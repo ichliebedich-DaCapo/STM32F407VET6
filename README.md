@@ -1,3 +1,6 @@
+   This is a project based on stm32f407vet6. <br>
+
+
 ## 简介
    此为stm32f407vet6的一个C/C++混编工程，包含了一些实验项目，使用了FreeRTOS、LVGL
 此工程分为Application、Module、BSP、Library、GUI、Drivers这几个部分
