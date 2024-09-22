@@ -2,7 +2,7 @@
 
 
 ## 简介
-   此为stm32f407vet6的一个C/C++混编工程，包含了一些实验项目，使用了FreeRTOS、LVGL
+   此为stm32f407vet6的一个C/C++混编工程，包含了一些实验项目，使用了FreeRTOS、LVGL <br>
 此工程分为Application、Module、BSP、Library、GUI、Drivers这几个部分
 
 **Application**：即应用级，是与硬件无关的部分，只管应用的实现。包含各种实验项目，如语音存储与回放、双音频信号发生器等。
