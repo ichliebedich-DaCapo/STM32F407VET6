@@ -9,7 +9,7 @@
 
 void GUITask(void *argument);
 
-const osThreadAttr_t GUITask_attributes = {
+const osThreadAttr_t voiceTask_attributes = {
         .name = "GUITask",
         .stack_size = 512 * 4,
         .priority = (osPriority_t) osPriorityNormal,
@@ -19,7 +19,7 @@ void GUI_Init()
 {
 
     lv_port_disp_init();
-    osThreadNew(GUITask, nullptr, &GUITask_attributes);
+    osThreadNew(GUITask, nullptr, &voiceTask_attributes);
 }
 
 void GUITask(void *argument)

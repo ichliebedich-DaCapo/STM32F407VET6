@@ -3,9 +3,9 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
-  <component name="CMakePresetLoader"><![CDATA[{
-  "useNewFormat": true
-}]]></component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
   <component name="CMakeProjectFlavorService">
     <option name="flavorId" value="CMakePlainProjectFlavor" />
   </component>
@@ -19,11 +19,26 @@
   </component>
   <component name="CMakeSettings">
     <configurations>
-      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+      <configuration PROFILE_NAME="Release" ENABLED="true" CONFIG_NAME="Release" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module/key.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module/key.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Base/baseInit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/Base/baseInit.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Base/baseInit.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/Base/baseInit.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI_Init.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI_Init.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,7 +48,24 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;fumgvsyj&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/fumgvsyj/STM32F407VET6.git&quot;,
+    &quot;accountId&quot;: &quot;a679c97f-91ee-40eb-8ce5-af8a944aaf79&quot;
+  }
+}</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/BSP/Core/system_stm32f4xx.c" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" root0="SKIP_INSPECTION" />
   </component>
   <component name="PerforceDirect.Settings">
@@ -45,10 +77,13 @@
     <option name="minorVersion" value="2.2" />
     <option name="productBranch" value="Classic" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2mPbm020RJkwfZrRH3JT31atVvv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -58,24 +93,29 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/Embedded/MCU/STM32/Furina",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "CPPToolchains",
+    "settings.editor.selected.configurable": "CMakeSettings",
+    "structure.view.defaults.are.configured": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Embedded\MCU\STM32\Furina\BSP\Core" />
       <recent name="D:\Embedded\MCU\STM32\Furina\BSP\Base" />
+      <recent name="D:\Embedded\MCU\STM32\Furina" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Application" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Core\Inc" />
-      <recent name="D:\Embedded\MCU\STM32\Furina\Application\Base" />
     </key>
   </component>
   <component name="RtosSettings">
@@ -113,8 +153,21 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1726981313287</updated>
-      <workItem from="1726981317550" duration="9491000" />
+      <workItem from="1726981317550" duration="25517000" />
+      <workItem from="1727150928776" duration="35000" />
+      <workItem from="1727150975357" duration="1271000" />
+      <workItem from="1728198309906" duration="1578000" />
+      <workItem from="1728199903608" duration="261000" />
     </task>
+    <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
+      <option name="closed" value="true" />
+      <created>1726996357168</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1726996357168</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,6 +177,33 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticReloadCMake value="true" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="__未配置好的工程——stm32f407VET6 LCD为ILI 9488" />
+    <option name="LAST_COMMIT_MESSAGE" value="__未配置好的工程——stm32f407VET6 LCD为ILI 9488" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

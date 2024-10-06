@@ -286,13 +286,13 @@ void HAL_DisableMemorySwappingBank(void);
 
 /**
   * @}
-  */
+  */ 
 static inline void Error_Handler(void)
 {
-    __disable_irq();
-    while (1)
-    {
-    }
+  __disable_irq();
+  while(1) 
+  {
+  }
 }
 
 

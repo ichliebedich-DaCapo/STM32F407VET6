@@ -6,7 +6,9 @@
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_hal_tim.h"
 #include "lvgl.h"
-TIM_HandleTypeDef        htim7;
+
+
+TIM_HandleTypeDef htim7;
 
 static inline void SystemClock_Config();
 
@@ -14,6 +16,8 @@ void BaseInit()
 {
     HAL_Init();
     SystemClock_Config();
+
+    uint8_t i;
 
     // 启用基础GPIO时钟
     __HAL_RCC_GPIOC_CLK_ENABLE();
@@ -51,8 +55,8 @@ void SystemClock_Config()
 
     /** Initializes the CPU, AHB and APB buses clocks
     */
-    RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                                  |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+    RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
+                                  | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
     RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
     RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
     RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
@@ -74,19 +78,15 @@ void HAL_MspInit(void)
 }
 
 
-
-
-
-
 /*用于配置供HAL使用基础时钟，频率为1KHz*/
 HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
 {
-    RCC_ClkInitTypeDef    clkconfig;
-    uint32_t              uwTimclock, uwAPB1Prescaler = 0U;
+    RCC_ClkInitTypeDef clkconfig;
+    uint32_t uwTimclock, uwAPB1Prescaler = 0U;
 
-    uint32_t              uwPrescalerValue = 0U;
-    uint32_t              pFLatency;
-    HAL_StatusTypeDef     status;
+    uint32_t uwPrescalerValue = 0U;
+    uint32_t pFLatency;
+    HAL_StatusTypeDef status;
 
     /* Enable TIM7 clock */
     __HAL_RCC_TIM7_CLK_ENABLE();
@@ -98,8 +98,7 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
     if (uwAPB1Prescaler == RCC_HCLK_DIV1)
     {
         uwTimclock = HAL_RCC_GetPCLK1Freq();
-    }
-    else
+    } else
     {
         uwTimclock = 2UL * HAL_RCC_GetPCLK1Freq();
     }
@@ -138,8 +137,7 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
                 /* Configure the TIM IRQ priority */
                 HAL_NVIC_SetPriority(TIM7_IRQn, TickPriority, 0U);
                 uwTickPrio = TickPriority;
-            }
-            else
+            } else
             {
                 status = HAL_ERROR;
             }

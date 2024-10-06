@@ -6,23 +6,28 @@
 #if ENABLE_VOICE_STORAGE_AND_PLAY
 #include "Base/osInit.h"
 
-osThreadId_t defaultTaskHandle;
-const osThreadAttr_t GUITask_attributes = {
-        .name = "defaultTask",
+
+const osThreadAttr_t voiceTask_attributes = {
+        .name = "voiceTask",
         .stack_size = 128 * 4,
         .priority = (osPriority_t) osPriorityNormal,
 };
-void StartDefaultTask(void *argument);
+void VoiceTask(void *argument);
 
 /*语音存储与回放初始化*/
 void voiceStorageAndPlayInit()
 {
-    defaultTaskHandle = osThreadNew(StartDefaultTask, nullptr, &GUITask_attributes);
+    osThreadNew(VoiceTask, nullptr, &voiceTask_attributes);
+}
+
+/*语音存储与回放处理函数,用于处理各种按键响应*/
+void voiceStorageAndPlay_handler()
+{
+
 }
 
 
-
-void StartDefaultTask(void *argument)
+void VoiceTask(void *argument)
 {
     for(;;)
     {

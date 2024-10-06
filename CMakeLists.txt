@@ -18,10 +18,13 @@ project(Furina C CXX ASM)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_STANDARD 11)
 
+# uncomment to mitigate c++17 absolute addresses warnings
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-register")
+
+# 添加编译标志
 #Uncomment for hardware floating point
 add_compile_definitions(ARM_MATH_CM4;ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING)
 add_compile_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
-add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
 
 #Uncomment for software floating point
 #add_compile_options(-mfloat-abi=soft)
@@ -29,12 +32,10 @@ add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
 add_compile_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
 add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-length=0)
 
-# uncomment to mitigate c++17 absolute addresses warnings
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-register")
-
 # Enable assembler files preprocessing
 add_compile_options($<$<COMPILE_LANGUAGE:ASM>:-x$<SEMICOLON>assembler-with-cpp>)
 
+# 选择优化级别
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
     message(STATUS "Maximum optimization for speed")
     add_compile_options(-Ofast)
@@ -49,7 +50,9 @@ else ()
     add_compile_options(-Og -g)
 endif ()
 
+#添加宏定义
 add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx)
+#添加头文件
 include_directories(
         # 官方自带库
         Drivers/STM32F4xx_HAL_Driver/Inc
@@ -82,23 +85,29 @@ include_directories(
 )
 
 
-
+# 添加资源文件
 file(GLOB_RECURSE SOURCES
         "Application/*.*"
         "Module/*.*"
         "BSP/*.*"
-        "Library/Third_Party/FreeRTOS/*.*"
         "Drivers/*.*"
         "GUI/*.*"
+
         # LVGL库
         "Library/Third_Party/lvgl/src/*.*"
         "Library/Third_Party/lvgl/lvgl.h"
         "Library/Third_Party/lvgl/lv_conf.h"
         "Library/Third_Party/lvgl/examples/porting/*.*"
+
+        # FreeRTOS库
+        "Library/Third_Party/FreeRTOS/*.*"
 )
 
+# 设置链接脚本
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld)
 
+# 设置链接选项
+add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
 add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map)
 add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
 add_link_options(-T ${LINKER_SCRIPT})
@@ -108,6 +117,8 @@ add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
 set(HEX_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.hex)
 set(BIN_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.bin)
 
+# 添加自定义命令：
+# 生成十六进制和二进制文件
 add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
         COMMAND ${CMAKE_OBJCOPY} -Oihex $<TARGET_FILE:${PROJECT_NAME}.elf> ${HEX_FILE}
         COMMAND ${CMAKE_OBJCOPY} -Obinary $<TARGET_FILE:${PROJECT_NAME}.elf> ${BIN_FILE}
