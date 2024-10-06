@@ -56,7 +56,7 @@
 #define CMSIS_device_header "stm32f4xx.h"
 #endif /* CMSIS_device_header */
 
-#define configENABLE_FPU                         0
+#define configENABLE_FPU                         1
 #define configENABLE_MPU                         0
 
 #define configUSE_PREEMPTION                     1
@@ -168,6 +168,17 @@ standard names. */
 
 /* USER CODE BEGIN Defines */
 /* Section where parameter definitions can be added (for instance, to override default ones in FreeRTOS.h) */
+
+#include "JYZQ_Conf.h"
+
+#if FreeRTOS_DebugMode
+#define configRECORD_STACK_HIGH_ADDRESS 1
+#define configGENERATE_RUN_TIME_STATS 1
+extern volatile uint32_t CPU_RunTime;// 定义一个变量存储CPU运行时间
+#define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() (CPU_RunTime = 0ul)
+#define portGET_RUN_TIME_COUNTER_VALUE() CPU_RunTime
+#endif
+
 /* USER CODE END Defines */
 
 #endif /* FREERTOS_CONFIG_H */

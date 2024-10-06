@@ -6,7 +6,11 @@
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_hal_tim.h"
 #include "lvgl.h"
+#include "JYZQ_Conf.h"
 
+#if FreeRTOS_DebugMode
+#include "CPU_RunTime.h"
+#endif
 
 TIM_HandleTypeDef htim7;
 
@@ -17,7 +21,11 @@ void BaseInit()
     HAL_Init();
     SystemClock_Config();
 
-    uint8_t i;
+    // 开启FreeRTOS的运行时统计信息
+#if FreeRTOS_DebugMode
+  ConfigureTimerForRunTimeStats();
+#endif
+
 
     // 启用基础GPIO时钟
     __HAL_RCC_GPIOC_CLK_ENABLE();
@@ -164,9 +172,17 @@ inline void HAL_ResumeTick(void)
 // TIM7中断处理函数
 void TIM7_IRQHandler()
 {
-    __HAL_TIM_CLEAR_FLAG(&htim7, TIM_FLAG_UPDATE);
+    if(__HAL_TIM_GET_IT_SOURCE(&htim7, TIM_IT_UPDATE) != RESET)
+    {
+        __HAL_TIM_CLEAR_IT(&htim7, TIM_IT_UPDATE);
+        HAL_IncTick();
+        lv_tick_inc(1);
+    }
+
+    // 下面的也许不安全
+/*    __HAL_TIM_CLEAR_FLAG(&htim7, TIM_FLAG_UPDATE);
     HAL_IncTick();
-    lv_tick_inc(1);
+    lv_tick_inc(1);*/
 }
 
 

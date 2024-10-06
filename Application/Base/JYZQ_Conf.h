@@ -23,14 +23,17 @@
 #define ENABLE_VOICE_STORAGE_AND_PLAY 1
 
 /* 模块级*/
-
+#define USE_
 
 /* 板级*/
 #define USE_
 
 
 
-
+/*其他*/
+// 是否开启FreeRTOS调试模式
+// 开了之后在负荷不大的情况下，也并不怎么影响实时性
+#define FreeRTOS_DebugMode  1
 
 
 
