@@ -4,7 +4,6 @@
 
 #include "GUI_Init.h"
 #include "lv_port_disp.h"
-#include "lcd.h"
 #include "cmsis_os2.h"
 
 void GUITask(void *argument);
@@ -17,7 +16,6 @@ const osThreadAttr_t voiceTask_attributes = {
 
 void GUI_Init()
 {
-
     lv_port_disp_init();
     osThreadNew(GUITask, nullptr, &voiceTask_attributes);
 }

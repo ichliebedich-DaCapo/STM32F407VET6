@@ -69,6 +69,7 @@ include_directories(
         BSP/Base
         BSP/Core
         BSP/LCD
+        BSP/Key
 
         # GUI
         GUI/Base

@@ -2,12 +2,15 @@
 #include "baseInit.h"
 #include "voiceStorageAndPlay.h"
 #include "GUI_Init.h"
+#include "keyTaskHandler.h"
+
 int main()
 {
 /*基础初始化*/
     BaseInit(); // 基础驱动初始化
     osKernelInitialize();// FreeRTOS内核初始化
     GUI_Init();
+    keyTaskHandler_init();
 /*应用程序初始化*/
     voiceStorageAndPlayInit();
 

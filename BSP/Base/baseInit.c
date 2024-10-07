@@ -6,7 +6,8 @@
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_hal_tim.h"
 #include "lvgl.h"
-#include "JYZQ_Conf.h"
+#include "lcd.h"
+#include "fsmc.h"
 
 #if FreeRTOS_DebugMode
 #include "CPU_RunTime.h"
@@ -19,18 +20,20 @@ static inline void SystemClock_Config();
 void BaseInit()
 {
     HAL_Init();
-    SystemClock_Config();
+    SystemClock_Config();// 系统时钟初始化
 
     // 开启FreeRTOS的运行时统计信息
 #if FreeRTOS_DebugMode
   ConfigureTimerForRunTimeStats();
 #endif
 
-
     // 启用基础GPIO时钟
     __HAL_RCC_GPIOC_CLK_ENABLE();
     __HAL_RCC_GPIOH_CLK_ENABLE();
     __HAL_RCC_GPIOA_CLK_ENABLE();
+
+    fsmc_dma_init();// 初始化FSMC+DMA
+    lcd_init();// 初始化LCD
 }
 
 

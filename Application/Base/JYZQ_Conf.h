@@ -21,13 +21,16 @@
 
 /* 应用级*/
 #define ENABLE_VOICE_STORAGE_AND_PLAY 1
+#define ENABLE_KEY_TASK_HANDLE 1
+
 
 /* 模块级*/
 #define USE_
 
 /* 板级*/
-#define USE_
-
+#define USE_FSMC 1  // 使用FSMC
+#define USE_LCD 1   // 使用LCD
+#define USE_KEY_EXTI  1// 使用按键的外部中断
 
 
 /*其他*/

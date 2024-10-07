@@ -23,7 +23,21 @@ void voiceStorageAndPlayInit()
 /*语音存储与回放处理函数,用于处理各种按键响应*/
 void voiceStorageAndPlay_handler()
 {
-
+//        switch (key.getCode())
+//        {
+//            case keyk0:
+//                if(key.stateHandler(1))
+//                {
+//
+//                }
+//                break;
+//
+//            case keyk1:
+//                break;
+//
+//            default:
+//                break;
+//        }
 }
 
 

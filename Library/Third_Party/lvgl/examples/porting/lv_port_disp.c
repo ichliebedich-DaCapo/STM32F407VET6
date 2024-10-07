@@ -9,6 +9,7 @@
 #include "lv_port_disp.h"
 #include <stdbool.h>
 #include "lcd.h"
+
 /*********************
  *      DEFINES
  *********************/
@@ -19,6 +20,7 @@
 /**********************
  *      TYPEDEFS
  **********************/
+extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
 
 /**********************
  *  STATIC PROTOTYPES
@@ -36,6 +38,8 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_
  *   GLOBAL FUNCTIONS
  **********************/
 
+static lv_disp_drv_t disp_drv;                         /*Descriptor of a display driver*/
+
 void lv_port_disp_init(void)
 {
     /* Example for 1) */
@@ -48,7 +52,7 @@ void lv_port_disp_init(void)
      * Register the display in lvgl
      *----------------------------------*/
 
-    static lv_disp_drv_t disp_drv;                         /*Descriptor of a display driver*/
+
     lv_disp_drv_init(&disp_drv);                    /*Basic initialization*/
 
     /*Set up the functions to access to your display*/
@@ -88,11 +92,19 @@ void disp_disable_update(void)
 }
 
 
-static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_t *color_p)
+static void disp_flush(lv_disp_drv_t *disp_drv1, const lv_area_t *area, lv_color_t *color_p)
 {
 // 打点函数
+    LCD_Set_Window(area->x1, area->y1, area->x2, area->y2);//设置LCD屏幕的扫描区域
+    HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream6, (uint32_t) color_p, (uint32_t) TFT_DATA_ADDR,
+                     ((area->x2 + 1) - area->x1) * ((area->y2 + 1) - area->y1));
+}
 
-// 通知lvgl 刷新完成
-    disp_drv->draw_buf->flushing = 0;
-    disp_drv->draw_buf->flushing_last = 0;
+void LVGL_LCD_FSMC_DMA_pCallback(DMA_HandleTypeDef *_hdma)
+{
+    // lv_disp_flush_ready(&disp_drv);
+
+    //为了减少栈帧的使用
+    disp_drv.draw_buf->flushing = 0;
+    disp_drv.draw_buf->flushing_last = 0;
 }
