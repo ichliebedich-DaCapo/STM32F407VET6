@@ -23,27 +23,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】为使用CLion集成的FreeRTOS功能，补充相关内容">
-      <change afterPath="$PROJECT_DIR$/Application/keyTaskHandler.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/keyTaskHandler.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BSP/Key/key_exit.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BSP/Key/key_exit.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BSP/LCD/fsmc.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BSP/LCD/fsmc.h" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】添加了一些LL库、LCD的驱动ILI 9488、Key类的简单实现、FSMC的驱动、外部中断驱动">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/Base/baseInit.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/Base/baseInit.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/Base/baseInit.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/Base/baseInit.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/Base/stm32f4xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/Base/stm32f4xx_hal_conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/LCD/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/LCD/lcd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/LCD/lcd.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/LCD/lcd.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI_Init.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI_Init.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/key.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/key.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/key.h" beforeDir="false" afterPath="$PROJECT_DIR$/Module/key.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +157,9 @@
       <workItem from="1728268966246" duration="663000" />
       <workItem from="1728278858739" duration="2955000" />
       <workItem from="1728281843425" duration="25000" />
-      <workItem from="1728281877254" duration="5470000" />
+      <workItem from="1728281877254" duration="7166000" />
+      <workItem from="1728299186827" duration="39000" />
+      <workItem from="1728299232375" duration="2302000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -209,7 +193,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728235348404</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="__【未配置好】添加了一些LL库、LCD的驱动ILI 9488、Key类的简单实现、FSMC的驱动、外部中断驱动">
+      <option name="closed" value="true" />
+      <created>1728288987458</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1728288987458</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,7 +240,8 @@
     <MESSAGE value="__未配置好的工程——stm32f407VET6 预置了一点点规范" />
     <MESSAGE value="__未配置好的工程——stm32f407VET6 稍微修改了一下介绍" />
     <MESSAGE value="__【未配置好】为使用CLion集成的FreeRTOS功能，补充相关内容" />
-    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】为使用CLion集成的FreeRTOS功能，补充相关内容" />
+    <MESSAGE value="__【未配置好】添加了一些LL库、LCD的驱动ILI 9488、Key类的简单实现、FSMC的驱动、外部中断驱动" />
+    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】添加了一些LL库、LCD的驱动ILI 9488、Key类的简单实现、FSMC的驱动、外部中断驱动" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
