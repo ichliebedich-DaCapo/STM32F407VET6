@@ -15,7 +15,7 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
 # project settings
 project(Furina C CXX ASM)
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_STANDARD 11)
 
 # uncomment to mitigate c++17 absolute addresses warnings
@@ -34,20 +34,6 @@ add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-le
 
 # Enable assembler files preprocessing
 add_compile_options($<$<COMPILE_LANGUAGE:ASM>:-x$<SEMICOLON>assembler-with-cpp>)
-
-
-# 检查编译器是否支持 C++20 模块
-# 为 C++ 源文件添加 -fmodules-ts 选项
-if(CMAKE_CXX_STANDARD EQUAL 20)
-    if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
-        if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 12.0.0)
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts")
-        elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 10.0.0)
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts")
-        endif()
-    endif()
-endif()
-
 
 # 选择优化级别
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
