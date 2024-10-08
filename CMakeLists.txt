@@ -70,6 +70,7 @@ include_directories(
         BSP/Core
         BSP/LCD
         BSP/Key
+        BSP/SPI_Flash
 
         # GUI
         GUI/Base
