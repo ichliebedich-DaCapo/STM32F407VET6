@@ -23,8 +23,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】C++20的module还是先算了">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】选出了一些从C++11到C++17中适合单片机开发的特性">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/key.h" beforeDir="false" afterPath="$PROJECT_DIR$/Module/key.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -157,7 +158,8 @@
       <workItem from="1728299186827" duration="39000" />
       <workItem from="1728299232375" duration="2302000" />
       <workItem from="1728348307316" duration="663000" />
-      <workItem from="1728360315760" duration="669000" />
+      <workItem from="1728360315760" duration="4143000" />
+      <workItem from="1728368212349" duration="348000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -207,7 +209,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728310595903</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="__【未配置好】选出了一些从C++11到C++17中适合单片机开发的特性">
+      <option name="closed" value="true" />
+      <created>1728365328861</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1728365328861</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,7 +258,8 @@
     <MESSAGE value="__【未配置好】为使用CLion集成的FreeRTOS功能，补充相关内容" />
     <MESSAGE value="__【未配置好】添加了一些LL库、LCD的驱动ILI 9488、Key类的简单实现、FSMC的驱动、外部中断驱动" />
     <MESSAGE value="__【未配置好】C++20的module还是先算了" />
-    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】C++20的module还是先算了" />
+    <MESSAGE value="__【未配置好】选出了一些从C++11到C++17中适合单片机开发的特性" />
+    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】选出了一些从C++11到C++17中适合单片机开发的特性" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -37,15 +37,21 @@
 class Key
 {
 public:
-    Key(): code(0),state(0){}
+    Key() : code(0), state(0) {}
+
     ~Key();
 
     // 成员函数
     static void init();
-    void setCode(uint8_t keycode) { code = keycode; }
-    [[nodiscard]] uint8_t getCode()const { return code; }
-    [[nodiscard]] uint8_t getState(uint8_t keycode)const;
-    void resetState(uint8_t keycode);
+
+    auto setCode(uint8_t keycode) { code = keycode; }
+
+    [[nodiscard]] auto getCode() const { return code; }// 获取键值
+
+    [[nodiscard]] auto getState(uint8_t keycode) const{return state&(0x3<<keycode*2);}// 获取键位状态
+
+    auto resetState(uint8_t keycode){ state &= ~(0x3 << (keycode * 2));  /*清除指定键位的状态*/}
+
     uint8_t stateHandler(uint8_t maxKeyStates);
 
     // 私有成员变量

@@ -18,7 +18,7 @@
 &nbsp;&nbsp;框架主体使用的是**FreeRTOS**，除了FreeRTOS本身自由、简单易上手的特点外，另一点是CLion集成了FreeRTOS的图形化调试，非常直观。同时，把整体开发流程主要分为了驱动、模块、应用三级，同时这些驱动、模块、应用相关文件由一个xxx_Conf.h来控制，决定了哪些文件可以被编译。<br>
   
 <!-- 闹着玩的 -->
-**人员**：WJY、WZX、XZQ &nbsp;&nbsp;&nbsp; 软：JY、ZQ &nbsp;&nbsp; 硬：ZX <br>
+**人员**：WJY、WZX、XZQ +HNT &nbsp;&nbsp;&nbsp; 软：JY、ZQ &nbsp;&nbsp; 硬：ZX +NT <br>
 <!-- 一个磕磕碰碰的团队 -->
 <!-- ZQ开发&维护  JY开发  ZX硬件支持-->
   

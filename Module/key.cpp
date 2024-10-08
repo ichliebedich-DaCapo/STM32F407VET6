@@ -35,28 +35,6 @@ uint8_t Key::stateHandler(uint8_t maxKeyStates)
     return temp;
 }
 
-
-/**
- * @brief 获取按键状态
- * @param keycode
- * @return
- * @note
- */
-uint8_t Key::getState(uint8_t keycode) const
-{
-    return state&(0x3<<keycode*2);
-}
-
-/**
- * @brief 重置按键状态
- * @param keycode
- * @note
- */
-void Key::resetState(uint8_t keycode)
-{
-    state &= ~(0x3 << (keycode * 2)); // 清除指定键位的状态
-}
-
 void Key::init()
 {
     key_exti_init();
