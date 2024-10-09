@@ -6,14 +6,17 @@
 #define FURINA_SPI_H
 #include "JYZQ_Conf.h"
 #if USE_SPI
+#include "stm32f4xx_hal.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void spi_init(unsigned char spi_num);
 
 
+void spi3_init();// 初始化SPI3
 
+extern  SPI_HandleTypeDef hspi3;
 
 #ifdef __cplusplus
 }

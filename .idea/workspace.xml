@@ -23,14 +23,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】略微完善了一下文档规范JYZQ_Conf.h">
-      <change afterPath="$PROJECT_DIR$/BSP/SPI_Flash/spi.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BSP/SPI_Flash/spi.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BSP/SPI_Flash/w25qxx.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BSP/SPI_Flash/w25qxx.h" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】略微修改了一下JYZQ_Conf.h">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Base/stm32f4xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/Base/stm32f4xx_hal_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/SPI_Flash/spi.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/SPI_Flash/spi.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/SPI_Flash/spi.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/SPI_Flash/spi.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +51,7 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/fumgvsyj/STM32F407VET6.git&quot;,
+    &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6.git&quot;,
     &quot;accountId&quot;: &quot;a679c97f-91ee-40eb-8ce5-af8a944aaf79&quot;
   }
 }</component>
@@ -121,11 +119,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Embedded\MCU\STM32\Furina\stlink.cfg" reset-type="INIT" download-type="UPDATED_ONLY">
         <debugger kind="GDB" isBundled="true" />
@@ -169,7 +162,9 @@
       <workItem from="1728348307316" duration="663000" />
       <workItem from="1728360315760" duration="4143000" />
       <workItem from="1728368212349" duration="3622000" />
-      <workItem from="1728392343320" duration="730000" />
+      <workItem from="1728392343320" duration="978000" />
+      <workItem from="1728395806632" duration="864000" />
+      <workItem from="1728439424819" duration="729000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -235,7 +230,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728369385607</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="__【未配置好】略微修改了一下JYZQ_Conf.h">
+      <option name="closed" value="true" />
+      <created>1728393280058</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1728393280058</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,7 +260,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -278,7 +281,8 @@
     <MESSAGE value="__【未配置好】C++20的module还是先算了" />
     <MESSAGE value="__【未配置好】选出了一些从C++11到C++17中适合单片机开发的特性" />
     <MESSAGE value="__【未配置好】略微完善了一下文档规范JYZQ_Conf.h" />
-    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】略微完善了一下文档规范JYZQ_Conf.h" />
+    <MESSAGE value="__【未配置好】略微修改了一下JYZQ_Conf.h" />
+    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】略微修改了一下JYZQ_Conf.h" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
