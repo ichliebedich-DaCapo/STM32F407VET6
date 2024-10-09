@@ -1,22 +1,14 @@
 //
 // Created by 34753 on 2024/9/22.
 //
-
 #include "key.h"
-#include "cmsis_os2.h"
 #include "key_exit.h"
 #include "stm32f4xx_hal.h"
-
-#define KEY_RAM (*((volatile unsigned short *)0x6006000C)) // 键盘接口地址
-
 // 实例化，由于我更喜欢通过“.”来访问成员变量，所以没有使用单例模式
 Key key;
-osSemaphoreId_t keySemHandle;
 
-Key::~Key()
-{
-    osSemaphoreDelete(keySemHandle);
-}
+extern void key_handler();
+__weak void key_handler(){/*由用户自己实现*/}
 
 /**
  * 设置按键状态函数
@@ -38,36 +30,19 @@ uint8_t Key::stateHandler(uint8_t maxKeyStates)
 void Key::init()
 {
     key_exti_init();
-    // 创建二值信号量，初始值为0
-    keySemHandle = osSemaphoreNew(1, 0, nullptr);
 }
 
-
-
-
-// 外部中断回调函数,先放在这，以后找到合适的位置再安放
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+auto Key::handler()->void
 {
-    switch (GPIO_Pin)
+    while (!sign)
     {
-        /*开启外部中断0*/
-
-        case GPIO_PIN_0:
-            key.setCode(KEY_RAM & 0xF);//获取键值
-            /*释放信号量*/
-            osSemaphoreRelease(keySemHandle);
-            break;
-
-            /*开启外部中断1*/
-
-        case GPIO_PIN_1:
-#if EXTI1_OPEN
-            //    frequency = FPGA_RAM;
-            osSemaphoreRelease(keySemHandle);
-            break;
-#endif
-        default:
-            break;
+        sign = 0;
+        key_handler();
     }
-
 }
+
+
+
+
+
+

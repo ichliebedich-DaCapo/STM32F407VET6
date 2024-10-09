@@ -171,7 +171,7 @@ standard names. */
 
 #include "JYZQ_Conf.h"
 
-#if FreeRTOS_DebugMode
+#if FreeRTOS_DEBUG
 #define configRECORD_STACK_HIGH_ADDRESS 1
 #define configGENERATE_RUN_TIME_STATS 1
 extern volatile uint32_t CPU_RunTime;// 定义一个变量存储CPU运行时间

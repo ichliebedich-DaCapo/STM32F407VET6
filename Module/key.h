@@ -6,6 +6,8 @@
 #define FURINA_KEY_H
 
 #include <cstdint>
+#include "main.h"
+
 
 #define keyk0 0x0
 #define keyk1 0x1
@@ -37,9 +39,12 @@
 class Key
 {
 public:
-    Key() : code(0), state(0) {}
-
-    ~Key();
+#ifndef APP_NO_RTOS
+  constexpr  Key() : code(0), state(0) {}
+#else
+    constexpr  Key() : code(0), state(0),sign(0) {}
+#endif
+    ~Key() = default;
 
     // 成员函数
     static void init();
@@ -48,9 +53,13 @@ public:
 
     [[nodiscard]] auto getCode() const { return code; }// 获取键值
 
-    [[nodiscard]] auto getState(uint8_t keycode) const{return state&(0x3<<keycode*2);}// 获取键位状态
+    [[nodiscard]] auto getState(uint8_t keycode) const { return state & (0x3 << keycode * 2); }// 获取键位状态
 
-    auto resetState(uint8_t keycode){ state &= ~(0x3 << (keycode * 2));  /*清除指定键位的状态*/}
+#ifdef APP_NO_RTOS
+    auto setSign() {  sign = 0xFF; }// 设置标志，表明已读取
+    auto handler()->void;// 反正都是阻塞式等待，也就无所谓多一步取反
+#endif// APP_NO_RTOS
+    auto resetState(uint8_t keycode) { state &= ~(0x3 << (keycode * 2));  /*清除指定键位的状态*/}
 
     uint8_t stateHandler(uint8_t maxKeyStates);
 
@@ -58,6 +67,9 @@ public:
 private:
     uint32_t state;// 按键状态,使用掩码操作，给每个按键分配两个位，用于存储最多4个状态
     uint8_t code;// 当前键值
+#ifdef APP_NO_RTOS
+    uint8_t sign;// 标志
+#endif// APP_NO_RTOS
 };
 
 extern Key key;

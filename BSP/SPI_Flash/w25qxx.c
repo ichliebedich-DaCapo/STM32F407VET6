@@ -29,7 +29,7 @@
 #define Dummy_Byte 0xFF
 #define WIP_Flag 0x01
 
-/*******内联函数******/
+/************************内联函数********************/
 
 // 初始化片选引脚
 static inline void w25qxx_spi_select(void)
@@ -150,6 +150,8 @@ static inline void SPI_FLASH_ReceiveData(uint8_t *pBuffer, uint16_t NumBytes)
     }
 }
 
+
+/************************接口函数********************/
 
 /**
  * @brief 初始化SPI Flash

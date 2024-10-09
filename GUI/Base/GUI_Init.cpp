@@ -1,9 +1,9 @@
 //
 // Created by 34753 on 2024/9/22.
 //
-
 #include "GUI_Init.h"
-#include "lv_port_disp.h"
+
+#ifndef APP_NO_RTOS
 #include "cmsis_os2.h"
 
 void GUITask(void *argument);
@@ -28,3 +28,4 @@ void GUITask(void *argument)
         lv_timer_handler();
     }
 }
+#endif

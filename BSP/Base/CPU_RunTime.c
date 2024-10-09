@@ -2,7 +2,7 @@
 // Created by 34753 on 2024/10/7.
 //
 #include "CPU_RunTime.h"
-#if FreeRTOS_DebugMode
+#if FreeRTOS_DEBUG
 #include "stm32f4xx_hal.h"
 
 /* 用于统计运行时间 */

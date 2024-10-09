@@ -9,7 +9,7 @@
 #include "lcd.h"
 #include "fsmc.h"
 
-#if FreeRTOS_DebugMode
+#if FreeRTOS_DEBUG
 #include "CPU_RunTime.h"
 #endif
 
@@ -23,7 +23,7 @@ void BaseInit()
     SystemClock_Config();// 系统时钟初始化
 
     // 开启FreeRTOS的运行时统计信息
-#if FreeRTOS_DebugMode
+#if FreeRTOS_DEBUG
   ConfigureTimerForRunTimeStats();
 #endif
 
