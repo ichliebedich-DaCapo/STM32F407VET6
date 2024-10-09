@@ -52,7 +52,7 @@ endif ()
 
 #添加宏定义
 # 使用Debug，使用HAL库。    -DUSE_FULL_LL_DRIVER 使用LL库
-add_definitions(-DDEBUG -DUSE_HAL_DRIVER  -DSTM32F407xx)
+add_definitions(-DDEBUG -DUSE_HAL_DRIVER  -DSTM32F407xx )
 #添加头文件
 include_directories(
         # 官方自带库
