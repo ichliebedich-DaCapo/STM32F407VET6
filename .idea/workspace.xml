@@ -23,24 +23,26 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】与AI合力编写了w25qxx的驱动，然后启用了stm32的断言机制,并删除了一下LL库（因为缺失stm32_assert.h文件）">
-      <change afterPath="$PROJECT_DIR$/Application/main.h" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】增添了一点解释">
+      <change afterPath="$PROJECT_DIR$/Application/ISR.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BSP/ADC/adc.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BSP/ADC/adc.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BSP/DAC/dac.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BSP/DAC/dac.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BSP/Timer/timer.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BSP/Timer/timer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module/player.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module/player.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/keyTaskHandler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/keyTaskHandler.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/keyTaskHandler.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/keyTaskHandler.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/osInit.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/Base/CPU_RunTime.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/Base/CPU_RunTime.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/Base/CPU_RunTime.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/Base/CPU_RunTime.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/Base/FreeRTOSConfig.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/Base/FreeRTOSConfig.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/Base/baseInit.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/Base/baseInit.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/SPI_Flash/w25qxx.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/SPI_Flash/w25qxx.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI_Init.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI_Init.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI_Init.h" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI_Init.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Base/stm32f4xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/Base/stm32f4xx_hal_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Base/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/Base/stm32f4xx_it.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Module/key.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/key.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/key.h" beforeDir="false" afterPath="$PROJECT_DIR$/Module/key.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,27 +97,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/Embedded/MCU/STM32/CubeTest",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "CMakeSettings",
-    "structure.view.defaults.are.configured": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Embedded/MCU/STM32/CubeTest&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CMakeSettings&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Embedded\MCU\STM32\Furina\BSP\Core" />
@@ -129,12 +131,12 @@
     <option name="rtosEnabled" value="true" />
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
-    <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -187,7 +189,8 @@
       <workItem from="1728439424819" duration="9408000" />
       <workItem from="1728461902854" duration="1100000" />
       <workItem from="1728465515056" duration="2400000" />
-      <workItem from="1728484872227" duration="3428000" />
+      <workItem from="1728484872227" duration="5779000" />
+      <workItem from="1728535951729" duration="4473000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -277,7 +280,23 @@
       <option name="project" value="LOCAL" />
       <updated>1728450200944</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="__【未配置好】添加了“是否启用RTOS”的宏。使用了__weak让代码隔离得更明显，用户只需专心编写应用、模块、BSP三级的代码。">
+      <option name="closed" value="true" />
+      <created>1728489151386</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1728489151387</updated>
+    </task>
+    <task id="LOCAL-00013" summary="__【未配置好】增添了一点解释">
+      <option name="closed" value="true" />
+      <created>1728490638318</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1728490638318</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -299,7 +318,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/main" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>
@@ -323,7 +342,9 @@
     <MESSAGE value="__【未配置好】略微修改了一下JYZQ_Conf.h" />
     <MESSAGE value="__【未配置好】根据远古代码写的SPI Flash驱动" />
     <MESSAGE value="__【未配置好】与AI合力编写了w25qxx的驱动，然后启用了stm32的断言机制,并删除了一下LL库（因为缺失stm32_assert.h文件）" />
-    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】与AI合力编写了w25qxx的驱动，然后启用了stm32的断言机制,并删除了一下LL库（因为缺失stm32_assert.h文件）" />
+    <MESSAGE value="__【未配置好】添加了“是否启用RTOS”的宏。使用了__weak让代码隔离得更明显，用户只需专心编写应用、模块、BSP三级的代码。" />
+    <MESSAGE value="__【未配置好】增添了一点解释" />
+    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】增添了一点解释" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

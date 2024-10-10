@@ -4,10 +4,10 @@
 #ifndef APP_NO_RTOS
 #include "cmsis_os2.h"
 #endif// APP_NO_RTOS
+
 #include "stm32f4xx_hal.h"
 #include "GUI_Init.h"
 #include "keyTaskHandler.h"
-
 
 extern void app_init();
 

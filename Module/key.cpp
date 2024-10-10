@@ -34,7 +34,7 @@ void Key::init()
 
 auto Key::handler()->void
 {
-    while (!sign)
+    if(!sign)
     {
         sign = 0;
         key_handler();

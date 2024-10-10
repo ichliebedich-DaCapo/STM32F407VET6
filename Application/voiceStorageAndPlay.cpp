@@ -26,8 +26,8 @@ void key_handler()
 {
         switch (key.getCode())
         {
-            case keyk0:
-                if(key.stateHandler(1))
+            case keyk0:// 播放
+                if(key.stateHandler(2))
                 {
 
                 }

@@ -72,6 +72,9 @@ include_directories(
         BSP/LCD
         BSP/Key
         BSP/SPI_Flash
+        BSP/Timer
+        BSP/ADC
+        BSP/DAC
 
         # GUI
         GUI/Base
