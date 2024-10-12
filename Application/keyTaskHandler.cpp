@@ -56,12 +56,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
         case GPIO_PIN_0:
             key.setCode(KEY_RAM & 0xF);//获取键值
-            key.setSign();
+
 #ifndef APP_NO_RTOS
             /*释放信号量*/
             osSemaphoreRelease(keySemHandle);
 #else
-
+            key.setSign();
 #endif
             break;
 

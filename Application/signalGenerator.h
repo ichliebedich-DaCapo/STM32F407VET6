@@ -1,0 +1,14 @@
+//
+// Created by 34753 on 2024/10/12.
+//
+
+#ifndef FURINA_SIGNALGENERATOR_H
+#define FURINA_SIGNALGENERATOR_H
+#include "JYZQ_Conf.h"
+#if ENABLE_SIGNAL_GENERATOR
+
+#define APP_NO_RTOS
+
+
+#endif
+#endif //FURINA_SIGNALGENERATOR_H

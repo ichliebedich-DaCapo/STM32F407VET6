@@ -80,6 +80,7 @@ include_directories(
         GUI/Base
 
         # 库
+        Library/Data
         Library/Third_Party/
         # FreeRTOS库
         Library/Third_Party/FreeRTOS/Source/include
@@ -99,7 +100,8 @@ file(GLOB_RECURSE SOURCES
         "Drivers/*.*"
         "GUI/*.*"
 
-        # LVGL库
+        # 数据库
+        "Library/Data/*.*"
         "Library/Third_Party/lvgl/src/*.*"
         "Library/Third_Party/lvgl/lvgl.h"
         "Library/Third_Party/lvgl/lv_conf.h"

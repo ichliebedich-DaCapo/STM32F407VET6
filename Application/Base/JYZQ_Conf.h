@@ -86,17 +86,19 @@
 
 // 是否开启FreeRTOS
 // 考虑到有一些应用项目并不需要多线程，且对实时性要求很高，使用FreeRTOS既会增加代码体积，也会增加运行时开销
-// 默认开启，由宏APP_NO_RTOS来控制。考虑到项目多了以后会记不住，于是由项目里的应用头文件来控制
-#define APP_NO_RTOS
+// 默认开启多线程，由宏APP_NO_RTOS来控制。考虑到项目多了以后会记不住，于是由项目里的应用头文件来控制
+// 这个宏默认是注释的
+/*#define APP_NO_RTOS*/
 
 /************************应用级***************************/
-#define ENABLE_VOICE_STORAGE_AND_PLAY 1
-
+#define ENABLE_VOICE_STORAGE_AND_PLAY 0
+#define ENABLE_SIGNAL_GENERATOR 1   // 信号发生器（简单的双音频）
 
 
 /*************************模块级**************************/
-#define USE_PLAYER 1 // 使用播放器
-#define USE_FLASH_STORAGE 1// 使用Flash存储
+#define USE_PLAYER 0 // 使用播放器
+#define USE_FLASH_STORAGE 0// 使用Flash存储
+#define USE_WAVE_SIGNAL 1 // 使用波形信号
 
 /**************************板级**************************/
 // 协议控制器放在上面，具体外设放在下面
