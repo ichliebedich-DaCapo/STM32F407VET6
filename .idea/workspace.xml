@@ -23,22 +23,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】">
-      <change afterPath="$PROJECT_DIR$/Module/flash_storage.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Module/flash_storage.h" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】快把语言存储与回放这个小项目写完了，但是手头还没有单片机！！">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/ISR.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/ADC/adc.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/ADC/adc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/ADC/adc.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/ADC/adc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/DAC/dac.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/DAC/dac.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/DAC/dac.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/DAC/dac.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/Timer/timer.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/Timer/timer.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/Timer/timer.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/Timer/timer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/player.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/player.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/player.h" beforeDir="false" afterPath="$PROJECT_DIR$/Module/player.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/ISR.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,17 +107,22 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Embedded\MCU\STM32\Furina\Application\Base" />
       <recent name="D:\Embedded\MCU\STM32\Furina\BSP\Core" />
       <recent name="D:\Embedded\MCU\STM32\Furina\BSP\Base" />
       <recent name="D:\Embedded\MCU\STM32\Furina" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Application" />
-      <recent name="D:\Embedded\MCU\STM32\Furina\Core\Inc" />
     </key>
   </component>
   <component name="RtosSettings">
     <option name="rtosEnabled" value="true" />
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -186,7 +182,7 @@
       <workItem from="1728640358157" duration="5162000" />
       <workItem from="1728659885407" duration="5661000" />
       <workItem from="1728706006983" duration="1625000" />
-      <workItem from="1728717574536" duration="3512000" />
+      <workItem from="1728717574536" duration="4242000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -300,7 +296,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728541287469</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="__【未配置好】快把语言存储与回放这个小项目写完了，但是手头还没有单片机！！">
+      <option name="closed" value="true" />
+      <created>1728721193957</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1728721193957</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -349,7 +353,8 @@
     <MESSAGE value="__【未配置好】添加了“是否启用RTOS”的宏。使用了__weak让代码隔离得更明显，用户只需专心编写应用、模块、BSP三级的代码。" />
     <MESSAGE value="__【未配置好】增添了一点解释" />
     <MESSAGE value="__【未配置好】添加了ADC、DAC、定时器驱动，添加了ISR.cpp用于处理中断回调。此外，开始编写player模块，但还没理清与应用、驱动之间的关系，低耦合高内聚真难搞啊" />
-    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】添加了ADC、DAC、定时器驱动，添加了ISR.cpp用于处理中断回调。此外，开始编写player模块，但还没理清与应用、驱动之间的关系，低耦合高内聚真难搞啊" />
+    <MESSAGE value="__【未配置好】快把语言存储与回放这个小项目写完了，但是手头还没有单片机！！" />
+    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】快把语言存储与回放这个小项目写完了，但是手头还没有单片机！！" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

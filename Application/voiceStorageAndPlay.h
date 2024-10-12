@@ -11,6 +11,17 @@
  * 播放和录音通过读写FLASH外设M25P16开实现，为了统一，读写都使用了双缓冲机制。
  * 频谱分析使用的是CMSIS的DSP库里的FFT，独自开辟了一个缓冲区
  */
+// 下面是使用到的模块和驱动
+//#define USE_PLAYER 1 // 使用播放器
+//#define USE_FLASH_STORAGE 1// 使用Flash存储
+//#define USE_SPI 1 // 使用SPI
+//#define USE_FSMC 1  // 使用FSMC
+//#define USE_LCD 1   // 使用LCD
+//#define USE_KEY_EXTI  1// 使用按键的外部中断
+//#define USE_SPI_FLASH 1 // 使用SPI Flash
+//#define USE_TIMER 1// 使用定时器
+//#define USE_ADC 1 // 使用ADC
+//#define USE_DAC 1 // 使用DAC
 
 #ifndef FURINA_VOICESTORAGEANDPLAY_H
 #define FURINA_VOICESTORAGEANDPLAY_H

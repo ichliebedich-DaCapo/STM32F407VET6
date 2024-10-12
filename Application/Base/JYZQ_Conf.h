@@ -82,15 +82,16 @@
 // 是否开启FreeRTOS调试模式
 // 调试时，开了之后在负荷不大的情况下，也并不怎么影响实时性。发行时记得关闭
 #define FreeRTOS_DEBUG  1
+#define ENABLE_KEY_TASK_HANDLE 1
 
 // 是否开启FreeRTOS
 // 考虑到有一些应用项目并不需要多线程，且对实时性要求很高，使用FreeRTOS既会增加代码体积，也会增加运行时开销
 // 默认开启，由宏APP_NO_RTOS来控制。考虑到项目多了以后会记不住，于是由项目里的应用头文件来控制
-/*#define APP_NO_RTOS*/
+#define APP_NO_RTOS
 
 /************************应用级***************************/
 #define ENABLE_VOICE_STORAGE_AND_PLAY 1
-#define ENABLE_KEY_TASK_HANDLE 1
+
 
 
 /*************************模块级**************************/
