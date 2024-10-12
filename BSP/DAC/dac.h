@@ -10,8 +10,15 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+extern DAC_HandleTypeDef hdac;
+
+#define dac_start() HAL_DAC_Start(&hdac, DAC_CHANNEL_1)
+#define dac_stop() HAL_DAC_Stop(&hdac, DAC_CHANNEL_1)
+
 
 void dac_init();
+
+
 
 
 #ifdef __cplusplus

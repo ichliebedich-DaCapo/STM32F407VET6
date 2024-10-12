@@ -9,19 +9,19 @@
 #include "JYZQ_Conf.h"
 
 // 由用户自行实现的中断处理函数
-extern void timer6_handler();
-extern void adc1_handler();
+extern void timer6_isr();
+extern void adc1_isr();
 
 // 弱定义，避免找不到
-__weak void timer6_handler(){} // 万一忘记定义了也没报错那可就糟糕了
-__weak void adc1_handler(){}
+__weak void timer6_isr(){} // 万一忘记定义了也没报错那可就糟糕了
+__weak void adc1_isr(){}
 
 /*TIM中断回调函数*/
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     if (htim->Instance == TIM6)
     {
-        timer6_handler();
+        timer6_isr();
     }
 }
 
@@ -30,6 +30,6 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
     if (hadc->Instance == ADC1)
     {
-        adc1_handler();
+        adc1_isr();
     }
 }

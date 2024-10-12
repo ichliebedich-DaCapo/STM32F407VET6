@@ -9,9 +9,20 @@
 #include "GUI_Init.h"
 #include "keyTaskHandler.h"
 
-extern void app_init();
+extern void app_init();// 应用程序初始化函数
 
 __weak void app_init() {}
+
+// 后台处理函数
+#ifdef APP_NO_RTOS
+
+extern void background_handler();
+
+__weak void background_handler() {}
+
+#endif
+
+/**预编译指令多了还挺烦*/
 
 int main()
 {
@@ -33,7 +44,8 @@ int main()
     for (;;)
     {
         GUI_handler();
-        key.handler();
+        key.handler();// 不太想优化成静态类，因为我真的很喜欢这个"."
+        background_handler();
     }
 #endif
 }

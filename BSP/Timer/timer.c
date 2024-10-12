@@ -64,6 +64,8 @@ void timer6_init(uint32_t arr, uint32_t psc)
     // 由于默认使用的是优先级组4，所以没有子优先级
     HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 3, 0);
     HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
+
+    __HAL_TIM_CLEAR_IT(&htim6, TIM_IT_UPDATE); // 清除定时器初始化过程中的更新中断标志，避免定时器一启动就中断
 }
 
 #endif

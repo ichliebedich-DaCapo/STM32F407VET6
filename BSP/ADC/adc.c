@@ -28,11 +28,6 @@ void adc1_init()
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(ADC1_GPIO_Port, &GPIO_InitStruct);
 
-    /* ADC1 interrupt Init */
-    HAL_NVIC_SetPriority(ADC_IRQn, 2, 0);
-    HAL_NVIC_EnableIRQ(ADC_IRQn);
-
-
     hadc1.Instance = ADC1;
     hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
     hadc1.Init.Resolution = ADC_RESOLUTION_12B;
@@ -51,6 +46,12 @@ void adc1_init()
     sConfig.Rank = 1;
     sConfig.SamplingTime = ADC_SAMPLETIME_56CYCLES;
     HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+
+
+
+    /* ADC1 interrupt Init */
+    HAL_NVIC_SetPriority(ADC_IRQn, 2, 0);
+    HAL_NVIC_EnableIRQ(ADC_IRQn);
 }
 
 
