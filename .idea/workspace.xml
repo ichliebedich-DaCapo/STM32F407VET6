@@ -23,9 +23,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】测试">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】测试2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +54,16 @@
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6&quot;,
     &quot;accountId&quot;: &quot;a9ff9cce-f6cd-41c3-bd49-a806fb1abb79&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;ichliebedich-DaCapo&quot;,
+    &quot;repository&quot;: &quot;STM32F407VET6&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
@@ -191,7 +200,8 @@
       <workItem from="1728805378951" duration="487000" />
       <workItem from="1728805988882" duration="880000" />
       <workItem from="1728806882497" duration="175000" />
-      <workItem from="1728807076087" duration="363000" />
+      <workItem from="1728807076087" duration="1450000" />
+      <workItem from="1728808729252" duration="2000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -361,7 +371,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728807014959</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="__【未配置好】测试2">
+      <option name="closed" value="true" />
+      <created>1728807451940</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1728807451940</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -383,7 +401,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="DV" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -414,9 +432,9 @@
     <MESSAGE value="__【未配置好】优化了一些细节。这个__weak大抵是发挥作用的吧，但编译后的内存竟然只增加了1%左右。等手头有单片机后再测试" />
     <MESSAGE value="__【未配置好】准备着手双音频信号发生器" />
     <MESSAGE value="__【未配置好】测试1" />
-    <MESSAGE value="__【未配置好】测试2" />
     <MESSAGE value="__【未配置好】测试" />
-    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】测试" />
+    <MESSAGE value="__【未配置好】测试2" />
+    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】测试2" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
