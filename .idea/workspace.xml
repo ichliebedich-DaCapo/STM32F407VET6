@@ -23,7 +23,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】测试1">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】测试2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -183,7 +183,8 @@
       <workItem from="1728804987016" duration="73000" />
       <workItem from="1728805066628" duration="306000" />
       <workItem from="1728805378951" duration="487000" />
-      <workItem from="1728805988882" duration="356000" />
+      <workItem from="1728805988882" duration="880000" />
+      <workItem from="1728806882497" duration="2000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -337,7 +338,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728805052790</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="__【未配置好】测试2">
+      <option name="closed" value="true" />
+      <created>1728806681900</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1728806681900</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -390,7 +399,8 @@
     <MESSAGE value="__【未配置好】优化了一些细节。这个__weak大抵是发挥作用的吧，但编译后的内存竟然只增加了1%左右。等手头有单片机后再测试" />
     <MESSAGE value="__【未配置好】准备着手双音频信号发生器" />
     <MESSAGE value="__【未配置好】测试1" />
-    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】测试1" />
+    <MESSAGE value="__【未配置好】测试2" />
+    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】测试2" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
