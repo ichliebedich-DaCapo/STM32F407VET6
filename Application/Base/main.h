@@ -8,6 +8,6 @@
 
 // 用户应用项目
 //#include "voiceStorageAndPlay.h"
-#include "signalGenerator.h"
+#include "signalGenerator.hpp"
 
 #endif //FURINA_MAIN_H

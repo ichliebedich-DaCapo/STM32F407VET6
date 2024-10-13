@@ -7,7 +7,7 @@
 
 #include "stm32f4xx_hal.h"
 #include "GUI_Init.h"
-#include "keyTaskHandler.h"
+#include "keyTaskHandler.hpp"
 
 extern void app_init();// 应用程序初始化函数
 

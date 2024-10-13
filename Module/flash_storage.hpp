@@ -2,8 +2,8 @@
 // Created by 34753 on 2024/10/11.
 //
 
-#ifndef FURINA_FLASH_STORAGE_H
-#define FURINA_FLASH_STORAGE_H
+#ifndef FURINA_FLASH_STORAGE_HPP
+#define FURINA_FLASH_STORAGE_HPP
 
 #include "JYZQ_Conf.h"
 
@@ -133,4 +133,4 @@ private:
 #ifdef __cplusplus
 }
 #endif
-#endif //FURINA_FLASH_STORAGE_H
+#endif //FURINA_FLASH_STORAGE_HPP

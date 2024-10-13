@@ -2,7 +2,7 @@
 // Created by 34753 on 2024/10/12.
 //
 
-#include "wave_signal.h"
+#include "wave_signal.hpp"
 
 #if USE_WAVE_SIGNAL
 

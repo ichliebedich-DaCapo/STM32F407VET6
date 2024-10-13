@@ -2,8 +2,8 @@
 // Created by 34753 on 2024/10/12.
 //
 
-#ifndef FURINA_WAVE_SIGNAL_H
-#define FURINA_WAVE_SIGNAL_H
+#ifndef FURINA_WAVE_SIGNAL_HPP
+#define FURINA_WAVE_SIGNAL_HPP
 
 #include "JYZQ_Conf.h"
 #if USE_WAVE_SIGNAL
@@ -120,4 +120,4 @@ private:
 
 #endif
 
-#endif //FURINA_WAVE_SIGNAL_H
+#endif //FURINA_WAVE_SIGNAL_HPP

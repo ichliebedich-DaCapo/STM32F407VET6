@@ -2,8 +2,8 @@
 // Created by 34753 on 2024/9/22.
 //
 
-#ifndef FURINA_KEY_H
-#define FURINA_KEY_H
+#ifndef FURINA_KEY_HPP
+#define FURINA_KEY_HPP
 
 #include <cstdint>
 #include "main.h"
@@ -77,4 +77,4 @@ private:
 };
 
 extern Key key;
-#endif //FURINA_KEY_H
+#endif //FURINA_KEY_HPP
