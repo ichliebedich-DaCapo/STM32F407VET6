@@ -30,8 +30,59 @@
 不然与以前随处定义的全局变量一样容易产生混淆。
 
 
-<br>
+## CLion开发体验提升
+- **文件模板**：
+<br><br>
+C文件模板
+```
+#parse("C File Header.h")
+#if (${HEADER_FILENAME})
+#[[#include]]# "${HEADER_FILENAME}"
+#end
+\#if 1
+// 头文件
 
+// 函数
+
+
+#endif
+```
+
+C头文件模板<br>
+&nbsp;&nbsp;&nbsp;&nbsp;根据个人去配置，这里面可以检测是否是hpp文件
+```
+#parse("C File Header.h")
+#[[#ifndef]]# ${INCLUDE_GUARD}
+#[[#define]]# ${INCLUDE_GUARD}
+## 设置一个变量名用来调用endsWith方法
+#set($filename = ${FILE_NAME})
+\#include "JYZQ_Conf.h"
+/* 预编译命令 */
+\#if 1
+// 头文件
+
+#if ($filename.endsWith(".h"))
+#ifdef __cplusplus
+extern "C" {
+#endif
+#end
+// 宏定义
+
+
+// 接口
+
+#if ($filename.endsWith(".h"))
+#ifdef __cplusplus
+}
+#endif
+#end
+/* 预编译命令 */
+#endif
+#[[#endif]]# //${INCLUDE_GUARD}
+```
+
+
+<br>
 <!-- 闹着玩的 -->
 **人员**：WJY、WZX、XZQ +HNT &nbsp;&nbsp;&nbsp; 软：JY、ZQ &nbsp;&nbsp; 硬：ZX +NT <br>
 <!-- 一个磕磕碰碰的团队 -->

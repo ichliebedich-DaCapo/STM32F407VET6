@@ -23,10 +23,15 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】协同开发测试">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】添加了一个宏定义，用于设置定时器的频率">
+      <change afterPath="$PROJECT_DIR$/Module/fff.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2024_10_6_18_23____.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2024_10_6_18_23_取消提交了更改_[更改]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/signalGenerator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/signalGenerator.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/key.h" beforeDir="false" afterPath="$PROJECT_DIR$/Module/key.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Module/wave_signal.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/wave_signal.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/wave_signal.h" beforeDir="false" afterPath="$PROJECT_DIR$/Module/wave_signal.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,17 +52,17 @@
     &quot;assignee&quot;: &quot;ichliebedich-DaCapo&quot;
   }
 }</component>
-  <component name="GitHubPullRequestState"><![CDATA[{
-  "prStates": [
+  <component name="GitHubPullRequestState">{
+  &quot;prStates&quot;: [
     {
-      "id": {
-        "id": "PR_kwDOM1Uexs5-cVLk",
-        "number": 1
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOM1Uexs5-cVLk&quot;,
+        &quot;number&quot;: 1
       },
-      "lastSeen": 1728808310381
+      &quot;lastSeen&quot;: 1728808310381
     }
   ]
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6.git&quot;,
@@ -108,7 +113,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "vcs.Git",
+    "settings.editor.selected.configurable": "fileTemplates",
     "structure.view.defaults.are.configured": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -189,7 +194,8 @@
       <workItem from="1728737608714" duration="7000" />
       <workItem from="1728747072867" duration="2956000" />
       <workItem from="1728788596047" duration="12642000" />
-      <workItem from="1728804497153" duration="8382000" />
+      <workItem from="1728804497153" duration="9828000" />
+      <workItem from="1728826753229" duration="6333000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -351,7 +357,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728807252060</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="__【未配置好】添加了一个宏定义，用于设置定时器的频率">
+      <option name="closed" value="true" />
+      <created>1728816383495</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1728816383495</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -406,7 +420,8 @@
     <MESSAGE value="__【未配置好】双音频信号发生器实现了一部分逻辑" />
     <MESSAGE value="__【未配置好】双音频信号发生器——模块基本写好" />
     <MESSAGE value="__【未配置好】协同开发测试" />
-    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】协同开发测试" />
+    <MESSAGE value="__【未配置好】添加了一个宏定义，用于设置定时器的频率" />
+    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】添加了一个宏定义，用于设置定时器的频率" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

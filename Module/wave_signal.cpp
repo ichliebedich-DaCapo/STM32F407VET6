@@ -96,7 +96,7 @@ auto WaveSignal::set_frequency(WaveFreq wave_freq) -> void
 
 /**
  * @brief 设置波形类型
- * @param type
+ * @param type 波形类型，分别为 正弦、方波、三角波、锯齿波等
  */
 auto WaveSignal::set_type(WaveType type) -> void
 {
@@ -123,9 +123,5 @@ auto WaveSignal::set_type(WaveType type) -> void
     }
 }
 
-auto WaveSignal::set_duty(WaveDuty wave_duty) -> void
-{
-    switch_count = max_count * static_cast<uint8_t>(wave_duty) / 10;
-}
 
 #endif
