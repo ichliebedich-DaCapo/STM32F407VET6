@@ -47,8 +47,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6.git&quot;,
-    &quot;accountId&quot;: &quot;a679c97f-91ee-40eb-8ce5-af8a944aaf79&quot;
+    &quot;url&quot;: &quot;https://github.com/fumgvsyj/STM32F407VET6&quot;,
+    &quot;accountId&quot;: &quot;a9ff9cce-f6cd-41c3-bd49-a806fb1abb79&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
@@ -180,7 +180,10 @@
       <workItem from="1728801697766" duration="155000" />
       <workItem from="1728802199352" duration="2108000" />
       <workItem from="1728804326398" duration="652000" />
-      <workItem from="1728804987016" duration="2000" />
+      <workItem from="1728804987016" duration="73000" />
+      <workItem from="1728805066628" duration="306000" />
+      <workItem from="1728805378951" duration="487000" />
+      <workItem from="1728805988882" duration="356000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -326,7 +329,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728804877009</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="__【未配置好】测试1">
+      <option name="closed" value="true" />
+      <created>1728805052790</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1728805052790</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
