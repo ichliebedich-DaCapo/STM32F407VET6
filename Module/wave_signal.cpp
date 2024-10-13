@@ -54,6 +54,7 @@ auto WaveSignal::generate() -> void
         if (temp_count == switch_count)
         {
             switch_freq();
+           /* 这个时候可以做一些别的处理，比如切换波形，但是这个机制还没有完善（低耦合）*/
         }
 
         // 计数值满就切频
@@ -89,6 +90,40 @@ auto WaveSignal::set_frequency(WaveFreq wave_freq) -> void
         default:
             break;
     }
+}
+
+/**
+ * @brief 设置波形类型
+ * @param type
+ */
+auto WaveSignal::set_type(WaveType type) -> void
+{
+    switch (type)
+    {
+        case WaveType::Sine:
+            pWave = sineWave;
+            break;
+
+        case WaveType::Square:
+            pWave = squareWave;
+            break;
+
+        case WaveType::Triangle:
+            pWave = triangleWave;
+            break;
+
+        case WaveType::Sawtooth:
+            pWave = sawtoothWave;
+            break;
+
+        default:
+            break;
+    }
+}
+
+auto WaveSignal::set_duty(WaveDuty wave_duty) -> void
+{
+    switch_count = max_count * static_cast<uint8_t>(wave_duty) / 10;
 }
 
 #endif

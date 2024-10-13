@@ -6,8 +6,8 @@
 #define FURINA_WAVE_SIGNAL_H
 
 #include "JYZQ_Conf.h"
-
 #if USE_WAVE_SIGNAL
+#include "waveData.h"
 
 enum class WaveMode : uint8_t
 {
@@ -22,7 +22,7 @@ enum class WaveType : uint8_t
     Square,// 方波
     Triangle,// 三角波
     Sawtooth,
-    Noise,
+    Noise,// 可以使用stm32自带的硬件随机数生成器产生
 };
 
 // 以采样点为256为1个周期，所以下面频率对应的定时器频率需要乘以256
@@ -30,6 +30,20 @@ enum class WaveFreq : uint8_t
 {
     Freq_8K,
     Freq_16K,
+};
+
+// 波形占空比
+enum class WaveDuty : uint8_t
+{
+    Duty_10=1,// 10%
+    Duty_20=2,// 20%
+    Duty_30=3,// 30%
+    Duty_40=4,// 40%
+    Duty_50=5,// 50%
+    Duty_60=6,// 60%
+    Duty_70=7,// 70%
+    Duty_80=8,// 80%
+    Duty_90=9,// 90%
 };
 
 class WaveSignal
@@ -41,7 +55,9 @@ public:
 
     static auto set_mode(WaveMode wave_mode) -> void;
 
-    auto set_type(WaveType type) -> void;
+    static auto set_type(WaveType type) -> void;
+
+    static auto set_duty(WaveDuty wave_duty) -> void;
 
     static auto set_frequency(WaveFreq wave_freq) -> void;
 
@@ -49,9 +65,9 @@ public:
 
 
 private:
-    static auto reset_count() -> void { count = get_clock(); }
+    static auto reset_count() -> void { count = get_clock(); }// 重置计数
 
-    static auto get_clock() -> uint32_t { return HAL_GetTick(); }
+    static auto get_clock() -> uint32_t { return HAL_GetTick(); }// 获取当前时间
 
     static auto switch_freq() -> void
     {
@@ -67,7 +83,7 @@ private:
 
 private:
     static inline uint32_t count = 0;
-    static inline uint8_t *pWave;// 默认指向正弦波
+    static inline const uint8_t *pWave=sineWave;// 现在是常量指针，默认指向正弦波。如果需要噪声，那么需要把它们变为普通指针
     static inline uint16_t status = 0;
     constexpr const static uint16_t cycle = 3;// 周期为3秒
     constexpr const static uint16_t sys_freq = 1000;
