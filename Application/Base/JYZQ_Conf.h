@@ -87,7 +87,7 @@
 // 是否开启FreeRTOS
 // 考虑到有一些应用项目并不需要多线程，且对实时性要求很高，使用FreeRTOS既会增加代码体积，也会增加运行时开销
 // 默认开启多线程，由宏APP_NO_RTOS来控制。考虑到项目多了以后会记不住，于是由项目里的应用头文件来控制
-// 这个宏默认是注释的
+// 【这个宏默认是注释的】
 /*#define APP_NO_RTOS*/
 
 /************************应用级***************************/
@@ -111,8 +111,39 @@
 #define USE_ADC 1 // 使用ADC
 #define USE_DAC 1 // 使用DAC
 
-/***cuy****************/
+/****************************宏定义的频率****************************/
+// 用于填入形参表为(uint32_t arr, uint32_t psc)的函数中，以方便修改频率
+#define FREQ_84M_to_100  839,999    // 84MHz -> 100Hz
+#define FREQ_84M_to_500  167,999    // 84MHz -> 500Hz
+#define FREQ_84M_to_1K  83,999    // 84MHz -> 1KHz
+#define FREQ_84M_to_2K   41,999   // 84MHz -> 2KHz
+#define FREQ_84M_to_5K   167,99   // 84MHz -> 5KHz
+# define FREQ_84M_to_8K   104,99  // 84MHz -> 8KHz
+#define FREQ_84M_to_10K   83,99  // 84MHz -> 10KHz
+#define FREQ_84M_to_12K   69,99  // 84MHz -> 12KHz
+#define FREQ_84M_to_16K   49,104  // 84MHz -> 16KHz
+#define FREQ_84M_to_20K   41,99  // 84MHz -> 20KHz
 
+// 针对于音频的频率（默认采样点为256个）
+# define FREQ_84M_to_256x8K  1,39   // 84MHz -> 256*8KHz
+# define FREQ_84M_to_256x16K  2,19  // 84MHz -> 256*16KHz
+
+// ************************************************************ //
+
+#define FREQ_168M_to_100  1679,999  // 168MHz -> 100Hz
+#define FREQ_168M_to_500  335,999   // 168MHz -> 500Hz
+# define FREQ_168M_to_1K  167,999   // 168MHz -> 1KHz
+# define FREQ_168M_to_2K  83,999    // 168MHz -> 2KHz
+# define FREQ_168M_to_5K  335,99    // 168MHz -> 5KHz
+# define FREQ_168M_to_8K  209,99    // 168MHz -> 8KHz
+# define FREQ_168M_to_10K  167,99    // 168MHz -> 10KHz
+# define FREQ_168M_to_12K  139,99    // 168MHz -> 12KHz
+# define FREQ_168M_to_16K  99,104   // 168MHz -> 16KHz
+# define FREQ_168M_to_20K  83,99    // 168MHz -> 20KHz
+
+// 针对于音频的频率（默认采样点为256个）
+# define FREQ_168M_to_256x8K  2,19  // 168MHz -> 256*8KHz
+# define FREQ_168M_to_256x16K  4,19  // 168MHz -> 256*16KHz
 
 
 #endif //FURINA_JYZQ_CONF_H

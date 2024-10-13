@@ -22,12 +22,14 @@ auto WaveSignal::set_mode(WaveMode wave_mode) -> void
 auto WaveSignal::on() -> void
 {
     timer6_start_it();
+    dac_start();
     reset_count();
 }
 
 auto WaveSignal::off() -> void
 {
     timer6_stop_it();
+    dac_stop();
 }
 
 /**
@@ -80,11 +82,11 @@ auto WaveSignal::set_frequency(WaveFreq wave_freq) -> void
     switch (wave_freq)
     {
         case WaveFreq::Freq_8K:
-            timer6_set_freq(1, 39);// 256*8K
+            timer6_set_freq(FREQ_84M_to_256x8K);// 256*8K
             break;
 
         case WaveFreq::Freq_16K:
-            timer6_set_freq(1, 19);// 256*16K
+            timer6_set_freq(FREQ_84M_to_256x16K);// 256*16K
             break;
 
         default:

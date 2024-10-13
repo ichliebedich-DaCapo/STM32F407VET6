@@ -23,8 +23,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】双音频信号发生器——模块基本写好">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】协同开发测试">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/signalGenerator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/signalGenerator.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/wave_signal.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/wave_signal.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,9 +44,20 @@
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;fumgvsyj&quot;
+    &quot;assignee&quot;: &quot;ichliebedich-DaCapo&quot;
   }
 }</component>
+  <component name="GitHubPullRequestState"><![CDATA[{
+  "prStates": [
+    {
+      "id": {
+        "id": "PR_kwDOM1Uexs5-cVLk",
+        "number": 1
+      },
+      "lastSeen": 1728808310381
+    }
+  ]
+}]]></component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6.git&quot;,
@@ -79,27 +92,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Embedded/MCU/STM32/CubeTest&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/Embedded/MCU/STM32/CubeTest",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "vcs.Git",
+    "structure.view.defaults.are.configured": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Base" />
@@ -176,7 +189,7 @@
       <workItem from="1728737608714" duration="7000" />
       <workItem from="1728747072867" duration="2956000" />
       <workItem from="1728788596047" duration="12642000" />
-      <workItem from="1728804497153" duration="2090000" />
+      <workItem from="1728804497153" duration="8382000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -330,7 +343,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728804108363</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="__【未配置好】协同开发测试">
+      <option name="closed" value="true" />
+      <created>1728807252060</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1728807252060</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -384,7 +405,8 @@
     <MESSAGE value="__【未配置好】准备着手双音频信号发生器" />
     <MESSAGE value="__【未配置好】双音频信号发生器实现了一部分逻辑" />
     <MESSAGE value="__【未配置好】双音频信号发生器——模块基本写好" />
-    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】双音频信号发生器——模块基本写好" />
+    <MESSAGE value="__【未配置好】协同开发测试" />
+    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】协同开发测试" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
