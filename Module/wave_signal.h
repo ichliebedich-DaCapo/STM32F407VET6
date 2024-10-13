@@ -11,49 +11,72 @@
 
 enum class WaveMode : uint8_t
 {
-    Freq_8K,// 8KHz单频波
-    Freq_16K,// 16KHz单频波
-    MixFreq_8K_16K,// 8KHz与16KHz混合波
+    SINGLE_FREQ,// 单频波
+    MIX_FREQ,// 混合波,默认是8K与16K混合
 };
 
 // 波形类型
 enum class WaveType : uint8_t
 {
-    Sine,
-    Square,
-    Triangle,
+    Sine,// 正弦波
+    Square,// 方波
+    Triangle,// 三角波
     Sawtooth,
     Noise,
+};
+
+// 以采样点为256为1个周期，所以下面频率对应的定时器频率需要乘以256
+enum class WaveFreq : uint8_t
+{
+    Freq_8K,
+    Freq_16K,
 };
 
 class WaveSignal
 {
 public:
-    auto on() -> void;
+    static auto on() -> void;
 
-    auto off() -> void;
+    static auto off() -> void;
 
-    auto set_mode(WaveMode mode) -> void;
+    static auto set_mode(WaveMode wave_mode) -> void;
 
     auto set_type(WaveType type) -> void;
 
-    static auto check_mode() -> WaveMode
+    static auto set_frequency(WaveFreq wave_freq) -> void;
+
+    static auto generate() -> void;
+
+
+private:
+    static auto reset_count() -> void { count = get_clock(); }
+
+    static auto get_clock() -> uint32_t { return HAL_GetTick(); }
+
+    static auto switch_freq() -> void
     {
-        return static_cast<WaveMode>(status & static_cast<uint8_t>(FlagStatus::Mode));
+        // 交换频率
+        if (freq == WaveFreq::Freq_8K)
+        {
+            set_frequency(WaveFreq::Freq_16K);
+        } else
+        {
+            set_frequency(WaveFreq::Freq_8K);
+        }
     }
 
 private:
     static inline uint32_t count = 0;
     static inline uint8_t *pWave;// 默认指向正弦波
     static inline uint16_t status = 0;
+    constexpr const static uint16_t cycle = 3;// 周期为3秒
+    constexpr const static uint16_t sys_freq = 1000;
+    constexpr const static uint16_t max_count = sys_freq * cycle;
+    constexpr const static uint16_t half_count = max_count / 2;
+    static inline uint16_t switch_count = half_count;// 默认切频计数值为1/2周期
     static inline uint8_t index = 0;// 波形索引，考虑到内存有限，所以一般波形数据只有256个采样点
-
-    enum class FlagStatus : uint8_t
-    {
-        Mode = 0x3,// bits:0-1，模式
-        Reset = 0x4,// bit:2 重置
-        Switch = 0x8,// bit:3 交换
-    };
+    static inline WaveMode mode = WaveMode::SINGLE_FREQ;
+    static inline WaveFreq freq = WaveFreq::Freq_8K;
 };
 
 #endif
