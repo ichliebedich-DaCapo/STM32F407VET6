@@ -19,11 +19,11 @@
   </component>
   <component name="CMakeSettings">
     <configurations>
-      <configuration PROFILE_NAME="Release" ENABLED="true" CONFIG_NAME="Release" BUILD_OPTIONS="-j 20" />
+      <configuration PROFILE_NAME="Release" ENABLED="true" CONFIG_NAME="Release" BUILD_OPTIONS="-j 16" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】测试1">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】双音频信号发生器——模块基本写好">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -118,7 +118,7 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
+    <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Embedded\MCU\STM32\Furina\stlink.cfg" reset-type="INIT" download-type="UPDATED_ONLY">
         <debugger kind="GDB" isBundled="true" />
       </openocd>
@@ -175,12 +175,8 @@
       <workItem from="1728717574536" duration="4969000" />
       <workItem from="1728737608714" duration="7000" />
       <workItem from="1728747072867" duration="2956000" />
-      <workItem from="1728788596047" duration="1422000" />
-      <workItem from="1728800247253" duration="157000" />
-      <workItem from="1728801697766" duration="155000" />
-      <workItem from="1728802199352" duration="2108000" />
-      <workItem from="1728804326398" duration="652000" />
-      <workItem from="1728804987016" duration="2000" />
+      <workItem from="1728788596047" duration="12642000" />
+      <workItem from="1728804497153" duration="2090000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -318,15 +314,23 @@
       <option name="project" value="LOCAL" />
       <updated>1728749785076</updated>
     </task>
-    <task id="LOCAL-00018" summary="__【未配置好】测试1">
+    <task id="LOCAL-00018" summary="__【未配置好】双音频信号发生器实现了一部分逻辑">
       <option name="closed" value="true" />
-      <created>1728804877009</created>
+      <created>1728793496808</created>
       <option name="number" value="00018" />
       <option name="presentableId" value="LOCAL-00018" />
       <option name="project" value="LOCAL" />
-      <updated>1728804877009</updated>
+      <updated>1728793496808</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="__【未配置好】双音频信号发生器——模块基本写好">
+      <option name="closed" value="true" />
+      <created>1728804108363</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1728804108363</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -348,7 +352,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -378,8 +382,9 @@
     <MESSAGE value="__【未配置好】快把语言存储与回放这个小项目写完了，但是手头还没有单片机！！" />
     <MESSAGE value="__【未配置好】优化了一些细节。这个__weak大抵是发挥作用的吧，但编译后的内存竟然只增加了1%左右。等手头有单片机后再测试" />
     <MESSAGE value="__【未配置好】准备着手双音频信号发生器" />
-    <MESSAGE value="__【未配置好】测试1" />
-    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】测试1" />
+    <MESSAGE value="__【未配置好】双音频信号发生器实现了一部分逻辑" />
+    <MESSAGE value="__【未配置好】双音频信号发生器——模块基本写好" />
+    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】双音频信号发生器——模块基本写好" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
