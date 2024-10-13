@@ -19,16 +19,12 @@
   </component>
   <component name="CMakeSettings">
     <configurations>
-      <configuration PROFILE_NAME="Release" ENABLED="true" CONFIG_NAME="Release" BUILD_OPTIONS="-j 16" />
+      <configuration PROFILE_NAME="Release" ENABLED="true" CONFIG_NAME="Release" BUILD_OPTIONS="-j 20" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】双音频信号发生器实现了一部分逻辑">
-      <change afterPath="$PROJECT_DIR$/Library/Data/waveData.c" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】准备着手双音频信号发生器">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Data/waveData.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Data/waveData.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/wave_signal.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/wave_signal.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/wave_signal.h" beforeDir="false" afterPath="$PROJECT_DIR$/Module/wave_signal.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +95,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "CPPToolchains",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
     "structure.view.defaults.are.configured": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -122,12 +118,7 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
+    <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Embedded\MCU\STM32\Furina\stlink.cfg" reset-type="INIT" download-type="UPDATED_ONLY">
         <debugger kind="GDB" isBundled="true" />
       </openocd>
@@ -184,7 +175,11 @@
       <workItem from="1728717574536" duration="4969000" />
       <workItem from="1728737608714" duration="7000" />
       <workItem from="1728747072867" duration="2956000" />
-      <workItem from="1728788596047" duration="11633000" />
+      <workItem from="1728788596047" duration="1422000" />
+      <workItem from="1728800247253" duration="157000" />
+      <workItem from="1728801697766" duration="155000" />
+      <workItem from="1728802199352" duration="2108000" />
+      <workItem from="1728804326398" duration="130000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -322,15 +317,7 @@
       <option name="project" value="LOCAL" />
       <updated>1728749785076</updated>
     </task>
-    <task id="LOCAL-00018" summary="__【未配置好】双音频信号发生器实现了一部分逻辑">
-      <option name="closed" value="true" />
-      <created>1728793496808</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1728793496808</updated>
-    </task>
-    <option name="localTasksCounter" value="19" />
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -352,7 +339,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -382,8 +369,7 @@
     <MESSAGE value="__【未配置好】快把语言存储与回放这个小项目写完了，但是手头还没有单片机！！" />
     <MESSAGE value="__【未配置好】优化了一些细节。这个__weak大抵是发挥作用的吧，但编译后的内存竟然只增加了1%左右。等手头有单片机后再测试" />
     <MESSAGE value="__【未配置好】准备着手双音频信号发生器" />
-    <MESSAGE value="__【未配置好】双音频信号发生器实现了一部分逻辑" />
-    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】双音频信号发生器实现了一部分逻辑" />
+    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】准备着手双音频信号发生器" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
