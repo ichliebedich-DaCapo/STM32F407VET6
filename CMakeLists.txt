@@ -82,6 +82,7 @@ include_directories(
         # 库
         Library/Data
         Library/Third_Party/
+        Library/DSP/
         # FreeRTOS库
         Library/Third_Party/FreeRTOS/Source/include
         Library/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
@@ -89,6 +90,10 @@ include_directories(
         # LVGL库
         Library/Third_Party/lvgl/src
         Library/Third_Party/lvgl/examples/porting
+        # DSP库
+        Library/DSP/ComputeLibrary/include
+        Library/DSP/Include/dsp
+        Library/DSP/Include
 )
 
 
@@ -109,6 +114,8 @@ file(GLOB_RECURSE SOURCES
 
         # FreeRTOS库
         "Library/Third_Party/FreeRTOS/*.*"
+        "Library/DSP/Include/dsp/*.*"
+
 )
 
 # 设置链接脚本

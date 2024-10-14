@@ -24,7 +24,7 @@
 #define USE_FLASH_STORAGE 0// 使用Flash存储
 #define USE_WAVE_SIGNAL 1 // 使用波形信号
 #define USE_CPU_TEMPERATURE 1 // 使用CPU测温计
-
+#define USE_FFT 1 //使用FFT
 /**************************板级**************************/
 // 协议控制器放在上面，具体外设放在下面
 #define USE_SPI 1 // 使用SPI
