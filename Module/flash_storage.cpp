@@ -2,7 +2,7 @@
 // Created by 34753 on 2024/10/11.
 //
 
-#include "flash_storage.h"
+#include "flash_storage.hpp"
 
 #if USE_FLASH_STORAGE
 

@@ -2,7 +2,7 @@
 // Created by 34753 on 2024/10/10.
 //
 
-#include "player.h"
+#include "player.hpp"
 
 #if USE_PLAYER
 #include "dac.h"

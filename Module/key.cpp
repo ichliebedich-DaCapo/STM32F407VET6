@@ -1,7 +1,7 @@
 //
 // Created by 34753 on 2024/9/22.
 //
-#include "key.h"
+#include "key.hpp"
 #include "key_exit.h"
 #include "stm32f4xx_hal.h"
 // 实例化，由于我更喜欢通过“.”来访问成员变量，所以没有使用单例模式

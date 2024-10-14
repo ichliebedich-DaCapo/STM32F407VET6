@@ -2,12 +2,12 @@
 // Created by 34753 on 2024/10/12.
 //
 
-#include "signalGenerator.h"
+#include "signalGenerator.hpp"
 #if ENABLE_SIGNAL_GENERATOR
 #include "timer.h"
 #include "dac.h"
-#include "wave_signal.h"
-#include "key.h"
+#include "wave_signal.hpp"
+#include "key.hpp"
 
 
 void app_init()

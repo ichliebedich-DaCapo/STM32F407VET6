@@ -7,7 +7,7 @@
 // 单纯是为了能在RTOS与非RTOS切换做出的妥协
 
 // 用户应用项目
-#include "voiceStorageAndPlay.h"
-//#include "signalGenerator.h"
+//#include "voiceStorageAndPlay.h"
+#include "signalGenerator.hpp"
 
 #endif //FURINA_MAIN_H

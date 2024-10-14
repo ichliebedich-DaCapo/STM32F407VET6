@@ -2,7 +2,7 @@
 // Created by 34753 on 2024/9/22.
 //
 
-#include "voiceStorageAndPlay.h"
+#include "voiceStorageAndPlay.hpp"
 
 #if ENABLE_VOICE_STORAGE_AND_PLAY
 

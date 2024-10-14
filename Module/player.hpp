@@ -2,8 +2,8 @@
 // Created by 34753 on 2024/10/10.
 //
 
-#ifndef FURINA_PLAYER_H
-#define FURINA_PLAYER_H
+#ifndef FURINA_PLAYER_HPP
+#define FURINA_PLAYER_HPP
 #include "JYZQ_Conf.h"
 #if USE_PLAYER
 
@@ -31,4 +31,4 @@ public:
 
 
 #endif  // USE_PLAYER
-#endif //FURINA_PLAYER_H
+#endif //FURINA_PLAYER_HPP
