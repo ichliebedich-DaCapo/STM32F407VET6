@@ -23,25 +23,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】使用了CLion的文件模板，以后C++头文件后缀使用hpp">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】让C++文件与C文件泾渭分明">
+      <change afterPath="$PROJECT_DIR$/解决开梯子后仍超时的奇技淫巧.bat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/main.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/keyTaskHandler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/keyTaskHandler.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/keyTaskHandler.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/keyTaskHandler.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/signalGenerator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/signalGenerator.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/signalGenerator.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/signalGenerator.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/flash_storage.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/flash_storage.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/flash_storage.h" beforeDir="false" afterPath="$PROJECT_DIR$/Module/flash_storage.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/key.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/key.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/key.h" beforeDir="false" afterPath="$PROJECT_DIR$/Module/key.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/player.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/player.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/player.h" beforeDir="false" afterPath="$PROJECT_DIR$/Module/player.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/wave_signal.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/wave_signal.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/wave_signal.h" beforeDir="false" afterPath="$PROJECT_DIR$/Module/wave_signal.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +107,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "fileTemplates",
+    "settings.editor.selected.configurable": "project.propVCSSupport.CommitDialog",
     "structure.view.defaults.are.configured": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -141,11 +125,6 @@
     <option name="rtosEnabled" value="true" />
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -210,7 +189,10 @@
       <workItem from="1728747072867" duration="2956000" />
       <workItem from="1728788596047" duration="12642000" />
       <workItem from="1728804497153" duration="9828000" />
-      <workItem from="1728826753229" duration="7504000" />
+      <workItem from="1728826753229" duration="8823000" />
+      <workItem from="1728892908296" duration="780000" />
+      <workItem from="1728894181745" duration="70000" />
+      <workItem from="1728894263001" duration="1721000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -388,7 +370,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728833671143</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="__【未配置好】让C++文件与C文件泾渭分明">
+      <option name="closed" value="true" />
+      <created>1728834327996</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1728834327996</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -445,7 +435,8 @@
     <MESSAGE value="__【未配置好】协同开发测试" />
     <MESSAGE value="__【未配置好】添加了一个宏定义，用于设置定时器的频率" />
     <MESSAGE value="__【未配置好】使用了CLion的文件模板，以后C++头文件后缀使用hpp" />
-    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】使用了CLion的文件模板，以后C++头文件后缀使用hpp" />
+    <MESSAGE value="__【未配置好】让C++文件与C文件泾渭分明" />
+    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】让C++文件与C文件泾渭分明" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
