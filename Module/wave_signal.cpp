@@ -4,7 +4,7 @@
 
 #include "wave_signal.hpp"
 
-#if USE_WAVE_SIGNAL
+#ifdef USE_WAVE_SIGNAL
 
 #include "timer.h"
 #include "dac.h"

@@ -4,7 +4,7 @@
 
 #include "spi.h"
 
-#if USE_SPI
+#ifdef USE_SPI
 
 
 

@@ -6,7 +6,7 @@
 #define FURINA_W25QXX_H
 
 #include "JYZQ_Conf.h"
-#if USE_SPI_FLASH
+#ifdef USE_SPI_FLASH
 #include "spi.h"
 #ifdef __cplusplus
 extern "C" {

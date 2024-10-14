@@ -3,7 +3,7 @@
 //
 #include "w25qxx.h"
 
-#if USE_SPI_FLASH
+#ifdef USE_SPI_FLASH
 
 /*FLASH_SPI*/
 #define FLASH_SPI SPI3

@@ -5,7 +5,7 @@
 #ifndef FURINA_SPI_H
 #define FURINA_SPI_H
 #include "JYZQ_Conf.h"
-#if USE_SPI
+#ifdef USE_SPI
 #include "stm32f4xx_hal.h"
 
 #ifdef __cplusplus

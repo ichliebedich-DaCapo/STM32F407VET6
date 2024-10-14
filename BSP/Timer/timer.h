@@ -7,7 +7,7 @@
 
 #include "JYZQ_Conf.h"
 #include "stm32f4xx_hal.h"
-#if USE_TIMER
+#ifdef USE_TIMER
 #ifdef __cplusplus
 extern "C" {
 #endif

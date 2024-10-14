@@ -4,7 +4,7 @@
 
 #include "flash_storage.hpp"
 
-#if USE_FLASH_STORAGE
+#ifdef USE_FLASH_STORAGE
 
 #include "w25qxx.h"
 

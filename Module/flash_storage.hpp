@@ -6,11 +6,11 @@
 #define FURINA_FLASH_STORAGE_HPP
 
 #include "JYZQ_Conf.h"
-
+#include "stm32f4xx_hal.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
-#if USE_FLASH_STORAGE
+#ifdef USE_FLASH_STORAGE
 
 /**
  * @brief Flash存储类

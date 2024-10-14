@@ -4,7 +4,7 @@
 
 #include "player.hpp"
 
-#if USE_PLAYER
+#ifdef USE_PLAYER
 #include "dac.h"
 #include "timer.h"
 #include "adc.h"

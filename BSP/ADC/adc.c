@@ -3,7 +3,7 @@
 //
 
 #include "adc.h"
-#if USE_ADC
+#ifdef USE_ADC
 ADC_HandleTypeDef hadc1;
 
 #define ADC1_PIN GPIO_PIN_0
