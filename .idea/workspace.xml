@@ -23,12 +23,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】备份">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】补救措施">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/App_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/App_Conf.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/ADC/adc.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/ADC/adc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/cpu_temperature.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/cpu_temperature.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/cpu_temperature.h" beforeDir="false" afterPath="$PROJECT_DIR$/Module/cpu_temperature.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/keyTaskHandler.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/keyTaskHandler.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/signalGenerator.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/signalGenerator.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +55,24 @@
     &quot;assignee&quot;: &quot;fumgvsyj&quot;
   }
 }</component>
+  <component name="GitHubPullRequestState"><![CDATA[{
+  "prStates": [
+    {
+      "id": {
+        "id": "PR_kwDOM1Uexs5-cVLk",
+        "number": 1
+      },
+      "lastSeen": 1728808310381
+    },
+    {
+      "id": {
+        "id": "PR_kwDOM1Uexs5-id6q",
+        "number": 2
+      },
+      "lastSeen": 1728915856324
+    }
+  ]
+}]]></component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6&quot;,
@@ -98,27 +117,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;DV&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Embedded/MCU/STM32/CubeTest&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;,
-    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/Embedded/MCU/STM32/CubeTest",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "project.propVCSSupport.CommitDialog",
+    "structure.view.defaults.are.configured": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Base" />
@@ -137,7 +156,12 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Embedded\MCU\STM32\Furina\stlink.cfg" reset-type="INIT" download-type="UPDATED_ONLY">
         <debugger kind="GDB" isBundled="true" />
       </openocd>
@@ -471,12 +495,15 @@
     <MESSAGE value="__【未配置好】快把语言存储与回放这个小项目写完了，但是手头还没有单片机！！" />
     <MESSAGE value="__【未配置好】优化了一些细节。这个__weak大抵是发挥作用的吧，但编译后的内存竟然只增加了1%左右。等手头有单片机后再测试" />
     <MESSAGE value="__【未配置好】准备着手双音频信号发生器" />
-    <MESSAGE value="__【未配置好】测试1" />
-    <MESSAGE value="__【未配置好】测试" />
-    <MESSAGE value="__【未配置好】测试2" />
-    <MESSAGE value="__【未配置好】测试3" />
-    <MESSAGE value="__【未配置好】备份" />
-    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】备份" />
+    <MESSAGE value="__【未配置好】双音频信号发生器实现了一部分逻辑" />
+    <MESSAGE value="__【未配置好】双音频信号发生器——模块基本写好" />
+    <MESSAGE value="__【未配置好】协同开发测试" />
+    <MESSAGE value="__【未配置好】添加了一个宏定义，用于设置定时器的频率" />
+    <MESSAGE value="__【未配置好】使用了CLion的文件模板，以后C++头文件后缀使用hpp" />
+    <MESSAGE value="__【未配置好】让C++文件与C文件泾渭分明" />
+    <MESSAGE value="__【未配置好】找到一个可能有用的方法，来解决挂梯子后仍超时的问题" />
+    <MESSAGE value="__【未配置好】补救措施" />
+    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】补救措施" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
