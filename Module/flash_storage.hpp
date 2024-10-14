@@ -91,7 +91,7 @@ private:
     static auto clear_write_incomplete_sign() -> void { status &= ~static_cast<uint8_t>(Flags::WRITE_INCOMPLETE_FLAG); }// 清除写残缺标志
 
     static auto reset_index() -> void { index = 0; }// 重置缓冲区索引
-
+//低耦合高内聚
 private:
     static constexpr const uint16_t page_size = 256;// 页大小,不占内存
     static inline uint8_t buffer1[page_size] = {};
