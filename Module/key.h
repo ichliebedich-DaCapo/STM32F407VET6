@@ -8,6 +8,10 @@
 #include <cstdint>
 #include "main.h"
 
+#define KEY_STATE_NONE 0x0  // 无状态,无需使用
+#define KEY_STATE_TWO 0x1   // 存储两个状态
+#define KEY_STATE_THREE 0x2 // 存储三个状态
+#define KEY_STATE_FOUR 0x3  // 存储四个状态
 
 #define keyk0 0x0
 #define keyk1 0x1
@@ -56,7 +60,7 @@ public:
     [[nodiscard]] auto getState(uint8_t keycode) const { return state & (0x3 << keycode * 2); }// 获取键位状态
 
 #ifdef APP_NO_RTOS
-    auto setSign() {  sign = 0xFF; }// 设置标志，表明已读取
+    auto setSign()->void {  sign = 0xFF; }// 设置标志，表明已读取
     auto handler()->void;// 反正都是阻塞式等待，也就无所谓多一步取反
 #endif// APP_NO_RTOS
     auto resetState(uint8_t keycode) { state &= ~(0x3 << (keycode * 2));  /*清除指定键位的状态*/}

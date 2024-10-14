@@ -22,12 +22,14 @@ auto WaveSignal::set_mode(WaveMode wave_mode) -> void
 auto WaveSignal::on() -> void
 {
     timer6_start_it();
+    dac_start();
     reset_count();
 }
 
 auto WaveSignal::off() -> void
 {
     timer6_stop_it();
+    dac_stop();
 }
 
 /**
@@ -80,11 +82,11 @@ auto WaveSignal::set_frequency(WaveFreq wave_freq) -> void
     switch (wave_freq)
     {
         case WaveFreq::Freq_8K:
-            timer6_set_freq(1, 39);// 256*8K
+            timer6_set_freq(FREQ_84M_to_256x8K);// 256*8K
             break;
 
         case WaveFreq::Freq_16K:
-            timer6_set_freq(1, 19);// 256*16K
+            timer6_set_freq(FREQ_84M_to_256x16K);// 256*16K
             break;
 
         default:
@@ -94,7 +96,7 @@ auto WaveSignal::set_frequency(WaveFreq wave_freq) -> void
 
 /**
  * @brief 设置波形类型
- * @param type
+ * @param type 波形类型，分别为 正弦、方波、三角波、锯齿波等
  */
 auto WaveSignal::set_type(WaveType type) -> void
 {
@@ -121,9 +123,5 @@ auto WaveSignal::set_type(WaveType type) -> void
     }
 }
 
-auto WaveSignal::set_duty(WaveDuty wave_duty) -> void
-{
-    switch_count = max_count * static_cast<uint8_t>(wave_duty) / 10;
-}
 
 #endif
