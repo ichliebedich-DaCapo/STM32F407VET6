@@ -5,7 +5,7 @@
 #ifndef FURINA_FSMC_H
 #define FURINA_FSMC_H
 #include "JYZQ_Conf.h"
-#if USE_FSMC
+#ifdef USE_FSMC
 
 #ifdef __cplusplus
 extern "C" {

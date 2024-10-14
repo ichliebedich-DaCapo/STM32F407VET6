@@ -6,8 +6,8 @@
 #define FURINA_TIMER_H
 
 #include "JYZQ_Conf.h"
-
-#if USE_TIMER
+#include "stm32f4xx_hal.h"
+#ifdef USE_TIMER
 #ifdef __cplusplus
 extern "C" {
 #endif

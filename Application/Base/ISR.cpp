@@ -7,7 +7,7 @@
  *      中断服务例程可能会调用到C++文件相关的代码。
 */
 #include "JYZQ_Conf.h"
-
+#include "stm32f4xx_hal.h"
 // 由用户自行实现的中断处理函数
 extern void timer6_isr();
 extern void adc1_isr();

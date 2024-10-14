@@ -3,7 +3,7 @@
 //
 
 #include "timer.h"
-#if USE_TIMER
+#ifdef USE_TIMER
 
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim6;

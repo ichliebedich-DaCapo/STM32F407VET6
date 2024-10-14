@@ -6,8 +6,8 @@
 #define FURINA_ADC_H
 
 #include "JYZQ_Conf.h"
-
-#if USE_ADC
+#include "stm32f4xx_hal.h"
+#ifdef USE_ADC
 #ifdef __cplusplus
 extern "C" {
 #endif

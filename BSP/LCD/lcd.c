@@ -3,7 +3,7 @@
 //
 
 #include "lcd.h"
-#if USE_LCD
+#ifdef USE_LCD
 #include "stm32f4xx_hal.h"
 
 

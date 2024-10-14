@@ -5,7 +5,7 @@
 #ifndef FURINA_PLAYER_HPP
 #define FURINA_PLAYER_HPP
 #include "JYZQ_Conf.h"
-#if USE_PLAYER
+#ifdef USE_PLAYER
 
 // 定义播放速度枚举体
 enum class PlaybackSpeed: unsigned int{

@@ -1,116 +1,51 @@
 //
-// Created by 34753 on 2024/9/22.
+// Created by fairy on 2024/9/22.
 //
 #ifndef FURINA_JYZQ_CONF_H
 #define FURINA_JYZQ_CONF_H
+#include "App_Conf.h"
 /**
- * @brief JY与ZQ协同开发の配置文件
- * @details 若有不同意见再共同磋商。这只是个简单的管理，后续各种模块肯定会有意想不到的冲突，其余且看且行。
- * @note
- * 【接口兼容性】：BSP统一使用C接口。而模块级与应用级则使用C++接口，方便开发，比如可以使用重载、引用、自动类型推导、lambda表达式、返回类型后置、结构化绑定等.
- *              只不过看着驱动开发里的C代码，总想用C++提高代码复用，唉兼容性……
- * 【文件命名规范】：BSP和模块级尽量小写为主，不同属性尽量用下划线隔开，方便调用接口；应用级尽量采用驼峰命名法。之所以是尽量，是因为C/C++的命名本来就已经很混乱了哈哈哈哈哈
- * 【函数】：
- *      BSP：为了提高驱动性能，实现简单功能的函数尽量内敛，其内局部变量尽量使用字长单位
- * 【变量】：尽量不使用全局变量
- *      BSP：尽量使用函数式编程，减少副作用
- * 【调试】：统一开-O2级别优化，遇到问题再开-Og。在CLion里面体现为使用Release选项。同时要注意volatile变量的使用
- * 【语法使用规范】：由于单片机资源有限，不能使用泛型编程如模版。类可以使用，尽量使用静态类以实现零成本抽象，避免实例化对象，尤其是new的使用。
+ *  @brief JYZQの配置文件
+ *  @note  主要是用于控制调试相关的宏，同时展现模块和驱动有哪些。这里的宏后缀都有"__"，而应用层宏后缀没有"__"
+ *          之所以是两个"_"，是因为方便使用“Alt+J”快捷键多选，不会误删单个"_"
+ *       这里集成了所有的模块和驱动的宏，而应用层的头文件里只有部分宏（需要哪部分宏就启用哪个）
  */
 
-/**
- *  @brief 开发注意事项
- *  @details
- *  1,本工程把多个项目的实现都放在同一个目录——Application，通过本文件下方的宏来控制是否编译，如果开启相应宏，只需要到main.h里添加相应头文件
- *  2，由于多个项目放在同一个目录，为了避免冲突，使用了不少__weak修饰的函数，开发每个“应用级”，需要自己实现key_handler()和app_init()函数。
- *  3,从前面也可以看出，一般编代码的地方都是在 Application/App_xxx.c/h、Module/xxx.c/h、BSP/xxx.c/h里，几乎不会在main.c里去编写代码。
- *  一般情况下，BSP提供接口供Module，Module提供接口供Application，上两层几乎不会设计硬件操作。
- *  4，想了想，BSP只提供驱动接口，而Moudle还是只做算法相关的，相当于函数式编程，不涉及驱动的初始化，但可以调用驱动接口。最后再由Application统一调用
- *
- */
+// 混蛋的依赖关系
+#if ENABLE_VOICE_STORAGE_AND_PLAY
+#include "voiceStorageAndPlay.hpp"
+#endif// 语音存储和播放
+#if ENABLE_SIGNAL_GENERATOR
+#include "signalGenerator.hpp"
+#endif// 双音频信号发生器
 
-// C++中适合单片机开发的新特性，C++11以后每三年一个版本，且按照Major-Minor-Minor进行迭代
-// C++20与C++23基本都是对标准库、泛型编程等进行了优化，很难用到单片机上。尤其是那该死的模块，听说MSVC支持的比较好，cmake也还行，但是试来试去就是不行，淦。
-/**
- * // -------------------------------------C++98-------------------------------------
- * 【命名空间】：命名空间是C++中唯一一种作用域机制，它允许将变量、函数、类等定义放在一个独立的命名空间中，避免命名冲突。
- *          在单片机开发中，我感觉它与静态类没有太大区别（不讨论封装、继承的情况下），但命名空间只是逻辑上的隔离，并不会带来格外的开销。
- *          话说，感觉有用但与静态类比起来有种鸡肋的感觉，真没办法，毕竟用不了泛型编程、继承、多态什么什么的。
- *
- *
- * // -------------------------------------C++11-------------------------------------
- *
- * 【constexpr】：允许在编译时计算常量表达式，减少了运行时的开销。C++20中进一步提升了性能
- *      constexpr int square(int x) {return x * x;}
- *      constexpr int result = square(5);  // result 在编译时计算
- *
- * 【范围-based for 循环】：允许在循环中迭代容器中的元素，简化代码。即简化了索引操作，避免潜在管理错误
- *      for (auto& elem : array) {elem *= 2;}
- *
- * 【自动类型推导】：允许在函数参数中省略类型声明，让编译器自动推导类型。这个没什么好说的。但是要注意使用场合，像【范围-based for 循环】、【lambda表达式】
- *                等一些类型复杂或者显而易见的场景，这样做可以让代码简洁。对于类型不明显或容易混淆的场景，比如基本类型变量、函数参数、等，还是建议显式声明类型，避免使用泛滥
- *      auto add(int a, int b) {return a + b; }// 可以推导出返回值类型为 int，与返回类型后置差不多
- *
- *
- *  // -------------------------------------C++14-------------------------------------
- *
- *  【泛型 lambda 表达式】：允许在函数内部定义lambda表达式，使得代码更加简洁，不再又是声明又是定义的。
- *          auto print = [](auto x) {std::cout << x << std::endl;};
- *
- *  【返回类型后置】：这他宝贝的才是我喜欢的函数定义语法，跟Koltin里一样，可以使复杂的函数签名更易读。只不过前面还是要加上auto真是麻烦
- *          auto square(int x) -> int { return x * x;}
- *
- *
- * // -------------------------------------C++17-------------------------------------
- *
- * 【if 和 switch 初始化器 】：允许在if语句和switch语句中初始化变量。避免局部变量到处都是，全他宝贝的污染
- *      比如：if (auto value = read_sensor(); value > threshold){}
- *
- * 【[[nodiscard]]】：用来标记函数返回值不应该被忽略，防止潜在错误
- *      比如：[[nodiscard]] bool check_error() {}
- *
- * 【结构化绑定】：跟Koltin里的解构差不多，就是当函数返回值类型为结构体之类的，可以让函数返回多个值
- *      std::pair<int, int> coords = get_coordinates();
- *      auto [x, y] = get_coordinates();
- *
- * 【内联变量】：可以在头文件中直接定义静态成员变量，而不会导致重复定义的问题。这个嘛不一定用得上
- */
-
-#include "stm32f4xx_hal.h"
 
 /**************************调试/其他*************************/
-// 是否开启FreeRTOS调试模式
-// 调试时，开了之后在负荷不大的情况下，也并不怎么影响实时性。发行时记得关闭
+// 是否开启FreeRTOS调试模式。调试时，开了之后在负荷不大的情况下，也并不怎么影响实时性。发行时记得关闭
 #define FreeRTOS_DEBUG  1
 #define ENABLE_KEY_TASK_HANDLE 1
 
-// 是否开启FreeRTOS
-// 考虑到有一些应用项目并不需要多线程，且对实时性要求很高，使用FreeRTOS既会增加代码体积，也会增加运行时开销
-// 默认开启多线程，由宏APP_NO_RTOS来控制。考虑到项目多了以后会记不住，于是由项目里的应用头文件来控制
-// 【这个宏默认是注释的】
-/*#define APP_NO_RTOS*/
+// 是否开启FreeRTOS,由项目头文件的宏来控制。因为一些项目比较简单且对实时性要求很高，使用FreeRTOS会增加开销
+/*#define APP_NO_RTOS*/ // 【这个宏默认是注释的】
 
-/************************应用级***************************/
-#define ENABLE_VOICE_STORAGE_AND_PLAY 0
-#define ENABLE_SIGNAL_GENERATOR 1   // 信号发生器（简单的双音频）
-
+/************************基本上都使用的驱动*************************/
+#define USE_FSMC   // 使用FSMC
+#define USE_LCD    // 使用LCD
+#define USE_KEY_EXTI  // 使用按键的外部中断
 
 /*************************模块级**************************/
-#define USE_PLAYER 0 // 使用播放器
-#define USE_FLASH_STORAGE 0// 使用Flash存储
-#define USE_WAVE_SIGNAL 1 // 使用波形信号
-#define USE_CPU_TEMPERATURE 1 // 使用CPU测温计
+#define USE_PLAYER__  // 使用播放器
+#define USE_FLASH_STORAGE__ // 使用Flash存储
+#define USE_WAVE_SIGNAL__ // 使用波形信号
 
 /**************************板级**************************/
-// 协议控制器放在上面，具体外设放在下面
-#define USE_SPI 1 // 使用SPI
-#define USE_FSMC 1  // 使用FSMC
-#define USE_LCD 1   // 使用LCD
-#define USE_KEY_EXTI  1// 使用按键的外部中断
-#define USE_SPI_FLASH 1 // 使用SPI Flash
-#define USE_TIMER 1// 使用定时器
-#define USE_ADC 1 // 使用ADC
-#define USE_DAC 1 // 使用DAC
+#define USE_SPI__  // 使用SPI
+#define USE_SPI_FLASH__  // 使用SPI Flash
+#define USE_TIMER__ // 使用定时器
+#define USE_ADC__  // 使用ADC
+#define USE_DAC__ // 使用DAC
+
+
 
 /****************************宏定义的频率****************************/
 // 用于填入形参表为(uint32_t arr, uint32_t psc)的函数中，以方便修改频率
