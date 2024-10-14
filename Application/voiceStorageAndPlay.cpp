@@ -1,18 +1,18 @@
 //
-// Created by 34753 on 2024/9/22.
+// Created by fairy on 2024/9/22.
 //
 
 #include "voiceStorageAndPlay.hpp"
 
 #if ENABLE_VOICE_STORAGE_AND_PLAY
 
-#include "key.h"
+#include "key.hpp"
 #include "spi.h"
 #include "timer.h"
 #include "adc.h"
 #include "dac.h"
-#include "player.h"
-#include "flash_storage.h"
+#include "player.hpp"
+#include "flash_storage.hpp"
 //const osThreadAttr_t voiceTask_attributes = {
 //        .name = "voiceTask",
 //        .stack_size = 128 * 4,

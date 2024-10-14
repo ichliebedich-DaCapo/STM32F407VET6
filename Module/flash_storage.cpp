@@ -1,10 +1,10 @@
 //
-// Created by 34753 on 2024/10/11.
+// Created by fairy on 2024/10/11.
 //
 
 #include "flash_storage.hpp"
 
-#if USE_FLASH_STORAGE
+#ifdef USE_FLASH_STORAGE
 
 #include "w25qxx.h"
 

@@ -4,7 +4,7 @@
 
 #include "dac.h"
 
-#if USE_DAC
+#ifdef USE_DAC
 
 DAC_HandleTypeDef hdac;
 

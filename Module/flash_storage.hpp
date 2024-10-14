@@ -1,16 +1,16 @@
 //
-// Created by 34753 on 2024/10/11.
+// Created by fairy on 2024/10/11.
 //
 
 #ifndef FURINA_FLASH_STORAGE_HPP
 #define FURINA_FLASH_STORAGE_HPP
 
 #include "JYZQ_Conf.h"
-
+#include "stm32f4xx_hal.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
-#if USE_FLASH_STORAGE
+#ifdef USE_FLASH_STORAGE
 
 /**
  * @brief Flash存储类

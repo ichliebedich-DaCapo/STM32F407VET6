@@ -3,7 +3,7 @@
 //
 
 #include "key_exit.h"
-#if USE_KEY_EXTI
+#ifdef USE_KEY_EXTI
 #include "stm32f4xx_hal.h"
 
 /*外部中断初始化*/

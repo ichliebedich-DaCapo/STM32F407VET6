@@ -7,7 +7,7 @@
 
 #include "JYZQ_Conf.h"
 
-#if USE_KEY_EXTI
+#ifdef USE_KEY_EXTI
 #ifdef __cplusplus
 extern "C" {
 #endif

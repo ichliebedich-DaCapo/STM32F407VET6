@@ -3,38 +3,48 @@
 //
 #ifndef FURINA_JYZQ_CONF_H
 #define FURINA_JYZQ_CONF_H
+#include "App_Conf.h"
+/**
+ *  @brief JYZQの配置文件
+ *  @note  主要是用于控制调试相关的宏，同时展现模块和驱动有哪些。这里的宏后缀都有"__"，而应用层宏后缀没有"__"
+ *          之所以是两个"_"，是因为方便使用“Alt+J”快捷键多选，不会误删单个"_"
+ *       这里集成了所有的模块和驱动的宏，而应用层的头文件里只有部分宏（需要哪部分宏就启用哪个）
+ */
+
+// 混蛋的依赖关系
+#if ENABLE_VOICE_STORAGE_AND_PLAY
+#include "voiceStorageAndPlay.hpp"
+#endif// 语音存储和播放
+#if ENABLE_SIGNAL_GENERATOR
+#include "signalGenerator.hpp"
+#endif// 双音频信号发生器
+
 
 /**************************调试/其他*************************/
-// 是否开启FreeRTOS调试模式
-// 调试时，开了之后在负荷不大的情况下，也并不怎么影响实时性。发行时记得关闭
+// 是否开启FreeRTOS调试模式。调试时，开了之后在负荷不大的情况下，也并不怎么影响实时性。发行时记得关闭
 #define FreeRTOS_DEBUG  1
 #define ENABLE_KEY_TASK_HANDLE 1
 
-// 是否开启FreeRTOS,由项目里的应用头文件来控制
-// 考虑到有一些应用项目并不需要多线程，且对实时性要求很高，使用FreeRTOS既会增加代码体积，也会增加运行时开销
+// 是否开启FreeRTOS,由项目头文件的宏来控制。因为一些项目比较简单且对实时性要求很高，使用FreeRTOS会增加开销
 /*#define APP_NO_RTOS*/ // 【这个宏默认是注释的】
 
-/************************应用级***************************/
-#define ENABLE_VOICE_STORAGE_AND_PLAY 0
-#define ENABLE_SIGNAL_GENERATOR 1   // 信号发生器（简单的双音频）
-
+/************************基本上都使用的驱动*************************/
+#define USE_FSMC   // 使用FSMC
+#define USE_LCD    // 使用LCD
+#define USE_KEY_EXTI  // 使用按键的外部中断
 
 /*************************模块级**************************/
-#define USE_PLAYER 0 // 使用播放器
-#define USE_FLASH_STORAGE 0// 使用Flash存储
-#define USE_WAVE_SIGNAL 1 // 使用波形信号
-#define USE_CPU_TEMPERATURE 1 // 使用CPU测温计
-#define USE_FFT 1 //使用FFT
+#define USE_PLAYER__  // 使用播放器
+#define USE_FLASH_STORAGE__ // 使用Flash存储
+#define USE_WAVE_SIGNAL__ // 使用波形信号
+
 /**************************板级**************************/
-// 协议控制器放在上面，具体外设放在下面
-#define USE_SPI 1 // 使用SPI
-#define USE_FSMC 1  // 使用FSMC
-#define USE_LCD 1   // 使用LCD
-#define USE_KEY_EXTI  1// 使用按键的外部中断
-#define USE_SPI_FLASH 1 // 使用SPI Flash
-#define USE_TIMER 1// 使用定时器
-#define USE_ADC 1 // 使用ADC
-#define USE_DAC 1 // 使用DAC
+#define USE_SPI__  // 使用SPI
+#define USE_SPI_FLASH__  // 使用SPI Flash
+#define USE_TIMER__ // 使用定时器
+#define USE_ADC__  // 使用ADC
+#define USE_DAC__ // 使用DAC
+
 
 
 /****************************宏定义的频率****************************/

@@ -6,7 +6,7 @@
 #define FURINA_WAVE_SIGNAL_HPP
 
 #include "JYZQ_Conf.h"
-#if USE_WAVE_SIGNAL
+#ifdef USE_WAVE_SIGNAL
 #include "waveData.h"
 
 enum class WaveMode : uint8_t

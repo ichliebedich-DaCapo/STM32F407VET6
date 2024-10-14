@@ -7,7 +7,7 @@
 #ifndef LCD_H_
 #define LCD_H_
 #include "JYZQ_Conf.h"
-#if USE_LCD
+#ifdef USE_LCD
 #include "stm32f4xx.h"
 #ifdef __cplusplus
 extern "C" {

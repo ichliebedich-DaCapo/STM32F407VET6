@@ -6,7 +6,7 @@
 #define FURINA_DAC_H
 #include "JYZQ_Conf.h"
 #include "stm32f4xx_hal.h"
-#if USE_DAC
+#ifdef USE_DAC
 #ifdef __cplusplus
 extern "C" {
 #endif
