@@ -23,8 +23,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】测试3">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】备份">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/ADC/adc.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/ADC/adc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/cpu_temperature.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/cpu_temperature.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/cpu_temperature.h" beforeDir="false" afterPath="$PROJECT_DIR$/Module/cpu_temperature.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +42,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="DV" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -50,9 +54,6 @@
     &quot;assignee&quot;: &quot;fumgvsyj&quot;
   }
 }</component>
-  <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="a9ff9cce-f6cd-41c3-bd49-a806fb1abb79" />
-  </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6&quot;,
@@ -211,7 +212,12 @@
       <workItem from="1728816425398" duration="3314000" />
       <workItem from="1728827825088" duration="5865000" />
       <workItem from="1728891905818" duration="79000" />
-      <workItem from="1728891993065" duration="3000" />
+      <workItem from="1728891993065" duration="1507000" />
+      <workItem from="1728893517052" duration="6000" />
+      <workItem from="1728894700723" duration="250000" />
+      <workItem from="1728894958860" duration="312000" />
+      <workItem from="1728896325983" duration="97000" />
+      <workItem from="1728896437537" duration="6520000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -405,7 +411,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728833901188</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="__【未配置好】备份">
+      <option name="closed" value="true" />
+      <created>1728892341839</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1728892341839</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -427,7 +441,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="DV" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -461,7 +475,8 @@
     <MESSAGE value="__【未配置好】测试" />
     <MESSAGE value="__【未配置好】测试2" />
     <MESSAGE value="__【未配置好】测试3" />
-    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】测试3" />
+    <MESSAGE value="__【未配置好】备份" />
+    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】备份" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

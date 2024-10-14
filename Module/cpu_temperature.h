@@ -16,7 +16,7 @@ class thermometer
 {
 public:
 
-    static auto Get_Temprate()->uint8_t ;
+    static auto Get_Temperature()->short ;
 
 };
 
