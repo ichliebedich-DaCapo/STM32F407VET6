@@ -78,6 +78,8 @@ include_directories(
 
         # GUI
         GUI/Base
+        GUI/custom
+        GUI/generated
 
         # 库
         Library/Data

@@ -33,6 +33,7 @@
 
 /************************基本上都使用的驱动*************************/
 #define USE_FSMC   // 使用FSMC
+//#define USE_FSMC_DMA // 暂时出现了不可描述的错误，进入看门狗了
 #define USE_LCD    // 使用LCD
 #define USE_KEY_EXTI  // 使用按键的外部中断
 

@@ -107,6 +107,7 @@ void fsmc_init()
 
 
 /*启用FSMC+DMA向LCD传输数据*/
+#ifdef USE_FSMC_DMA
 void fsmc_dma_init()
 {
     __HAL_RCC_DMA2_CLK_ENABLE();
@@ -136,5 +137,6 @@ void fsmc_dma_init()
     * 流程：开启DMA中断后，DMA开始传输数据，传输完之后回到【pCallback】，需要注意的是中断处理函数得要定义*/
     HAL_DMA_RegisterCallback(&hdma_memtomem_dma2_stream6, HAL_DMA_XFER_CPLT_CB_ID, LVGL_LCD_FSMC_DMA_pCallback);
 }
+#endif
 
 #endif

@@ -6,7 +6,6 @@
 #define FURINA_KEYTASKHANDLER_HPP
 #include "JYZQ_Conf.h"
 #if ENABLE_KEY_TASK_HANDLE
-#include "main.h"
 #include "key.hpp"
 #ifndef APP_NO_RTOS
 void keyTaskHandler_init();

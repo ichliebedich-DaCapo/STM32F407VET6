@@ -14,7 +14,7 @@ extern "C" {
 #endif
 
 /*预编译*/
-#define LCD_SORTS 9488
+#define LCD_SORTS 9481
 
 
 /*LCD地址*/
@@ -52,8 +52,22 @@ void lcd_init(void);
 /*清空画面*/
 void LCD_Clear(uint16_t color);
 /*填充一个区域*/
-void LCD_Color_Fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t *color);
-
+//void LCD_Color_Fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t *color);
+static inline void LCD_Color_Fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, const uint16_t *color)
+{
+    uint16_t length, width;
+    length = ex - sx + 1;// 矩形区域的长度
+    width = ey - sy + 1; // 矩形区域的宽度
+    LCD_Set_Window(sx, sy, ex, ey);
+    // 遍历矩形区域的每一行
+    for (uint16_t j = 0; j < width; j++)
+    {
+        for (uint16_t i = 0; i < length; i++)
+        {
+            LCD_WRITE_DATA(color[i + length * j]);// 一次性写入整行的颜色数据
+        }
+    }
+}
 
 
 #ifdef __cplusplus

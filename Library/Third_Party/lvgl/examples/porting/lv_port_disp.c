@@ -94,10 +94,13 @@ void disp_disable_update(void)
 
 static void disp_flush(lv_disp_drv_t *disp_drv1, const lv_area_t *area, lv_color_t *color_p)
 {
+    LCD_Color_Fill(area->x1, area->y1, area->x2, area->y2, (const uint16_t *)color_p);
+    disp_drv.draw_buf->flushing = 0;
+    disp_drv.draw_buf->flushing_last = 0;
 // 打点函数
-    LCD_Set_Window(area->x1, area->y1, area->x2, area->y2);//设置LCD屏幕的扫描区域
-    HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream6, (uint32_t) color_p, (uint32_t) TFT_DATA_ADDR,
-                     ((area->x2 + 1) - area->x1) * ((area->y2 + 1) - area->y1));
+//    LCD_Set_Window(area->x1, area->y1, area->x2, area->y2);//设置LCD屏幕的扫描区域
+//    HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream6, (uint32_t) color_p, (uint32_t) TFT_DATA_ADDR,
+//                     ((area->x2 + 1) - area->x1) * ((area->y2 + 1) - area->y1));
 }
 
 void LVGL_LCD_FSMC_DMA_pCallback(DMA_HandleTypeDef *_hdma)

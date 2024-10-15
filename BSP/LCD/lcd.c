@@ -3,7 +3,9 @@
 //
 
 #include "lcd.h"
+
 #ifdef USE_LCD
+
 #include "stm32f4xx_hal.h"
 
 
@@ -77,7 +79,7 @@ void lcd_init(void)
     LCD_WRITE_DATA(0x0080);
 
     LCD_WRITE_CMD(0x0036); //显示行列设置
-    LCD_WRITE_DATA(0x00A9);//屏幕需要旋转180度
+    LCD_WRITE_DATA(0x002f);//屏幕需要旋转180度 A9是倒过来的
 
     LCD_WRITE_CMD(0x003a);
     LCD_WRITE_DATA(0x0055);
@@ -107,7 +109,7 @@ void lcd_init(void)
     HAL_Delay(20);
     LCD_WRITE_CMD(0x002C);
     TFTLED = 0x01;
-    LCD_Clear(BLACK);
+//    LCD_Clear(BLACK);
 #endif
 
 #if LCD_SORTS == 9488
@@ -203,7 +205,7 @@ void lcd_init(void)
     TFTLED = 0x01;      // 背光寄存器初始化
 
     /*我觉得没必要清屏函数*/
-    // LCD_Clear(0xFFFF);  // 清除屏幕，设置为白色
+//     LCD_Clear(0xFFFF);  // 清除屏幕，设置为白色
 #endif
 }
 
@@ -231,22 +233,22 @@ void LCD_Clear(uint16_t color)
 //在指定区域内填充指定颜色块
 //(sx,sy),(ex,ey):填充矩形对角坐标，区域大小为:(ex-sx+1)*(ey-sy+1)
 //color:要填充的颜色
-void LCD_Color_Fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t *color)
-{
-    uint16_t i, j;
-    uint16_t length, width;
-    length = ex - sx + 1;// 矩形区域的长度
-    width = ey - sy + 1; // 矩形区域的宽度
-    LCD_Set_Window(sx, sy, ex, ey);
-    // 遍历矩形区域的每一行
-    for (j = 0; j < width; j++)
-    {
-        for (i = 0; i < length; i++)
-        {
-            LCD_WRITE_DATA(color[i + length * j]);// 一次性写入整行的颜色数据
-        }
-    }
-}
+//void LCD_Color_Fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t *color)
+//{
+//    uint16_t i, j;
+//    uint16_t length, width;
+//    length = ex - sx + 1;// 矩形区域的长度
+//    width = ey - sy + 1; // 矩形区域的宽度
+//    LCD_Set_Window(sx, sy, ex, ey);
+//    // 遍历矩形区域的每一行
+//    for (j = 0; j < width; j++)
+//    {
+//        for (i = 0; i < length; i++)
+//        {
+//            LCD_WRITE_DATA(color[i + length * j]);// 一次性写入整行的颜色数据
+//        }
+//    }
+//}
 
 
 

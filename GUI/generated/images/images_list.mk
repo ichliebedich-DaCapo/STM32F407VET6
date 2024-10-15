@@ -1,0 +1,1 @@
+GEN_CSRCS += _icn_slider_alpha_15x15.c _cover_1_alpha_105x105.c _btn_play_alpha_48x48.c _btn_pause_alpha_48x48.c _cover_2_alpha_105x105.c _cover_3_alpha_105x105.c _wave_bottom_alpha_480x34.c _wave_top_alpha_480x34.c _btn_prev_alpha_37x37.c _btn_next_alpha_37x37.c
