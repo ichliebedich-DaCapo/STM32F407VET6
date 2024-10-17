@@ -102,7 +102,7 @@ auto Screen::init(lv_ui *ui) -> void
 
     //Write codes screen_img_11
     img.init(ui->screen, ui->screen_img_11);
-    img.set_Src(&_icn_slider_alpha_15x15);
+    img.set_src(&_icn_slider_alpha_15x15);
     img.set_pos_size(235, 152, 15, 15);
     img.add_flag(LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_HIDDEN);
     img.set_style_clip_corner(LV_PART_MAIN | LV_STATE_DEFAULT);// 设置为圆角
@@ -116,8 +116,8 @@ auto Screen::init(lv_ui *ui) -> void
     imgbtn.set_pos_size(216, 234, 48, 48);
     imgbtn.set_style_clip_corner((LV_PART_MAIN | LV_STATE_DEFAULT));
     imgbtn.add_flag(LV_OBJ_FLAG_CHECKABLE);
-//    imgbtn.set_Src(LV_IMGBTN_STATE_RELEASED, &_btn_play_alpha_48x48);// 正常状态->播放
-//    imgbtn.set_Src(LV_IMGBTN_STATE_CHECKED_RELEASED, &_btn_pause_alpha_48x48);// 按下按钮->暂停
+    imgbtn.set_src(LV_IMGBTN_STATE_RELEASED, &_btn_play_alpha_48x48);// 正常状态->播放
+    imgbtn.set_src(LV_IMGBTN_STATE_CHECKED_RELEASED, &_btn_pause_alpha_48x48);// 按下按钮->暂停
 
 
     //Write codes screen_imgbtn_acc
@@ -125,16 +125,16 @@ auto Screen::init(lv_ui *ui) -> void
     imgbtn.set_pos_size(318, 240, 37, 37);
     imgbtn.set_style_clip_corner((LV_PART_MAIN | LV_STATE_DEFAULT));
     imgbtn.add_flag(LV_OBJ_FLAG_CHECKABLE);
-//    imgbtn.set_Src(LV_IMGBTN_STATE_RELEASED, &_btn_next_alpha_37x37);
-//    imgbtn.set_Src(LV_IMGBTN_STATE_CHECKED_RELEASED, &_icn_slider_alpha_37x37);
+    imgbtn.set_src(LV_IMGBTN_STATE_RELEASED, &_btn_next_alpha_37x37);
+    imgbtn.set_src(LV_IMGBTN_STATE_CHECKED_RELEASED, &_icn_slider_alpha_37x37);
 
     //Write codes screen_imgbtn_slow
     imgbtn.init(ui->screen, ui->screen_imgbtn_slow);
     imgbtn.set_pos_size(122, 240, 37, 37);
     imgbtn.set_style_clip_corner((LV_PART_MAIN | LV_STATE_DEFAULT));
     imgbtn.add_flag(LV_OBJ_FLAG_CHECKABLE);
-//    imgbtn.set_Src(LV_IMGBTN_STATE_RELEASED, &_btn_prev_alpha_37x37);
-//    imgbtn.set_Src(LV_IMGBTN_STATE_CHECKED_RELEASED, &_icn_slider_alpha_37x37);
+    imgbtn.set_src(LV_IMGBTN_STATE_RELEASED, &_btn_prev_alpha_37x37);
+    imgbtn.set_src(LV_IMGBTN_STATE_CHECKED_RELEASED, &_icn_slider_alpha_37x37);
 
     //Init events for screen.
     lv_obj_update_layout(guider_ui.screen);
