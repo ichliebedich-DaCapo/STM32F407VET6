@@ -63,6 +63,7 @@ include_directories(
         # 应用
         Application
         Application/Base
+        Application/Conf
 
         # 模块
         Module
@@ -100,7 +101,7 @@ file(GLOB_RECURSE SOURCES
         "Module/*.*"
         "BSP/*.*"
         "Drivers/*.*"
-        "GUI/*.*"
+        "GUI/Base/*.*"
 
         # 数据库
         "Library/Data/*.*"
@@ -134,3 +135,15 @@ add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
         COMMAND ${CMAKE_OBJCOPY} -Obinary $<TARGET_FILE:${PROJECT_NAME}.elf> ${BIN_FILE}
         COMMENT "Building ${HEX_FILE}
 Building ${BIN_FILE}")
+
+
+# ----------------------------用于启动LVGL模拟器------------------------
+# 引入模块,可以启用
+#include(ExternalProject)
+#ExternalProject_Add(GUI_simulator
+#        SOURCE_DIR "${CMAKE_SOURCE_DIR}/GUI/lvgl-simulator"
+#        BUILD_IN_SOURCE 1
+#        CONFIGURE_COMMAND ""
+#        BUILD_COMMAND ""
+#        INSTALL_COMMAND ""
+#)

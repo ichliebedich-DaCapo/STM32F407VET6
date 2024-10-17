@@ -7,9 +7,12 @@
  *      INCLUDES
  *********************/
 #define _DEFAULT_SOURCE /* needed for usleep() */
+
 #include <stdlib.h>
 #include <unistd.h>
+
 #define SDL_MAIN_HANDLED        /*To fix SDL's "undefined reference to WinMain" issue*/
+
 #include <SDL2/SDL.h>
 #include "lvgl/lvgl.h"
 #include "lv_drivers/display/monitor.h"
@@ -26,6 +29,8 @@
 #if LV_USE_FREEMASTER
 #include "external_data_init.h"
 #endif
+// 引入头文件
+#include "GUI.hpp"
 
 /*********************
  *      DEFINES
@@ -38,8 +43,9 @@
 /**********************
  *  STATIC PROTOTYPES
  **********************/
-static void hal_init(void);
-static int tick_thread(void * data);
+static void hal_init();
+
+static int tick_thread(void *data);
 
 /**********************
  *  STATIC VARIABLES
@@ -65,7 +71,7 @@ pthread_mutex_t gg_edata_ll_mutex;
 pthread_cond_t gg_edata_ll_cond;
 #endif
 
-int main(int argc, char ** argv)
+int main(int argc, char **argv)
 {
 #if LV_USE_FREEMASTER
     if(argc > 1)
@@ -92,8 +98,7 @@ int main(int argc, char ** argv)
 #endif
 
     /*Create a GUI-Guider app */
-    setup_ui(&guider_ui);
-    custom_init(&guider_ui);
+    GUI::init();
 #if LV_USE_FREEMASTER
     pthread_mutex_init(&jsonrpc_mutex, NULL);
     pthread_mutex_init(&lvgl_mutex, NULL);
@@ -102,7 +107,8 @@ int main(int argc, char ** argv)
     pthread_create(&thread[0], NULL, gg_edata_task_exec, &jsonrpc_mutex);
 #endif
 
-    while(keep_running) {
+    while (keep_running)
+    {
 #if LV_USE_FREEMASTER
         pthread_mutex_lock(&lvgl_mutex);
 #endif
@@ -193,11 +199,12 @@ static void hal_init(void)
  * @param data unused
  * @return never return
  */
-static int tick_thread(void * data)
+static int tick_thread(void *data)
 {
-    (void)data;
+    (void) data;
 
-    while(keep_running) {
+    while (keep_running)
+    {
         SDL_Delay(5);   /*Sleep for 5 millisecond*/
         lv_tick_inc(5); /*Tell LittelvGL that 5 milliseconds were elapsed*/
     }
@@ -260,13 +267,13 @@ int sim_conf(int argc, char *argv[])
 __declspec(dllexport)
 const void * sim_info(void)
 {
-    #define SIM_F_RESIZE_UP        0x0001   /* Enable growing size within parent view */
-    #define SIM_F_RESIZE_DOWN      0x0002   /* Enable shrinking size within parent view */
-    #define SIM_F_KEEP_ASPECT      0x0004   /* When RESIZE used, preserve aspect ratio */
-    #define SIM_F_CENTER_H         0x0008   /* Center horizontally */
-    #define SIM_F_CENTER_V         0x0010   /* Center vertically */
-    #define SIM_F_CENTER_FORCE     0x0020   /* Keep centered even if parent is smaller (move beyond top/left border) */
-    #define SIM_F_AUTO_BACKCOLOR   0x0040   /* Determine background color automatically */
+#define SIM_F_RESIZE_UP        0x0001   /* Enable growing size within parent view */
+#define SIM_F_RESIZE_DOWN      0x0002   /* Enable shrinking size within parent view */
+#define SIM_F_KEEP_ASPECT      0x0004   /* When RESIZE used, preserve aspect ratio */
+#define SIM_F_CENTER_H         0x0008   /* Center horizontally */
+#define SIM_F_CENTER_V         0x0010   /* Center vertically */
+#define SIM_F_CENTER_FORCE     0x0020   /* Keep centered even if parent is smaller (move beyond top/left border) */
+#define SIM_F_AUTO_BACKCOLOR   0x0040   /* Determine background color automatically */
 
     typedef struct
     {

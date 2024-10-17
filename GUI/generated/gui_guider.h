@@ -55,7 +55,7 @@ void setup_ui(lv_ui *ui);
 extern lv_ui guider_ui;
 
 
-void setup_scr_screen(lv_ui *ui);
+
 LV_IMG_DECLARE(_icn_slider_alpha_15x15);
 LV_IMG_DECLARE(_btn_prev_alpha_37x37);
 LV_IMG_DECLARE(_btn_next_alpha_37x37);

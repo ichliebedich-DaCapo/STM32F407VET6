@@ -23,24 +23,19 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】纠正了些许小问题">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【初始】开始引入LVGL模拟器">
+      <change afterPath="$PROJECT_DIR$/GUI/Base/GUI.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/Base/GUI.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/App_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/App_Conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/App_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Conf/App_Conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/Base/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/main.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/keyTaskHandler.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/keyTaskHandler.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/Base/baseInit.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/Base/baseInit.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/Base/stm32f4xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/Base/stm32f4xx_hal_conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/LCD/fsmc.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/LCD/fsmc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/LCD/fsmc.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/LCD/fsmc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/LCD/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/LCD/lcd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/LCD/lcd.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/LCD/lcd.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI_Init.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI_Init.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI_Init.h" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI_Init.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/STM32F407VETX_FLASH.ld" beforeDir="false" afterPath="$PROJECT_DIR$/STM32F407VETX_FLASH.ld" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI_Init.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/lvgl_init.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI_Init.h" beforeDir="false" afterPath="$PROJECT_DIR$/Module/lvgl_init.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,11 +148,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Embedded\MCU\STM32\Furina\Module" />
+      <recent name="D:\Embedded\MCU\STM32\Furina\Application\Conf" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Base" />
       <recent name="D:\Embedded\MCU\STM32\Furina\BSP\Core" />
       <recent name="D:\Embedded\MCU\STM32\Furina\BSP\Base" />
-      <recent name="D:\Embedded\MCU\STM32\Furina" />
-      <recent name="D:\Embedded\MCU\STM32\Furina\Application" />
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
@@ -251,6 +246,10 @@
       <workItem from="1728971864279" duration="633000" />
       <workItem from="1728987290487" duration="6134000" />
       <workItem from="1728994332038" duration="850000" />
+      <workItem from="1729158500316" duration="459000" />
+      <workItem from="1729159843778" duration="901000" />
+      <workItem from="1729162055465" duration="561000" />
+      <workItem from="1729164207205" duration="260000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -460,7 +459,23 @@
       <option name="project" value="LOCAL" />
       <updated>1728917722953</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="【初始】准备引入LVGL模拟器">
+      <option name="closed" value="true" />
+      <created>1729158055637</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1729158055638</updated>
+    </task>
+    <task id="LOCAL-00028" summary="【初始】开始引入LVGL模拟器">
+      <option name="closed" value="true" />
+      <created>1729158151119</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1729158151119</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -482,7 +497,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/main" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>
@@ -495,8 +510,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="__未配置好的工程——stm32f407VET6 预置了一点点规范" />
-    <MESSAGE value="__未配置好的工程——stm32f407VET6 稍微修改了一下介绍" />
     <MESSAGE value="__【未配置好】为使用CLion集成的FreeRTOS功能，补充相关内容" />
     <MESSAGE value="__【未配置好】添加了一些LL库、LCD的驱动ILI 9488、Key类的简单实现、FSMC的驱动、外部中断驱动" />
     <MESSAGE value="__【未配置好】C++20的module还是先算了" />
@@ -520,7 +533,9 @@
     <MESSAGE value="__【未配置好】找到一个可能有用的方法，来解决挂梯子后仍超时的问题" />
     <MESSAGE value="__【未配置好】补救措施" />
     <MESSAGE value="__【未配置好】纠正了些许小问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】纠正了些许小问题" />
+    <MESSAGE value="【初始】准备引入LVGL模拟器" />
+    <MESSAGE value="【初始】开始引入LVGL模拟器" />
+    <option name="LAST_COMMIT_MESSAGE" value="【初始】开始引入LVGL模拟器" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -23,11 +23,16 @@ add_compile_options(-O2 -g0 -DLV_CONF_INCLUDE_SIMPLE=1)
 set(LIBRARIES decoder openh264 rlottie pthread stdc++ jansson curl m SDL2)
 link_directories(${LIBFILE_PATH} ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib ${GEN_OBJ_DIR})
 
+# 添加控制目录
+include_directories(../../Application/Conf ../../Application)
+
 # 源文件
 file(GLOB_RECURSE LVGL_SRCS "${LVGL_DIR}/lvgl/*.c")
 file(GLOB_RECURSE DRIVER_SRCS "${SIMULATOR_DIR}/lv_drivers/*.c")
-file(GLOB_RECURSE CUSTOM_SRCS "${PROJECT_SOURCE_DIR}/custom/*.c")
-file(GLOB_RECURSE GENERATED_SRCS "${PROJECT_SOURCE_DIR}/generated/*.c")
+file(GLOB_RECURSE CUSTOM_SRCS "${PROJECT_SOURCE_DIR}/custom/*.*")
+file(GLOB_RECURSE GENERATED_SRCS "${PROJECT_SOURCE_DIR}/generated/*.*")
+# 外部
+file(GLOB_RECURSE BASE_SRCS "../Base/*.*")
 
 # 定义静态库
 add_library(libgenerated STATIC
@@ -35,7 +40,9 @@ add_library(libgenerated STATIC
         ${DRIVER_SRCS}
         ${CUSTOM_SRCS}
         ${GENERATED_SRCS}
+        ${BASE_SRCS}
 )
+# 头文件目录
 target_include_directories(libgenerated PUBLIC
         ${LVGL_DIR}
         ${SIMULATOR_DIR}
@@ -44,11 +51,13 @@ target_include_directories(libgenerated PUBLIC
         ${PROJECT_SOURCE_DIR}/custom
         ${PROJECT_SOURCE_DIR}/generated
         ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/include
+        # Base 目录
+        ../Base
 )
 set_target_properties(libgenerated PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${GEN_OBJ_DIR})
 
 # 创建可执行文件
-add_executable(simulator ${SIMULATOR_DIR}/main.c)
+add_executable(simulator ${SIMULATOR_DIR}/main.cpp)
 target_link_libraries(simulator PRIVATE libgenerated ${LIBRARIES})
 target_include_directories(simulator PRIVATE
         ${SIMULATOR_DIR}
@@ -56,7 +65,7 @@ target_include_directories(simulator PRIVATE
 set_target_properties(simulator PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
 
 # 创建DLL
-add_library(simulator_dll SHARED ${SIMULATOR_DIR}/main.c)
+add_library(simulator_dll SHARED ${SIMULATOR_DIR}/main.cpp)
 target_link_libraries(simulator_dll PRIVATE libgenerated ${LIBRARIES})
 target_include_directories(simulator_dll PRIVATE
         ${SIMULATOR_DIR}
@@ -82,3 +91,9 @@ add_custom_target(run
         COMMAND ${CMAKE_COMMAND} -E echo "Running simulator..."
         COMMAND ${BIN_DIR}/simulator
 )
+
+# 添加自定义命令来显示内存分布
+#add_custom_command(TARGET simulator POST_BUILD
+#        COMMAND ${CMAKE_SIZE_UTIL} --format=sysv $<TARGET_FILE:simulator>
+#        COMMENT "Displaying memory usage of my_project"
+#)

@@ -3,8 +3,10 @@
 #ifndef APP_NO_RTOS
 #include "cmsis_os2.h"
 #endif// APP_NO_RTOS
-#include "GUI_Init.h"
+
+#include "lvgl_init.h"
 #include "keyTaskHandler.hpp"
+#include "GUI.hpp"
 
 // 应用程序初始化函数
 extern void app_init();
@@ -28,8 +30,9 @@ int main()
 #ifndef APP_NO_RTOS
     osKernelInitialize();// FreeRTOS内核初始化
 #endif// APP_NO_RTOS
-    GUI_Init();
+    lvgl_init();// 进行LVGL模块初始化
     keyTaskHandler_init();
+    GUI::init();
 /*应用程序初始化*/
     app_init();
 

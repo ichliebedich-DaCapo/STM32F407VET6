@@ -114,7 +114,7 @@ void custom_init(lv_ui *ui)
     lv_timer_pause(sec_counter_timer);
     lv_obj_set_style_bg_img_src(guider_ui.screen_slider_1, &_icn_slider_alpha_37x37, LV_PART_KNOB);
 
-    spectrum_update_timer = lv_timer_create(spectrum_update_timer_cb, 100, ui);
+    spectrum_update_timer = lv_timer_create(spectrum_update_timer_cb, 30, ui);
     lv_timer_pause(spectrum_update_timer);
 
     spectrum_area = lv_obj_create(guider_ui.screen);
