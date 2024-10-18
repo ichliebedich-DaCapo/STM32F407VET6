@@ -24,19 +24,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【初始】开始引入LVGL模拟器">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Component/component.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/component.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/Component/component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/component.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Component/gui_guider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/gui_guider.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Events/events.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Events/events.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Events/events.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Events/events.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/lvgl_init.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/lvgl_init.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/lvgl_init.h" beforeDir="false" afterPath="$PROJECT_DIR$/Module/lvgl_init.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,7 +248,7 @@
       <workItem from="1729164207205" duration="260000" />
       <workItem from="1729224638980" duration="1446000" />
       <workItem from="1729247440193" duration="4000" />
-      <workItem from="1729265952812" duration="1901000" />
+      <workItem from="1729265952812" duration="2243000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />

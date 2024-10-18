@@ -65,18 +65,18 @@ target_include_directories(libgenerated PUBLIC
 set_target_properties(libgenerated PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${GEN_OBJ_DIR})
 
 # 创建可执行文件
-add_executable(simulator ${SIMULATOR_DIR}/main.cpp)
-target_link_libraries(simulator PRIVATE libgenerated ${LIBRARIES})
-target_include_directories(simulator PRIVATE ${SIMULATOR_DIR})
-set_target_properties(simulator PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
+add_executable(${PROJECT_NAME} ${SIMULATOR_DIR}/main.cpp)
+target_link_libraries(${PROJECT_NAME} PRIVATE libgenerated ${LIBRARIES})
+target_include_directories(${PROJECT_NAME} PRIVATE ${SIMULATOR_DIR})
+set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
 
 # 创建DLL
-add_library(simulator_dll SHARED ${SIMULATOR_DIR}/main.cpp)
-target_link_libraries(simulator_dll PRIVATE libgenerated ${LIBRARIES})
-target_include_directories(simulator_dll PRIVATE
+add_library(${PROJECT_NAME}_dll SHARED ${SIMULATOR_DIR}/main.cpp)
+target_link_libraries(${PROJECT_NAME}_dll PRIVATE libgenerated ${LIBRARIES})
+target_include_directories(${PROJECT_NAME}_dll PRIVATE
         ${SIMULATOR_DIR}
 )
-set_target_properties(simulator_dll PROPERTIES
+set_target_properties(${PROJECT_NAME}_dll PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR}
         LINK_FLAGS "--entry=_DllMainCRTStartup@12"
 )
@@ -90,12 +90,20 @@ add_custom_target(copy_libs
         COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SIMULATOR_DIR}/multi_thread/libcurl.dll ${BIN_DIR}/libcurl.dll
         COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SIMULATOR_DIR}/SDL2/lib/libopenh264.dll ${BIN_DIR}/libopenh264.dll
 )
-add_dependencies(simulator copy_libs)
+add_dependencies(${PROJECT_NAME} copy_libs)
 
+# 自定义命令，构建后执行
 
-# 添加自定义命令，在构建完成后执行
+## 获取当前日期和时间
+string(TIMESTAMP CURRENT_DATE_TIME "%Y-%m-%d %H:%M:%S")
+set(SIZE_OUTPUT_FILE "size_history.txt")
+
 # 显示exe文件
-add_custom_command(TARGET simulator POST_BUILD
-        COMMAND ${CMAKE_SIZE_UTIL} ${BIN_DIR}/simulator.exe
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND echo.
+        COMMAND echo ${CURRENT_DATE_TIME} >>  ${SIZE_OUTPUT_FILE}
+        COMMAND ${CMAKE_SIZE_UTIL} ${BIN_DIR}/${PROJECT_NAME}.exe
+        COMMAND ${CMAKE_SIZE_UTIL} ${BIN_DIR}/${PROJECT_NAME}.exe  >> ${SIZE_OUTPUT_FILE}
+        COMMAND echo "--------------------------------------------------------------------------------------------" >> ${SIZE_OUTPUT_FILE}
         COMMENT "Displaying size of the executable"
 )

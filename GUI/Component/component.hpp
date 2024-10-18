@@ -72,11 +72,11 @@ public:
         _obj = component;
     }
     // 使用前必须设置父对象
-    inline auto p_init( _lv_obj_t *&component) -> void
-    {
-        component = lv_img_create(_parent);
-        _obj = component;
-    }
+//    inline auto p_init( _lv_obj_t *&component) -> void
+//    {
+//        component = lv_img_create(_parent);
+//        _obj = component;
+//    }
 
     //  设置图片资源
     inline auto set_src(const lv_img_dsc_t *src) -> void
