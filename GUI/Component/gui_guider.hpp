@@ -72,10 +72,4 @@ LV_FONT_DECLARE(lv_font_arial_12)
 LV_FONT_DECLARE(lv_font_arial_16)
 
 
-class GUI_Base
-{
-protected:
-    constexpr static inline lv_ui * gui=&guider_ui;// 为了使用内联变量，需要C++17
-};
-
 #endif

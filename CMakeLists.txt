@@ -79,8 +79,9 @@ include_directories(
 
         # GUI
         GUI/Base
-        GUI/custom
-        GUI/generated
+        GUI/Events
+        GUI/Component
+        GUI/UI
 
         # 库
         Library/Data
@@ -102,6 +103,9 @@ file(GLOB_RECURSE SOURCES
         "BSP/*.*"
         "Drivers/*.*"
         "GUI/Base/*.*"
+        "GUI/UI/*.*"
+        "GUI/Component/*.*"
+        "GUI/Events/*.*"
 
         # 数据库
         "Library/Data/*.*"

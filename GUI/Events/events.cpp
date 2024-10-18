@@ -15,7 +15,6 @@
 
 extern void events_init();
 
-
 /**
  * @brief 初始化事件
  * @note 把各种事件回调与组件绑定起来
@@ -23,6 +22,5 @@ extern void events_init();
 auto Events::init() -> void
 {
     events_init();
-
 }
 

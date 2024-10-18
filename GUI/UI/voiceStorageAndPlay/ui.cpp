@@ -5,18 +5,18 @@
 #include "component.hpp"
 #include "events.hpp"
 #include "custom.hpp"
+#include "ui.hpp"
 
 #if 1
 // 头文件
-#include "voiceStorageAndPlay/ui.hpp"
-lv_ui_t ui;
+lv_ui_t gui;
+
 
 // 函数
 void ui_init()
 {
     guider_ui.screen = lv_obj_create(nullptr);
     lv_obj_set_size(guider_ui.screen, 480, 320);
-//    lv_obj_set_scrollbar_mode(guider_ui.screen, LV_SCROLLBAR_MODE_OFF);
 
     /******************************************文本框***************************************/
 
@@ -91,29 +91,9 @@ void ui_init()
 
 }
 
+/******************************************事件实现*************************************************/
 
 
-// 取别名
-using stateHandler = void (*)(bool);
-using event = lv_event_t *;
-
-/**
- * @brief 通用事件处理
- * @param e
- * @param handler
- */
-static void handler(event e, stateHandler handler)
-{
-    switch (bool is_checked;lv_event_get_code(e))
-    {
-        case LV_EVENT_CLICKED:
-            is_checked = lv_obj_has_state(e->current_target, LV_STATE_CHECKED);
-            handler(is_checked);
-            break;
-        default:
-            break;
-    }
-}
 
 // 快进处理
 static void acc_event(bool is_checked)
@@ -137,8 +117,8 @@ static void play_event(bool is_checked)
 
 void events_init()
 {
-    Events::bond(guider_ui.screen_imgbtn_acc, [](event e) { handler(e, acc_event); });// 快进按钮
-    Events::bond(guider_ui.screen_imgbtn_play, [](event e) { handler(e, play_event); });// 播放暂停按钮
+    Events::bond(guider_ui.screen_imgbtn_acc, [](event e) { Events::handler(e, acc_event); });// 快进按钮
+    Events::bond(guider_ui.screen_imgbtn_play, [](event e) { Events::handler(e, play_event); });// 播放暂停按钮
     custom_init(&guider_ui);
 }
 

@@ -24,6 +24,9 @@ set(BIN_DIR ${BUILD_DIR}/bin)
 # 编译选项
 add_compile_options(-O2 -g0 -DLV_CONF_INCLUDE_SIMPLE=1)
 
+# 添加链接选项,显示内存分布，但现在不能使用
+#add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${BIN_DIR}/${PROJECT_NAME}.map)
+
 # 链接选项
 set(LIBRARIES decoder openh264 rlottie pthread stdc++ jansson curl m SDL2)
 link_directories(${LIBFILE_PATH} ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib ${GEN_OBJ_DIR})
@@ -89,8 +92,10 @@ add_custom_target(copy_libs
 )
 add_dependencies(simulator copy_libs)
 
-# 添加自定义命令来显示内存分布
-#add_custom_command(TARGET simulator POST_BUILD
-#        COMMAND ${CMAKE_SIZE_UTIL} --format=sysv $<TARGET_FILE:simulator>
-#        COMMENT "Displaying memory usage of my_project"
-#)
+
+# 添加自定义命令，在构建完成后执行
+# 显示exe文件
+add_custom_command(TARGET simulator POST_BUILD
+        COMMAND ${CMAKE_SIZE_UTIL} ${BIN_DIR}/simulator.exe
+        COMMENT "Displaying size of the executable"
+)

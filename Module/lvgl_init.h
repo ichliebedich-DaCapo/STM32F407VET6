@@ -6,8 +6,7 @@
 #define FURINA_LVGL_INIT_H
 #include "lv_port_disp.h"
 #include "JYZQ_Conf.h"
-#include "gui_guider.h"
-#include "events_init.h"
+
 #include "stm32f4xx_hal.h"
 #ifndef APP_NO_RTOS
 void GUI_Init();

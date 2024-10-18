@@ -8,7 +8,6 @@
 */
 
 #include "lvgl.h"
-#include "gui_guider.hpp"
 #include "component.hpp"
 
 extern void ui_init();
