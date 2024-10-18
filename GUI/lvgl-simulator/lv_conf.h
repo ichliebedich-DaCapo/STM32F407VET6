@@ -43,7 +43,7 @@
   MEMORY SETTINGS
  *=========================*/
 
-/*1: use custom malloc/free, 0: use the built-in `lv_mem_alloc()` and `lv_mem_free()`*/
+/*1: use UI malloc/free, 0: use the built-in `lv_mem_alloc()` and `lv_mem_free()`*/
 #define LV_MEM_CUSTOM 0
 #if LV_MEM_CUSTOM == 0
 /*Size of the memory available for `lv_mem_alloc()` in bytes (>= 2kB)*/
@@ -76,7 +76,7 @@
 /*Input device read period in milliseconds*/
 #define LV_INDEV_DEF_READ_PERIOD 30
 
-/*Use a custom tick source that tells the elapsed time in milliseconds.
+/*Use a UI tick source that tells the elapsed time in milliseconds.
  *It removes the need to manually update the tick with `lv_tick_inc()`)*/
 #define LV_TICK_CUSTOM 0
 #if LV_TICK_CUSTOM
@@ -226,7 +226,7 @@
 /*Check the object's type and existence (e.g. not deleted). (Slow)*/
 #define LV_USE_ASSERT_OBJ 0
 
-/*Add a custom handler when assert happens e.g. to restart the MCU*/
+/*Add a UI handler when assert happens e.g. to restart the MCU*/
 #define LV_ASSERT_HANDLER_INCLUDE <stdint.h>
 /*Halt by default*/
 #define LV_ASSERT_HANDLER while(1);
@@ -278,13 +278,13 @@
 /*For big endian systems set to 1*/
 #define LV_BIG_ENDIAN_SYSTEM 0
 
-/*Define a custom attribute to `lv_tick_inc` function*/
+/*Define a UI attribute to `lv_tick_inc` function*/
 #define LV_ATTRIBUTE_TICK_INC 
 
-/*Define a custom attribute to `lv_timer_handler` function*/
+/*Define a UI attribute to `lv_timer_handler` function*/
 #define LV_ATTRIBUTE_TIMER_HANDLER 
 
-/*Define a custom attribute to `lv_disp_flush_ready` function*/
+/*Define a UI attribute to `lv_disp_flush_ready` function*/
 #define LV_ATTRIBUTE_FLUSH_READY 
 
 #ifndef LV_ATTRIBUTE_LARGE_CONST
@@ -350,7 +350,7 @@
 #define LV_FONT_UNSCII_8 0
 #define LV_FONT_UNSCII_16 0
 
-/*Optionally declare custom fonts here.
+/*Optionally declare UI fonts here.
  *You can use these fonts as default font too and they will be available globally.
  *E.g. #define LV_FONT_CUSTOM_DECLARE   LV_FONT_DECLARE(my_font_1) LV_FONT_DECLARE(my_font_2)*/
 #define LV_FONT_CUSTOM_DECLARE 
@@ -555,7 +555,7 @@
 #define LV_THEME_DEFAULT_TRANSITION_TIME 80
 #endif    /* LV_USE_THEME_DEFAULT */
 
-/*A very simple theme that is a good starting point for a custom theme*/
+/*A very simple theme that is a good starting point for a UI theme*/
 #define LV_USE_THEME_BASIC 1
 
 /*A theme designed for monochrome displays*/
@@ -639,7 +639,7 @@
 #define LV_USE_BMP 0
 
 /* JPG + split JPG decoder library.
- * Split JPG is a custom format optimized for embedded systems. */
+ * Split JPG is a UI format optimized for embedded systems. */
 #define LV_USE_SJPG 0
 
 /*GIF decoder library*/

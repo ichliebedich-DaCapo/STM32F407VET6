@@ -55,7 +55,7 @@ typedef enum
                                               dstA = (srcA * dstA) + (dstA * (1-srcA)) */
     SDL_BLENDMODE_INVALID = 0x7FFFFFFF
 
-    /* Additional custom blend modes can be returned by SDL_ComposeCustomBlendMode() */
+    /* Additional UI blend modes can be returned by SDL_ComposeCustomBlendMode() */
 
 } SDL_BlendMode;
 
@@ -91,7 +91,7 @@ typedef enum
 } SDL_BlendFactor;
 
 /**
- *  \brief Create a custom blend mode, which may or may not be supported by a given renderer
+ *  \brief Create a UI blend mode, which may or may not be supported by a given renderer
  *
  *  \param srcColorFactor source color factor
  *  \param dstColorFactor destination color factor

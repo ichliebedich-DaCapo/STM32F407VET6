@@ -178,7 +178,7 @@ const char *SDLTest_CommonUsage(SDLTest_CommonState * state);
 SDL_bool SDLTest_CommonInit(SDLTest_CommonState * state);
 
 /**
- * \brief Easy argument handling when test app doesn't need any custom args.
+ * \brief Easy argument handling when test app doesn't need any UI args.
  *
  * \param state The common state describing the test window to create.
  * \param argc argc, as supplied to SDL_main

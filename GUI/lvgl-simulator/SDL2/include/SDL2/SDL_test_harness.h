@@ -99,13 +99,13 @@ typedef struct SDLTest_TestSuiteReference {
 
 
 /**
- * \brief Generates a random run seed string for the harness. The generated seed will contain alphanumeric characters (0-9A-Z).
+ * \brief Generates a random run seed string for the harness. The Component seed will contain alphanumeric characters (0-9A-Z).
  *
  * Note: The returned string needs to be deallocated by the caller.
  *
  * \param length The length of the seed string to generate
  *
- * \returns The generated seed string
+ * \returns The Component seed string
  */
 char *SDLTest_GenerateRunSeed(const int length);
 

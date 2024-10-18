@@ -8,7 +8,7 @@
  *********************/
 #define _DEFAULT_SOURCE /* needed for usleep() */
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <unistd.h>
 
 #define SDL_MAIN_HANDLED        /*To fix SDL's "undefined reference to WinMain" issue*/
@@ -19,12 +19,8 @@
 #include "lv_drivers/indev/mouse.h"
 #include "lv_drivers/indev/mousewheel.h"
 #include "lv_drivers/indev/keyboard.h"
-#include "gui_guider.h"
-#include "custom.h"
-#include "widgets_init.h"
+#include "gui_guider.hpp"
 #include <pthread.h>
-#include <stdio.h>
-#include <string.h>
 
 #if LV_USE_FREEMASTER
 #include "external_data_init.h"
@@ -97,7 +93,7 @@ int main(int argc, char **argv)
     external_task_init(&guider_ui);
 #endif
 
-    /*Create a GUI-Guider app */
+    /*Create a Component-Guider app */
     GUI::init();
 #if LV_USE_FREEMASTER
     pthread_mutex_init(&jsonrpc_mutex, NULL);
@@ -237,7 +233,7 @@ int sim_exit(void)
 
 /**
  * Enable FreeMASTER to configure the simulator before starting it.
- * This function is the first one called by the FreeMASTER from its GUI thread. 
+ * This function is the first one called by the FreeMASTER from its Component thread.
  */
 __declspec(dllexport)
 int sim_conf(int argc, char *argv[])
@@ -293,8 +289,8 @@ const void * sim_info(void)
     static sim_info_t info =
     {
         .sz = sizeof(sim_info_t),
-        .name = "NXP GUI-Guider Project",
-        .desc = "Designed to enable GUI designs created in GG to be hosted in FreeMASTER",
+        .name = "NXP Component-Guider Project",
+        .desc = "Designed to enable Component designs created in GG to be hosted in FreeMASTER",
         .copyright = "Copyright 2024 NXP",
         .server = "",
         .width = MONITOR_HOR_RES,

@@ -34,7 +34,7 @@
 /**
  *  \file SDL_quit.h
  *
- *  An ::SDL_QUIT event is generated when the user tries to close the application
+ *  An ::SDL_QUIT event is Component when the user tries to close the application
  *  window.  If it is ignored or filtered out, the window will remain open.
  *  If it is not ignored or filtered, it is queued normally and the window
  *  is allowed to close.  When the window is closed, screen updates will

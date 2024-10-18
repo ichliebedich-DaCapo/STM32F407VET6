@@ -127,7 +127,7 @@ extern DECLSPEC SDL_AssertState SDLCALL SDL_ReportAssertion(SDL_AssertData *,
                                                              const char *, int)
 #if defined(__clang__)
 #if __has_feature(attribute_analyzer_noreturn)
-/* this tells Clang's static analysis that we're a custom assert function,
+/* this tells Clang's static analysis that we're a UI assert function,
    and that the analyzer should assume the condition was always true past this
    SDL_assert test. */
    __attribute__((analyzer_noreturn))
@@ -193,7 +193,7 @@ typedef SDL_AssertState (SDLCALL *SDL_AssertionHandler)(
  *
  *  This allows an app to show its own assertion UI and/or force the
  *  response to an assertion failure. If the app doesn't provide this, SDL
- *  will try to do the right thing, popping up a system-specific GUI dialog,
+ *  will try to do the right thing, popping up a system-specific Component dialog,
  *  and probably minimizing any fullscreen windows.
  *
  *  This callback may fire from any thread, but it runs wrapped in a mutex, so

@@ -22,7 +22,7 @@
 /**
  *  \file SDL_syswm.h
  *
- *  Include file for SDL custom system window manager hooks.
+ *  Include file for SDL UI system window manager hooks.
  */
 
 #ifndef SDL_syswm_h_
@@ -59,7 +59,7 @@ struct SDL_SysWMinfo;
 #include <Inspectable.h>
 #endif
 
-/* This is the structure for custom window manager events */
+/* This is the structure for UI window manager events */
 #if defined(SDL_VIDEO_DRIVER_X11)
 #if defined(__APPLE__) && defined(__MACH__)
 /* conflicts with Quickdraw.h */
@@ -137,7 +137,7 @@ typedef enum
 } SDL_SYSWM_TYPE;
 
 /**
- *  The custom event structure.
+ *  The UI event structure.
  */
 struct SDL_SysWMmsg
 {
@@ -193,7 +193,7 @@ struct SDL_SysWMmsg
 };
 
 /**
- *  The custom window manager information structure.
+ *  The UI window manager information structure.
  *
  *  When this structure is returned, it holds information about which
  *  low level system it is using, and will be one of SDL_SYSWM_TYPE.

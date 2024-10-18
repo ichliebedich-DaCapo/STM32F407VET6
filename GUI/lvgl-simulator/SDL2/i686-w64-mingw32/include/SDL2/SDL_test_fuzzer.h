@@ -160,7 +160,7 @@ double SDLTest_RandomDouble(void);
  *
  * \param boundary1 Lower boundary limit
  * \param boundary2 Upper boundary limit
- * \param validDomain Should the generated boundary be valid (=within the bounds) or not?
+ * \param validDomain Should the Component boundary be valid (=within the bounds) or not?
  *
  * \returns Random boundary value for the given range and domain or 0 with error set
  */
@@ -181,7 +181,7 @@ Uint8 SDLTest_RandomUint8BoundaryValue(Uint8 boundary1, Uint8 boundary2, SDL_boo
  *
  * \param boundary1 Lower boundary limit
  * \param boundary2 Upper boundary limit
- * \param validDomain Should the generated boundary be valid (=within the bounds) or not?
+ * \param validDomain Should the Component boundary be valid (=within the bounds) or not?
  *
  * \returns Random boundary value for the given range and domain or 0 with error set
  */
@@ -202,7 +202,7 @@ Uint16 SDLTest_RandomUint16BoundaryValue(Uint16 boundary1, Uint16 boundary2, SDL
  *
  * \param boundary1 Lower boundary limit
  * \param boundary2 Upper boundary limit
- * \param validDomain Should the generated boundary be valid (=within the bounds) or not?
+ * \param validDomain Should the Component boundary be valid (=within the bounds) or not?
  *
  * \returns Random boundary value for the given range and domain or 0 with error set
  */
@@ -223,7 +223,7 @@ Uint32 SDLTest_RandomUint32BoundaryValue(Uint32 boundary1, Uint32 boundary2, SDL
  *
  * \param boundary1 Lower boundary limit
  * \param boundary2 Upper boundary limit
- * \param validDomain Should the generated boundary be valid (=within the bounds) or not?
+ * \param validDomain Should the Component boundary be valid (=within the bounds) or not?
  *
  * \returns Random boundary value for the given range and domain or 0 with error set
  */
@@ -244,7 +244,7 @@ Uint64 SDLTest_RandomUint64BoundaryValue(Uint64 boundary1, Uint64 boundary2, SDL
  *
  * \param boundary1 Lower boundary limit
  * \param boundary2 Upper boundary limit
- * \param validDomain Should the generated boundary be valid (=within the bounds) or not?
+ * \param validDomain Should the Component boundary be valid (=within the bounds) or not?
  *
  * \returns Random boundary value for the given range and domain or SINT8_MIN with error set
  */
@@ -266,7 +266,7 @@ Sint8 SDLTest_RandomSint8BoundaryValue(Sint8 boundary1, Sint8 boundary2, SDL_boo
  *
  * \param boundary1 Lower boundary limit
  * \param boundary2 Upper boundary limit
- * \param validDomain Should the generated boundary be valid (=within the bounds) or not?
+ * \param validDomain Should the Component boundary be valid (=within the bounds) or not?
  *
  * \returns Random boundary value for the given range and domain or SINT16_MIN with error set
  */
@@ -287,7 +287,7 @@ Sint16 SDLTest_RandomSint16BoundaryValue(Sint16 boundary1, Sint16 boundary2, SDL
  *
  * \param boundary1 Lower boundary limit
  * \param boundary2 Upper boundary limit
- * \param validDomain Should the generated boundary be valid (=within the bounds) or not?
+ * \param validDomain Should the Component boundary be valid (=within the bounds) or not?
  *
  * \returns Random boundary value for the given range and domain or SINT32_MIN with error set
  */
@@ -308,7 +308,7 @@ Sint32 SDLTest_RandomSint32BoundaryValue(Sint32 boundary1, Sint32 boundary2, SDL
  *
  * \param boundary1 Lower boundary limit
  * \param boundary2 Upper boundary limit
- * \param validDomain Should the generated boundary be valid (=within the bounds) or not?
+ * \param validDomain Should the Component boundary be valid (=within the bounds) or not?
  *
  * \returns Random boundary value for the given range and domain or SINT64_MIN with error set
  */
@@ -348,7 +348,7 @@ char * SDLTest_RandomAsciiString(void);
  *
  * Note: Returned string needs to be deallocated.
  *
- * \param maxLength The maximum length of the generated string.
+ * \param maxLength The maximum length of the Component string.
  *
  * \returns Newly allocated random string; or NULL if maxLength was invalid or string could not be allocated.
  */
@@ -362,7 +362,7 @@ char * SDLTest_RandomAsciiStringWithMaximumLength(int maxLength);
  *
  * Note: Returned string needs to be deallocated.
  *
- * \param size The length of the generated string
+ * \param size The length of the Component string
  *
  * \returns Newly allocated random string; or NULL if size was invalid or string could not be allocated.
  */

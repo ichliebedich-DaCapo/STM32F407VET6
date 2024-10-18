@@ -140,7 +140,7 @@ typedef enum
             (((X)&0xFFFF0000) == SDL_WINDOWPOS_CENTERED_MASK)
 
 /**
- *  \brief Event subtype for window events
+ *  \brief Events subtype for window events
  */
 typedef enum
 {
@@ -169,7 +169,7 @@ typedef enum
 } SDL_WindowEventID;
 
 /**
- *  \brief Event subtype for display events
+ *  \brief Events subtype for display events
  */
 typedef enum
 {

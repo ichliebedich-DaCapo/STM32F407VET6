@@ -377,7 +377,7 @@ extern DECLSPEC void SDLCALL SDL_GetMemoryFunctions(SDL_malloc_func *malloc_func
                                                     SDL_free_func *free_func);
 
 /**
- *  \brief Replace SDL's memory allocation functions with a custom set
+ *  \brief Replace SDL's memory allocation functions with a UI set
  *
  *  \note If you are replacing SDL's memory functions, you should call
  *        SDL_GetNumAllocations() and be very careful if it returns non-zero.
