@@ -4,9 +4,6 @@
 #include <iostream>
 #include "component.hpp"
 #include "events.hpp"
-//#include "custom.hpp"
-#include "ui.hpp"
-
 #include "spectrum_1.h"
 
 #if 1
@@ -21,11 +18,7 @@ enum PlaySpeed
 
 static uint32_t time;
 static uint32_t track_id;
-static lv_timer_t *sec_counter_timer;
 static lv_obj_t *spectrum_area;
-
-
-static void spectrum_update_timer_cb(lv_timer_t *timer);
 
 static const uint32_t time_list[] = {
         1 * 60 + 14,
@@ -33,10 +26,6 @@ static const uint32_t time_list[] = {
         1 * 60 + 54,
 };
 
-static void timer_cb(lv_timer_t *t)
-{
-
-}
 
 #define FFT_NUM 256
 #define SPECTRUM_START_X 50
@@ -47,15 +36,12 @@ static void timer_cb(lv_timer_t *t)
 #define BAR_WIDTH 2  // 每个频谱条的宽度
 static float bar_spacing = (float) ((SPECTRUM_WIDTH - SPECTRUM_NUM * BAR_WIDTH) / (SPECTRUM_NUM - 1.0)); // 频谱条之间的间距
 
-lv_timer_t *spectrum_update_timer = nullptr;
-
+// 进度条计时器
 class SliderTimer : public GUI_Base
 {
 public:
-    static auto init() -> void;
-
-    static auto pause() -> void { lv_timer_pause(_timer); }
-
+    static auto init() -> void;// 初始化
+    static auto pause() -> void { lv_timer_pause(_timer); }// 暂停
     static auto resume() -> void { lv_timer_resume(_timer); }
 
 private:
@@ -64,37 +50,19 @@ private:
     static inline lv_timer_t *_timer;
 };
 
-auto SliderTimer::event_cb(lv_timer_t *timer) -> void
-{
-    time++;
-    lv_label_set_text_fmt(gui->main.label_slider_time, "%d:%02d", time / 60, time % 60);
-    lv_slider_set_value(gui->main.slider, time, LV_ANIM_ON);
-}
-
-auto SliderTimer::init() -> void
-{
-    _timer = lv_timer_create(event_cb, 1000, nullptr);
-}
-
-
+// 频谱计时器
 class SpectrumTimer : public GUI_Base
 {
 public:
-    static auto init() -> void;
-
-    static auto pause() -> void { lv_timer_pause(_timer); }
-
+    static auto init() -> void;// 初始化
+    static auto pause() -> void { lv_timer_pause(_timer); }// 暂停
     static auto resume() -> void { lv_timer_resume(_timer); }
 
 private:
+    static auto event_cb(lv_timer_t *timer) -> void;
+
     static inline lv_timer_t *_timer;
 };
-
-auto SpectrumTimer::init() -> void
-{
-    _timer = lv_timer_create(spectrum_update_timer_cb, 30, gui);
-}
-
 
 /********************************界面初始化******************************/
 
@@ -128,13 +96,7 @@ auto Screen::init() -> void
     text.set_text_color(lv_color_hex(0x8a86b8));
     text.set_text_align(LV_TEXT_ALIGN_CENTER);
 
-    /******************************************滑条***************************************/
-    //Write codes screen_slider_1
-    SliderInitializer slider{};
-    slider.init(gui->main.screen, gui->main.slider);
-    slider.set_range(0, 100);
-    slider.set_pos_size(42, 294, 342, 1);
-    slider.set_bg_color(lv_color_hex(0x2195f6), 100);
+
 
 
     /*************************************图片*************************************/
@@ -175,23 +137,30 @@ auto Screen::init() -> void
     imgbtn.set_src(LV_IMGBTN_STATE_RELEASED, &_btn_prev_alpha_37x37);
     imgbtn.set_src(LV_IMGBTN_STATE_CHECKED_RELEASED, &_icn_slider_alpha_37x37);
 
-    /***自定义组件***/
-    LV_IMG_DECLARE(_icn_slider_alpha_37x37);
+    /******************************************滑条***************************************/
+    //Write codes screen_slider_1
+    SliderInitializer slider{};
+    slider.init(gui->main.screen, gui->main.slider);
+    slider.set_range(0, 100);
+    slider.set_pos_size(42, 294, 342, 1);
+    slider.set_bg_color(lv_color_hex(0x2195f6), 100);
 
+    LV_IMG_DECLARE(_icn_slider_alpha_37x37);
+    lv_obj_set_style_bg_img_src(gui->main.slider, &_icn_slider_alpha_37x37, LV_PART_KNOB);
+
+
+    /***自定义组件***/
     SliderTimer::init();
     SliderTimer::pause();
 
-    lv_obj_set_style_bg_img_src(gui->main.slider, &_icn_slider_alpha_37x37, LV_PART_KNOB);
-
-   SpectrumTimer::init();
-   SpectrumTimer::pause();
+    SpectrumTimer::init();
+    SpectrumTimer::pause();
 
     spectrum_area = lv_obj_create(gui->main.screen);
     lv_obj_remove_style_all(spectrum_area);
     lv_obj_set_pos(spectrum_area, SPECTRUM_START_X, SPECTRUM_START_Y);
     lv_obj_set_size(spectrum_area, SPECTRUM_WIDTH, SPECTRUM_HEIGHT);
     lv_obj_move_background(spectrum_area);
-
 }
 
 /******************************************事件实现*************************************************/
@@ -316,10 +285,6 @@ auto Spectrum::update() -> void
     lv_obj_invalidate(spectrum_area);  // 使频谱区域无效，触发重绘
 }
 
-static void spectrum_update_timer_cb(lv_timer_t *timer)
-{
-    Spectrum::update();
-}
 
 /**
  * @brief 播放速度显示
@@ -369,15 +334,47 @@ auto Play::set_speed(enum PlaySpeed speed) -> void
 
 auto Play::resume() -> void
 {
-    lv_timer_resume(spectrum_update_timer);
-    lv_timer_resume(sec_counter_timer);
+    SpectrumTimer::resume();
+    SliderTimer::resume();
     lv_slider_set_range(gui->main.slider, 0, time_list[track_id]);
 }
 
 auto Play::pause() -> void
 {
-    lv_timer_pause(spectrum_update_timer);
-    lv_timer_pause(sec_counter_timer);
+    SpectrumTimer::pause();
+    SliderTimer::pause();
+}
+
+/*****************************************定时器*************************************/
+auto SliderTimer::event_cb(lv_timer_t *timer) -> void
+{
+    time++;
+    lv_label_set_text_fmt(gui->main.label_slider_time, "%d:%02d", time / 60, time % 60);
+    lv_slider_set_value(gui->main.slider, time, LV_ANIM_ON);
+}
+
+auto SliderTimer::init() -> void
+{
+    _timer = lv_timer_create(event_cb, 1000, nullptr);
+}
+
+
+auto SpectrumTimer::init() -> void
+{
+    _timer = lv_timer_create(event_cb, 30, gui);
+}
+
+auto SpectrumTimer::event_cb(lv_timer_t *timer) -> void
+{
+    // 更新FFT频谱数据
+    uint8_t temp = spectrum[0];
+    spectrum[FFT_NUM - 1] = temp;
+    for (uint32_t i = 0; i < FFT_NUM - 1; ++i)
+    {
+        temp = spectrum[i + 1];
+        spectrum[i] = temp;
+    }
+    lv_obj_invalidate(spectrum_area);  // 使频谱区域无效，触发重绘
 }
 
 
