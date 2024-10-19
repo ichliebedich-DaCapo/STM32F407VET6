@@ -11,7 +11,8 @@
 // 函数
 auto GUI::init() -> void
 {
-    gui->screen_dell= true;
+    gui->main.screen = lv_obj_create(nullptr);
+    lv_obj_set_size(gui->main.screen, 480, 320);
     Screen::init();// 初始化屏幕
     lv_obj_update_layout(gui->main.screen);
     Events::init();

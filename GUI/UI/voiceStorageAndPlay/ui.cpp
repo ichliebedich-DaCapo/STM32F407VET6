@@ -68,85 +68,68 @@ private:
 
 auto Screen::init() -> void
 {
-    gui->main.screen = lv_obj_create(nullptr);
-    lv_obj_set_size(gui->main.screen, 480, 320);
 
-
-//    ComponentInitializer::set_parent(guider_ui.screen);
+    Component::set_parent(gui->main.screen);
     /******************************************文本框***************************************/
-    TextInitializer text{};
 
     //Write codes screen_label_speed
-    text.init(gui->main.screen, gui->main.label_speed, "快进×1.75");
-    text.set_pos_size(392, 26, 74, 13);
-    text.add_flag(LV_OBJ_FLAG_HIDDEN);
-    text.set_text_font_space(&lv_customer_font_SourceHanSerifSC_Regular_12, 2);
+    Text::init(gui->main.label_speed, "");
+    Text::set_pos_size(392, 26, 74, 13);
+    Text::add_flag(LV_OBJ_FLAG_HIDDEN);
+    Text::set_text_font_space(&lv_customer_font_SourceHanSerifSC_Regular_12, 2);
 
     //Write codes screen_label_title_music
-    text.init(gui->main.screen, gui->main.label_title_music, "语音存储与回放");
-    text.set_pos_size(150, 5, 180, 21);
-    text.set_text_font_space(&lv_customer_font_SourceHanSerifSC_Regular_14);
-    text.set_text_color(lv_color_hex(0x504d6d));
-    text.set_text_align(LV_TEXT_ALIGN_CENTER);// 设置文本居中
+    Text::init(gui->main.label_title_music, "语音存储与回放");
+    Text::set_pos_size(150, 5, 180, 21);
+    Text::set_text_font_space(&lv_customer_font_SourceHanSerifSC_Regular_14);
+    Text::set_text_color(lv_color_hex(0x504d6d));
+    Text::set_text_align(LV_TEXT_ALIGN_CENTER);// 设置文本居中
 
     //Write codes screen_label_slider_time
-    text.init(gui->main.screen, gui->main.label_slider_time, "0:00");
-    text.set_pos_size(420, 288, 36, 12);
-    text.set_text_font_space(&lv_customer_font_SourceHanSerifSC_Regular_12);
-    text.set_text_color(lv_color_hex(0x8a86b8));
-    text.set_text_align(LV_TEXT_ALIGN_CENTER);
-
-
+    Text::init(gui->main.label_slider_time, "0:00");
+    Text::set_pos_size(420, 288, 36, 12);
+    Text::set_text_font_space(&lv_customer_font_SourceHanSerifSC_Regular_12);
+    Text::set_text_color(lv_color_hex(0x8a86b8));
+    Text::set_text_align(LV_TEXT_ALIGN_CENTER);
 
 
     /*************************************图片*************************************/
-    ImageInitializer img{};
 
     //Write codes screen_img_11
-    img.init(gui->main.screen, gui->main.img_11);
-    img.set_src(&_icn_slider_alpha_15x15);
-    img.set_pos_size(235, 152, 15, 15);
-    img.add_flag(LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_HIDDEN);
-    img.set_style_clip_corner(LV_PART_MAIN | LV_STATE_DEFAULT);// 设置为圆角
-
+    Image::init(gui->main.img_11);
+    Image::set_src(&_icn_slider_alpha_15x15);
+    Image::set_pos_size(235, 152, 15, 15);
+    Image::add_flag(LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_HIDDEN);
 
     /************************************图片按钮************************************/
-    ImageButtonInitializer imgbtn{};
+
 
     //Write codes screen_imgbtn_play
-    imgbtn.init(gui->main.screen, gui->main.imgbtn_play);
-    imgbtn.set_pos_size(216, 234, 48, 48);
-    imgbtn.set_style_clip_corner((LV_PART_MAIN | LV_STATE_DEFAULT));
-    imgbtn.add_flag(LV_OBJ_FLAG_CHECKABLE);
-    imgbtn.set_src(LV_IMGBTN_STATE_RELEASED, &_btn_list_play_alpha_48x48);// 正常状态.播放
-    imgbtn.set_src(LV_IMGBTN_STATE_CHECKED_RELEASED, &_btn_list_pause_alpha_48x48);// 按下按钮.暂停
+    ImageButton::init(gui->main.imgbtn_play);
+    ImageButton::set_pos_size(216, 234, 48, 48);
+    ImageButton::add_flag(LV_OBJ_FLAG_CHECKABLE);
+    ImageButton::set_src(LV_IMGBTN_STATE_RELEASED, &_btn_list_play_alpha_48x48);// 正常状态.播放
+    ImageButton::set_src(LV_IMGBTN_STATE_CHECKED_RELEASED, &_btn_list_pause_alpha_48x48);// 按下按钮.暂停
 
     //Write codes screen_imgbtn_acc
-    imgbtn.init(gui->main.screen, gui->main.imgbtn_acc);
-    imgbtn.set_pos_size(318, 240, 37, 37);
-    imgbtn.set_style_clip_corner((LV_PART_MAIN | LV_STATE_DEFAULT));
-    imgbtn.add_flag(LV_OBJ_FLAG_CHECKABLE);
-    imgbtn.set_src(LV_IMGBTN_STATE_RELEASED, &_btn_next_alpha_37x37);
-    imgbtn.set_src(LV_IMGBTN_STATE_CHECKED_RELEASED, &_icn_slider_alpha_15x15);
+    ImageButton::init(gui->main.imgbtn_acc);
+    ImageButton::set_pos_size(318, 240, 37, 37);
+    ImageButton::add_flag(LV_OBJ_FLAG_CHECKABLE);
+    ImageButton::set_src(LV_IMGBTN_STATE_RELEASED, &_btn_next_alpha_37x37);
 
     //Write codes screen_imgbtn_slow
-    imgbtn.init(gui->main.screen, gui->main.imgbtn_slow);
-    imgbtn.set_pos_size(122, 240, 37, 37);
-    imgbtn.set_style_clip_corner((LV_PART_MAIN | LV_STATE_DEFAULT));
-    imgbtn.add_flag(LV_OBJ_FLAG_CHECKABLE);
-    imgbtn.set_src(LV_IMGBTN_STATE_RELEASED, &_btn_prev_alpha_37x37);
-    imgbtn.set_src(LV_IMGBTN_STATE_CHECKED_RELEASED, &_icn_slider_alpha_15x15);
+    ImageButton::init(gui->main.imgbtn_slow);
+    ImageButton::set_pos_size(122, 240, 37, 37);
+    ImageButton::add_flag(LV_OBJ_FLAG_CHECKABLE);
+    ImageButton::set_src(LV_IMGBTN_STATE_RELEASED, &_btn_prev_alpha_37x37);
 
     /******************************************滑条***************************************/
     //Write codes screen_slider_1
-    SliderInitializer slider{};
-    slider.init(gui->main.screen, gui->main.slider);
-    slider.set_range(0, 100);
-    slider.set_pos_size(42, 294, 342, 1);
-    slider.set_bg_color(lv_color_hex(0x2195f6), 100);
-
-    lv_obj_set_style_bg_img_src(gui->main.slider, &_icn_slider_alpha_15x15, LV_PART_KNOB);
-
+    Slider::init(gui->main.slider);
+    Slider::set_range(0, 100);
+    Slider::set_pos_size(42, 294, 342, 1);
+    Slider::set_bg_color(lv_color_hex(0x2195f6), 100);
+    Slider::set_bg_src(gui->main.slider, &_icn_slider_alpha_15x15);
 
     /***自定义组件***/
     SliderTimer::init();
@@ -155,11 +138,10 @@ auto Screen::init() -> void
     SpectrumTimer::init();
     SpectrumTimer::pause();
 
-    spectrum_area = lv_obj_create(gui->main.screen);
-    lv_obj_remove_style_all(spectrum_area);
-    lv_obj_set_pos(spectrum_area, SPECTRUM_START_X, SPECTRUM_START_Y);
-    lv_obj_set_size(spectrum_area, SPECTRUM_WIDTH, SPECTRUM_HEIGHT);
-    lv_obj_move_background(spectrum_area);
+    Component::init(spectrum_area);
+    Component::remove_all_style();
+    Component::set_pos_size(SPECTRUM_START_X, SPECTRUM_START_Y,SPECTRUM_WIDTH, SPECTRUM_HEIGHT);
+    Component::move_to_background();
 }
 
 /******************************************事件实现*************************************************/
@@ -188,7 +170,7 @@ class Event : public GUI_Base
 {
 
 public: // 通用事件
-    static auto acc(bool is_checked) -> void ;
+    static auto acc(bool is_checked) -> void;
 
     static auto play(bool is_checked) -> void;
 
@@ -203,6 +185,7 @@ auto Events::init() -> void
     Events::bond(gui->main.imgbtn_play, [](event e) { Events::handler(e, Event::play); });// 播放暂停按钮
     Events::bond(gui->main.screen, Event::spectrum_draw);
 }
+
 //
 ///*****************************自定义接口*********************************/
 auto Event::acc(bool is_checked) -> void

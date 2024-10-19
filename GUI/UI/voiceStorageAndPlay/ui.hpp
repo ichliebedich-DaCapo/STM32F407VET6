@@ -11,7 +11,6 @@
 /*********************组件*******************/
 typedef struct
 {
-    bool screen_dell;
     struct
     {
         lv_obj_t *screen;// 屏幕自身

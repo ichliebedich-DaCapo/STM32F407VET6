@@ -23,9 +23,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【初始】开始引入LVGL模拟器">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【初始】主项目——CMakelists实在没有什么好修改的地方" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -145,6 +143,11 @@
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -244,6 +247,7 @@
       <workItem from="1729265952812" duration="2243000" />
       <workItem from="1729304281094" duration="48000" />
       <workItem from="1729304338217" duration="8000" />
+      <workItem from="1729326639200" duration="9332000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -469,7 +473,47 @@
       <option name="project" value="LOCAL" />
       <updated>1729158151119</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="【初始】主项目——发生了一件奇怪的事情，即便没有使用GUI，ROM也会爆满。正在尝试解决……">
+      <option name="closed" value="true" />
+      <created>1729328155208</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1729328155208</updated>
+    </task>
+    <task id="LOCAL-00030" summary="【初始】主项目——初步判断是ui.cpp导致ROM爆了，原因不明">
+      <option name="closed" value="true" />
+      <created>1729328450716</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1729328450716</updated>
+    </task>
+    <task id="LOCAL-00031" summary="【初始】主项目——已解决。吃个饭回来，发现原因是使用了cout，ROM直接增加了两百多KB">
+      <option name="closed" value="true" />
+      <created>1729331128662</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1729331128662</updated>
+    </task>
+    <task id="LOCAL-00032" summary="【初始】主项目——CMakelists未修改前">
+      <option name="closed" value="true" />
+      <created>1729335884890</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1729335884890</updated>
+    </task>
+    <task id="LOCAL-00033" summary="【初始】主项目——CMakelists实在没有什么好修改的地方">
+      <option name="closed" value="true" />
+      <created>1729336775210</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1729336775210</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -504,11 +548,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="__【未配置好】为使用CLion集成的FreeRTOS功能，补充相关内容" />
-    <MESSAGE value="__【未配置好】添加了一些LL库、LCD的驱动ILI 9488、Key类的简单实现、FSMC的驱动、外部中断驱动" />
-    <MESSAGE value="__【未配置好】C++20的module还是先算了" />
-    <MESSAGE value="__【未配置好】选出了一些从C++11到C++17中适合单片机开发的特性" />
-    <MESSAGE value="__【未配置好】略微完善了一下文档规范JYZQ_Conf.h" />
     <MESSAGE value="__【未配置好】略微修改了一下JYZQ_Conf.h" />
     <MESSAGE value="__【未配置好】根据远古代码写的SPI Flash驱动" />
     <MESSAGE value="__【未配置好】与AI合力编写了w25qxx的驱动，然后启用了stm32的断言机制,并删除了一下LL库（因为缺失stm32_assert.h文件）" />
@@ -529,7 +568,12 @@
     <MESSAGE value="__【未配置好】纠正了些许小问题" />
     <MESSAGE value="【初始】准备引入LVGL模拟器" />
     <MESSAGE value="【初始】开始引入LVGL模拟器" />
-    <option name="LAST_COMMIT_MESSAGE" value="【初始】开始引入LVGL模拟器" />
+    <MESSAGE value="【初始】主项目——发生了一件奇怪的事情，即便没有使用GUI，ROM也会爆满。正在尝试解决……" />
+    <MESSAGE value="【初始】主项目——初步判断是ui.cpp导致ROM爆了，原因不明" />
+    <MESSAGE value="【初始】主项目——已解决。吃个饭回来，发现原因是使用了cout，ROM直接增加了两百多KB" />
+    <MESSAGE value="【初始】主项目——CMakelists未修改前" />
+    <MESSAGE value="【初始】主项目——CMakelists实在没有什么好修改的地方" />
+    <option name="LAST_COMMIT_MESSAGE" value="【初始】主项目——CMakelists实在没有什么好修改的地方" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
