@@ -54,16 +54,8 @@ endif ()
 add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx)
 
 
-set(APPLICATION_DIR Application)
-set(BSP_DIR BSP)
-set(GUI_DIR GUI)
-set(BASE_DIR ${GUI_DIR}/Base)
-set(COMPONENT_DIR ${GUI_DIR}/Component)
-set(EVENTS_DIR ${GUI_DIR}/Events)
-
 # ----------------------------------设置你的UI路径（选择项目）------------------------------
-set(UI_DIR ${GUI_DIR}/UI/voiceStorageAndPlay)
-
+set(UI_DIR GUI/UI/voiceStorageAndPlay)
 
 #添加头文件
 include_directories(
@@ -79,6 +71,7 @@ include_directories(
 
         # 模块
         Module
+
         # 板级支持包
         BSP/Base
         BSP/Core
@@ -89,12 +82,11 @@ include_directories(
         BSP/ADC
         BSP/DAC
 
-
         # GUI
         ${UI_DIR}
-        ${BASE_DIR}
-        ${COMPONENT_DIR}
-        ${EVENTS_DIR}
+        GUI/Base
+        GUI/Component
+        GUI/Events
 
         # 库
         Library/Data
@@ -111,24 +103,29 @@ include_directories(
 
 # 添加资源文件
 file(GLOB_RECURSE SOURCES
-        "Application/*.*"
-        "Module/*.*"
-        "BSP/*.*"
-        "Drivers/*.*"
-        "GUI/Base/*.*"
+        "BSP/Core/*.s"
+        "Drivers/STM32F4xx_HAL_Driver/Src/*.c"
+
+        # 三层划分
+        "Application/*.cpp"
+        "Module/*.cpp"
+        "BSP/*.c"
+
+        # GUI
         "${UI_DIR}/*.*"
-        "GUI/Component/*.*"
-        "GUI/Events/*.*"
+        "GUI/Base/GUI.cpp"
+        "GUI/Component/*.cpp"
+        "GUI/Events/*.cpp"
 
         # 数据库
         "Library/Data/*.*"
-        "Library/Third_Party/lvgl/src/*.*"
-        "Library/Third_Party/lvgl/lvgl.h"
-        "Library/Third_Party/lvgl/lv_conf.h"
-        "Library/Third_Party/lvgl/examples/porting/*.*"
+        "Library/Third_Party/lvgl/src/*.c"
+        "Library/Third_Party/lvgl/examples/porting/*.c"
 
         # FreeRTOS库
-        "Library/Third_Party/FreeRTOS/*.*"
+        "Library/Third_Party/FreeRTOS/Source/*.c"
+        "Library/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c"
+        " Library/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c"
 )
 
 # 设置链接脚本
@@ -141,7 +138,6 @@ add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
 add_link_options(-T ${LINKER_SCRIPT})
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
-
 
 set(HEX_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.hex)
 set(BIN_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.bin)
