@@ -9,12 +9,14 @@ set(CMAKE_CXX_STANDARD 17)
 set(LIBFILE_PATH resource/lib/native)
 set(PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
 set(APP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../Application)
-set(UI_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../UI)
 set(BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../Base)
 set(LVGL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/resource)
 set(SIMULATOR_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(COMPONENT_DIR ${PROJECT_SOURCE_DIR}/Component)
 set(EVENTS_DIR ${PROJECT_SOURCE_DIR}/Events)
+# ----------------------------------设置你的UI路径（选择项目）------------------------------
+set(UI_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../UI/voiceStorageAndPlay)
+
 # 生成的目标文件目录
 set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
 set(OBJ_DIR ${BUILD_DIR}/object)

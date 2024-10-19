@@ -8,7 +8,7 @@
 /* 预编译命令 */
 #if 1
 // 头文件
-
+#include "GUI_Base.hpp"
 // 宏定义
 
 
@@ -17,7 +17,7 @@
 /**
  * @brief GUI类
  */
-class GUI
+class GUI:public GUI_Base
 {
 public:
     static auto init() -> void;// 初始化界面

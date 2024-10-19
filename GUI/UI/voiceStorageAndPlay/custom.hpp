@@ -11,9 +11,11 @@
 #define __CUSTOM_H_
 
 
-#include "gui_guider.hpp"
+
 
 /********宏定义********/
+#include "gui_guider.hpp"
+
 #define DEBUG_PRINTF // 使用Debug打印
 #ifdef DEBUG_PRINTF
 #define print(x, ...) printf(x, ##__VA_ARGS__)

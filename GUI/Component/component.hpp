@@ -7,14 +7,14 @@
 /* 预编译命令 */
 #if 1
 // 头文件
-#include "gui_guider.hpp"
+#include "GUI_Base.hpp"
 // 宏定义
 
 
 /**
  * @brief 屏幕类
  */
-class Screen
+class Screen:public GUI_Base
 {
 public:
     static auto init() -> void;// 初始化屏幕

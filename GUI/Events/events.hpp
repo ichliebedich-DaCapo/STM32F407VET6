@@ -2,7 +2,7 @@
 #define EVENTS_INIT_H_
 
 
-#include "lvgl.h"
+#include "GUI_Base.hpp"
 
 using stateHandler = void (*)(bool);
 using event = lv_event_t *;
@@ -10,7 +10,7 @@ using event = lv_event_t *;
 /**
  * @brief 初始化事件
  */
-class Events
+class Events:public GUI_Base
 {
 public:
     static auto init() -> void;

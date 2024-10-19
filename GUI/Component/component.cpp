@@ -13,9 +13,9 @@
 extern void ui_init();
 
 
-auto Screen::init() -> void
-{
-    init_scr_del_flag(&guider_ui);
-    ui_init();// 由UI下面文件实现
-    lv_obj_update_layout(guider_ui.screen);
-}
+//auto Screen::init() -> void
+//{
+//
+//    ui_init();// 由UI下面文件实现
+//
+//}

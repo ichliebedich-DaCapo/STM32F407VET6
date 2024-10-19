@@ -13,14 +13,4 @@
 #include "freemaster_client.h"
 #endif
 
-extern void events_init();
-
-/**
- * @brief 初始化事件
- * @note 把各种事件回调与组件绑定起来
- */
-auto Events::init() -> void
-{
-    events_init();
-}
 
