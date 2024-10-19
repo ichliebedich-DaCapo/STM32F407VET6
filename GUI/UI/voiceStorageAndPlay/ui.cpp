@@ -80,19 +80,19 @@ auto Screen::init() -> void
     text.init(gui->main.screen, gui->main.label_speed, "快进×1.75");
     text.set_pos_size(392, 26, 74, 13);
     text.add_flag(LV_OBJ_FLAG_HIDDEN);
-    text.set_text_font_space(&lv_font_SourceHanSerifSC_Regular_12, 2);
+    text.set_text_font_space(&lv_customer_font_SourceHanSerifSC_Regular_12, 2);
 
     //Write codes screen_label_title_music
-    text.init(gui->main.screen, gui->main.label_title_music, "Waiting for true love");
+    text.init(gui->main.screen, gui->main.label_title_music, "语音存储与回放");
     text.set_pos_size(150, 5, 180, 21);
-    text.set_text_font_space(&lv_font_arial_14);
+    text.set_text_font_space(&lv_customer_font_SourceHanSerifSC_Regular_14);
     text.set_text_color(lv_color_hex(0x504d6d));
     text.set_text_align(LV_TEXT_ALIGN_CENTER);// 设置文本居中
 
     //Write codes screen_label_slider_time
     text.init(gui->main.screen, gui->main.label_slider_time, "0:00");
     text.set_pos_size(420, 288, 36, 12);
-    text.set_text_font_space(&lv_font_arial_12);
+    text.set_text_font_space(&lv_customer_font_SourceHanSerifSC_Regular_12);
     text.set_text_color(lv_color_hex(0x8a86b8));
     text.set_text_align(LV_TEXT_ALIGN_CENTER);
 
@@ -118,8 +118,8 @@ auto Screen::init() -> void
     imgbtn.set_pos_size(216, 234, 48, 48);
     imgbtn.set_style_clip_corner((LV_PART_MAIN | LV_STATE_DEFAULT));
     imgbtn.add_flag(LV_OBJ_FLAG_CHECKABLE);
-    imgbtn.set_src(LV_IMGBTN_STATE_RELEASED, &_btn_play_alpha_48x48);// 正常状态.播放
-    imgbtn.set_src(LV_IMGBTN_STATE_CHECKED_RELEASED, &_btn_pause_alpha_48x48);// 按下按钮.暂停
+    imgbtn.set_src(LV_IMGBTN_STATE_RELEASED, &_btn_list_play_alpha_48x48);// 正常状态.播放
+    imgbtn.set_src(LV_IMGBTN_STATE_CHECKED_RELEASED, &_btn_list_pause_alpha_48x48);// 按下按钮.暂停
 
     //Write codes screen_imgbtn_acc
     imgbtn.init(gui->main.screen, gui->main.imgbtn_acc);
@@ -127,7 +127,7 @@ auto Screen::init() -> void
     imgbtn.set_style_clip_corner((LV_PART_MAIN | LV_STATE_DEFAULT));
     imgbtn.add_flag(LV_OBJ_FLAG_CHECKABLE);
     imgbtn.set_src(LV_IMGBTN_STATE_RELEASED, &_btn_next_alpha_37x37);
-    imgbtn.set_src(LV_IMGBTN_STATE_CHECKED_RELEASED, &_icn_slider_alpha_37x37);
+    imgbtn.set_src(LV_IMGBTN_STATE_CHECKED_RELEASED, &_icn_slider_alpha_15x15);
 
     //Write codes screen_imgbtn_slow
     imgbtn.init(gui->main.screen, gui->main.imgbtn_slow);
@@ -135,7 +135,7 @@ auto Screen::init() -> void
     imgbtn.set_style_clip_corner((LV_PART_MAIN | LV_STATE_DEFAULT));
     imgbtn.add_flag(LV_OBJ_FLAG_CHECKABLE);
     imgbtn.set_src(LV_IMGBTN_STATE_RELEASED, &_btn_prev_alpha_37x37);
-    imgbtn.set_src(LV_IMGBTN_STATE_CHECKED_RELEASED, &_icn_slider_alpha_37x37);
+    imgbtn.set_src(LV_IMGBTN_STATE_CHECKED_RELEASED, &_icn_slider_alpha_15x15);
 
     /******************************************滑条***************************************/
     //Write codes screen_slider_1
@@ -145,8 +145,7 @@ auto Screen::init() -> void
     slider.set_pos_size(42, 294, 342, 1);
     slider.set_bg_color(lv_color_hex(0x2195f6), 100);
 
-    LV_IMG_DECLARE(_icn_slider_alpha_37x37);
-    lv_obj_set_style_bg_img_src(gui->main.slider, &_icn_slider_alpha_37x37, LV_PART_KNOB);
+    lv_obj_set_style_bg_img_src(gui->main.slider, &_icn_slider_alpha_15x15, LV_PART_KNOB);
 
 
     /***自定义组件***/

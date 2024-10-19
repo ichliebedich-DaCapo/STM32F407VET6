@@ -19,7 +19,6 @@
 #include "lv_drivers/indev/mouse.h"
 #include "lv_drivers/indev/mousewheel.h"
 #include "lv_drivers/indev/keyboard.h"
-#include "gui_guider.hpp"
 #include <pthread.h>
 
 #if LV_USE_FREEMASTER
@@ -56,8 +55,6 @@ volatile int keep_running = 0;
  *   GLOBAL FUNCTIONS
  **********************/
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
-lv_ui guider_ui;
 
 #if LV_USE_FREEMASTER
 pthread_t thread[2];

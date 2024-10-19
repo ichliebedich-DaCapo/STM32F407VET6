@@ -7,8 +7,6 @@
 #if 1
 // 头文件
 #include "events.hpp"
-#include "gui_guider.hpp"
-
 
 // 函数
 auto GUI::init() -> void
