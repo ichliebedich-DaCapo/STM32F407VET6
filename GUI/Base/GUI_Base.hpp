@@ -14,6 +14,12 @@
 // 宏定义
 class GUI_Base
 {
+public:
+    // 谁都有逼不得已的时候
+    static inline auto get_ui()
+    {
+        return gui;
+    }
 protected:
     static inline lv_ui_t ui;// 内联变量，C++17特性
     static inline lv_ui_t *gui = &ui;// 可加可不加

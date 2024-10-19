@@ -33,16 +33,19 @@ public:
     {
         _parent = parent;
     }
+
     // 设置组件
     static inline auto set_object(_lv_obj_t *&object) -> void
     {
         _obj = object;
     }
+
     static inline auto init(_lv_obj_t *&component) -> void
     {
         component = lv_obj_create(_parent);
         _obj = component;
     }
+
     /**
      * @brief 设置图片位置和尺寸
      * @param x,y 默认起始坐标为左上角（参考系起点也在左上角）
@@ -66,15 +69,21 @@ public:
     }
 
     // 移除所有样式,没有圆角方框
-    static inline auto remove_all_style()->void
+    static inline auto remove_all_style() -> void
     {
         lv_obj_remove_style_all(_obj);
     }
 
     // 移动到图层底部
-    static inline auto move_to_background()->void
+    static inline auto move_to_background() -> void
     {
         lv_obj_move_background(_obj);
+    }
+
+    // 重绘
+    static inline auto invalidate() -> void
+    {
+        lv_obj_invalidate(_obj);  // 使频谱区域无效，触发重绘
     }
 
 protected:
@@ -105,7 +114,7 @@ public:
 class ImageButton : public Component
 {
 public:
-      // 使用前必须设置父对象
+    // 使用前必须设置父对象
     static inline auto init(_lv_obj_t *&component) -> void
     {
         component = lv_imgbtn_create(_parent);
@@ -131,7 +140,7 @@ public:
         component = lv_label_create(_parent);
         _obj = component;
         if (text != nullptr)
-            lv_label_set_text(_obj, text);
+            set_text(text);
     }
 
     /**
@@ -156,6 +165,19 @@ public:
     {
         lv_obj_set_style_text_align(_obj, align, LV_PART_MAIN | LV_STATE_DEFAULT);
     }
+
+    static inline auto set_text(const char *text) -> void
+    {
+        lv_label_set_text(_obj, text);
+    }
+
+    static inline auto set_text_fmt(const char *fmt, ...) -> void
+    {
+        va_list args;
+        va_start(args, fmt);
+        lv_label_set_text_fmt(_obj, fmt, args);
+        va_end(args);
+    }
 };
 
 
@@ -174,6 +196,11 @@ public:
         lv_slider_set_range(_obj, min, max);
     }
 
+    static inline auto set_value(int32_t value, lv_anim_enable_t anim_en = LV_ANIM_OFF) -> void
+    {
+        lv_slider_set_value(_obj, value, anim_en);
+    }
+
     static inline auto set_bg_color(lv_color_t color, lv_opa_t opa = 50,
                                     lv_style_selector_t selector = LV_PART_MAIN | LV_PART_MAIN) -> void
     {
@@ -181,12 +208,52 @@ public:
         if (opa != 50)
             lv_obj_set_style_bg_opa(_obj, opa, selector);
     }
-    static inline auto set_bg_src(lv_obj_t *obj,const void *src,lv_style_selector_t selector = LV_PART_KNOB) -> void
+
+    static inline auto set_bg_src(lv_obj_t *obj, const void *src, lv_style_selector_t selector = LV_PART_KNOB) -> void
     {
         lv_obj_set_style_bg_img_src(obj, src, selector);
     }
 
 };
+
+/***********************************定时器**************************************/
+class LV_Timer
+{
+public:
+    // 默认为关闭状态
+    auto inline create(lv_timer_cb_t timer_cb, uint32_t period = 1000, void *user_data = nullptr) -> void
+    {
+        if(_timer== nullptr)
+        {
+            _timer = lv_timer_create(timer_cb, period, user_data);
+            pause();
+        }
+    }
+
+    auto inline remove() -> void
+    {
+        lv_timer_del(_timer);
+        _timer = nullptr;
+    }
+
+    // 恢复定时器
+    auto inline resume() -> void
+    {
+        lv_timer_resume(_timer);
+    }
+
+    // 暂停定时器
+    auto inline pause() -> void
+    {
+        lv_timer_pause(_timer);
+    }
+
+private:
+    lv_timer_t *_timer{};
+};
+
+
+
 /* 预编译命令 */
 #endif
 #endif //SIMULATOR_COMPONENT_HPP

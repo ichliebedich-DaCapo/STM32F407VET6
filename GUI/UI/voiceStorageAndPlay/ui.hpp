@@ -22,6 +22,7 @@ typedef struct
         lv_obj_t *label_speed;
         lv_obj_t *label_slider_time;
         lv_obj_t *imgbtn_play;
+        lv_obj_t *spectrum;// 频谱
     } main;// 主屏幕
 
 }lv_ui_t;
