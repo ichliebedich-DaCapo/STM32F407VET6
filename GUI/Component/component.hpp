@@ -75,15 +75,15 @@ public:
     }
 
     // 移动到图层底部
-    static inline auto move_to_background() -> void
+    static inline auto move_to_background(_lv_obj_t *&obj=_obj) -> void
     {
-        lv_obj_move_background(_obj);
+        lv_obj_move_background(obj);
     }
 
     // 重绘
-    static inline auto invalidate() -> void
+    static inline auto invalidate(_lv_obj_t *&obj=_obj) -> void
     {
-        lv_obj_invalidate(_obj);  // 使频谱区域无效，触发重绘
+        lv_obj_invalidate(obj);  // 使频谱区域无效，触发重绘
     }
 
 protected:
@@ -196,9 +196,9 @@ public:
         lv_slider_set_range(_obj, min, max);
     }
 
-    static inline auto set_value(int32_t value, lv_anim_enable_t anim_en = LV_ANIM_OFF) -> void
+    static inline auto set_value(int32_t value, lv_anim_enable_t anim_en = LV_ANIM_OFF,_lv_obj_t*&obj=_obj) -> void
     {
-        lv_slider_set_value(_obj, value, anim_en);
+        lv_slider_set_value(obj, value, anim_en);
     }
 
     static inline auto set_bg_color(lv_color_t color, lv_opa_t opa = 50,
@@ -216,41 +216,7 @@ public:
 
 };
 
-/***********************************定时器**************************************/
-class LV_Timer
-{
-public:
-    // 默认为关闭状态
-    auto inline create(lv_timer_cb_t timer_cb, uint32_t period = 1000, void *user_data = nullptr) -> void
-    {
-        if(_timer== nullptr)
-        {
-            _timer = lv_timer_create(timer_cb, period, user_data);
-            pause();
-        }
-    }
 
-    auto inline remove() -> void
-    {
-        lv_timer_del(_timer);
-        _timer = nullptr;
-    }
-
-    // 恢复定时器
-    auto inline resume() -> void
-    {
-        lv_timer_resume(_timer);
-    }
-
-    // 暂停定时器
-    auto inline pause() -> void
-    {
-        lv_timer_pause(_timer);
-    }
-
-private:
-    lv_timer_t *_timer{};
-};
 
 
 

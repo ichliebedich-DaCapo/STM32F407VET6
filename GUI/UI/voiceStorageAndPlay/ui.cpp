@@ -4,6 +4,7 @@
 #include "component.hpp"
 #include "events.hpp"
 #include "spectrum_1.h"
+#include "LV_Timer.hpp"
 
 
 #if 1
@@ -14,31 +15,17 @@ enum PlaySpeed
     LV_PLAYSPEED_ACC,// 快进1.75
     LV_PLAYSPEED_SLOW,//慢放0.25
 };
-// 头文件
-
 static uint32_t time;
-static uint32_t track_id;
 
+static constexpr uint16_t fft_num = 256;
+static constexpr uint16_t spectrum_start_x = 50;
+static constexpr uint16_t spectrum_start_y = 50;
+static constexpr uint16_t spectrum_width = 380;
+static constexpr uint16_t spectrum_height = 170;
+static constexpr uint16_t spectrum_num = 64;
+static constexpr uint16_t bar_width = 2; // 每个频谱条的宽度
+static  constexpr float bar_spacing = (float) ((spectrum_width - spectrum_num * bar_width) / (spectrum_num - 1.0)); // 频谱条之间的间距
 
-static const uint32_t time_list[] = {
-        1 * 60 + 14,
-        2 * 60 + 26,
-        1 * 60 + 54,
-};
-
-
-#define FFT_NUM 256
-#define SPECTRUM_START_X 50
-#define SPECTRUM_START_Y 50
-#define SPECTRUM_WIDTH 380
-#define SPECTRUM_HEIGHT 170
-#define SPECTRUM_NUM 64
-#define BAR_WIDTH 2  // 每个频谱条的宽度
-static float bar_spacing = (float) ((SPECTRUM_WIDTH - SPECTRUM_NUM * BAR_WIDTH) / (SPECTRUM_NUM - 1.0)); // 频谱条之间的间距
-
-static auto slider_timer_cb(lv_timer_t *timer) -> void;
-
-static auto spectrum_timer_cb(lv_timer_t *timer) -> void;
 
 // 计时器
 LV_Timer slider_timer;
@@ -83,8 +70,6 @@ auto Screen::init() -> void
     Image::add_flag(LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_HIDDEN);
 
     /************************************图片按钮************************************/
-
-
     //Write codes screen_imgbtn_play
     ImageButton::init(gui->main.imgbtn_play);
     ImageButton::set_pos_size(216, 234, 48, 48);
@@ -113,13 +98,10 @@ auto Screen::init() -> void
     Slider::set_bg_src(gui->main.slider, &_icn_slider_alpha_15x15);
 
     /***自定义组件***/
-    slider_timer.create(slider_timer_cb, 1000);
-    spectrum_timer.create(spectrum_timer_cb, 30);
-
     Component::init(gui->main.spectrum);
-    Component::remove_all_style();
-    Component::set_pos_size(SPECTRUM_START_X, SPECTRUM_START_Y, SPECTRUM_WIDTH, SPECTRUM_HEIGHT);
-    Component::move_to_background();
+//    Component::remove_all_style();
+    Component::set_pos_size(spectrum_start_x-4, spectrum_start_y, spectrum_width+6, spectrum_height+1);
+//    Component::move_to_background();
 }
 
 /******************************************事件实现*************************************************/
@@ -137,21 +119,17 @@ public:
 class Spectrum : public GUI_Base
 {
 public:
-    static auto draw(lv_event_t *e) -> void;
-
-    static auto update() -> void;
+    static auto draw(lv_event_t *e) -> void;// 重绘频谱
+    static auto update() -> void;// 更新频谱数据
 };
 
-
-//// 事件定义
+// 事件定义
 class Event : public GUI_Base
 {
-
 public: // 通用事件
-    static auto acc(bool is_checked) -> void;
-
-    static auto play(bool is_checked) -> void;
-
+    static auto acc(bool is_checked) -> void;// 快进按钮
+    static auto slow(bool is_checked) -> void;
+    static auto play(bool is_checked) -> void;// 播放暂停按钮
 public:// 自定义事件
     static inline auto spectrum_draw(lv_event_t *e) -> void { Spectrum::draw(e); }
 };
@@ -160,12 +138,35 @@ public:// 自定义事件
 auto Events::init() -> void
 {
     Events::bond(gui->main.imgbtn_acc, [](event e) { Events::handler(e, Event::acc); });// 快进按钮
+    Events::bond(gui->main.imgbtn_slow, [](event e) { Events::handler(e, Event::slow); });// 慢放按钮
     Events::bond(gui->main.imgbtn_play, [](event e) { Events::handler(e, Event::play); });// 播放暂停按钮
     Events::bond(gui->main.screen, Event::spectrum_draw);
+
+    // 进度条
+    slider_timer.create([](lv_timer_t*){
+        time++;
+        Text::set_object(GUI_Base::get_ui()->main.label_slider_time);
+        Text::set_text_fmt("%d:%02d", time / 60, time % 60);
+
+        Slider::set_value(time, LV_ANIM_ON,GUI_Base::get_ui()->main.slider);
+        }, 1000);
+
+    // 定时更新频谱数据
+    spectrum_timer.create([](lv_timer_t*){
+        // 更新FFT频谱数据
+        uint8_t temp = spectrum[0];
+        spectrum[fft_num - 1] = temp;
+        for (uint32_t i = 0; i < fft_num - 1; ++i)
+        {
+            temp = spectrum[i + 1];
+            spectrum[i] = temp;
+        }
+        Component::invalidate(GUI_Base::get_ui()->main.spectrum);// 使频谱区域无效，触发重绘
+        }, 30);
 }
 
-//
-///*****************************自定义接口*********************************/
+
+///*****************************实现接口*********************************/
 auto Event::acc(bool is_checked) -> void
 {
     Play::print_speed(is_checked ? LV_PLAYSPEED_ACC : LV_PLAYSPEED_NORMAL);// 显示播放速度信息
@@ -181,6 +182,12 @@ auto Event::play(bool is_checked) -> void
     {
         Play::pause();
     }
+}
+
+auto Event::slow(bool is_checked) -> void
+{
+    Play::print_speed(is_checked ? LV_PLAYSPEED_SLOW : LV_PLAYSPEED_NORMAL);// 显示播放速度信息
+    Play::set_speed(is_checked ? LV_PLAYSPEED_SLOW : LV_PLAYSPEED_NORMAL);// 快进
 }
 
 auto Spectrum::draw(lv_event_t *e) -> void
@@ -200,23 +207,23 @@ auto Spectrum::draw(lv_event_t *e) -> void
         grad.stops[1].frac = 255;  // 结束位置
         grad.dir = LV_GRAD_DIR_VER;  // 垂直渐变
 
-        const uint32_t start_x = SPECTRUM_START_X;
-        const uint32_t start_y = SPECTRUM_START_Y + SPECTRUM_HEIGHT;
-        const uint32_t bar_width_plus_spacing = BAR_WIDTH + bar_spacing;
+        const uint32_t start_x = spectrum_start_x;
+        const uint32_t start_y = spectrum_start_y + spectrum_height;
+        const uint32_t bar_width_plus_spacing = bar_width + bar_spacing;
 
         lv_draw_line_dsc_t line_dsc;
         lv_draw_line_dsc_init(&line_dsc);
-        line_dsc.width = BAR_WIDTH;
+        line_dsc.width =bar_width;
         line_dsc.opa = LV_OPA_COVER;
 
-        for (uint32_t i = 0; i < SPECTRUM_NUM; i++)
+        for (uint32_t i = 0; i < spectrum_num; i++)
         {
             // 计算当前频谱条的位置
             uint32_t x1 = start_x + i * bar_width_plus_spacing;
-            uint32_t y1 = start_y - spectrum[(i << 2)] * SPECTRUM_HEIGHT / 255;  // 从底部开始，但考虑最大高度
+            uint32_t y1 = start_y - spectrum[(i << 2)] * spectrum_height / 255;  // 从底部开始，但考虑最大高度
 
             // 计算当前频谱条的高度比例，用于渐变色
-            uint8_t height_ratio = (start_y - y1) * 255 / SPECTRUM_HEIGHT;
+            uint8_t height_ratio = (start_y - y1) * 255 / spectrum_height;
 
             // 根据高度比例调整渐变色
             lv_color_t color = lv_color_mix(grad.stops[0].color, grad.stops[1].color, height_ratio);
@@ -236,13 +243,13 @@ auto Spectrum::update() -> void
 {
     // 更新FFT频谱数据
     uint8_t temp = spectrum[0];
-    spectrum[FFT_NUM - 1] = temp;
-    for (uint32_t i = 0; i < FFT_NUM - 1; ++i)
+    spectrum[fft_num - 1] = temp;
+    for (uint32_t i = 0; i < fft_num - 1; ++i)
     {
         temp = spectrum[i + 1];
         spectrum[i] = temp;
     }
-    lv_obj_invalidate(gui->main.spectrum);  // 使频谱区域无效，触发重绘
+    Component::invalidate(gui->main.spectrum); // 使频谱区域无效，触发重绘
 }
 
 
@@ -260,7 +267,7 @@ auto Play::print_speed(enum PlaySpeed speed) -> void
             break;
         case LV_PLAYSPEED_SLOW:
             lv_obj_clear_flag(gui->main.label_speed, LV_OBJ_FLAG_HIDDEN);
-            lv_label_set_text(gui->main.label_speed, "慢放0.25");
+            lv_label_set_text(gui->main.label_speed, "慢放×0.25");
             break;
         case LV_PLAYSPEED_NORMAL:
         default:
@@ -296,7 +303,7 @@ auto Play::resume() -> void
 {
     slider_timer.resume();
     spectrum_timer.resume();
-    lv_slider_set_range(gui->main.slider, 0, time_list[track_id]);
+    lv_slider_set_range(gui->main.slider, 0, 255);
 }
 
 auto Play::pause() -> void
@@ -305,30 +312,5 @@ auto Play::pause() -> void
     spectrum_timer.pause();
 }
 
-/*****************************************定时器*************************************/
-static auto slider_timer_cb(lv_timer_t *timer) -> void
-{
-    time++;
-    Text::set_object(GUI_Base::get_ui()->main.label_slider_time);
-    Text::set_text_fmt("%d:%02d", time / 60, time % 60);
-
-    Slider::set_object(GUI_Base::get_ui()->main.slider);
-    Slider::set_value(time, LV_ANIM_ON);
-}
-
-
-static auto spectrum_timer_cb(lv_timer_t *timer) -> void
-{
-    // 更新FFT频谱数据
-    uint8_t temp = spectrum[0];
-    spectrum[FFT_NUM - 1] = temp;
-    for (uint32_t i = 0; i < FFT_NUM - 1; ++i)
-    {
-        temp = spectrum[i + 1];
-        spectrum[i] = temp;
-    }
-    Component::set_object(GUI_Base::get_ui()->main.spectrum);
-    Component::invalidate();// 使频谱区域无效，触发重绘
-}
 
 #endif
