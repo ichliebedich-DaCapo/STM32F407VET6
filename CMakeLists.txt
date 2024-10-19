@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.29)
 # specify cross-compilers and tools
 set(CMAKE_C_COMPILER arm-none-eabi-gcc)
 set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
-set(CMAKE_ASM_COMPILER  arm-none-eabi-gcc)
+set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
 set(CMAKE_AR arm-none-eabi-ar)
 set(CMAKE_OBJCOPY arm-none-eabi-objcopy)
 set(CMAKE_OBJDUMP arm-none-eabi-objdump)
@@ -51,7 +51,7 @@ endif ()
 
 #添加宏定义
 # 使用Debug，使用HAL库。    -DUSE_FULL_LL_DRIVER 使用LL库
-add_definitions(-DDEBUG -DUSE_HAL_DRIVER  -DSTM32F407xx )
+add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx)
 
 
 set(APPLICATION_DIR Application)
@@ -106,8 +106,6 @@ include_directories(
         # LVGL库
         Library/Third_Party/lvgl/src
         Library/Third_Party/lvgl/examples/porting
-
-
 )
 
 
@@ -133,23 +131,6 @@ file(GLOB_RECURSE SOURCES
         "Library/Third_Party/FreeRTOS/*.*"
 )
 
-#file(GLOB_RECURSE UI_SRCS "${UI_DIR}/*.*")
-#file(GLOB_RECURSE COMPONENT_SRCS "${COMPONENT_DIR}/*.*")
-#file(GLOB_RECURSE EVENTS_SRCS "${EVENTS_DIR}/*.*")
-#file(GLOB_RECURSE BASE_SRCS "${BASE_DIR}/*.*")
-#add_library(libgenerated STATIC
-#        ${UI_SRCS}
-#        ${COMPONENT_SRCS}
-#        ${BASE_SRCS}
-#        ${EVENTS_SRCS}
-#)
-## 头文件目录
-#target_include_directories(libgenerated PUBLIC
-#        ${BASE_DIR}
-#        ${COMPONENT_DIR}
-#        ${EVENTS_DIR}
-#        ${UI_DIR}
-#)
 # 设置链接脚本
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld)
 
@@ -160,7 +141,6 @@ add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
 add_link_options(-T ${LINKER_SCRIPT})
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
-#target_link_libraries(${PROJECT_NAME}.elf PRIVATE libgenerated)
 
 
 set(HEX_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.hex)
@@ -173,15 +153,3 @@ add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
         COMMAND ${CMAKE_OBJCOPY} -Obinary $<TARGET_FILE:${PROJECT_NAME}.elf> ${BIN_FILE}
         COMMENT "Building ${HEX_FILE}
 Building ${BIN_FILE}")
-
-
-# ----------------------------用于启动LVGL模拟器------------------------
-# 引入模块,可以启用
-#include(ExternalProject)
-#ExternalProject_Add(GUI_simulator
-#        SOURCE_DIR "${CMAKE_SOURCE_DIR}/GUI/lvgl-simulator"
-#        BUILD_IN_SOURCE 1
-#        CONFIGURE_COMMAND ""
-#        BUILD_COMMAND ""
-#        INSTALL_COMMAND ""
-#)
