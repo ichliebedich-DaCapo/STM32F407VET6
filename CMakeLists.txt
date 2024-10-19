@@ -53,6 +53,19 @@ endif ()
 #添加宏定义
 # 使用Debug，使用HAL库。    -DUSE_FULL_LL_DRIVER 使用LL库
 add_definitions(-DDEBUG -DUSE_HAL_DRIVER  -DSTM32F407xx )
+
+
+set(APPLICATION_DIR Application)
+set(BSP_DIR BSP)
+set(GUI_DIR GUI)
+set(BASE_DIR ${GUI_DIR}/Base)
+set(COMPONENT_DIR ${GUI_DIR}/Component)
+set(EVENTS_DIR ${GUI_DIR}/Events)
+
+# ----------------------------------设置你的UI路径（选择项目）------------------------------
+set(UI_DIR ${GUI_DIR}/UI/voiceStorageAndPlay)
+
+
 #添加头文件
 include_directories(
         # 官方自带库
@@ -77,11 +90,12 @@ include_directories(
         BSP/ADC
         BSP/DAC
 
+
         # GUI
-        GUI/Base
-        GUI/Events
-        GUI/Component
-        GUI/UI
+        ${UI_DIR}
+        ${BASE_DIR}
+        ${COMPONENT_DIR}
+        ${EVENTS_DIR}
 
         # 库
         Library/Data
@@ -93,6 +107,8 @@ include_directories(
         # LVGL库
         Library/Third_Party/lvgl/src
         Library/Third_Party/lvgl/examples/porting
+
+
 )
 
 
@@ -103,7 +119,7 @@ file(GLOB_RECURSE SOURCES
         "BSP/*.*"
         "Drivers/*.*"
         "GUI/Base/*.*"
-        "GUI/UI/*.*"
+        "${UI_DIR}/*.*"
         "GUI/Component/*.*"
         "GUI/Events/*.*"
 
@@ -118,6 +134,23 @@ file(GLOB_RECURSE SOURCES
         "Library/Third_Party/FreeRTOS/*.*"
 )
 
+#file(GLOB_RECURSE UI_SRCS "${UI_DIR}/*.*")
+#file(GLOB_RECURSE COMPONENT_SRCS "${COMPONENT_DIR}/*.*")
+#file(GLOB_RECURSE EVENTS_SRCS "${EVENTS_DIR}/*.*")
+#file(GLOB_RECURSE BASE_SRCS "${BASE_DIR}/*.*")
+#add_library(libgenerated STATIC
+#        ${UI_SRCS}
+#        ${COMPONENT_SRCS}
+#        ${BASE_SRCS}
+#        ${EVENTS_SRCS}
+#)
+## 头文件目录
+#target_include_directories(libgenerated PUBLIC
+#        ${BASE_DIR}
+#        ${COMPONENT_DIR}
+#        ${EVENTS_DIR}
+#        ${UI_DIR}
+#)
 # 设置链接脚本
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld)
 
@@ -128,6 +161,8 @@ add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
 add_link_options(-T ${LINKER_SCRIPT})
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
+#target_link_libraries(${PROJECT_NAME}.elf PRIVATE libgenerated)
+
 
 set(HEX_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.hex)
 set(BIN_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.bin)

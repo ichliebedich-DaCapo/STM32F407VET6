@@ -29,14 +29,14 @@ typedef struct
 
 
 // 加载资源文件
-LV_FONT_DECLARE(lv_customer_font_SourceHanSerifSC_Regular_14)
-LV_FONT_DECLARE(lv_customer_font_SourceHanSerifSC_Regular_12)
-
-LV_IMG_DECLARE(_icn_slider_alpha_15x15);
-LV_IMG_DECLARE(_btn_prev_alpha_37x37);
-LV_IMG_DECLARE(_btn_next_alpha_37x37);
-LV_IMG_DECLARE(_btn_list_play_alpha_48x48);
-LV_IMG_DECLARE(_btn_list_pause_alpha_48x48);
+//LV_FONT_DECLARE(lv_customer_font_SourceHanSerifSC_Regular_14)
+//LV_FONT_DECLARE(lv_customer_font_SourceHanSerifSC_Regular_12)
+//
+//LV_IMG_DECLARE(_icn_slider_alpha_15x15);
+//LV_IMG_DECLARE(_btn_prev_alpha_37x37);
+//LV_IMG_DECLARE(_btn_next_alpha_37x37);
+//LV_IMG_DECLARE(_btn_list_play_alpha_48x48);
+//LV_IMG_DECLARE(_btn_list_pause_alpha_48x48);
 
 
 

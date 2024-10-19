@@ -49,8 +49,8 @@ add_library(libgenerated STATIC
         ${DRIVER_SRCS}
         ${COMPONENT_SRCS}
         ${BASE_SRCS}
-        ${UI_SRCS}
         ${EVENTS_SRCS}
+        ${UI_SRCS}
 )
 # 头文件目录
 target_include_directories(libgenerated PUBLIC
