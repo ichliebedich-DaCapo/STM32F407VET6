@@ -2,29 +2,30 @@
 // Created by fairy on 2024/10/18 18:34.
 //
 #include <iostream>
-#include "JYZQ_Conf.h"
 #include "component.hpp"
 #include "events.hpp"
-#include "custom.hpp"
+//#include "custom.hpp"
 #include "ui.hpp"
 
 #include "spectrum_1.h"
 
 #if 1
+/********变量声明********/
+enum PlaySpeed
+{
+    LV_PLAYSPEED_NORMAL,// 正常播放
+    LV_PLAYSPEED_ACC,// 快进1.75
+    LV_PLAYSPEED_SLOW,//慢放0.25
+};
 // 头文件
-
-
 
 static uint32_t time;
 static uint32_t track_id;
 static lv_timer_t *sec_counter_timer;
 static lv_obj_t *spectrum_area;
 
-static void spectrum_draw_event_cb(lv_event_t *e);
 
 static void spectrum_update_timer_cb(lv_timer_t *timer);
-
-static void update_spectrum();
 
 static const uint32_t time_list[] = {
         1 * 60 + 14,
@@ -34,13 +35,10 @@ static const uint32_t time_list[] = {
 
 static void timer_cb(lv_timer_t *t)
 {
-    time++;
-    lv_label_set_text_fmt(guider_ui.screen_label_slider_time, "%d:%02d", time / 60, time % 60);
-    lv_slider_set_value(guider_ui.screen_slider_1, time, LV_ANIM_ON);
+
 }
 
 #define FFT_NUM 256
-
 #define SPECTRUM_START_X 50
 #define SPECTRUM_START_Y 50
 #define SPECTRUM_WIDTH 380
@@ -49,10 +47,54 @@ static void timer_cb(lv_timer_t *t)
 #define BAR_WIDTH 2  // 每个频谱条的宽度
 static float bar_spacing = (float) ((SPECTRUM_WIDTH - SPECTRUM_NUM * BAR_WIDTH) / (SPECTRUM_NUM - 1.0)); // 频谱条之间的间距
 
+lv_timer_t *spectrum_update_timer = nullptr;
+
+class SliderTimer : public GUI_Base
+{
+public:
+    static auto init() -> void;
+
+    static auto pause() -> void { lv_timer_pause(_timer); }
+
+    static auto resume() -> void { lv_timer_resume(_timer); }
+
+private:
+    static auto event_cb(lv_timer_t *timer) -> void;
+
+    static inline lv_timer_t *_timer;
+};
+
+auto SliderTimer::event_cb(lv_timer_t *timer) -> void
+{
+    time++;
+    lv_label_set_text_fmt(gui->main.label_slider_time, "%d:%02d", time / 60, time % 60);
+    lv_slider_set_value(gui->main.slider, time, LV_ANIM_ON);
+}
+
+auto SliderTimer::init() -> void
+{
+    _timer = lv_timer_create(event_cb, 1000, nullptr);
+}
 
 
+class SpectrumTimer : public GUI_Base
+{
+public:
+    static auto init() -> void;
 
-lv_timer_t *spectrum_update_timer = NULL;
+    static auto pause() -> void { lv_timer_pause(_timer); }
+
+    static auto resume() -> void { lv_timer_resume(_timer); }
+
+private:
+    static inline lv_timer_t *_timer;
+};
+
+auto SpectrumTimer::init() -> void
+{
+    _timer = lv_timer_create(spectrum_update_timer_cb, 30, gui);
+}
+
 
 /********************************界面初始化******************************/
 
@@ -136,12 +178,13 @@ auto Screen::init() -> void
     /***自定义组件***/
     LV_IMG_DECLARE(_icn_slider_alpha_37x37);
 
-    sec_counter_timer = lv_timer_create(timer_cb, 1000, nullptr);
-    lv_timer_pause(sec_counter_timer);
+    SliderTimer::init();
+    SliderTimer::pause();
+
     lv_obj_set_style_bg_img_src(gui->main.slider, &_icn_slider_alpha_37x37, LV_PART_KNOB);
 
-    spectrum_update_timer = lv_timer_create(spectrum_update_timer_cb, 30, gui);
-    lv_timer_pause(spectrum_update_timer);
+   SpectrumTimer::init();
+   SpectrumTimer::pause();
 
     spectrum_area = lv_obj_create(gui->main.screen);
     lv_obj_remove_style_all(spectrum_area);
@@ -152,43 +195,66 @@ auto Screen::init() -> void
 }
 
 /******************************************事件实现*************************************************/
-
-class Event_Handler
+// 播放组件
+class Play : public GUI_Base
 {
 public:
-    static auto playspeed_print(enum PlaySpeed speed)->void ;
+    static auto resume() -> void;// 恢复播放
+    static auto pause() -> void;// 暂停播放
+    static auto print_speed(enum PlaySpeed speed) -> void;// 显示播放速度信息
+    static auto set_speed(enum PlaySpeed speed) -> void;// 设置播放速度
+};
+
+// 频谱组件
+class Spectrum : public GUI_Base
+{
+public:
+    static auto draw(lv_event_t *e) -> void;
+
+    static auto update() -> void;
 };
 
 
-// 快进处理
-static void acc_event(bool is_checked)
+// 事件定义
+class Event : public GUI_Base
 {
-//    lv_playspeed_print(is_checked ? LV_PLAYSPEED_ACC : LV_PLAYSPEED_NORMAL);// 显示播放速度信息
-    lv_playspeed_set(is_checked ? LV_PLAYSPEED_ACC : LV_PLAYSPEED_NORMAL);// 快进
-}
 
-// 播放暂停处理
-static void play_event(bool is_checked)
-{
-    if (is_checked)
-    {
-        lv_demo_music_resume();
-    } else
-    {
-        lv_demo_music_pause();
-    }
-}
+public: // 通用事件
+    static auto acc(bool is_checked) -> void;
+
+    static auto play(bool is_checked) -> void;
+
+public:// 自定义事件
+    static inline auto spectrum_draw(lv_event_t *e) -> void { Spectrum::draw(e); }
+};
 
 
 auto Events::init() -> void
 {
-    Events::bond(gui->main.imgbtn_acc, [](event e) { Events::handler(e, acc_event); });// 快进按钮
-    Events::bond(gui->main.imgbtn_play, [](event e) { Events::handler(e, play_event); });// 播放暂停按钮
-    Events::bond(gui->main.screen, spectrum_draw_event_cb);
+    Events::bond(gui->main.imgbtn_acc, [](event e) { Events::handler(e, Event::acc); });// 快进按钮
+    Events::bond(gui->main.imgbtn_play, [](event e) { Events::handler(e, Event::play); });// 播放暂停按钮
+    Events::bond(gui->main.screen, Event::spectrum_draw);
 }
 
 /*****************************自定义接口*********************************/
-static void spectrum_draw_event_cb(lv_event_t *e)
+auto Event::acc(bool is_checked) -> void
+{
+    Play::print_speed(is_checked ? LV_PLAYSPEED_ACC : LV_PLAYSPEED_NORMAL);// 显示播放速度信息
+    Play::set_speed(is_checked ? LV_PLAYSPEED_ACC : LV_PLAYSPEED_NORMAL);// 快进
+}
+
+auto Event::play(bool is_checked) -> void
+{
+    if (is_checked)
+    {
+        Play::resume();
+    } else
+    {
+        Play::pause();
+    }
+}
+
+auto Spectrum::draw(lv_event_t *e) -> void
 {
     lv_event_code_t code = lv_event_get_code(e);
     if (code == LV_EVENT_DRAW_POST)
@@ -237,40 +303,9 @@ static void spectrum_draw_event_cb(lv_event_t *e)
     }
 }
 
-void start_spectrum_update()
+auto Spectrum::update() -> void
 {
-    lv_timer_resume(spectrum_update_timer);
-}
-
-void stop_spectrum_update()
-{
-
-    lv_timer_pause(spectrum_update_timer);
-
-}
-
-static void spectrum_update_timer_cb(lv_timer_t *timer)
-{
-    update_spectrum();  // 更新FFT频谱数据
-    lv_obj_invalidate(spectrum_area);  // 使频谱区域无效，触发重绘
-}
-
-void lv_demo_music_pause()
-{
-    stop_spectrum_update();
-    lv_timer_pause(sec_counter_timer);
-}
-
-void lv_demo_music_resume()
-{
-    start_spectrum_update();
-    lv_timer_resume(sec_counter_timer);
-//    lv_slider_set_range(guider_ui.screen_slider_1, 0, time_list[track_id]);
-}
-
-/*******更新FFT*******/
-static void update_spectrum()
-{
+    // 更新FFT频谱数据
     uint8_t temp = spectrum[0];
     spectrum[FFT_NUM - 1] = temp;
     for (uint32_t i = 0; i < FFT_NUM - 1; ++i)
@@ -278,39 +313,43 @@ static void update_spectrum()
         temp = spectrum[i + 1];
         spectrum[i] = temp;
     }
+    lv_obj_invalidate(spectrum_area);  // 使频谱区域无效，触发重绘
 }
 
+static void spectrum_update_timer_cb(lv_timer_t *timer)
+{
+    Spectrum::update();
+}
 
 /**
  * @brief 播放速度显示
  * @param speed 播放速度
  */
-auto Event_Handler::playspeed_print(enum PlaySpeed speed) -> void
+auto Play::print_speed(enum PlaySpeed speed) -> void
 {
     switch (speed)
     {
         case LV_PLAYSPEED_ACC:
-            lv_obj_clear_flag(guider_ui.screen_label_speed, LV_OBJ_FLAG_HIDDEN);
-            lv_label_set_text(guider_ui.screen_label_speed, "快进×1.75");
+            lv_obj_clear_flag(gui->main.label_speed, LV_OBJ_FLAG_HIDDEN);
+            lv_label_set_text(gui->main.label_speed, "快进×1.75");
             break;
         case LV_PLAYSPEED_SLOW:
-            lv_obj_clear_flag(guider_ui.screen_label_speed, LV_OBJ_FLAG_HIDDEN);
-            lv_label_set_text(guider_ui.screen_label_speed, "慢放0.25");
+            lv_obj_clear_flag(gui->main.label_speed, LV_OBJ_FLAG_HIDDEN);
+            lv_label_set_text(gui->main.label_speed, "慢放0.25");
             break;
         case LV_PLAYSPEED_NORMAL:
         default:
-            lv_obj_add_flag(guider_ui.screen_label_speed, LV_OBJ_FLAG_HIDDEN);
+            lv_obj_add_flag(gui->main.label_speed, LV_OBJ_FLAG_HIDDEN);
             break;
     }
 }
-
 
 
 /**
  * @brief 设置播放速度
  * @param speed 播放速度
  */
-void lv_playspeed_set(enum PlaySpeed speed)
+auto Play::set_speed(enum PlaySpeed speed) -> void
 {
     switch (speed)
     {
@@ -326,6 +365,19 @@ void lv_playspeed_set(enum PlaySpeed speed)
         default:
             break;
     }
+}
+
+auto Play::resume() -> void
+{
+    lv_timer_resume(spectrum_update_timer);
+    lv_timer_resume(sec_counter_timer);
+    lv_slider_set_range(gui->main.slider, 0, time_list[track_id]);
+}
+
+auto Play::pause() -> void
+{
+    lv_timer_pause(spectrum_update_timer);
+    lv_timer_pause(sec_counter_timer);
 }
 
 

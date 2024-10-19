@@ -62,13 +62,13 @@ typedef uint16_t lv_state_t;
 /**
  * The possible parts of widgets.
  * The parts can be considered as the internal building block of the widgets.
- * E.g. slider = background + indicator + knob
+ * E.g. event_cb = background + indicator + knob
  * Not all parts are used by every widget
  */
 enum {
     LV_PART_MAIN         = 0x000000,   /**< A background like rectangle*/
     LV_PART_SCROLLBAR    = 0x010000,   /**< The scrollbar(s)*/
-    LV_PART_INDICATOR    = 0x020000,   /**< Indicator, e.g. for slider, bar, switch, or the tick box of the checkbox*/
+    LV_PART_INDICATOR    = 0x020000,   /**< Indicator, e.g. for event_cb, bar, switch, or the tick box of the checkbox*/
     LV_PART_KNOB         = 0x030000,   /**< Like handle to grab to adjust the value*/
     LV_PART_SELECTED     = 0x040000,   /**< Indicate the currently selected option or section*/
     LV_PART_ITEMS        = 0x050000,   /**< Used if the widget has multiple similar elements (e.g. table cells)*/

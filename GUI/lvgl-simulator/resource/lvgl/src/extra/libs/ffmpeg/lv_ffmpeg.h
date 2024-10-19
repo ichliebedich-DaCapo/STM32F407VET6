@@ -28,7 +28,7 @@ extern const lv_obj_class_t lv_ffmpeg_player_class;
 
 typedef struct {
     lv_img_t img;
-    lv_timer_t * timer;
+    lv_timer_t * _timer;
     lv_img_dsc_t imgdsc;
     bool auto_restart;
     struct ffmpeg_context_s * ffmpeg_ctx;

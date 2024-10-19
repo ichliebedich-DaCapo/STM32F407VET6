@@ -155,7 +155,7 @@ lv_res_t lv_ffmpeg_player_set_src(lv_obj_t * obj, const char * path)
         player->ffmpeg_ctx = NULL;
     }
 
-    lv_timer_pause(player->timer);
+    lv_timer_pause(player->_timer);
 
     player->ffmpeg_ctx = ffmpeg_open_file(path);
 
@@ -196,7 +196,7 @@ lv_res_t lv_ffmpeg_player_set_src(lv_obj_t * obj, const char * path)
     if(period > 0) {
         LV_LOG_INFO("frame refresh period = %d ms, rate = %d fps",
                     period, 1000 / period);
-        lv_timer_set_period(player->timer, period);
+        lv_timer_set_period(player->_timer, period);
     }
     else {
         LV_LOG_WARN("unable to get frame refresh period");
@@ -218,27 +218,27 @@ void lv_ffmpeg_player_set_cmd(lv_obj_t * obj, lv_ffmpeg_player_cmd_t cmd)
         return;
     }
 
-    lv_timer_t * timer = player->timer;
+    lv_timer_t * _timer = player->_timer;
 
     switch(cmd) {
         case LV_FFMPEG_PLAYER_CMD_START:
             av_seek_frame(player->ffmpeg_ctx->fmt_ctx,
                           0, 0, AVSEEK_FLAG_BACKWARD);
-            lv_timer_resume(timer);
+            lv_timer_resume(_timer);
             LV_LOG_INFO("ffmpeg player start");
             break;
         case LV_FFMPEG_PLAYER_CMD_STOP:
             av_seek_frame(player->ffmpeg_ctx->fmt_ctx,
                           0, 0, AVSEEK_FLAG_BACKWARD);
-            lv_timer_pause(timer);
+            lv_timer_pause(_timer);
             LV_LOG_INFO("ffmpeg player stop");
             break;
         case LV_FFMPEG_PLAYER_CMD_PAUSE:
-            lv_timer_pause(timer);
+            lv_timer_pause(_timer);
             LV_LOG_INFO("ffmpeg player pause");
             break;
         case LV_FFMPEG_PLAYER_CMD_RESUME:
-            lv_timer_resume(timer);
+            lv_timer_resume(_timer);
             LV_LOG_INFO("ffmpeg player resume");
             break;
         default:
@@ -809,9 +809,9 @@ static void ffmpeg_close(struct ffmpeg_context_s * ffmpeg_ctx)
     LV_LOG_INFO("ffmpeg_ctx closed");
 }
 
-static void lv_ffmpeg_player_frame_update_cb(lv_timer_t * timer)
+static void lv_ffmpeg_player_frame_update_cb(lv_timer_t * _timer)
 {
-    lv_obj_t * obj = (lv_obj_t *)timer->user_data;
+    lv_obj_t * obj = (lv_obj_t *)_timer->user_data;
     lv_ffmpeg_player_t * player = (lv_ffmpeg_player_t *)obj;
 
     if(!player->ffmpeg_ctx) {
@@ -845,9 +845,9 @@ static void lv_ffmpeg_player_constructor(const lv_obj_class_t * class_p,
 
     player->auto_restart = false;
     player->ffmpeg_ctx = NULL;
-    player->timer = lv_timer_create(lv_ffmpeg_player_frame_update_cb,
+    player->_timer = lv_timer_create(lv_ffmpeg_player_frame_update_cb,
                                     FRAME_DEF_REFR_PERIOD, obj);
-    lv_timer_pause(player->timer);
+    lv_timer_pause(player->_timer);
 
     LV_TRACE_OBJ_CREATE("finished");
 }
@@ -859,9 +859,9 @@ static void lv_ffmpeg_player_destructor(const lv_obj_class_t * class_p,
 
     lv_ffmpeg_player_t * player = (lv_ffmpeg_player_t *)obj;
 
-    if(player->timer) {
-        lv_timer_del(player->timer);
-        player->timer = NULL;
+    if(player->_timer) {
+        lv_timer_del(player->_timer);
+        player->_timer = NULL;
     }
 
     lv_img_cache_invalidate_src(lv_img_get_src(obj));

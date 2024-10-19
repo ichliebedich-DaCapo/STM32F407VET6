@@ -62,7 +62,7 @@ void _lv_anim_core_init(void)
 {
     _lv_ll_init(&LV_GC_ROOT(_lv_anim_ll), sizeof(lv_anim_t));
     _lv_anim_tmr = lv_timer_create(anim_timer, LV_DISP_DEF_REFR_PERIOD, NULL);
-    anim_mark_list_change(); /*Turn off the animation timer*/
+    anim_mark_list_change(); /*Turn off the animation _timer*/
     anim_list_changed = false;
 }
 
@@ -85,7 +85,7 @@ lv_anim_t * lv_anim_start(const lv_anim_t * a)
     /*Do not let two animations for the same 'var' with the same 'exec_cb'*/
     if(a->exec_cb != NULL) lv_anim_del(a->var, a->exec_cb); /*exec_cb == NULL would delete all animations of var*/
 
-    /*If the list is empty the anim timer was suspended and it's last run measure is invalid*/
+    /*If the list is empty the anim _timer was suspended and it's last run measure is invalid*/
     if(_lv_ll_is_empty(&LV_GC_ROOT(_lv_anim_ll))) {
         last_timer_run = lv_tick_get();
     }

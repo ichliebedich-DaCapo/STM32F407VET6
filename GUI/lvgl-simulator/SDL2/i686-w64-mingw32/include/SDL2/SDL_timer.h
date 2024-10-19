@@ -71,35 +71,35 @@ extern DECLSPEC Uint64 SDLCALL SDL_GetPerformanceFrequency(void);
 extern DECLSPEC void SDLCALL SDL_Delay(Uint32 ms);
 
 /**
- *  Function prototype for the timer callback function.
+ *  Function prototype for the _timer callback function.
  *
- *  The callback function is passed the current timer interval and returns
- *  the next timer interval.  If the returned value is the same as the one
+ *  The callback function is passed the current _timer interval and returns
+ *  the next _timer interval.  If the returned value is the same as the one
  *  passed in, the periodic alarm continues, otherwise a new alarm is
  *  scheduled.  If the callback returns 0, the periodic alarm is cancelled.
  */
 typedef Uint32 (SDLCALL * SDL_TimerCallback) (Uint32 interval, void *param);
 
 /**
- * Definition of the timer ID type.
+ * Definition of the _timer ID type.
  */
 typedef int SDL_TimerID;
 
 /**
- * \brief Add a new timer to the pool of timers already running.
+ * \brief Add a new _timer to the pool of timers already running.
  *
- * \return A timer ID, or 0 when an error occurs.
+ * \return A _timer ID, or 0 when an error occurs.
  */
 extern DECLSPEC SDL_TimerID SDLCALL SDL_AddTimer(Uint32 interval,
                                                  SDL_TimerCallback callback,
                                                  void *param);
 
 /**
- * \brief Remove a timer knowing its ID.
+ * \brief Remove a _timer knowing its ID.
  *
  * \return A boolean value indicating success or failure.
  *
- * \warning It is not safe to remove a timer multiple times.
+ * \warning It is not safe to remove a _timer multiple times.
  */
 extern DECLSPEC SDL_bool SDLCALL SDL_RemoveTimer(SDL_TimerID id);
 

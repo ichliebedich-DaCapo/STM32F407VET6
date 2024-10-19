@@ -31,7 +31,7 @@ extern "C" {
 
 /**
  * Called periodically to read the input devices
- * @param timer pointer to a timer to read
+ * @param timer pointer to a _timer to read
  */
 void lv_indev_read_timer_cb(lv_timer_t * timer);
 
@@ -150,10 +150,10 @@ void lv_indev_wait_release(lv_indev_t * indev);
 lv_obj_t * lv_indev_get_obj_act(void);
 
 /**
- * Get a pointer to the indev read timer to
+ * Get a pointer to the indev read _timer to
  * modify its parameters with `lv_timer_...` functions.
  * @param indev pointer to an input device
- * @return pointer to the indev read refresher timer. (NULL on error)
+ * @return pointer to the indev read refresher _timer. (NULL on error)
  */
 lv_timer_t * lv_indev_get_read_timer(lv_disp_t * indev);
 

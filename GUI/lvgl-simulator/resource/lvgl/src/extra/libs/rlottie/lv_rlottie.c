@@ -230,7 +230,7 @@ static void next_frame_task_cb(lv_timer_t * t)
 
     if((rlottie->play_ctrl & LV_RLOTTIE_CTRL_PAUSE) == LV_RLOTTIE_CTRL_PAUSE) {
         if(rlottie->current_frame == rlottie->dest_frame) {
-            /* Pause the timer too when it has run once to avoid CPU consumption */
+            /* Pause the _timer too when it has run once to avoid CPU consumption */
             lv_timer_pause(t);
             return;
         }

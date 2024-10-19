@@ -384,8 +384,8 @@ void lv_anim_del_all(void);
 lv_anim_t * lv_anim_get(void * var, lv_anim_exec_xcb_t exec_cb);
 
 /**
- * Get global animation refresher timer.
- * @return pointer to the animation refresher timer.
+ * Get global animation refresher _timer.
+ * @return pointer to the animation refresher _timer.
  */
 struct _lv_timer_t * lv_anim_get_timer(void);
 

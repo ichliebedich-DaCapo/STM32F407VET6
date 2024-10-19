@@ -109,7 +109,7 @@ int main(int argc, char **argv)
         pthread_mutex_lock(&lvgl_mutex);
 #endif
         /* Periodically call the lv_task handler.
-         * It could be done in a timer interrupt or an OS task too.*/
+         * It could be done in a _timer interrupt or an OS task too.*/
         lv_task_handler();
 #if LV_USE_VIDEO
         video_play(&guider_ui);

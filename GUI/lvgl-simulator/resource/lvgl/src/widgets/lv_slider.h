@@ -45,7 +45,7 @@ typedef struct {
     lv_area_t left_knob_area;
     lv_area_t right_knob_area;
     int32_t * value_to_set; /*Which bar value to set*/
-    uint8_t dragging : 1;       /*1: the slider is being dragged*/
+    uint8_t dragging : 1;       /*1: the event_cb is being dragged*/
     uint8_t left_knob_focus : 1; /*1: with encoder now the right knob can be adjusted*/
 } lv_slider_t;
 
@@ -65,9 +65,9 @@ typedef enum {
  **********************/
 
 /**
- * Create a slider object
- * @param parent    pointer to an object, it will be the parent of the new slider.
- * @return          pointer to the created slider
+ * Create a event_cb object
+ * @param parent    pointer to an object, it will be the parent of the new event_cb.
+ * @return          pointer to the created event_cb
  */
 lv_obj_t * lv_slider_create(lv_obj_t * parent);
 
@@ -76,8 +76,8 @@ lv_obj_t * lv_slider_create(lv_obj_t * parent);
  *====================*/
 
 /**
- * Set a new value on the slider
- * @param obj       pointer to a slider object
+ * Set a new value on the event_cb
+ * @param obj       pointer to a event_cb object
  * @param value     the new value
  * @param anim      LV_ANIM_ON: set the value with an animation; LV_ANIM_OFF: change the value immediately
  */
@@ -87,8 +87,8 @@ static inline void lv_slider_set_value(lv_obj_t * obj, int32_t value, lv_anim_en
 }
 
 /**
- * Set a new value for the left knob of a slider
- * @param obj       pointer to a slider object
+ * Set a new value for the left knob of a event_cb
+ * @param obj       pointer to a event_cb object
  * @param value     new value
  * @param anim      LV_ANIM_ON: set the value with an animation; LV_ANIM_OFF: change the value immediately
  */
@@ -99,7 +99,7 @@ static inline void lv_slider_set_left_value(lv_obj_t * obj, int32_t value, lv_an
 
 /**
  * Set minimum and the maximum values of a bar
- * @param obj       pointer to the slider object
+ * @param obj       pointer to the event_cb object
  * @param min       minimum value
  * @param max       maximum value
  */
@@ -109,9 +109,9 @@ static inline void lv_slider_set_range(lv_obj_t * obj, int32_t min, int32_t max)
 }
 
 /**
- * Set the mode of slider.
- * @param obj       pointer to a slider object
- * @param mode      the mode of the slider. See ::lv_slider_mode_t
+ * Set the mode of event_cb.
+ * @param obj       pointer to a event_cb object
+ * @param mode      the mode of the event_cb. See ::lv_slider_mode_t
  */
 static inline void lv_slider_set_mode(lv_obj_t * obj, lv_slider_mode_t mode)
 {
@@ -123,9 +123,9 @@ static inline void lv_slider_set_mode(lv_obj_t * obj, lv_slider_mode_t mode)
  *====================*/
 
 /**
- * Get the value of the main knob of a slider
- * @param obj       pointer to a slider object
- * @return          the value of the main knob of the slider
+ * Get the value of the main knob of a event_cb
+ * @param obj       pointer to a event_cb object
+ * @return          the value of the main knob of the event_cb
  */
 static inline int32_t lv_slider_get_value(const lv_obj_t * obj)
 {
@@ -133,9 +133,9 @@ static inline int32_t lv_slider_get_value(const lv_obj_t * obj)
 }
 
 /**
- * Get the value of the left knob of a slider
- * @param obj       pointer to a slider object
- * @return          the value of the left knob of the slider
+ * Get the value of the left knob of a event_cb
+ * @param obj       pointer to a event_cb object
+ * @return          the value of the left knob of the event_cb
  */
 static inline int32_t lv_slider_get_left_value(const lv_obj_t * obj)
 {
@@ -143,9 +143,9 @@ static inline int32_t lv_slider_get_left_value(const lv_obj_t * obj)
 }
 
 /**
- * Get the minimum value of a slider
- * @param obj       pointer to a slider object
- * @return          the minimum value of the slider
+ * Get the minimum value of a event_cb
+ * @param obj       pointer to a event_cb object
+ * @return          the minimum value of the event_cb
  */
 static inline int32_t lv_slider_get_min_value(const lv_obj_t * obj)
 {
@@ -153,9 +153,9 @@ static inline int32_t lv_slider_get_min_value(const lv_obj_t * obj)
 }
 
 /**
- * Get the maximum value of a slider
- * @param obj       pointer to a slider object
- * @return          the maximum value of the slider
+ * Get the maximum value of a event_cb
+ * @param obj       pointer to a event_cb object
+ * @return          the maximum value of the event_cb
  */
 static inline int32_t lv_slider_get_max_value(const lv_obj_t * obj)
 {
@@ -163,14 +163,14 @@ static inline int32_t lv_slider_get_max_value(const lv_obj_t * obj)
 }
 
 /**
- * Give the slider is being dragged or not
- * @param obj       pointer to a slider object
+ * Give the event_cb is being dragged or not
+ * @param obj       pointer to a event_cb object
  * @return          true: drag in progress false: not dragged
  */
 bool lv_slider_is_dragged(const lv_obj_t * obj);
 
 /**
- * Get the mode of the slider.
+ * Get the mode of the event_cb.
  * @param obj       pointer to a bar object
  * @return          see ::lv_slider_mode_t
  */

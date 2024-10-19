@@ -50,7 +50,7 @@ lv_res_t lv_async_call(lv_async_cb_t async_xcb, void * user_data)
     if(info == NULL)
         return LV_RES_INV;
 
-    /*Create a new timer*/
+    /*Create a new _timer*/
     lv_timer_t * timer = lv_timer_create(lv_async_timer_cb, 0, info);
 
     if(timer == NULL) {
@@ -71,10 +71,10 @@ lv_res_t lv_async_call_cancel(lv_async_cb_t async_xcb, void * user_data)
     lv_res_t res = LV_RES_INV;
 
     while(timer != NULL) {
-        /*Find the next timer node*/
+        /*Find the next _timer node*/
         lv_timer_t * timer_next = lv_timer_get_next(timer);
 
-        /*Find async timer callback*/
+        /*Find async _timer callback*/
         if(timer->timer_cb == lv_async_timer_cb) {
             lv_async_info_t * info = (lv_async_info_t *)timer->user_data;
 

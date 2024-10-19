@@ -30,7 +30,7 @@ extern "C" {
 typedef struct {
     lv_img_t img;
     gd_GIF * gif;
-    lv_timer_t * timer;
+    lv_timer_t * _timer;
     lv_img_dsc_t imgdsc;
     uint32_t last_call;
 } lv_gif_t;

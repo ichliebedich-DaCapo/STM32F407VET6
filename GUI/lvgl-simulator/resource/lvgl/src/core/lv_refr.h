@@ -100,7 +100,7 @@ uint32_t lv_refr_get_fps_avg(void);
 
 /**
  * Called periodically to handle the refreshing
- * @param timer pointer to the timer itself
+ * @param timer pointer to the _timer itself
  */
 void _lv_disp_refr_timer(lv_timer_t * timer);
 

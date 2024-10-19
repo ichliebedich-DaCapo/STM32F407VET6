@@ -24,7 +24,7 @@ typedef struct _lv_monkey {
     lv_indev_drv_t indev_drv;
     lv_indev_data_t indev_data;
     lv_indev_t * indev;
-    lv_timer_t * timer;
+    lv_timer_t * _timer;
 #if LV_USE_USER_DATA
     void * user_data;
 #endif
@@ -51,7 +51,7 @@ static const lv_key_t lv_key_map[] = {
 
 static void lv_monkey_read_cb(lv_indev_drv_t * indev_drv, lv_indev_data_t * data);
 static int32_t lv_monkey_random(int32_t howsmall, int32_t howbig);
-static void lv_monkey_timer_cb(lv_timer_t * timer);
+static void lv_monkey_timer_cb(lv_timer_t * _timer);
 
 /**********************
  *   GLOBAL FUNCTIONS
@@ -80,8 +80,8 @@ lv_monkey_t * lv_monkey_create(const lv_monkey_config_t * config)
     drv->read_cb = lv_monkey_read_cb;
     drv->user_data = monkey;
 
-    monkey->timer = lv_timer_create(lv_monkey_timer_cb, monkey->config.period_range.min, monkey);
-    lv_timer_pause(monkey->timer);
+    monkey->_timer = lv_timer_create(lv_monkey_timer_cb, monkey->config.period_range.min, monkey);
+    lv_timer_pause(monkey->_timer);
 
     monkey->indev = lv_indev_drv_register(drv);
 
@@ -97,13 +97,13 @@ lv_indev_t * lv_monkey_get_indev(lv_monkey_t * monkey)
 void lv_monkey_set_enable(lv_monkey_t * monkey, bool en)
 {
     LV_ASSERT_NULL(monkey);
-    en ? lv_timer_resume(monkey->timer) : lv_timer_pause(monkey->timer);
+    en ? lv_timer_resume(monkey->_timer) : lv_timer_pause(monkey->_timer);
 }
 
 bool lv_monkey_get_enable(lv_monkey_t * monkey)
 {
     LV_ASSERT_NULL(monkey);
-    return !monkey->timer->paused;
+    return !monkey->_timer->paused;
 }
 
 #if LV_USE_USER_DATA
@@ -126,7 +126,7 @@ void lv_monkey_del(lv_monkey_t * monkey)
 {
     LV_ASSERT_NULL(monkey);
 
-    lv_timer_del(monkey->timer);
+    lv_timer_del(monkey->_timer);
     lv_indev_delete(monkey->indev);
     lv_mem_free(monkey);
 }
@@ -154,9 +154,9 @@ static int32_t lv_monkey_random(int32_t howsmall, int32_t howbig)
     return (int32_t)lv_rand(0, diff) + howsmall;
 }
 
-static void lv_monkey_timer_cb(lv_timer_t * timer)
+static void lv_monkey_timer_cb(lv_timer_t * _timer)
 {
-    lv_monkey_t * monkey = timer->user_data;
+    lv_monkey_t * monkey = _timer->user_data;
     lv_indev_data_t * data = &monkey->indev_data;
 
     switch(monkey->indev_drv.type) {
@@ -181,7 +181,7 @@ static void lv_monkey_timer_cb(lv_timer_t * timer)
 
     data->state = lv_monkey_random(0, 100) < 50 ? LV_INDEV_STATE_RELEASED : LV_INDEV_STATE_PRESSED;
 
-    lv_timer_set_period(monkey->timer, lv_monkey_random(monkey->config.period_range.min, monkey->config.period_range.max));
+    lv_timer_set_period(monkey->_timer, lv_monkey_random(monkey->config.period_range.min, monkey->config.period_range.max));
 }
 
 #endif /*LV_USE_MONKEY*/

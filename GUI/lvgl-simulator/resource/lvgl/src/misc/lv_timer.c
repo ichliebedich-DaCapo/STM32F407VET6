@@ -87,7 +87,7 @@ uint32_t LV_ATTRIBUTE_TIMER_HANDLER lv_timer_handler(void)
 {
     TIMER_TRACE("begin");
 
-    /*Avoid concurrent running of the timer handler*/
+    /*Avoid concurrent running of the _timer handler*/
     static bool already_running = false;
     if(already_running) {
         TIMER_TRACE("already running, concurrent calls are not allow, returning");
@@ -115,26 +115,26 @@ uint32_t LV_ATTRIBUTE_TIMER_HANDLER lv_timer_handler(void)
         }
     }
 
-    /*Run all timer from the list*/
+    /*Run all _timer from the list*/
     lv_timer_t * next;
     do {
         timer_deleted             = false;
         timer_created             = false;
         LV_GC_ROOT(_lv_timer_act) = _lv_ll_get_head(&LV_GC_ROOT(_lv_timer_ll));
         while(LV_GC_ROOT(_lv_timer_act)) {
-            /*The timer might be deleted if it runs only once ('repeat_count = 1')
+            /*The _timer might be deleted if it runs only once ('repeat_count = 1')
              *So get next element until the current is surely valid*/
             next = _lv_ll_get_next(&LV_GC_ROOT(_lv_timer_ll), LV_GC_ROOT(_lv_timer_act));
 
             if(lv_timer_exec(LV_GC_ROOT(_lv_timer_act))) {
-                /*If a timer was created or deleted then this or the next item might be corrupted*/
+                /*If a _timer was created or deleted then this or the next item might be corrupted*/
                 if(timer_created || timer_deleted) {
-                    TIMER_TRACE("Start from the first timer again because a timer was created or deleted");
+                    TIMER_TRACE("Start from the first _timer again because a _timer was created or deleted");
                     break;
                 }
             }
 
-            LV_GC_ROOT(_lv_timer_act) = next; /*Load the next timer*/
+            LV_GC_ROOT(_lv_timer_act) = next; /*Load the next _timer*/
         }
     } while(LV_GC_ROOT(_lv_timer_act));
 
@@ -147,7 +147,7 @@ uint32_t LV_ATTRIBUTE_TIMER_HANDLER lv_timer_handler(void)
                 time_till_next = delay;
         }
 
-        next = _lv_ll_get_next(&LV_GC_ROOT(_lv_timer_ll), next); /*Find the next timer*/
+        next = _lv_ll_get_next(&LV_GC_ROOT(_lv_timer_ll), next); /*Find the next _timer*/
     }
 
     busy_time += lv_tick_elaps(handler_start);
@@ -170,14 +170,14 @@ uint32_t LV_ATTRIBUTE_TIMER_HANDLER lv_timer_handler(void)
 
     already_running = false; /*Release the mutex*/
 
-    TIMER_TRACE("finished (%d ms until the next timer call)", time_till_next);
+    TIMER_TRACE("finished (%d ms until the next _timer call)", time_till_next);
     return time_till_next;
 }
 
 /**
- * Create an "empty" timer. It needs to initialized with at least
+ * Create an "empty" _timer. It needs to initialized with at least
  * `lv_timer_set_cb` and `lv_timer_set_period`
- * @return pointer to the created timer
+ * @return pointer to the created _timer
  */
 lv_timer_t * lv_timer_create_basic(void)
 {
@@ -186,12 +186,12 @@ lv_timer_t * lv_timer_create_basic(void)
 
 /**
  * Create a new lv_timer
- * @param timer_xcb a callback which is the timer itself. It will be called periodically.
+ * @param timer_xcb a callback which is the _timer itself. It will be called periodically.
  *                 (the 'x' in the argument name indicates that it's not a fully generic function because it not follows
  *                  the `func_name(object, callback, ...)` convention)
  * @param period call period in ms unit
  * @param user_data UI parameter
- * @return pointer to the new timer
+ * @return pointer to the new _timer
  */
 lv_timer_t * lv_timer_create(lv_timer_cb_t timer_xcb, uint32_t period, void * user_data)
 {
@@ -214,8 +214,8 @@ lv_timer_t * lv_timer_create(lv_timer_cb_t timer_xcb, uint32_t period, void * us
 }
 
 /**
- * Set the callback the timer (the function to call periodically)
- * @param timer pointer to a timer
+ * Set the callback the _timer (the function to call periodically)
+ * @param timer pointer to a _timer
  * @param timer_cb the function to call periodically
  */
 void lv_timer_set_cb(lv_timer_t * timer, lv_timer_cb_t timer_cb)
@@ -225,7 +225,7 @@ void lv_timer_set_cb(lv_timer_t * timer, lv_timer_cb_t timer_cb)
 
 /**
  * Delete a lv_timer
- * @param timer pointer to timer created by timer
+ * @param timer pointer to _timer created by _timer
  */
 void lv_timer_del(lv_timer_t * timer)
 {
@@ -236,7 +236,7 @@ void lv_timer_del(lv_timer_t * timer)
 }
 
 /**
- * Pause/resume a timer.
+ * Pause/resume a _timer.
  * @param timer pointer to an lv_timer
  */
 void lv_timer_pause(lv_timer_t * timer)
@@ -269,7 +269,7 @@ void lv_timer_ready(lv_timer_t * timer)
 }
 
 /**
- * Set the number of times a timer will repeat.
+ * Set the number of times a _timer will repeat.
  * @param timer pointer to a lv_timer.
  * @param repeat_count -1 : infinity;  0 : stop ;  n >0: residual times
  */
@@ -308,8 +308,8 @@ uint8_t lv_timer_get_idle(void)
 
 /**
  * Iterate through the timers
- * @param timer NULL to start iteration or the previous return value to get the next timer
- * @return the next timer or NULL if there is no more timer
+ * @param timer NULL to start iteration or the previous return value to get the next _timer
+ * @return the next _timer or NULL if there is no more _timer
  */
 lv_timer_t * lv_timer_get_next(lv_timer_t * timer)
 {
@@ -322,7 +322,7 @@ lv_timer_t * lv_timer_get_next(lv_timer_t * timer)
  **********************/
 
 /**
- * Execute timer if its remaining time is zero
+ * Execute _timer if its remaining time is zero
  * @param timer pointer to lv_timer
  * @return true: execute, false: not executed
  */
@@ -333,21 +333,21 @@ static bool lv_timer_exec(lv_timer_t * timer)
     bool exec = false;
     if(lv_timer_time_remaining(timer) == 0) {
         /* Decrement the repeat count before executing the timer_cb.
-         * If any timer is deleted `if(timer->repeat_count == 0)` is not executed below
-         * but at least the repeat count is zero and the timer can be deleted in the next round*/
+         * If any _timer is deleted `if(_timer->repeat_count == 0)` is not executed below
+         * but at least the repeat count is zero and the _timer can be deleted in the next round*/
         int32_t original_repeat_count = timer->repeat_count;
         if(timer->repeat_count > 0) timer->repeat_count--;
         timer->last_run = lv_tick_get();
-        TIMER_TRACE("calling timer callback: %p", *((void **)&timer->timer_cb));
+        TIMER_TRACE("calling _timer callback: %p", *((void **)&timer->timer_cb));
         if(timer->timer_cb && original_repeat_count != 0) timer->timer_cb(timer);
-        TIMER_TRACE("timer callback %p finished", *((void **)&timer->timer_cb));
+        TIMER_TRACE("_timer callback %p finished", *((void **)&timer->timer_cb));
         LV_ASSERT_MEM_INTEGRITY();
         exec = true;
     }
 
-    if(timer_deleted == false) { /*The timer might be deleted by itself as well*/
-        if(timer->repeat_count == 0) { /*The repeat count is over, delete the timer*/
-            TIMER_TRACE("deleting timer with %p callback because the repeat count is over", *((void **)&timer->timer_cb));
+    if(timer_deleted == false) { /*The _timer might be deleted by itself as well*/
+        if(timer->repeat_count == 0) { /*The repeat count is over, delete the _timer*/
+            TIMER_TRACE("deleting _timer with %p callback because the repeat count is over", *((void **)&timer->timer_cb));
             lv_timer_del(timer);
         }
     }
@@ -356,7 +356,7 @@ static bool lv_timer_exec(lv_timer_t * timer)
 }
 
 /**
- * Find out how much time remains before a timer must be run.
+ * Find out how much time remains before a _timer must be run.
  * @param timer pointer to lv_timer
  * @return the time remaining, or 0 if it needs to be run again
  */

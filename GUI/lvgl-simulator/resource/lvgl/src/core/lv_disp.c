@@ -447,10 +447,10 @@ bool lv_disp_is_invalidation_enabled(lv_disp_t * disp)
 }
 
 /**
- * Get a pointer to the screen refresher timer to
+ * Get a pointer to the screen refresher _timer to
  * modify its parameters with `lv_timer_...` functions.
  * @param disp pointer to a display
- * @return pointer to the display refresher timer. (NULL on error)
+ * @return pointer to the display refresher _timer. (NULL on error)
  */
 lv_timer_t * _lv_disp_get_refr_timer(lv_disp_t * disp)
 {

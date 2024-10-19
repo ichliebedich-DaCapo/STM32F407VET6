@@ -364,7 +364,7 @@ extern "C" {
 #define SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS   "SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS"
 
 /**
- *  \brief  A variable controlling whether the idle timer is disabled on iOS.
+ *  \brief  A variable controlling whether the idle _timer is disabled on iOS.
  *
  *  When an iOS app does not receive touches for some time, the screen is
  *  dimmed automatically. For games where the accelerometer is the only input
@@ -375,8 +375,8 @@ extern "C" {
  *  accomplish the same thing on iOS. They should be preferred over this hint.
  *
  *  This variable can be set to the following values:
- *    "0"       - Enable idle timer
- *    "1"       - Disable idle timer
+ *    "0"       - Enable idle _timer
+ *    "1"       - Disable idle _timer
  */
 #define SDL_HINT_IDLE_TIMER_DISABLED "SDL_IOS_IDLE_TIMER_DISABLED"
 
@@ -672,16 +672,16 @@ extern "C" {
 #define SDL_HINT_ALLOW_TOPMOST "SDL_ALLOW_TOPMOST"
 
 /**
- *  \brief A variable that controls the timer resolution, in milliseconds.
+ *  \brief A variable that controls the _timer resolution, in milliseconds.
  *
- *  The higher resolution the timer, the more frequently the CPU services
- *  timer interrupts, and the more precise delays are, but this takes up
+ *  The higher resolution the _timer, the more frequently the CPU services
+ *  _timer interrupts, and the more precise delays are, but this takes up
  *  power and CPU time.  This hint is only used on Windows 7 and earlier.
  *
  *  See this blog post for more information:
- *  http://randomascii.wordpress.com/2013/07/08/windows-timer-resolution-megawatts-wasted/
+ *  http://randomascii.wordpress.com/2013/07/08/windows-_timer-resolution-megawatts-wasted/
  *
- *  If this variable is set to "0", the system timer resolution is not set.
+ *  If this variable is set to "0", the system _timer resolution is not set.
  *
  *  The default value is "1". This hint may be set at any time.
  */

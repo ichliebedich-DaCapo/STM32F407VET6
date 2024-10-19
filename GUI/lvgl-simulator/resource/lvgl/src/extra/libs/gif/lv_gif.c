@@ -88,10 +88,10 @@ void lv_gif_set_src(lv_obj_t * obj, const void * src)
 
     lv_img_set_src(obj, &gifobj->imgdsc);
 
-    lv_timer_resume(gifobj->timer);
-    lv_timer_reset(gifobj->timer);
+    lv_timer_resume(gifobj->_timer);
+    lv_timer_reset(gifobj->_timer);
 
-    next_frame_task_cb(gifobj->timer);
+    next_frame_task_cb(gifobj->_timer);
 
 }
 
@@ -99,8 +99,8 @@ void lv_gif_restart(lv_obj_t * obj)
 {
     lv_gif_t * gifobj = (lv_gif_t *) obj;
     gd_rewind(gifobj->gif);
-    lv_timer_resume(gifobj->timer);
-    lv_timer_reset(gifobj->timer);
+    lv_timer_resume(gifobj->_timer);
+    lv_timer_reset(gifobj->_timer);
 }
 
 /**********************
@@ -114,8 +114,8 @@ static void lv_gif_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
     lv_gif_t * gifobj = (lv_gif_t *) obj;
 
     gifobj->gif = NULL;
-    gifobj->timer = lv_timer_create(next_frame_task_cb, 10, obj);
-    lv_timer_pause(gifobj->timer);
+    gifobj->_timer = lv_timer_create(next_frame_task_cb, 10, obj);
+    lv_timer_pause(gifobj->_timer);
 }
 
 static void lv_gif_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
@@ -125,7 +125,7 @@ static void lv_gif_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
     lv_img_cache_invalidate_src(&gifobj->imgdsc);
     if(gifobj->gif)
         gd_close_gif(gifobj->gif);
-    lv_timer_del(gifobj->timer);
+    lv_timer_del(gifobj->_timer);
 }
 
 static void next_frame_task_cb(lv_timer_t * t)

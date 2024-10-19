@@ -92,10 +92,10 @@ void lv_draw_stm32_dma2d_init(void)
     volatile uint32_t temp = RCC->AHB1ENR;
     LV_UNUSED(temp);
 
-    // AHB master timer configuration
+    // AHB master _timer configuration
     DMA2D->AMTCR = 0; // AHB bus guaranteed dead time disabled
 #if defined(LV_STM32_DMA2D_TEST)
-    _lv_gpu_stm32_dwt_init(); // init µs timer
+    _lv_gpu_stm32_dwt_init(); // init µs _timer
 #endif
 }
 
@@ -728,7 +728,7 @@ LV_STM32_DMA2D_STATIC void _lv_gpu_stm32_dma2d_clean_cache(uint32_t address, lv_
 #endif
 }
 
-// initialize µs timer
+// initialize µs _timer
 LV_STM32_DMA2D_STATIC bool _lv_gpu_stm32_dwt_init(void)
 {
     // disable TRC
@@ -768,7 +768,7 @@ LV_STM32_DMA2D_STATIC uint32_t _lv_gpu_stm32_dwt_get_us(void)
     return us;
 }
 
-// reset µs timer
+// reset µs _timer
 LV_STM32_DMA2D_STATIC void _lv_gpu_stm32_dwt_reset(void)
 {
     DWT->CYCCNT = 0;

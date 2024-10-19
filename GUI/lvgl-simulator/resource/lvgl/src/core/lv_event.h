@@ -64,7 +64,7 @@ typedef enum {
     LV_EVENT_DRAW_PART_END,      /**< Finishing to draw a part. The event parameter is `lv_obj_draw_dsc_t *`. */
 
     /** Special events*/
-    LV_EVENT_VALUE_CHANGED,       /**< The object's value has changed (i.e. slider moved)*/
+    LV_EVENT_VALUE_CHANGED,       /**< The object's value has changed (i.e. event_cb moved)*/
     LV_EVENT_INSERT,              /**< A text is inserted to the object. The event data is `char *` being inserted.*/
     LV_EVENT_REFRESH,             /**< Notify the object to refresh something on it (for the user)*/
     LV_EVENT_READY,               /**< A process has finished*/

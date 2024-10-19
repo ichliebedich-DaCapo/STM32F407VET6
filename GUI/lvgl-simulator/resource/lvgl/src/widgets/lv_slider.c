@@ -82,7 +82,7 @@ static void lv_slider_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj
     LV_UNUSED(class_p);
     lv_slider_t * slider = (lv_slider_t *)obj;
 
-    /*Initialize the allocated 'slider'*/
+    /*Initialize the allocated 'event_cb'*/
     slider->value_to_set = NULL;
     slider->dragging = 0U;
     slider->left_knob_focus = 0U;
@@ -112,7 +112,7 @@ static void lv_slider_event(const lv_obj_class_t * class_p, lv_event_t * e)
         lv_hit_test_info_t * info = lv_event_get_param(e);
         lv_coord_t ext_click_area = obj->spec_attr ? obj->spec_attr->ext_click_pad : 0;
 
-        /*Ordinary slider: was the knob area hit?*/
+        /*Ordinary event_cb: was the knob area hit?*/
         lv_area_t a;
         lv_area_copy(&a, &slider->right_knob_area);
         lv_area_increase(&a, ext_click_area, ext_click_area);

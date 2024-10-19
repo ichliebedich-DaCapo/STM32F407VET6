@@ -209,7 +209,7 @@ typedef unsigned int uintptr_t;
 /* Enable various threading systems */
 #define SDL_THREAD_WINDOWS  1
 
-/* Enable various timer systems */
+/* Enable various _timer systems */
 #define SDL_TIMER_WINDOWS   1
 
 /* Enable various video drivers */

@@ -135,7 +135,7 @@ void lv_indev_delete(lv_indev_t * indev)
     LV_ASSERT_NULL(indev);
     LV_ASSERT_NULL(indev->driver);
     LV_ASSERT_NULL(indev->driver->read_timer);
-    /*Clean up the read timer first*/
+    /*Clean up the read _timer first*/
     lv_timer_del(indev->driver->read_timer);
     /*Remove the input device from the list*/
     _lv_ll_remove(&LV_GC_ROOT(_lv_indev_ll), indev);

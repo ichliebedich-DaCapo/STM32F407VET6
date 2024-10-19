@@ -104,7 +104,7 @@ typedef struct _lv_indev_drv_t {
     /**< Pointer to the assigned display*/
     struct _lv_disp_t * disp;
 
-    /**< Timer to periodically read the input device*/
+    /**< SliderTimer to periodically read the input device*/
     lv_timer_t * read_timer;
 
     /**< Number of pixels to slide before actually drag the object*/
