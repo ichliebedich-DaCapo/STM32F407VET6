@@ -118,7 +118,7 @@ file(GLOB_RECURSE SOURCES
         "BSP/*.*"
         "Drivers/*.*"
         "GUI/Base/*.*"
-        "${UI_DIR}/ui.cpp"
+        "${UI_DIR}/*.*"
         "GUI/Component/*.*"
         "GUI/Events/*.*"
 
