@@ -1,4 +1,3 @@
-#此文件从模板自动生成! 请勿更改!
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_VERSION 1)
 cmake_minimum_required(VERSION 3.29)
@@ -119,7 +118,7 @@ file(GLOB_RECURSE SOURCES
         "BSP/*.*"
         "Drivers/*.*"
         "GUI/Base/*.*"
-        "${UI_DIR}/*.*"
+        "${UI_DIR}/ui.cpp"
         "GUI/Component/*.*"
         "GUI/Events/*.*"
 
