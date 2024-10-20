@@ -43,38 +43,29 @@
 class Key
 {
 public:
-#ifndef APP_NO_RTOS
-  constexpr  Key() : code(0), state(0) {}
-#else
-    constexpr  Key() : code(0), state(0),sign(0) {}
-#endif
-    ~Key() = default;
-
     // 成员函数
     static void init();
 
-    auto setCode(uint8_t keycode) { code = keycode; }
+    static auto setCode(uint8_t keycode) { code = keycode; }
 
-    [[nodiscard]] auto getCode() const { return code; }// 获取键值
+    [[nodiscard]] static auto getCode() { return code; }// 获取键值
 
-    [[nodiscard]] auto getState(uint8_t keycode) const { return state & (0x3 << keycode * 2); }// 获取键位状态
+    [[nodiscard]] static auto getState(uint8_t keycode) { return state & (0x3 << keycode * 2); }// 获取键位状态
 
 #ifdef APP_NO_RTOS
-    auto setSign()->void {  sign = 0xFF; }// 设置标志，表明已读取
-    auto handler()->void;// 反正都是阻塞式等待，也就无所谓多一步取反
+    static auto setSign()->void {  sign = 0xFF; }// 设置标志，表明已读取
+    static auto handler()->  void;// 反正都是阻塞式等待，也就无所谓多一步取反
 #endif// APP_NO_RTOS
-    auto resetState(uint8_t keycode) { state &= ~(0x3 << (keycode * 2));  /*清除指定键位的状态*/}
+    static auto resetState(uint8_t keycode) { state &= ~(0x3 << (keycode * 2));  /*清除指定键位的状态*/}
 
-    uint8_t stateHandler(uint8_t maxKeyStates);
+    static uint8_t stateHandler(uint8_t maxKeyStates);
 
     // 私有成员变量
 private:
-    uint32_t state;// 按键状态,使用掩码操作，给每个按键分配两个位，用于存储最多4个状态
-    uint8_t code;// 当前键值
+    static inline uint32_t state=0;// 按键状态,使用掩码操作，给每个按键分配两个位，用于存储最多4个状态
+    static inline uint8_t code=0;// 当前键值
 #ifdef APP_NO_RTOS
-    uint8_t sign;// 标志
+    static inline uint8_t sign=0;// 标志
 #endif// APP_NO_RTOS
 };
-
-extern Key key;
 #endif //FURINA_KEY_HPP

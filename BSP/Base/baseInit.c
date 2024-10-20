@@ -8,7 +8,7 @@
 #include "lvgl.h"
 #include "lcd.h"
 #include "fsmc.h"
-
+#include "key_exit.h"
 #if FreeRTOS_DEBUG
 
 #include "CPU_RunTime.h"
@@ -36,6 +36,7 @@ void BaseInit()
 
     fsmc_init();
     lcd_init();// 初始化LCD
+    key_exti_init();
 #ifdef USE_FSMC_DMA
     fsmc_dma_init();// 初始化FSMC+DMA
 #endif
@@ -181,17 +182,17 @@ inline void HAL_ResumeTick(void)
 // TIM7中断处理函数
 void TIM7_IRQHandler()
 {
-    if (__HAL_TIM_GET_IT_SOURCE(&htim7, TIM_IT_UPDATE) != RESET)
-    {
-        __HAL_TIM_CLEAR_IT(&htim7, TIM_IT_UPDATE);
-        HAL_IncTick();
-        lv_tick_inc(1);
-    }
+//    if (__HAL_TIM_GET_IT_SOURCE(&htim7, TIM_IT_UPDATE) != RESET)
+//    {
+//        __HAL_TIM_CLEAR_IT(&htim7, TIM_IT_UPDATE);
+//        HAL_IncTick();
+//        lv_tick_inc(1);
+//    }
 
-    // 下面的也许不安全
-/*    __HAL_TIM_CLEAR_FLAG(&htim7, TIM_FLAG_UPDATE);
+    // 我把TIM7当做系统时钟，所以并不需要判断中断源
+    __HAL_TIM_CLEAR_FLAG(&htim7, TIM_FLAG_UPDATE);
     HAL_IncTick();
-    lv_tick_inc(1);*/
+    lv_tick_inc(1);
 }
 
 

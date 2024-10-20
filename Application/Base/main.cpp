@@ -4,7 +4,7 @@
 #include "cmsis_os2.h"
 #endif// APP_NO_RTOS
 
-#include "lvgl_init.h"
+#include "lvgl_init.hpp"
 #include "keyTaskHandler.hpp"
 #include "GUI.hpp"
 
@@ -43,7 +43,7 @@ int main()
     for (;;)
     {
         GUI_handler();
-        key.handler();// 不太想优化成静态类，因为我真的很喜欢这个"."
+        Key::handler();
         background_handler();
     }
 #endif

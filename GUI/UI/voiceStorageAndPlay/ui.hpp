@@ -14,7 +14,7 @@ typedef struct
     struct
     {
         lv_obj_t *screen;// 屏幕自身
-        lv_obj_t *img_11;
+        lv_obj_t *img_slider_flag;
         lv_obj_t *imgbtn_slow;
         lv_obj_t *imgbtn_acc;
         lv_obj_t *label_title_music;

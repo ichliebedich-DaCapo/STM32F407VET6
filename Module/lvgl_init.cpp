@@ -1,7 +1,7 @@
 //
 // Created by fairy on 2024/9/22.
 //
-#include "lvgl_init.h"
+#include "lvgl_init.hpp"
 
 #ifndef APP_NO_RTOS
 #include "cmsis_os2.h"

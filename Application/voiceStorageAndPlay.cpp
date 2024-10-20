@@ -6,6 +6,7 @@
 
 #if ENABLE_VOICE_STORAGE_AND_PLAY
 
+#include "lvgl.h"
 #include "key.hpp"
 #include "spi.h"
 #include "timer.h"
@@ -13,6 +14,7 @@
 #include "dac.h"
 #include "player.hpp"
 #include "flash_storage.hpp"
+#include "GUI.hpp"
 //const osThreadAttr_t voiceTask_attributes = {
 //        .name = "voiceTask",
 //        .stack_size = 128 * 4,
@@ -34,35 +36,38 @@ void app_init()
 /*语音存储与回放处理函数,用于处理各种按键响应*/
 void key_handler()
 {
-    switch (key.getCode())
+    switch (Key::getCode())
     {
         case keyk0:// 播放
-            if (key.stateHandler(2))
+            if (Key::stateHandler(2))
             {
-                FlashStorage::read_isr_ready();// 预加载
-                Player::on();
+                lv_obj_add_state(GUI_Base::get_ui()->main.imgbtn_play, LV_STATE_CHECKED);
+//                FlashStorage::read_isr_ready();// 预加载
+//                Player::on();
             } else
             {
-                Player::off();
+                lv_obj_clear_state(GUI_Base::get_ui()->main.imgbtn_play, LV_STATE_CHECKED);
+//                Player::off();
             }
+            lv_event_send(GUI_Base::get_ui()->main.imgbtn_play, LV_EVENT_CLICKED, nullptr);
             break;
 
-        case keyk1:// 录音
-            if (key.stateHandler(2))
-            {
-                FlashStorage::write_isr_ready();// 预加载
-                Player::record_on();
-            } else
-            {
-                Player::record_off();
-            }
-            break;
-
-        case keyk2:// 慢放
-            Player::set_speed(PlaybackSpeed::Speed_0_75x);
-
-        case keyk3:// 快放
-            Player::set_speed(PlaybackSpeed::Speed_1_5x);
+//        case keyk1:// 录音
+//            if (Key::stateHandler(2))
+//            {
+//                FlashStorage::write_isr_ready();// 预加载
+//                Player::record_on();
+//            } else
+//            {
+//                Player::record_off();
+//            }
+//            break;
+//
+//        case keyk2:// 慢放
+//            Player::set_speed(PlaybackSpeed::Speed_0_75x);
+//
+//        case keyk3:// 快放
+//            Player::set_speed(PlaybackSpeed::Speed_1_5x);
 
         default:
             break;

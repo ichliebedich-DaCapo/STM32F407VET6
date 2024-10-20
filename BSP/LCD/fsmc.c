@@ -100,8 +100,6 @@ void fsmc_init()
     hsram1.Init.AsynchronousWait = FSMC_ASYNCHRONOUS_WAIT_DISABLE;// 是否使能同步传输模式下的等待信号,此处未用
     hsram1.Init.ExtendedMode = FSMC_EXTENDED_MODE_DISABLE;        // 读写使用相同的时序
     hsram1.Init.WriteBurst = FSMC_WRITE_BURST_ENABLE;            // 开启突发写，性能翻倍
-    // hsram1.Init.ContinuousClock=FSMC_CONTINUOUS_CLOCK_SYNC_ASYNC;//这一条是旧库所没有的，下面这一条找不到
-    // FSMC_NORSRAMInitStructure.FSMC_ReadWriteTimingStruct = &FSMC_NORSRAMTimingInitStructure;
     HAL_SRAM_Init(&hsram1, &Timing, &Timing);
 }
 

@@ -9,6 +9,9 @@
 #if 1
 // 头文件
 #include "GUI_Base.hpp"
+#include "component.hpp"
+#include "events.hpp"
+#include "LV_Timer.hpp"
 // 宏定义
 
 

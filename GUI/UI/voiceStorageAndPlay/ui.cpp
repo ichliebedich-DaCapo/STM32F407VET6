@@ -64,7 +64,7 @@ auto Screen::init() -> void
     /*************************************图片*************************************/
 
     //Write codes screen_img_11
-    Image::init(gui->main.img_11);
+    Image::init(gui->main.img_slider_flag);
     Image::set_src(&_icn_slider_alpha_15x15);
     Image::set_pos_size(235, 152, 15, 15);
     Image::add_flag(LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_HIDDEN);
@@ -90,7 +90,7 @@ auto Screen::init() -> void
     ImageButton::set_src(LV_IMGBTN_STATE_RELEASED, &_btn_prev_alpha_37x37);
 
     /******************************************滑条***************************************/
-    //Write codes screen_slider_1
+    //Write codes screen_slider
     Slider::init(gui->main.slider);
     Slider::set_range(0, 100);
     Slider::set_pos_size(42, 294, 342, 1);

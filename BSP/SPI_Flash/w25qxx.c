@@ -54,7 +54,6 @@ static inline uint8_t SPI_FLASH_TransferByte(uint8_t byte)
 {
     uint8_t temp = 0;
     HAL_StatusTypeDef status = HAL_SPI_TransmitReceive(&FLASH_SPI_Handle, &byte, &temp, 1, HAL_MAX_DELAY);
-    assert(status == HAL_OK && "SPI transfer failed");
     return temp;
 }
 

@@ -2,8 +2,8 @@
 // Created by fairy on 2024/9/22.
 //
 
-#ifndef FURINA_LVGL_INIT_H
-#define FURINA_LVGL_INIT_H
+#ifndef FURINA_LVGL_INIT_HPP
+#define FURINA_LVGL_INIT_HPP
 #include "lv_port_disp.h"
 #include "JYZQ_Conf.h"
 
@@ -26,4 +26,4 @@ inline void GUI_handler()
 #endif
 
 
-#endif //FURINA_LVGL_INIT_H
+#endif //FURINA_LVGL_INIT_HPP

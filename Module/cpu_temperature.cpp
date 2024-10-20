@@ -2,7 +2,7 @@
 // Created by DV on 2024/10/13.
 //
 
-#include "cpu_temperature.h"
+#include "cpu_temperature.hpp"
 #include "adc.h"
 
 #if USE_CPU_TEMPERATURE

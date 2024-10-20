@@ -2,8 +2,8 @@
 // Created by 吴俊颐 on 2024/10/13.
 //
 
-#ifndef FURINA_CPU_TEMPERATURE_H
-#define FURINA_CPU_TEMPERATURE_H
+#ifndef FURINA_CPU_TEMPERATURE_HPP
+#define FURINA_CPU_TEMPERATURE_HPP
 #include "JYZQ_Conf.h"
 #if USE_CPU_TEMPERATURE
 
@@ -22,4 +22,4 @@ public:
 
 
 #endif  // USE_CPU_TEMPERATURE
-#endif //FURINA_CPU_TEMPERATURE_H
+#endif //FURINA_CPU_TEMPERATURE_HPP
