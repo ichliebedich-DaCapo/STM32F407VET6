@@ -23,7 +23,7 @@ public:
     }
 
 /**
-* @brief 通用事件处理
+* @brief 通用事件处理,两态按钮
 * @param e
 * @param handler
 */

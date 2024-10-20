@@ -1,11 +1,11 @@
 //
-// Created by 34753 on 2024/10/8.
+// Created by fairy on 2024/10/8.
 //
 
 #ifndef FURINA_W25QXX_H
 #define FURINA_W25QXX_H
 
-#include "JYZQ_Conf.h"
+#include "Module_Conf.h"
 #ifdef USE_SPI_FLASH
 #include "spi.h"
 #ifdef __cplusplus
@@ -13,7 +13,7 @@ extern "C" {
 #endif
 
 // 声明接口
-void w25qxx_init(void);// 初始化Flash
+void w25qxx_init(void);// 初始化Flash,包含了初始化
 void w25qxx_sector_erase(uint32_t SectorAddr);                                         // 擦除扇区
 void w25qxx_chip_erase();                                                              // 整片擦除
 void w25qxx_page_write(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite); // 页写入

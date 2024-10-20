@@ -4,7 +4,7 @@
 
 #ifndef FURINA_CPU_RUNTIME_H
 #define FURINA_CPU_RUNTIME_H
-#include "JYZQ_Conf.h"
+#include "Module_Conf.h"
 
 #if FreeRTOS_DEBUG
 void ConfigureTimerForRunTimeStats();

@@ -15,6 +15,7 @@
 #include "player.hpp"
 #include "flash_storage.hpp"
 #include "GUI.hpp"
+#include "w25qxx.h"
 //const osThreadAttr_t voiceTask_attributes = {
 //        .name = "voiceTask",
 //        .stack_size = 128 * 4,
@@ -25,34 +26,76 @@
 /*语音存储与回放初始化*/
 void app_init()
 {
-    spi3_init();
+    spi2_init();// 初始化SPI2
     dac_init();
     adc1_init();
+    w25qxx_init();// 初始化flash
     timer2_init(49, 104);// 分频为16KHz
     timer6_init(49, 104);
-//    osThreadNew(VoiceTask, nullptr, &voiceTask_attributes);
 }
 
 /*语音存储与回放处理函数,用于处理各种按键响应*/
+uint8_t test[256];
+volatile uint32_t test_addr=0;
+volatile uint8_t test_var = 0;
 void key_handler()
 {
     switch (Key::getCode())
     {
+        case keyk0:// 写入1字节
+            w25qxx_write_byte(test_addr++, 0xAA);
+            break;
+        case keyk1:// 读取1字节
+            test_var=w25qxx_read_byte(test_addr);
+            break;
+        case keyk2:// 读取256字节
+            w25qxx_buffer_read(test, test_addr, 256);
+            break;
+
+        case keyk3:
+            __BKPT(0);// 设置一个断点
+            w25qxx_chip_erase();
+            __BKPT(1);
+
+        case keyk8:
+            test_addr-=256;
+            break;
+        case keyk9:
+            test_addr+=256;
+            break;
+
+        case keykE:
+            --test_addr;
+            break;
+        case keykF:
+            ++test_addr;
+            break;
+        default:
+            break;
+    }
+
+
+
+
+
+/*    switch (Key::getCode())
+    {
         case keyk0:// 播放
-            if (Key::stateHandler(2))
+*//*            if (Key::stateHandler(2))
             {
-                lv_obj_add_state(GUI_Base::get_ui()->main.imgbtn_play, LV_STATE_CHECKED);
+            ImageButton::press(GUI_Base::get_ui()->main.imgbtn_play);
 //                FlashStorage::read_isr_ready();// 预加载
 //                Player::on();
             } else
             {
-                lv_obj_clear_state(GUI_Base::get_ui()->main.imgbtn_play, LV_STATE_CHECKED);
+              ImageButton::release(GUI_Base::get_ui()->main.imgbtn_play);
 //                Player::off();
-            }
-            lv_event_send(GUI_Base::get_ui()->main.imgbtn_play, LV_EVENT_CLICKED, nullptr);
+            }*//*
             break;
 
-//        case keyk1:// 录音
+        case keyk1:// 录音
+
+////            ITM_SendChar('#');
 //            if (Key::stateHandler(2))
 //            {
 //                FlashStorage::write_isr_ready();// 预加载
@@ -61,7 +104,7 @@ void key_handler()
 //            {
 //                Player::record_off();
 //            }
-//            break;
+            break;
 //
 //        case keyk2:// 慢放
 //            Player::set_speed(PlaybackSpeed::Speed_0_75x);
@@ -71,7 +114,7 @@ void key_handler()
 
         default:
             break;
-    }
+    }*/
 }
 
 void background_handler()

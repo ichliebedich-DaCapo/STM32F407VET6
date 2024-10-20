@@ -126,6 +126,21 @@ public:
     {
         lv_imgbtn_set_src(_obj, state, nullptr, src, nullptr);
     }
+
+     //默认发送的事件为LV_EVENT_CLICKED,因为平时用得最多就是这个。后面可自行添加
+    static inline auto press(_lv_obj_t*&obj=_obj)-> void
+    {
+        lv_imgbtn_set_state(obj, LV_IMGBTN_STATE_CHECKED_RELEASED);
+        lv_obj_add_state(obj, LV_STATE_CHECKED);// 选中
+        lv_event_send(obj, LV_EVENT_CLICKED, nullptr);
+
+    }
+    static inline auto release(_lv_obj_t*&obj=_obj)-> void
+    {
+        lv_imgbtn_set_state(obj, LV_IMGBTN_STATE_RELEASED);
+        lv_obj_clear_state(obj, LV_STATE_CHECKED);// 取消选中
+        lv_event_send(obj, LV_EVENT_CLICKED, nullptr);
+    }
 };
 
 /**

@@ -4,7 +4,7 @@
 #ifndef FURINA_GUI_HPP
 #define FURINA_GUI_HPP
 
-#include "JYZQ_Conf.h"
+#include "Module_Conf.h"
 /* 预编译命令 */
 #if 1
 // 头文件

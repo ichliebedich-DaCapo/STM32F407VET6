@@ -29,5 +29,11 @@
 #define USE_ADC  // 使用ADC
 #define USE_DAC // 使用DAC
 
+
+/**************************其他**************************/
+#define USE_SOFT_CS // 使用软件CS控制
+
+
+
 #endif
 #endif //FURINA_VOICESTORAGEANDPLAY_HPP

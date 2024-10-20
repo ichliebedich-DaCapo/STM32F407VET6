@@ -6,7 +6,7 @@ ___
 此工程可分为Application、Module、BSP、Library、GUI、Drivers这几个部分
 
 - **Application**：即应用级，是与硬件无关的部分，只管应用的实现。包含各种实验项目，如语音存储与回放、双音频信号发生器等。
-通过其Base下的JYZQ_Conf.h来控制使用哪个项目，由C++实现  <br><br>
+通过其Base下的Module_Conf.h来控制使用哪个项目，由C++实现。同时其头文件不提供任何接口，仅有宏声明  <br><br>
 - **Module**：即模块级，主要用于编写各种算法等，与驱动无关，主要由C++实现  <br><br>
 - **BSP**：板级支持包，本想建立Drivers目录但与后面重名了。基于HAL编写的裸机驱动，同时提供对应C接口供使用 <br><br>
 - **Library**：库，包含了第三方库如FreeRTOS、LVGL、FATS等，同时添加了DATA目录，用于存放一些数据，如正弦波波形数据等  <br><br>
@@ -24,13 +24,16 @@ ___
 几乎不会在main.c里去编写代码。
 一般情况下，BSP提供接口供Module，Module提供接口供Application，上两层几乎不会设计硬件操作。
 想了想，BSP只提供驱动接口，而Moudle还是只做算法相关的，相当于函数式编程，不涉及驱动的初始化，
-但可以调用驱动接口。最后再由Application统一调用<br><br>
+但可以调用驱动接口。最后再由Application统一调用<br>
+&nbsp;&nbsp;&nbsp;&nbsp;补充了是否启用FreeRTOS的宏，如果不需要使用RTOS，可在应用级文件定义一个宏APP_NO_RTOS,同时在CMakeLists里把FreeRTOS资源文件注释掉
+<br><br>
 
-- **开始**： 先从JYZQ_Conf.h开始看，里面有众多规范，以及控制不同应用的宏<br><br>
+
+- **开始**： 先从Module_Conf.h开始看，里面有控制不同q驱动模块的宏，App_Conf.h里则控制哪些应用级文件要编译。<br><br>
 - **架构**：整个工程如前面所说分成三个部分，编写代码的主要地方也在三级目录下的.c/h文件里，通过文件名可以识别出。
   先从顶层Application开始看，里面主要实现了两个函数app_init和key_handler，见名知义，同时main函数不再是我们
   编写代码的主场地。<br><br>
-- **宏**：在JYZQ_Conf.h文件中使用各种宏来控制各级文件的编译，但没有随应用自动决定哪些驱动、模块级文件要编译。
+- **宏**：在Module_Conf.h文件中使用各种宏来控制各级文件的编译，但没有随应用自动决定哪些驱动、模块级文件要编译。
   主要是这样做了之后，预编译指令会到处飘，很乱。<br><br>
 - **模块层的静态类**：模块层基本上都是用静态类来实现的，这是为了更好地封装同时不至于二进制文件膨胀。其中，
   变量和一些简单函数基本上都是私有成员，这么做主要是不让其他函数随意访问这里的变量，只能通过给定的接口实现（代码逻辑更清晰），
@@ -137,7 +140,7 @@ C头文件模板<br>
 #[[#define]]# ${INCLUDE_GUARD}
 ## 设置一个变量名用来调用endsWith方法
 #set($filename = ${FILE_NAME})
-\#include "JYZQ_Conf.h"
+\#include "Module_Conf.h"
 /* 预编译命令 */
 \#if 1
 // 头文件

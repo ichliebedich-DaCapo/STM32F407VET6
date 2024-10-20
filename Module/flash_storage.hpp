@@ -5,7 +5,7 @@
 #ifndef FURINA_FLASH_STORAGE_HPP
 #define FURINA_FLASH_STORAGE_HPP
 
-#include "JYZQ_Conf.h"
+#include "Module_Conf.h"
 #include "stm32f4xx_hal.h"
 #ifdef __cplusplus
 extern "C" {

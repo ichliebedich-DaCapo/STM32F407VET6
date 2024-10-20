@@ -6,14 +6,18 @@
 #ifdef USE_SPI_FLASH
 
 /*FLASH_SPI*/
-#define FLASH_SPI SPI3
-#define FLASH_SPI_Handle hspi3
+#define FLASH_SPI SPI2
+#define FLASH_SPI_Handle hspi2
 
+
+#ifdef USE_SOFT_CS
 // 片选引脚
-#define W25QXX_CS_GPIO_Port GPIOC
-#define W25QXX_CS_PIN GPIO_PIN_9
+#define W25QXX_CS_GPIO_Port GPIOB
+#define W25QXX_CS_PIN GPIO_PIN_12
 #define W25QXX_CS_HIGH() HAL_GPIO_WritePin(W25QXX_CS_GPIO_Port, W25QXX_CS_PIN, GPIO_PIN_SET)
 #define W25QXX_CS_LOW() HAL_GPIO_WritePin(W25QXX_CS_GPIO_Port, W25QXX_CS_PIN, GPIO_PIN_RESET)
+#endif
+
 
 /*FLASH常用命令*/
 #define WriteEnable 0x06   // 写使能
@@ -34,6 +38,7 @@
 // 初始化片选引脚
 static inline void w25qxx_spi_select(void)
 {
+#ifdef USE_SOFT_CS
     GPIO_InitTypeDef GPIO_InitStruct = {0};
 
     /*片选初始化*/
@@ -43,6 +48,7 @@ static inline void w25qxx_spi_select(void)
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
     HAL_GPIO_Init(W25QXX_CS_GPIO_Port, &GPIO_InitStruct);
     HAL_GPIO_WritePin(W25QXX_CS_GPIO_Port, W25QXX_CS_PIN, GPIO_PIN_SET);
+#endif
 }
 
 /**
@@ -53,7 +59,7 @@ static inline void w25qxx_spi_select(void)
 static inline uint8_t SPI_FLASH_TransferByte(uint8_t byte)
 {
     uint8_t temp = 0;
-    HAL_StatusTypeDef status = HAL_SPI_TransmitReceive(&FLASH_SPI_Handle, &byte, &temp, 1, HAL_MAX_DELAY);
+    HAL_SPI_TransmitReceive(&FLASH_SPI_Handle, &byte, &temp, 1, HAL_MAX_DELAY);
     return temp;
 }
 
@@ -64,9 +70,13 @@ static inline uint8_t SPI_FLASH_TransferByte(uint8_t byte)
  */
 static inline void SPI_FLASH_WriteEnable(void)
 {
+#ifdef USE_SOFT_CS
     W25QXX_CS_LOW();
+#endif
     SPI_FLASH_TransferByte(WriteEnable); /* 发送写使能命令*/
+#ifdef USE_SOFT_CS
     W25QXX_CS_HIGH();
+#endif
 }
 
 /**
@@ -77,13 +87,17 @@ static inline void SPI_FLASH_WriteEnable(void)
 static inline void SPI_FLASH_WaitForWriteEnd(void)
 {
     uint8_t FLASH_Status = 0;
+#ifdef USE_SOFT_CS
     W25QXX_CS_LOW();
+#endif
     SPI_FLASH_TransferByte(ReadStatusReg); /* 发送 读状态寄存器 命令 */
     do
     {
         FLASH_Status = SPI_FLASH_TransferByte(Dummy_Byte);
     } while (FLASH_Status & WIP_Flag); // 检测BUSY位是否为0,0表示已完成不忙
+#ifdef USE_SOFT_CS
     W25QXX_CS_HIGH();
+#endif
 }
 
 /**
@@ -95,7 +109,9 @@ static inline void SPI_FLASH_BeginWrite(void)
 {
     SPI_FLASH_WriteEnable();
     SPI_FLASH_WaitForWriteEnd();
+#ifdef USE_SOFT_CS
     W25QXX_CS_LOW();
+#endif
 }
 
 /**
@@ -105,7 +121,9 @@ static inline void SPI_FLASH_BeginWrite(void)
  */
 static inline void SPI_FLASH_EndWrite(void)
 {
+#ifdef USE_SOFT_CS
     W25QXX_CS_HIGH();
+#endif
     SPI_FLASH_WaitForWriteEnd();
 }
 
@@ -141,7 +159,7 @@ static inline void SPI_FLASH_TransmitData(uint8_t *pBuffer, uint16_t NumBytes)
  * @param  NumBytes，要接收的数据长度
  * @retval 无
  */
-static inline void SPI_FLASH_ReceiveData(uint8_t *pBuffer, uint16_t NumBytes)
+static inline void SPI_FLASH_ReceiveData( uint8_t *pBuffer, uint16_t NumBytes)
 {
     for (uint16_t i = 0; i < NumBytes; ++i)
     {
@@ -159,8 +177,24 @@ static inline void SPI_FLASH_ReceiveData(uint8_t *pBuffer, uint16_t NumBytes)
  */
 void w25qxx_init(void)
 {
-    w25qxx_spi_select();
-    spi3_init();
+    /*初始化可以不进行，默认为0x00*/
+    SPI_FLASH_WriteEnable(); // 使能读写
+#ifdef USE_SOFT_CS
+    W25QXX_CS_LOW();
+#endif
+    SPI_FLASH_TransferByte(0x50); /*这是反复改变BP位的关键*/
+#ifdef USE_SOFT_CS
+    W25QXX_CS_HIGH();
+#endif
+#ifdef USE_SOFT_CS
+    W25QXX_CS_LOW();
+#endif
+    SPI_FLASH_TransferByte(WriteStatusReg);
+    SPI_FLASH_TransferByte(0x00);
+#ifdef USE_SOFT_CS
+    W25QXX_CS_HIGH();
+#endif
+    SPI_FLASH_WaitForWriteEnd();
 }
 
 /**
@@ -211,23 +245,31 @@ void w25qxx_page_write(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToW
  * @param   NumByteToRead，读取数据长度
  * @retval 无
  */
-void w25qxx_buffer_read(uint8_t *pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead)
+void w25qxx_buffer_read( uint8_t *pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead)
 {
+#ifdef USE_SOFT_CS
     W25QXX_CS_LOW();
+#endif
     SPI_FLASH_TransferByte(ReadData);
     SPI_FLASH_TransferAddress(ReadAddr);
     SPI_FLASH_ReceiveData(pBuffer, NumByteToRead);
+#ifdef USE_SOFT_CS
     W25QXX_CS_HIGH();
+#endif
 }
 
 uint8_t w25qxx_read_byte(uint32_t ReadAddr)
 {
     uint8_t temp;
+#ifdef USE_SOFT_CS
     W25QXX_CS_LOW();
+#endif
     SPI_FLASH_TransferByte(ReadData);
     SPI_FLASH_TransferAddress(ReadAddr);
     temp = SPI_FLASH_TransferByte(Dummy_Byte);
+#ifdef USE_SOFT_CS
     W25QXX_CS_HIGH();
+#endif
     return temp;
 }
 

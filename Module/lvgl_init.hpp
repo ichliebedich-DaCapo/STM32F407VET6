@@ -5,7 +5,7 @@
 #ifndef FURINA_LVGL_INIT_HPP
 #define FURINA_LVGL_INIT_HPP
 #include "lv_port_disp.h"
-#include "JYZQ_Conf.h"
+#include "Module_Conf.h"
 
 #include "stm32f4xx_hal.h"
 #ifndef APP_NO_RTOS

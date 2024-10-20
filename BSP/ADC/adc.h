@@ -5,7 +5,7 @@
 #ifndef FURINA_ADC_H
 #define FURINA_ADC_H
 
-#include "JYZQ_Conf.h"
+#include "Module_Conf.h"
 #include "stm32f4xx_hal.h"
 #ifdef USE_ADC
 #ifdef __cplusplus

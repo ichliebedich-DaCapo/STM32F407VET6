@@ -6,7 +6,7 @@
 #define FURINA_LCD_H
 #ifndef LCD_H_
 #define LCD_H_
-#include "JYZQ_Conf.h"
+#include "Module_Conf.h"
 #ifdef USE_LCD
 #include "stm32f4xx.h"
 #ifdef __cplusplus
