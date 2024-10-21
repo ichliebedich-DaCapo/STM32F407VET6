@@ -23,12 +23,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】新增CPU测温计模块和扩充adc">
-      <change afterPath="$PROJECT_DIR$/Module/fft.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Module/fft.hpp" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="__【未配置好】新增fft模块">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2024_10_13_16_03_取消提交了更改_[更改]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2024_10_13_16_32_取消提交了更改_[更改]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/cpu_temperature.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/cpu_temperature.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/cpu_temperature.h" beforeDir="false" afterPath="$PROJECT_DIR$/Module/cpu_temperature.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/fft.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/fft.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/fft.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/fft.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +110,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;DV 上的 #2&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;DV&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/Embedded/MCU/STM32/CubeTest&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -114,7 +118,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.updates&quot;,
     &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -132,11 +136,6 @@
     <option name="rtosEnabled" value="true" />
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -224,6 +223,11 @@
       <workItem from="1728896325983" duration="97000" />
       <workItem from="1728896437537" duration="6772000" />
       <workItem from="1728908411913" duration="1284000" />
+      <workItem from="1728987212840" duration="420000" />
+      <workItem from="1728987642987" duration="3037000" />
+      <workItem from="1728991795029" duration="1598000" />
+      <workItem from="1729248921209" duration="610000" />
+      <workItem from="1729495154203" duration="4000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -433,7 +437,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728908234748</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="__【未配置好】新增fft模块">
+      <option name="closed" value="true" />
+      <created>1728915716220</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1728915716220</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -491,7 +503,8 @@
     <MESSAGE value="__【未配置好】测试3" />
     <MESSAGE value="__【未配置好】备份" />
     <MESSAGE value="__【未配置好】新增CPU测温计模块和扩充adc" />
-    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】新增CPU测温计模块和扩充adc" />
+    <MESSAGE value="__【未配置好】新增fft模块" />
+    <option name="LAST_COMMIT_MESSAGE" value="__【未配置好】新增fft模块" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

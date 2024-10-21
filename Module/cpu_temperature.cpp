@@ -5,7 +5,7 @@
 #include "cpu_temperature.hpp"
 #include "adc.h"
 
-#if USE_CPU_TEMPERATURE
+//#if USE_CPU_TEMPERATURE
 
 /**
  * @brief 测量CPU温度
@@ -18,4 +18,4 @@ auto thermometer::Get_Temperature() -> short {
     auto result = (short)(temperature * 100);
     return result;
 }
-#endif
+//#endif
