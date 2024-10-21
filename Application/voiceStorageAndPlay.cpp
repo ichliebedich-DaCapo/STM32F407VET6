@@ -40,21 +40,27 @@ volatile uint32_t test_addr=0;
 volatile uint8_t test_var = 0;
 void key_handler()
 {
+    uint8_t test2[256];
     switch (Key::getCode())
     {
         case keyk0:// 写入1字节
-            w25qxx_write_byte(test_addr++, 0xAA);
+            w25qxx_write_byte(test_addr, 0xAA);
+            __BKPT(0);// 设置一个断点
             break;
         case keyk1:// 读取1字节
             test_var=w25qxx_read_byte(test_addr);
+            __BKPT(0);// 设置一个断点
             break;
         case keyk2:// 读取256字节
             w25qxx_buffer_read(test, test_addr, 256);
+            __BKPT(0);// 设置一个断点
             break;
 
         case keyk3:
             __BKPT(0);// 设置一个断点
-            w25qxx_chip_erase();
+            for (auto & elem : test2)
+                elem=0xAA;
+            w25qxx_page_write(test2, test_addr, 256);
             __BKPT(1);
 
         case keyk8:

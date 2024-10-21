@@ -8,9 +8,9 @@
 /*FLASH_SPI*/
 #define FLASH_SPI SPI2
 #define FLASH_SPI_Handle hspi2
+#define FAST_READ_WRITE // 目前看好像是有问题
 
-
-#ifdef USE_SOFT_CS
+#ifndef USE_HARD_CS
 // 片选引脚
 #define W25QXX_CS_GPIO_Port GPIOB
 #define W25QXX_CS_PIN GPIO_PIN_12
@@ -38,14 +38,14 @@
 // 初始化片选引脚
 static inline void w25qxx_spi_select(void)
 {
-#ifdef USE_SOFT_CS
+#ifndef USE_HARD_CS
     GPIO_InitTypeDef GPIO_InitStruct = {0};
 
     /*片选初始化*/
     GPIO_InitStruct.Pin = W25QXX_CS_PIN;
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStruct.Pull = GPIO_PULLUP; // 默认上拉
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     HAL_GPIO_Init(W25QXX_CS_GPIO_Port, &GPIO_InitStruct);
     HAL_GPIO_WritePin(W25QXX_CS_GPIO_Port, W25QXX_CS_PIN, GPIO_PIN_SET);
 #endif
@@ -70,11 +70,11 @@ static inline uint8_t SPI_FLASH_TransferByte(uint8_t byte)
  */
 static inline void SPI_FLASH_WriteEnable(void)
 {
-#ifdef USE_SOFT_CS
+#ifndef USE_HARD_CS
     W25QXX_CS_LOW();
 #endif
     SPI_FLASH_TransferByte(WriteEnable); /* 发送写使能命令*/
-#ifdef USE_SOFT_CS
+#ifndef USE_HARD_CS
     W25QXX_CS_HIGH();
 #endif
 }
@@ -87,7 +87,7 @@ static inline void SPI_FLASH_WriteEnable(void)
 static inline void SPI_FLASH_WaitForWriteEnd(void)
 {
     uint8_t FLASH_Status = 0;
-#ifdef USE_SOFT_CS
+#ifndef USE_HARD_CS
     W25QXX_CS_LOW();
 #endif
     SPI_FLASH_TransferByte(ReadStatusReg); /* 发送 读状态寄存器 命令 */
@@ -95,7 +95,7 @@ static inline void SPI_FLASH_WaitForWriteEnd(void)
     {
         FLASH_Status = SPI_FLASH_TransferByte(Dummy_Byte);
     } while (FLASH_Status & WIP_Flag); // 检测BUSY位是否为0,0表示已完成不忙
-#ifdef USE_SOFT_CS
+#ifndef USE_HARD_CS
     W25QXX_CS_HIGH();
 #endif
 }
@@ -109,7 +109,7 @@ static inline void SPI_FLASH_BeginWrite(void)
 {
     SPI_FLASH_WriteEnable();
     SPI_FLASH_WaitForWriteEnd();
-#ifdef USE_SOFT_CS
+#ifndef USE_HARD_CS
     W25QXX_CS_LOW();
 #endif
 }
@@ -121,7 +121,7 @@ static inline void SPI_FLASH_BeginWrite(void)
  */
 static inline void SPI_FLASH_EndWrite(void)
 {
-#ifdef USE_SOFT_CS
+#ifndef USE_HARD_CS
     W25QXX_CS_HIGH();
 #endif
     SPI_FLASH_WaitForWriteEnd();
@@ -147,10 +147,14 @@ static inline void SPI_FLASH_TransferAddress(uint32_t Address)
  */
 static inline void SPI_FLASH_TransmitData(uint8_t *pBuffer, uint16_t NumBytes)
 {
+#ifdef FAST_READ_WRITE
+    HAL_SPI_Transmit(&FLASH_SPI_Handle, pBuffer, NumBytes, HAL_MAX_DELAY);
+#else
     for (uint16_t i = 0; i < NumBytes; ++i)
     {
         SPI_FLASH_TransferByte(pBuffer[i]);
     }
+#endif
 }
 
 /**
@@ -159,12 +163,16 @@ static inline void SPI_FLASH_TransmitData(uint8_t *pBuffer, uint16_t NumBytes)
  * @param  NumBytes，要接收的数据长度
  * @retval 无
  */
-static inline void SPI_FLASH_ReceiveData( uint8_t *pBuffer, uint16_t NumBytes)
+static inline void SPI_FLASH_ReceiveData(uint8_t *pBuffer, uint16_t NumBytes)
 {
+#ifdef FAST_READ_WRITE
+    HAL_SPI_Receive(&FLASH_SPI_Handle, pBuffer, NumBytes, HAL_MAX_DELAY);
+#else
     for (uint16_t i = 0; i < NumBytes; ++i)
     {
         pBuffer[i] = SPI_FLASH_TransferByte(Dummy_Byte);
     }
+#endif
 }
 
 
@@ -179,19 +187,19 @@ void w25qxx_init(void)
 {
     /*初始化可以不进行，默认为0x00*/
     SPI_FLASH_WriteEnable(); // 使能读写
-#ifdef USE_SOFT_CS
+#ifndef USE_HARD_CS
     W25QXX_CS_LOW();
 #endif
     SPI_FLASH_TransferByte(0x50); /*这是反复改变BP位的关键*/
-#ifdef USE_SOFT_CS
+#ifndef USE_HARD_CS
     W25QXX_CS_HIGH();
 #endif
-#ifdef USE_SOFT_CS
+#ifndef USE_HARD_CS
     W25QXX_CS_LOW();
 #endif
     SPI_FLASH_TransferByte(WriteStatusReg);
     SPI_FLASH_TransferByte(0x00);
-#ifdef USE_SOFT_CS
+#ifndef USE_HARD_CS
     W25QXX_CS_HIGH();
 #endif
     SPI_FLASH_WaitForWriteEnd();
@@ -245,15 +253,15 @@ void w25qxx_page_write(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToW
  * @param   NumByteToRead，读取数据长度
  * @retval 无
  */
-void w25qxx_buffer_read( uint8_t *pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead)
+void w25qxx_buffer_read(uint8_t *pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead)
 {
-#ifdef USE_SOFT_CS
+#ifndef USE_HARD_CS
     W25QXX_CS_LOW();
 #endif
     SPI_FLASH_TransferByte(ReadData);
     SPI_FLASH_TransferAddress(ReadAddr);
     SPI_FLASH_ReceiveData(pBuffer, NumByteToRead);
-#ifdef USE_SOFT_CS
+#ifndef USE_HARD_CS
     W25QXX_CS_HIGH();
 #endif
 }
@@ -261,13 +269,13 @@ void w25qxx_buffer_read( uint8_t *pBuffer, uint32_t ReadAddr, uint16_t NumByteTo
 uint8_t w25qxx_read_byte(uint32_t ReadAddr)
 {
     uint8_t temp;
-#ifdef USE_SOFT_CS
+#ifndef USE_HARD_CS
     W25QXX_CS_LOW();
 #endif
     SPI_FLASH_TransferByte(ReadData);
     SPI_FLASH_TransferAddress(ReadAddr);
     temp = SPI_FLASH_TransferByte(Dummy_Byte);
-#ifdef USE_SOFT_CS
+#ifndef USE_HARD_CS
     W25QXX_CS_HIGH();
 #endif
     return temp;
@@ -280,6 +288,44 @@ void w25qxx_write_byte(uint32_t WriteAddr, uint8_t byte)
     SPI_FLASH_TransferAddress(WriteAddr);
     SPI_FLASH_TransferByte(byte);
     SPI_FLASH_EndWrite();
+}
+
+/**
+ * @brief  异步擦除整片扇区
+ * @note 使用的时候必须手动调用w25qxx_async_is_busy()函数判断是否擦除完成
+ */
+void w25qxx_async_chip_erase()
+{
+    SPI_FLASH_BeginWrite();
+    SPI_FLASH_TransferByte(ChipErase);
+    W25QXX_CS_HIGH();
+}
+
+void w25qxx_async_sector_erase(uint32_t SectorAddr)
+{
+    SPI_FLASH_BeginWrite();
+    SPI_FLASH_TransferByte(SectorErase);
+    SPI_FLASH_TransferAddress(SectorAddr);
+    W25QXX_CS_HIGH();
+}
+
+/**
+ * @brief  判断是否擦除完成
+ * @return ture表示完成，false表示正在忙
+ */
+uint8_t w25qxx_async_is_busy()
+{
+    uint8_t FLASH_Status = Dummy_Byte;
+#ifndef USE_HARD_CS
+    W25QXX_CS_LOW();
+#endif
+    SPI_FLASH_TransferByte(ReadStatusReg); /* 发送 读状态寄存器 命令 */
+    FLASH_Status = SPI_FLASH_TransferByte(Dummy_Byte);
+    FLASH_Status &= WIP_Flag; // 检测BUSY位是否为0,0表示已完成不忙
+#ifndef USE_HARD_CS
+    W25QXX_CS_HIGH();
+#endif
+    return FLASH_Status;
 }
 
 ///**
