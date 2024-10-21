@@ -28,6 +28,7 @@
 #define USE_TIMER // 使用定时器
 #define USE_ADC  // 使用ADC
 #define USE_DAC // 使用DAC
+#define USE_FFT //使用FFT
 
 #endif
 #endif //FURINA_VOICESTORAGEANDPLAY_HPP

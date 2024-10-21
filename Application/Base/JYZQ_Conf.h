@@ -33,10 +33,12 @@
 #define USE_LCD    // 使用LCD
 #define USE_KEY_EXTI  // 使用按键的外部中断
 
+
 /*************************模块级**************************/
 #define USE_PLAYER__  // 使用播放器
 #define USE_FLASH_STORAGE__ // 使用Flash存储
 #define USE_WAVE_SIGNAL__ // 使用波形信号
+#define USE_CPU_TEMPERATURE__ // 使用CPU温度*********
 
 /**************************板级**************************/
 #define USE_SPI__  // 使用SPI
