@@ -56,6 +56,7 @@ add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx)
 # ----------------------------------设置你的UI路径（选择项目）------------------------------
 set(UI_DIR GUI/UI/voiceStorageAndPlay)
 
+# ----------------------------------设置你的UI路径（选择项目）------------------------------
 
 #添加头文件
 include_directories(

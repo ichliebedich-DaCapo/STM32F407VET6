@@ -23,10 +23,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【初始】主项目——SPI_Flash已经调通，可以进行上层应用的开发了">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2024_10_13_16_03_取消提交了更改_[更改]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2024_10_13_16_32_取消提交了更改_[更改]/shelved.patch" beforeDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【语音存储与回放】稍微优化了Flash读写函数">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/ADC/adc.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/ADC/adc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1659,7 +1660,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CPPToolchains&quot;,
     &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -1775,7 +1776,14 @@
       <workItem from="1729304338217" duration="8000" />
       <workItem from="1729326639200" duration="9332000" />
       <workItem from="1729390413954" duration="43241000" />
-      <workItem from="1729470452058" duration="3000" />
+      <workItem from="1729470452058" duration="3386000" />
+      <workItem from="1729483523628" duration="643000" />
+      <workItem from="1729489371453" duration="15000" />
+      <workItem from="1729489764404" duration="19000" />
+      <workItem from="1729490049002" duration="1244000" />
+      <workItem from="1729491918734" duration="297000" />
+      <workItem from="1729492652079" duration="19000" />
+      <workItem from="1729493438473" duration="3000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -2057,7 +2065,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729442762010</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="【语音存储与回放】稍微优化了Flash读写函数">
+      <option name="closed" value="true" />
+      <created>1729473023590</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1729473023590</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2092,7 +2108,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="__【未配置好】与AI合力编写了w25qxx的驱动，然后启用了stm32的断言机制,并删除了一下LL库（因为缺失stm32_assert.h文件）" />
     <MESSAGE value="__【未配置好】添加了“是否启用RTOS”的宏。使用了__weak让代码隔离得更明显，用户只需专心编写应用、模块、BSP三级的代码。" />
     <MESSAGE value="__【未配置好】增添了一点解释" />
     <MESSAGE value="__【未配置好】添加了ADC、DAC、定时器驱动，添加了ISR.cpp用于处理中断回调。此外，开始编写player模块，但还没理清与应用、驱动之间的关系，低耦合高内聚真难搞啊" />
@@ -2117,14 +2132,15 @@
     <MESSAGE value="【初始】主项目——CMakelists实在没有什么好修改的地方" />
     <MESSAGE value="【初始】主项目——简单测试了一下驱动模块与UI事件的对接，可以初步完成一些基本操作，但还需要改进。添加一些对外接口" />
     <MESSAGE value="【初始】主项目——SPI_Flash已经调通，可以进行上层应用的开发了" />
-    <option name="LAST_COMMIT_MESSAGE" value="【初始】主项目——SPI_Flash已经调通，可以进行上层应用的开发了" />
+    <MESSAGE value="【语音存储与回放】稍微优化了Flash读写函数" />
+    <option name="LAST_COMMIT_MESSAGE" value="【语音存储与回放】稍微优化了Flash读写函数" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
         <watch expression="test_addr" />
         <watch expression="test_var" />
-        <watch expression="test" />
+        <watch expression="test" language="ObjectiveC" />
       </configuration>
     </watches-manager>
   </component>

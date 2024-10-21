@@ -30,73 +30,26 @@ void app_init()
     dac_init();
     adc1_init();
     w25qxx_init();// 初始化flash
-    timer2_init(49, 104);// 分频为16KHz
-    timer6_init(49, 104);
+    timer2_init(FREQ_168M_to_1K);// 分频为16KHz
+    timer6_init(FREQ_168M_to_16K);
 }
 
 /*语音存储与回放处理函数,用于处理各种按键响应*/
-uint8_t test[256];
-volatile uint32_t test_addr=0;
-volatile uint8_t test_var = 0;
 void key_handler()
 {
-    uint8_t test2[256];
     switch (Key::getCode())
     {
-        case keyk0:// 写入1字节
-            w25qxx_write_byte(test_addr, 0xAA);
-            __BKPT(0);// 设置一个断点
-            break;
-        case keyk1:// 读取1字节
-            test_var=w25qxx_read_byte(test_addr);
-            __BKPT(0);// 设置一个断点
-            break;
-        case keyk2:// 读取256字节
-            w25qxx_buffer_read(test, test_addr, 256);
-            __BKPT(0);// 设置一个断点
-            break;
-
-        case keyk3:
-            __BKPT(0);// 设置一个断点
-            for (auto & elem : test2)
-                elem=0xAA;
-            w25qxx_page_write(test2, test_addr, 256);
-            __BKPT(1);
-
-        case keyk8:
-            test_addr-=256;
-            break;
-        case keyk9:
-            test_addr+=256;
-            break;
-
-        case keykE:
-            --test_addr;
-            break;
-        case keykF:
-            ++test_addr;
-            break;
-        default:
-            break;
-    }
-
-
-
-
-
-/*    switch (Key::getCode())
-    {
         case keyk0:// 播放
-*//*            if (Key::stateHandler(2))
+            if (Key::stateHandler(2))
             {
-            ImageButton::press(GUI_Base::get_ui()->main.imgbtn_play);
-//                FlashStorage::read_isr_ready();// 预加载
-//                Player::on();
+                ImageButton::press(GUI_Base::get_ui()->main.imgbtn_play);
+                FlashStorage::read_isr_ready();// 预加载
+                Player::on();
             } else
             {
-              ImageButton::release(GUI_Base::get_ui()->main.imgbtn_play);
-//                Player::off();
-            }*//*
+                ImageButton::release(GUI_Base::get_ui()->main.imgbtn_play);
+                Player::off();
+            }
             break;
 
         case keyk1:// 录音
@@ -120,7 +73,43 @@ void key_handler()
 
         default:
             break;
-    }*/
+    }
+    uint8_t test2[256];
+    switch (Key::getCode())
+    {
+        case keyk0:// 写入1字节
+            adc1_start_it();
+            __BKPT(0);// 设置一个断点
+            break;
+        case keyk1:// 读取1字节
+            adc1_stop_it();
+            __BKPT(0);// 设置一个断点
+            break;
+        case keyk2:// 读取256字节
+
+            __BKPT(0);// 设置一个断点
+            break;
+
+        case keyk3:
+            __BKPT(0);// 设置一个断点
+        case keyk8:
+
+            break;
+        case keyk9:
+
+            break;
+
+        case keykE:
+
+            break;
+        case keykF:
+
+            break;
+        default:
+            break;
+    }
+
+
 }
 
 void background_handler()
@@ -130,10 +119,14 @@ void background_handler()
 
 /**实现中断服务例程*/
 // 用于采集ADC数据
+volatile uint32_t count = 0;
+
 void adc1_isr()
 {
+    __BKPT(0);// 设置一个断点
+    count = HAL_GetTick();
     // 12位舍弃低4位
-    FlashStorage::write_isr(HAL_ADC_GetValue(&hadc1) >> 4);
+//    FlashStorage::write_isr(HAL_ADC_GetValue(&hadc1) >> 4);
 }
 
 // 用于播放DAC数据

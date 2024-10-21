@@ -7,6 +7,7 @@
 
 #include "Module_Conf.h"
 #include "stm32f4xx_hal.h"
+#include "timer.h"
 #ifdef USE_ADC
 #ifdef __cplusplus
 extern "C" {
@@ -18,11 +19,13 @@ void adc1_init();
 
 static inline void adc1_start_it()
 {
+    timer2_start();
     HAL_ADC_Start_IT(&hadc1);
 }
 
 static inline void adc1_stop_it()
 {
+    timer2_stop();
     HAL_ADC_Stop_IT(&hadc1);
 }
 /**
