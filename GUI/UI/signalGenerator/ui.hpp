@@ -14,6 +14,7 @@ typedef struct
     struct
     {
         lv_obj_t *screen;// 屏幕自身
+        lv_obj_t *chart;// 折线图
 
     } main;// 主屏幕
 

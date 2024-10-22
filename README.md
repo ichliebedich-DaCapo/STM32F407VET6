@@ -7,7 +7,7 @@ ___
 <br>
 `开发平台`： Windows 11 
 <br>
-`工具集/链`： 
+`工具集/链`：
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [MinGW](https://github.com/niXman/mingw-builds-binaries/releases)
@@ -16,15 +16,20 @@ ___
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [arm-toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
 &nbsp;arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi
+<br>
+`分支说明`:main分支是已经测试通过，ZQ和DV分支是两条测试用的分支
+<br>
 
 
+<!-- 
+- [x] xxx:显示任务完成图标,方括号里放空格就是未完成
+-->
 ___
 ## 简介
-<pre>
-  此为stm32f407vet6的一个C/C++混编工程用于练手，会不定期更新些小项目，可供参考。
-包含了一些简单基础实验项目，使用了FreeRTOS、LVGL等第三方库，整个工程使用CMakeLists组织。
-  此工程可分为Application、Module、BSP、Library、GUI、Drivers这几个部分
-</pre>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+> 此为stm32f407vet6的一个C/C++混编工程用于练手，会不定期更新一些简单基础实验项目可供参考。
+整个工程使用CMakeLists组织,可分为下面几个部分
+
 
 - `Application`：即应用级，是与硬件无关的部分，只管应用的实现。包含各种实验项目，如语音存储与回放、双音频信号发生器等。
 通过其Conf下的Module_Conf.h来控制使用哪个项目，由C++实现。同时其头文件不提供任何接口，仅有宏声明  <br><br>
@@ -85,7 +90,7 @@ ___
 
 <!--C++中适合单片机开发的新特性，C++11以后每三年一个版本，且按照Major-Minor-Minor进行迭代
 C++20与C++23基本都是对标准库、泛型编程等进行了优化，很难用到单片机上。尤其是那该死的模块，听说MSVC支持的比较好，
-cmake也还行，但是试来试去就是不行，淦。?-->
+cmake也还行，但是试来试去就是不行，淦。-->
 
 ```
  * // -------------------------------------C++98-------------------------------------
