@@ -211,44 +211,6 @@ void lcd_init(void)
 
 
 
-/*旧函数库*/
-/********************************************************************
- * 名称 : LCD_Clear
- * 功能 : 清空画面
- * 输入 : 颜色
- * 输出 : 无
- ***********************************************************************/
-void LCD_Clear(uint16_t color)
-{
-    LCD_Set_Window(0, 0, 479, 319);
-    for (uint32_t i = 0; i < 0x25800; i++)
-        LCD_WRITE_DATA(color);
-}
-/********************************************************************
- * 名称 : LCD_Color_Fill
- * 功能 : 填充一个区域
- * 输入 : x,y,ex,ey,color
- * 输出 : 无
- ***********************************************************************/
-//在指定区域内填充指定颜色块
-//(sx,sy),(ex,ey):填充矩形对角坐标，区域大小为:(ex-sx+1)*(ey-sy+1)
-//color:要填充的颜色
-//void LCD_Color_Fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t *color)
-//{
-//    uint16_t i, j;
-//    uint16_t length, width;
-//    length = ex - sx + 1;// 矩形区域的长度
-//    width = ey - sy + 1; // 矩形区域的宽度
-//    LCD_Set_Window(sx, sy, ex, ey);
-//    // 遍历矩形区域的每一行
-//    for (j = 0; j < width; j++)
-//    {
-//        for (i = 0; i < length; i++)
-//        {
-//            LCD_WRITE_DATA(color[i + length * j]);// 一次性写入整行的颜色数据
-//        }
-//    }
-//}
 
 
 

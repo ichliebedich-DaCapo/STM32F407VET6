@@ -127,7 +127,6 @@ void fsmc_dma_init()
     {
         Error_Handler();
     }
-
     /*不受FreeRTOS调度*/
     HAL_NVIC_SetPriority(DMA2_Stream6_IRQn, 3, 0);
     HAL_NVIC_EnableIRQ(DMA2_Stream6_IRQn);
@@ -135,6 +134,13 @@ void fsmc_dma_init()
     * 流程：开启DMA中断后，DMA开始传输数据，传输完之后回到【pCallback】，需要注意的是中断处理函数得要定义*/
     HAL_DMA_RegisterCallback(&hdma_memtomem_dma2_stream6, HAL_DMA_XFER_CPLT_CB_ID, LVGL_LCD_FSMC_DMA_pCallback);
 }
+
+// DMA中断,里面他宝贝的真啰嗦
+void DMA2_Stream6_IRQHandler(void)
+{
+    HAL_DMA_IRQHandler(&hdma_memtomem_dma2_stream6);
+}
+
 #endif
 
 #endif

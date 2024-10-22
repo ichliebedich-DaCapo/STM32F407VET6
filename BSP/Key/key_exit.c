@@ -11,7 +11,6 @@ void key_exti_init()
 {
     GPIO_InitTypeDef GPIO_InitStructure;
     __HAL_RCC_GPIOB_CLK_ENABLE();
-    __HAL_RCC_SYSCFG_CLK_ENABLE();
 
     GPIO_InitStructure.Mode = MODE_INPUT;
     GPIO_InitStructure.Pull = GPIO_PULLUP;

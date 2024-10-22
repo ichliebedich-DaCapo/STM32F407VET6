@@ -56,4 +56,9 @@ void adc1_init()
 
 
 
+void ADC_IRQHandler(void)
+{
+    HAL_ADC_IRQHandler(&hadc1);
+}
+
 #endif

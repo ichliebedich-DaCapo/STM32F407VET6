@@ -30,51 +30,50 @@ void app_init()
     dac_init();
     adc1_init();
     w25qxx_init();// 初始化flash
-    timer2_init(FREQ_168M_to_1K);// 分频为16KHz
-    timer6_init(FREQ_168M_to_16K);
+    timer2_init(FREQ_84M_to_100);// 分频为16KHz
+    timer6_init(FREQ_84M_to_16K);
 }
 
 /*语音存储与回放处理函数,用于处理各种按键响应*/
 void key_handler()
 {
-    switch (Key::getCode())
-    {
-        case keyk0:// 播放
-            if (Key::stateHandler(2))
-            {
-                ImageButton::press(GUI_Base::get_ui()->main.imgbtn_play);
-                FlashStorage::read_isr_ready();// 预加载
-                Player::on();
-            } else
-            {
-                ImageButton::release(GUI_Base::get_ui()->main.imgbtn_play);
-                Player::off();
-            }
-            break;
-
-        case keyk1:// 录音
-
-////            ITM_SendChar('#');
+//    switch (Key::getCode())
+//    {
+//        case keyk0:// 播放
 //            if (Key::stateHandler(2))
 //            {
-//                FlashStorage::write_isr_ready();// 预加载
-//                Player::record_on();
+//                ImageButton::press(GUI_Base::get_ui()->main.imgbtn_play);
+//                FlashStorage::read_isr_ready();// 预加载
+//                Player::on();
 //            } else
 //            {
-//                Player::record_off();
+//                ImageButton::release(GUI_Base::get_ui()->main.imgbtn_play);
+//                Player::off();
 //            }
-            break;
+//            break;
 //
-//        case keyk2:// 慢放
-//            Player::set_speed(PlaybackSpeed::Speed_0_75x);
+//        case keyk1:// 录音
 //
-//        case keyk3:// 快放
-//            Player::set_speed(PlaybackSpeed::Speed_1_5x);
-
-        default:
-            break;
-    }
-    uint8_t test2[256];
+//////            ITM_SendChar('#');
+////            if (Key::stateHandler(2))
+////            {
+////                FlashStorage::write_isr_ready();// 预加载
+////                Player::record_on();
+////            } else
+////            {
+////                Player::record_off();
+////            }
+//            break;
+////
+////        case keyk2:// 慢放
+////            Player::set_speed(PlaybackSpeed::Speed_0_75x);
+////
+////        case keyk3:// 快放
+////            Player::set_speed(PlaybackSpeed::Speed_1_5x);
+//
+//        default:
+//            break;
+//    }
     switch (Key::getCode())
     {
         case keyk0:// 写入1字节
@@ -119,30 +118,18 @@ void background_handler()
 
 /**实现中断服务例程*/
 // 用于采集ADC数据
-volatile uint32_t count = 0;
-
 void adc1_isr()
 {
-    __BKPT(0);// 设置一个断点
-    count = HAL_GetTick();
     // 12位舍弃低4位
-//    FlashStorage::write_isr(HAL_ADC_GetValue(&hadc1) >> 4);
+    FlashStorage::write_isr(HAL_ADC_GetValue(&hadc1) >> 4);
 }
 
 // 用于播放DAC数据
 void timer6_isr()
 {
     // 把8位数据恢复为12位
-    HAL_DAC_SetValue(&hdac, DAC1_CHANNEL_1, DAC_ALIGN_12B_R, FlashStorage::read_isr() << 4);
+    dac_set_value(FlashStorage::read_isr() << 4);
 }
 
-
-//void VoiceTask(void *argument)
-//{
-//    for(;;)
-//    {
-//        osDelay(1);
-//    }
-//}
 
 #endif
