@@ -55,7 +55,6 @@ add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx)
 
 # ----------------------------------设置你的UI路径（选择项目）------------------------------
 set(UI_DIR GUI/UI/voiceStorageAndPlay)
-
 # ----------------------------------设置你的UI路径（选择项目）------------------------------
 
 #添加头文件
@@ -89,8 +88,9 @@ include_directories(
         GUI/Component
         GUI/Events
 
-        # 库
+        # -----------------库-----------------
         Library/Data
+        # --------第三方-------
         Library/Third_Party/
         # FreeRTOS库
         Library/Third_Party/FreeRTOS/Source/include
@@ -99,6 +99,10 @@ include_directories(
         # LVGL库
         Library/Third_Party/lvgl/src
         Library/Third_Party/lvgl/examples/porting
+        # --------CMSIS-------
+        # DSP
+        Library/CMSIS/DSP/Include
+        Library/CMSIS/DSP/PrivateInclude
 )
 
 
@@ -118,15 +122,24 @@ file(GLOB_RECURSE SOURCES
         "GUI/Component/*.cpp"
         "GUI/Events/*.cpp"
 
+        # -----------------库-----------------
         # 数据库
         "Library/Data/*.*"
+        # --------第三方-------
+        # LVGL库
         "Library/Third_Party/lvgl/src/*.c"
         "Library/Third_Party/lvgl/examples/porting/*.c"
-
         # FreeRTOS库
 #        "Library/Third_Party/FreeRTOS/Source/*.c"
 #        "Library/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c"
 #        " Library/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c"
+
+        # --------CMSIS-------
+        # DSP
+        # 现在CMakeLists还没有用熟练，先凑合
+        "Library/CMSIS/DSP/Source/TransformFunctions/arm_cfft_f32.c"
+        "Library/CMSIS/DSP/Source/TransformFunctions/arm_cfft_init_f32.c"
+        "Library/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_f32.c"
 )
 
 # 设置链接脚本
