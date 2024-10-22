@@ -1,35 +1,55 @@
 &nbsp;&nbsp;This is a project based on stm32f407vet6. <br>
+___
+## 环境
+`IDE`: CLion
+<br>
+`辅助工具`： GUI Guider STM32CubeMX
+<br>
+`开发平台`： Windows 11 
+<br>
+`工具集/链`： 
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[MinGW](https://github.com/niXman/mingw-builds-binaries/releases)
+&nbsp;x86_64-14.2.0-release-posix-seh-ucrt-rt_v12-rev0
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[arm-toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
+&nbsp;arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi
+
 
 ___
 ## 简介
-&nbsp;&nbsp;此为stm32f407vet6的一个C/C++混编工程(供戏耳,莫当真)，包含了一些实验项目，使用了FreeRTOS、LVGL等。 <br>
-此工程可分为Application、Module、BSP、Library、GUI、Drivers这几个部分
+<pre>
+  此为stm32f407vet6的一个C/C++混编工程用于练手，会不定期更新些小项目，可供参考。
+包含了一些简单基础实验项目，使用了FreeRTOS、LVGL等第三方库，整个工程使用CMakeLists组织。
+  此工程可分为Application、Module、BSP、Library、GUI、Drivers这几个部分
+</pre>
 
-- **Application**：即应用级，是与硬件无关的部分，只管应用的实现。包含各种实验项目，如语音存储与回放、双音频信号发生器等。
-通过其Base下的Module_Conf.h来控制使用哪个项目，由C++实现。同时其头文件不提供任何接口，仅有宏声明  <br><br>
-- **Module**：即模块级，主要用于编写各种算法等，与驱动无关，主要由C++实现  <br><br>
-- **BSP**：板级支持包，本想建立Drivers目录但与后面重名了。基于HAL编写的裸机驱动，同时提供对应C接口供使用 <br><br>
-- **Library**：库，包含了第三方库如FreeRTOS、LVGL、FATS等，同时添加了DATA目录，用于存放一些数据，如正弦波波形数据等  <br><br>
-- **GUI**：设计用户界面的，使用的是LVGL，里面包含了界面设计和界面逻辑以及资源文件三部分  <br><br>
-- **Drivers**：里面存放的是ST官方提供的HAL，除了stm32fxx_hal.h里我添加了一个Error_Handler内联函数外，其余地方未修改。同时为了避免误操作，把整个文件夹设置成了只读状态  <br><br>
+- `Application`：即应用级，是与硬件无关的部分，只管应用的实现。包含各种实验项目，如语音存储与回放、双音频信号发生器等。
+通过其Conf下的Module_Conf.h来控制使用哪个项目，由C++实现。同时其头文件不提供任何接口，仅有宏声明  <br><br>
+- `Module`：即模块级，主要用于编写各种算法等，与驱动无关，主要由C++实现  <br><br>
+- `BSP`：板级支持包，本想建立Drivers目录但与CubeMX生成的目录重名了。基于HAL编写的裸机驱动，同时提供对应C接口供使用。后文中所指的驱动级即此处 <br><br>
+- `Library`：库，包含了第三方库如FreeRTOS、LVGL、FATS等，同时添加了DATA目录，用于存放一些数据，如正弦波波形数据等  <br><br>
+- `GUI`：设计用户界面的，使用的是LVGL，包含了界面设计和界面逻辑以及资源文件三部分 。同时里面内嵌了一个LVGL模拟器，在lv-simulator目录。 <br><br>
+- `Drivers`：里面存放的是ST官方提供的HAL，除了stm32fxx_hal.h里我添加了一个Error_Handler内联函数外，其余地方未修改。同时为了避免误操作，把整个文件夹设置成了只读状态  <br><br>
 
 ___
 
-## 项目说明
-&nbsp;&nbsp;&nbsp;&nbsp;本工程把多个项目的实现都放在同一个目录——Application，通过本文件下方的宏来控制是否编译，如果开启相应宏，
-只需要到main.h里添加相应头文件。
-同时由于多个项目放在同一个目录，为了避免冲突，使用了不少__weak修饰的函数，
-开发每个“应用级”，需要自己实现key_handler()和app_init()函数。<br>
-&nbsp;&nbsp;&nbsp;&nbsp;从前面也可以看出，一般编代码的地方都是在 Application/App_xxx.c/h、Module/xxx.c/h、BSP/xxx.c/h里，
-几乎不会在main.c里去编写代码。
-一般情况下，BSP提供接口供Module，Module提供接口供Application，上两层几乎不会设计硬件操作。
-想了想，BSP只提供驱动接口，而Moudle还是只做算法相关的，相当于函数式编程，不涉及驱动的初始化，
-但可以调用驱动接口。最后再由Application统一调用<br>
-&nbsp;&nbsp;&nbsp;&nbsp;补充了是否启用FreeRTOS的宏，如果不需要使用RTOS，可在应用级文件定义一个宏APP_NO_RTOS,同时在CMakeLists里把FreeRTOS资源文件注释掉
+## 项目
+
+### _说明_：
+- 本工程由于融合了多个简单实验项目，为避免冲突，决定使用预编译来控制。相关控制宏放在了Conf目录下。<br><br>
+其下的App_Conf.h里决定了哪个项目要编译，Module_Conf.h包含了项目头文件，自动控制模块驱动级文件的编译。<br><br>
+- 为了在main.cpp里写下大量的预编译命令，使用了不少__weak修饰的函数，
+开发每个“应用级”，需要自己实现key_handler()和app_init()函数。<br><br>
+-  编写实现代码一般在 Application/App_xxx.c/h、Module/xxx.c/h、BSP/xxx.c/h里。理想情况下：
+BSP提供接口供Module，Module提供接口供Application，不涉及驱动的初始化，最后再由Application统一调用并初始化给模块驱动<br><br>
+- 补充了是否启用FreeRTOS的宏，如果不需要使用RTOS，可在应用级文件定义一个宏APP_NO_RTOS,同时在CMakeLists里把FreeRTOS资源文件注释掉
 <br><br>
 
-
-- **开始**： 先从Module_Conf.h开始看，里面有控制不同q驱动模块的宏，App_Conf.h里则控制哪些应用级文件要编译。<br><br>
+### _流程_：
+- **开始**： 先从App_Conf.h开始看，内部有控制应用级文件编译的宏，Module_Conf.h里则有控制不同驱动模块的宏。<br><br>
 - **架构**：整个工程如前面所说分成三个部分，编写代码的主要地方也在三级目录下的.c/h文件里，通过文件名可以识别出。
   先从顶层Application开始看，里面主要实现了两个函数app_init和key_handler，见名知义，同时main函数不再是我们
   编写代码的主场地。<br><br>
@@ -49,14 +69,14 @@ ___
 
 
 ### _注意事项_：<br><br>
-- **接口兼容性**：BSP统一使用C接口。而模块级与应用级则使用C++接口，方便开发，比如可以使用重载、引用、自动类型推导、lambda表达式、返回类型后置、结构化绑定等.
+- `接口兼容性`：BSP统一使用C接口。而模块级与应用级则使用C++接口，方便开发，比如可以使用重载、引用、自动类型推导、lambda表达式、返回类型后置、结构化绑定等.
              只不过看着驱动开发里的C代码，总想用C++提高代码复用，唉兼容性…… <br><br>
-- **文件命名规范**：BSP和模块级尽量小写为主，不同属性尽量用下划线隔开，方便调用接口；
+- `文件命名规范`：BSP和模块级尽量小写为主，不同属性尽量用下划线隔开，方便调用接口；
 应用级尽量采用驼峰命名法。之所以是尽量，是因为C/C++的命名本来就已经很混乱了哈哈哈哈哈<br><br>
-- **函数**：为了提高驱动性能，实现简单功能的函数尽量内敛，其内局部变量尽量使用字长单位<br><br>
-- **变量**：尽量不使用全局变量,尽量使用函数式编程，减少副作用<br><br>
-- **调试**：统一开-O2级别优化，遇到问题再开-Og。在CLion里面体现为使用Release选项。同时要注意volatile变量的使用<br><br>
-- **语法使用规范**：由于单片机资源有限，不能使用泛型编程如模版。类可以使用，尽量使用静态类以实现零成本抽象，
+- `函数`：为了提高驱动性能，实现简单功能的函数尽量内敛，其内局部变量尽量使用字长单位<br><br>
+- `变量`：尽量不使用全局变量,尽量使用函数式编程，减少副作用<br><br>
+- `调试`：统一开-O2级别优化，遇到问题再开-Og。在CLion里面体现为使用Release选项。同时要注意volatile变量的使用<br><br>
+- `语法使用规范`：由于单片机资源有限，不能使用泛型编程如模版。类可以使用，尽量使用静态类以实现零成本抽象，
 避免实例化对象，尤其是new的使用。<br><br>
 
 
