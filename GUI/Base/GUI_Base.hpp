@@ -25,7 +25,9 @@ protected:
     static inline lv_ui_t *gui = &ui;// 可加可不加
 };
 
-// 接口
+// 色彩
+#define Color_Firefly_Green  lv_color_make(133, 238, 223)// 流萤绿
+#define Color_Firefly_Gold   lv_color_make(239, 221, 121)// 流萤金
 
 /* 预编译命令 */
 #endif
