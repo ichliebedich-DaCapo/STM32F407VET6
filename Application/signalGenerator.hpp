@@ -4,7 +4,7 @@
 
 #ifndef FURINA_SIGNALGENERATOR_HPP
 #define FURINA_SIGNALGENERATOR_HPP
-#include "JYZQ_Conf.h"
+#include "App_Conf.h"
 #if ENABLE_SIGNAL_GENERATOR
 // 宏定义
 #define APP_NO_RTOS // 没有使用FreeRTOS

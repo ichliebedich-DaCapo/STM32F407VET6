@@ -8,9 +8,11 @@
 #include "lvgl.h"
 #include "lcd.h"
 #include "fsmc.h"
-
+#include "key_exit.h"
 #if FreeRTOS_DEBUG
+
 #include "CPU_RunTime.h"
+
 #endif
 
 TIM_HandleTypeDef htim7;
@@ -24,7 +26,7 @@ void BaseInit()
 
     // 开启FreeRTOS的运行时统计信息
 #if FreeRTOS_DEBUG
-  ConfigureTimerForRunTimeStats();
+    ConfigureTimerForRunTimeStats();
 #endif
 
     // 启用基础GPIO时钟
@@ -32,8 +34,12 @@ void BaseInit()
     __HAL_RCC_GPIOH_CLK_ENABLE();
     __HAL_RCC_GPIOA_CLK_ENABLE();
 
-    fsmc_dma_init();// 初始化FSMC+DMA
+    fsmc_init();
     lcd_init();// 初始化LCD
+    key_exti_init();
+#ifdef USE_FSMC_DMA
+    fsmc_dma_init();// 初始化FSMC+DMA
+#endif
 }
 
 
@@ -132,6 +138,7 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
     htim7.Init.ClockDivision = 0;
     htim7.Init.CounterMode = TIM_COUNTERMODE_UP;
     htim7.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+// 考虑到LVGL初始化会死循环
 
     status = HAL_TIM_Base_Init(&htim7);
     if (status == HAL_OK)
@@ -175,17 +182,17 @@ inline void HAL_ResumeTick(void)
 // TIM7中断处理函数
 void TIM7_IRQHandler()
 {
-    if(__HAL_TIM_GET_IT_SOURCE(&htim7, TIM_IT_UPDATE) != RESET)
-    {
-        __HAL_TIM_CLEAR_IT(&htim7, TIM_IT_UPDATE);
-        HAL_IncTick();
-        lv_tick_inc(1);
-    }
+//    if (__HAL_TIM_GET_IT_SOURCE(&htim7, TIM_IT_UPDATE) != RESET)
+//    {
+//        __HAL_TIM_CLEAR_IT(&htim7, TIM_IT_UPDATE);
+//        HAL_IncTick();
+//        lv_tick_inc(1);
+//    }
 
-    // 下面的也许不安全
-/*    __HAL_TIM_CLEAR_FLAG(&htim7, TIM_FLAG_UPDATE);
+    // 我把TIM7当做系统时钟，所以并不需要判断中断源
+    __HAL_TIM_CLEAR_FLAG(&htim7, TIM_FLAG_UPDATE);
     HAL_IncTick();
-    lv_tick_inc(1);*/
+    lv_tick_inc(1);
 }
 
 

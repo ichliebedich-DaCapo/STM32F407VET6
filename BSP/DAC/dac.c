@@ -33,7 +33,6 @@ void dac_init(void)
     sConfig.DAC_Trigger = DAC_TRIGGER_NONE;
     sConfig.DAC_OutputBuffer = DAC_OUTPUTBUFFER_DISABLE;// 输出缓冲若是开启，则输入的数据好像会取反？
     HAL_DAC_ConfigChannel(&hdac, &sConfig, DAC_CHANNEL_1);
-
 }
 
 #endif

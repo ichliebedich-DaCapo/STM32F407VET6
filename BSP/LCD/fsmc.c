@@ -100,13 +100,12 @@ void fsmc_init()
     hsram1.Init.AsynchronousWait = FSMC_ASYNCHRONOUS_WAIT_DISABLE;// 是否使能同步传输模式下的等待信号,此处未用
     hsram1.Init.ExtendedMode = FSMC_EXTENDED_MODE_DISABLE;        // 读写使用相同的时序
     hsram1.Init.WriteBurst = FSMC_WRITE_BURST_ENABLE;            // 开启突发写，性能翻倍
-    // hsram1.Init.ContinuousClock=FSMC_CONTINUOUS_CLOCK_SYNC_ASYNC;//这一条是旧库所没有的，下面这一条找不到
-    // FSMC_NORSRAMInitStructure.FSMC_ReadWriteTimingStruct = &FSMC_NORSRAMTimingInitStructure;
     HAL_SRAM_Init(&hsram1, &Timing, &Timing);
 }
 
 
 /*启用FSMC+DMA向LCD传输数据*/
+#ifdef USE_FSMC_DMA
 void fsmc_dma_init()
 {
     __HAL_RCC_DMA2_CLK_ENABLE();
@@ -128,7 +127,6 @@ void fsmc_dma_init()
     {
         Error_Handler();
     }
-
     /*不受FreeRTOS调度*/
     HAL_NVIC_SetPriority(DMA2_Stream6_IRQn, 3, 0);
     HAL_NVIC_EnableIRQ(DMA2_Stream6_IRQn);
@@ -136,5 +134,13 @@ void fsmc_dma_init()
     * 流程：开启DMA中断后，DMA开始传输数据，传输完之后回到【pCallback】，需要注意的是中断处理函数得要定义*/
     HAL_DMA_RegisterCallback(&hdma_memtomem_dma2_stream6, HAL_DMA_XFER_CPLT_CB_ID, LVGL_LCD_FSMC_DMA_pCallback);
 }
+
+// DMA中断,里面他宝贝的真啰嗦
+void DMA2_Stream6_IRQHandler(void)
+{
+    HAL_DMA_IRQHandler(&hdma_memtomem_dma2_stream6);
+}
+
+#endif
 
 #endif

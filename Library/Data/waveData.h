@@ -5,7 +5,7 @@
 #ifndef FURINA_WAVEDATA_H
 #define FURINA_WAVEDATA_H
 
-#include "JYZQ_Conf.h"
+#include "Module_Conf.h"
 #include "stm32f4xx_hal.h"
 /**
  * @brief 波形数据

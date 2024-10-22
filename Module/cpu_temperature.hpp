@@ -4,8 +4,8 @@
 
 #ifndef FURINA_CPU_TEMPERATURE_HPP
 #define FURINA_CPU_TEMPERATURE_HPP
-#include "JYZQ_Conf.h"
-//#ifdef USE_CPU_TEMPERATURE
+#include "Module_Conf.h"
+#if USE_CPU_TEMPERATURE
 
 /**
  * @brief 测温计（CPU）
@@ -21,5 +21,5 @@ public:
 };
 
 
-//#endif  // USE_CPU_TEMPERATURE
+#endif  // USE_CPU_TEMPERATURE
 #endif //FURINA_CPU_TEMPERATURE_HPP

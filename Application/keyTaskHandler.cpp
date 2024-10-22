@@ -1,5 +1,5 @@
 //
-// Created by 34753 on 2024/10/7.
+// Created by fairy on 2024/10/7.
 //
 
 #include "keyTaskHandler.hpp"
@@ -47,37 +47,50 @@ void keyTask(void *argument)
 }
 #endif
 
-// 外部中断回调函数,先放在这，以后找到合适的位置再安放
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+extern "C" {
+void EXTI0_IRQHandler()
 {
-    switch (GPIO_Pin)
-    {
-        /*开启外部中断0*/
-
-        case GPIO_PIN_0:
-            key.setCode(KEY_RAM & 0xF);//获取键值
-
+    __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_0);
+    Key::setCode(KEY_RAM & 0xF);//获取键值
 #ifndef APP_NO_RTOS
-            /*释放信号量*/
-            osSemaphoreRelease(keySemHandle);
+    /*释放信号量*/
+    osSemaphoreRelease(keySemHandle);
 #else
-            key.setSign();
+    Key::setSign();
 #endif
-            break;
-
-            /*开启外部中断1*/
-
-        case GPIO_PIN_1:
-#if EXTI1_OPEN
-            //    frequency = FPGA_RAM;
-            osSemaphoreRelease(keySemHandle);
-            break;
-#endif
-        default:
-            break;
-    }
-
 }
+}
+
+//// 外部中断回调函数,先放在这，以后找到合适的位置再安放
+//void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+//{
+//    switch (GPIO_Pin)
+//    {
+//        /*开启外部中断0*/
+//
+//        case GPIO_PIN_0:
+//            Key::setCode(KEY_RAM & 0xF);//获取键值
+//
+//#ifndef APP_NO_RTOS
+//            /*释放信号量*/
+//            osSemaphoreRelease(keySemHandle);
+//#else
+//            Key::setSign();
+//#endif
+//            break;
+//
+//            /*开启外部中断1*/
+//
+//        case GPIO_PIN_1:
+//#if EXTI1_OPEN
+//            //    frequency = FPGA_RAM;
+//            osSemaphoreRelease(keySemHandle);
+//            break;
+//#endif
+//        default:
+//            break;
+//    }
+//}
 
 
 #endif

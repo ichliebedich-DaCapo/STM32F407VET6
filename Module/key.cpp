@@ -1,11 +1,9 @@
 //
-// Created by 34753 on 2024/9/22.
+// Created by fairy on 2024/9/22.
 //
 #include "key.hpp"
 #include "key_exit.h"
 #include "stm32f4xx_hal.h"
-// 实例化，由于我更喜欢通过“.”来访问成员变量，所以没有使用单例模式
-Key key;
 
 extern void key_handler();
 __weak void key_handler(){/*由用户自己实现*/}
@@ -36,7 +34,7 @@ void Key::init()
 #ifdef APP_NO_RTOS
 auto Key::handler()->void
 {
-    if(!sign)
+    if(sign)
     {
         sign = 0;
         key_handler();

@@ -13,7 +13,7 @@
  */
 #ifndef FURINA_VOICESTORAGEANDPLAY_HPP
 #define FURINA_VOICESTORAGEANDPLAY_HPP
-#include "JYZQ_Conf.h"
+#include "App_Conf.h"
 #if ENABLE_VOICE_STORAGE_AND_PLAY
 // 不启用FreeRTOS
 #define APP_NO_RTOS
@@ -29,6 +29,12 @@
 #define USE_ADC  // 使用ADC
 #define USE_DAC // 使用DAC
 #define USE_FFT //使用FFT
+
+
+/**************************其他**************************/
+// 使用软件CS控制
+
+
 
 #endif
 #endif //FURINA_VOICESTORAGEANDPLAY_HPP

@@ -4,7 +4,7 @@
 
 #ifndef FURINA_SPI_H
 #define FURINA_SPI_H
-#include "JYZQ_Conf.h"
+#include "Module_Conf.h"
 #ifdef USE_SPI
 #include "stm32f4xx_hal.h"
 
@@ -15,9 +15,10 @@ extern "C" {
 
 
 void spi3_init();// 初始化SPI3
+void spi2_init();// 初始化SPI2
 
 extern  SPI_HandleTypeDef hspi3;
-
+extern  SPI_HandleTypeDef hspi2;
 #ifdef __cplusplus
 }
 #endif
