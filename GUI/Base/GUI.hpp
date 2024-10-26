@@ -15,8 +15,6 @@
 // 宏定义
 
 
-
-
 /**
  * @brief GUI类
  */
@@ -26,6 +24,14 @@ public:
     static auto init() -> void;// 初始化界面
 };
 
+#ifdef APP_NO_RTOS
+inline void GUI_handler()
+{
+    lv_task_handler();
+}
+#else
+#define GUI_handler() void(0)
+#endif
 /* 预编译命令 */
 #endif
 #endif //FURINA_GUI_HPP

@@ -34,15 +34,12 @@ auto Screen::init() -> void
     lv_chart_set_point_count(gui->main.chart, 128); // 设置数据点数量
     lv_chart_set_range(gui->main.chart, LV_CHART_AXIS_PRIMARY_Y, 0, 255);// 设置Y轴范围
     lv_chart_set_range(gui->main.chart, LV_CHART_AXIS_SECONDARY_Y, 0, 100);
-//    lv_chart_set_zoom_x(gui->main.chart, 256);// 设置默认缩放
-//    lv_chart_set_zoom_y(gui->main.chart, 256);
     lv_obj_set_style_size(gui->main.chart, 0, LV_PART_INDICATOR);// 设置点的大小
     lv_obj_set_scrollbar_mode(gui->main.chart, LV_SCROLLBAR_MODE_OFF);
 
     // 自定义刻度线和背景
     lv_chart_set_div_line_count(gui->main.chart, 0, 0); // 更多刻度线
     lv_chart_set_axis_tick(gui->main.chart, LV_CHART_AXIS_PRIMARY_Y, 2, 1, 1, 10, true, 1); // 调整刻度线样式
-    //Write codes screen_chart_1
 
 
     //Write style for screen_chart_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
@@ -73,7 +70,9 @@ auto Screen::init() -> void
     timer.create([](lv_timer_t *)
                  {
                      lv_chart_set_next_value(GUI_Base::get_ui()->main.chart, series, sine_wave[wave_index]);
-                     wave_index+=4;
+                     wave_index+=1;
+                     if(wave_index==128)
+                         wave_index=0;
                  }, 25);
 
     timer.resume();

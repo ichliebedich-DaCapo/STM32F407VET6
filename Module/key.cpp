@@ -30,9 +30,8 @@ void Key::init()
     key_exti_init();
 }
 
-
 #ifdef APP_NO_RTOS
-auto Key::handler()->void
+auto Key::handler() -> void
 {
     if(sign)
     {
@@ -40,7 +39,17 @@ auto Key::handler()->void
         key_handler();
     }
 }
+#else
+auto Key::handler()-> void{}
 #endif
+
+
+//#ifdef APP_NO_RTOS
+//auto Key::handler()->void
+//{
+//
+//}
+//#endif
 
 
 

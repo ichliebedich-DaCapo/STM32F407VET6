@@ -84,21 +84,6 @@ static inline void LCD_Color_Fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_
     }
 }
 
-//#define LCD_Set_Window(sx, sy, ex, ey) \
-//{\
-//    LCD_WRITE_CMD(0x002A);\
-//    LCD_WRITE_DATA(sx >> 8);\
-//    LCD_WRITE_DATA(0x00FF & sx);\
-//    LCD_WRITE_DATA((ex) >> 8);\
-//    LCD_WRITE_DATA(0x00FF & (ex));\
-//    LCD_WRITE_CMD(0x002B);\
-//    LCD_WRITE_DATA(sy >> 8);\
-//    LCD_WRITE_DATA(0x00FF & sy);\
-//    LCD_WRITE_DATA(ey >> 8);\
-//    LCD_WRITE_DATA(0x00FF & ey);\
-//    LCD_WRITE_CMD(0x002C);\
-//}
-
 /*液晶初始化*/
 void lcd_init(void);
 
