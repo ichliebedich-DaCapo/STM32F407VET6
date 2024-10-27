@@ -8,6 +8,7 @@
 #if 1
 // 头文件
 #include "wave.h"
+#include "chart.hpp"
 
 // 变量
 uint8_t wave_index = 0;
@@ -23,56 +24,47 @@ auto Screen::init() -> void
     Component::set_parent(gui->main.screen);
 
     // 创建图表对象
-    gui->main.chart = lv_chart_create(gui->main.screen);
-    lv_obj_set_size(gui->main.chart, 320, 200); // 设置图表大小
-    lv_obj_set_pos(gui->main.chart, 122, 54);
-    lv_obj_align(gui->main.chart, LV_ALIGN_CENTER, 0, 0); // 居中对齐
+    Chart::init(gui->main.chart);
+    Chart::set_pos_size(122, 54, 320, 200);// 设置图表大小位置
+    Chart::set_align(LV_ALIGN_CENTER, 0, 0);// 居中对齐
 
     // 配置图表
-    lv_chart_set_type(gui->main.chart, LV_CHART_TYPE_LINE);// 设置类型:折线 柱形
-    lv_chart_set_update_mode(gui->main.chart, LV_CHART_UPDATE_MODE_SHIFT);// 滚动模式
-    lv_chart_set_point_count(gui->main.chart, 128); // 设置数据点数量
-    lv_chart_set_range(gui->main.chart, LV_CHART_AXIS_PRIMARY_Y, 0, 255);// 设置Y轴范围
-    lv_chart_set_range(gui->main.chart, LV_CHART_AXIS_SECONDARY_Y, 0, 100);
-    lv_obj_set_style_size(gui->main.chart, 0, LV_PART_INDICATOR);// 设置点的大小
-    lv_obj_set_scrollbar_mode(gui->main.chart, LV_SCROLLBAR_MODE_OFF);
+    Chart::set_type(LV_CHART_TYPE_LINE);// 设置类型:折线 柱形
+    Chart::set_point_count(128);// 设置数据点数量
+    Chart::set_update_mode(LV_CHART_UPDATE_MODE_SHIFT);// 滚动模式
+    Chart::set_range(0, 255, LV_CHART_AXIS_PRIMARY_Y);// 设置Y轴范围
+    Chart::remove_style_dot();// 取消折线点样式
 
     // 自定义刻度线和背景
-    lv_chart_set_div_line_count(gui->main.chart, 0, 0); // 更多刻度线
-    lv_chart_set_axis_tick(gui->main.chart, LV_CHART_AXIS_PRIMARY_Y, 2, 1, 1, 10, true, 1); // 调整刻度线样式
-
+    Chart::set_div_count(0, 0);// 设置刻度线
 
     //Write style for screen_chart_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-    lv_obj_set_style_bg_opa(gui->main.chart, 105, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(gui->main.chart, Color_Firefly_Green, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_grad_dir(gui->main.chart, LV_GRAD_DIR_HOR, LV_PART_MAIN | LV_STATE_DEFAULT); // 设置垂直渐变
-    lv_obj_set_style_bg_grad_color(gui->main.chart, Color_Firefly_Gold, LV_PART_MAIN | LV_STATE_DEFAULT); // 设置渐变结束颜色
+    Chart::bg_color(Color_Firefly_Green);
+    Chart::bg_opa(105);
+    Chart::bg_grad_dir(LV_GRAD_DIR_HOR);// 设置垂直渐变
+    Chart::bg_grad_color(Color_Firefly_Gold);// 设置渐变结束颜色
 
-    lv_obj_set_style_border_width(gui->main.chart, 1, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_opa(gui->main.chart, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_color(gui->main.chart, lv_color_hex(0xe8e8e8), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_border_side(gui->main.chart, LV_BORDER_SIDE_FULL, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_radius(gui->main.chart, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_line_width(gui->main.chart, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_shadow_width(gui->main.chart, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    Chart::border_set_clip_corner();
+    Chart::border_color(lv_color_hex(0x3f3f3f));
+    Chart::border_opa(255);
+    Chart::border_width(1);
+    Chart::radius(0);
+    Chart::shadow_width(0);
+    Chart::line_width(0);
 
 
     //Write style for screen_chart_1, Part: LV_PART_TICKS, State: LV_STATE_DEFAULT.
-    lv_obj_set_style_text_color(gui->main.chart, lv_color_hex(0x151212), LV_PART_TICKS|LV_STATE_DEFAULT);
-//    lv_obj_set_style_text_font(gui->main.chart, &lv_font_montserratMedium_12, LV_PART_TICKS|LV_STATE_DEFAULT);
-    lv_obj_set_style_text_opa(gui->main.chart, 255, LV_PART_TICKS|LV_STATE_DEFAULT);
-    lv_obj_set_style_line_width(gui->main.chart, 0, LV_PART_TICKS|LV_STATE_DEFAULT);
-
-    // 添加数据序列
-    series = lv_chart_add_series(gui->main.chart, lv_color_hex(0x00ff00), LV_CHART_AXIS_PRIMARY_Y);
+    Chart::text_color(lv_color_hex(0x151212));
+    Chart::text_opa(255);
+    Chart::add_series(series,lv_color_hex(0x00ff00)); // 添加数据序列
 
     /*  创建定时器*/
     timer.create([](lv_timer_t *)
                  {
                      lv_chart_set_next_value(GUI_Base::get_ui()->main.chart, series, sine_wave[wave_index]);
-                     wave_index+=1;
-                     if(wave_index==128)
-                         wave_index=0;
+                     wave_index += 1;
+                     if (wave_index == 128)
+                         wave_index = 0;
                  }, 25);
 
     timer.resume();

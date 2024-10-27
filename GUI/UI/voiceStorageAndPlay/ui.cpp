@@ -5,6 +5,10 @@
 #include "events.hpp"
 #include "spectrum_1.h"
 #include "LV_Timer.hpp"
+#include "text.hpp"
+#include "imageButton.hpp"
+#include "image.hpp"
+#include "slider.hpp"
 
 
 #if 1

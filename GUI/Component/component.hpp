@@ -23,7 +23,7 @@ public:
 
 /**
  * @brief 组件初始化基类
- * @note 需要自己去实现create函数
+ * @note 需要自己去实现create函数.若要使用其他组件静态类，需要自行调用Component类的相关接口来设置parent和object
  */
 class Component
 {
@@ -40,6 +40,7 @@ public:
         _obj = object;
     }
 
+    // 初始化自定义组件
     static inline auto init(_lv_obj_t *&component) -> void
     {
         component = lv_obj_create(_parent);
@@ -57,13 +58,14 @@ public:
         lv_obj_set_size(_obj, w, h);
     }
 
+    // 添加标志
     static inline auto add_flag(lv_obj_flag_t flag) -> void
     {
         lv_obj_add_flag(_obj, flag);
     }
 
-    // 设置为裁切圆角
-    static inline auto set_style_clip_corner(lv_style_selector_t selector) -> void
+    // 设置为边框圆角
+    static inline auto border_set_clip_corner(lv_style_selector_t selector = (LV_PART_MAIN | LV_STATE_DEFAULT)) -> void
     {
         lv_obj_set_style_clip_corner(_obj, true, selector);
     }
@@ -75,16 +77,128 @@ public:
     }
 
     // 移动到图层底部
-    static inline auto move_to_background(_lv_obj_t *&obj=_obj) -> void
+    static inline auto move_to_background(_lv_obj_t *&obj = _obj) -> void
     {
         lv_obj_move_background(obj);
     }
 
     // 重绘
-    static inline auto invalidate(_lv_obj_t *&obj=_obj) -> void
+    static inline auto invalidate(_lv_obj_t *&obj = _obj) -> void
     {
         lv_obj_invalidate(obj);  // 使频谱区域无效，触发重绘
     }
+
+    // 设置对齐
+    static inline auto
+    set_align(lv_align_t align, lv_coord_t x_offset, lv_coord_t y_offset, _lv_obj_t *&obj = _obj) -> void
+    {
+        lv_obj_align(obj, align, x_offset, y_offset);
+    }
+
+    // 设置样式大小
+    static inline auto set_style_size(lv_coord_t size, lv_style_selector_t selector) -> void
+    {
+        lv_obj_set_style_size(_obj, size, selector);
+    }
+
+    // 设置背景颜色
+    static inline auto
+    bg_color(lv_color_t color, lv_style_selector_t selector = (LV_PART_MAIN | LV_STATE_DEFAULT)) -> void
+    {
+        lv_obj_set_style_bg_color(_obj, color, selector);
+    }
+
+    // 设置背景透明度
+    static inline auto
+    bg_opa(uint8_t opa, lv_style_selector_t selector = (LV_PART_MAIN | LV_STATE_DEFAULT)) -> void
+    {
+        lv_obj_set_style_bg_opa(_obj, opa, selector);
+    }
+
+    // 设置背景渐变方向
+    static inline auto
+    bg_grad_dir(lv_grad_dir_t dir, lv_style_selector_t selector = (LV_PART_MAIN | LV_STATE_DEFAULT)) -> void
+    {
+        lv_obj_set_style_bg_grad_dir(_obj, dir, selector);
+    }
+
+    // 设置背景渐变颜色
+    static inline auto
+    bg_grad_color(lv_color_t color, lv_style_selector_t selector = (LV_PART_MAIN | LV_STATE_DEFAULT)) -> void
+    {
+        lv_obj_set_style_bg_grad_color(_obj, color, selector);
+    }
+
+    // 设置边框宽度
+    static inline auto
+    border_width(lv_coord_t width, lv_style_selector_t selector = (LV_PART_MAIN | LV_STATE_DEFAULT)) -> void
+    {
+        lv_obj_set_style_border_width(_obj, width, selector);
+    }
+
+    // 设置边框颜色
+    static inline auto
+    border_color(lv_color_t color, lv_style_selector_t selector = (LV_PART_MAIN | LV_STATE_DEFAULT)) -> void
+    {
+        lv_obj_set_style_border_color(_obj, color, selector);
+    }
+
+    // 设置边框透明度
+    static inline auto
+    border_opa(uint8_t opa, lv_style_selector_t selector = (LV_PART_MAIN | LV_STATE_DEFAULT)) -> void
+    {
+        lv_obj_set_style_border_opa(_obj, opa, selector);
+    }
+
+    // 设置边框xxx
+    static inline auto
+    border_side(lv_border_side_t side = LV_BORDER_SIDE_FULL,
+                lv_style_selector_t selector = (LV_PART_MAIN | LV_STATE_DEFAULT)) -> void
+    {
+        lv_obj_set_style_border_side(_obj, side, selector);
+    }
+
+    // 设置圆角半径
+    static inline auto
+    radius(lv_coord_t radius, lv_style_selector_t selector = (LV_PART_MAIN | LV_STATE_DEFAULT)) -> void
+    {
+        lv_obj_set_style_radius(_obj, radius, selector);
+    }
+
+    // 设置线条宽度
+    static inline auto
+    line_width(lv_coord_t width, lv_style_selector_t selector = (LV_PART_MAIN | LV_STATE_DEFAULT)) -> void
+    {
+        lv_obj_set_style_line_width(_obj, width, selector);
+    }
+
+    // 设置阴影宽度
+    static inline auto
+    shadow_width(lv_coord_t width, lv_style_selector_t selector = (LV_PART_MAIN | LV_STATE_DEFAULT)) -> void
+    {
+        lv_obj_set_style_shadow_width(_obj, width, selector);
+    }
+
+    // 设置文本颜色,一般用于图表或刻度盘
+    static inline auto
+    text_color(lv_color_t color, lv_style_selector_t selector = (LV_PART_TICKS|LV_STATE_DEFAULT)) -> void
+    {
+        lv_obj_set_style_text_color(_obj, color, selector);
+    }
+
+    // 设置文本透明度,一般用于图表或刻度盘
+    static inline auto text_opa(uint8_t opa, lv_style_selector_t selector = (LV_PART_TICKS|LV_STATE_DEFAULT)) -> void
+    {
+        lv_obj_set_style_text_opa(_obj, opa, selector);
+    }
+
+    // 设置文本字体,一般用于图表或刻度盘
+    static inline auto
+    text_font(lv_font_t *font, lv_style_selector_t selector = (LV_PART_TICKS|LV_STATE_DEFAULT)) -> void
+    {
+        lv_obj_set_style_text_font(_obj, font, selector);
+    }
+
 
 protected:
     static inline _lv_obj_t *_obj;
@@ -92,144 +206,13 @@ protected:
 };
 
 
-// 图片类
-class Image : public Component
-{
-public:
-    // 使用前必须设置父对象
-    static inline auto init(_lv_obj_t *&component) -> void
-    {
-        component = lv_img_create(_parent);
-        _obj = component;
-    }
-
-    //  设置图片资源
-    static inline auto set_src(const lv_img_dsc_t *src) -> void
-    {
-        lv_img_set_src(_obj, src);
-    }
-};
-
-// 按钮类
-class ImageButton : public Component
-{
-public:
-    // 使用前必须设置父对象
-    static inline auto init(_lv_obj_t *&component) -> void
-    {
-        component = lv_imgbtn_create(_parent);
-        _obj = component;
-    }
-
-    // 默认居中，大部分情况下都用不到旁边两个参数，需要时再补充
-    static inline auto set_src(lv_imgbtn_state_t state, const lv_img_dsc_t *src) -> void
-    {
-        lv_imgbtn_set_src(_obj, state, nullptr, src, nullptr);
-    }
-
-     //默认发送的事件为LV_EVENT_CLICKED,因为平时用得最多就是这个。后面可自行添加
-    static inline auto press(_lv_obj_t*&obj=_obj)-> void
-    {
-        lv_imgbtn_set_state(obj, LV_IMGBTN_STATE_CHECKED_RELEASED);
-        lv_obj_add_state(obj, LV_STATE_CHECKED);// 选中
-        lv_event_send(obj, LV_EVENT_CLICKED, nullptr);
-
-    }
-    static inline auto release(_lv_obj_t*&obj=_obj)-> void
-    {
-        lv_imgbtn_set_state(obj, LV_IMGBTN_STATE_RELEASED);
-        lv_obj_clear_state(obj, LV_STATE_CHECKED);// 取消选中
-        lv_event_send(obj, LV_EVENT_CLICKED, nullptr);
-    }
-};
-
-/**
- * @brief 文本框类
- */
-class Text : public Component
-{
-public:
-    // 使用前必须设置父对象
-    static inline auto init(_lv_obj_t *&component, const char *text = nullptr) -> void
-    {
-        component = lv_label_create(_parent);
-        _obj = component;
-        if (text != nullptr)
-            set_text(text);
-    }
-
-    /**
-     * @brief 设置字体和字间距
-     * @param font 字体格式
-     * @param space 字间距，默认为0
-     * @return
-     */
-    static inline auto set_text_font_space(const lv_font_t *font, lv_coord_t space = 0) -> void
-    {
-        lv_obj_set_style_text_font(_obj, font, LV_PART_MAIN | LV_STATE_DEFAULT);
-        if (space)
-            lv_obj_set_style_text_letter_space(_obj, space, LV_PART_MAIN | LV_STATE_DEFAULT);
-    }
-
-    static inline auto set_text_color(lv_color_t color) -> void
-    {
-        lv_obj_set_style_text_color(_obj, color, LV_PART_MAIN | LV_STATE_DEFAULT);
-    }
-
-    static inline auto set_text_align(lv_text_align_t align) -> void
-    {
-        lv_obj_set_style_text_align(_obj, align, LV_PART_MAIN | LV_STATE_DEFAULT);
-    }
-
-    static inline auto set_text(const char *text) -> void
-    {
-        lv_label_set_text(_obj, text);
-    }
-
-    static inline auto set_text_fmt(const char *fmt, ...) -> void
-    {
-        va_list args;
-        va_start(args, fmt);
-        lv_label_set_text_fmt(_obj, fmt, args);
-        va_end(args);
-    }
-};
 
 
-class Slider : public Component
-{
-public:
-    // 使用前必须设置父对象
-    static inline auto init(_lv_obj_t *&component) -> void
-    {
-        component = lv_slider_create(_parent);
-        _obj = component;
-    }
 
-    static inline auto set_range(lv_coord_t min, lv_coord_t max) -> void
-    {
-        lv_slider_set_range(_obj, min, max);
-    }
 
-    static inline auto set_value(int32_t value, lv_anim_enable_t anim_en = LV_ANIM_OFF,_lv_obj_t*&obj=_obj) -> void
-    {
-        lv_slider_set_value(obj, value, anim_en);
-    }
 
-    static inline auto set_bg_color(lv_color_t color, lv_opa_t opa = 50,
-                                    lv_style_selector_t selector = LV_PART_MAIN | LV_PART_MAIN) -> void
-    {
-        lv_obj_set_style_bg_color(_obj, color, selector);
-        if (opa != 50)
-            lv_obj_set_style_bg_opa(_obj, opa, selector);
-    }
 
-    static inline auto set_bg_src(lv_obj_t *obj, const void *src, lv_style_selector_t selector = LV_PART_KNOB) -> void
-    {
-        lv_obj_set_style_bg_img_src(obj, src, selector);
-    }
 
-};
 
 
 
