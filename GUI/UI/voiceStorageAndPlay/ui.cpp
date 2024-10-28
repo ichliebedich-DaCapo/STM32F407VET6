@@ -45,22 +45,20 @@ auto Screen::init() -> void
     /******************************************文本框***************************************/
 
     //Write codes screen_label_speed
-    Text::init(gui->main.label_speed, "");
+    Text::init(gui->main.label_speed, "",&lv_customer_font_SourceHanSerifSC_Regular_12);
     Text::set_pos_size(392, 26, 74, 13);
     Text::add_flag(LV_OBJ_FLAG_HIDDEN);
-    Text::set_text_font_space(&lv_customer_font_SourceHanSerifSC_Regular_12, 2);
+    Text::set_space( 2);
 
     //Write codes screen_label_title_music
-    Text::init(gui->main.label_title_music, "语音存储与回放");
+    Text::init(gui->main.label_title_music, "语音存储与回放",&lv_customer_font_SourceHanSerifSC_Regular_14);
     Text::set_pos_size(150, 5, 180, 21);
-    Text::set_text_font_space(&lv_customer_font_SourceHanSerifSC_Regular_14);
     Text::set_text_color(lv_color_hex(0x504d6d));
     Text::set_text_align(LV_TEXT_ALIGN_CENTER);// 设置文本居中
 
     //Write codes screen_label_slider_time
-    Text::init(gui->main.label_slider_time, "0:00");
+    Text::init(gui->main.label_slider_time, "0:00",&lv_customer_font_SourceHanSerifSC_Regular_12);
     Text::set_pos_size(420, 288, 36, 12);
-    Text::set_text_font_space(&lv_customer_font_SourceHanSerifSC_Regular_12);
     Text::set_text_color(lv_color_hex(0x8a86b8));
     Text::set_text_align(LV_TEXT_ALIGN_CENTER);
 

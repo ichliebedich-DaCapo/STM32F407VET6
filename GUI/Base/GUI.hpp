@@ -8,10 +8,14 @@
 /* 预编译命令 */
 #if 1
 // 头文件
-#include "GUI_Base.hpp"
-#include "component.hpp"
-#include "events.hpp"
 #include "LV_Timer.hpp"
+#include "events.hpp"
+#include "component.hpp"
+#include "chart.hpp"
+#include "slider.hpp"
+#include "image.hpp"
+#include "text.hpp"
+#include "button.hpp"
 // 宏定义
 
 

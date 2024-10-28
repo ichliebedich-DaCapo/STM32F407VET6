@@ -46,6 +46,11 @@ public:
         lv_chart_set_update_mode(_obj, mode);
     }
 
+    static inline auto set_next_value(lv_chart_series_t *&series, lv_coord_t value,_lv_obj_t *&obj=_obj)
+    {
+        lv_chart_set_next_value(obj, series, value);
+    }
+
     // 移除折线上点的样式
     static inline auto remove_style_dot() -> void
     {

@@ -54,7 +54,15 @@ public:
      */
     static inline auto set_pos_size(lv_coord_t x, lv_coord_t y, lv_coord_t w, lv_coord_t h) -> void
     {
+        set_pos(x, y);
+        set_size(w, h);
+    }
+    static inline auto set_pos(lv_coord_t x, lv_coord_t y) -> void
+    {
         lv_obj_set_pos(_obj, x, y);
+    }
+    static inline auto set_size(lv_coord_t w, lv_coord_t h) -> void
+    {
         lv_obj_set_size(_obj, w, h);
     }
 
@@ -64,8 +72,8 @@ public:
         lv_obj_add_flag(_obj, flag);
     }
 
-    // 设置为边框圆角
-    static inline auto border_set_clip_corner(lv_style_selector_t selector = (LV_PART_MAIN | LV_STATE_DEFAULT)) -> void
+    // 设置为裁剪属性，即子对象的内容会被父对象的圆角部分裁剪掉，而不会超出父对象的圆角边界。
+    static inline auto set_clip_corner(lv_style_selector_t selector = (LV_PART_MAIN | LV_STATE_DEFAULT)) -> void
     {
         lv_obj_set_style_clip_corner(_obj, true, selector);
     }
@@ -90,7 +98,7 @@ public:
 
     // 设置对齐
     static inline auto
-    set_align(lv_align_t align, lv_coord_t x_offset, lv_coord_t y_offset, _lv_obj_t *&obj = _obj) -> void
+    set_align(lv_align_t align, lv_coord_t x_offset=0, lv_coord_t y_offset=0, _lv_obj_t *&obj = _obj) -> void
     {
         lv_obj_align(obj, align, x_offset, y_offset);
     }
@@ -158,9 +166,9 @@ public:
         lv_obj_set_style_border_side(_obj, side, selector);
     }
 
-    // 设置圆角半径
+    // 设置边框圆角半径
     static inline auto
-    radius(lv_coord_t radius, lv_style_selector_t selector = (LV_PART_MAIN | LV_STATE_DEFAULT)) -> void
+    border_radius(lv_coord_t radius, lv_style_selector_t selector = (LV_PART_MAIN | LV_STATE_DEFAULT)) -> void
     {
         lv_obj_set_style_radius(_obj, radius, selector);
     }

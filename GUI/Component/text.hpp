@@ -7,6 +7,7 @@
 #include "component.hpp"
 /* 预编译命令 */
 #if 1
+
 /**
  * @brief 文本框类
  */
@@ -14,12 +15,17 @@ class Text : public Component
 {
 public:
     // 使用前必须设置父对象
-    static inline auto init(_lv_obj_t *&component, const char *text = nullptr) -> void
+    static inline auto init(_lv_obj_t *&component, const char *text = nullptr, const lv_font_t *font = nullptr) -> void
     {
         component = lv_label_create(_parent);
         _obj = component;
-        if (text != nullptr)
+
+        if (text)
             set_text(text);
+        if (font)
+        {
+            set_font(font);
+        }
     }
 
     /**
@@ -28,13 +34,18 @@ public:
      * @param space 字间距，默认为0
      * @return
      */
-    static inline auto set_text_font_space(const lv_font_t *font, lv_coord_t space = 0) -> void
+    static inline auto set_font(const lv_font_t *font, lv_style_selector_t selector=LV_PART_MAIN | LV_STATE_DEFAULT) -> void
     {
-        lv_obj_set_style_text_font(_obj, font, LV_PART_MAIN | LV_STATE_DEFAULT);
-        if (space)
-            lv_obj_set_style_text_letter_space(_obj, space, LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_text_font(_obj, font, selector);
     }
 
+    // 设置字间距
+    static inline auto set_space(lv_coord_t space,lv_style_selector_t selector=LV_PART_MAIN | LV_STATE_DEFAULT) -> void
+    {
+        lv_obj_set_style_text_letter_space(_obj, space, selector);
+    }
+
+    // 可以设置文本框或者作为文本框父对象的按钮
     static inline auto set_text_color(lv_color_t color) -> void
     {
         lv_obj_set_style_text_color(_obj, color, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -58,5 +69,6 @@ public:
         va_end(args);
     }
 };
+
 #endif
 #endif //SIMULATOR_TEXT_HPP
