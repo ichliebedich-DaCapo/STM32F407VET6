@@ -8,29 +8,50 @@
 #include "lvgl.h"
 /* 预编译命令 */
 #if 1
+
+
 /*********************组件*******************/
-typedef struct
+struct lv_ui_t
 {
+    using Obj = lv_obj_t *;
+    // 主屏幕
     struct
     {
-        lv_obj_t *screen;// 屏幕自身
-        lv_obj_t *chart;// 折线图
-        lv_obj_t  *btn_mode;// 模式
-        lv_obj_t  *btn_mode_label;
-        lv_obj_t  *btn_freq;// 频率
-        lv_obj_t  *btn_freq_label;
-        lv_obj_t  *btn_ratio_add;// 比例
-        lv_obj_t  *btn_ratio_sub;
-        lv_obj_t  *btn_bias_add;// 偏置
-        lv_obj_t  *btn_bias_sub;
-        lv_obj_t  *imgbtn_start;// 开始
-        lv_obj_t  *imgbtn_stop;// 停止
+        Obj screen;// 屏幕自身
+        Obj chart;// 折线图
+        Obj btn_mode;// 模式
+        Obj btn_mode_label;
+        Obj label_mode;
+        Obj btn_freq;// 频率
+        Obj btn_freq_label;
+        Obj label_freq;
+        Obj btn_ratio_add;// 比例
+        Obj btn_ratio_add_label;
+        Obj btn_ratio_sub;
+        Obj btn_ratio_sub_label;
+        Obj label_ratio;
+        Obj btn_bias_add;// 偏置
+        Obj btn_bias_add_label;
+        Obj btn_bias_sub;
+        Obj btn_bias_sub_label;
+        Obj label_bias;
+        Obj label_tick;// 时刻
+        Obj label_info;// 信息
+        Obj label_title;// 标题
+        Obj imgbtn_play;// 播放键
     } main;// 主屏幕
 
-}lv_ui_t;
+};
+
+// 取别名
+using lv_ui_t = struct lv_ui_t;
+
 
 // 加载资源文件
-LV_FONT_DECLARE(lv_customer_font_SourceHanSerifSC_Regular_16)
+LV_FONT_DECLARE(lv_customer_font_SourceHanSerifSC_Regular_15)
 LV_FONT_DECLARE(lv_customer_font_SourceHanSerifSC_Regular_13)
+
+LV_IMG_DECLARE(_btn_list_play_alpha_48x48);
+LV_IMG_DECLARE(_btn_list_pause_alpha_48x48);
 #endif
 #endif //SIMULATOR_UI_HPP

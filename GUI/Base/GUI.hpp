@@ -16,6 +16,7 @@
 #include "image.hpp"
 #include "text.hpp"
 #include "button.hpp"
+#include "imageButton.hpp"
 // 宏定义
 
 

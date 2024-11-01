@@ -14,61 +14,115 @@
 class Text : public Component
 {
 public:
-    // 使用前必须设置父对象
-    static inline auto init(_lv_obj_t *&component, const char *text = nullptr, const lv_font_t *font = nullptr) -> void
-    {
-        component = lv_label_create(_parent);
-        _obj = component;
+    // 初始化文本框
+    static inline auto init(Obj component, Strings text = nullptr, Font font = nullptr,Obj parent=_parent) -> void;
 
-        if (text)
-            set_text(text);
-        if (font)
-        {
-            set_font(font);
-        }
-    }
-
-    /**
-     * @brief 设置字体和字间距
-     * @param font 字体格式
-     * @param space 字间距，默认为0
-     * @return
-     */
-    static inline auto set_font(const lv_font_t *font, lv_style_selector_t selector=LV_PART_MAIN | LV_STATE_DEFAULT) -> void
-    {
-        lv_obj_set_style_text_font(_obj, font, selector);
-    }
+    // 设置字体
+    static inline auto
+    set_font(Font font, Selector selector = selector_default) -> void;
 
     // 设置字间距
-    static inline auto set_space(lv_coord_t space,lv_style_selector_t selector=LV_PART_MAIN | LV_STATE_DEFAULT) -> void
-    {
-        lv_obj_set_style_text_letter_space(_obj, space, selector);
-    }
+    [[maybe_unused]] static inline auto
+    set_space(Coord space, Selector selector = selector_default) -> void;
 
-    // 可以设置文本框或者作为文本框父对象的按钮
-    static inline auto set_text_color(lv_color_t color) -> void
-    {
-        lv_obj_set_style_text_color(_obj, color, LV_PART_MAIN | LV_STATE_DEFAULT);
-    }
+    // 设置文本颜色
+    static inline auto set_text_color(Color color) -> void;
 
-    static inline auto set_text_align(lv_text_align_t align) -> void
-    {
-        lv_obj_set_style_text_align(_obj, align, LV_PART_MAIN | LV_STATE_DEFAULT);
-    }
+    // 设置文本对齐方式
+    [[maybe_unused]] static inline auto set_text_align(Align align) -> void;
 
-    static inline auto set_text(const char *text) -> void
-    {
-        lv_label_set_text(_obj, text);
-    }
+    // 设置文本内容
+    static inline auto set_text(Strings text,Obj obj=_obj) -> void;
 
-    static inline auto set_text_fmt(const char *fmt, ...) -> void
-    {
-        va_list args;
-        va_start(args, fmt);
-        lv_label_set_text_fmt(_obj, fmt, args);
-        va_end(args);
-    }
+    // 设置文本内容格式化
+    [[maybe_unused]] static inline auto set_text_fmt(Strings fmt, ...) -> void;
+
+    /*自定义初始化函数*/
+    inline auto init(Obj text,  Coord x, Coord y, Coord w, Coord h,Strings string= nullptr)->void ;
+
+
+    // 设置文本框字体
+    [[maybe_unused]] inline auto init_font(Font font) -> void;
+
+
+
+private:
+    Font _font{};
+
 };
+
+
+/**
+ * @brief 初始化文本框
+ * @param component    文本框对象指针
+ * @param text  文本字符串
+ * @param font  文本框字体
+ */
+inline auto Text::init(Obj component, Strings text, Font font,Obj parent) -> void
+{
+    component = lv_label_create(parent);
+    _obj = component;
+
+    // 初始化文本内容
+    if (text)
+        set_text(text);
+    if (font)
+    {
+        set_font(font);
+    }
+}
+
+/**
+ * @brief 设置字体和字间距
+ * @param font 字体格式
+ * @param space 字间距，默认为0
+ * @return
+ */
+inline auto
+Text::set_font(Font font, Selector selector) -> void
+{
+    lv_obj_set_style_text_font(_obj, font, selector);
+}
+
+[[maybe_unused]] inline auto Text::set_space(lv_coord_t space, Selector selector) -> void
+{
+    lv_obj_set_style_text_letter_space(_obj, space, selector);
+}
+
+inline auto Text::set_text_color(lv_color_t color) -> void
+{
+    lv_obj_set_style_text_color(_obj, color, selector_default);
+}
+
+[[maybe_unused]] inline auto Text::set_text_align(lv_text_align_t align) -> void
+{
+    lv_obj_set_style_text_align(_obj, align, selector_default);
+}
+
+inline auto Text::set_text(Strings text,Obj obj) -> void
+{
+    lv_label_set_text(obj, text);
+}
+
+[[maybe_unused]] inline auto Text::set_text_fmt(Strings fmt, ...) -> void
+{
+    va_list args;
+    va_start(args, fmt);
+    lv_label_set_text_fmt(_obj, fmt, args);
+    va_end(args);
+}
+
+[[maybe_unused]] auto Text::init_font(Font font) -> void
+{
+    _font = font;
+}
+
+auto Text::init(Obj text, Coord x, Coord y, Coord w, Coord h, Strings string) -> void
+{
+    Text::init(text, string, _font);
+    Text::set_pos_size(x, y, w, h);
+    Text::set_text_color(lv_color_hex(0));
+}
 
 #endif
 #endif //SIMULATOR_TEXT_HPP
