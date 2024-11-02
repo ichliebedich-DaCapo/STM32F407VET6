@@ -3,7 +3,7 @@ project(Simulator)
 
 # 设置编译器
 set(CMAKE_C_COMPILER gcc)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 # 定义路径
 set(LIBFILE_PATH resource/lib/native)
