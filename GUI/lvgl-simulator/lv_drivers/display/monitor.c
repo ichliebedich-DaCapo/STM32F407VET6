@@ -8,6 +8,7 @@
  *********************/
 #include "monitor.h"
 #include "pro_name.h"
+
 #if USE_MONITOR
 
 #ifndef MONITOR_SDL_INCLUDE_PATH
@@ -17,6 +18,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdio.h>
 #include MONITOR_SDL_INCLUDE_PATH
 #include "../indev/mouse.h"
 #include "../indev/keyboard.h"
@@ -46,28 +48,35 @@
 /**********************
  *      TYPEDEFS
  **********************/
-typedef struct {
-    SDL_Window * window;
-    SDL_Renderer * renderer;
-    SDL_Texture * texture;
+typedef struct
+{
+    SDL_Window *window;
+    SDL_Renderer *renderer;
+    SDL_Texture *texture;
     volatile bool sdl_refr_qry;
 #if MONITOR_DOUBLE_BUFFERED
     uint32_t * tft_fb_act;
 #else
-    uint32_t * tft_fb;
+    uint32_t *tft_fb;
 #endif
-}monitor_t;
+} monitor_t;
 
 /**********************
  *  STATIC PROTOTYPES
  **********************/
-static void window_create(monitor_t * m);
-static void window_update(monitor_t * m);
-int quit_filter(void * userdata, SDL_Event * event);
+static void window_create(monitor_t *m);
+
+static void window_update(monitor_t *m);
+
+int quit_filter(void *userdata, SDL_Event *event);
+
 static void monitor_sdl_clean_up(void);
+
 static void monitor_sdl_init(void);
-static void sdl_event_handler(lv_timer_t * t);
-static void monitor_sdl_refr(lv_timer_t * t);
+
+static void sdl_event_handler(lv_timer_t *t);
+
+static void monitor_sdl_refr(lv_timer_t *t);
 
 /***********************
  *   GLOBAL PROTOTYPES
@@ -109,15 +118,16 @@ void monitor_init(void)
  * @param area an area where to copy `color_p`
  * @param color_p an array of pixel to copy to the `area` part of the screen
  */
-void monitor_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p)
+void monitor_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_t *color_p)
 {
     lv_coord_t hres = disp_drv->hor_res;
     lv_coord_t vres = disp_drv->ver_res;
 
-//    printf("x1:%d,y1:%d,x2:%d,y2:%d\n", area->x1, area->y1, area->x2, area->y2);
+//    printf("x1:%3d  y1:%3d  x2:%3d  y2:%3d\n", area->x1, area->y1, area->x2, area->y2);
 
     /*Return if the area is out the screen*/
-    if(area->x2 < 0 || area->y2 < 0 || area->x1 > hres - 1 || area->y1 > vres - 1) {
+    if (area->x2 < 0 || area->y2 < 0 || area->x1 > hres - 1 || area->y1 > vres - 1)
+    {
         lv_disp_flush_ready(disp_drv);
         return;
     }
@@ -129,12 +139,13 @@ void monitor_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t 
     int32_t y;
 #if LV_COLOR_DEPTH != 24 && LV_COLOR_DEPTH != 32    /*32 is valid but support 24 for backward compatibility too*/
     int32_t x;
-    for(y = area->y1; y <= area->y2 && y < disp_drv->ver_res; y++) {
-        for(x = area->x1; x <= area->x2; x++) {
+    for (y = area->y1; y <= area->y2 && y < disp_drv->ver_res; y++)
+    {
+        for (x = area->x1; x <= area->x2; x++)
+        {
             monitor.tft_fb[y * disp_drv->hor_res + x] = lv_color_to32(*color_p);
             color_p++;
         }
-
     }
 #else
     uint32_t w = lv_area_get_width(area);
@@ -149,7 +160,8 @@ void monitor_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t 
 
     /* TYPICALLY YOU DO NOT NEED THIS
      * If it was the last part to refresh update the texture of the window.*/
-    if(lv_disp_flush_is_last(disp_drv)) {
+    if (lv_disp_flush_is_last(disp_drv))
+    {
         monitor_sdl_refr(NULL);
     }
 
@@ -229,13 +241,14 @@ void monitor_flush2(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t
  * It initializes SDL, handles drawing and the mouse.
  */
 
-static void sdl_event_handler(lv_timer_t * t)
+static void sdl_event_handler(lv_timer_t *t)
 {
-    (void)t;
+    (void) t;
 
     /*Refresh handling*/
     SDL_Event event;
-    while(SDL_PollEvent(&event)) {
+    while (SDL_PollEvent(&event))
+    {
 #if USE_MOUSE != 0
         mouse_handler(&event);
 #endif
@@ -247,8 +260,10 @@ static void sdl_event_handler(lv_timer_t * t)
 #if USE_KEYBOARD
         keyboard_handler(&event);
 #endif
-        if((&event)->type == SDL_WINDOWEVENT) {
-            switch((&event)->window.event) {
+        if ((&event)->type == SDL_WINDOWEVENT)
+        {
+            switch ((&event)->window.event)
+            {
 #if SDL_VERSION_ATLEAST(2, 0, 5)
                 case SDL_WINDOWEVENT_TAKE_FOCUS:
 #endif
@@ -265,7 +280,8 @@ static void sdl_event_handler(lv_timer_t * t)
     }
 
     /*Run until quit event not arrives*/
-    if(sdl_quit_qry) {
+    if (sdl_quit_qry)
+    {
         monitor_sdl_clean_up();
         exit(0);
     }
@@ -276,12 +292,13 @@ static void sdl_event_handler(lv_timer_t * t)
  * It initializes SDL, handles drawing and the mouse.
  */
 
-static void monitor_sdl_refr(lv_timer_t * t)
+static void monitor_sdl_refr(lv_timer_t *t)
 {
-    (void)t;
+    (void) t;
 
     /*Refresh handling*/
-    if(monitor.sdl_refr_qry != false) {
+    if (monitor.sdl_refr_qry != false)
+    {
         monitor.sdl_refr_qry = false;
         window_update(&monitor);
     }
@@ -294,16 +311,18 @@ static void monitor_sdl_refr(lv_timer_t * t)
 #endif
 }
 
-int quit_filter(void * userdata, SDL_Event * event)
+int quit_filter(void *userdata, SDL_Event *event)
 {
-    (void)userdata;
+    (void) userdata;
 
-    if(event->type == SDL_WINDOWEVENT) {
-        if(event->window.event == SDL_WINDOWEVENT_CLOSE) {
+    if (event->type == SDL_WINDOWEVENT)
+    {
+        if (event->window.event == SDL_WINDOWEVENT_CLOSE)
+        {
             sdl_quit_qry = true;
         }
-    }
-    else if(event->type == SDL_QUIT) {
+    } else if (event->type == SDL_QUIT)
+    {
         sdl_quit_qry = true;
     }
 
@@ -346,16 +365,18 @@ static void monitor_sdl_init(void)
 }
 
 
-static void window_create(monitor_t * m)
+static void window_create(monitor_t *m)
 {
-    SDL_Surface* iconSurface = NULL;
+    SDL_Surface *iconSurface = NULL;
     m->window = SDL_CreateWindow(PRJ_NAME,
-                              SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                              MONITOR_HOR_RES * MONITOR_ZOOM_X, MONITOR_VER_RES * MONITOR_ZOOM_Y, 0);       /*last param. SDL_WINDOW_BORDERLESS to hide borders*/
+                                 SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+                                 MONITOR_HOR_RES * MONITOR_ZOOM_X, MONITOR_VER_RES * MONITOR_ZOOM_Y,
+                                 0);       /*last param. SDL_WINDOW_BORDERLESS to hide borders*/
 
     m->renderer = SDL_CreateRenderer(m->window, -1, SDL_RENDERER_SOFTWARE);
     m->texture = SDL_CreateTexture(m->renderer,
-                                SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, MONITOR_HOR_RES, MONITOR_VER_RES);
+                                   SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, MONITOR_HOR_RES,
+                                   MONITOR_VER_RES);
     SDL_SetTextureBlendMode(m->texture, SDL_BLENDMODE_BLEND);
 
     iconSurface = SDL_CreateRGBSurfaceFrom(simulator_icon, 32, 32, 16, 32 * 2, 0xf000, 0x0f00, 0x00f0, 0x000f);
@@ -366,7 +387,7 @@ static void window_create(monitor_t * m)
 #if MONITOR_DOUBLE_BUFFERED
     SDL_UpdateTexture(m->texture, NULL, m->tft_fb_act, MONITOR_HOR_RES * sizeof(uint32_t));
 #else
-    m->tft_fb = (uint32_t *)malloc(sizeof(uint32_t) * MONITOR_HOR_RES * MONITOR_VER_RES);
+    m->tft_fb = (uint32_t *) malloc(sizeof(uint32_t) * MONITOR_HOR_RES * MONITOR_VER_RES);
     memset(m->tft_fb, 0x44, MONITOR_HOR_RES * MONITOR_VER_RES * sizeof(uint32_t));
 #endif
 
@@ -374,7 +395,7 @@ static void window_create(monitor_t * m)
 
 }
 
-static void window_update(monitor_t * m)
+static void window_update(monitor_t *m)
 {
 #if MONITOR_DOUBLE_BUFFERED == 0
     SDL_UpdateTexture(m->texture, NULL, m->tft_fb, MONITOR_HOR_RES * sizeof(uint32_t));
@@ -394,5 +415,22 @@ static void window_update(monitor_t * m)
     SDL_RenderCopy(m->renderer, m->texture, NULL, NULL);
     SDL_RenderPresent(m->renderer);
 }
+
+
+void LCD_Set_Pixel(uint16_t x, uint16_t y, lv_color_t color)
+{
+    monitor.tft_fb[y * 480 + x]= lv_color_to32(color);
+}
+void LCD_Color_Fill(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend, lv_color_t color)
+{
+    for(int i=ysta;i<=yend;i++)
+    {
+        for(int j=xsta;j<=xend;j++)
+        {
+            LCD_Set_Pixel(j,i,color);
+        }
+    }
+}
+
 
 #endif /*USE_MONITOR*/

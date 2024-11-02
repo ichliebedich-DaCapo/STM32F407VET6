@@ -24,7 +24,7 @@ set(GEN_OBJ_DIR ${OBJ_DIR}/generated)
 set(BIN_DIR ${BUILD_DIR}/bin)
 
 # 编译选项
-add_compile_options(-O2 -g0 -DLV_CONF_INCLUDE_SIMPLE=1)
+add_compile_options(-O2 -g -DLV_CONF_INCLUDE_SIMPLE=1)
 
 # 添加链接选项,显示内存分布，但现在不能使用
 #add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${BIN_DIR}/${PROJECT_NAME}.map)

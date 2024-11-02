@@ -63,7 +63,9 @@ pthread_mutex_t lvgl_mutex;
 pthread_mutex_t gg_edata_ll_mutex;
 pthread_cond_t gg_edata_ll_cond;
 #endif
-
+/******************自定义函数*******************/
+static void handler();
+/******************自定义函数*******************/
 int main(int argc, char **argv)
 {
 #if LV_USE_FREEMASTER
@@ -115,6 +117,9 @@ int main(int argc, char **argv)
         pthread_mutex_unlock(&lvgl_mutex);
 #endif
         usleep(5 * 1000);
+
+        /************自定义代码***********/
+       handler();
     }
 
 #if LV_USE_FREEMASTER
@@ -129,6 +134,80 @@ int main(int argc, char **argv)
     SDL_Quit();
     return 0;
 }
+
+
+/*******************************自定义代码**********************************/
+
+
+// 定义背景色和波形的颜色
+#define BACKGROUND_COLOR lv_color_hex(0xFFFFFF)
+#define WAVEFORM_COLOR lv_color_hex(0)
+
+// 示波器参数
+#define OSC_WIDTH 320
+#define OSC_HEIGHT 200
+#define OSC_X_START 80
+#define OSC_Y_START 60
+#define DATA_POINTS 256
+
+// 用于存储上一个数据点的位置
+static uint16_t last_x = OSC_X_START;
+static uint16_t last_y = OSC_Y_START + OSC_HEIGHT / 2;
+
+// 波形绘制函数
+void Draw_Oscilloscope(uint16_t data) {
+    // 计算当前数据点的位置
+    uint16_t current_x = OSC_X_START + (last_x - OSC_X_START + 1) % DATA_POINTS;
+    uint16_t current_y = OSC_Y_START + OSC_HEIGHT / 2 - data * (OSC_HEIGHT / 2) / 255;
+
+    // 绘制线条连接上一个数据点和当前数据点
+    for (int i = last_x; i != current_x; i = (i + 1) % DATA_POINTS) {
+        // 线性插值计算y坐标
+        uint16_t y = last_y + (current_y - last_y) * (i - last_x) / (current_x - last_x);
+        if (i >= OSC_X_START && i < OSC_X_START + OSC_WIDTH) {
+            LCD_Set_Pixel(i, y, lv_color_hex(0));
+        }
+    }
+
+    // 更新上一个数据点的位置
+    last_x = current_x;
+    last_y = current_y;
+
+    // 如果到达显示区域的末尾，则清除并重置
+    if (current_x == OSC_X_START + DATA_POINTS - 1) {
+        // 清除显示区域
+        lv_color_t clear_color = {0, 0, 0}; // 黑色
+        LCD_Color_Fill(OSC_X_START, OSC_Y_START, OSC_X_START + OSC_WIDTH - 1, OSC_Y_START + OSC_HEIGHT - 1, clear_color);
+
+        // 重置起始位置
+        last_x = OSC_X_START;
+        last_y = OSC_Y_START + OSC_HEIGHT / 2;
+    }
+}
+
+
+
+// 用于在main中执行
+static void handler()
+{
+    int16_t tick = lv_tick_get() &0xFFFF;
+    Draw_Oscilloscope(tick);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*******************************自定义代码**********************************/
+
+
 
 /**********************
  *   STATIC FUNCTIONS

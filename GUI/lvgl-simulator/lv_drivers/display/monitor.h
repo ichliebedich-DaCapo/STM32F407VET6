@@ -46,6 +46,9 @@ void monitor_init(void);
 void monitor_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p);
 void monitor_flush2(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p);
 
+// 下面这两个接口是用于模拟直接操作LCD的
+void LCD_Set_Pixel(uint16_t x, uint16_t y, lv_color_t color);
+void LCD_Color_Fill(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend, lv_color_t color);
 /**********************
  *      MACROS
  **********************/

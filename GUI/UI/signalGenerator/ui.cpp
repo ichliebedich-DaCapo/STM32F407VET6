@@ -227,14 +227,22 @@ private:
     static constexpr uint32_t period = 1500;// 周期为1500ms
 };
 
+
+#include "lv_drivers/display/monitor.h"
+
 /***********************函数实现***********************/
 auto Screen::init() -> void
 {
     Component::set_parent(gui->main.screen);
 
     // 创建图表对象
-    Chart::init(gui->main.chart, 0, -15, 320, 200, point_cnt);
-    Chart::add_series(series, lv_color_hex(0x00ff00)); // 添加数据序列
+//    Chart::init(gui->main.chart, 0, -15, 320, 200, point_cnt);
+//    Chart::add_series(series, lv_color_hex(0x00ff00)); // 添加数据序列
+
+
+
+
+
 
     // 初始化器
     Button customBtn;
@@ -285,7 +293,6 @@ auto Screen::init() -> void
 
 
 /***********************函数实现***********************/
-#include "lcd.h"
 
 //uint16_t color[320*200];
 auto Events::init() -> void
