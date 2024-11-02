@@ -14,7 +14,7 @@ constexpr uint16_t start_x = 80;
 constexpr uint16_t start_y = 60;
 constexpr uint16_t max_value = 255;
 
-uint16_t Buf[Sample_Size];
+uint16_t TestBuf[Sample_Size];
 const uint8_t sine_wave[128] = {
         128, 134, 140, 146, 152, 158, 165, 170, 176, 182, 188, 193, 198, 203, 208, 213, 218, 222, 226, 230, 234, 237,
         240, 243, 245, 248, 250, 251, 253, 254, 254, 255, 255, 255, 254, 254, 253, 251, 250, 248, 245, 243, 240, 237,
@@ -30,7 +30,7 @@ const uint8_t sine_wave[128] = {
 void test_handler()
 {
     static uint8_t cnt = 0;
-    WaveCurve::draw_curve<uint16_t, uint32_t, uint16_t, 4>(WaveCurve::draw_CatmullRomSp_line, Buf,
+    WaveCurve::draw_curve<uint16_t, uint32_t, uint16_t, 4>(WaveCurve::draw_CatmullRomSp_line, TestBuf,
                                                            sine_wave[(cnt++) % 128],
                                                            Sample_Size, start_x, start_y, chart_width,
                                                            chart_height, max_value, COLOR_WHITE, COLOR_BLACK);

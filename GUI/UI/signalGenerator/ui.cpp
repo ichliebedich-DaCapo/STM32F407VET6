@@ -58,6 +58,10 @@ lv_chart_series_t *series;
 LV_Timer timer;
 LV_Timer tick_timer;
 
+#include "WaveCurve.hpp"
+
+uint8_t Buf[256];
+
 class SignalGenerator : public GUI_Base
 {
 public:
@@ -93,7 +97,10 @@ public:
                 }
             }
         }
-        Chart::set_next_value(series, static_cast<Coord>(sine_wave[wave_index] + bias), gui->main.chart);
+//        Chart::set_next_value(series, static_cast<Coord>(sine_wave[wave_index] + bias), gui->main.chart);
+        WaveCurve::draw_curve<uint8_t, uint16_t, Coord>(WaveCurve::draw_interpolated_line<uint8_t, uint16_t>, Buf,
+                                                        sine_wave[wave_index] + bias, 256, 80, 60, 320, 200, 255,
+                                                        0xFFFF, 0);
         wave_index += index_offset;
         if (wave_index >= 128)
             wave_index = 0;
@@ -228,16 +235,14 @@ private:
 };
 
 
-#include "lv_drivers/display/monitor.h"
-
 /***********************函数实现***********************/
 auto Screen::init() -> void
 {
     Component::set_parent(gui->main.screen);
 
     // 创建图表对象
-//    Chart::init(gui->main.chart, 0, -15, 320, 200, point_cnt);
-//    Chart::add_series(series, lv_color_hex(0x00ff00)); // 添加数据序列
+    Chart::init(gui->main.chart, 0, -15, 320, 200, point_cnt);
+    Chart::add_series(series, lv_color_hex(0x00ff00)); // 添加数据序列
 
 
 
@@ -303,7 +308,11 @@ auto Events::init() -> void
                      SignalGenerator::handler();
                      Tools::fps();
                  }, Freq_8K);
-    tick_timer.create([](lv_timer_t *) { SignalGenerator::print_tick(); }, 10);
+    tick_timer.create([](lv_timer_t *)
+                      {
+                          SignalGenerator::handler();
+                          SignalGenerator::print_tick();
+                      }, 10);
 #warning "测试中"
     // 绑定播放事件
     bond(gui->main.imgbtn_play, imgbtn_fun2(

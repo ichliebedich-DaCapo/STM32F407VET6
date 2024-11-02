@@ -5,8 +5,14 @@
 #define SIMULATOR_WAVECURVE_HPP
 
 #include "Module_Conf.h"
+#ifdef ARM_MATH_CM4
+#include "lcd.h"
+#else
+#include "lv_drivers/display/monitor.h"
+#endif
 /* 预编译命令 */
 #include <cstring> // 引入string.h以使用memmove
+#include <valarray>
 
 /**
  * @brief 绘制波形曲线
@@ -15,28 +21,33 @@ class WaveCurve
 {
 public:
     // 绘制曲线_插值画线
-    template<typename Data, typename Color, typename Coord=uint16_t, uint8_t once_points = 2>
+    template<typename Data, typename Color,  typename Coord=uint16_t, uint8_t once_points = 2>
     static auto
-    draw_curve(void(*DrawFunc)(const Coord *, const Coord *, Color), Data data[], Data value, Coord N, Coord Start_x,
+    draw_curve(void(*DrawFunc)(const Data *, const Data *, Color), Data data[], Data value, Coord N, Coord Start_x,
                Coord Start_y,
                Coord Width,
-               Coord Height, Data Max_Value, Color bg_color, Color color) -> void;
+               Coord Height, Data Max_Value, uint32_t bg_color, uint32_t color) -> void;
 
     // 绘制函数
-    static inline auto draw_interpolated_line(const uint16_t *x, const uint16_t *y, uint32_t color) -> void;
+    template<typename Data,typename Color>
+    static inline auto draw_interpolated_line(const Data *x, const Data *y, Color color) -> void;
 
-    static inline auto draw_BezierCurve2(const uint16_t *x, const uint16_t *y, uint32_t color) -> void;
+    template<typename Data,typename Color>
+    static inline auto draw_BezierCurve2(const Data *x, const Data *y, Color color) -> void;
 
-    static inline auto draw_BezierCurve3(const uint16_t *x, const uint16_t *y, uint32_t color) -> void;
+    template<typename Data,typename Color>
+    static inline auto draw_BezierCurve3(const Data *x, const Data *y, Color color) -> void;
 
-    static inline auto draw_CatmullRomSp_line(const uint16_t *x, const uint16_t *y, uint32_t color) -> void;
+    template<typename Data,typename Color>
+    static inline auto draw_CatmullRomSp_line(const Data *x, const Data *y, Color color)-> void;
 
 private:
 //    static constexpr uint16_t ax_Value = 4096;
 };
 
 // 插值画线函数
-auto WaveCurve::draw_interpolated_line(const uint16_t *x, const uint16_t *y, uint32_t color) -> void
+template<typename Data,typename Color>
+auto WaveCurve::draw_interpolated_line(const Data *x, const Data *y, Color color) -> void
 {
     // Bresenham's line algorithm
     uint16_t x0 = x[0], y0 = y[0], x1 = x[1], y1 = y[1];
@@ -66,7 +77,6 @@ auto WaveCurve::draw_interpolated_line(const uint16_t *x, const uint16_t *y, uin
  * @brief 绘制曲线  辣鸡！辣鸡！辣鸡！ 辣鸡模板，难用得一批
  * @tparam Data 缓冲数组类型,也是数据类型
  * @辣鸡 DrawFunc 绘制函数 说得就是这个，连个函数指针都tm推导不出来
- * @tparam Color 颜色类型
  * @tparam Coord 坐标类型
  * @tparam once_points 一次绘制的点数
  * @param value 待绘制的值
@@ -79,17 +89,17 @@ auto WaveCurve::draw_interpolated_line(const uint16_t *x, const uint16_t *y, uin
  */
 template<typename Data, typename Color, typename Coord, uint8_t once_points>
 auto
-WaveCurve::draw_curve(void(*DrawFunc)(const Coord *, const Coord *, Color), Data data[], Data value, Coord N,
+WaveCurve::draw_curve(void(*DrawFunc)(const Data *, const Data *, Color), Data data[], Data value, Coord N,
                       Coord Start_x,
                       Coord Start_y,
                       Coord Width,
-                      Coord Height, Data Max_Value, Color bg_color, Color color) -> void
+                      Coord Height, Data Max_Value,uint32_t bg_color,uint32_t color) -> void
 {
     if (N < once_points) return; // 如果数据点过少，则无法画线
 
     // 计算每个数据点之间的水平距离
     Coord step = Width / (N - 1);// 步长
-    Coord x[once_points], y[once_points + 1];
+    Data x[once_points], y[once_points + 1];
 
     // 从右往左刷新，更符合直观上的感受
     for (int i = N - once_points; i >= 0; --i)
@@ -128,7 +138,8 @@ WaveCurve::draw_curve(void(*DrawFunc)(const Coord *, const Coord *, Color), Data
  * @param y
  * @param color
  */
-auto WaveCurve::draw_BezierCurve2(const uint16_t *x, const uint16_t *y, uint32_t color) -> void
+template<typename Data,typename Color>
+auto WaveCurve::draw_BezierCurve2(const Data *x, const Data *y, Color color) -> void
 {
     // 定义步长，决定曲线的平滑度
     constexpr float step = 0.01;
@@ -150,7 +161,8 @@ auto WaveCurve::draw_BezierCurve2(const uint16_t *x, const uint16_t *y, uint32_t
  * @param y
  * @param color
  */
-auto WaveCurve::draw_BezierCurve3(const uint16_t *x, const uint16_t *y, uint32_t color) -> void
+template<typename Data,typename Color>
+auto WaveCurve::draw_BezierCurve3(const Data *x, const Data *y, Color color) -> void
 {
     // 定义步长，决定曲线的平滑度
     constexpr float step = 0.01;
@@ -175,7 +187,8 @@ auto WaveCurve::draw_BezierCurve3(const uint16_t *x, const uint16_t *y, uint32_t
  * @param y
  * @param color
  */
-auto WaveCurve::draw_CatmullRomSp_line(const uint16_t *x, const uint16_t *y, uint32_t color) -> void
+template<typename Data,typename Color>
+auto WaveCurve::draw_CatmullRomSp_line(const Data *x, const Data *y, Color color) -> void
 {
     constexpr float step = 0.01;
 
