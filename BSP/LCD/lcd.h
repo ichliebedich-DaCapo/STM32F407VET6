@@ -84,6 +84,14 @@ static inline void LCD_Color_Fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_
     }
 }
 
+/// 设置一个像素
+static inline void LCD_Set_Pixel(uint16_t x, uint16_t y, uint16_t color)
+{
+    LCD_Set_Window(x, y, x, y);
+    LCD_WRITE_DATA(color);
+}
+
+
 /*液晶初始化*/
 void lcd_init(void);
 

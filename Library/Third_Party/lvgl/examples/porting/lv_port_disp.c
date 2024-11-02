@@ -43,10 +43,17 @@ static lv_disp_drv_t disp_drv;                         /*Descriptor of a display
 void lv_port_disp_init(void)
 {
     /* Example for 1) */
-    static lv_disp_draw_buf_t draw_buf_dsc_1;
-    static lv_color_t buf_1[MY_DISP_HOR_RES * MY_DISP_BUF_SIZE];                          /*A buffer for 10 rows*/
-    lv_disp_draw_buf_init(&draw_buf_dsc_1, buf_1, NULL,
-                          MY_DISP_HOR_RES * MY_DISP_BUF_SIZE);   /*Initialize the display buffer*/
+//    static lv_disp_draw_buf_t draw_buf_dsc;
+//    static lv_color_t buf_1[MY_DISP_HOR_RES * MY_DISP_BUF_SIZE];                          /*A buffer for 10 rows*/
+//    lv_disp_draw_buf_init(&draw_buf_dsc, buf_1, NULL,
+//                          MY_DISP_HOR_RES * MY_DISP_BUF_SIZE);   /*Initialize the display buffer*/
+
+    /* Example for 2) */
+    static lv_disp_draw_buf_t draw_buf_dsc;
+    static lv_color_t buf_2_1[MY_DISP_HOR_RES * MY_DISP_BUF_SIZE];
+    static lv_color_t buf_2_2[MY_DISP_HOR_RES * MY_DISP_BUF_SIZE];
+    lv_disp_draw_buf_init(&draw_buf_dsc, buf_2_1, buf_2_2, MY_DISP_HOR_RES * MY_DISP_BUF_SIZE);   /*Initialize the display buffer*/
+
 
     /*-----------------------------------
      * Register the display in lvgl
@@ -65,7 +72,7 @@ void lv_port_disp_init(void)
     disp_drv.flush_cb = disp_flush;
 
     /*Set a display buffer*/
-    disp_drv.draw_buf = &draw_buf_dsc_1;
+    disp_drv.draw_buf = &draw_buf_dsc;
 
     /*Finally register the driver*/
     lv_disp_drv_register(&disp_drv);
