@@ -15,7 +15,7 @@ set(SIMULATOR_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(COMPONENT_DIR ${PROJECT_SOURCE_DIR}/Component)
 set(EVENTS_DIR ${PROJECT_SOURCE_DIR}/Events)
 # ----------------------------------设置你的UI路径（选择项目）------------------------------
-set(UI_DIR ../UI/voiceStorageAndPlay)
+set(UI_DIR ../UI/signalGenerator)
 # ----------------------------------设置你的UI路径（选择项目）------------------------------
 # 生成的目标文件目录
 set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)

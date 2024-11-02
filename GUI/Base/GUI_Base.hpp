@@ -45,11 +45,9 @@ public:
     }
 
 protected:
-    static inline lv_ui_t ui;// 内联变量，C++17特性
+    static inline lv_ui_t ui{};// 内联变量，C++17特性
     static inline lv_ui_t *gui = &ui;// 可加可不加
 };
-
-
 
 
 // 暂时废弃，不同屏幕尺寸下，把各组件的的坐标和大小都对应乘以一个比例系数：【你的宽或高】/【本屏幕的宽或高】

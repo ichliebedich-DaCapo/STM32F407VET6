@@ -19,11 +19,11 @@ void lcd_init(void)
 {
 #if LCD_SORTS == 9481
     TFT_RST = 0;
-    HAL_Delay(20);
+    HAL_Delay(5);
     TFT_RST = 1;
 
     LCD_WRITE_CMD(0x0011);
-    HAL_Delay(20);
+    HAL_Delay(5);
     LCD_WRITE_CMD(0x00D0);
     LCD_WRITE_DATA(0x0007);
     LCD_WRITE_DATA(0x0041);
@@ -104,9 +104,9 @@ void lcd_init(void)
     LCD_WRITE_DATA(0x0010);
     LCD_WRITE_DATA(0x0022);
 
-    HAL_Delay(20);
+    HAL_Delay(5);
     LCD_WRITE_CMD(0x0029);
-    HAL_Delay(20);
+    HAL_Delay(5);
     LCD_WRITE_CMD(0x002C);
     TFTLED = 0x01;
 //    LCD_Clear(BLACK);
@@ -115,15 +115,15 @@ void lcd_init(void)
 #if LCD_SORTS == 9488
     // 复位TFT显示屏
     TFT_RST = 1;  // 将TFT复位引脚设为高电平
-    HAL_Delay(20);// 等待100毫秒
+    HAL_Delay(5);// 等待100毫秒
     TFT_RST = 0;  // 将TFT复位引脚设为低电平
-    HAL_Delay(20);// 等待100毫秒
+    HAL_Delay(5);// 等待100毫秒
     TFT_RST = 1;  // 将TFT复位引脚设为高电平，完成复位操作
-    HAL_Delay(20);// 等待100毫秒
+    HAL_Delay(5);// 等待100毫秒
 
     // 向LCD发送命令退出睡眠模式
     LCD_WRITE_CMD(0x11);// 退出睡眠模式
-    HAL_Delay(20);      // 等待100毫秒，确保命令执行完毕
+    HAL_Delay(5);      // 等待100毫秒，确保命令执行完毕
 
     // 设置LCD电源控制
     LCD_WRITE_CMD(0xd0); // 电源控制命令
@@ -198,10 +198,10 @@ void lcd_init(void)
     LCD_WRITE_DATA(0x01);// 设置参数
     LCD_WRITE_DATA(0x3F);// 设置参数
 
-    HAL_Delay(20);      // 等待100毫秒
+    HAL_Delay(5);      // 等待100毫秒
     LCD_WRITE_CMD(0x29);// 唤醒命令
     LCD_WRITE_CMD(0x2c);// 写入RAM命令
-    HAL_Delay(20);      // 等待100毫秒
+    HAL_Delay(5);      // 等待100毫秒
     TFTLED = 0x01;      // 背光寄存器初始化
 
     /*我觉得没必要清屏函数*/

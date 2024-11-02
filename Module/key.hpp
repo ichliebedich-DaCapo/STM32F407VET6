@@ -9,9 +9,9 @@
 #include "Module_Conf.h"
 
 #define KEY_STATE_NONE 0x0  // 无状态,无需使用
-#define KEY_STATE_TWO 0x1   // 存储两个状态
-#define KEY_STATE_THREE 0x2 // 存储三个状态
-#define KEY_STATE_FOUR 0x3  // 存储四个状态
+#define KEY_STATE_TWO 0x2   // 存储两个状态
+#define KEY_STATE_THREE 0x3 // 存储三个状态
+#define KEY_STATE_FOUR 0x4  // 存储四个状态
 
 #define keyk0 0x0
 #define keyk1 0x1

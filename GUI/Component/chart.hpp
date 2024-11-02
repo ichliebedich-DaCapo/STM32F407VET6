@@ -42,7 +42,7 @@ public:
     add_series(lv_chart_series_t *&series, Color color, lv_chart_axis_t axis = LV_CHART_AXIS_PRIMARY_Y) -> void;
 
     /*初始化器*/
-    static inline auto init(Obj chart, Coord x_offset, Coord y_offset, Coord w, Coord h, bool is_grad = true) -> void;
+    static inline auto init(Obj chart, Coord x_offset, Coord y_offset, Coord w, Coord h,uint16_t point_cnt=128, bool is_grad = true) -> void;
 
 
 };
@@ -127,7 +127,7 @@ auto Chart::add_series(lv_chart_series_t *&series, Color color, lv_chart_axis_t 
  * @param h
  * @param is_grad
  */
-auto Chart::init(Obj chart, Coord x_offset, Coord y_offset, Coord w, Coord h, bool is_grad) -> void
+auto Chart::init(Obj chart, Coord x_offset, Coord y_offset, Coord w, Coord h, uint16_t point_cnt,bool is_grad) -> void
 {
     // 创建图表对象
     init(chart);
@@ -136,7 +136,7 @@ auto Chart::init(Obj chart, Coord x_offset, Coord y_offset, Coord w, Coord h, bo
 
     // 配置图表
     set_type(LV_CHART_TYPE_LINE);// 设置类型:折线 柱形
-    set_point_count(128);// 设置数据点数量
+    set_point_count(point_cnt);// 设置数据点数量
     set_update_mode(LV_CHART_UPDATE_MODE_SHIFT);// 滚动模式
     set_range(0, 255, LV_CHART_AXIS_PRIMARY_Y);// 设置Y轴范围
     remove_dot();// 取消折线点样式

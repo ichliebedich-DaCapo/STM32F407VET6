@@ -45,10 +45,6 @@ auto ImageButton::set_src(lv_imgbtn_state_t state, ImageSrc src) -> void
 // 按下按钮
 auto ImageButton::press(Obj obj) -> void
 {
-    if (obj == nullptr)
-    {
-        obj = _obj;
-    }
     lv_imgbtn_set_state(obj, LV_IMGBTN_STATE_CHECKED_RELEASED);
     lv_obj_add_state(obj, LV_STATE_CHECKED); // 选中
     lv_event_send(obj, LV_EVENT_CLICKED, nullptr);

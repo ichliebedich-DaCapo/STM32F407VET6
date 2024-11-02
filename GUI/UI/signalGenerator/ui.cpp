@@ -3,7 +3,34 @@
 //
 #include "ui.hpp"
 #include "GUI.hpp"
-
+/**
+ * @简介：双音频信号发生器
+ * @note
+ *      第一轮测试：
+ *          绘制速度极慢，预期6ms(10ms)一帧。实际一帧为：
+ *          开Ofast -> 40000/230=174ms    开Og -> 400000/216=185ms    开Oz -> 400000/213=188ms
+ *
+ *      第二轮测试（开Ofast）：
+ *          动手做了一个简单的测试辅助工具，测试结果如下：
+ *          注释掉回调函数的实现，实际一帧为22.51ms    仅注释掉回调函数中向图表中添加数据的部分，实际一帧为：21.23ms
+ *          不注释(64个点)，实际一帧为：181.29ms(缓慢增长中)     不注释(32个点)，画质很差，且实际一帧为：177.45ms
+ *          说明耗时在图表添加数据中,刷屏和图表更新数据机制，使得降幅可达159.43ms，即降低了88%的性能。
+ *
+ *          【测试刷屏的影响，把回调函数实现部分替换为刷屏函数
+ *                  使用DMA ，整个图表区域刷屏(320*200)->140.39ms   1/2屏->81ms     1/4个屏->52ms
+ *                  不使用DMA，整个图表区域刷屏->140ms↓    1/2屏->82ms↓     1/4屏->52ms↓
+ *           即便DMA开到最大，但并没有提高多少，原因应该在于HAL繁冗的中断调用
+ *
+ *          使用寄存器写法优化了一下DMA中断回调，整个图表区域->141ms↓    1/2屏->81ms↓     1/4屏->52ms↓
+ *          没有任何提升，说明瓶颈并不在中断回调。期间也把DMA的各种配置拉满了（再往上就白屏了），说明瓶颈也不在DMA
+ *
+ *          把缓冲区从480*10扩展为480*30，图表添加数据（64个点）->165.94ms     把缓冲区拉到最大480*109（内存占用达到99.76%）->161.47ms↑
+ *          480*60->161ms↑  480*20->162.74ms    480*15->174.16ms
+ *          后续测了几个数值，缓冲区拉大之后对图表添加数据没有明显帮助，刷屏确比平时快一点。
+ *
+ *          由于已经启用了DMA且开到了最大，那么刷屏限制在于单缓冲机制和图表更新数据机制
+ *
+ */
 #if 1
 // 头文件
 #include "wave.h"
@@ -15,8 +42,11 @@
 // 常量
 //constexpr uint32_t Freq_8K = 30;
 //constexpr uint32_t Freq_16K = 15;
-constexpr uint32_t Freq_8K = 12;
-constexpr uint32_t Freq_16K = 6;
+constexpr uint32_t Freq_8K = 6;
+constexpr uint32_t Freq_16K = 3;
+constexpr uint8_t index_offset_8K = 2;// 8K下索引递增值
+constexpr uint8_t index_offset_16K = 4;// 16K下索引递增值
+constexpr uint16_t point_cnt = 64;// 点的数量
 
 // 变量
 lv_chart_series_t *series;
@@ -68,6 +98,8 @@ public:
     {
         timer.resume();
         tick_timer.resume();
+#warning "测试"
+        Tools::restart_fps();
     }
 
     static inline auto stop() -> void
@@ -129,7 +161,7 @@ public:
     static inline auto print_tick() -> void
     {
         char buf[12];
-        sprintf(buf, "tick：\n%d", get_tick());
+        sprintf(buf, "tick：\n%lu", get_tick());
         Text::set_text(buf, gui->main.label_tick);
     }
 
@@ -138,7 +170,7 @@ private:
     static inline auto set_freq(bool freq) -> void
     {
         _freq = freq;
-        index_offset = _freq ? 2 : 1;
+        index_offset = _freq ? index_offset_16K : index_offset_8K;
         Text::set_text(_freq ? "16K" : "8K", gui->main.btn_freq_label);
 
 #if Strong_Print
@@ -196,7 +228,7 @@ auto Screen::init() -> void
     Component::set_parent(gui->main.screen);
 
     // 创建图表对象
-    Chart::init(gui->main.chart, 0, -15, 320, 200);
+    Chart::init(gui->main.chart, 0, -15, 320, 200, point_cnt);
     Chart::add_series(series, lv_color_hex(0x00ff00)); // 添加数据序列
 
     // 初始化器
@@ -211,8 +243,8 @@ auto Screen::init() -> void
     label.init(gui->main.label_mode, 45, 300, 40, 20, "模式");
 
 //     按钮_偏置：+、-
-    customBtn.init(gui->main.btn_bias_add, gui->main.btn_bias_add_label, 115, 265, 30, 30, "+");
-    customBtn.init(gui->main.btn_bias_sub, gui->main.btn_bias_sub_label, 155, 265, 30, 30, "-");
+    customBtn.init(gui->main.btn_bias_sub, gui->main.btn_bias_sub_label, 115, 265, 30, 30, "-");
+    customBtn.init(gui->main.btn_bias_add, gui->main.btn_bias_add_label, 155, 265, 30, 30, "+");
     label.init(gui->main.label_bias, 118, 300, 80, 20, "偏置：0");
 
 //     按钮_频率：8K、16K
@@ -220,8 +252,8 @@ auto Screen::init() -> void
     label.init(gui->main.label_freq, 405, 300, 40, 20, "频率");
 
 //     按钮_占比：+、-
-    customBtn.init(gui->main.btn_ratio_add, gui->main.btn_ratio_add_label, 295, 265, 30, 30, "+");
-    customBtn.init(gui->main.btn_ratio_sub, gui->main.btn_ratio_sub_label, 335, 265, 30, 30, "-");
+    customBtn.init(gui->main.btn_ratio_sub, gui->main.btn_ratio_sub_label, 295, 265, 30, 30, "-");
+    customBtn.init(gui->main.btn_ratio_add, gui->main.btn_ratio_add_label, 335, 265, 30, 30, "+");
     label.init(gui->main.label_ratio, 298, 300, 80, 20, "占比：50%");
 
 //     图片按钮：停止、播放
@@ -236,23 +268,31 @@ auto Screen::init() -> void
     Text::set_text_color(Color_Firefly_Green);
 
     // 标签：CPU温度
-    label.init(gui->main.label_cpu, 0, 0, 60, 30, "CPU：35\n");
+    label.init(gui->main.label_cpu, 0, 0, 80, 30, "CPU:35℃\n");
 
     // 标签：标题
     label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
     label.init(gui->main.label_title, 190, 13, 140, 30, "双音频信号发生器");
 
+
+    Tools::fps_init(&lv_customer_font_SourceHanSerifSC_Regular_13, 10, 40);
 }
 
 
 /***********************函数实现***********************/
+#include "lcd.h"
 
+//uint16_t color[320*200];
 auto Events::init() -> void
 {
     /*  创建定时器*/
-    timer.create([](lv_timer_t *) { SignalGenerator::handler(); }, Freq_8K);
+    timer.create([](lv_timer_t *)
+                 {
+                     SignalGenerator::handler();
+                     Tools::fps();
+                 }, Freq_8K);
     tick_timer.create([](lv_timer_t *) { SignalGenerator::print_tick(); }, 10);
-
+#warning "测试中"
     // 绑定播放事件
     bond(gui->main.imgbtn_play, imgbtn_fun2(
             fun(SignalGenerator::start();),

@@ -16,7 +16,7 @@
 
 #define MY_DISP_HOR_RES    480
 #define MY_DISP_VER_RES    320
-#define MY_DISP_BUF_SIZE    10
+#define MY_DISP_BUF_SIZE    20
 /**********************
  *      TYPEDEFS
  **********************/
@@ -99,9 +99,9 @@ static void disp_flush(lv_disp_drv_t *disp_drv1, const lv_area_t *area, lv_color
     HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream6, (uint32_t) color_p, (uint32_t) TFT_DATA_ADDR,
                      ((area->x2 + 1) - area->x1) * ((area->y2 + 1) - area->y1));
 #else
-     LCD_Color_Fill(area->x1, area->y1, area->x2, area->y2, (const uint16_t *)color_p);
-    disp_drv.draw_buf->flushing = 0;
-    disp_drv.draw_buf->flushing_last = 0;
+    LCD_Color_Fill(area->x1, area->y1, area->x2, area->y2, (const uint16_t *)color_p);
+   disp_drv.draw_buf->flushing = 0;
+   disp_drv.draw_buf->flushing_last = 0;
 #endif
 }
 
@@ -111,4 +111,35 @@ void LVGL_LCD_FSMC_DMA_pCallback(DMA_HandleTypeDef *_hdma)
     //为了减少栈帧的使用
     disp_drv.draw_buf->flushing = 0;
     disp_drv.draw_buf->flushing_last = 0;
+}
+
+
+/**
+ * @brief DMA中断
+*/
+
+// 主打一个狂野
+#define DMA2_S6CR (*((volatile uint32_t *)0x400264A0))
+
+// DMA中断,里面他宝贝的真啰嗦
+void DMA2_Stream6_IRQHandler(void)
+{
+    HAL_DMA_IRQHandler(&hdma_memtomem_dma2_stream6);
+
+    // 检查传输完成标志（TCIF）是否被设置，即是否传输完成标志位
+//    if (DMA2->HISR & 0x1 << 21)
+//    {
+//        DMA2->HISR &= ~(0x1 << 21);// 清除标志位
+//        // 检查中断使能标志位
+//        if (DMA2_S6CR & (DMA_IT_TC))
+//        {
+//            DMA2_S6CR &= ~(DMA_IT_TC);// 清除标志位
+//            /* Change the DMA state */
+//            hdma_memtomem_dma2_stream6.State = HAL_DMA_STATE_READY;// 不能少,因为Start_IT里需要靠它来开启
+//            /* Process Unlocked */
+//            __HAL_UNLOCK(&hdma_memtomem_dma2_stream6);// 不能少
+//        }
+//        disp_drv.draw_buf->flushing = 0;
+//        disp_drv.draw_buf->flushing_last = 0;
+//    }
 }

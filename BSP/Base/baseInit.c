@@ -12,6 +12,7 @@
 #if FreeRTOS_DEBUG
 
 #include "CPU_RunTime.h"
+#include "lv_port_disp.h"
 
 #endif
 
@@ -40,6 +41,8 @@ void BaseInit()
 #ifdef USE_FSMC_DMA
     fsmc_dma_init();// 初始化FSMC+DMA
 #endif
+    lv_init();// 混账，搞了半天是因为漏加你才死机
+    lv_port_disp_init();// 进入临界保护区
 }
 
 

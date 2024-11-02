@@ -3,7 +3,9 @@
 //
 
 #include "fsmc.h"
+
 #ifdef USE_FSMC
+
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx.h"//内嵌了stm32f4xx_ll_fsmc.h
 
@@ -106,6 +108,7 @@ void fsmc_init()
 
 /*启用FSMC+DMA向LCD传输数据*/
 #ifdef USE_FSMC_DMA
+
 void fsmc_dma_init()
 {
     __HAL_RCC_DMA2_CLK_ENABLE();
@@ -118,7 +121,7 @@ void fsmc_dma_init()
     hdma_memtomem_dma2_stream6.Init.PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD;
     hdma_memtomem_dma2_stream6.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
     hdma_memtomem_dma2_stream6.Init.Mode = DMA_NORMAL;//传输模式，此即传输一次停止
-    hdma_memtomem_dma2_stream6.Init.Priority = DMA_PRIORITY_MEDIUM;
+    hdma_memtomem_dma2_stream6.Init.Priority = DMA_PRIORITY_VERY_HIGH;
     hdma_memtomem_dma2_stream6.Init.FIFOMode = DMA_FIFOMODE_ENABLE;
     hdma_memtomem_dma2_stream6.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_FULL;
     hdma_memtomem_dma2_stream6.Init.MemBurst = DMA_MBURST_INC8;   //源地址,16太快了，否则屏幕无反应
@@ -128,18 +131,14 @@ void fsmc_dma_init()
         Error_Handler();
     }
     /*不受FreeRTOS调度*/
-    HAL_NVIC_SetPriority(DMA2_Stream6_IRQn, 3, 0);
+    HAL_NVIC_SetPriority(DMA2_Stream6_IRQn, 2, 0);
     HAL_NVIC_EnableIRQ(DMA2_Stream6_IRQn);
     /*注册回调函数
     * 流程：开启DMA中断后，DMA开始传输数据，传输完之后回到【pCallback】，需要注意的是中断处理函数得要定义*/
     HAL_DMA_RegisterCallback(&hdma_memtomem_dma2_stream6, HAL_DMA_XFER_CPLT_CB_ID, LVGL_LCD_FSMC_DMA_pCallback);
 }
 
-// DMA中断,里面他宝贝的真啰嗦
-void DMA2_Stream6_IRQHandler(void)
-{
-    HAL_DMA_IRQHandler(&hdma_memtomem_dma2_stream6);
-}
+
 
 #endif
 

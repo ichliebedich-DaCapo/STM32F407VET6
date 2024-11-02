@@ -21,6 +21,8 @@ public:
     // 使用前必须设置父对象
     static inline auto init(Obj component) -> void;
 
+    static inline auto click(Obj obj = _obj) -> void;
+
     // 自定义风格按钮
     inline auto init(Obj btn, Obj text, Coord x, Coord y, Coord w, Coord h, Strings string = nullptr) -> void;
 
@@ -112,6 +114,11 @@ auto Button::init(Obj btn, Obj text, Coord x, Coord y, Coord w, Coord h, Strings
 {
     btn_shadow_width = width;
 
+}
+
+auto Button::click(Obj obj) -> void
+{
+    lv_event_send(obj, LV_EVENT_CLICKED, nullptr);
 }
 
 
