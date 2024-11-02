@@ -93,20 +93,22 @@ void update_wave(uint16_t value, uint16_t N, uint16_t Start_x, uint16_t Start_y,
 
     // 计算每个数据点之间的水平距离
     uint16_t step = Width / (N - 1);
+    uint16_t x0, y0, x1, y1;
+    int16_t dx, dy, e2, err, sx, sy;
 
-    for (uint16_t i = 0; i < N - 1; ++i)
+
+    for (int i = 0; i < N - 1; ++i)
     {
-        // 当前点和下一个点的坐标
-        uint16_t x0 = Start_x + i * step;
-        uint16_t y0 = Start_y + Height - (Data[i] * (Height - 1) / Max_Value); // 反转y轴以匹配屏幕坐标系
-        uint16_t x1 = Start_x + (i + 1) * step;
-        uint16_t y1 = Start_y + Height - (Data[i + 1] * (Height - 1) / Max_Value);
+        // 旧：当前点和下一个点的坐标
+        x0 = Start_x + i * step;
+        y0 = Start_y + Height - (Data[i] * (Height - 1) / Max_Value); // 反转y轴以匹配屏幕坐标系
+        x1 = Start_x + (i + 1) * step;
+        y1 = Start_y + Height - (Data[i + 1] * (Height - 1) / Max_Value);
 
         // Bresenham's line algorithm
-        int16_t dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
-        int16_t dy = -abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
-        int16_t err = dx + dy, e2;
-
+        dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
+        dy = -abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
+        err = dx + dy;
         for (;;)
         {
             LCD_Set_Pixel(x0, y0, COLOR_WHITE);
@@ -123,27 +125,23 @@ void update_wave(uint16_t value, uint16_t N, uint16_t Start_x, uint16_t Start_y,
                 y0 += sy;
             }
         }
-    }
 
-    /******更新数据******/
-
-    memmove(&Data[0], &Data[1], (N - 1) * sizeof(Data[0]));
-    Data[N - 1] = value;
-
-    /******绘制数据******/
-    for (uint16_t i = 0; i < N - 1; ++i)
-    {
-        // 当前点和下一个点的坐标
-        uint16_t x0 = Start_x + i * step;
-        uint16_t y0 = Start_y + Height - (Data[i] * (Height - 1) / Max_Value); // 反转y轴以匹配屏幕坐标系
-        uint16_t x1 = Start_x + (i + 1) * step;
-        uint16_t y1 = Start_y + Height - (Data[i + 1] * (Height - 1) / Max_Value);
+        // 新：当前点和下一个点的坐标
+        x0 = Start_x + i * step;
+        y0 = Start_y + Height - (Data[i + 1] * (Height - 1) / Max_Value); // 反转y轴以匹配屏幕坐标系
+        x1 = Start_x + (i + 1) * step;
+        if (i == N - 2)
+        {
+            y1 = Start_y + Height - (value * (Height - 1) / Max_Value);
+        } else
+        {
+            y1 = Start_y + Height - (Data[i + 2] * (Height - 1) / Max_Value);
+        }
 
         // Bresenham's line algorithm
-        int16_t dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
-        int16_t dy = -abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
-        int16_t err = dx + dy, e2;
-
+        dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
+        dy = -abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
+        err = dx + dy;
         for (;;)
         {
             LCD_Set_Pixel(x0, y0, COLOR_BLACK);
@@ -161,6 +159,10 @@ void update_wave(uint16_t value, uint16_t N, uint16_t Start_x, uint16_t Start_y,
             }
         }
     }
+    /******更新数据******/
+
+    memmove(&Data[0], &Data[1], (N - 1) * sizeof(Data[0]));
+    Data[N - 1] = value;
 }
 
 // 用于在main中执行
