@@ -417,11 +417,11 @@ static void window_update(monitor_t *m)
 }
 
 
-void LCD_Set_Pixel(uint16_t x, uint16_t y, lv_color_t color)
+void LCD_Set_Pixel(uint16_t x, uint16_t y, uint32_t color)
 {
-    monitor.tft_fb[y * 480 + x]= lv_color_to32(color);
+    monitor.tft_fb[y * 480 + x]= lv_color_to32(lv_color_hex(color));
 }
-void LCD_Color_Fill(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend, lv_color_t color)
+void LCD_Color_Fill(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend,  uint32_t color)
 {
     for(int i=ysta;i<=yend;i++)
     {

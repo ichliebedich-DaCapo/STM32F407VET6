@@ -42,7 +42,7 @@ file(GLOB_RECURSE DRIVER_SRCS "${SIMULATOR_DIR}/lv_drivers/*.c")
 file(GLOB_RECURSE COMPONENT_SRCS "${COMPONENT_DIR}/*.*")
 file(GLOB_RECURSE EVENTS_SRCS "${EVENTS_DIR}/*.*")
 file(GLOB_RECURSE BASE_SRCS "${BASE_DIR}/*.*")
-file(GLOB_RECURSE UI_SRCS "${UI_DIR}/*.*")
+file(GLOB_RECURSE UI_SRCS "${UI_DIR}/*.*" "../UI/test.cpp")
 # 定义静态库
 add_library(libgenerated STATIC
         ${LVGL_SRCS}
