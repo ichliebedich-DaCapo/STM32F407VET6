@@ -38,7 +38,7 @@ public:
     [[maybe_unused]] static inline auto set_text_fmt(Strings fmt, ...) -> void;
 
     /*自定义初始化函数*/
-    inline auto init(Obj text,  Coord x, Coord y, Coord w, Coord h,Strings string= nullptr)->void ;
+    inline auto init(Obj text,  Coord x, Coord y, Coord w, Coord h,Strings string= nullptr,Color text_color=lv_color_hex(0))->void ;
 
 
     // 设置文本框字体
@@ -104,6 +104,12 @@ inline auto Text::set_text(Strings text,Obj obj) -> void
     lv_label_set_text(obj, text);
 }
 
+/**
+ * @brief 设置文本内容格式化
+ * @param fmt
+ * @param ...
+ * @note 莫名其妙出现混账的乱码问题，感觉不出有什么错误，可确实显示不对，真是魂淡
+ */
 [[maybe_unused]] inline auto Text::set_text_fmt(Strings fmt, ...) -> void
 {
     va_list args;
@@ -112,16 +118,17 @@ inline auto Text::set_text(Strings text,Obj obj) -> void
     va_end(args);
 }
 
+
 [[maybe_unused]] auto Text::init_font(Font font) -> void
 {
     _font = font;
 }
 
-auto Text::init(Obj text, Coord x, Coord y, Coord w, Coord h, Strings string) -> void
+auto Text::init(Obj text, Coord x, Coord y, Coord w, Coord h, Strings string,Color text_color) -> void
 {
-    Text::init(text, string, _font);
-    Text::set_pos_size(x, y, w, h);
-    Text::set_text_color(lv_color_hex(0));
+    init(text, string, _font);
+    set_pos_size(x, y, w, h);
+    set_text_color(text_color);
 }
 
 #endif

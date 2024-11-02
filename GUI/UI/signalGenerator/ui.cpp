@@ -41,7 +41,7 @@ public:
                     {
                         set_freq(false);// 切换为8K
                         update_count();
-                        index_offset = 1;
+
                     }
                 }
             } else// 8K -> 16K
@@ -54,7 +54,6 @@ public:
                     if (_ratio != 100)
                     {
                         set_freq(true);
-                        index_offset = 2;
                     }
                 }
             }
@@ -139,7 +138,9 @@ private:
     static inline auto set_freq(bool freq) -> void
     {
         _freq = freq;
+        index_offset = _freq ? 2 : 1;
         Text::set_text(_freq ? "16K" : "8K", gui->main.btn_freq_label);
+
 #if Strong_Print
         timer.set_period(_freq ? Freq_16K : Freq_8K);
 #endif
@@ -228,15 +229,19 @@ auto Screen::init() -> void
                       &_btn_list_pause_alpha_48x48);
 
     // 标签：信息
-    label.init(gui->main.label_info, 420, 60, 60, 80, "队伍：\n\n王正翔\n吴俊颐\n谢智晴\n何乃滔");
+    label.init(gui->main.label_info, 420, 60, 60, 80, "  队伍：\n\n王正翔\n吴俊颐\n谢智晴\n何乃滔");
 
     // 标签：时刻
-    label.init(gui->main.label_tick, 20, 60, 60, 80, "tick：\n0");
+    label.init(gui->main.label_tick, 20, 100, 60, 80, "tick：\n0");
     Text::set_text_color(Color_Firefly_Green);
+
+    // 标签：CPU温度
+    label.init(gui->main.label_cpu, 0, 0, 60, 30, "CPU：35\n");
 
     // 标签：标题
     label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
     label.init(gui->main.label_title, 190, 13, 140, 30, "双音频信号发生器");
+
 }
 
 
@@ -250,28 +255,28 @@ auto Events::init() -> void
 
     // 绑定播放事件
     bond(gui->main.imgbtn_play, imgbtn_fun2(
-            FUN(SignalGenerator::start();),
-            FUN(SignalGenerator::stop();)));
+            fun(SignalGenerator::start();),
+            fun(SignalGenerator::stop();)));
 
     // 绑定频率事件
     bond(gui->main.btn_freq, btn_fun(
-            FUN(SignalGenerator::switch_freq();)));
+            fun(SignalGenerator::switch_freq();)));
 
     // 绑定偏置事件
     bond(gui->main.btn_bias_add, btn_fun(
-            FUN(SignalGenerator::add_bias();)));
+            fun(SignalGenerator::add_bias();)));
     bond(gui->main.btn_bias_sub, btn_fun(
-            FUN(SignalGenerator::sub_bias();)));
+            fun(SignalGenerator::sub_bias();)));
 
     // 绑定模式事件
     bond(gui->main.btn_mode, btn_fun(
-            FUN(SignalGenerator::switch_mode();)));
+            fun(SignalGenerator::switch_mode();)));
 
     // 绑定占比事件
     bond(gui->main.btn_ratio_add, btn_fun(
-            FUN(SignalGenerator::add_ratio();)));
+            fun(SignalGenerator::add_ratio();)));
     bond(gui->main.btn_ratio_sub, btn_fun(
-            FUN(SignalGenerator::sub_ratio();)));
+            fun(SignalGenerator::sub_ratio();)));
 }
 
 

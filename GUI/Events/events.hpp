@@ -34,19 +34,27 @@ using event = lv_event_t *;
  *              })
  *
  *          使用宏：
- *           bond(FUN(
+ *           bond(fun(
  *           int a=0;
  *           a=a+2;
  *           ))
  *
  *           调用宏所代表的函数：
- *           FUN(
+ *           fun(
  *           int a=0;
  *           a=a+2;
  *           )();
  *
  */
-#define FUN(...) [](){ __VA_ARGS__}
+#define fun(...) [](){ __VA_ARGS__}
+// 用于调用
+#define FUN(...) [](){ __VA_ARGS__}()
+
+
+// 用于定时器的状态事件回调
+#define timer_fun(...) [](lv_timer_t*){__VA_ARGS__}
+
+
 
 /**
  * @brief 用于图片按钮的状态事件回调

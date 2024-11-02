@@ -25,30 +25,28 @@ public:
     static inline auto release(Obj obj = _obj) -> void;
 
     /*初始化器*/
-    static inline auto init(Obj imgbtn,Coord x, Coord y, Coord w, Coord h,ImageSrc release_src, ImageSrc press_src) -> void {
-        //     图片按钮：停止、播放
-        ImageButton::init(imgbtn);
-        ImageButton::set_pos_size(x,y,w,h);
-        ImageButton::add_flag(LV_OBJ_FLAG_CHECKABLE);
-        ImageButton::set_src(LV_IMGBTN_STATE_RELEASED, release_src);// 正常状态
-        ImageButton::set_src(LV_IMGBTN_STATE_CHECKED_RELEASED, press_src);// 按下后状态
-    }
+    static inline auto init(Obj imgbtn, Coord x, Coord y, Coord w, Coord h, ImageSrc release_src = nullptr,
+                            ImageSrc press_src = nullptr) -> void;
 };
 
 // 初始化函数
- auto ImageButton::init(Obj imgbtn) -> void {
+auto ImageButton::init(Obj imgbtn) -> void
+{
     imgbtn = lv_imgbtn_create(_parent);
     _obj = imgbtn;
 }
 
 // 设置图片源
- auto ImageButton::set_src(lv_imgbtn_state_t state, ImageSrc src) -> void {
+auto ImageButton::set_src(lv_imgbtn_state_t state, ImageSrc src) -> void
+{
     lv_imgbtn_set_src(_obj, state, nullptr, src, nullptr);
 }
 
 // 按下按钮
- auto ImageButton::press(Obj obj) -> void {
-    if (obj == nullptr) {
+auto ImageButton::press(Obj obj) -> void
+{
+    if (obj == nullptr)
+    {
         obj = _obj;
     }
     lv_imgbtn_set_state(obj, LV_IMGBTN_STATE_CHECKED_RELEASED);
@@ -57,13 +55,25 @@ public:
 }
 
 // 释放按钮
- auto ImageButton::release(Obj obj) -> void {
-    if (obj == nullptr) {
+auto ImageButton::release(Obj obj) -> void
+{
+    if (obj == nullptr)
+    {
         obj = _obj;
     }
     lv_imgbtn_set_state(obj, LV_IMGBTN_STATE_RELEASED);
     lv_obj_clear_state(obj, LV_STATE_CHECKED); // 取消选中
     lv_event_send(obj, LV_EVENT_CLICKED, nullptr);
+}
+
+auto ImageButton::init(Obj imgbtn, Coord x, Coord y, Coord w, Coord h, ImageSrc release_src, ImageSrc press_src) -> void
+{
+    //     图片按钮：停止、播放
+    ImageButton::init(imgbtn);
+    ImageButton::set_pos_size(x, y, w, h);
+    ImageButton::add_flag(LV_OBJ_FLAG_CHECKABLE);
+    ImageButton::set_src(LV_IMGBTN_STATE_RELEASED, release_src);// 正常状态
+    ImageButton::set_src(LV_IMGBTN_STATE_CHECKED_RELEASED, press_src);// 按下后状态
 }
 
 #endif //SIMULATOR_IMAGEBUTTON_HPP

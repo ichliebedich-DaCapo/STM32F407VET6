@@ -39,6 +39,7 @@ struct lv_ui_t
         Obj label_info;// 信息
         Obj label_title;// 标题
         Obj imgbtn_play;// 播放键
+        Obj label_cpu;
     } main;// 主屏幕
 
 };
