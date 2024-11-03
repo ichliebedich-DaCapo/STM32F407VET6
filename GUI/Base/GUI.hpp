@@ -41,7 +41,6 @@ inline void GUI_handler()
 #define GUI_handler() void(0)
 #endif
 
-
 /**
  * @brief 工具类
  */

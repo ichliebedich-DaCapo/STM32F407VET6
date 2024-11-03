@@ -13,7 +13,7 @@
  *      第二轮测试（开Ofast）：
  *          动手做了一个简单的测试辅助工具，测试结果如下：
  *          注释掉回调函数的实现，实际一帧为22.51ms    仅注释掉回调函数中向图表中添加数据的部分，实际一帧为：21.23ms
- *          不注释(64个点)，实际一帧为：181.29ms(缓慢增长中)     不注释(32个点)，画质很差，且实际一帧为：177.45ms
+ *          不注释(64个点)，实际一帧为：181.29ms(缓慢增长中)     不注释(32个点)，画质很差且卡顿，且实际一帧为：177.45ms
  *          说明耗时在图表添加数据中,刷屏和图表更新数据机制，使得降幅可达159.43ms，即降低了88%的性能。
  *
  *          【测试刷屏的影响，把回调函数实现部分替换为刷屏函数
@@ -33,7 +33,7 @@
  *          总结： 原版:181.29ms -----增加缓冲区----> 165.94ms  -----使用双缓冲---->  142.82ms
  *                那么此时刷屏限制在于图表更新数据的机制
  *
- *        第三轮测试：
+ *        第三轮测试（双绘制）：
  *          由于没怎么搞过这么底层的绘制操作，不熟练，搞了一夜总算搞个能用的示波器显示算法了，原理很简单：清除旧点->更新数据->绘制新点。
  *          当然顺序可以改变，因为是滚动更新且一次只更改一个点,这里我采用的是从最后的几个点数据开始，计算出点的坐标，清除旧点，绘制新点，直至遍历
  *          所有点数据之后，再使用memmove更新点数据数组
@@ -70,7 +70,7 @@
  *          这一点我选择用constexpr选择性编译，这样可以有个自主选择的机会
  *
  *
- *          第四轮测试：
+ *          第四轮测试（双绘制）：
  *              优化计算坐标过程中的重复计算：
  *                  平滑度：0.1
  *                  贝塞尔曲线（二次)：130.04ms -> 130.37ms   没有任何提升只能说编译器更懂代码(-Ofast)
@@ -78,6 +78,21 @@
  *              选择性优化步长计算：
  *                  平滑度：0.1
  *                  贝塞尔曲线（二次)：130.37ms -> 129ms   优化很有限，并且还限制了宽度和采样点数，把代码变长了一些，我还是改回去吧
+ *
+ *              优化缓存命中没有任何提升
+ *
+ *              综上，除非是从根本上改变算法，否则在开了(-Ofast)的情况下，优化极为有限。
+ *
+ *          第五轮测试：
+ *              Mud（murder），准备排除图表影响时，发现不小心在另一个定时器里也加了一个绘制函数，也就是说在绘制两遍的情况下还能达到130ms。把这个多余的函数注释掉之后
+ *              耗时直接降到75.24ms.使用线性插值，耗时直降45.84ms，而且更加简约.样条算法是77.01ms，还是有些毛刺
+ *
+ *              排除图表影响后（其中毙掉了图表的计时器），75.24ms -> 31.72ms，只能说刁爆了，与定时器的24ms十分接近。出于好奇，
+ *              注释掉绘制函数，测了一下定时器，发现是完全等于24.00ms，且测量多次结果相同，看来硬件定时器提供的lv_tick在lv_timer_handler()的英明指导下几乎没有损失
+ *
+ *          总结：使用自定义的绘制算法，可以将速度从181ms提升到75ms（贝塞尔二次曲线），甚至是45ms（线性插值），虽然达到不到定时器的24ms，
+ *          但已经算是流畅了，我已经是处心积虑、手段用尽了哈
+ *
  *
  *
  *
@@ -101,6 +116,9 @@ constexpr uint8_t index_offset_16K = 2;// 16K下索引递增值
 constexpr uint16_t point_cnt = 128;// 点的数量
 constexpr uint16_t chart_width = 320;
 constexpr uint16_t chart_height = 200;
+constexpr uint16_t start_x = 80;
+constexpr uint16_t start_y = 45;
+constexpr uint16_t sine_count = 128;// 采样点数量
 
 // 变量
 lv_chart_series_t *series;
@@ -146,19 +164,23 @@ public:
                 }
             }
         }
-//        Chart::set_next_value(series, static_cast<Coord>(sine_wave[wave_index] + bias), gui->main.chart);
-        WaveCurve::draw_curve<uint8_t, uint16_t, Coord,3>(WaveCurve::draw_BezierCurve2, Buf,
-                                                        static_cast<Coord>(sine_wave[wave_index] + bias), point_cnt, 80,
-                                                        60, chart_width, chart_height, 255,
-                                                        0xFFFF, 0);
-        wave_index += index_offset;
-        if (wave_index >= 128)
+        WaveCurve::draw_curve<uint8_t, uint16_t, Coord, 3>(WaveCurve::draw_BezierCurve2, Buf,
+                                                           static_cast<Coord>(sine_wave[wave_index] + bias), point_cnt,
+                                                           start_x,
+                                                           start_y, chart_width, chart_height, 255,
+                                                           0xFFFF, 0);
+
+        if (wave_index >= sine_count - 1)[[unlikely]]
+        {
             wave_index = 0;
+        } else
+        {
+            wave_index += index_offset;
+        }
     }
 
     static inline auto start() -> void
     {
-        timer.resume();
         tick_timer.resume();
 #warning "测试"
         Tools::restart_fps();
@@ -166,7 +188,7 @@ public:
 
     static inline auto stop() -> void
     {
-        timer.pause();
+//        timer.pause();
         tick_timer.pause();
     }
 
@@ -290,10 +312,6 @@ auto Screen::init() -> void
 {
     Component::set_parent(gui->main.screen);
 
-    // 创建图表对象
-    Chart::init(gui->main.chart, 0, -15, 320, 200, point_cnt);
-    Chart::add_series(series, lv_color_hex(0x00ff00)); // 添加数据序列
-
     // 初始化器
     Button customBtn;
     customBtn.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
@@ -348,21 +366,12 @@ auto Screen::init() -> void
 auto Events::init() -> void
 {
     /*  创建定时器*/
-    timer.create([](lv_timer_t *)
-                 {
-                     SignalGenerator::handler();
-//                     static uint16_t cnt = 0;
-//                     constexpr uint16_t N = 256;
-//                     WaveCurve::draw_curve<uint8_t, uint16_t, Coord>(WaveCurve::draw_interpolated_line, Buf,
-//                                                                     sine_wave[(cnt++) % 128], N, 80, 60, 320, 200, 255,
-//                                                                     0xFFFF, 0);
-                     Tools::fps();
-                 }, Freq_8K);
     tick_timer.create([](lv_timer_t *)
                       {
                           SignalGenerator::handler();
+                          Tools::fps();
                           SignalGenerator::print_tick();
-                      }, 10);
+                      }, 24);
 #warning "测试中"
     // 绑定播放事件
     bond(gui->main.imgbtn_play, imgbtn_fun2(

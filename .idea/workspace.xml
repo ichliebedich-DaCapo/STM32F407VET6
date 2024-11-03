@@ -23,12 +23,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】示波器绘制算法勉强可以使用，只不过在真机上运行会导致图形紊乱，猜测可能是数据类型导致的">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】已解决紊乱问题，现在尝试解决优化速率">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Component/WaveCurve.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/WaveCurve.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1810,7 +1809,7 @@
       <workItem from="1730507124617" duration="21430000" />
       <workItem from="1730557209426" duration="4229000" />
       <workItem from="1730595421585" duration="1365000" />
-      <workItem from="1730599802257" duration="6357000" />
+      <workItem from="1730599802257" duration="9666000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -2140,7 +2139,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730586115061</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="【双音频信号发生器】已解决紊乱问题，现在尝试解决优化速率">
+      <option name="closed" value="true" />
+      <created>1730606427778</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1730606427778</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2175,7 +2182,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="__【未配置好】双音频信号发生器实现了一部分逻辑" />
     <MESSAGE value="__【未配置好】双音频信号发生器——模块基本写好" />
     <MESSAGE value="__【未配置好】协同开发测试" />
     <MESSAGE value="__【未配置好】添加了一个宏定义，用于设置定时器的频率" />
@@ -2200,7 +2206,8 @@
     <MESSAGE value="【双音频信号发生器】发现绘制图表时会有很严重的性能问题。现准备尝试双缓冲" />
     <MESSAGE value="【双音频信号发生器】尝试用基本LCD函数来实现波形绘制" />
     <MESSAGE value="【双音频信号发生器】示波器绘制算法勉强可以使用，只不过在真机上运行会导致图形紊乱，猜测可能是数据类型导致的" />
-    <option name="LAST_COMMIT_MESSAGE" value="【双音频信号发生器】示波器绘制算法勉强可以使用，只不过在真机上运行会导致图形紊乱，猜测可能是数据类型导致的" />
+    <MESSAGE value="【双音频信号发生器】已解决紊乱问题，现在尝试解决优化速率" />
+    <option name="LAST_COMMIT_MESSAGE" value="【双音频信号发生器】已解决紊乱问题，现在尝试解决优化速率" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
