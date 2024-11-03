@@ -299,11 +299,11 @@ auto WaveCurve::draw_curve(Data data[], Data value, Coord N, Coord Start_x, Coor
     Coord x[once_points], y[once_points + 1];
     float ratio = (Height - 1.0f) / Max_Value;
     float step = Width / (N - 1.0f);// 步长
-
+    Coord *new_y = y + 1;
 
     /*******************绘制曲线*********************/
     // 从右往左刷新，更符合直观上的感受
-    for (int i = N - once_points-1; i >= 0; --i)
+    for (int i = N - once_points - 1; i >= 0; --i)
     {
         // 确认旧点
         for (int j = 0; j < once_points; ++j)
@@ -322,10 +322,50 @@ auto WaveCurve::draw_curve(Data data[], Data value, Coord N, Coord Start_x, Coor
             DrawFunction<draw_type, Coord, Color>::draw(x, y + 1, color);// 绘制新曲线
         } else
         {
-//            DrawFunction<draw_type, Coord, Color>::clean(x, y + 1, bg_color);// 清除旧曲线
-//            DrawFunction<draw_type, Coord, Color>::draw(x, y, color);// 绘制新曲线
-            DrawFunction<draw_type, Coord, Color>::clean(x, y, bg_color);// 清除旧曲线
-            DrawFunction<draw_type, Coord, Color>::draw(x, y + 1, color);// 绘制新曲线
+//            DrawFunction<draw_type, Coord, Color>::clean(x, y, bg_color);// 清除旧曲线
+//            DrawFunction<draw_type, Coord, Color>::draw(x, y + 1, color);// 绘制新曲线
+            float t = 0.0f;
+            Coord px, py, py_new;
+            float one_minus_t, two_t, t2;
+
+            static Coord buff_x[11];
+            static Coord buff_y[11];
+            static Coord *pBuff_x = buff_x;
+            static Coord *pBuff_y = buff_y;
+
+            static Coord buff_new_y[11];
+            static Coord *pBuff_new_y = buff_new_y;
+
+            for (int j = 0; j <= 10; ++j)
+            {
+                t = j * smoothness;
+                one_minus_t = 1.0f - t;
+                two_t = 2.0f * t;
+                t2 = t * t;
+
+                // 计算新的py
+                buff_new_y[j] = (Coord) (one_minus_t * one_minus_t * new_y[0] + two_t * one_minus_t * new_y[1] +
+                                         t2 * new_y[2]);
+            }
+
+            for (int j = 0; j <= 10; ++j)
+            {
+                t = j * smoothness;
+                one_minus_t = 1.0f - t;
+                two_t = 2.0f * t;
+                t2 = t * t;
+
+                // 计算px和py
+                pBuff_x[j] = (Coord) (one_minus_t * one_minus_t * x[0] + two_t * one_minus_t * x[1] + t2 * x[2]);
+                pBuff_y[j] = (Coord) (one_minus_t * one_minus_t * y[0] + two_t * one_minus_t * y[1] + t2 * y[2]);
+
+                // 设置背景颜色的像素点
+                LCD_Set_Pixel(pBuff_x[j], pBuff_y[j], bg_color);
+
+                // 计算新的py
+                LCD_Set_Pixel(pBuff_x[j], pBuff_new_y[j], color);
+                switch_ptr(pBuff_y, pBuff_new_y);
+            }
         }
     }
 
