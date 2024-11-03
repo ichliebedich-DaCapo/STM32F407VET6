@@ -75,12 +75,26 @@ static inline void LCD_Color_Fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_
     width = ey - sy + 1; // 矩形区域的宽度
     LCD_Set_Window(sx, sy, ex, ey);
     // 遍历矩形区域的每一行
-    for (uint16_t j = 0; j < width; ++j)
+    for (int j = 0; j < width; ++j)
     {
-        for (uint16_t i = 0; i < length; ++i)
+        for (int i = 0; i < length; ++i)
         {
             LCD_WRITE_DATA(color[i + length * j]);// 一次性写入整行的颜色数据
         }
+    }
+}
+
+static inline void LCD_Color_Clean(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t color)
+{
+    uint16_t length, width;
+    length = ex - sx + 1;// 矩形区域的长度
+    width = ey - sy + 1; // 矩形区域的宽度
+    LCD_Set_Window(sx, sy, ex, ey);
+    // 遍历矩形区域的每一行
+    int total = length * width;
+    for (int j = 0; j < total; ++j)
+    {
+        LCD_WRITE_DATA(color);// 一次性写入整行的颜色数据
     }
 }
 
@@ -94,8 +108,6 @@ static inline void LCD_Set_Pixel(uint16_t x, uint16_t y, uint16_t color)
 
 /*液晶初始化*/
 void lcd_init(void);
-
-
 
 
 #ifdef __cplusplus

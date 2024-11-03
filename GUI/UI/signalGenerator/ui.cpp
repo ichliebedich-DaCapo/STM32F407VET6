@@ -105,6 +105,16 @@
  *                  现在发现前面为什么得到的漏墨现象为什么不同了，因为当初看到的是这个的漏墨。
  *                  实际定刷新周期为72ms，于是把定时器周期改为80ms，实际81ms但仍会漏墨。改为90ms还会漏墨。一口气改为160ms，还是会漏墨，没救了
  *
+ *              尝试解决：
+ *                  我首先想到的是更改清除旧线的函数，原先清除的方式时重新计算一遍曲线，然后上背景颜色，但这样显然太慢了。于是我把清除旧线函数改为清除矩形块
+ *                  为了不影响之前的绘制，我选定x的最值作为矩形边界。好消息是绘制速度又提升了，坏消息是前段仍会漏墨，我得查找更底层的原因了。
+ *                      线性插值：36.21ms 这个下降了，可能是因为计算上耗时远小于刷屏
+ *                      贝塞尔曲线（二次）： 50.58ms
+ *                      贝塞尔曲线（三次）：50.31ms
+ *                      样条曲线： 测试样条函数时，结果程序卡死，换模拟器是正常的
+ *                  提升效果之明显，以至于绘线的同时可以更新FPS，原本显示FPS时需要暂停，现在直接实时刷新。
+ *
+ *
  *
  *
  *
@@ -121,7 +131,7 @@
 // 常量
 //constexpr uint32_t Freq_8K = 30;
 //constexpr uint32_t Freq_16K = 15;
-constexpr uint32_t Freq_8K = 65;
+constexpr uint32_t Freq_8K = 180;
 constexpr uint32_t Freq_16K = 12;
 constexpr uint8_t index_offset_8K = 1;// 8K下索引递增值
 constexpr uint8_t index_offset_16K = 2;// 16K下索引递增值
@@ -177,10 +187,11 @@ public:
                 }
             }
         }
+        // 防止数据溢出
         int wave_date = sine_wave[wave_index] + bias;
         wave_date = (wave_date > max_value) ? max_value : (wave_date < 0) ? 0 : wave_date;
 
-        WaveCurve::draw_curve<uint8_t, uint16_t, Coord, 2>(WaveCurve::draw_interpolated_line, Buf,
+        WaveCurve::draw_curve<uint8_t, uint16_t, Coord, 4>(WaveCurve::draw_BezierCurve3, Buf,
                                                            static_cast<uint8_t>(wave_date), point_cnt,
                                                            start_x,
                                                            start_y, chart_width, chart_height, 255,
@@ -204,7 +215,6 @@ public:
 
     static inline auto stop() -> void
     {
-//        timer.pause();
         tick_timer.pause();
     }
 

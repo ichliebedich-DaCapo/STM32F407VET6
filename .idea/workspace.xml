@@ -23,12 +23,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】准备解决绘制漏墨问题">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】发现漏墨问题的一点端倪">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/LCD/lcd.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/LCD/lcd.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/Component/WaveCurve.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/WaveCurve.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/lv_drivers/display/monitor.c" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/lv_drivers/display/monitor.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/lv_drivers/display/monitor.h" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/lv_drivers/display/monitor.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1810,7 +1811,7 @@
       <workItem from="1730507124617" duration="21430000" />
       <workItem from="1730557209426" duration="4229000" />
       <workItem from="1730595421585" duration="1365000" />
-      <workItem from="1730599802257" duration="13863000" />
+      <workItem from="1730599802257" duration="16942000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -2156,7 +2157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730610629824</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="【双音频信号发生器】发现漏墨问题的一点端倪">
+      <option name="closed" value="true" />
+      <created>1730619162562</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1730619162562</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2191,7 +2200,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="__【未配置好】协同开发测试" />
     <MESSAGE value="__【未配置好】添加了一个宏定义，用于设置定时器的频率" />
     <MESSAGE value="__【未配置好】使用了CLion的文件模板，以后C++头文件后缀使用hpp" />
     <MESSAGE value="__【未配置好】让C++文件与C文件泾渭分明" />
@@ -2216,7 +2224,8 @@
     <MESSAGE value="【双音频信号发生器】示波器绘制算法勉强可以使用，只不过在真机上运行会导致图形紊乱，猜测可能是数据类型导致的" />
     <MESSAGE value="【双音频信号发生器】已解决紊乱问题，现在尝试解决优化速率" />
     <MESSAGE value="【双音频信号发生器】准备解决绘制漏墨问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="【双音频信号发生器】准备解决绘制漏墨问题" />
+    <MESSAGE value="【双音频信号发生器】发现漏墨问题的一点端倪" />
+    <option name="LAST_COMMIT_MESSAGE" value="【双音频信号发生器】发现漏墨问题的一点端倪" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

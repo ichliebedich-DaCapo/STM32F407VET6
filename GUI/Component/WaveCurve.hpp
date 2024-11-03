@@ -48,11 +48,38 @@ public:
 
     template<typename Coord, typename Color>
     static inline auto draw_CatmullRomSp_line(const Coord *x, const Coord *y, Color color) -> void;
-
+public:
+    enum class Type{
+        Interpolated_Line,// 插值画线
+        BezierCurve2,// 二次贝塞尔曲线
+        BezierCurve3,// 三次贝塞尔曲线
+        CatmullRomSp_line,// Catmull-Rom样条曲线
+    };
 private:
+    template<typename Coord, typename Color>
+    static inline auto clean_curve(const Coord *x, const Coord *y, Color color) -> void;
+
     // 定义步长，决定曲线的平滑度
     static constexpr float smoothness = 0.1;
 };
+
+template<typename Coord, typename Color>
+auto WaveCurve::clean_curve(const Coord *x, const Coord *y, Color color) -> void
+{
+    Coord min_y,max_y;
+    if(y[0]>y[1])
+    {
+        min_y=y[1];
+        max_y=y[0];
+    }
+    else
+    {
+        min_y=y[0];
+        max_y=y[1];
+    }
+
+    LCD_Color_Clean(x[0],min_y,x[1],max_y,color);
+}
 
 
 /**
@@ -97,7 +124,8 @@ WaveCurve::draw_curve(void(*DrawFunc)(const Coord *, const Coord *, Color), Data
         y[once_points] = (Coord) (Start_y + Height - (i != N - once_points ? data[i + once_points] : value) * ratio);
 
         // 更新曲线
-        DrawFunc(x, y, bg_color);// 清除前面曲线
+//        DrawFunc(x, y, bg_color);
+        clean_curve(x, y, bg_color);// 清除前面曲线
         DrawFunc(x, y+1, color);// 绘制新曲线
     }
 
@@ -112,7 +140,7 @@ auto WaveCurve::draw_interpolated_line(const Coord *x, const Coord *y, Color col
 {
     // Bresenham's line algorithm
     Coord x0 = x[0], y0 = y[0], x1 = x[1], y1 = y[1];
-    int dx = (abs(x1 - x0)), sx = x0 < x1 ? 1 : -1;
+    int dx = (abs(x1 - x0)), sx = x0 < x1 ? 1 : -1;// sx：决定递增方向
     int dy = (-abs(y1 - y0)), sy = y0 < y1 ? 1 : -1;
     int err = (dx + dy), e2;
 
@@ -132,8 +160,6 @@ auto WaveCurve::draw_interpolated_line(const Coord *x, const Coord *y, Color col
             y0 += sy;
         }
     }
-//    LCD_Set_Pixel(x[0], y[0], color);
-//    LCD_Set_Pixel(x[1], y[1], color);
 }
 
 /**
