@@ -336,17 +336,18 @@ auto WaveCurve::draw_curve(Data data[], Data value, Coord N, Coord Start_x, Coor
             static Coord buff_new_y[11];
             static Coord *pBuff_new_y = buff_new_y;
 
-            for (int j = 0; j <= 10; ++j)
-            {
-                t = j * smoothness;
-                one_minus_t = 1.0f - t;
-                two_t = 2.0f * t;
-                t2 = t * t;
+            if (i == N - once_points - 1)
+                for (int j = 0; j <= 10; ++j)
+                {
+                    t = j * smoothness;
+                    one_minus_t = 1.0f - t;
+                    two_t = 2.0f * t;
+                    t2 = t * t;
 
-                // 计算新的py
-                buff_new_y[j] = (Coord) (one_minus_t * one_minus_t * new_y[0] + two_t * one_minus_t * new_y[1] +
-                                         t2 * new_y[2]);
-            }
+                    // 计算新的py
+                    buff_new_y[j] = (Coord) (one_minus_t * one_minus_t * new_y[0] + two_t * one_minus_t * new_y[1] +
+                                             t2 * new_y[2]);
+                }
 
             for (int j = 0; j <= 10; ++j)
             {
@@ -360,12 +361,11 @@ auto WaveCurve::draw_curve(Data data[], Data value, Coord N, Coord Start_x, Coor
                 pBuff_y[j] = (Coord) (one_minus_t * one_minus_t * y[0] + two_t * one_minus_t * y[1] + t2 * y[2]);
 
                 // 设置背景颜色的像素点
-                LCD_Set_Pixel(pBuff_x[j], pBuff_y[j], bg_color);
+                LCD_Set_Pixel(pBuff_x[j], pBuff_y[j], bg_color);// 清除旧像素点
+                LCD_Set_Pixel(pBuff_x[j], pBuff_new_y[j], color);// 绘制新像素点
 
-                // 计算新的py
-                LCD_Set_Pixel(pBuff_x[j], pBuff_new_y[j], color);
-                switch_ptr(pBuff_y, pBuff_new_y);
             }
+            switch_ptr(pBuff_y, pBuff_new_y);// 交换指针，把pBuff_y当做下一轮pBuff_new_y
         }
     }
 
