@@ -14,7 +14,7 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
 # project settings
 project(Furina C CXX ASM)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_C_STANDARD 11)
 
 # uncomment to mitigate c++17 absolute addresses warnings
@@ -45,7 +45,7 @@ add_compile_options($<$<COMPILE_LANGUAGE:ASM>:-x$<SEMICOLON>assembler-with-cpp>)
 #-Oz:极度优化大小,进一步优化生成的代码大小，比 -Os更激进,可能会牺牲一些性能。
 #-flto:在链接阶段进行优化,允许进行跨文件的优化，进一步提高性能，但耗时间（项目本来就小我不在乎）
 #-fprofile-generate（生成配置文件） 和 -fprofile-use（基于配置文件的优化）
-add_compile_options(-Ofast -g)
+add_compile_options(-Ofast )
 # 不调试了再开启
 #add_compile_options(-flto )
 

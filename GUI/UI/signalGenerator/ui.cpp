@@ -34,6 +34,53 @@
  *                那么此时刷屏限制在于图表更新数据的机制
  *
  *        第三轮测试：
+ *          由于没怎么搞过这么底层的绘制操作，不熟练，搞了一夜总算搞个能用的示波器显示算法了，原理很简单：清除旧点->更新数据->绘制新点。
+ *          当然顺序可以改变，因为是滚动更新且一次只更改一个点,这里我采用的是从最后的几个点数据开始，计算出点的坐标，清除旧点，绘制新点，直至遍历
+ *          所有点数据之后，再使用memmove更新点数据数组
+ *          这轮测试有三个绘制算法：线性插值、贝塞尔曲线（二次、三次）和样条曲线
+ *
+ *          显示128点，采样数据点为128：
+ *              线性插值：71.28ms 流畅,简约
+ *              平滑度：0.01
+ *              贝塞尔曲线（二次)：1134.32ms 虽然很还原，但太慢了，可能是里面的浮点运算（已经开了硬件浮点的情况下）太多了,需要改一下平滑度
+ *              贝塞尔曲线（三次)：1127.41ms 这是什么情况？！三次比二次还快，重新又测了一遍二次和三次，结果还是三次快。
+ *                              看了一下算法，三次我只是把for循环改成了while循环，我改一下再测
+ *                              都改为while循环，重测了一下，二次1136ms，三次1130ms 这是什么情况？！可能是三次贝塞尔曲线一次会计算4个点，
+ *                              从而减少绘制时间，这可能是个优化思路，但并不好更改
+ *              样条曲线：1179.65ms，从绘制正弦波的角度来说，不如贝塞尔曲线更平滑，有种草图毛茸茸的感觉，但更均匀
+ *              平滑度：0.1
+ *              贝塞尔曲线（二次)：130.04ms  确实是十倍提升，并且视觉上的平滑效果并没有减弱
+ *              贝塞尔曲线（三次)：128.96ms  如预期
+ *              样条曲线：133.52ms 毛刺多了一点点，但整体还是一样均匀
+ *              平滑度：0.3
+ *              贝塞尔曲线（二次)：64.31ms  视觉上的平滑效果降了一点点，但还是可以的
+ *              贝塞尔曲线（三次)：64.15ms  视觉上的平滑效果弱了很多，仿佛散点图
+ *              样条曲线：65.42ms 提升没有三倍那么大了，说明浮点运算的开销占比下降了。视觉上毛刺多了一点点，但整体均匀
+ *              平滑度：0.15
+ *              贝塞尔曲线（二次)：97.11ms  视觉上的平滑效果降了一点点，但还是可以的，比0.3要强一些
+ *              贝塞尔曲线（三次)：96.75ms  视觉上虽平滑，但会抽动（更新速率有些慢）
+ *              样条曲线：99.66ms 一如既往毛刺多，但整体均匀
+ *
+ *          显示64点，采样数据点为128：
+ *              平滑度：0.1
+ *              贝塞尔曲线（二次)：55.82ms，速度又快，平滑度还行
+ *
+ *          综上，论效果和速率，最好的是贝塞尔曲线（二次），比线性插值还快还平滑，这一点我是真没想到
+ *          其实效率上还能继续优化，比如把步进从浮点型改为整型，不过这样做了之后，显示点数必须是宽度的整数倍，不然会不符合实际宽度。
+ *          这一点我选择用constexpr选择性编译，这样可以有个自主选择的机会
+ *
+ *
+ *          第四轮测试：
+ *              优化计算坐标过程中的重复计算：
+ *                  平滑度：0.1
+ *                  贝塞尔曲线（二次)：130.04ms -> 130.37ms   没有任何提升只能说编译器更懂代码(-Ofast)
+ *
+ *              选择性优化步长计算：
+ *                  平滑度：0.1
+ *                  贝塞尔曲线（二次)：130.37ms -> 129ms   优化很有限，并且还限制了宽度和采样点数，把代码变长了一些，我还是改回去吧
+ *
+ *
+ *
  *
  */
 #if 1
@@ -47,11 +94,13 @@
 // 常量
 //constexpr uint32_t Freq_8K = 30;
 //constexpr uint32_t Freq_16K = 15;
-constexpr uint32_t Freq_8K = 6;
-constexpr uint32_t Freq_16K = 3;
-constexpr uint8_t index_offset_8K = 2;// 8K下索引递增值
-constexpr uint8_t index_offset_16K = 4;// 16K下索引递增值
-constexpr uint16_t point_cnt = 64;// 点的数量
+constexpr uint32_t Freq_8K = 24;
+constexpr uint32_t Freq_16K = 12;
+constexpr uint8_t index_offset_8K = 1;// 8K下索引递增值
+constexpr uint8_t index_offset_16K = 2;// 16K下索引递增值
+constexpr uint16_t point_cnt = 128;// 点的数量
+constexpr uint16_t chart_width = 320;
+constexpr uint16_t chart_height = 200;
 
 // 变量
 lv_chart_series_t *series;
@@ -60,7 +109,7 @@ LV_Timer tick_timer;
 
 #include "WaveCurve.hpp"
 
-uint8_t Buf[256];
+uint8_t Buf[point_cnt];
 
 class SignalGenerator : public GUI_Base
 {
@@ -98,8 +147,9 @@ public:
             }
         }
 //        Chart::set_next_value(series, static_cast<Coord>(sine_wave[wave_index] + bias), gui->main.chart);
-        WaveCurve::draw_curve<uint8_t, uint16_t, Coord>(WaveCurve::draw_interpolated_line<uint8_t, uint16_t>, Buf,
-                                                        sine_wave[wave_index] + bias, 256, 80, 60, 320, 200, 255,
+        WaveCurve::draw_curve<uint8_t, uint16_t, Coord,3>(WaveCurve::draw_BezierCurve2, Buf,
+                                                        static_cast<Coord>(sine_wave[wave_index] + bias), point_cnt, 80,
+                                                        60, chart_width, chart_height, 255,
                                                         0xFFFF, 0);
         wave_index += index_offset;
         if (wave_index >= 128)
@@ -244,11 +294,6 @@ auto Screen::init() -> void
     Chart::init(gui->main.chart, 0, -15, 320, 200, point_cnt);
     Chart::add_series(series, lv_color_hex(0x00ff00)); // 添加数据序列
 
-
-
-
-
-
     // 初始化器
     Button customBtn;
     customBtn.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
@@ -306,6 +351,11 @@ auto Events::init() -> void
     timer.create([](lv_timer_t *)
                  {
                      SignalGenerator::handler();
+//                     static uint16_t cnt = 0;
+//                     constexpr uint16_t N = 256;
+//                     WaveCurve::draw_curve<uint8_t, uint16_t, Coord>(WaveCurve::draw_interpolated_line, Buf,
+//                                                                     sine_wave[(cnt++) % 128], N, 80, 60, 320, 200, 255,
+//                                                                     0xFFFF, 0);
                      Tools::fps();
                  }, Freq_8K);
     tick_timer.create([](lv_timer_t *)
