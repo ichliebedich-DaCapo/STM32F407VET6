@@ -24,6 +24,7 @@ set(GEN_OBJ_DIR ${OBJ_DIR}/generated)
 set(BIN_DIR ${BUILD_DIR}/bin)
 
 # 编译选项
+# 开-O2和-O3有时候会卡死，但相同情况下真机没有问题
 add_compile_options(-O2 -g -DLV_CONF_INCLUDE_SIMPLE=1)
 
 # 添加链接选项,显示内存分布，但现在不能使用

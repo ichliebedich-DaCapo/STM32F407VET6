@@ -13,7 +13,9 @@
 #include "lcd.h"
 
 #else
+
 #include "lv_drivers/display/monitor.h"
+
 #endif
 
 
@@ -92,11 +94,11 @@ WaveCurve::draw_curve(void(*DrawFunc)(const Coord *, const Coord *, Color), Data
         }
 
         // 确认新点
-        y[once_points] = (Coord) (Start_y + Height - (i != N - once_points ? data[i + once_points]: value )* ratio);
+        y[once_points] = (Coord) (Start_y + Height - (i != N - once_points ? data[i + once_points] : value) * ratio);
 
         // 更新曲线
         DrawFunc(x, y, bg_color);// 清除前面曲线
-        DrawFunc(x, y + 1, color);// 绘制新曲线
+        DrawFunc(x, y+1, color);// 绘制新曲线
     }
 
 /******更新数据******/
@@ -130,6 +132,8 @@ auto WaveCurve::draw_interpolated_line(const Coord *x, const Coord *y, Color col
             y0 += sy;
         }
     }
+//    LCD_Set_Pixel(x[0], y[0], color);
+//    LCD_Set_Pixel(x[1], y[1], color);
 }
 
 /**
@@ -175,9 +179,9 @@ auto WaveCurve::draw_BezierCurve3(const Coord *x, const Coord *y, Color color) -
         // 转换浮点数坐标到整数
 
         px = (Coord) ((1 - t) * (1 - t) * (1 - t) * x[0] + 3 * (1 - t) * (1 - t) * t * x[1] +
-                         3 * (1 - t) * t2 * x[2] + t3 * x[3]);
+                      3 * (1 - t) * t2 * x[2] + t3 * x[3]);
         py = (Coord) ((1 - t) * (1 - t) * (1 - t) * y[0] + 3 * (1 - t) * (1 - t) * t * y[1] +
-                         3 * (1 - t) * t2 * y[2] + t3 * y[3]);
+                      3 * (1 - t) * t2 * y[2] + t3 * y[3]);
 
         // 设置像素点
         LCD_Set_Pixel(px, py, color);

@@ -93,6 +93,18 @@
  *          总结：使用自定义的绘制算法，可以将速度从181ms提升到75ms（贝塞尔二次曲线），甚至是45ms（线性插值），虽然达到不到定时器的24ms，
  *          但已经算是流畅了，我已经是处心积虑、手段用尽了哈
  *
+ *          第六轮测试：
+ *              线性插值：
+ *                  发现绘制曲线时会有漏墨发生，也就是对于同一段曲线的绘制，你先绘制再清除，得到的结果竟然不同，会有残余的像素在里面。后来不知道修改了什么(x_x)
+ *              原本发生在全屏的漏墨现象，结果只会出现在右半部分，而且非常严重。
+ *              经过观察，发现暂停再重开会有一瞬间出现正确的曲线,这说明可能是绘制初始段时，过快导致没有绘制完全.于是我把定时器周期调成与实际刷新周期差不多，
+ *              结果真的消失了，小概率会出现漏墨，但基本不会。只不过这种情况会很大程度上影响刷新，原本定时器周期为24ms实际为42ms，只能被迫改为定时器周期为60ms，
+ *              如果改成50ms仍会漏墨。最好改为70ms
+ *
+ *              贝塞尔曲线（二次）：
+ *                  现在发现前面为什么得到的漏墨现象为什么不同了，因为当初看到的是这个的漏墨。
+ *                  实际定刷新周期为72ms，于是把定时器周期改为80ms，实际81ms但仍会漏墨。改为90ms还会漏墨。一口气改为160ms，还是会漏墨，没救了
+ *
  *
  *
  *
@@ -109,7 +121,7 @@
 // 常量
 //constexpr uint32_t Freq_8K = 30;
 //constexpr uint32_t Freq_16K = 15;
-constexpr uint32_t Freq_8K = 24;
+constexpr uint32_t Freq_8K = 65;
 constexpr uint32_t Freq_16K = 12;
 constexpr uint8_t index_offset_8K = 1;// 8K下索引递增值
 constexpr uint8_t index_offset_16K = 2;// 16K下索引递增值
@@ -119,10 +131,9 @@ constexpr uint16_t chart_height = 200;
 constexpr uint16_t start_x = 80;
 constexpr uint16_t start_y = 45;
 constexpr uint16_t sine_count = 128;// 采样点数量
+constexpr uint16_t max_value = 255;
 
 // 变量
-lv_chart_series_t *series;
-LV_Timer timer;
 LV_Timer tick_timer;
 
 #include "WaveCurve.hpp"
@@ -141,10 +152,11 @@ public:
             // 16K -> 8K
             if (_freq)
             {
-                if (get_tick() >= period * 2)
+                if (_ratio != 0)
                 {
-                    if (_ratio != 0)
+                    if (get_tick() >= period * 2)
                     {
+
                         set_freq(false);// 切换为8K
                         update_count();
 
@@ -155,24 +167,28 @@ public:
                 // 极端情况：
                 // ① _ratio为100，那么会直接跳过
                 // ② _ratio为0，那么会一直执行这个
-                if (get_tick() >= period * _ratio / 50)
+                if (_ratio != 100)
                 {
-                    if (_ratio != 100)
+                    if (get_tick() >= period * _ratio / 50)
                     {
+
                         set_freq(true);
                     }
                 }
             }
         }
-        WaveCurve::draw_curve<uint8_t, uint16_t, Coord, 3>(WaveCurve::draw_BezierCurve2, Buf,
-                                                           static_cast<Coord>(sine_wave[wave_index] + bias), point_cnt,
+        int wave_date = sine_wave[wave_index] + bias;
+        wave_date = (wave_date > max_value) ? max_value : (wave_date < 0) ? 0 : wave_date;
+
+        WaveCurve::draw_curve<uint8_t, uint16_t, Coord, 2>(WaveCurve::draw_interpolated_line, Buf,
+                                                           static_cast<uint8_t>(wave_date), point_cnt,
                                                            start_x,
                                                            start_y, chart_width, chart_height, 255,
                                                            0xFFFF, 0);
 
         if (wave_index >= sine_count - 1)[[unlikely]]
         {
-            wave_index = 0;
+            wave_index -=sine_count-1;// 尽量让转折处柔和一些
         } else
         {
             wave_index += index_offset;
@@ -345,7 +361,7 @@ auto Screen::init() -> void
     label.init(gui->main.label_info, 420, 60, 60, 80, "  队伍：\n\n王正翔\n吴俊颐\n谢智晴\n何乃滔");
 
     // 标签：时刻
-    label.init(gui->main.label_tick, 20, 100, 60, 80, "tick：\n0");
+    label.init(gui->main.label_tick, 20, 100, 50, 80, "tick：\n0");
     Text::set_text_color(Color_Firefly_Green);
 
     // 标签：CPU温度
@@ -371,7 +387,7 @@ auto Events::init() -> void
                           SignalGenerator::handler();
                           Tools::fps();
                           SignalGenerator::print_tick();
-                      }, 24);
+                      }, Freq_8K);
 #warning "测试中"
     // 绑定播放事件
     bond(gui->main.imgbtn_play, imgbtn_fun2(
