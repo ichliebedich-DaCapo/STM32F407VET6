@@ -56,9 +56,6 @@ protected:
     template<WaveCurve::Type draw_type, typename Coord, typename Color>
     struct DrawFunction;
 
-    template<WaveCurve::Type draw_type, typename Coord, typename Color>
-    struct CleanFunction;
-
     // 绘制函数
     template<typename Coord, typename Color>
     static inline auto draw_interpolated_line(const Coord *x, const Coord *y, Color color) -> void;
@@ -91,10 +88,21 @@ private:
     static inline auto switch_ptr(T *&p1, T *&p2) -> void;
 
 
-
     // 定义步长，决定曲线的平滑度
-    static constexpr float smoothness = 0.1f;// 定为0.1比较适合，不推荐改，如果改的话，把下面的缓冲数组尺寸也改了1/smoothness，得是整数
-    static constexpr uint16_t buffer_size = 10;
+    static constexpr float smoothness = 0.1f;// 定为0.1比较适合，不推荐改，如果改的话，把下面的缓冲数组尺寸也改了1/smoothness+1，得是整数
+    static constexpr uint16_t buffer_size = 11;
+
+    // 千万不要把volatile去掉，程序对数组的优化，尤其是静态数组，总是容易优化死
+    // 根据我的远古回忆，上次优化导致卡死还是在使用TI(默认-O2还是-O3来着)时，定义了一个很小的静态数组，结果排查了半天
+    // 最后根据汇编查看才发现是静态数组被优化掉了，变成寄存器了还是什么的，总之之后就卡死了
+    volatile inline static Coord x_buff1[buffer_size]{};
+    volatile inline static Coord y_buff1[buffer_size]{};
+    volatile inline static Coord x_buff2[buffer_size]{};
+    volatile inline static Coord y_buff2[buffer_size]{};
+    volatile inline static Coord *pBuff_draw_x = x_buff1;
+    volatile inline static Coord *pBuff_draw_y = y_buff1;
+    volatile inline static Coord *pBuff_clean_x = x_buff2;
+    volatile inline static Coord *pBuff_clean_y = y_buff2;
 };
 
 template<typename T>
@@ -104,7 +112,6 @@ auto WaveCurve::switch_ptr(T *&p1, T *&p2) -> void
     p1 = p2;
     p2 = tmp;
 }
-
 
 
 template<typename Coord>
@@ -182,41 +189,21 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::Interpolated_Line, Coord, Color>
 template<typename Coord, typename Color>
 struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve2, Coord, Color>
 {
-    static inline Coord x_buff1[buffer_size]{};
-    static inline Coord y_buff1[buffer_size]{};
-    static inline Coord x_buff2[buffer_size]{};
-    static inline Coord y_buff2[buffer_size]{};
-    static inline Coord *pBuff_draw_x = x_buff1;
-    static inline Coord *pBuff_draw_y = y_buff1;
-    static inline Coord *pBuff_clean_x = x_buff2;
-    static inline Coord *pBuff_clean_y = y_buff2;
-
-
     static auto inline draw(const Coord *x, const Coord *y, Color color) -> void
     {
-//        draw_BezierCurve2(x, y, color);
-        for (int i = 0; i < buffer_size; ++i)
-        {
-            LCD_Set_Pixel(pBuff_draw_x[i], pBuff_draw_y[i], color);
-        }
-
+        draw_BezierCurve2(x, y, color);
+//        static int count = 0;
+//        count++;
+//        for (int i = 0; i < buffer_size; ++i)
+//        {
+//            LCD_Set_Pixel(pBuff_draw_x[i], pBuff_draw_y[i], color);
+//            printf("x:%d  y:%d  i:%d-----------count:%d\n", pBuff_draw_x[i], pBuff_draw_y[i], i, count);
+//        }
     }
 
     static auto inline clean(const Coord *x, const Coord *y, Color color) -> void
     {
-        // 交换缓冲区
-        switch_ptr(pBuff_draw_x, pBuff_clean_x);
-        switch_ptr(pBuff_draw_y, pBuff_clean_y);
-
-        // 计算并绘制曲线点
-        for (int i = 0; i < buffer_size; ++i)
-        {
-            float t= i * smoothness;
-            float t2 = t * t;
-            pBuff_clean_x[i] = (Coord) ((1 - t) * (1 - t) * x[0] + 2 * (1 - t) * t * x[1] + t2 * x[2]);
-            pBuff_clean_y[i] = (Coord) ((1 - t) * (1 - t) * y[0] + 2 * (1 - t) * t * y[1] + t2 * y[2]);
-            LCD_Set_Pixel(pBuff_clean_x[i], pBuff_clean_y[i], color);
-        }
+        draw_BezierCurve2(x, y, color);
     }
 };
 
@@ -313,11 +300,10 @@ auto WaveCurve::draw_curve(Data data[], Data value, Coord N, Coord Start_x, Coor
     float ratio = (Height - 1.0f) / Max_Value;
     float step = Width / (N - 1.0f);// 步长
 
-    data[N - 1] = value;// 更新数据
 
     /*******************绘制曲线*********************/
     // 从右往左刷新，更符合直观上的感受
-    for (int i = N - once_points - 1; i >= 0; --i)
+    for (int i = N - once_points-1; i >= 0; --i)
     {
         // 确认旧点
         for (int j = 0; j < once_points; ++j)
@@ -330,19 +316,22 @@ auto WaveCurve::draw_curve(Data data[], Data value, Coord N, Coord Start_x, Coor
         y[once_points] = (Coord) (Start_y + Height - data[i + once_points] * ratio);
 
         // 更新曲线
-        if constexpr (draw_type == Type::CatmullRomSp_line)
+        if constexpr (draw_type == Type::Interpolated_Line)
         {
             DrawFunction<draw_type, Coord, Color>::clean(x, y, bg_color);// 清除旧曲线
             DrawFunction<draw_type, Coord, Color>::draw(x, y + 1, color);// 绘制新曲线
         } else
         {
-            DrawFunction<draw_type, Coord, Color>::clean(x, y + 1, bg_color);// 清除旧曲线
-            DrawFunction<draw_type, Coord, Color>::draw(x, y, color);// 绘制新曲线
+//            DrawFunction<draw_type, Coord, Color>::clean(x, y + 1, bg_color);// 清除旧曲线
+//            DrawFunction<draw_type, Coord, Color>::draw(x, y, color);// 绘制新曲线
+            DrawFunction<draw_type, Coord, Color>::clean(x, y, bg_color);// 清除旧曲线
+            DrawFunction<draw_type, Coord, Color>::draw(x, y + 1, color);// 绘制新曲线
         }
     }
 
 /******更新数据******/
     memmove(data, data + 1, (N - 1) * sizeof(data[0]));// 将数据左移一位
+    data[N - 1] = value;
 }
 
 /*************************画线函数算法***************************/
