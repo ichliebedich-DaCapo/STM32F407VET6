@@ -131,7 +131,7 @@
 // 常量
 //constexpr uint32_t Freq_8K = 30;
 //constexpr uint32_t Freq_16K = 15;
-constexpr uint32_t Freq_8K = 180;
+constexpr uint32_t Freq_8K = 24;
 constexpr uint32_t Freq_16K = 12;
 constexpr uint8_t index_offset_8K = 1;// 8K下索引递增值
 constexpr uint8_t index_offset_16K = 2;// 16K下索引递增值
@@ -191,15 +191,15 @@ public:
         int wave_date = sine_wave[wave_index] + bias;
         wave_date = (wave_date > max_value) ? max_value : (wave_date < 0) ? 0 : wave_date;
 
-        WaveCurve::draw_curve<uint8_t, uint16_t, Coord, 4>(WaveCurve::draw_BezierCurve3, Buf,
-                                                           static_cast<uint8_t>(wave_date), point_cnt,
-                                                           start_x,
-                                                           start_y, chart_width, chart_height, 255,
-                                                           0xFFFF, 0);
+        WaveCurve::draw_curve<WaveCurve::Type::BezierCurve2, uint8_t>(Buf, static_cast<uint8_t>(wave_date),
+                                                                                point_cnt,
+                                                                                start_x,
+                                                                                start_y, chart_width, chart_height, 255,
+                                                                                0xFFFF, 0);
 
         if (wave_index >= sine_count - 1)[[unlikely]]
         {
-            wave_index -=sine_count-1;// 尽量让转折处柔和一些
+            wave_index -= sine_count - 1;// 尽量让转折处柔和一些
         } else
         {
             wave_index += index_offset;
