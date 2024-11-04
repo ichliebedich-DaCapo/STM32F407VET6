@@ -39,6 +39,13 @@ add_compile_options(-O2 -g -DLV_CONF_INCLUDE_SIMPLE=1)
 set(LIBRARIES decoder openh264 rlottie pthread stdc++ jansson curl m SDL2)
 link_directories(${LIBFILE_PATH} ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib ${GEN_OBJ_DIR})
 
+#------------------------------------------库-------------------------------------------
+#---------------lvgl库---------------
+
+
+
+#---------------Driver库---------------
+#---------------lvgl库---------------
 # 添加控制目录
 include_directories(${APP_DIR}/Conf  ${APP_DIR}/${APP})
 
