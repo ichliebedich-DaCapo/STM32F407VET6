@@ -38,19 +38,32 @@ add_compile_options(-O2 -g -DLV_CONF_INCLUDE_SIMPLE=1)
 # 链接选项
 set(LIBRARIES decoder openh264 rlottie pthread stdc++ jansson curl m SDL2)
 link_directories(${LIBFILE_PATH} ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib ${GEN_OBJ_DIR})
-
 #------------------------------------------库-------------------------------------------
-#---------------lvgl库---------------
+# 添加公共目录
+include_directories(${APP_DIR}/Conf  ${APP_DIR}/${APP})
 
+
+#---------------lvgl库---------------
+file(GLOB_RECURSE LVGL_SRCS "resource/lvgl/*.c")
+add_library(liblvgl STATIC ${LVGL_SRCS})
+target_include_directories(liblvgl PUBLIC
+        # LVGL根目录
+        resource
+        resource/lvgl
+
+        ${SIMULATOR_DIR}
+)
 
 
 #---------------Driver库---------------
+
+
+
 #---------------lvgl库---------------
-# 添加控制目录
-include_directories(${APP_DIR}/Conf  ${APP_DIR}/${APP})
+
 
 # 源文件
-file(GLOB_RECURSE LVGL_SRCS "${LVGL_DIR}/lvgl/*.c")
+
 file(GLOB_RECURSE DRIVER_SRCS "${SIMULATOR_DIR}/lv_drivers/*.c")
 file(GLOB_RECURSE COMPONENT_SRCS "${COMPONENT_DIR}/*.*")
 file(GLOB_RECURSE EVENTS_SRCS "${EVENTS_DIR}/*.*")
@@ -58,7 +71,7 @@ file(GLOB_RECURSE BASE_SRCS "${BASE_DIR}/*.*")
 file(GLOB_RECURSE UI_SRCS "${UI_DIR}/*.*" "../UI/test.cpp")
 # 定义静态库
 add_library(libgenerated STATIC
-        ${LVGL_SRCS}
+#        ${LVGL_SRCS}
         ${DRIVER_SRCS}
         ${COMPONENT_SRCS}
         ${BASE_SRCS}
@@ -67,17 +80,18 @@ add_library(libgenerated STATIC
 )
 # 头文件目录
 target_include_directories(libgenerated PUBLIC
-        ${LVGL_DIR}
+
         ${BASE_DIR}
         ${COMPONENT_DIR}
         ${EVENTS_DIR}
         ${SIMULATOR_DIR}
-        ${LVGL_DIR}/lvgl
+#        ${LVGL_DIR}/lvgl
         ${SIMULATOR_DIR}/lv_drivers
         ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/include
         ${UI_DIR}
 )
 set_target_properties(libgenerated PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${GEN_OBJ_DIR})
+target_link_libraries(libgenerated PUBLIC liblvgl)
 
 # 创建可执行文件
 add_executable(${PROJECT_NAME} ${SIMULATOR_DIR}/main.cpp)
