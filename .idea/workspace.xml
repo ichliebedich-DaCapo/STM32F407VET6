@@ -23,9 +23,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】贝塞尔二次曲线，些许漏墨，但速度下降了不少。线性插值也是，真奇怪">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】贝塞尔二次曲线_又见漏墨端倪，真机上右一小块没有正常显示，模拟器上可以">
       <change beforePath="$PROJECT_DIR$/GUI/Component/WaveCurve.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/WaveCurve.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1803,7 +1803,7 @@
       <workItem from="1730557209426" duration="4229000" />
       <workItem from="1730595421585" duration="1365000" />
       <workItem from="1730599802257" duration="25192000" />
-      <workItem from="1730694172834" duration="1000" />
+      <workItem from="1730694172834" duration="1161000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -2173,7 +2173,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730651874179</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="【双音频信号发生器】贝塞尔二次曲线_又见漏墨端倪，真机上右一小块没有正常显示，模拟器上可以">
+      <option name="closed" value="true" />
+      <created>1730694564105</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1730694564105</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2208,7 +2216,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="__【未配置好】让C++文件与C文件泾渭分明" />
     <MESSAGE value="__【未配置好】找到一个可能有用的方法，来解决挂梯子后仍超时的问题" />
     <MESSAGE value="__【未配置好】补救措施" />
     <MESSAGE value="__【未配置好】纠正了些许小问题" />
@@ -2233,7 +2240,8 @@
     <MESSAGE value="【双音频信号发生器】发现漏墨问题的一点端倪" />
     <MESSAGE value="【双音频信号发生器】先搁置样条算法的死机问题，先更改模板函数" />
     <MESSAGE value="【双音频信号发生器】贝塞尔二次曲线，些许漏墨，但速度下降了不少。线性插值也是，真奇怪" />
-    <option name="LAST_COMMIT_MESSAGE" value="【双音频信号发生器】贝塞尔二次曲线，些许漏墨，但速度下降了不少。线性插值也是，真奇怪" />
+    <MESSAGE value="【双音频信号发生器】贝塞尔二次曲线_又见漏墨端倪，真机上右一小块没有正常显示，模拟器上可以" />
+    <option name="LAST_COMMIT_MESSAGE" value="【双音频信号发生器】贝塞尔二次曲线_又见漏墨端倪，真机上右一小块没有正常显示，模拟器上可以" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

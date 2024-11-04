@@ -92,7 +92,7 @@ private:
     static constexpr float smoothness = 0.1f;// 定为0.1比较适合，不推荐改，如果改的话，把下面的缓冲数组尺寸也改了1/smoothness+1，得是整数
     static constexpr uint16_t buffer_size = 11;
 
-    // 千万不要把volatile去掉，程序对数组的优化，尤其是静态数组，总是容易优化死
+    // 定义大量静态数组时千万不要把volatile去掉，程序对数组的优化，尤其是静态数组，总是容易优化死
     // 根据我的远古回忆，上次优化导致卡死还是在使用TI(默认-O2还是-O3来着)时，定义了一个很小的静态数组，结果排查了半天
     // 最后根据汇编查看才发现是静态数组被优化掉了，变成寄存器了还是什么的，总之之后就卡死了
 //    volatile inline static Coord x_buff1[buffer_size]{};
@@ -197,21 +197,9 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve2, Coord, Color>
     static inline Coord draw_buff_y[buffer_size];
     static inline Coord *pDrawBuff_y = draw_buff_y;
 
-    static auto inline pre_draw( const Coord *y)
+    static auto inline draw(int &i,Coord& N,const Coord x[], const Coord y[], Color &bg_color, Color &color) -> void
     {
-        for (int j = 0; j <= 10; ++j)
-        {
-            float t = j * smoothness;
-            float one_minus_t = 1.0f - t;
-            float two_t = 2.0f * t;
-            float t2 = t * t;
-
-            pCleanBuff_y[j] = (Coord) (one_minus_t * one_minus_t * y[0] + two_t * one_minus_t * y[1] + t2 * y[2]);
-        }
-    }
-
-    static auto inline draw(int &i,Coord& N,const Coord *x, const Coord *y, Color &bg_color, Color &color) -> void
-    {
+        uint16_t end_index=N- getOncePoints<WaveCurve::Type::BezierCurve2>();
         for (int j = 0; j <= 10; ++j)
         {
             float t = j * smoothness;
@@ -221,7 +209,7 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve2, Coord, Color>
 
             // 计算px和py
             pCleanBuff_y[j] = (Coord) (one_minus_t * one_minus_t * y[0] + two_t * one_minus_t * y[1] + t2 * y[2]);
-            if(i!=N- getOncePoints<WaveCurve::Type::BezierCurve2>())
+            if(i!=end_index)
             {
                 pBuff_x[j] = (Coord) (one_minus_t * one_minus_t * x[0] + two_t * one_minus_t * x[1] + t2 * x[2]);
 
