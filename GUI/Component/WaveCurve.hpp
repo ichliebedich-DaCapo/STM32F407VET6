@@ -46,7 +46,7 @@ public:
     // 绘制曲线_插值画线
     template<WaveCurve::Type draw_type, typename Data=uint16_t, typename Color=uint16_t, typename Coord=uint16_t>
     static auto
-    draw_curve(Data data[], Data value, Coord N, Coord Start_x,
+    draw_curve(Data data[], Coord N, Data value, Coord Start_x,
                Coord Start_y,
                Coord Width,
                Coord Height, Data Max_Value, Color bg_color, Color color) -> void;
@@ -103,6 +103,13 @@ private:
 //    volatile inline static Coord *pBuff_draw_y = y_buff1;
 //    volatile inline static Coord *pBuff_clean_x = x_buff2;
 //    volatile inline static Coord *pBuff_clean_y = y_buff2;
+    static inline Coord buff_x[buffer_size];
+    static inline Coord clean_buff_y[buffer_size];
+    static inline Coord *pBuff_x = buff_x;
+    static inline Coord *pCleanBuff_y = clean_buff_y;
+
+    static inline Coord draw_buff_y[buffer_size];
+    static inline Coord *pDrawBuff_y = draw_buff_y;
 };
 
 template<typename T>
@@ -189,17 +196,9 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::Interpolated_Line, Coord, Color>
 template<typename Coord, typename Color>
 struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve2, Coord, Color>
 {
-    static inline Coord buff_x[buffer_size];
-    static inline Coord clean_buff_y[buffer_size];
-    static inline Coord *pBuff_x = buff_x;
-    static inline Coord *pCleanBuff_y = clean_buff_y;
-
-    static inline Coord draw_buff_y[buffer_size];
-    static inline Coord *pDrawBuff_y = draw_buff_y;
-
-    static auto inline draw(int &i,Coord& N,const Coord x[], const Coord y[], Color &bg_color, Color &color) -> void
+    static auto inline draw(int &i, Coord &N, const Coord x[], const Coord y[], Color &bg_color, Color &color) -> void
     {
-        uint16_t end_index=N- getOncePoints<WaveCurve::Type::BezierCurve2>();
+        uint16_t end_index = N - getOncePoints<WaveCurve::Type::BezierCurve2>();
         for (int j = 0; j <= 10; ++j)
         {
             float t = j * smoothness;
@@ -209,7 +208,7 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve2, Coord, Color>
 
             // 计算px和py
             pCleanBuff_y[j] = (Coord) (one_minus_t * one_minus_t * y[0] + two_t * one_minus_t * y[1] + t2 * y[2]);
-            if(i!=end_index)
+            if (i != end_index)
             {
                 pBuff_x[j] = (Coord) (one_minus_t * one_minus_t * x[0] + two_t * one_minus_t * x[1] + t2 * x[2]);
 
@@ -225,30 +224,35 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve2, Coord, Color>
 template<typename Coord, typename Color>
 struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve3, Coord, Color>
 {
-    static auto inline draw(const Coord *x, const Coord *y, Color color) -> void
+    static auto inline draw(int &i, Coord &N, const Coord x[], const Coord y[], Color &bg_color, Color &color) -> void
     {
-        draw_BezierCurve3(x, y, color);
-    }
-
-    static auto inline clean(const Coord *x, const Coord *y, Color color) -> void
-    {
-        Coord px, py;
-        float t = 0.0f;
-        while (t <= 1.0f)
+        uint16_t end_index = N - getOncePoints<WaveCurve::Type::BezierCurve3>();
+        for (int j = 0; j <= 10; ++j)
         {
+            float t = j * smoothness;
+            float one_minus_t = 1.0f - t;
+            float one_minus_t_2 = one_minus_t * one_minus_t;
+            float one_minus_t_3 = one_minus_t_2 * one_minus_t;
+            float three_t = 3.0f * t;
             float t2 = t * t;
             float t3 = t2 * t;
-            // 转换浮点数坐标到整数
 
-            px = (Coord) ((1 - t) * (1 - t) * (1 - t) * x[0] + 3 * (1 - t) * (1 - t) * t * x[1] +
-                          3 * (1 - t) * t2 * x[2] + t3 * x[3]);
-            py = (Coord) ((1 - t) * (1 - t) * (1 - t) * y[0] + 3 * (1 - t) * (1 - t) * t * y[1] +
-                          3 * (1 - t) * t2 * y[2] + t3 * y[3]);
+            // 计算px和py
 
-            // 设置像素点
-            LCD_Set_Pixel(px, py, color);
-            t += smoothness;
+            pCleanBuff_y[j] =
+                    (Coord) (one_minus_t_3 * y[0] + three_t * one_minus_t_2 * y[1] + 3 * one_minus_t * t2 * y[2]
+                             + t3 * y[3]);
+            if (i != end_index)
+            {
+                pBuff_x[j] = (Coord) (one_minus_t_3 * x[0] + three_t * one_minus_t_2 * x[1] +
+                                      3 * one_minus_t * t2 * x[2]
+                                      + t3 * x[3]);
+
+                LCD_Set_Pixel(pBuff_x[j], pCleanBuff_y[j], bg_color);// 清除旧像素点
+                LCD_Set_Pixel(pBuff_x[j], pDrawBuff_y[j], color);// 绘制新像素点
+            }
         }
+        switch_ptr(pCleanBuff_y, pDrawBuff_y);// 交换指针，把pBuff_y当做下一轮pBuff_new_y
     }
 };
 
@@ -275,7 +279,7 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::CatmullRomSp_line, Coord, Color>
  * @tparam Coord 坐标类型，默认为uint16_t
  * @param data  缓冲数组，其大小为总显示点数+1，因为要预留1个元素用于提速（去除分支判断）
  * @param value 待绘制的值
- * @param N  总显示点数，也是缓冲数组大小-1
+ * @param N  总显示点数，也是缓冲数组大小-1,为了可以动态调整绘制点数，不进行模板特化
  * @param Start_x 绘制区域的起点横坐标
  * @param Start_y 绘制区域的起点纵坐标
  * @param Width 绘制区域的宽度
@@ -283,7 +287,7 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::CatmullRomSp_line, Coord, Color>
  * @param Max_Value 样本数据的最大值
  */
 template<WaveCurve::Type draw_type, typename Data, typename Color, typename Coord>
-auto WaveCurve::draw_curve(Data data[], Data value, Coord N, Coord Start_x, Coord Start_y, Coord Width, Coord Height,
+auto WaveCurve::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Coord Start_y, Coord Width, Coord Height,
                            Data Max_Value, Color bg_color, Color color) -> void
 {
     /*******************前置条件*********************/
@@ -320,7 +324,7 @@ auto WaveCurve::draw_curve(Data data[], Data value, Coord N, Coord Start_x, Coor
             DrawFunction<draw_type, Coord, Color>::draw(x, y + 1, color);// 绘制新曲线
         } else
         {
-            DrawFunction<draw_type, Coord, Color>::draw(i,N,x, y, bg_color, color);// 绘制新曲线
+            DrawFunction<draw_type, Coord, Color>::draw(i, N, x, y, bg_color, color);// 绘制新曲线
         }
     }
 

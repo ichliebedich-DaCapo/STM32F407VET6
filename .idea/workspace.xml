@@ -24,6 +24,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】贝塞尔二次曲线_又见漏墨端倪，真机上右一小块没有正常显示，模拟器上可以">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/Component/WaveCurve.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/WaveCurve.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" afterDir="false" />
     </list>
@@ -1803,7 +1804,8 @@
       <workItem from="1730557209426" duration="4229000" />
       <workItem from="1730595421585" duration="1365000" />
       <workItem from="1730599802257" duration="25192000" />
-      <workItem from="1730694172834" duration="1161000" />
+      <workItem from="1730694172834" duration="1511000" />
+      <workItem from="1730697414966" duration="410000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
