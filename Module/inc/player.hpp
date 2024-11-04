@@ -4,7 +4,7 @@
 
 #ifndef FURINA_PLAYER_HPP
 #define FURINA_PLAYER_HPP
-#include "Module_Conf.h"
+#include "JYZQ_Conf.h"
 #ifdef USE_PLAYER
 
 // 定义播放速度枚举体

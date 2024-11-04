@@ -7,7 +7,7 @@
 #ifndef LCD_H_
 #define LCD_H_
 
-#include "Module_Conf.h"
+#include "JYZQ_Conf.h"
 
 #ifdef USE_LCD
 

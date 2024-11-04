@@ -5,7 +5,7 @@
 #ifndef FURINA_W25QXX_H
 #define FURINA_W25QXX_H
 
-#include "Module_Conf.h"
+#include "JYZQ_Conf.h"
 #ifdef USE_SPI_FLASH
 #include "spi.h"
 #ifdef __cplusplus

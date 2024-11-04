@@ -5,7 +5,7 @@
 #ifndef FURINA_WAVE_SIGNAL_HPP
 #define FURINA_WAVE_SIGNAL_HPP
 
-#include "Module_Conf.h"
+#include "JYZQ_Conf.h"
 #ifdef USE_WAVE_SIGNAL
 #include "waveData.h"
 #include "stm32f4xx_hal.h"

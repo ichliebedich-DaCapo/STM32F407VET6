@@ -4,7 +4,7 @@
 #ifndef SIMULATOR_UI_HPP
 #define SIMULATOR_UI_HPP
 
-#include "Module_Conf.h"
+#include "JYZQ_Conf.h"
 #include "lvgl.h"
 /* 预编译命令 */
 #if 1

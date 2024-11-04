@@ -32,15 +32,36 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】调整项目组织结构">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】完成了这次的项目优化，后面还有许多不妥之处，后续再慢慢改">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Conf/App_Conf.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Conf/Module_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Conf/Module_Conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/signalGenerator/signalGenerator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/signalGenerator/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/signalGenerator/signalGenerator.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/signalGenerator/app.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay/voiceStorageAndPlay.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay/voiceStorageAndPlay.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay/voiceStorageAndPlay.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay/app.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/ISR.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/keyTaskHandler.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/keyTaskHandler.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Conf/Module_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay/voiceStorageAndPlay.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/CPU_RunTime.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/CPU_RunTime.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/adc.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/adc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/baseInit.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/baseInit.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/dac.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/dac.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/fsmc.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/fsmc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/key_exit.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/key_exit.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/lcd.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/lcd.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/spi.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/spi.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/timer.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/timer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/w25qxx.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/w25qxx.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI_Base.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI_Base.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Component/WaveCurve.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/WaveCurve.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/Data/waveData.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Data/waveData.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/Third_Party/FreeRTOS/FreeRTOSConfig.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/FreeRTOS/FreeRTOSConfig.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/inc/fft.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/fft.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/inc/flash_storage.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/flash_storage.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/inc/key.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/key.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/inc/player.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/player.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/inc/wave_signal.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/wave_signal.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1879,15 +1900,7 @@
       <workItem from="1730599802257" duration="25192000" />
       <workItem from="1730694172834" duration="1511000" />
       <workItem from="1730697414966" duration="410000" />
-      <workItem from="1730708894404" duration="20599000" />
-    </task>
-    <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
-      <option name="closed" value="true" />
-      <created>1726996357168</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1726996357168</updated>
+      <workItem from="1730708894404" duration="23651000" />
     </task>
     <task id="LOCAL-00002" summary="__未配置好的工程——stm32f407VET6 预置了一点点规范">
       <option name="closed" value="true" />
@@ -2273,7 +2286,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730732283409</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="【双音频信号发生器】完成了这次的项目优化，后面还有许多不妥之处，后续再慢慢改">
+      <option name="closed" value="true" />
+      <created>1730732916020</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1730732916020</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2308,7 +2329,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="__【未配置好】纠正了些许小问题" />
     <MESSAGE value="【初始】准备引入LVGL模拟器" />
     <MESSAGE value="【初始】开始引入LVGL模拟器" />
     <MESSAGE value="【初始】主项目——发生了一件奇怪的事情，即便没有使用GUI，ROM也会爆满。正在尝试解决……" />
@@ -2333,7 +2353,8 @@
     <MESSAGE value="【双音频信号发生器】贝塞尔二次曲线_又见漏墨端倪，真机上右一小块没有正常显示，模拟器上可以" />
     <MESSAGE value="【双音频信号发生器】算法基本OK" />
     <MESSAGE value="【双音频信号发生器】调整项目组织结构" />
-    <option name="LAST_COMMIT_MESSAGE" value="【双音频信号发生器】调整项目组织结构" />
+    <MESSAGE value="【双音频信号发生器】完成了这次的项目优化，后面还有许多不妥之处，后续再慢慢改" />
+    <option name="LAST_COMMIT_MESSAGE" value="【双音频信号发生器】完成了这次的项目优化，后面还有许多不妥之处，后续再慢慢改" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -170,11 +170,11 @@ target_include_directories(libmodule PUBLIC Module/inc)
 target_link_libraries(libmodule PRIVATE libbsp libdsp libdata)
 
 # ------Application库------
-file(GLOB_RECURSE APPLICATION_SRC "${APP_DIR}/*.cpp" "Application/Base/*.cpp")
+file(GLOB_RECURSE APPLICATION_SRC "${APP_DIR}/app.cpp" "Application/Base/*.cpp")
 add_library(libapp STATIC ${APPLICATION_SRC})
 target_include_directories(libapp PUBLIC Application/Base)
-# 需要链接 libdrivers libdsp libdata libgui libfreertos
-target_link_libraries(libapp PUBLIC libdrivers libdsp libdata libgui libbsp libmodule)
+# 需要链接 libdsp libdata libgui libbsp libmodule等，根据需要选
+target_link_libraries(libapp PUBLIC libdsp libdata libgui libbsp libmodule)
 
 
 # 包含公共目录

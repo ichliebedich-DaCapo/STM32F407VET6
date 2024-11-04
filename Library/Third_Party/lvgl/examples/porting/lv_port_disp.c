@@ -9,7 +9,7 @@
 #include "lv_port_disp.h"
 #include <stdbool.h>
 #include "lcd.h"
-#include "Module_Conf.h"
+#include "JYZQ_Conf.h"
 /*********************
  *      DEFINES
  *********************/

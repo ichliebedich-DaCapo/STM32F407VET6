@@ -1,8 +1,8 @@
 //
 // Created by fairy on 2024/9/22.
 //
-#ifndef FURINA_MODULE_CONF_H
-#define FURINA_MODULE_CONF_H
+#ifndef FURINA_JYZQ_CONF_H
+#define FURINA_JYZQ_CONF_H
 /**
  *  @brief JYZQの配置文件
  *  @note  主要是用于控制调试相关的宏，同时展现模块和驱动有哪些。这里的宏后缀都有"__"，而应用层宏后缀没有"__"
@@ -78,4 +78,4 @@
 #define FREQ_168M_to_256x16K  4,19  // 168MHz -> 256*16KHz
 
 
-#endif //FURINA_MODULE_CONF_H
+#endif //FURINA_JYZQ_CONF_H

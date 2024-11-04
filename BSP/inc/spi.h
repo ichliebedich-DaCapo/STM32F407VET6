@@ -4,7 +4,7 @@
 
 #ifndef FURINA_SPI_H
 #define FURINA_SPI_H
-#include "Module_Conf.h"
+#include "JYZQ_Conf.h"
 #ifdef USE_SPI
 #include "stm32f4xx_hal.h"
 

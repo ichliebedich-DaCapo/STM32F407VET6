@@ -8,7 +8,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "Module_Conf.h"
+#include "JYZQ_Conf.h"
 
 void BaseInit();
 

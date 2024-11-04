@@ -5,7 +5,7 @@
 #ifndef FURINA_KEY_EXIT_H
 #define FURINA_KEY_EXIT_H
 
-#include "Module_Conf.h"
+#include "JYZQ_Conf.h"
 
 #ifdef USE_KEY_EXTI
 #ifdef __cplusplus

@@ -5,7 +5,7 @@
 #ifndef FURINA_TIMER_H
 #define FURINA_TIMER_H
 
-#include "Module_Conf.h"
+#include "JYZQ_Conf.h"
 #include "stm32f4xx_hal.h"
 #ifdef USE_TIMER
 #ifdef __cplusplus

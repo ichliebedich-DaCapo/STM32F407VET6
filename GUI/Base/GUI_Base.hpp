@@ -4,7 +4,7 @@
 #ifndef SIMULATOR_GUI_BASE_HPP
 #define SIMULATOR_GUI_BASE_HPP
 
-#include "Module_Conf.h"
+#include "JYZQ_Conf.h"
 /* 预编译命令 */
 #if 1
 // 头文件

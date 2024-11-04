@@ -4,7 +4,7 @@
 
 #ifndef FURINA_KEYTASKHANDLER_HPP
 #define FURINA_KEYTASKHANDLER_HPP
-#include "Module_Conf.h"
+#include "JYZQ_Conf.h"
 #if ENABLE_KEY_TASK_HANDLE
 #include "key.hpp"
 #ifndef APP_NO_RTOS
