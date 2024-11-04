@@ -224,37 +224,29 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve2, Coord, Color>
 template<typename Coord, typename Color>
 struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve3, Coord, Color>
 {
-    static auto inline draw(int &i, Coord &N, const Coord x[], const Coord y[], Color &bg_color, Color &color) -> void
+    static auto inline draw(const Coord x[], const Coord y[], Color &bg_color, Color &color) -> void
     {
-        uint16_t end_index = N - getOncePoints<WaveCurve::Type::BezierCurve3>();
         float t = 0.0f;
         for (int j = 0; j <= 10; ++j)
         {
             float one_minus_t = 1.0f - t;
             float one_minus_t_2 = one_minus_t * one_minus_t;
             float one_minus_t_3 = one_minus_t_2 * one_minus_t;
-            float three_t = 3.0f * t;
+            float three_t = t + t + t;// 我不敢假定编译器的优化行为
             float t2 = t * t;
             float t3 = t2 * t;
 
             // 计算px和py
+            pCleanBuff_y[j] = (Coord) (one_minus_t_3 * y[0] + three_t * one_minus_t_2 * y[1] +
+                                       3 * one_minus_t * t2 * y[2] + t3 * y[3]);
+            pBuff_x[j] = (Coord) (one_minus_t_3 * x[0] + three_t * one_minus_t_2 * x[1] + 3 * one_minus_t * t2 * x[2] +
+                                  t3 * x[3]);
 
-            pCleanBuff_y[j] =
-                    (Coord) (one_minus_t_3 * y[0] + three_t * one_minus_t_2 * y[1] + 3 * one_minus_t * t2 * y[2]
-                             + t3 * y[3]);
-            if (i != end_index)
-            {
-                pBuff_x[j] = (Coord) (one_minus_t_3 * x[0] + three_t * one_minus_t_2 * x[1] +
-                                      3 * one_minus_t * t2 * x[2]
-                                      + t3 * x[3]);
-
-                LCD_Set_Pixel(pBuff_x[j], pCleanBuff_y[j], bg_color);// 清除旧像素点
-                LCD_Set_Pixel(pBuff_x[j], pDrawBuff_y[j], color);// 绘制新像素点
-            }
+            LCD_Set_Pixel(pBuff_x[j], pCleanBuff_y[j], bg_color);// 清除旧像素点
+            LCD_Set_Pixel(pBuff_x[j], pDrawBuff_y[j], color);// 绘制新像素点
             t += smoothness;
         }
         switch_ptr(pCleanBuff_y, pDrawBuff_y);// 交换指针，把pBuff_y当做下一轮pBuff_new_y
-
     }
 };
 
@@ -262,30 +254,32 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve3, Coord, Color>
 template<typename Coord, typename Color>
 struct WaveCurve::DrawFunction<WaveCurve::Type::CatmullRomSp_line, Coord, Color>
 {
-    static auto inline draw(int &i, Coord &N, const Coord x[], const Coord y[], Color &bg_color, Color &color) -> void
+    static auto inline draw(const Coord x[], const Coord y[], Color &bg_color, Color &color) -> void
     {
-        uint16_t end_index = N - getOncePoints<WaveCurve::Type::CatmullRomSp_line>();
         float t = 0.0f;
+        // 预计算一些常量表达式
+        const float y_c0 = 2 * y[1];
+        const float y_c1 = (-y[0] + y[2]);
+        const float y_c2 = (2 * y[0] - 5 * y[1] + 4 * y[2] - y[3]);
+        const float y_c3 = (-y[0] + 3 * y[1] - 3 * y[2] + y[3]);
+
+        const float x_c0 = 2 * x[1];
+        const float x_c1 = (-x[0] + x[1]);
+        const float x_c2 = (2 * x[0] - 5 * x[1] + 4 * x[2] - x[3]);
+        const float x_c3 = (-x[0] + 3 * x[1] - 3 * x[2] + x[3]);
+
         for (int j = 0; j <= 10; ++j)
         {
+            // 我大胆猜想编译器应该会把它优化为成一张表
             float t2 = t * t;
             float t3 = t2 * t;
 
             // 计算px和py
-            pCleanBuff_y[j] = (Coord) (0.5 * (2 * y[1] +
-                                              (-y[0] + y[2]) * t +
-                                              (2 * y[0] - 5 * y[1] + 4 * y[2] - y[3]) * t2 +
-                                              (-y[0] + 3 * y[1] - 3 * y[2] + y[3]) * t3));
+            pCleanBuff_y[j] = (Coord) (0.5 * (y_c0 + y_c1 * t + y_c2 * t2 + y_c3 * t3));
+            pBuff_x[j] = (Coord) (0.5 * (x_c0 + x_c1 * t + x_c2 * t2 + x_c3 * t3));
 
-            if (i != end_index)
-            {
-                pBuff_x[j] = (Coord) (0.5 *
-                                      (2 * x[1] + (-x[0] + x[1]) * t + (2 * x[0] - 5 * x[1] + 4 * x[2] - x[3]) * t2 +
-                                       (-x[0] + 3 * x[1] - 3 * x[2] + x[3]) * t3));
-
-                LCD_Set_Pixel(pBuff_x[j], pCleanBuff_y[j], bg_color);// 清除旧像素点
-                LCD_Set_Pixel(pBuff_x[j], pDrawBuff_y[j], color);// 绘制新像素点
-            }
+            LCD_Set_Pixel(pBuff_x[j], pCleanBuff_y[j], bg_color);// 清除旧像素点
+            LCD_Set_Pixel(pBuff_x[j], pDrawBuff_y[j], color);// 绘制新像素点
             t += smoothness;
         }
         switch_ptr(pCleanBuff_y, pDrawBuff_y);// 交换指针，把pBuff_y当做下一轮pBuff_new_y
