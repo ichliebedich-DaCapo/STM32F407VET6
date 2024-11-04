@@ -6,7 +6,7 @@
 #define FURINA_WAVEDATA_H
 
 #include "Module_Conf.h"
-#include "stm32f4xx_hal.h"
+#include <stdint-gcc.h>
 /**
  * @brief 波形数据
  * @details 使用的是MATLAB生成的波形数据，之所以不使用Python是因为Python的精度没有MATLAB高

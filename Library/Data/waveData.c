@@ -1,6 +1,7 @@
 //
-// Created by 34753 on 2024/10/13.
+// Created by fairy on 2024/10/13.
 //
+
 
 #include "waveData.h"
 // 正弦波

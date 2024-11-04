@@ -14,7 +14,16 @@
   </component>
   <component name="CMakeRunConfigurationManager">
     <generated>
+      <config projectName="Furina" targetName="libfreertos" />
+      <config projectName="Furina" targetName="libdata" />
+      <config projectName="Furina" targetName="liblvgl" />
+      <config projectName="Furina" targetName="libmodule" />
       <config projectName="Furina" targetName="Furina.elf" />
+      <config projectName="Furina" targetName="libdrivers" />
+      <config projectName="Furina" targetName="libbsp" />
+      <config projectName="Furina" targetName="libdsp" />
+      <config projectName="Furina" targetName="libapp" />
+      <config projectName="Furina" targetName="libgui" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -23,12 +32,57 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】贝塞尔二次曲线_又见漏墨端倪，真机上右一小块没有正常显示，模拟器上可以">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】算法基本OK">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/signalGenerator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/signalGenerator.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Component/WaveCurve.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/WaveCurve.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/keyTaskHandler.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/keyTaskHandler.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/signalGenerator.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/signalGenerator.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/ADC/adc.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/ADC/adc.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Base/CPU_RunTime.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Base/CPU_RunTime.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Base/FreeRTOSConfig.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Base/baseInit.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Base/baseInit.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Base/stm32f4xx_hal_conf.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Base/stm32f4xx_it.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Core/startup_stm32f407vetx.s" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Core/syscalls.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Core/sysmem.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Core/system_stm32f4xx.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/DAC/dac.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/DAC/dac.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Key/key_exit.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Key/key_exit.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/LCD/fsmc.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/LCD/fsmc.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/LCD/lcd.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/LCD/lcd.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/SPI_Flash/spi.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/SPI_Flash/spi.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/SPI_Flash/w25qxx.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/SPI_Flash/w25qxx.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Timer/timer.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/Timer/timer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/Data/waveData.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Data/waveData.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/Data/waveData.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Data/waveData.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/cpu_temperature.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/cpu_temperature.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/fft.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/fft.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/flash_storage.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/flash_storage.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/key.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/key.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/player.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/player.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/wave_signal.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/wave_signal.hpp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1687,6 +1741,51 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="libapp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libapp" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libbsp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libbsp" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libdata" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdata" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libdrivers" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdrivers" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libdsp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdsp" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libfreertos" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libfreertos" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libgui" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libgui" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="liblvgl" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="liblvgl" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libmodule" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libmodule" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Embedded\MCU\STM32\Furina\stlink.cfg" reset-type="RUN" download-type="UPDATED_ONLY">
         <debugger kind="GDB" isBundled="true" />
@@ -1697,6 +1796,15 @@
     </configuration>
     <list>
       <item itemvalue="CMake 应用程序.Furina.elf" />
+      <item itemvalue="CMake 应用程序.libapp" />
+      <item itemvalue="CMake 应用程序.libbsp" />
+      <item itemvalue="CMake 应用程序.libdata" />
+      <item itemvalue="CMake 应用程序.libdrivers" />
+      <item itemvalue="CMake 应用程序.libdsp" />
+      <item itemvalue="CMake 应用程序.libfreertos" />
+      <item itemvalue="CMake 应用程序.libgui" />
+      <item itemvalue="CMake 应用程序.liblvgl" />
+      <item itemvalue="CMake 应用程序.libmodule" />
       <item itemvalue="OpenOCD 下载并运行.OCD Furina" />
     </list>
   </component>
@@ -1813,7 +1921,7 @@
       <workItem from="1730599802257" duration="25192000" />
       <workItem from="1730694172834" duration="1511000" />
       <workItem from="1730697414966" duration="410000" />
-      <workItem from="1730708894404" duration="5095000" />
+      <workItem from="1730708894404" duration="19964000" />
     </task>
     <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
       <option name="closed" value="true" />
@@ -2191,7 +2299,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730694564105</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="【双音频信号发生器】算法基本OK">
+      <option name="closed" value="true" />
+      <created>1730717047441</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1730717047441</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2226,7 +2342,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="__【未配置好】找到一个可能有用的方法，来解决挂梯子后仍超时的问题" />
     <MESSAGE value="__【未配置好】补救措施" />
     <MESSAGE value="__【未配置好】纠正了些许小问题" />
     <MESSAGE value="【初始】准备引入LVGL模拟器" />
@@ -2251,7 +2366,8 @@
     <MESSAGE value="【双音频信号发生器】先搁置样条算法的死机问题，先更改模板函数" />
     <MESSAGE value="【双音频信号发生器】贝塞尔二次曲线，些许漏墨，但速度下降了不少。线性插值也是，真奇怪" />
     <MESSAGE value="【双音频信号发生器】贝塞尔二次曲线_又见漏墨端倪，真机上右一小块没有正常显示，模拟器上可以" />
-    <option name="LAST_COMMIT_MESSAGE" value="【双音频信号发生器】贝塞尔二次曲线_又见漏墨端倪，真机上右一小块没有正常显示，模拟器上可以" />
+    <MESSAGE value="【双音频信号发生器】算法基本OK" />
+    <option name="LAST_COMMIT_MESSAGE" value="【双音频信号发生器】算法基本OK" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

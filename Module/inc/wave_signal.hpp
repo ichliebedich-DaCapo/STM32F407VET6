@@ -8,6 +8,7 @@
 #include "Module_Conf.h"
 #ifdef USE_WAVE_SIGNAL
 #include "waveData.h"
+#include "stm32f4xx_hal.h"
 
 enum class WaveMode : uint8_t
 {
