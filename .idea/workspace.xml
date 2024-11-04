@@ -14,7 +14,16 @@
   </component>
   <component name="CMakeRunConfigurationManager">
     <generated>
+      <config projectName="Furina" targetName="libfreertos" />
+      <config projectName="Furina" targetName="libdata" />
+      <config projectName="Furina" targetName="liblvgl" />
+      <config projectName="Furina" targetName="libmodule" />
       <config projectName="Furina" targetName="Furina.elf" />
+      <config projectName="Furina" targetName="libdrivers" />
+      <config projectName="Furina" targetName="libbsp" />
+      <config projectName="Furina" targetName="libdsp" />
+      <config projectName="Furina" targetName="libapp" />
+      <config projectName="Furina" targetName="libgui" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -23,9 +32,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【语音存储与回放】更新了Readme">
-      <change beforePath="$PROJECT_DIR$/Module/fft.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/fft.hpp" afterDir="false" />
-    </list>
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】完善了一下Readme" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,15 +66,15 @@
         <entry key="STM32F407.svd" value="-E" />
         <entry key="STM32F407.svd|g:ADC" value="-C" />
         <entry key="STM32F407.svd|g:CAN" value="-C" />
-        <entry key="STM32F407.svd|g:DMA" value="-C" />
+        <entry key="STM32F407.svd|g:DMA" value="-E" />
         <entry key="STM32F407.svd|g:Ethernet" value="-C" />
         <entry key="STM32F407.svd|g:GPIO" value="-C" />
         <entry key="STM32F407.svd|g:I2C" value="-C" />
-        <entry key="STM32F407.svd|g:SPI" value="-E" />
+        <entry key="STM32F407.svd|g:SPI" value="-C" />
         <entry key="STM32F407.svd|g:TIM" value="-C" />
         <entry key="STM32F407.svd|g:USART" value="-C" />
-        <entry key="STM32F407.svd|g:USB_OTG_FS" value="-E" />
-        <entry key="STM32F407.svd|g:USB_OTG_HS" value="-E" />
+        <entry key="STM32F407.svd|g:USB_OTG_FS" value="-C" />
+        <entry key="STM32F407.svd|g:USB_OTG_HS" value="-C" />
         <entry key="STM32F407.svd|p:ADC1" value="-C" />
         <entry key="STM32F407.svd|p:ADC1|CR1" value="HC" />
         <entry key="STM32F407.svd|p:ADC1|CR2" value="HC" />
@@ -441,9 +448,9 @@
         <entry key="STM32F407.svd|p:DMA1|S7M1AR" value="HC" />
         <entry key="STM32F407.svd|p:DMA1|S7NDTR" value="HC" />
         <entry key="STM32F407.svd|p:DMA1|S7PAR" value="HC" />
-        <entry key="STM32F407.svd|p:DMA2" value="-C" />
+        <entry key="STM32F407.svd|p:DMA2" value="-E" />
         <entry key="STM32F407.svd|p:DMA2|HIFCR" value="HC" />
-        <entry key="STM32F407.svd|p:DMA2|HISR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA2|HISR" value="HE" />
         <entry key="STM32F407.svd|p:DMA2|LIFCR" value="HC" />
         <entry key="STM32F407.svd|p:DMA2|LISR" value="HC" />
         <entry key="STM32F407.svd|p:DMA2|S0CR" value="HC" />
@@ -482,7 +489,7 @@
         <entry key="STM32F407.svd|p:DMA2|S5M1AR" value="HC" />
         <entry key="STM32F407.svd|p:DMA2|S5NDTR" value="HC" />
         <entry key="STM32F407.svd|p:DMA2|S5PAR" value="HC" />
-        <entry key="STM32F407.svd|p:DMA2|S6CR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA2|S6CR" value="HE" />
         <entry key="STM32F407.svd|p:DMA2|S6FCR" value="HC" />
         <entry key="STM32F407.svd|p:DMA2|S6M0AR" value="HC" />
         <entry key="STM32F407.svd|p:DMA2|S6M1AR" value="HC" />
@@ -852,7 +859,7 @@
         <entry key="STM32F407.svd|p:IWDG|PR" value="HC" />
         <entry key="STM32F407.svd|p:IWDG|RLR" value="HC" />
         <entry key="STM32F407.svd|p:IWDG|SR" value="HC" />
-        <entry key="STM32F407.svd|p:OTG_FS_DEVICE" value="-E" />
+        <entry key="STM32F407.svd|p:OTG_FS_DEVICE" value="-C" />
         <entry key="STM32F407.svd|p:OTG_FS_DEVICE|DIEPCTL1" value="HC" />
         <entry key="STM32F407.svd|p:OTG_FS_DEVICE|DIEPCTL2" value="HC" />
         <entry key="STM32F407.svd|p:OTG_FS_DEVICE|DIEPCTL3" value="HC" />
@@ -888,7 +895,7 @@
         <entry key="STM32F407.svd|p:OTG_FS_DEVICE|FS_DCFG" value="HC" />
         <entry key="STM32F407.svd|p:OTG_FS_DEVICE|FS_DCTL" value="HC" />
         <entry key="STM32F407.svd|p:OTG_FS_DEVICE|FS_DIEPCTL0" value="HC" />
-        <entry key="STM32F407.svd|p:OTG_FS_DEVICE|FS_DIEPMSK" value="HE" />
+        <entry key="STM32F407.svd|p:OTG_FS_DEVICE|FS_DIEPMSK" value="HC" />
         <entry key="STM32F407.svd|p:OTG_FS_DEVICE|FS_DOEPMSK" value="HC" />
         <entry key="STM32F407.svd|p:OTG_FS_DEVICE|FS_DSTS" value="HC" />
         <entry key="STM32F407.svd|p:OTG_FS_GLOBAL" value="-C" />
@@ -1251,15 +1258,15 @@
         <entry key="STM32F407.svd|p:SPI1|RXCRCR" value="HC" />
         <entry key="STM32F407.svd|p:SPI1|SR" value="HC" />
         <entry key="STM32F407.svd|p:SPI1|TXCRCR" value="HC" />
-        <entry key="STM32F407.svd|p:SPI2" value="-E" />
-        <entry key="STM32F407.svd|p:SPI2|CR1" value="HE" />
-        <entry key="STM32F407.svd|p:SPI2|CR2" value="HE" />
+        <entry key="STM32F407.svd|p:SPI2" value="-C" />
+        <entry key="STM32F407.svd|p:SPI2|CR1" value="HC" />
+        <entry key="STM32F407.svd|p:SPI2|CR2" value="HC" />
         <entry key="STM32F407.svd|p:SPI2|CRCPR" value="HC" />
         <entry key="STM32F407.svd|p:SPI2|DR" value="HC" />
         <entry key="STM32F407.svd|p:SPI2|I2SCFGR" value="HC" />
         <entry key="STM32F407.svd|p:SPI2|I2SPR" value="HC" />
         <entry key="STM32F407.svd|p:SPI2|RXCRCR" value="HC" />
-        <entry key="STM32F407.svd|p:SPI2|SR" value="HE" />
+        <entry key="STM32F407.svd|p:SPI2|SR" value="HC" />
         <entry key="STM32F407.svd|p:SPI2|TXCRCR" value="HC" />
         <entry key="STM32F407.svd|p:SPI3" value="-C" />
         <entry key="STM32F407.svd|p:SPI3|CR1" value="HC" />
@@ -1642,23 +1649,24 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "OpenOCD 下载并运行.OCD Furina.executor": "Debug",
+    "OpenOCD 下载并运行.OCD Furina.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "test",
+    "git-widget-placeholder": "ZQ",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "E:/Tools/Develop/Embedded/STM32Cube/Repository/STM32F4_svd/STM32F4_svd_V2.0/STM32F407.svd",
+    "last_opened_file_path": "D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "CPPToolchains",
+    "settings.editor.selected.configurable": "fileTemplates",
     "structure.view.defaults.are.configured": "true",
+    "two.files.diff.last.used.file": "D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -1682,6 +1690,51 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="libapp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libapp" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libbsp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libbsp" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libdata" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdata" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libdrivers" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdrivers" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libdsp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdsp" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libfreertos" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libfreertos" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libgui" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libgui" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="liblvgl" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="liblvgl" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libmodule" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libmodule" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Embedded\MCU\STM32\Furina\stlink.cfg" reset-type="RUN" download-type="UPDATED_ONLY">
         <debugger kind="GDB" isBundled="true" />
@@ -1692,6 +1745,15 @@
     </configuration>
     <list>
       <item itemvalue="CMake 应用程序.Furina.elf" />
+      <item itemvalue="CMake 应用程序.libapp" />
+      <item itemvalue="CMake 应用程序.libbsp" />
+      <item itemvalue="CMake 应用程序.libdata" />
+      <item itemvalue="CMake 应用程序.libdrivers" />
+      <item itemvalue="CMake 应用程序.libdsp" />
+      <item itemvalue="CMake 应用程序.libfreertos" />
+      <item itemvalue="CMake 应用程序.libgui" />
+      <item itemvalue="CMake 应用程序.liblvgl" />
+      <item itemvalue="CMake 应用程序.libmodule" />
       <item itemvalue="OpenOCD 下载并运行.OCD Furina" />
     </list>
   </component>
@@ -1788,22 +1850,27 @@
       <workItem from="1729493438473" duration="3000" />
       <workItem from="1729495118572" duration="5423000" />
       <workItem from="1729574318885" duration="5836000" />
-    </task>
-    <task id="LOCAL-00001" summary="__未配置好的工程——stm32f407VET6 LCD为ILI 9488">
-      <option name="closed" value="true" />
-      <created>1726996357168</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1726996357168</updated>
-    </task>
-    <task id="LOCAL-00002" summary="__未配置好的工程——stm32f407VET6 预置了一点点规范">
-      <option name="closed" value="true" />
-      <created>1728200238927</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1728200238927</updated>
+      <workItem from="1729585768734" duration="53000" />
+      <workItem from="1729615921017" duration="138000" />
+      <workItem from="1729669960233" duration="2407000" />
+      <workItem from="1729674895308" duration="2884000" />
+      <workItem from="1729689439541" duration="8502000" />
+      <workItem from="1729760111332" duration="717000" />
+      <workItem from="1729821849367" duration="124000" />
+      <workItem from="1729822808246" duration="13000" />
+      <workItem from="1729823212979" duration="322000" />
+      <workItem from="1729946339214" duration="23000" />
+      <workItem from="1730015668951" duration="938000" />
+      <workItem from="1730460938052" duration="891000" />
+      <workItem from="1730461843571" duration="8000" />
+      <workItem from="1730478119422" duration="631000" />
+      <workItem from="1730507124617" duration="21430000" />
+      <workItem from="1730557209426" duration="4229000" />
+      <workItem from="1730595421585" duration="1365000" />
+      <workItem from="1730599802257" duration="25192000" />
+      <workItem from="1730694172834" duration="1511000" />
+      <workItem from="1730697414966" duration="410000" />
+      <workItem from="1730708894404" duration="24726000" />
     </task>
     <task id="LOCAL-00003" summary="__未配置好的工程——stm32f407VET6 稍微修改了一下介绍">
       <option name="closed" value="true" />
@@ -2093,7 +2160,111 @@
       <option name="project" value="LOCAL" />
       <updated>1729579144137</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="【双音频信号发生器】发现绘制图表时会有很严重的性能问题。现准备尝试双缓冲">
+      <option name="closed" value="true" />
+      <created>1730528798409</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1730528798409</updated>
+    </task>
+    <task id="LOCAL-00040" summary="【双音频信号发生器】尝试用基本LCD函数来实现波形绘制">
+      <option name="closed" value="true" />
+      <created>1730559155335</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1730559155335</updated>
+    </task>
+    <task id="LOCAL-00041" summary="【双音频信号发生器】示波器绘制算法勉强可以使用，只不过在真机上运行会导致图形紊乱，猜测可能是数据类型导致的">
+      <option name="closed" value="true" />
+      <created>1730586115061</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1730586115061</updated>
+    </task>
+    <task id="LOCAL-00042" summary="【双音频信号发生器】已解决紊乱问题，现在尝试解决优化速率">
+      <option name="closed" value="true" />
+      <created>1730606427778</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1730606427778</updated>
+    </task>
+    <task id="LOCAL-00043" summary="【双音频信号发生器】准备解决绘制漏墨问题">
+      <option name="closed" value="true" />
+      <created>1730610629824</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1730610629824</updated>
+    </task>
+    <task id="LOCAL-00044" summary="【双音频信号发生器】发现漏墨问题的一点端倪">
+      <option name="closed" value="true" />
+      <created>1730619162562</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1730619162562</updated>
+    </task>
+    <task id="LOCAL-00045" summary="【双音频信号发生器】先搁置样条算法的死机问题，先更改模板函数">
+      <option name="closed" value="true" />
+      <created>1730622190728</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1730622190728</updated>
+    </task>
+    <task id="LOCAL-00046" summary="【双音频信号发生器】贝塞尔二次曲线，些许漏墨，但速度下降了不少。线性插值也是，真奇怪">
+      <option name="closed" value="true" />
+      <created>1730651874179</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1730651874179</updated>
+    </task>
+    <task id="LOCAL-00047" summary="【双音频信号发生器】贝塞尔二次曲线_又见漏墨端倪，真机上右一小块没有正常显示，模拟器上可以">
+      <option name="closed" value="true" />
+      <created>1730694564105</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1730694564105</updated>
+    </task>
+    <task id="LOCAL-00048" summary="【双音频信号发生器】算法基本OK">
+      <option name="closed" value="true" />
+      <created>1730717047441</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1730717047441</updated>
+    </task>
+    <task id="LOCAL-00049" summary="【双音频信号发生器】调整项目组织结构">
+      <option name="closed" value="true" />
+      <created>1730732283409</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1730732283409</updated>
+    </task>
+    <task id="LOCAL-00050" summary="【双音频信号发生器】完成了这次的项目优化，后面还有许多不妥之处，后续再慢慢改">
+      <option name="closed" value="true" />
+      <created>1730732916020</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1730732916020</updated>
+    </task>
+    <task id="LOCAL-00051" summary="【双音频信号发生器】完善了一下Readme">
+      <option name="closed" value="true" />
+      <created>1730736973300</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1730736973300</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2115,7 +2286,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="test" />
+                        <option value="ZQ" />
                       </list>
                     </value>
                   </entry>
@@ -2128,20 +2299,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="__【未配置好】添加了ADC、DAC、定时器驱动，添加了ISR.cpp用于处理中断回调。此外，开始编写player模块，但还没理清与应用、驱动之间的关系，低耦合高内聚真难搞啊" />
-    <MESSAGE value="__【未配置好】快把语言存储与回放这个小项目写完了，但是手头还没有单片机！！" />
-    <MESSAGE value="__【未配置好】优化了一些细节。这个__weak大抵是发挥作用的吧，但编译后的内存竟然只增加了1%左右。等手头有单片机后再测试" />
-    <MESSAGE value="__【未配置好】准备着手双音频信号发生器" />
-    <MESSAGE value="__【未配置好】双音频信号发生器实现了一部分逻辑" />
-    <MESSAGE value="__【未配置好】双音频信号发生器——模块基本写好" />
-    <MESSAGE value="__【未配置好】协同开发测试" />
-    <MESSAGE value="__【未配置好】添加了一个宏定义，用于设置定时器的频率" />
-    <MESSAGE value="__【未配置好】使用了CLion的文件模板，以后C++头文件后缀使用hpp" />
-    <MESSAGE value="__【未配置好】让C++文件与C文件泾渭分明" />
-    <MESSAGE value="__【未配置好】找到一个可能有用的方法，来解决挂梯子后仍超时的问题" />
-    <MESSAGE value="__【未配置好】补救措施" />
-    <MESSAGE value="__【未配置好】纠正了些许小问题" />
-    <MESSAGE value="【初始】准备引入LVGL模拟器" />
     <MESSAGE value="【初始】开始引入LVGL模拟器" />
     <MESSAGE value="【初始】主项目——发生了一件奇怪的事情，即便没有使用GUI，ROM也会爆满。正在尝试解决……" />
     <MESSAGE value="【初始】主项目——初步判断是ui.cpp导致ROM爆了，原因不明" />
@@ -2153,16 +2310,21 @@
     <MESSAGE value="【语音存储与回放】稍微优化了Flash读写函数" />
     <MESSAGE value="【语音存储与回放】启用了DMA用于FSMC传输数据，准备测试分支的读取内部温度传感器" />
     <MESSAGE value="【语音存储与回放】更新了Readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="【语音存储与回放】更新了Readme" />
-  </component>
-  <component name="XDebuggerManager">
-    <watches-manager>
-      <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
-        <watch expression="count" />
-        <watch expression="start_click" />
-        <watch expression="end_click" />
-      </configuration>
-    </watches-manager>
+    <MESSAGE value="【语音存储与回放】更新了Readme,创建了一个新分支ZQ用于测试" />
+    <MESSAGE value="【双音频信号发生器】发现绘制图表时会有很严重的性能问题。现准备尝试双缓冲" />
+    <MESSAGE value="【双音频信号发生器】尝试用基本LCD函数来实现波形绘制" />
+    <MESSAGE value="【双音频信号发生器】示波器绘制算法勉强可以使用，只不过在真机上运行会导致图形紊乱，猜测可能是数据类型导致的" />
+    <MESSAGE value="【双音频信号发生器】已解决紊乱问题，现在尝试解决优化速率" />
+    <MESSAGE value="【双音频信号发生器】准备解决绘制漏墨问题" />
+    <MESSAGE value="【双音频信号发生器】发现漏墨问题的一点端倪" />
+    <MESSAGE value="【双音频信号发生器】先搁置样条算法的死机问题，先更改模板函数" />
+    <MESSAGE value="【双音频信号发生器】贝塞尔二次曲线，些许漏墨，但速度下降了不少。线性插值也是，真奇怪" />
+    <MESSAGE value="【双音频信号发生器】贝塞尔二次曲线_又见漏墨端倪，真机上右一小块没有正常显示，模拟器上可以" />
+    <MESSAGE value="【双音频信号发生器】算法基本OK" />
+    <MESSAGE value="【双音频信号发生器】调整项目组织结构" />
+    <MESSAGE value="【双音频信号发生器】完成了这次的项目优化，后面还有许多不妥之处，后续再慢慢改" />
+    <MESSAGE value="【双音频信号发生器】完善了一下Readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="【双音频信号发生器】完善了一下Readme" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

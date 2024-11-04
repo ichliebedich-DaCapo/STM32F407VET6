@@ -3,7 +3,7 @@ project(Simulator)
 
 # 设置编译器
 set(CMAKE_C_COMPILER gcc)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 # 定义路径
 set(LIBFILE_PATH resource/lib/native)
@@ -15,8 +15,8 @@ set(SIMULATOR_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(COMPONENT_DIR ${PROJECT_SOURCE_DIR}/Component)
 set(EVENTS_DIR ${PROJECT_SOURCE_DIR}/Events)
 # ----------------------------------设置你的UI路径（选择项目）------------------------------
-set(UI_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../UI/voiceStorageAndPlay)
-
+set(UI_DIR ../UI/signalGenerator)
+# ----------------------------------设置你的UI路径（选择项目）------------------------------
 # 生成的目标文件目录
 set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
 set(OBJ_DIR ${BUILD_DIR}/object)
@@ -24,7 +24,8 @@ set(GEN_OBJ_DIR ${OBJ_DIR}/generated)
 set(BIN_DIR ${BUILD_DIR}/bin)
 
 # 编译选项
-add_compile_options(-O2 -g0 -DLV_CONF_INCLUDE_SIMPLE=1)
+# 开-O2和-O3有时候会卡死，但相同情况下真机没有问题
+add_compile_options(-O2 -g -DLV_CONF_INCLUDE_SIMPLE=1)
 
 # 添加链接选项,显示内存分布，但现在不能使用
 #add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${BIN_DIR}/${PROJECT_NAME}.map)
@@ -34,7 +35,7 @@ set(LIBRARIES decoder openh264 rlottie pthread stdc++ jansson curl m SDL2)
 link_directories(${LIBFILE_PATH} ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib ${GEN_OBJ_DIR})
 
 # 添加控制目录
-include_directories(${APP_DIR}/Conf ${APP_DIR} )
+include_directories(${APP_DIR}/Conf  ${APP_DIR})
 
 # 源文件
 file(GLOB_RECURSE LVGL_SRCS "${LVGL_DIR}/lvgl/*.c")
@@ -42,7 +43,7 @@ file(GLOB_RECURSE DRIVER_SRCS "${SIMULATOR_DIR}/lv_drivers/*.c")
 file(GLOB_RECURSE COMPONENT_SRCS "${COMPONENT_DIR}/*.*")
 file(GLOB_RECURSE EVENTS_SRCS "${EVENTS_DIR}/*.*")
 file(GLOB_RECURSE BASE_SRCS "${BASE_DIR}/*.*")
-file(GLOB_RECURSE UI_SRCS "${UI_DIR}/*.*")
+file(GLOB_RECURSE UI_SRCS "${UI_DIR}/*.*" "../UI/test.cpp")
 # 定义静态库
 add_library(libgenerated STATIC
         ${LVGL_SRCS}

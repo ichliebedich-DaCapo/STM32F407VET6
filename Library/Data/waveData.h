@@ -1,12 +1,12 @@
 //
-// Created by 34753 on 2024/10/12.
+// Created by fairy on 2024/10/12.
 //
 
 #ifndef FURINA_WAVEDATA_H
 #define FURINA_WAVEDATA_H
 
-#include "Module_Conf.h"
-#include "stm32f4xx_hal.h"
+#include "JYZQ_Conf.h"
+#include <stdint-gcc.h>
 /**
  * @brief 波形数据
  * @details 使用的是MATLAB生成的波形数据，之所以不使用Python是因为Python的精度没有MATLAB高
