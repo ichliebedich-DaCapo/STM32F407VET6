@@ -23,10 +23,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【语音存储与回放】更新了Readme">
-      <change beforePath="$PROJECT_DIR$/Application/Base/JYZQ_Conf.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Conf/App_Conf.h" beforeDir="false" />
-    </list>
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【语音存储与回放】更新了Readme" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
