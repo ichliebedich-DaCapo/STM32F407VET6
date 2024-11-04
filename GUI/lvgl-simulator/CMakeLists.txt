@@ -35,20 +35,17 @@ add_compile_options(-O2 -g -DLV_CONF_INCLUDE_SIMPLE=1)
 # 添加链接选项,显示内存分布，但现在不能使用
 #add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${BIN_DIR}/${PROJECT_NAME}.map)
 
-# 链接选项
-set(LIBRARIES decoder openh264 rlottie pthread stdc++ jansson curl m SDL2)
-link_directories(${LIBFILE_PATH} ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib ${GEN_OBJ_DIR})
+
 #------------------------------------------库-------------------------------------------
 # 添加公共目录
-include_directories(${APP_DIR}/Conf  ${APP_DIR}/${APP})
-
+include_directories(${APP_DIR}/Conf ${APP_DIR}/${APP})
 
 #---------------lvgl库---------------
 file(GLOB_RECURSE LVGL_SRCS "resource/lvgl/*.c")
 add_library(liblvgl STATIC ${LVGL_SRCS})
 target_include_directories(liblvgl PUBLIC
         # LVGL根目录
-        resource
+        ${LVGL_DIR}
         resource/lvgl
 
         ${SIMULATOR_DIR}
@@ -56,61 +53,45 @@ target_include_directories(liblvgl PUBLIC
 
 
 #---------------Driver库---------------
-
-
-
-#---------------lvgl库---------------
-
-
-# 源文件
-
 file(GLOB_RECURSE DRIVER_SRCS "${SIMULATOR_DIR}/lv_drivers/*.c")
+add_library(libdriver STATIC ${DRIVER_SRCS})
+target_include_directories(libdriver PUBLIC
+        ${SIMULATOR_DIR}/lv_drivers
+        ${SIMULATOR_DIR}
+        ${LVGL_DIR}
+        ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/include
+)
+
+
+#---------------GUI库---------------
 file(GLOB_RECURSE COMPONENT_SRCS "${COMPONENT_DIR}/*.*")
 file(GLOB_RECURSE EVENTS_SRCS "${EVENTS_DIR}/*.*")
 file(GLOB_RECURSE BASE_SRCS "${BASE_DIR}/*.*")
 file(GLOB_RECURSE UI_SRCS "${UI_DIR}/*.*" "../UI/test.cpp")
-# 定义静态库
-add_library(libgenerated STATIC
-#        ${LVGL_SRCS}
-        ${DRIVER_SRCS}
+add_library(libgui STATIC
         ${COMPONENT_SRCS}
         ${BASE_SRCS}
         ${EVENTS_SRCS}
         ${UI_SRCS}
 )
-# 头文件目录
-target_include_directories(libgenerated PUBLIC
-
+target_include_directories(libgui PUBLIC
+        ${UI_DIR}
         ${BASE_DIR}
         ${COMPONENT_DIR}
         ${EVENTS_DIR}
-        ${SIMULATOR_DIR}
-#        ${LVGL_DIR}/lvgl
-        ${SIMULATOR_DIR}/lv_drivers
-        ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/include
-        ${UI_DIR}
 )
-set_target_properties(libgenerated PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${GEN_OBJ_DIR})
-target_link_libraries(libgenerated PUBLIC liblvgl)
+target_link_libraries(libgui PUBLIC liblvgl)
+
+# 链接库
+set(LIBRARIES decoder openh264 rlottie pthread stdc++ jansson curl m SDL2)
+link_directories(${LIBFILE_PATH} ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib ${GEN_OBJ_DIR})
 
 # 创建可执行文件
 add_executable(${PROJECT_NAME} ${SIMULATOR_DIR}/main.cpp)
-target_link_libraries(${PROJECT_NAME} PRIVATE libgenerated ${LIBRARIES})
-target_include_directories(${PROJECT_NAME} PRIVATE ${SIMULATOR_DIR})
+target_link_libraries(${PROJECT_NAME} PRIVATE libdriver libgui ${LIBRARIES})
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
 
-# 创建DLL
-add_library(${PROJECT_NAME}_dll SHARED ${SIMULATOR_DIR}/main.cpp)
-target_link_libraries(${PROJECT_NAME}_dll PRIVATE libgenerated ${LIBRARIES})
-target_include_directories(${PROJECT_NAME}_dll PRIVATE
-        ${SIMULATOR_DIR}
-)
-set_target_properties(${PROJECT_NAME}_dll PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR}
-        LINK_FLAGS "--entry=_DllMainCRTStartup@12"
-)
-
-# 复制所需的库文件
+# 复制程序运行所需的库文件
 add_custom_target(copy_libs
         COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SIMULATOR_DIR}/SDL2/lib/SDL2.dll ${BIN_DIR}/SDL2.dll
         COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SIMULATOR_DIR}/multi_thread/libgcc_s_dw2-1.dll ${BIN_DIR}/libgcc_s_dw2-1.dll
@@ -122,17 +103,17 @@ add_custom_target(copy_libs
 add_dependencies(${PROJECT_NAME} copy_libs)
 
 # 自定义命令，构建后执行
-
-## 获取当前日期和时间
-string(TIMESTAMP CURRENT_DATE_TIME "%Y-%m-%d %H:%M:%S")
-set(SIZE_OUTPUT_FILE "size_history.txt")
-
-# 显示exe文件
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-        COMMAND echo.
-        COMMAND echo ${CURRENT_DATE_TIME} >>  ${SIZE_OUTPUT_FILE}
-        COMMAND ${CMAKE_SIZE_UTIL} ${BIN_DIR}/${PROJECT_NAME}.exe
-        COMMAND ${CMAKE_SIZE_UTIL} ${BIN_DIR}/${PROJECT_NAME}.exe  >> ${SIZE_OUTPUT_FILE}
-        COMMAND echo "--------------------------------------------------------------------------------------------" >> ${SIZE_OUTPUT_FILE}
-        COMMENT "Displaying size of the executable"
-)
+#
+### 获取当前日期和时间
+#string(TIMESTAMP CURRENT_DATE_TIME "%Y-%m-%d %H:%M:%S")
+#set(SIZE_OUTPUT_FILE "size_history.txt")
+#
+## 显示exe文件
+#add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+#        COMMAND echo.
+#        COMMAND echo ${CURRENT_DATE_TIME} >> ${SIZE_OUTPUT_FILE}
+#        COMMAND ${CMAKE_SIZE_UTIL} ${BIN_DIR}/${PROJECT_NAME}.exe
+#        COMMAND ${CMAKE_SIZE_UTIL} ${BIN_DIR}/${PROJECT_NAME}.exe >> ${SIZE_OUTPUT_FILE}
+#        COMMAND echo "--------------------------------------------------------------------------------------------" >> ${SIZE_OUTPUT_FILE}
+#        COMMENT "Displaying size of the executable"
+#)
