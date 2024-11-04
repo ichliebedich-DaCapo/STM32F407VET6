@@ -1,5 +1,5 @@
 //
-// Created by 34753 on 2024/10/12.
+// Created by fairy on 2024/10/12.
 //
 
 #ifndef FURINA_WAVEDATA_H

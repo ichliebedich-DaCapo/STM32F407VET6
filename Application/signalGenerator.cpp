@@ -11,6 +11,7 @@
 #include "wave_signal.hpp"
 #include "key.hpp"
 #include "GUI.hpp"
+#include "WaveCurve.hpp"
 
 void app_init()
 {
@@ -20,6 +21,7 @@ void app_init()
 
 void key_handler()
 {
+
     switch (Key::getCode())
     {
         case keyk0:// 播放
@@ -27,10 +29,12 @@ void key_handler()
             {
 //                WaveSignal::on();
                 ImageButton::press(GUI_Base::get_ui()->main.imgbtn_play);
+
             } else
             {
+                timer6_stop_it();
 //                WaveSignal::off();
-                ImageButton::release(GUI_Base::get_ui()->main.imgbtn_play);
+                 ImageButton::release(GUI_Base::get_ui()->main.imgbtn_play);
             }
             break;
 

@@ -25,6 +25,10 @@
 /**
  * @brief 绘制波形曲线
  * @note 没有显式实例化，所以，请注意不要在多个地方使用同一个模板函数，不然会导致代码膨胀。不过就这个函数的性能而言，不大可能在多个地方调用这个函数
+ * \绘制情况
+ *          以168MHz的stm32f407裸机运行来说，如果绘制区域为320*200那么大，且使用FSMC+DMA，8080并口屏，那么：
+ *          如果绘制点数大于100，建议用线性插值；如果小于100，建议用其他两种曲线。一帧时间推荐在80ms左右
+ *          如果波形数据变化剧烈，建议不要使用线性插值。样条曲线更适合各种波形数据，非常均匀，不过要注意的是下面的样条曲线算法在-Og优化下没有问题，不知道什么原因。
  */
 
 class WaveCurve
@@ -40,6 +44,7 @@ public:
         // 三次贝塞尔曲线
         BezierCurve3,
         // Catmull-Rom样条曲线
+        // 开-Og优化可以使用，-O2以上会直接卡死，我也不明白
         CatmullRomSp_line,
     };
 public:
@@ -55,11 +60,6 @@ protected:
     // 模板类，用于确定绘制函数
     template<WaveCurve::Type draw_type, typename Coord, typename Color>
     struct DrawFunction;
-
-    // 绘制函数
-    template<typename Coord, typename Color>
-    static inline auto draw_interpolated_line(const Coord *x, const Coord *y, Color color) -> void;
-
 
 private:
     // 获取一次绘制所需的点数
@@ -94,7 +94,6 @@ private:
     static inline Coord draw_buff_y[buffer_size];
     static inline Coord *pDrawBuff_y = draw_buff_y;
 
-    Coord &y_temp = draw_buff_y[0];// 临时变量y，用于给线性插值函数用，这也是为了函数形式上看着统一
 };
 
 template<typename T>
