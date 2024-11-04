@@ -1,3 +1,10 @@
+# ----------------------------------设置你的UI路径（选择项目）------------------------------
+set(UI_DIR ../UI/signalGenerator)
+# ----------------------------------设置你的UI路径（选择项目）------------------------------
+
+# 提取最后一个斜杠后的部分
+string(REGEX REPLACE ".*/" "" APP "${UI_DIR}")
+
 cmake_minimum_required(VERSION 3.10)
 project(Simulator)
 
@@ -14,9 +21,7 @@ set(LVGL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/resource)
 set(SIMULATOR_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(COMPONENT_DIR ${PROJECT_SOURCE_DIR}/Component)
 set(EVENTS_DIR ${PROJECT_SOURCE_DIR}/Events)
-# ----------------------------------设置你的UI路径（选择项目）------------------------------
-set(UI_DIR ../UI/signalGenerator)
-# ----------------------------------设置你的UI路径（选择项目）------------------------------
+
 # 生成的目标文件目录
 set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
 set(OBJ_DIR ${BUILD_DIR}/object)
@@ -35,7 +40,7 @@ set(LIBRARIES decoder openh264 rlottie pthread stdc++ jansson curl m SDL2)
 link_directories(${LIBFILE_PATH} ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib ${GEN_OBJ_DIR})
 
 # 添加控制目录
-include_directories(${APP_DIR}/Conf  ${APP_DIR})
+include_directories(${APP_DIR}/Conf  ${APP_DIR}/${APP})
 
 # 源文件
 file(GLOB_RECURSE LVGL_SRCS "${LVGL_DIR}/lvgl/*.c")
