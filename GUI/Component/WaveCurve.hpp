@@ -285,7 +285,9 @@ auto WaveCurve::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Coor
     float ratio = (Height - 1.0f) / Max_Value;
     float step = Width / (N - 1.0f);// 步长
 
-    auto y_old=(Coord) (Start_y + Height - value * ratio);
+    Coord y_old;// 未使用会被优化掉
+    if constexpr (draw_type == Type::Interpolated_Line)
+        y_old = (Coord) (Start_y + Height - value * ratio);
 
     // 一放在前面就会卡死，不知缘由
 //        data[N - 1] = value;
@@ -304,12 +306,12 @@ auto WaveCurve::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Coor
         // 更新曲线
         if constexpr (draw_type == Type::Interpolated_Line)
         {
-            // 确认新点
-
             // Bresenham's line algorithm
             Coord x0 = x[0], y0 = y[0], x1 = x[1], y1 = y[1];
-            int dx = (abs(x1 - x0)), sx = x0 < x1 ? 1 : -1;// sx：决定递增方向
-            int dy = (-abs(y1 - y0)), sy = y0 < y1 ? 1 : -1;
+            const int dx = (abs(x1 - x0));
+            const int sx = x0 < x1 ? 1 : -1;// sx：决定递增方向
+            int dy = (-abs(y1 - y0));
+            int sy = y0 < y1 ? 1 : -1;
             int err = (dx + dy), e2;
 
             for (;;)
@@ -328,14 +330,14 @@ auto WaveCurve::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Coor
                     y0 += sy;
                 }
             }
-       // 重置
-             x0 = x[0];
+            // 重置
+            x0 = x[0];
             y0 = y1;
             x1 = x[1];
             y1 = y_old;
-             dx = (abs(x1 - x0)), sx = x0 < x1 ? 1 : -1;// sx：决定递增方向
-             dy = (-abs(y1 - y0)), sy = y0 < y1 ? 1 : -1;
-             err = (dx + dy), e2;
+            dy = (-abs(y1 - y0));
+            sy = y0 < y1 ? 1 : -1;
+            err = (dx + dy);
 
             for (;;)
             {
@@ -353,7 +355,8 @@ auto WaveCurve::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Coor
                     y0 += sy;
                 }
             }
-            y_old=y[1];
+//            y_old = y0;//使用这个会出现非常诡异的图形，观赏性是有滴
+            y_old = y[1];
         } else
         {
             DrawFunction<draw_type, Coord, Color>::draw(i, N, x, y, bg_color, color);// 绘制新曲线
