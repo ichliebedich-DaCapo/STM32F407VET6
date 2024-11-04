@@ -2,9 +2,7 @@
 // Created by fairy on 2024/10/12.
 //
 
-#include "signalGenerator.hpp"
-
-#if ENABLE_SIGNAL_GENERATOR
+#include "app.hpp"
 
 #include "timer.h"
 #include "dac.h"
@@ -90,5 +88,3 @@ void timer6_isr()
 {
     WaveSignal::generate();
 }
-
-#endif

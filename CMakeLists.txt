@@ -1,3 +1,9 @@
+# --------------------------------------选择你的项目--------------------------------
+# 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
+set(APP_DIR Application/signalGenerator)
+# --------------------------------------选择你的项目------------------------------
+
+
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_VERSION 1)
 cmake_minimum_required(VERSION 3.29)
@@ -50,10 +56,7 @@ add_compile_options(-Ofast -g)
 # 使用Debug，使用HAL库。    -DUSE_FULL_LL_DRIVER 使用LL库
 add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx)
 
-# --------------------------------------选择你的项目--------------------------------
-# 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
-set(APP_DIR Application/signalGenerator)
-# --------------------------------------选择你的项目------------------------------
+# ----------------对选择的项目进行字符串处理，以匹配对应的UI文件--------------
 
 # 提取 APP_DIR 的末尾部分
 string(REGEX REPLACE "^.*/(.+)$" "\\1" APP_DIR_LAST_PART "${APP_DIR}")

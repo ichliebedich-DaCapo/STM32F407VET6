@@ -2,10 +2,10 @@
 // Created by 34753 on 2024/10/12.
 //
 
-#ifndef FURINA_SIGNALGENERATOR_HPP
-#define FURINA_SIGNALGENERATOR_HPP
-#include "App_Conf.h"
-#if ENABLE_SIGNAL_GENERATOR
+#ifndef FURINA_APP_HPP
+#define FURINA_APP_HPP
+
+
 // 宏定义
 #define APP_NO_RTOS // 没有使用FreeRTOS
 
@@ -17,5 +17,5 @@
 #define USE_ADC  // 使用ADC
 #define USE_DAC // 使用DAC
 
-#endif
-#endif //FURINA_SIGNALGENERATOR_HPP
+
+#endif //FURINA_APP_HPP

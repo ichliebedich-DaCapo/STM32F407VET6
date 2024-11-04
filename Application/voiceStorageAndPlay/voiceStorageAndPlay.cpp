@@ -2,9 +2,9 @@
 // Created by fairy on 2024/9/22.
 //
 
-#include "voiceStorageAndPlay.hpp"
+#include "app.hpp"
 
-#if ENABLE_VOICE_STORAGE_AND_PLAY
+
 
 #include "lvgl.h"
 #include "key.hpp"
@@ -131,5 +131,3 @@ void timer6_isr()
     dac_set_value(FlashStorage::read_isr() << 4);
 }
 
-
-#endif

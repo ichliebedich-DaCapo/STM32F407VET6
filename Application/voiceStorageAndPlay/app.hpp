@@ -13,8 +13,8 @@
  */
 #ifndef FURINA_VOICESTORAGEANDPLAY_HPP
 #define FURINA_VOICESTORAGEANDPLAY_HPP
-#include "App_Conf.h"
-#if ENABLE_VOICE_STORAGE_AND_PLAY
+
+
 // 不启用FreeRTOS
 #define APP_NO_RTOS
 
@@ -36,5 +36,4 @@
 
 
 
-#endif
 #endif //FURINA_VOICESTORAGEANDPLAY_HPP

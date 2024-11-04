@@ -3,8 +3,6 @@
 //
 #ifndef FURINA_MODULE_CONF_H
 #define FURINA_MODULE_CONF_H
-
-#include "App_Conf.h"
 /**
  *  @brief JYZQの配置文件
  *  @note  主要是用于控制调试相关的宏，同时展现模块和驱动有哪些。这里的宏后缀都有"__"，而应用层宏后缀没有"__"
@@ -12,16 +10,10 @@
  *       这里集成了所有的模块和驱动的宏，而应用层的头文件里只有部分宏（需要哪部分宏就启用哪个）
  */
 
-// 混蛋的依赖关系
-#if ENABLE_VOICE_STORAGE_AND_PLAY
+#include "app.hpp"
 
-#include "voiceStorageAndPlay.hpp"
-
-#endif// 语音存储和播放
-#if ENABLE_SIGNAL_GENERATOR
-#include "signalGenerator.hpp"
-#endif// 双音频信号发生器
-
+/**************************常用应用级*****************************/
+#define ENABLE_KEY_TASK_HANDLE 1
 
 /**************************调试/其他*************************/
 // 是否开启FreeRTOS调试模式。调试时，开了之后在负荷不大的情况下，也并不怎么影响实时性。发行时记得关闭
