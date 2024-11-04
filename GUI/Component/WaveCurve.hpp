@@ -60,34 +60,17 @@ protected:
     template<typename Coord, typename Color>
     static inline auto draw_interpolated_line(const Coord *x, const Coord *y, Color color) -> void;
 
-    template<typename Coord, typename Color>
-    static inline auto draw_BezierCurve2(const Coord *x, const Coord *y, Color color) -> void;
-
-    template<typename Coord, typename Color>
-    static inline auto draw_BezierCurve3(const Coord *x, const Coord *y, Color color) -> void;
-
-    template<typename Coord, typename Color>
-    static inline auto draw_CatmullRomSp_line(const Coord *x, const Coord *y, Color color) -> void;
-
-    // 清除函数
-    template<WaveCurve::Type draw_type, typename Coord, typename Color>
-    static inline auto clean_general(const Coord *x, const Coord *y, Color color) -> void;
-
 
 private:
     // 获取一次绘制所需的点数
     template<WaveCurve::Type draw_type>
     static inline constexpr auto getOncePoints() -> uint16_t;
 
-    // 获取最大最小值
-    template<typename Coord>
-    static inline auto get_max_min(Coord value, Coord &max, Coord &min) -> void;
-
     // 交换指针
     template<typename T>
     static inline auto switch_ptr(T *&p1, T *&p2) -> void;
 
-
+private:
     // 定义步长，决定曲线的平滑度
     static constexpr float smoothness = 0.1f;// 定为0.1比较适合，不推荐改，再小会非常卡，太大曲线会不连续
     static constexpr uint16_t buffer_size = (uint16_t) (1.0f / smoothness) + 1;
@@ -103,13 +86,15 @@ private:
 //    volatile inline static Coord *pBuff_draw_y = y_buff1;
 //    volatile inline static Coord *pBuff_clean_x = x_buff2;
 //    volatile inline static Coord *pBuff_clean_y = y_buff2;
-    volatile static inline Coord buff_x[buffer_size];
-    volatile static inline Coord clean_buff_y[buffer_size];
-    volatile static inline Coord *pBuff_x = buff_x;
-    volatile static inline Coord *pCleanBuff_y = clean_buff_y;
+    static inline Coord buff_x[buffer_size];
+    static inline Coord clean_buff_y[buffer_size];
+    static inline Coord *pBuff_x = buff_x;
+    static inline Coord *pCleanBuff_y = clean_buff_y;
 
-    volatile static inline Coord draw_buff_y[buffer_size];
-    volatile static inline Coord *pDrawBuff_y = draw_buff_y;
+    static inline Coord draw_buff_y[buffer_size];
+    static inline Coord *pDrawBuff_y = draw_buff_y;
+
+    Coord &y_temp = draw_buff_y[0];// 临时变量y，用于给线性插值函数用，这也是为了函数形式上看着统一
 };
 
 template<typename T>
@@ -139,12 +124,21 @@ constexpr auto WaveCurve::getOncePoints() -> uint16_t
 
 
 /*DrawFunction特化版本*/
-// 插值画线
+/**
+ * @brief 插值画线
+ * @tparam Data
+ * @tparam Coord
+ * @tparam Color
+ * @note 插值画线算法，使用Bresenham算法，插值点数由模板参数决定，默认为2，即线性插值。
+ *        为了与其他函数一致，所以使用了 draw_buff_y[0]用于存储临时的y坐标
+ */
+
 template<typename Coord, typename Color>
 struct WaveCurve::DrawFunction<WaveCurve::Type::Interpolated_Line, Coord, Color>
 {
+
     static auto inline
-    draw(Coord &y_old, Coord &Start_x, Coord &Start_y, const Coord x[], const Coord y[], Color &bg_color,
+    draw(const Coord x[], const Coord y[], Color &bg_color,
          Color &color) -> void
     {
         // Bresenham's line algorithm
@@ -175,7 +169,7 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::Interpolated_Line, Coord, Color>
         x0 = x[0];
         y0 = y1;
         x1 = x[1];
-        y1 = y_old;
+        y1 = draw_buff_y[0];
         dy = (-abs(y1 - y0));
         sy = y0 < y1 ? 1 : -1;
         err = (dx + dy);
@@ -196,8 +190,8 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::Interpolated_Line, Coord, Color>
                 y0 += sy;
             }
         }
-//            y_old = y0;//使用这个会出现非常诡异的图形，观赏性是有滴
-        y_old = y[1];
+//            draw_buff_y[0] = y0;//使用这个会出现非常诡异的图形，观赏性是有滴
+        draw_buff_y[0] = y[1];
     }
 };
 
@@ -205,25 +199,21 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::Interpolated_Line, Coord, Color>
 template<typename Coord, typename Color>
 struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve2, Coord, Color>
 {
-    static auto inline draw(int &i, Coord &N, const Coord x[], const Coord y[], Color &bg_color, Color &color) -> void
+    static auto inline draw(const Coord x[], const Coord y[], Color &bg_color, Color &color) -> void
     {
-        uint16_t end_index = N - getOncePoints<WaveCurve::Type::BezierCurve2>();
         float t = 0.0f;
         for (int j = 0; j <= 10; ++j)
         {
             float one_minus_t = 1.0f - t;
-            float two_t = 2.0f * t;
+            float two_t = t + t;
             float t2 = t * t;
 
             // 计算px和py
             pCleanBuff_y[j] = (Coord) (one_minus_t * one_minus_t * y[0] + two_t * one_minus_t * y[1] + t2 * y[2]);
-            if (i != end_index)
-            {
-                pBuff_x[j] = (Coord) (one_minus_t * one_minus_t * x[0] + two_t * one_minus_t * x[1] + t2 * x[2]);
+            pBuff_x[j] = (Coord) (one_minus_t * one_minus_t * x[0] + two_t * one_minus_t * x[1] + t2 * x[2]);
 
-                LCD_Set_Pixel(pBuff_x[j], pCleanBuff_y[j], bg_color);// 清除旧像素点
-                LCD_Set_Pixel(pBuff_x[j], pDrawBuff_y[j], color);// 绘制新像素点
-            }
+            LCD_Set_Pixel(pBuff_x[j], pCleanBuff_y[j], bg_color);// 清除旧像素点
+            LCD_Set_Pixel(pBuff_x[j], pDrawBuff_y[j], color);// 绘制新像素点
             t += smoothness;
         }
         switch_ptr(pCleanBuff_y, pDrawBuff_y);// 交换指针，把pBuff_y当做下一轮pBuff_new_y
@@ -326,71 +316,45 @@ auto WaveCurve::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Coor
     constexpr uint16_t once_points = getOncePoints<draw_type>();
 
     // 如果数据点过少，则无法画线
-    if (N < once_points) return;
+    // 数据点一般是固定的，比较多。当然也不能排除这种情况
+//    if (N < once_points) return;
+
+    const float ratio = (Height - 1.0f) / Max_Value;
+    const float step = Width / (N - 1.0f);// 步长
 
     Coord x[once_points], y[once_points];
-    float ratio = (Height - 1.0f) / Max_Value;
-    float step = Width / (N - 1.0f);// 步长
+    Coord y_temp;// 不使用会被自动优化掉，不用担心
 
-    Coord y_old;// 未使用会被优化掉
+    // 进行前置计算
     if constexpr (draw_type == Type::Interpolated_Line)
-        y_old = (Coord) (Start_y + Height - value * ratio);
-
-//        data[N - 1] = value;// 一放在前面就会卡死，不知缘由
+        draw_buff_y[0] = (Coord) (Start_y + Height - value * ratio);
+    else
+    {
+        // 如果你问我为什么不是计算最新的点，我只能说我也不知道。试了很久，无意中发现置零就不会漏墨，于是就置零了
+        // 置零应该是不画最右段的曲线
+        // 别细问，问就是理论对不上实践，fxxk玄学
+        memset((void *) pDrawBuff_y, 0, buffer_size * sizeof(Coord));
+    }
 
     /*******************绘制曲线*********************/
+
     // 从右往左刷新，更符合直观上的感受
     for (int i = N - once_points; i >= 0; --i)
     {
-        // 确认旧点
+        // 确认控制点
         for (int j = 0; j < once_points; ++j)
         {
             x[j] = (Coord) (Start_x + (float) (i + j) * step);
             y[j] = (Coord) (Start_y + Height - (data[i + j] * ratio));
         }
 
-        // 更新曲线
-        if constexpr (draw_type == Type::Interpolated_Line)
-        {
-            DrawFunction<draw_type, Coord, Color>::draw(y_old, Start_x, Start_y, x, y, bg_color, color);
-        } else
-        {
-            DrawFunction<draw_type, Coord, Color>::draw(i, N, x, y, bg_color, color);// 绘制新曲线
-        }
+        // 绘制曲线
+        DrawFunction<draw_type, Coord, Color>::draw(x, y, bg_color, color);
     }
 
-/******更新数据******/
+    /********************更新数据*******************/
     memmove(data, data + 1, (N - 1) * sizeof(data[0]));// 将数据左移一位
-    data[N - 1] = value;
-}
-
-/*************************画线函数算法***************************/
-// 插值画线函数
-template<typename Coord, typename Color>
-auto WaveCurve::draw_interpolated_line(const Coord *x, const Coord *y, Color color) -> void
-{
-    // Bresenham's line algorithm
-    Coord x0 = x[0], y0 = y[0], x1 = x[1], y1 = y[1];
-    int dx = (abs(x1 - x0)), sx = x0 < x1 ? 1 : -1;// sx：决定递增方向
-    int dy = (-abs(y1 - y0)), sy = y0 < y1 ? 1 : -1;
-    int err = (dx + dy), e2;
-
-    for (;;)
-    {
-        LCD_Set_Pixel(x0, y0, color);
-        if (x0 == x1 && y0 == y1) break;
-        e2 = 2 * err;
-        if (e2 >= dy)
-        {
-            err += dy;
-            x0 += sx;
-        }
-        if (e2 <= dx)
-        {
-            err += dx;
-            y0 += sy;
-        }
-    }
+    data[N - 1] = value;// 一放在前面就会卡死，不知缘由 总不能是该死的优化导致的吧
 }
 
 #endif //SIMULATOR_WAVECURVE_HPP
