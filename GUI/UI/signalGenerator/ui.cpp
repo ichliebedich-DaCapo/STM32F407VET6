@@ -150,7 +150,7 @@ constexpr uint16_t point_cnt = 128;// 点的数量
 constexpr uint16_t chart_width = 320;
 constexpr uint16_t chart_height = 200;
 constexpr uint16_t start_x = 80;
-constexpr uint16_t start_y = 45;
+constexpr uint16_t start_y = 40;
 constexpr uint16_t sine_count = 128;// 采样点数量
 constexpr uint16_t max_value = 255;
 
@@ -201,7 +201,7 @@ public:
         int wave_date = sine_wave[wave_index] + bias;
         wave_date = (wave_date > max_value) ? max_value : (wave_date < 0) ? 0 : wave_date;
 
-        WaveCurve::draw_curve<WaveCurve::Type::BezierCurve3, uint8_t>(Buf,point_cnt, static_cast<uint8_t>(wave_date),
+        WaveCurve::draw_curve<WaveCurve::Type::BezierCurve2, uint8_t>(Buf,point_cnt, static_cast<uint8_t>(wave_date),
                                                                                 start_x,
                                                                                 start_y, chart_width, chart_height, 255,
                                                                                 0xFFFF, 0);
@@ -373,6 +373,7 @@ auto Screen::init() -> void
     label.init(gui->main.label_ratio, 298, 300, 80, 20, "占比：50%");
 
 //     图片按钮：停止、播放
+// 中心y轴为280
     ImageButton::init(gui->main.imgbtn_play, 216, 256, 48, 48, &_btn_list_play_alpha_48x48,
                       &_btn_list_pause_alpha_48x48);
 

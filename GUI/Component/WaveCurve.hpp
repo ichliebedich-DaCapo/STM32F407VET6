@@ -103,13 +103,13 @@ private:
 //    volatile inline static Coord *pBuff_draw_y = y_buff1;
 //    volatile inline static Coord *pBuff_clean_x = x_buff2;
 //    volatile inline static Coord *pBuff_clean_y = y_buff2;
-    static inline Coord buff_x[buffer_size];
-    static inline Coord clean_buff_y[buffer_size];
-    static inline Coord *pBuff_x = buff_x;
-    static inline Coord *pCleanBuff_y = clean_buff_y;
+    volatile static inline Coord buff_x[buffer_size];
+    volatile static inline Coord clean_buff_y[buffer_size];
+    volatile static inline Coord *pBuff_x = buff_x;
+    volatile static inline Coord *pCleanBuff_y = clean_buff_y;
 
-    static inline Coord draw_buff_y[buffer_size];
-    static inline Coord *pDrawBuff_y = draw_buff_y;
+    volatile static inline Coord draw_buff_y[buffer_size];
+    volatile static inline Coord *pDrawBuff_y = draw_buff_y;
 };
 
 template<typename T>
@@ -199,9 +199,9 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve2, Coord, Color>
     static auto inline draw(int &i, Coord &N, const Coord x[], const Coord y[], Color &bg_color, Color &color) -> void
     {
         uint16_t end_index = N - getOncePoints<WaveCurve::Type::BezierCurve2>();
+        float t=0.0f;
         for (int j = 0; j <= 10; ++j)
         {
-            float t = j * smoothness;
             float one_minus_t = 1.0f - t;
             float two_t = 2.0f * t;
             float t2 = t * t;
@@ -215,6 +215,7 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve2, Coord, Color>
                 LCD_Set_Pixel(pBuff_x[j], pCleanBuff_y[j], bg_color);// 清除旧像素点
                 LCD_Set_Pixel(pBuff_x[j], pDrawBuff_y[j], color);// 绘制新像素点
             }
+            t+=smoothness;
         }
         switch_ptr(pCleanBuff_y, pDrawBuff_y);// 交换指针，把pBuff_y当做下一轮pBuff_new_y
     }
@@ -227,9 +228,9 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve3, Coord, Color>
     static auto inline draw(int &i, Coord &N, const Coord x[], const Coord y[], Color &bg_color, Color &color) -> void
     {
         uint16_t end_index = N - getOncePoints<WaveCurve::Type::BezierCurve3>();
+        float t=0.0f;
         for (int j = 0; j <= 10; ++j)
         {
-            float t = j * smoothness;
             float one_minus_t = 1.0f - t;
             float one_minus_t_2 = one_minus_t * one_minus_t;
             float one_minus_t_3 = one_minus_t_2 * one_minus_t;
@@ -251,8 +252,10 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve3, Coord, Color>
                 LCD_Set_Pixel(pBuff_x[j], pCleanBuff_y[j], bg_color);// 清除旧像素点
                 LCD_Set_Pixel(pBuff_x[j], pDrawBuff_y[j], color);// 绘制新像素点
             }
+            t+=smoothness;
         }
         switch_ptr(pCleanBuff_y, pDrawBuff_y);// 交换指针，把pBuff_y当做下一轮pBuff_new_y
+
     }
 };
 
@@ -260,14 +263,54 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve3, Coord, Color>
 template<typename Coord, typename Color>
 struct WaveCurve::DrawFunction<WaveCurve::Type::CatmullRomSp_line, Coord, Color>
 {
-    static auto inline draw(const Coord *x, const Coord *y, Color color) -> void
+    static auto inline draw(int &i, Coord &N, const Coord x[], const Coord y[], Color &bg_color, Color &color) -> void
     {
-        draw_CatmullRomSp_line(x, y, color);
+        uint16_t end_index = N - getOncePoints<WaveCurve::Type::CatmullRomSp_line>();
+        float t = 0.0f;
+        for (int j = 0; j <= 10; ++j)
+        {
+            float t2 = t * t;
+            float t3 = t2 * t;
+
+            // 计算px和py
+            pCleanBuff_y[j] = (Coord) (0.5 * (2 * y[1] +
+                                              (-y[0] + y[2]) * t +
+                                              (2 * y[0] - 5 * y[1] + 4 * y[2] - y[3]) * t2 +
+                                              (-y[0] + 3 * y[1] - 3 * y[2] + y[3]) * t3));
+
+            if (i != end_index)
+            {
+                pBuff_x[j] = (Coord) (0.5 *
+                                      (2 * x[1] + (-x[0] + x[1]) * t + (2 * x[0] - 5 * x[1] + 4 * x[2] - x[3]) * t2 +
+                                       (-x[0] + 3 * x[1] - 3 * x[2] + x[3]) * t3));
+
+                LCD_Set_Pixel(pBuff_x[j], pCleanBuff_y[j], bg_color);// 清除旧像素点
+                LCD_Set_Pixel(pBuff_x[j], pDrawBuff_y[j], color);// 绘制新像素点
+            }
+            t += smoothness;
+        }
+        switch_ptr(pCleanBuff_y, pDrawBuff_y);// 交换指针，把pBuff_y当做下一轮pBuff_new_y
     }
 
     static auto inline clean(const Coord *x, const Coord *y, Color color) -> void
     {
-        draw_CatmullRomSp_line(x, y, color);
+        float t = 0.0;
+        while (t <= 1.0)
+        {
+            float t2 = t * t;
+            float t3 = t2 * t;
+            // 转换浮点数坐标到整数
+            auto px = (uint16_t) (0.5 *
+                                  (2 * x[1] + (-x[0] + x[1]) * t + (2 * x[0] - 5 * x[1] + 4 * x[2] - x[3]) * t2 +
+                                   (-x[0] + 3 * x[1] - 3 * x[2] + x[3]) * t3));
+            auto py = (uint16_t) (0.5 * (2 * y[1] +
+                                         (-y[0] + y[2]) * t +
+                                         (2 * y[0] - 5 * y[1] + 4 * y[2] - y[3]) * t2 +
+                                         (-y[0] + 3 * y[1] - 3 * y[2] + y[3]) * t3));
+            // 设置像素点
+            LCD_Set_Pixel(px, py, color);
+            t += smoothness;
+        }
     }
 };
 
