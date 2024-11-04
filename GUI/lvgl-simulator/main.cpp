@@ -28,33 +28,12 @@
 // 引入头文件
 #include "GUI.hpp"
 
-/*********************
- *      DEFINES
- *********************/
-
-/**********************
- *      TYPEDEFS
- **********************/
-
-/**********************
- *  STATIC PROTOTYPES
- **********************/
 static void hal_init();
 
 static int tick_thread(void *data);
 
-/**********************
- *  STATIC VARIABLES
- **********************/
 volatile int keep_running = 0;
 
-/**********************
- *      MACROS
- **********************/
-
-/**********************
- *   GLOBAL FUNCTIONS
- **********************/
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 #if LV_USE_FREEMASTER
@@ -82,7 +61,6 @@ int main(int argc, char **argv)
     /* local threads will run */
     keep_running = 1;
 
-    /*Initialize LittlevGL*/
     lv_init();
 
     /*Initialize the HAL (display, input devices, tick) for LittlevGL*/
@@ -138,9 +116,6 @@ int main(int argc, char **argv)
     return 0;
 }
 
-/**********************
- *   STATIC FUNCTIONS
- **********************/
 
 /**
  * Initialize the Hardware Abstraction Layer (HAL) for the Littlev graphics library
@@ -192,7 +167,7 @@ static void hal_init(void)
     /* Tick init.
      * You have to call 'lv_tick_inc()' in periodically to inform LittelvGL about how much time were elapsed
      * Create an SDL thread to do this*/
-    SDL_CreateThread(tick_thread, "tick", NULL);
+    SDL_CreateThread(tick_thread, "tick", nullptr);
 }
 
 /**

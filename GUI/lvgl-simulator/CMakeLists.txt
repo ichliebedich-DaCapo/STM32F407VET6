@@ -13,7 +13,6 @@ set(CMAKE_C_COMPILER gcc)
 set(CMAKE_CXX_STANDARD 20)
 
 # 定义路径
-set(LIBFILE_PATH resource/lib/native)
 set(PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
 set(APP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../Application)
 set(BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../Base)
@@ -24,9 +23,8 @@ set(EVENTS_DIR ${PROJECT_SOURCE_DIR}/Events)
 
 # 生成的目标文件目录
 set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
-set(OBJ_DIR ${BUILD_DIR}/object)
-set(GEN_OBJ_DIR ${OBJ_DIR}/generated)
 set(BIN_DIR ${BUILD_DIR}/bin)
+set(LIB_DIR ${BUILD_DIR}/lib)
 
 # 编译选项
 # 开-O2和-O3有时候会卡死，但相同情况下真机没有问题
@@ -44,13 +42,13 @@ include_directories(${APP_DIR}/Conf ${APP_DIR}/${APP})
 file(GLOB_RECURSE LVGL_SRCS "resource/lvgl/*.c")
 add_library(liblvgl STATIC ${LVGL_SRCS})
 target_include_directories(liblvgl PUBLIC
-        # LVGL根目录
         ${LVGL_DIR}
-        resource/lvgl
+        ${LVGL_DIR}/lvgl
 
         ${SIMULATOR_DIR}
 )
-
+# 设置静态库的输出目录
+set_target_properties(liblvgl PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 #---------------Driver库---------------
 file(GLOB_RECURSE DRIVER_SRCS "${SIMULATOR_DIR}/lv_drivers/*.c")
@@ -61,7 +59,8 @@ target_include_directories(libdriver PUBLIC
         ${LVGL_DIR}
         ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/include
 )
-
+# 设置静态库的输出目录
+set_target_properties(libdriver PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 #---------------GUI库---------------
 file(GLOB_RECURSE COMPONENT_SRCS "${COMPONENT_DIR}/*.*")
@@ -81,17 +80,23 @@ target_include_directories(libgui PUBLIC
         ${EVENTS_DIR}
 )
 target_link_libraries(libgui PUBLIC liblvgl)
+# 设置静态库的输出目录
+set_target_properties(libgui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
-# 链接库
-set(LIBRARIES decoder openh264 rlottie pthread stdc++ jansson curl m SDL2)
-link_directories(${LIBFILE_PATH} ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib ${GEN_OBJ_DIR})
+
+# 链接外部库
+set(LIBRARIES  pthread stdc++ m SDL2  decoder openh264 rlottie jansson curl )
+set(LIBFILE_PATH resource/lib/native)
+# 全局设置应该链接的库的目录
+link_directories(${LIBFILE_PATH} ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib)
 
 # 创建可执行文件
 add_executable(${PROJECT_NAME} ${SIMULATOR_DIR}/main.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE libdriver libgui ${LIBRARIES})
-set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
+# 动态库或者可执行文件的生成位置
+set_target_properties(${PROJECT_NAME} PROPERTIES  RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
 
-# 复制程序运行所需的库文件
+# 复制程序运行所必需的库文件
 add_custom_target(copy_libs
         COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SIMULATOR_DIR}/SDL2/lib/SDL2.dll ${BIN_DIR}/SDL2.dll
         COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SIMULATOR_DIR}/multi_thread/libgcc_s_dw2-1.dll ${BIN_DIR}/libgcc_s_dw2-1.dll
