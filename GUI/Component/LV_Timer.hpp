@@ -19,37 +19,56 @@ class LV_Timer
 {
 public:
     // 默认为关闭状态
-    auto inline create(lv_timer_cb_t timer_cb, uint32_t period = 1000, void *user_data = nullptr) -> void
-    {
-        if(_timer== nullptr)
-        {
-            _timer = lv_timer_create(timer_cb, period, user_data);
-            pause();
-        }
-    }
+    inline auto create(lv_timer_cb_t timer_cb, uint32_t period = 1000, void *user_data = nullptr) -> void;
 
-    auto inline remove() -> void
-    {
-        lv_timer_del(_timer);
-        _timer = nullptr;
-    }
+    // 删除定时器
+    inline auto remove() -> void;
 
     // 恢复定时器
-    auto inline resume() -> void
-    {
-        lv_timer_resume(_timer);
-    }
+    inline auto resume() -> void;
 
     // 暂停定时器
-    auto inline pause() -> void
-    {
-        lv_timer_pause(_timer);
-    }
+    inline auto pause() -> void;
+
+    // 设置周期
+    inline auto set_period(uint32_t period) -> void;
 
 private:
     lv_timer_t *_timer{};
 };
 
-/* 预编译命令 */
+// 默认为关闭状态
+auto LV_Timer::create(lv_timer_cb_t timer_cb, uint32_t period, void *user_data) -> void
+{
+    if(_timer== nullptr)
+    {
+        _timer = lv_timer_create(timer_cb, period, user_data);
+        pause();
+    }
+}
+
+auto LV_Timer::remove() -> void
+{
+    lv_timer_del(_timer);
+    _timer = nullptr;
+}
+
+// 恢复定时器
+auto LV_Timer::resume() -> void
+{
+    lv_timer_resume(_timer);
+}
+
+// 暂停定时器
+auto LV_Timer::pause() -> void
+{
+    lv_timer_pause(_timer);
+}
+
+auto LV_Timer::set_period(uint32_t period) -> void
+{
+    lv_timer_set_period(_timer, period);
+}
+
 #endif
 #endif //SIMULATOR_LV_TIMER_HPP

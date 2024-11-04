@@ -129,7 +129,7 @@ typedef struct
 /** @addtogroup DMA_Private_Functions
   * @{
   */
-static void DMA_SetConfig(DMA_HandleTypeDef *hdma, uint32_t SrcAddress, uint32_t DstAddress, uint32_t DataLength);
+static void inline DMA_SetConfig(DMA_HandleTypeDef *hdma, uint32_t SrcAddress, uint32_t DstAddress, uint32_t DataLength);
 static uint32_t DMA_CalcBaseAndBitshift(DMA_HandleTypeDef *hdma);
 static HAL_StatusTypeDef DMA_CheckFifoParam(DMA_HandleTypeDef *hdma);
 
@@ -846,8 +846,9 @@ void HAL_DMA_IRQHandler(DMA_HandleTypeDef *hdma)
     if(__HAL_DMA_GET_IT_SOURCE(hdma, DMA_IT_TC) != RESET)
     {
       /* Clear the transfer complete flag */
-      regs->IFCR = DMA_FLAG_TCIF0_4 << hdma->StreamIndex;
-      
+      regs->IFCR = DMA_FLAG_TCIF0_4 << hdma->StreamIndex;// 这一步是要走的，清除标志位
+
+      // 下面这个直接跳过了
       if(HAL_DMA_STATE_ABORT == hdma->State)
       {
         /* Disable all the transfer interrupts */
@@ -875,6 +876,7 @@ void HAL_DMA_IRQHandler(DMA_HandleTypeDef *hdma)
         return;
       }
 
+      // 这个直接进入另外一个分支
       if(((hdma->Instance->CR) & (uint32_t)(DMA_SxCR_DBM)) != RESET)
       {
         /* Current memory buffer used is Memory 0 */
@@ -899,6 +901,7 @@ void HAL_DMA_IRQHandler(DMA_HandleTypeDef *hdma)
       /* Disable the transfer complete interrupt if the DMA mode is not CIRCULAR */
       else
       {
+          // 进入了这句
         if((hdma->Instance->CR & DMA_SxCR_CIRC) == RESET)
         {
           /* Disable the transfer complete interrupt */
@@ -1148,7 +1151,7 @@ uint32_t HAL_DMA_GetError(DMA_HandleTypeDef *hdma)
   * @param  DataLength The length of data to be transferred from source to destination
   * @retval HAL status
   */
-static void DMA_SetConfig(DMA_HandleTypeDef *hdma, uint32_t SrcAddress, uint32_t DstAddress, uint32_t DataLength)
+static void inline DMA_SetConfig(DMA_HandleTypeDef *hdma, uint32_t SrcAddress, uint32_t DstAddress, uint32_t DataLength)
 {
   /* Clear DBM bit */
   hdma->Instance->CR &= (uint32_t)(~DMA_SxCR_DBM);

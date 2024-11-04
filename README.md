@@ -3,7 +3,7 @@ ___
 ## 环境
 `IDE`: CLion
 <br>
-`辅助工具`： GUI Guider STM32CubeMX
+`辅助工具`： GUI Guider &nbsp;&nbsp; STM32CubeMX
 <br>
 `开发平台`： Windows 11 
 <br>
@@ -17,8 +17,10 @@ ___
 [arm-toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
 &nbsp;arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi
 <br>
-`分支说明`:main分支是已经测试通过，ZQ和DV分支是两条测试用的分支
+`分支说明`:main分支是已经测试通过，ZQ和DV分支是两条测试用的分支  &nbsp;&nbsp;&nbsp;&nbsp; JY快更新你的DV
 <br>
+`其他`：工程里嵌套了一个来自GUI Guider的lvgl模拟器，目录为GUI/lvgl_simulator，使用的是GUI Guider的工具链，编译出的是32位程序。
+<!-- 鉴于原工具链有些慢，后面有空换一下工具链。-->
 
 
 <!-- 
@@ -32,46 +34,95 @@ ___
 
 
 - `Application`：即应用级，是与硬件无关的部分，只管应用的实现。包含各种实验项目，如语音存储与回放、双音频信号发生器等。
-通过其Conf下的Module_Conf.h来控制使用哪个项目，由C++实现。同时其头文件不提供任何接口，仅有宏声明  <br><br>
-- `Module`：即模块级，主要用于编写各种算法等，与驱动无关，主要由C++实现  <br><br>
-- `BSP`：板级支持包，本想建立Drivers目录但与CubeMX生成的目录重名了。基于HAL编写的裸机驱动，同时提供对应C接口供使用。后文中所指的驱动级即此处 <br><br>
-- `Library`：库，包含了第三方库如FreeRTOS、LVGL、FATS等，同时添加了DATA目录，用于存放一些数据，如正弦波波形数据等  <br><br>
-- `GUI`：设计用户界面的，使用的是LVGL，包含了界面设计和界面逻辑以及资源文件三部分 。同时里面内嵌了一个LVGL模拟器，在lv-simulator目录。 <br><br>
-- `Drivers`：里面存放的是ST官方提供的HAL，除了stm32fxx_hal.h里我添加了一个Error_Handler内联函数外，其余地方未修改。同时为了避免误操作，把整个文件夹设置成了只读状态  <br><br>
+通过CMakelists顶部的变量来控制使用哪个项目。主体由C++实现同时其头文件不提供任何接口，仅有宏声明  <br><br>
+- `BSP`：即板级支持包(本想命名为Drivers但重名了),基于HAL编写的裸机驱动，同时提供对应C接口供使用。后文中所指的驱动级即此处 <br><br>
+- `Core`：即SoC内核文件，存放的是系统调用、启动文件等与SoC相关的文件，不用做任何改变。<br><br>
+- `Drivers`：由CubeMX生成的目录，存放的是ST官方HAL，仅在stm32fxx_hal.h里添加了一个Error_Handler内联函数。为避免误操作，整个文件夹设置成了只读状态  <br><br>
+- `GUI`：即用户交互的，使用的是LVGL，包含了界面设计和界面逻辑以及资源文件三部分 。同时里面内嵌了一个LVGL模拟器，在lv-simulator目录。 <br><br>
+- `Library`：即库，包含了第三方库如FreeRTOS、LVGL、FATS等，同时添加了DATA目录，用于存放一些数据，如正弦波波形数据等  <br><br>
+- `Module`：即模块级，主要用于编写各种算法等，尽量与驱动无关，主要由C++实现  <br><br>
+
+
+<br>
+
+####  如何使用CMakelists控制不同实验项目的编译
+<p style="text-indent: 2em;">
+在CMakelists的头部有如下变量定义，set是CMakelists的“函数”，用于设置变量。用法为set(变量名 值)，变量名可以是自定义的，
+也可以是CMakeLists里定义好的。这里可以看到，设置了一个变量“APP_DIR”，其值为目录“Application/signalGenerator”，
+这就表明要使用“signalGenerator”这个实验项目，即信号发生器（双音频信号发生器）。<br>
+</p>
+
+<p style="text-indent: 2em;">
+如果你要使用其他项目，比如语音存储与回放，那么只需要将set(APP_DIR Application/voiceStorage)即可。里面嵌入的lvgl模拟器，也是如此，
+在CMakelists里通过相同的方式来设置。
+</p>
+
+```cmake
+# --------------------------------------选择你的项目--------------------------------
+# 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
+set(APP_DIR Application/signalGenerator)
+# --------------------------------------选择你的项目------------------------------
+```
+
+<p style="text-indent: 2em;">
+那么它是如何实现的呢？在CMakelists往下翻，可以看到这一句，通过前面设置的变量${APP_DIR}来选择性编译其目录下的
+app.cpp文件。你没有看错，为了方便管理，不同实验项目都是由app.hpp/cpp组成，只有目录名称不同，在Application目录里
+你可以清晰地看到这一点。
+</p>
+
+```cmake
+# ------Application库------
+file(GLOB_RECURSE APPLICATION_SRC "${APP_DIR}/app.cpp" "Application/Base/*.cpp")
+add_library(libapp STATIC ${APPLICATION_SRC})
+target_include_directories(libapp PUBLIC Application/Base)
+# 需要链接 libdsp libdata libgui libbsp libmodule等，根据需要选
+target_link_libraries(libapp PUBLIC libdsp libdata libgui libbsp libmodule)
+```
+
 
 ___
 
 ## 项目
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+> 本工程由于融合了多个简单实验项目，采用选择性编译的方法来避免冲突，原理在上文中提到。
+在Application目录下的Conf目录里，有一个名为JYZQ_Conf.h，该文件的主要作用是传递应用级头文件的宏，
+以此来控制不同模块的编译。
 
 ### _说明_：
-- 本工程由于融合了多个简单实验项目，为避免冲突，决定使用预编译来控制。相关控制宏放在了Conf目录下。<br><br>
-其下的App_Conf.h里决定了哪个项目要编译，Module_Conf.h包含了项目头文件，自动控制模块驱动级文件的编译。<br><br>
-- 为了在main.cpp里写下大量的预编译命令，使用了不少__weak修饰的函数，
-开发每个“应用级”，需要自己实现key_handler()和app_init()函数。<br><br>
--  编写实现代码一般在 Application/App_xxx.c/h、Module/xxx.c/h、BSP/xxx.c/h里。理想情况下：
-BSP提供接口供Module，Module提供接口供Application，不涉及驱动的初始化，最后再由Application统一调用并初始化给模块驱动<br><br>
+- 应用级文件一般由app.hpp/cpp组成，每个实验项目都在Application有一个独立的目录，比如signalGenerator、voiceStorage等。
+其中头文件app.hpp里没有任何接口变量什么的，只有一堆宏声明，用于控制不同模块的编译。
+<br><br>
+-  正如前文所述，app.hpp里有一堆宏来控制不同模块的编译，在不同模块里会通过引用JYZQ_Conf.h间接引用app.hpp，进而
+通过预编译指令 **#ifdef** 来控制改编译单元是否编译。
+<br><br>
 - 补充了是否启用FreeRTOS的宏，如果不需要使用RTOS，可在应用级文件定义一个宏APP_NO_RTOS,同时在CMakeLists里把FreeRTOS资源文件注释掉
 <br><br>
 
 ### _流程_：
-- **开始**： 先从App_Conf.h开始看，内部有控制应用级文件编译的宏，Module_Conf.h里则有控制不同驱动模块的宏。<br><br>
+- **开始**： 可以先从Application/Base里的main.cpp开始看，这里对初始化函数和处理函数都进行了封装。
+<br><br>
 - **架构**：整个工程如前面所说分成三个部分，编写代码的主要地方也在三级目录下的.c/h文件里，通过文件名可以识别出。
-  先从顶层Application开始看，里面主要实现了两个函数app_init和key_handler，见名知义，同时main函数不再是我们
-  编写代码的主场地。<br><br>
-- **宏**：在Module_Conf.h文件中使用各种宏来控制各级文件的编译，但没有随应用自动决定哪些驱动、模块级文件要编译。
-  主要是这样做了之后，预编译指令会到处飘，很乱。<br><br>
+先从顶层Application开始看，里面主要实现了两个函数app_init和key_handler，见名知义，
+同时main函数不再是我们编写代码的主场地。
+<br><br>
+- **宏**：在JYZQ_Conf.h里可以看到一些奇怪的宏，这里被注释的宏只是为了记忆，方便编写app.hpp/cpp时知道定义哪个宏
+<br><br>
 - **模块层的静态类**：模块层基本上都是用静态类来实现的，这是为了更好地封装同时不至于二进制文件膨胀。其中，
   变量和一些简单函数基本上都是私有成员，这么做主要是不让其他函数随意访问这里的变量，只能通过给定的接口实现（代码逻辑更清晰），
-  不然与以前随处定义的全局变量一样容易产生混淆。<br><br>
+  不然与以前随处定义的全局变量一样容易产生混淆。
+<br><br>
 
 ___
 
 ## 规范：
-&nbsp;&nbsp;&nbsp;&nbsp;为了让项目的代码规范一点，我们约定了一些规则。<br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;框架主体使用的是**FreeRTOS**，除了FreeRTOS本身自由、简单易上手的特点外，
-另一点是CLion集成了FreeRTOS的图形化调试，非常直观。 同时，把整体开发流程主要分为了驱动、模块、应用三级，
-同时这些驱动、模块、应用相关文件由一个xxx_Conf.h来控制，决定了哪些文件可以被编译。<br><br>
+>为了让项目的代码规范一点，我们约定了一些规则。
 
+
+<p style="text-indent: 2em;">
+框架主体使用的是FreeRTOS，除了FreeRTOS本身自由、简单易上手的特点外，
+另一点是CLion集成了FreeRTOS的图形化调试，非常直观。对于一些简单实验项目，采用的是裸机。同时，把整体开发流程主要分为了驱动、模块、应用三级，
+同时这些驱动、模块、应用相关文件由一个xxx_Conf.h来控制，决定了哪些文件可以被编译。<br><br>
+</p>
 
 ### _注意事项_：<br><br>
 - `接口兼容性`：BSP统一使用C接口。而模块级与应用级则使用C++接口，方便开发，比如可以使用重载、引用、自动类型推导、lambda表达式、返回类型后置、结构化绑定等.
@@ -86,13 +137,13 @@ ___
 
 
 ### _C++特性_:<br><br>
-&nbsp;&nbsp;&nbsp;&nbsp;适合单片机开发的一些C++特性，在尽可能减少开销的情况下尽量提升开发效率。
+>适合单片机开发的一些C++特性，在尽可能减少开销的情况下尽量提升开发效率。
 
 <!--C++中适合单片机开发的新特性，C++11以后每三年一个版本，且按照Major-Minor-Minor进行迭代
 C++20与C++23基本都是对标准库、泛型编程等进行了优化，很难用到单片机上。尤其是那该死的模块，听说MSVC支持的比较好，
 cmake也还行，但是试来试去就是不行，淦。-->
 
-```
+```c++
  * // -------------------------------------C++98-------------------------------------
  *
  * 【命名空间】：命名空间是C++中唯一一种作用域机制，它允许将变量、函数、类等定义放在一个独立的命名空间中，避免命名冲突。
@@ -192,7 +243,6 @@ extern "C" {
 
 
 ___
-<!-- 闹着玩的 -->
+<!-- 相戏耳 -->
 **人员**：WJY、WZX、XZQ +HNT &nbsp;&nbsp;&nbsp; 软：JY、ZQ &nbsp;&nbsp; 硬：ZX +NT <br>
-<!-- 一个磕磕碰碰的团队 -->
-<!-- ZQ开发&维护  JY开发  ZX硬件支持-->
+<!-- ZQ发起&开发&维护  JY开发  ZX硬件支持-->

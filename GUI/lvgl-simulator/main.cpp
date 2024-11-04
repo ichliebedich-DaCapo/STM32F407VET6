@@ -20,6 +20,7 @@
 #include "lv_drivers/indev/mousewheel.h"
 #include "lv_drivers/indev/keyboard.h"
 #include <pthread.h>
+#include <cmath>
 
 #if LV_USE_FREEMASTER
 #include "external_data_init.h"
@@ -64,6 +65,10 @@ pthread_mutex_t gg_edata_ll_mutex;
 pthread_cond_t gg_edata_ll_cond;
 #endif
 
+/******************自定义函数*******************/
+extern void test_handler();
+
+/******************自定义函数*******************/
 int main(int argc, char **argv)
 {
 #if LV_USE_FREEMASTER
@@ -115,6 +120,9 @@ int main(int argc, char **argv)
         pthread_mutex_unlock(&lvgl_mutex);
 #endif
         usleep(5 * 1000);
+
+        /************自定义代码***********/
+        test_handler();
     }
 
 #if LV_USE_FREEMASTER
