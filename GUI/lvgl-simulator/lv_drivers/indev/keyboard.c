@@ -146,6 +146,9 @@ bool keyboard_get_input(uint32_t*keycode)
     *keycode=last_key;
     return state;
 }
-
+bool keyboard_get_state()
+{
+    return state;
+}
 
 #endif

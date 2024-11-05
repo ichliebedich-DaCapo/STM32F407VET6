@@ -6,6 +6,7 @@
 
 #include "JYZQ_Conf.h"
 #include "lvgl.h"
+
 /* 预编译命令 */
 #if 1
 
@@ -49,6 +50,40 @@ struct lv_ui_t
 
 // 取别名
 using lv_ui_t = struct lv_ui_t;
+
+
+// 对外接口
+class uiInterface
+{
+public:
+    // 是否显示FPS
+    static auto show_fps(bool is_show) -> void;
+
+    // 是否显示FPS一帧时间
+    static auto set_fps_mode(bool fps_mode) -> void;
+
+    // 增加波形点数
+    static auto add_wave_cnt() -> void;
+
+    // 减少波形点数
+    static auto sub_wave_cnt() -> void;
+
+    // 下一个波形类型
+    static auto next_wave_type() -> void;
+
+    // 上一个波形类型
+    static auto pre_wave_type() -> void;
+
+    // 波形已产生
+    static auto wave_is_generate() -> void ;
+
+    // 波形没有产生
+    static auto wave_is_not_generate() -> void ;
+
+
+};
+
+
 
 
 // 加载资源文件

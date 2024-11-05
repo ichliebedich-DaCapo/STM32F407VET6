@@ -190,7 +190,6 @@
  *
 
  */
-#if 1
 // 头文件
 #include "wave.h"
 #include <cstdio>
@@ -213,220 +212,89 @@ constexpr uint16_t start_x = 80;
 constexpr uint16_t start_y = 40;
 constexpr uint16_t sine_count = 128;// 采样点数量
 constexpr uint16_t max_value = 255;
+constexpr uint16_t bg_color = 0xFFFF;
+constexpr uint16_t line_color = 0x0000;
 
 // 变量
 LV_Timer tick_timer;
 uint8_t Buf[point_cnt];
-bool is_fps = false;// 是否开启FPS -> keyk15
-bool is_fps_time = false;// 是否开启FPS时间 -> keyk14
-bool is_wave = false;// 是否开启实际波形 -> keyk7
-uint8_t wave_cnt = 100;//显示点数 -> keyk8、keyk9
-uint8_t wave_type = 1;// 波形类型 keyk10 过一段时间会消失
+
 
 // keyk13
 #warning "提供一个清屏，用于消除漏墨"
 
-class SignalGenerator : public GUI_Base
+
+// 播放
+class SignalGenerator
 {
 public:
     // 播放
-    static inline auto handler() -> void
-    {
-        /**可以加个值判断*/
-        if (_mode)
-        {
-            // 16K -> 8K
-            if (_freq)
-            {
-                if (_ratio != 0)
-                {
-                    if (get_tick() >= period * 2)
-                    {
+    static auto handler() -> void;
 
-                        set_freq(false);// 切换为8K
-                        update_count();
+    // 开始
+    static inline auto start() -> void;
 
-                    }
-                }
-            } else// 8K -> 16K
-            {
-                // 极端情况：
-                // ① _ratio为100，那么会直接跳过
-                // ② _ratio为0，那么会一直执行这个
-                if (_ratio != 100)
-                {
-                    if (get_tick() >= period * _ratio / 50)
-                    {
-                        set_freq(true);
-                    }
-                }
-            }
-        }
-
-        // 防止数据溢出
-        uint8_t wave_date = sine_wave[wave_index] + bias;
-        wave_date = (wave_date > max_value) ? max_value : (wave_date < 0) ? 0 : wave_date;
-
-        // 选择算法绘制波形
-        switch (wave_type)
-        {
-            case 1:
-                WaveCurve<>::draw_curve<WaveCurveType::Interpolated_Line, uint8_t>(Buf, wave_cnt, wave_date, start_x,
-                                                                                   start_y,
-                                                                                   chart_width, chart_height, 255,
-                                                                                   0xFFFF, 0);
-                break;
-            case 2:
-                WaveCurve<>::draw_curve<WaveCurveType::BezierCurve2, uint8_t>(Buf, wave_cnt, wave_date, start_x,
-                                                                              start_y,
-                                                                              chart_width, chart_height, 255, 0xFFFF,
-                                                                              0);
-                break;
-            case 3:
-                WaveCurve<>::draw_curve<WaveCurveType::BezierCurve3, uint8_t>(Buf, wave_cnt, wave_date, start_x,
-                                                                              start_y,
-                                                                              chart_width, chart_height, 255, 0xFFFF,
-                                                                              0);
-                break;
-            case 4:
-                WaveCurve<>::draw_curve<WaveCurveType::CatmullRomSp_line, uint8_t>(Buf, wave_cnt, wave_date, start_x,
-                                                                                   start_y,
-                                                                                   chart_width, chart_height, 255,
-                                                                                   0xFFFF, 0);
-                break;
-
-            default:
-                break;
-
-        }
-
-
-        wave_index += index_offset;
-        if (wave_index >= sine_count)[[unlikely]]
-        {
-            wave_index -=sine_count;// 尽量让转折处柔和一些
-        }
-
-        // 显示FPS
-        if (is_fps)
-            Tools::fps(is_fps_time);
-    }
-
-    static inline auto start() -> void
-    {
-        tick_timer.resume();
-        // 重置FPS刷新计数
-        if (is_fps)
-            Tools::restart_fps();
-    }
-
-    static inline auto stop() -> void
-    {
-        tick_timer.pause();
-    }
+    // 停止
+    static inline auto stop() -> void;
 
     // 切换频率
-    static inline auto switch_freq() -> void
-    {
-        _freq = !_freq;
-        set_freq(_freq);
-        update_count();
-    }
+    static inline auto switch_freq() -> void;
 
     // 切换模式
-    static inline auto switch_mode() -> void
-    {
-        _mode = !_mode;
-        set_mode(_mode);
-        update_count();
-    }
+    static inline auto switch_mode() -> void;
 
     // 加偏置
-    static inline auto add_bias() -> void
-    {
-        if (bias < 120)
-            bias += 10;
-        char buf[12];
-        sprintf(buf, "偏置：%d", bias);
-        Text::set_text(buf, gui->main.label_bias);
-    }
+    static inline auto add_bias() -> void;
 
     // 减偏置
-    static inline auto sub_bias() -> void
-    {
-        if (bias > -120)
-            bias -= 10;
-        char buf[12];
-        sprintf(buf, "偏置：%d", bias);
-        Text::set_text(buf, gui->main.label_bias);
-    }
+    static inline auto sub_bias() -> void;
 
-    static inline auto add_ratio() -> void
-    {
-        if (_ratio < 100)
-            _ratio += 10;
-        set_ratio(_ratio);
-    }
+    // 加比例
+    static inline auto add_ratio() -> void;
 
-    static inline auto sub_ratio() -> void
-    {
-        if (_ratio > 0)
-            _ratio -= 10;
-        set_ratio(_ratio);
-    }
+    // 减比例
+    static inline auto sub_ratio() -> void;
 
-    static inline auto print_tick() -> void
-    {
-        char buf[12];
-        sprintf(buf, "tick：\n%lu", get_tick());
-        Text::set_text(buf, gui->main.label_tick);
-    }
+    // 打印时间
+    static inline auto print_tick() -> void;
+
+    // 是否显示FPS
+    static inline auto show_fps(bool is_show) -> void;
+
+    // 是否显示FPS一帧时间
+    static inline auto set_fps_mode(bool fps_mode) -> void;
+
+    // 增加波形点数
+    static inline auto add_wave_cnt() -> void;
+
+    // 减少波形点数
+    static inline auto sub_wave_cnt() -> void;
+
+    // 下一个波形类型
+    static inline auto next_wave_type() -> void;
+
+    // 上一个波形类型
+    static inline auto pre_wave_type() -> void;
+
+    // 波形已产生
+    static inline auto wave_is_generate() -> void;
+
+    // 波形没有产生
+    static inline auto wave_is_not_generate() -> void;
 
 private:
     // 设置频率,true表示16K，false表示8K
-    static inline auto set_freq(bool freq) -> void
-    {
-        _freq = freq;
-        index_offset = _freq ? index_offset_16K : index_offset_8K;
-        Text::set_text(_freq ? "16K" : "8K", gui->main.btn_freq_label);
+    static inline auto set_freq(bool freq) -> void;
 
-#if Strong_Print
-        timer.set_period(_freq ? Freq_16K : Freq_8K);
-#endif
-    }
+    static inline auto set_mode(bool &mode) -> void;
 
-    static inline auto set_mode(bool &mode) -> void
-    {
-        _mode = mode;
-        Text::set_text(_mode ? "双频" : "单频", gui->main.btn_mode_label);
-    }
-
-    static inline auto set_ratio(uint8_t ratio) -> void
-    {
-        _ratio = ratio;
-        char buf[12];
-        sprintf(buf, "占比：%d%%", _ratio);
-        Text::set_text(buf, gui->main.label_ratio);
-    }
+    static inline auto set_ratio(uint8_t ratio) -> void;
 
     // 更新时间
-    static inline auto update_count() -> void
-    {
-        count = lv_tick_get();
-    }
+    static inline auto update_count() -> void;
 
     // 获取时间
-    static inline auto get_tick() -> uint32_t
-    {
-        uint32_t temp_count = lv_tick_get();
-        // 防止溢出
-        if (temp_count < count)
-            temp_count += (0xFFFF'FFFF - count);
-        else
-            temp_count -= count;
-
-        return temp_count;
-    }
+    static inline auto get_tick() -> uint32_t;
 
 private:
     static inline uint32_t count = 0;// 用于计时
@@ -437,6 +305,11 @@ private:
     static inline bool _mode = false;// 默认模式为单频
     static inline bool _freq = false;// 默认频率为8K
     static constexpr uint32_t period = 1500;// 周期为1500ms
+
+    static inline bool is_fps = false;// 是否开启FPS -> keyk15
+    static inline bool is_fps_time = false;// 是否开启FPS时间 -> keyk14
+    static inline uint8_t wave_cnt = 100;//显示点数 -> keyk8、keyk9
+    static inline uint8_t wave_type = 1;// 波形类型 keyk10 过一段时间会消失
 };
 
 
@@ -498,13 +371,14 @@ auto Screen::init() -> void
     label.init(gui->main.label_wave_type, 10, 160, 60, 80, "线性插值");
 
     // 标签：波形生成
-    label.init(gui->main.label_wave_generate, 10, 200, 60, 80, "已产生");
+    label.init(gui->main.label_wave_generate, 430, 200, 50, 80, "波形已产生");
+    Text::hidden(gui->main.label_wave_generate);
 
     // 标签：标题
     label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
     label.init(gui->main.label_title, 190, 13, 140, 30, "双音频信号发生器");
 
-
+    // fps
     Tools::fps_init(&lv_customer_font_SourceHanSerifSC_Regular_13, 415, 0);
     Tools::set_right();
 }
@@ -549,4 +423,365 @@ auto Events::init() -> void
 }
 
 
+auto SignalGenerator::handler() -> void
+{
+    /**可以加个值判断*/
+    if (_mode)
+    {
+        // 16K -> 8K
+        if (_freq)
+        {
+            if (_ratio != 0)
+            {
+                if (get_tick() >= period * 2)
+                {
+
+                    set_freq(false);// 切换为8K
+                    update_count();
+
+                }
+            }
+        } else// 8K -> 16K
+        {
+            // 极端情况：
+            // ① _ratio为100，那么会直接跳过
+            // ② _ratio为0，那么会一直执行这个
+            if (_ratio != 100)
+            {
+                if (get_tick() >= period * _ratio / 50)
+                {
+                    set_freq(true);
+                }
+            }
+        }
+    }
+
+    // 防止数据溢出
+    uint8_t wave_date = sine_wave[wave_index] + bias;
+    wave_date = (wave_date > max_value) ? max_value : (wave_date < 0) ? 0 : wave_date;
+
+    // 选择算法绘制波形
+    switch (wave_type)
+    {
+        case 1:
+            WaveCurve<>::draw_curve<WaveCurveType::Interpolated_Line, uint8_t>(Buf, wave_cnt, wave_date, start_x,
+                                                                               start_y,
+                                                                               chart_width, chart_height, 255,
+                                                                               0xFFFF, 0);
+            break;
+        case 2:
+            WaveCurve<>::draw_curve<WaveCurveType::BezierCurve2, uint8_t>(Buf, wave_cnt, wave_date, start_x,
+                                                                          start_y,
+                                                                          chart_width, chart_height, 255, 0xFFFF,
+                                                                          0);
+            break;
+        case 3:
+            WaveCurve<>::draw_curve<WaveCurveType::BezierCurve3, uint8_t>(Buf, wave_cnt, wave_date, start_x,
+                                                                          start_y,
+                                                                          chart_width, chart_height, 255, 0xFFFF,
+                                                                          0);
+            break;
+        case 4:
+            WaveCurve<>::draw_curve<WaveCurveType::CatmullRomSp_line, uint8_t>(Buf, wave_cnt, wave_date, start_x,
+                                                                               start_y,
+                                                                               chart_width, chart_height, 255,
+                                                                               0xFFFF, 0);
+            break;
+
+        default:
+            break;
+
+    }
+
+
+    wave_index += index_offset;
+    if (wave_index >= sine_count)[[unlikely]]
+    {
+        wave_index -= sine_count;// 尽量让转折处柔和一些
+    }
+
+    // 显示FPS
+    if (is_fps)
+        Tools::fps(is_fps_time);
+}
+
+
+auto SignalGenerator::start() -> void
+{
+    tick_timer.resume();
+    // 重置FPS刷新计数
+    if (is_fps)
+        Tools::restart_fps();
+}
+
+auto SignalGenerator::stop() -> void
+{
+    tick_timer.pause();
+}
+
+// 切换频率
+auto SignalGenerator::switch_freq() -> void
+{
+    _freq = !_freq;
+    set_freq(_freq);
+    update_count();
+}
+
+// 切换模式
+auto SignalGenerator::switch_mode() -> void
+{
+    _mode = !_mode;
+    set_mode(_mode);
+    update_count();
+}
+
+// 加偏置
+auto SignalGenerator::add_bias() -> void
+{
+    if (bias < 120)
+        bias += 10;
+    char buf[12];
+    sprintf(buf, "偏置：%d", bias);
+    Text::set_text(buf, GUI_Base::get_ui()->main.label_bias);
+}
+
+// 减偏置
+auto SignalGenerator::sub_bias() -> void
+{
+    if (bias > -120)
+        bias -= 10;
+    char buf[12];
+    sprintf(buf, "偏置：%d", bias);
+    Text::set_text(buf, GUI_Base::get_ui()->main.label_bias);
+}
+
+auto SignalGenerator::add_ratio() -> void
+{
+    if (_ratio < 100)
+        _ratio += 10;
+    set_ratio(_ratio);
+}
+
+auto SignalGenerator::sub_ratio() -> void
+{
+    if (_ratio > 0)
+        _ratio -= 10;
+    set_ratio(_ratio);
+}
+
+auto SignalGenerator::print_tick() -> void
+{
+    char buf[12];
+    sprintf(buf, "tick：\n%lu", get_tick());
+    Text::set_text(buf, GUI_Base::get_ui()->main.label_tick);
+}
+
+
+// 设置频率,true表示16K，false表示8K
+auto SignalGenerator::set_freq(bool freq) -> void
+{
+    _freq = freq;
+    index_offset = _freq ? index_offset_16K : index_offset_8K;
+    Text::set_text(_freq ? "16K" : "8K", GUI_Base::get_ui()->main.btn_freq_label);
+
+#if Strong_Print
+    timer.set_period(_freq ? Freq_16K : Freq_8K);
 #endif
+}
+
+auto SignalGenerator::set_mode(bool &mode) -> void
+{
+    _mode = mode;
+    Text::set_text(_mode ? "双频" : "单频", GUI_Base::get_ui()->main.btn_mode_label);
+}
+
+auto SignalGenerator::set_ratio(uint8_t ratio) -> void
+{
+    _ratio = ratio;
+    char buf[12];
+    sprintf(buf, "占比：%d%%", _ratio);
+    Text::set_text(buf, GUI_Base::get_ui()->main.label_ratio);
+}
+
+// 更新时间
+auto SignalGenerator::update_count() -> void
+{
+    count = lv_tick_get();
+}
+
+// 获取时间
+auto SignalGenerator::get_tick() -> uint32_t
+{
+    uint32_t temp_count = lv_tick_get();
+    // 防止溢出
+    if (temp_count < count)
+        temp_count += (0xFFFF'FFFF - count);
+    else
+        temp_count -= count;
+
+    return temp_count;
+}
+
+auto SignalGenerator::show_fps(bool is_show) -> void
+{
+    is_fps = is_show;
+    if (is_show)
+        Tools::restart_fps();
+}
+
+/**
+ * 设置FPS显示模式
+ * @param fps_mode ture表示显示一帧消耗的时间，false表示显示帧数
+ */
+auto SignalGenerator::set_fps_mode(bool fps_mode) -> void
+{
+    is_fps_time = fps_mode;
+}
+
+auto SignalGenerator::add_wave_cnt() -> void
+{
+    char buf[15];
+    if (wave_cnt < 180)
+    {
+        if (wave_cnt == 128)
+            wave_cnt += 2;
+        else
+            wave_cnt += 10;
+    }
+
+    LCD_Color_Clean(start_x, start_y, start_x + chart_width, start_y + chart_height, bg_color);// 清除显示
+    sprintf(buf, "点数：\n %3d", wave_cnt);
+    Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_cnt);
+}
+
+auto SignalGenerator::sub_wave_cnt() -> void
+{
+    char buf[15];
+    if (wave_cnt > 20)
+    {
+        if (wave_cnt == 128)
+            wave_cnt -= 8;
+        else
+            wave_cnt -= 10;
+    }
+
+    LCD_Color_Clean(start_x, start_y, start_x + chart_width, start_y + chart_height, bg_color);// 清除显示
+    sprintf(buf, "点数：\n %3d", wave_cnt);
+    Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_cnt);
+}
+
+auto SignalGenerator::next_wave_type() -> void
+{
+    char buf[32];
+    if (wave_type < 4)
+        ++wave_type;
+
+    switch (wave_type)
+    {
+        case 1:
+            sprintf(buf, "线性插值");
+            break;
+
+        case 2:
+            sprintf(buf, "二次贝塞尔曲线");
+            break;
+
+        case 3:
+            sprintf(buf, "三次贝塞尔曲线");
+            break;
+
+        case 4:
+            sprintf(buf, "样条曲线");
+            break;
+
+        default:
+            sprintf(buf, "无效曲线");
+            break;
+    }
+    LCD_Color_Clean(80, 40, 400, 240, 0xFFFF);
+    Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_type);
+}
+
+auto SignalGenerator::pre_wave_type() -> void
+{
+    char buf[32];
+    if (wave_type > 1)
+        --wave_type;
+
+    switch (wave_type)
+    {
+        case 1:
+            sprintf(buf, "线性插值");
+            break;
+
+        case 2:
+            sprintf(buf, "二次贝塞尔曲线");
+            break;
+
+        case 3:
+            sprintf(buf, "三次贝塞尔曲线");
+            break;
+
+        case 4:
+            sprintf(buf, "样条曲线");
+            break;
+
+        default:
+            sprintf(buf, "无效曲线");
+            break;
+    }
+    LCD_Color_Clean(80, 40, 400, 240, 0xFFFF);
+    Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_type);
+}
+
+auto SignalGenerator::wave_is_generate() -> void
+{
+    Text::appear(GUI_Base::get_ui()->main.label_wave_generate);
+}
+
+auto SignalGenerator::wave_is_not_generate() -> void
+{
+    Text::hidden(GUI_Base::get_ui()->main.label_wave_generate);
+}
+
+
+/*****************************对外接口**************************/
+auto uiInterface::show_fps(bool is_show) -> void
+{
+    SignalGenerator::show_fps(is_show);
+}
+
+auto uiInterface::set_fps_mode(bool fps_mode) -> void
+{
+    SignalGenerator::set_fps_mode(fps_mode);
+}
+
+auto uiInterface::add_wave_cnt() -> void
+{
+    SignalGenerator::add_wave_cnt();
+}
+
+auto uiInterface::sub_wave_cnt() -> void
+{
+    SignalGenerator::sub_wave_cnt();
+}
+
+auto uiInterface::next_wave_type() -> void
+{
+    SignalGenerator::next_wave_type();
+}
+
+auto uiInterface::pre_wave_type() -> void
+{
+    SignalGenerator::pre_wave_type();
+}
+
+auto uiInterface::wave_is_generate() -> void
+{
+    SignalGenerator::wave_is_generate();
+}
+
+auto uiInterface::wave_is_not_generate() -> void
+{
+    SignalGenerator::wave_is_not_generate();
+}

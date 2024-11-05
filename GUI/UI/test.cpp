@@ -32,11 +32,6 @@ const uint8_t sine_wave[128] = {
         109, 115, 121
 };
 
-extern bool is_fps;// 是否开启FPS -> keyk15
-extern bool is_fps_time;// 是否开启FPS时间 -> keyk14
-extern bool is_wave;// 是否开启实际波形 -> keyk7
-extern uint8_t wave_cnt;//显示点数 -> keyk8、keyk9
-extern uint8_t wave_type;// 波形类型 keyk10 过一段时间会消失
 
 /**
  * 键盘线程
@@ -45,87 +40,64 @@ extern uint8_t wave_type;// 波形类型 keyk10 过一段时间会消失
  * @note 这样可以使得我调试的手段更多了，可以不必大费周章得绑定组件到对应的事件回调里。当然这也是因为我的单片机上是矩阵键盘，
  *      暂时不太方便添加到lvgl的输入设备里，因为按键我是采用外部中断触发，并且需要完成一些外设的控制和部分组件的属性调整或部分组件的开启。
  */
-void update_cnt()
-{
-    char buf[15];
-    LCD_Color_Clean(80, 40, 400, 240, 0xFFFF);
-    sprintf(buf, "点数：\n %3d", wave_cnt);
-    Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_cnt);
-}
-void update_type(uint8_t type)
-{
-    char buf[32];
-    switch (type)
-    {
-        case 1:
-            sprintf(buf, "线性插值");
-            break;
-
-            case 2:
-                sprintf(buf, "二次贝塞尔曲线");
-                break;
-
-            case 3:
-                sprintf(buf, "三次贝塞尔曲线");
-                break;
-
-            case 4:
-                sprintf(buf, "样条曲线");
-                break;
-
-        default:
-            sprintf(buf, "无效曲线");
-            break;
-    }
-    LCD_Color_Clean(80, 40, 400, 240, 0xFFFF);
-    Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_type);
-
-}
-
 int keyboard_thread(void *data)
 {
     (void) data;  /* 忽略传递的参数，因为在这个函数中不需要使用它 */
-
+    static bool is_fps_mode = false;
+    bool is_fps = false;
+    bool is_generate = false;
     while (keep_running)
     {
         uint32_t keycode;
         if (keyboard_get_input(&keycode))
         {
+            while (keyboard_get_state());//等待按键释放
             switch (keycode)
             {
                 case 'a':
-                    wave_cnt += 10;
-
-                    update_cnt();
-                    printf("A pressed\n");
+                    is_fps = !is_fps;
+                    uiInterface::show_fps(is_fps);
+                    printf("FPS显示\n");
                     break;
-
 
                 case 's':
-                    wave_cnt -= 10;
-                    update_cnt();
-                    printf("S pressed\n");
+                    is_fps_mode = !is_fps_mode;
+                    uiInterface::set_fps_mode(is_fps_mode);
+                    printf("FPS模式\n");
                     break;
-
-                case 'w':
-                    wave_type++;
-                    update_type(wave_type);
-                    printf("wave:%d",wave_type);
-                    printf("W pressed\n");
-                    break;
-
 
                 case 'd':
-                    wave_type--;
-                    update_type(wave_type);
-                    printf("D pressed\n");
+                    uiInterface::pre_wave_type();
+                    printf("上一个波形\n");
                     break;
+
+                case 'f':
+                    uiInterface::next_wave_type();
+                    printf("下一个波形\n");
+                    break;
+
+
+                case 'g':
+                    uiInterface::sub_wave_cnt();
+                    printf("E pressed\n");
+                    break;
+
+                case 'h':
+                    uiInterface::add_wave_cnt();
+                    printf("F pressed\n");
+                    break;
+
+                case 'j':
+                    is_generate = !is_generate;
+                    if (is_generate)
+                        uiInterface::wave_is_generate();
+                    else
+                        uiInterface::wave_is_not_generate();
 
                 default:
                     break;
             }
         }
-        SDL_Delay(150);  // 以我个人而言150ms差不多，不容易抖动
     }
 
     return 0;  /* 这个函数实际上永远不会返回，因为它一直在循环中运行 */

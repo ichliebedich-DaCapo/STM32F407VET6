@@ -80,7 +80,7 @@ void keyboard_handler(SDL_Event *event);
  * @note 很明显会有键盘抖动，或者说这是持续检测
  */
 bool keyboard_get_input(uint32_t*keycode);
-
+bool keyboard_get_state();
 #endif /*USE_KEYBOARD*/
 
 #ifdef __cplusplus
