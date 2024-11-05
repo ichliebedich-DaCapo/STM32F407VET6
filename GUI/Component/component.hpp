@@ -46,8 +46,17 @@ public:
     static inline auto set_pos(Coord x, Coord y) -> void;// 设置位置
     static inline auto set_size(Coord w, Coord h) -> void;// 设置尺寸
 
+    // 隐藏组件
+    static inline auto hidden(Obj obj = _obj) -> void;
+
+    // 显示组件
+    static inline auto appear(Obj obj = _obj) -> void;
+
     // 添加标志
-    [[maybe_unused]] static inline auto add_flag(lv_obj_flag_t flag) -> void;
+    [[maybe_unused]] static inline auto add_flag(lv_obj_flag_t flag, Obj obj = _obj) -> void;
+
+    // 清除标志
+    static inline auto clear_flag(lv_obj_flag_t flag, Obj obj = _obj) -> void;
 
     // 设置为裁剪属性，即子对象的内容会被父对象的圆角部分裁剪掉，而不会超出父对象的圆角边界。
     [[maybe_unused]] static inline auto set_clip_corner(Selector selector = selector_default) -> void;
@@ -112,11 +121,11 @@ public:
     shadow_width(Coord width, Selector selector = selector_default) -> void;
 
     // 设置文本颜色,一般用于图表或刻度盘，现在失效了
-    static inline auto
+    [[maybe_unused]] static inline auto
     text_color(lv_color_t color, Selector selector = selector_default) -> void;
 
     // 设置文本透明度,一般用于图表或刻度盘
-    static inline auto text_opa(uint8_t opa, Selector selector = selector_ticks) -> void;
+    [[maybe_unused]] static inline auto text_opa(uint8_t opa, Selector selector = selector_ticks) -> void;
 
     // 设置文本字体,一般用于图表或刻度盘
     [[maybe_unused]] static inline auto
@@ -128,7 +137,7 @@ public:
 
     // 设置边框样式
     static inline auto
-    border(Color color,Coord radius = 5,Coord  width = 1, uint8_t opa = 255) -> void;
+    border(Color color, Coord radius = 5, Coord width = 1, uint8_t opa = 255) -> void;
 
 
     /*初始化器*/
@@ -186,9 +195,15 @@ auto Component::set_size(Coord w, Coord h) -> void
 }
 
 // 添加标志
-[[maybe_unused]] auto Component::add_flag(lv_obj_flag_t flag) -> void
+[[maybe_unused]] auto Component::add_flag(lv_obj_flag_t flag, Obj obj) -> void
 {
-    lv_obj_add_flag(_obj, flag);
+    lv_obj_add_flag(obj, flag);
+}
+
+// 清除标志
+auto Component::clear_flag(lv_obj_flag_t flag, Obj obj) -> void
+{
+    lv_obj_clear_flag(obj, flag);
 }
 
 // 设置为裁剪属性
@@ -294,13 +309,13 @@ auto Component::shadow_width(Coord width, Selector selector) -> void
 }
 
 // 设置文本颜色
-auto Component::text_color(lv_color_t color, Selector selector) -> void
+[[maybe_unused]] auto Component::text_color(lv_color_t color, Selector selector) -> void
 {
     lv_obj_set_style_text_color(_obj, color, selector);
 }
 
 // 设置文本透明度
-auto Component::text_opa(uint8_t opa, Selector selector) -> void
+[[maybe_unused]] auto Component::text_opa(uint8_t opa, Selector selector) -> void
 {
     lv_obj_set_style_text_opa(_obj, opa, selector);
 }
@@ -340,6 +355,16 @@ auto Component::border(Color color, Coord radius, Coord width, uint8_t opa) -> v
     border_color(color);
     border_opa(opa);
     border_width(width);
+}
+
+auto Component::hidden(Obj obj) -> void
+{
+    add_flag(LV_OBJ_FLAG_HIDDEN, obj);
+}
+
+auto Component::appear(Obj obj) -> void
+{
+    clear_flag(LV_OBJ_FLAG_HIDDEN, obj);
 }
 
 

@@ -6,6 +6,7 @@
 /*********************
  *      INCLUDES
  *********************/
+#include <stdio.h>
 #include "keyboard.h"
 #if USE_KEYBOARD
 
@@ -131,4 +132,20 @@ static uint32_t keycode_to_ascii(uint32_t sdl_key)
             return sdl_key;
     }
 }
+
+
+
+/**
+ * @brief 获取键盘输入
+ * @param keycode 输入的keycode
+ * @return true: 有输入，false: 无输入
+ * @note 很明显会有键盘抖动，或者说这是持续检测
+ */
+bool keyboard_get_input(uint32_t*keycode)
+{
+    *keycode=last_key;
+    return state;
+}
+
+
 #endif

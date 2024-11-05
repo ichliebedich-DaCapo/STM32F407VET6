@@ -1,9 +1,12 @@
 #include <cmath>
+#include <unistd.h>
 #include "lvgl.h"
 #include "GUI.hpp"
 #include "lv_drivers/display/monitor.h"
 #include "WaveCurve.hpp"
+#include "lv_drivers/indev/keyboard.h"
 
+extern volatile int keep_running;
 /*******************************自定义代码**********************************/
 constexpr uint16_t Sample_Size = 128;
 constexpr uint16_t chart_width = 320;
@@ -33,5 +36,51 @@ void test_handler()
 //                                                           sine_wave[(cnt++) % 128],
 //                                                           Sample_Size, start_x, start_y, chart_width,
 //                                                           chart_height, max_value, COLOR_WHITE, COLOR_BLACK);
+
+
+
+}
+
+/**
+ * 键盘线程
+ * @param data
+ * @return
+ * @note 这样可以使得我调试的手段更多了，可以不必大费周章得绑定组件到对应的事件回调里。当然这也是因为我的单片机上是矩阵键盘，
+ *      暂时不太方便添加到lvgl的输入设备里，因为按键我是采用外部中断触发，并且需要完成一些外设的控制和部分组件的属性调整或部分组件的开启。
+ */
+int keyboard_thread(void *data)
+{
+    (void) data;  /* 忽略传递的参数，因为在这个函数中不需要使用它 */
+    while (keep_running)
+    {
+        uint32_t keycode;
+        if (keyboard_get_input(&keycode))
+        {
+            switch (keycode)
+            {
+                case 'a':
+                    printf("A pressed\n");
+                    break;
+
+                case 'w':
+                    printf("W pressed\n");
+                    break;
+
+                case 's':
+                    printf("S pressed\n");
+                    break;
+
+                case 'd':
+                    printf("D pressed\n");
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        SDL_Delay(150);  // 以我个人而言150ms差不多，不容易抖动
+    }
+
+    return 0;  /* 这个函数实际上永远不会返回，因为它一直在循环中运行 */
 }
 

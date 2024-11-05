@@ -50,7 +50,7 @@ public:
     static inline auto fps_init(Font font, Coord x = 0, Coord y = 40) -> void;
 
     // 显示fps
-    static inline auto fps() -> void;
+    static inline auto fps(bool time = true) -> void;
 
     static inline auto restart_fps() -> void;
 
@@ -89,14 +89,20 @@ auto Tools::fps_init(Font font, Coord x, Coord y) -> void
  * @note 启用该功能之前必须先调用fps_init进行必要的初始化。启用fps显示，即在需要的地方调用本函数
  *      默认显示一帧需要的时间单位为ms
  */
-auto Tools::fps() -> void
+auto Tools::fps(bool time) -> void
 {
 #if SIMPLE_FPS
     char buf[5];
-    // 显示一帧的时间
-    sprintf(buf, "%.2f", 1.0 * get_tick() / (count++));
-    // 显示帧率
-//    sprintf(buf, "%.2f", 1000.0*(count++))/get_tick();
+
+    if (time)
+    {
+        // 显示一帧的时间
+        sprintf(buf, "%.2f", 1.0 * get_tick() / (count++));
+    } else
+    {
+        // 显示帧率
+        sprintf(buf, "%.2f", 1000.0 * (count++) / get_tick());
+    }
     Text::set_text(buf, label_fps);
 #else
     char buf[9];
