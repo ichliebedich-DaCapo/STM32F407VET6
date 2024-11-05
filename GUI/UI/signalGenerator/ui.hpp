@@ -40,6 +40,9 @@ struct lv_ui_t
         Obj label_title;// 标题
         Obj imgbtn_play;// 播放键
         Obj label_cpu;
+        Obj label_wave_cnt;// 波形点数
+        Obj label_wave_type;// 波形类型
+        Obj label_wave_generate;// 波形生成
     } main;// 主屏幕
 
 };

@@ -194,6 +194,8 @@
 // 头文件
 #include "wave.h"
 #include <cstdio>
+#include "WaveCurve.hpp"
+
 // 宏定义
 #define Strong_Print 0 // 使用更强烈的显示（时间和索引都会加倍）
 
@@ -204,7 +206,7 @@ constexpr uint32_t Freq_8K = 70;
 constexpr uint32_t Freq_16K = 12;
 constexpr uint8_t index_offset_8K = 2;// 8K下索引递增值
 constexpr uint8_t index_offset_16K = 4;// 16K下索引递增值
-constexpr uint16_t point_cnt = 100;// 点的数量
+constexpr uint16_t point_cnt = 256;// 点的数量
 constexpr uint16_t chart_width = 320;
 constexpr uint16_t chart_height = 200;
 constexpr uint16_t start_x = 80;
@@ -214,10 +216,15 @@ constexpr uint16_t max_value = 255;
 
 // 变量
 LV_Timer tick_timer;
-
-#include "WaveCurve.hpp"
-
 uint8_t Buf[point_cnt];
+bool is_fps = false;// 是否开启FPS -> keyk15
+bool is_fps_time = false;// 是否开启FPS时间 -> keyk14
+bool is_wave = false;// 是否开启实际波形 -> keyk7
+uint8_t wave_cnt = 128;//显示点数 -> keyk8、keyk9
+uint8_t wave_type = 1;// 波形类型 keyk10 过一段时间会消失
+
+// keyk13
+#warning "提供一个清屏，用于消除漏墨"
 
 class SignalGenerator : public GUI_Base
 {
@@ -259,8 +266,40 @@ public:
         uint8_t wave_date = sine_wave[wave_index] + bias;
         wave_date = (wave_date > max_value) ? max_value : (wave_date < 0) ? 0 : wave_date;
 
-        WaveCurve<>::draw_curve<WaveCurveType::BezierCurve3, uint8_t>(Buf, point_cnt, wave_date, start_x, start_y,
-                                                                      chart_width, chart_height, 255, 0xFFFF, 0);
+
+        // 选择算法绘制波形
+        switch (wave_type)
+        {
+            case 1:
+                WaveCurve<>::draw_curve<WaveCurveType::Interpolated_Line, uint8_t>(Buf, wave_cnt, wave_date, start_x,
+                                                                                   start_y,
+                                                                                   chart_width, chart_height, 255,
+                                                                                   0xFFFF, 0);
+                break;
+            case 2:
+                WaveCurve<>::draw_curve<WaveCurveType::BezierCurve2, uint8_t>(Buf, wave_cnt, wave_date, start_x,
+                                                                              start_y,
+                                                                              chart_width, chart_height, 255, 0xFFFF,
+                                                                              0);
+                break;
+            case 3:
+                WaveCurve<>::draw_curve<WaveCurveType::BezierCurve3, uint8_t>(Buf, wave_cnt, wave_date, start_x,
+                                                                              start_y,
+                                                                              chart_width, chart_height, 255, 0xFFFF,
+                                                                              0);
+                break;
+            case 4:
+                WaveCurve<>::draw_curve<WaveCurveType::CatmullRomSp_line, uint8_t>(Buf, wave_cnt, wave_date, start_x,
+                                                                                   start_y,
+                                                                                   chart_width, chart_height, 255,
+                                                                                   0xFFFF, 0);
+                break;
+
+            default:
+                break;
+
+        }
+
 
         if (wave_index >= sine_count - 1)[[unlikely]]
         {
@@ -269,13 +308,17 @@ public:
         {
             wave_index += index_offset;
         }
+
+        if (is_fps)
+            Tools::fps(is_fps_time);
     }
 
     static inline auto start() -> void
     {
         tick_timer.resume();
-#warning "测试"
-        Tools::restart_fps();
+        // 重置FPS刷新计数
+        if (is_fps)
+            Tools::restart_fps();
     }
 
     static inline auto stop() -> void
@@ -405,7 +448,7 @@ auto Screen::init() -> void
 
     // 设置边框
     Component::init(gui->main.rect);
-    Component::set_pos_size(78,36,324,208);
+    Component::set_pos_size(78, 36, 324, 208);
     Component::border_radius(5);
 
 
@@ -443,18 +486,28 @@ auto Screen::init() -> void
     label.init(gui->main.label_info, 420, 60, 60, 80, "  队伍：\n\n王正翔\n吴俊颐\n谢智晴\n何乃滔");
 
     // 标签：时刻
-    label.init(gui->main.label_tick, 20, 100, 50, 80, "tick：\n0");
+    label.init(gui->main.label_tick, 10, 40, 50, 80, "tick：\n0");
     Text::set_text_color(Color_Firefly_Green);
 
     // 标签：CPU温度
     label.init(gui->main.label_cpu, 0, 0, 80, 30, "CPU:35℃\n");
+
+    // 标签：显示点数
+    label.init(gui->main.label_wave_cnt, 10, 100, 60, 80, "点数：\n 128");
+
+    // 标签：算法
+    label.init(gui->main.label_wave_type, 10, 160, 60, 80, "线性插值");
+
+    // 标签：波形生成
+    label.init(gui->main.label_wave_generate, 10, 200, 60, 80, "已产生");
 
     // 标签：标题
     label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
     label.init(gui->main.label_title, 190, 13, 140, 30, "双音频信号发生器");
 
 
-    Tools::fps_init(&lv_customer_font_SourceHanSerifSC_Regular_13, 10, 40);
+    Tools::fps_init(&lv_customer_font_SourceHanSerifSC_Regular_13, 415, 0);
+    Tools::set_right();
 }
 
 
@@ -467,7 +520,6 @@ auto Events::init() -> void
     tick_timer.create([](lv_timer_t *)
                       {
                           SignalGenerator::handler();
-                          Tools::fps();
                           SignalGenerator::print_tick();
                       }, Freq_8K);
 #warning "测试中"

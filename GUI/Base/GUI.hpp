@@ -47,12 +47,20 @@ inline void GUI_handler()
 class Tools
 {
 public:
-    static inline auto fps_init(Font font, Coord x = 0, Coord y = 40) -> void;
+    static inline auto fps_init(Font font, Coord x = 0, Coord y = 40,Coord width = 60, Coord height=20) -> void;
 
     // 显示fps
     static inline auto fps(bool time = true) -> void;
 
     static inline auto restart_fps() -> void;
+
+    static inline auto set_right()->void;
+
+    static inline auto set_left()->void;
+
+    static inline auto set_center()->void;
+
+    static inline auto clear_fps() -> void;
 
 private:
     // 获取时间
@@ -72,16 +80,19 @@ private:
  * @param font 指定字库中要有fps和十位数字，字体大小为13即可
  * @param x x轴
  * @param y y轴
+ * @note 默认文本框为60*20，即宽60，高20，且文本为左对齐。
  */
-auto Tools::fps_init(Font font, Coord x, Coord y) -> void
+auto Tools::fps_init(Font font, Coord x, Coord y,Coord width, Coord height) -> void
 {
     Text label;
     label.init_font(font);
 #if SIMPLE_FPS
-    label.init(label_fps, x, y, 60, 20, "0");
+    label.init(label_fps, x, y, width, height, "");
 #else
     label.init(label_fps, x, y, 60, 80, "fps\n0");
 #endif
+
+
 }
 
 /**
@@ -92,12 +103,12 @@ auto Tools::fps_init(Font font, Coord x, Coord y) -> void
 auto Tools::fps(bool time) -> void
 {
 #if SIMPLE_FPS
-    char buf[5];
+    char buf[7];
 
     if (time)
     {
         // 显示一帧的时间
-        sprintf(buf, "%.2f", 1.0 * get_tick() / (count++));
+        sprintf(buf, "%.2fms", 1.0 * get_tick() / (count++));
     } else
     {
         // 显示帧率
@@ -138,6 +149,27 @@ auto Tools::restart_fps() -> void
 {
     update_tick();
     count = 0;
+}
+
+auto Tools::set_right() -> void
+{
+    Text::set_text_align(LV_TEXT_ALIGN_RIGHT,label_fps);
+}
+
+auto Tools::set_center() -> void
+{
+    Text::set_text_align(LV_TEXT_ALIGN_CENTER,label_fps);
+}
+
+auto Tools::set_left() -> void
+{
+    Text::set_text_align(LV_TEXT_ALIGN_LEFT,label_fps);
+}
+
+auto Tools::clear_fps() -> void
+{
+    Text::set_text("", label_fps);
+
 }
 
 
