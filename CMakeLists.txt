@@ -30,7 +30,7 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
 # -----------------工程设置-----------------
 project(Furina C CXX ASM)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_C_STANDARD 11)
 
 # -----------------判断编译器类别-----------------
@@ -85,7 +85,7 @@ if (COMPILER_IS_GCC)
     #-Oz:极度优化大小,进一步优化生成的代码大小，比 -Os更激进,可能会牺牲一些性能。
     #-flto:在链接阶段进行优化,允许进行跨文件的优化，进一步提高性能，但耗时间（项目本来就小我不在乎）
     #-fprofile-generate（生成配置文件） 和 -fprofile-use（基于配置文件的优化）
-    add_compile_options(-Ofast -g)
+    add_compile_options(-Ofast -g3)
     # 不调试了再开启
     #add_compile_options(-flto )
 elseif (COMPILER_IS_CLANG)
@@ -261,12 +261,12 @@ file(GLOB_RECURSE SOURCES "Core/*.*")
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld)
 
 # 链接标志
+add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
 if (COMPILER_IS_GCC)
     add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
 elseif (COMPILER_IS_CLANG)
     add_link_options(-mcpu=cortex-m4 )
 endif ()
-add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
 add_link_options(-T ${LINKER_SCRIPT})
 
 # 设置链接选项

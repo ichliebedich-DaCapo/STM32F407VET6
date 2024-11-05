@@ -68,4 +68,14 @@ private:
     static inline uint8_t sign=0;// 标志
 #endif// APP_NO_RTOS
 };
+
+#ifndef APP_NO_RTOS
+void keyTaskHandler_init();
+#else
+inline void keyTaskHandler_init()
+{
+    Key::init();
+}
+#endif
+
 #endif //FURINA_KEY_HPP

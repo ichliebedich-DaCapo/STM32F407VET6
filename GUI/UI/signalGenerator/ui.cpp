@@ -229,7 +229,7 @@ class SignalGenerator
 {
 public:
     // 播放
-    static auto handler() -> void;
+    static inline auto handler() -> void;
 
     // 开始
     static inline auto start() -> void;
@@ -395,7 +395,6 @@ auto Events::init() -> void
                           SignalGenerator::handler();
                           SignalGenerator::print_tick();
                       }, Freq_8K);
-#warning "测试中"
     // 绑定播放事件
     bond(gui->main.imgbtn_play, imgbtn_fun2(
             fun(SignalGenerator::start();),
@@ -469,24 +468,24 @@ auto SignalGenerator::handler() -> void
                                                                                chart_width, chart_height, 255,
                                                                                0xFFFF, 0);
             break;
-        case 2:
-            WaveCurve<>::draw_curve<WaveCurveType::BezierCurve2, uint8_t>(Buf, wave_cnt, wave_date, start_x,
-                                                                          start_y,
-                                                                          chart_width, chart_height, 255, 0xFFFF,
-                                                                          0);
-            break;
-        case 3:
-            WaveCurve<>::draw_curve<WaveCurveType::BezierCurve3, uint8_t>(Buf, wave_cnt, wave_date, start_x,
-                                                                          start_y,
-                                                                          chart_width, chart_height, 255, 0xFFFF,
-                                                                          0);
-            break;
-        case 4:
-            WaveCurve<>::draw_curve<WaveCurveType::CatmullRomSp_line, uint8_t>(Buf, wave_cnt, wave_date, start_x,
-                                                                               start_y,
-                                                                               chart_width, chart_height, 255,
-                                                                               0xFFFF, 0);
-            break;
+//        case 2:
+//            WaveCurve<>::draw_curve<WaveCurveType::BezierCurve2, uint8_t>(Buf, wave_cnt, wave_date, start_x,
+//                                                                          start_y,
+//                                                                          chart_width, chart_height, 255, 0xFFFF,
+//                                                                          0);
+//            break;
+//        case 3:
+//            WaveCurve<>::draw_curve<WaveCurveType::BezierCurve3, uint8_t>(Buf, wave_cnt, wave_date, start_x,
+//                                                                          start_y,
+//                                                                          chart_width, chart_height, 255, 0xFFFF,
+//                                                                          0);
+//            break;
+//        case 4:
+//            WaveCurve<>::draw_curve<WaveCurveType::CatmullRomSp_line, uint8_t>(Buf, wave_cnt, wave_date, start_x,
+//                                                                               start_y,
+//                                                                               chart_width, chart_height, 255,
+//                                                                               0xFFFF, 0);
+//            break;
 
         default:
             break;
@@ -751,6 +750,10 @@ auto uiInterface::show_fps(bool is_show) -> void
     SignalGenerator::show_fps(is_show);
 }
 
+/**
+ * 设置FPS显示模式
+ * @param fps_mode ture表示显示一帧消耗的时间，false表示显示帧数
+ */
 auto uiInterface::set_fps_mode(bool fps_mode) -> void
 {
     SignalGenerator::set_fps_mode(fps_mode);
@@ -784,4 +787,9 @@ auto uiInterface::wave_is_generate() -> void
 auto uiInterface::wave_is_not_generate() -> void
 {
     SignalGenerator::wave_is_not_generate();
+}
+
+auto uiInterface::clear_screen() -> void
+{
+    LCD_Color_Clean(80, 40, 400, 240, 0xFFFF);
 }

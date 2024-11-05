@@ -7,14 +7,7 @@
 #include "JYZQ_Conf.h"
 #if ENABLE_KEY_TASK_HANDLE
 #include "key.hpp"
-#ifndef APP_NO_RTOS
-void keyTaskHandler_init();
-#else
-inline void keyTaskHandler_init()
-{
-    Key::init();
-}
-#endif
+
 
 
 #endif// ENABLE_KEY_TASK_HANDLE

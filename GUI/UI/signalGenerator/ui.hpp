@@ -75,12 +75,13 @@ public:
     static auto pre_wave_type() -> void;
 
     // 波形已产生
-    static auto wave_is_generate() -> void ;
+    static auto wave_is_generate() -> void;
 
     // 波形没有产生
-    static auto wave_is_not_generate() -> void ;
+    static auto wave_is_not_generate() -> void;
 
-
+    // 清屏
+    static auto clear_screen() -> void;
 };
 
 

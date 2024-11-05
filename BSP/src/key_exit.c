@@ -30,5 +30,4 @@ void key_exti_init()
 //    HAL_NVIC_EnableIRQ(EXTI1_IRQn);
 //#endif
 }
-
 #endif

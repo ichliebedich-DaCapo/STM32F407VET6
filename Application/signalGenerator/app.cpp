@@ -32,7 +32,7 @@ void key_handler()
             {
                 timer6_stop_it();
 //                WaveSignal::off();
-                 ImageButton::release(GUI_Base::get_ui()->main.imgbtn_play);
+                ImageButton::release(GUI_Base::get_ui()->main.imgbtn_play);
             }
             break;
 
@@ -49,7 +49,6 @@ void key_handler()
             break;
 
         case keyk2:// 偏置-
-#warning "未实现偏置"
             Button::click(GUI_Base::get_ui()->main.btn_bias_sub);
             break;
 
@@ -58,7 +57,6 @@ void key_handler()
             break;
 
         case keyk4:// 比例-
-#warning "未实现比例"
             Button::click(GUI_Base::get_ui()->main.btn_ratio_sub);
             break;
 
@@ -78,6 +76,52 @@ void key_handler()
             Button::click(GUI_Base::get_ui()->main.btn_freq);
             break;
 
+
+        case keyk7:// 波形是否产生
+            if (Key::stateHandler(KEY_STATE_TWO))
+            {
+                uiInterface::wave_is_generate();
+            } else
+            {
+                uiInterface::wave_is_not_generate();
+            }
+            break;
+
+        case keyk8:// 减少波形点数
+            uiInterface::sub_wave_cnt();
+            break;
+        case keyk9:// 增加波形点数
+            uiInterface::add_wave_cnt();
+            break;
+        case keykA:// 上一个波形类型
+            uiInterface::pre_wave_type();
+            break;
+        case keykB: // 下一个波形类型
+            uiInterface::next_wave_type();
+            break;
+        case keykC:
+            break;
+        case keykD:// 清屏
+            uiInterface::clear_screen();
+            break;
+        case keykE:// 是否显示FPS一帧时间
+            if (Key::stateHandler(KEY_STATE_TWO))
+            {
+                uiInterface::set_fps_mode(true);
+            } else
+            {
+                uiInterface::set_fps_mode(false);
+            }
+            break;
+        case keykF:// 是否显示FPS
+            if (Key::stateHandler(KEY_STATE_TWO))
+            {
+                uiInterface::show_fps(true);
+            } else
+            {
+                uiInterface::show_fps(false);
+            }
+            break;
 
         default:
             break;
