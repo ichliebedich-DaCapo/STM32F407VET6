@@ -93,13 +93,14 @@ void key_handler()
         case keyk9:// 增加波形点数
             uiInterface::add_wave_cnt();
             break;
-        case keykA:// 上一个波形类型
-            uiInterface::pre_wave_type();
+        case keykA:// 切换波形类型
+            uiInterface::switch_wave_type();
             break;
-        case keykB: // 下一个波形类型
-            uiInterface::next_wave_type();
+        case keykB:
+
             break;
         case keykC:
+
             break;
         case keykD:// 清屏
             uiInterface::clear_screen();

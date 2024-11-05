@@ -68,11 +68,8 @@ public:
     // 减少波形点数
     static auto sub_wave_cnt() -> void;
 
-    // 下一个波形类型
-    static auto next_wave_type() -> void;
-
-    // 上一个波形类型
-    static auto pre_wave_type() -> void;
+    // 切换波形类型
+    static auto switch_wave_type() -> void;
 
     // 波形已产生
     static auto wave_is_generate() -> void;

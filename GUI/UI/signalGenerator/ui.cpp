@@ -271,7 +271,7 @@ public:
     static inline auto sub_wave_cnt() -> void;
 
     // 下一个波形类型
-    static inline auto next_wave_type() -> void;
+    static inline auto switch_wave_type() -> void;
 
     // 上一个波形类型
     static inline auto pre_wave_type() -> void;
@@ -468,24 +468,24 @@ auto SignalGenerator::handler() -> void
                                                                                chart_width, chart_height, 255,
                                                                                0xFFFF, 0);
             break;
-//        case 2:
-//            WaveCurve<>::draw_curve<WaveCurveType::BezierCurve2, uint8_t>(Buf, wave_cnt, wave_date, start_x,
-//                                                                          start_y,
-//                                                                          chart_width, chart_height, 255, 0xFFFF,
-//                                                                          0);
-//            break;
-//        case 3:
-//            WaveCurve<>::draw_curve<WaveCurveType::BezierCurve3, uint8_t>(Buf, wave_cnt, wave_date, start_x,
-//                                                                          start_y,
-//                                                                          chart_width, chart_height, 255, 0xFFFF,
-//                                                                          0);
-//            break;
-//        case 4:
-//            WaveCurve<>::draw_curve<WaveCurveType::CatmullRomSp_line, uint8_t>(Buf, wave_cnt, wave_date, start_x,
-//                                                                               start_y,
-//                                                                               chart_width, chart_height, 255,
-//                                                                               0xFFFF, 0);
-//            break;
+        case 2:
+            WaveCurve<>::draw_curve<WaveCurveType::BezierCurve2, uint8_t>(Buf, wave_cnt, wave_date, start_x,
+                                                                          start_y,
+                                                                          chart_width, chart_height, 255, 0xFFFF,
+                                                                          0);
+            break;
+        case 3:
+            WaveCurve<>::draw_curve<WaveCurveType::BezierCurve3, uint8_t>(Buf, wave_cnt, wave_date, start_x,
+                                                                          start_y,
+                                                                          chart_width, chart_height, 255, 0xFFFF,
+                                                                          0);
+            break;
+        case 4:
+            WaveCurve<>::draw_curve<WaveCurveType::CatmullRomSp_line, uint8_t>(Buf, wave_cnt, wave_date, start_x,
+                                                                               start_y,
+                                                                               chart_width, chart_height, 255,
+                                                                               0xFFFF, 0);
+            break;
 
         default:
             break;
@@ -669,11 +669,12 @@ auto SignalGenerator::sub_wave_cnt() -> void
     Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_cnt);
 }
 
-auto SignalGenerator::next_wave_type() -> void
+auto SignalGenerator::switch_wave_type() -> void
 {
     char buf[32];
-    if (wave_type < 4)
-        ++wave_type;
+    ++wave_type;
+    if (wave_type > 4)
+        wave_type = 1;
 
     switch (wave_type)
     {
@@ -701,37 +702,6 @@ auto SignalGenerator::next_wave_type() -> void
     Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_type);
 }
 
-auto SignalGenerator::pre_wave_type() -> void
-{
-    char buf[32];
-    if (wave_type > 1)
-        --wave_type;
-
-    switch (wave_type)
-    {
-        case 1:
-            sprintf(buf, "线性插值");
-            break;
-
-        case 2:
-            sprintf(buf, "二次贝塞尔曲线");
-            break;
-
-        case 3:
-            sprintf(buf, "三次贝塞尔曲线");
-            break;
-
-        case 4:
-            sprintf(buf, "样条曲线");
-            break;
-
-        default:
-            sprintf(buf, "无效曲线");
-            break;
-    }
-    LCD_Color_Clean(80, 40, 400, 240, 0xFFFF);
-    Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_type);
-}
 
 auto SignalGenerator::wave_is_generate() -> void
 {
@@ -769,15 +739,11 @@ auto uiInterface::sub_wave_cnt() -> void
     SignalGenerator::sub_wave_cnt();
 }
 
-auto uiInterface::next_wave_type() -> void
+auto uiInterface::switch_wave_type() -> void
 {
-    SignalGenerator::next_wave_type();
+    SignalGenerator::switch_wave_type();
 }
 
-auto uiInterface::pre_wave_type() -> void
-{
-    SignalGenerator::pre_wave_type();
-}
 
 auto uiInterface::wave_is_generate() -> void
 {
