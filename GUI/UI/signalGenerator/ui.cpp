@@ -220,10 +220,6 @@ LV_Timer tick_timer;
 uint8_t Buf[point_cnt];
 
 
-// keyk13
-#warning "提供一个清屏，用于消除漏墨"
-
-
 // 播放
 class SignalGenerator
 {
@@ -270,17 +266,21 @@ public:
     // 减少波形点数
     static inline auto sub_wave_cnt() -> void;
 
-    // 下一个波形类型
+    // 切换波形类型
     static inline auto switch_wave_type() -> void;
 
-    // 上一个波形类型
-    static inline auto pre_wave_type() -> void;
 
     // 波形已产生
     static inline auto wave_is_generate() -> void;
 
     // 波形没有产生
     static inline auto wave_is_not_generate() -> void;
+
+    // 增加时钟周期
+    static inline auto add_period() -> void;
+
+    // 减少时钟周期
+    static inline auto sub_period() -> void;
 
 private:
     // 设置频率,true表示16K，false表示8K
@@ -298,18 +298,18 @@ private:
 
 private:
     static inline uint32_t count = 0;// 用于计时
+    static inline uint32_t period = 1500;// 周期为1500ms
     static inline int8_t bias = 0;
     static inline uint8_t _ratio = 50;// 8K的占比
     static inline uint8_t wave_index = 0;
     static inline uint8_t index_offset = 1;
     static inline bool _mode = false;// 默认模式为单频
     static inline bool _freq = false;// 默认频率为8K
-    static constexpr uint32_t period = 1500;// 周期为1500ms
 
-    static inline bool is_fps = false;// 是否开启FPS -> keyk15
-    static inline bool is_fps_time = false;// 是否开启FPS时间 -> keyk14
     static inline uint8_t wave_cnt = 100;//显示点数 -> keyk8、keyk9
     static inline uint8_t wave_type = 1;// 波形类型 keyk10 过一段时间会消失
+    static inline bool is_fps = false;// 是否开启FPS -> keyk15
+    static inline bool is_fps_time = false;// 是否开启FPS时间 -> keyk14
 };
 
 
@@ -357,22 +357,27 @@ auto Screen::init() -> void
     // 标签：信息
     label.init(gui->main.label_info, 420, 60, 60, 80, "  队伍：\n\n王正翔\n吴俊颐\n谢智晴\n何乃滔");
 
-    // 标签：时刻
-    label.init(gui->main.label_tick, 10, 40, 50, 80, "tick：\n0");
-    Text::set_text_color(Color_Firefly_Green);
-
     // 标签：CPU温度
     label.init(gui->main.label_cpu, 0, 0, 80, 30, "CPU:35℃\n");
 
+    // 标签：时刻
+    label.init(gui->main.label_tick, 5, 50, 50, 80, "tick：\n0");
+//    Text::set_text_color(Color_Firefly_Green);
+
     // 标签：显示点数
-    label.init(gui->main.label_wave_cnt, 10, 100, 60, 80, "点数：\n 128");
+    label.init(gui->main.label_wave_cnt, 5, 110, 60, 80, "点数：128");
+
+    // 标签：波形周期
+    label.init(gui->main.label_wave_period, 5, 160, 70, 80, "周期：1.5s");
 
     // 标签：算法
-    label.init(gui->main.label_wave_type, 10, 160, 60, 80, "线性插值");
+    label.init(gui->main.label_wave_type, 5, 210, 60, 80, "线性插值");
 
     // 标签：波形生成
     label.init(gui->main.label_wave_generate, 430, 200, 50, 80, "波形已产生");
     Text::hidden(gui->main.label_wave_generate);
+
+
 
     // 标签：标题
     label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
@@ -649,7 +654,7 @@ auto SignalGenerator::add_wave_cnt() -> void
     }
 
     LCD_Color_Clean(start_x, start_y, start_x + chart_width, start_y + chart_height, bg_color);// 清除显示
-    sprintf(buf, "点数：\n %3d", wave_cnt);
+    sprintf(buf, "点数：%3d", wave_cnt);
     Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_cnt);
 }
 
@@ -665,7 +670,7 @@ auto SignalGenerator::sub_wave_cnt() -> void
     }
 
     LCD_Color_Clean(start_x, start_y, start_x + chart_width, start_y + chart_height, bg_color);// 清除显示
-    sprintf(buf, "点数：\n %3d", wave_cnt);
+    sprintf(buf, "点数：%3d", wave_cnt);
     Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_cnt);
 }
 
@@ -711,6 +716,24 @@ auto SignalGenerator::wave_is_generate() -> void
 auto SignalGenerator::wave_is_not_generate() -> void
 {
     Text::hidden(GUI_Base::get_ui()->main.label_wave_generate);
+}
+
+auto SignalGenerator::add_period() -> void
+{
+    char buf[14];
+    if (period < 9000)
+        period += 100;
+    sprintf(buf, "周期：%d.%ds", period/1000,period%1000/100);
+    Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_period);
+}
+
+auto SignalGenerator::sub_period() -> void
+{
+    char buf[14];
+    if (period > 100)
+        period -= 100;
+    sprintf(buf, "周期：%d.%ds", period/1000,period%1000/100);
+    Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_period);
 }
 
 
@@ -759,3 +782,14 @@ auto uiInterface::clear_screen() -> void
 {
     LCD_Color_Clean(80, 40, 400, 240, 0xFFFF);
 }
+
+auto uiInterface::add_period() -> void
+{
+    SignalGenerator::add_period();
+}
+
+auto uiInterface::sub_period() -> void
+{
+    SignalGenerator::sub_period();
+}
+

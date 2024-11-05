@@ -34,11 +34,15 @@
   <component name="ChangeListManager">
     <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】略微优化了CMakelists">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/sysmem.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/sysmem.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Data/waveData.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Data/waveData.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/ISR.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/signalGenerator/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/signalGenerator/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/timer.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/timer.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/font.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/lv_customer_font_SourceHanSerifSC_Regular_13.c" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/lv_customer_font_SourceHanSerifSC_Regular_13.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/test.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1656,7 +1660,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "OpenOCD 下载并运行.OCD Furina.executor": "Run",
+    "OpenOCD 下载并运行.OCD Furina.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
@@ -1688,11 +1692,6 @@
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
     <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -1882,6 +1881,7 @@
       <workItem from="1730806322740" duration="6000" />
       <workItem from="1730807606236" duration="116000" />
       <workItem from="1730814464885" duration="302000" />
+      <workItem from="1730820221150" duration="3499000" />
     </task>
     <task id="LOCAL-00004" summary="__【未配置好】为使用CLion集成的FreeRTOS功能，补充相关内容">
       <option name="closed" value="true" />

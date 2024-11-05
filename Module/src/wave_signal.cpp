@@ -38,12 +38,18 @@ auto WaveSignal::off() -> void
  */
 auto WaveSignal::generate() -> void
 {
-    HAL_DAC_SetValue(&hdac, DAC1_CHANNEL_1, DAC_ALIGN_12B_R, pWave[index++]);
+//    volatile uint16_t data=sineWave[index++]<<4;
+    HAL_DAC_SetValue(&hdac, DAC1_CHANNEL_1, DAC_ALIGN_12B_R,sine_wave[index]<<4);
+    ++index;
+    if(index>=128)
+    {
+        index=0;
+    }
     // 检测模式
     if (mode == WaveMode::MIX_FREQ)
     {
         // 获取计差数值
-        uint32_t temp_count = get_clock();
+        volatile uint32_t temp_count = get_clock();
         if (temp_count >= count)
         {
             temp_count -= count;
@@ -82,11 +88,12 @@ auto WaveSignal::set_frequency(WaveFreq wave_freq) -> void
     switch (wave_freq)
     {
         case WaveFreq::Freq_8K:
-            timer6_set_freq(FREQ_84M_to_256x8K);// 256*8K
+#warning "4个周期为386ms，即T=96.5ms，实际只有10.05*128Hz，真是奇怪"
+            timer6_set_freq(FREQ_84M_to_128x8K);// 256*8K
             break;
 
         case WaveFreq::Freq_16K:
-            timer6_set_freq(FREQ_84M_to_256x16K);// 256*16K
+            timer6_set_freq(FREQ_84M_to_128x16K);// 256*16K
             break;
 
         default:

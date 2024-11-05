@@ -13,7 +13,7 @@
 
 void app_init()
 {
-    timer6_init(FREQ_84M_to_1K);
+    timer6_init(FREQ_84M_to_128x8K);// 预期1KHz
     dac_init();
 }
 
@@ -25,13 +25,10 @@ void key_handler()
         case keyk0:// 播放
             if (Key::stateHandler(KEY_STATE_TWO))
             {
-//                WaveSignal::on();
                 ImageButton::press(GUI_Base::get_ui()->main.imgbtn_play);
 
             } else
             {
-                timer6_stop_it();
-//                WaveSignal::off();
                 ImageButton::release(GUI_Base::get_ui()->main.imgbtn_play);
             }
             break;
@@ -81,9 +78,11 @@ void key_handler()
             if (Key::stateHandler(KEY_STATE_TWO))
             {
                 uiInterface::wave_is_generate();
+                WaveSignal::on();
             } else
             {
                 uiInterface::wave_is_not_generate();
+                WaveSignal::off();
             }
             break;
 
@@ -93,13 +92,14 @@ void key_handler()
         case keyk9:// 增加波形点数
             uiInterface::add_wave_cnt();
             break;
-        case keykA:// 切换波形类型
+        case keykA:// 减少周期
+            uiInterface::sub_period();
+            break;
+        case keykB:// 增加周期
+            uiInterface::add_period();
+            break;
+        case keykC:// 切换波形类型
             uiInterface::switch_wave_type();
-            break;
-        case keykB:
-
-            break;
-        case keykC:
 
             break;
         case keykD:// 清屏
@@ -129,7 +129,10 @@ void key_handler()
     }
 }
 
+extern "C"
+{
 void timer6_isr()
 {
     WaveSignal::generate();
+}
 }

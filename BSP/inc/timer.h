@@ -25,9 +25,10 @@ void timer2_init(uint32_t arr, uint32_t psc);
 void timer6_init(uint32_t arr, uint32_t psc);
 
 // 设置定时器6的时钟
-static inline void timer6_set_freq(uint32_t arr, uint32_t psc)
+static inline void timer6_set_freq(uint32_t psc,uint32_t arr )
 {
     __HAL_TIM_SET_PRESCALER(&htim6, psc);
+    // arr不能为0，否则CNT寄存器不变
     __HAL_TIM_SET_AUTORELOAD(&htim6, arr);
 }
 

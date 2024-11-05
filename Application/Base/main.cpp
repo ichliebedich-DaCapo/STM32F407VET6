@@ -4,6 +4,7 @@
 #endif// APP_NO_RTOS
 
 #include "GUI.hpp"
+#include "key.hpp"
 
 extern void app_init();// 应用程序初始化函数,强制定义
 

@@ -44,6 +44,7 @@ struct lv_ui_t
         Obj label_wave_cnt;// 波形点数
         Obj label_wave_type;// 波形类型
         Obj label_wave_generate;// 波形生成
+        Obj label_wave_period;// 波形周期
     } main;// 主屏幕
 
 };
@@ -79,6 +80,12 @@ public:
 
     // 清屏
     static auto clear_screen() -> void;
+
+    // 增加时钟周期
+    static auto add_period() -> void;
+
+    // 减少时钟周期
+    static auto sub_period() -> void;
 };
 
 

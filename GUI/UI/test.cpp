@@ -67,12 +67,12 @@ int keyboard_thread(void *data)
                     break;
 
                 case 'd':
-                    uiInterface::pre_wave_type();
+                    uiInterface::sub_period();
                     printf("上一个波形\n");
                     break;
 
                 case 'f':
-                    uiInterface::next_wave_type();
+                    uiInterface::add_period();
                     printf("下一个波形\n");
                     break;
 

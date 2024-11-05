@@ -105,7 +105,7 @@ private:
     }
 
 private:
-    static inline uint32_t count = 0;
+    static inline uint32_t count = 0;// 用于做起始时刻
     static inline const uint8_t *pWave=sineWave;// 现在是常量指针，默认指向正弦波。如果需要噪声，那么需要把它们变为普通指针
     static inline uint16_t status = 0;
     constexpr const static uint16_t cycle = 3;// 周期为3秒
@@ -114,7 +114,7 @@ private:
     constexpr const static uint16_t half_count = max_count / 2;
     static inline uint16_t switch_count = half_count;// 默认切频计数值为1/2周期
     static inline uint8_t index = 0;// 波形索引，考虑到内存有限，所以一般波形数据只有256个采样点
-    static inline WaveMode mode = WaveMode::SINGLE_FREQ;// 默认单频
+    static inline WaveMode mode = WaveMode::MIX_FREQ;// 默认单频
     static inline WaveFreq freq = WaveFreq::Freq_8K;// 默认8K
     static inline WaveDuty duty = WaveDuty::Duty_50;// 默认占空比50%
 };

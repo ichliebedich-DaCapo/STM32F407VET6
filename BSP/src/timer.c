@@ -57,16 +57,23 @@ void timer6_init(uint32_t arr, uint32_t psc)
     htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;// 自动预加载，开启。
     HAL_TIM_Base_Init(&htim6);
 
+    // 不能关
     sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
     sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_ENABLE;
     HAL_TIMEx_MasterConfigSynchronization(&htim6, &sMasterConfig);
 
     // 由于默认使用的是优先级组4，所以没有子优先级
-    HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 3, 0);
+    HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
 
     __HAL_TIM_CLEAR_IT(&htim6, TIM_IT_UPDATE); // 清除定时器初始化过程中的更新中断标志，避免定时器一启动就中断
 }
 
-
+extern void timer6_isr();
+void TIM6_DAC_IRQHandler()
+{
+    // 我把TIM7当做系统时钟，所以并不需要判断中断源
+    __HAL_TIM_CLEAR_FLAG(&htim6, TIM_FLAG_UPDATE);
+    timer6_isr();
+}
 #endif
