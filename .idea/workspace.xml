@@ -33,7 +33,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】合并前夕2">
-      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/.idea/lvgl-simulator.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1682,12 +1683,12 @@
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -1873,6 +1874,7 @@
       <workItem from="1730694172834" duration="1511000" />
       <workItem from="1730697414966" duration="410000" />
       <workItem from="1730708894404" duration="24726000" />
+      <workItem from="1730781885391" duration="523000" />
     </task>
     <task id="LOCAL-00003" summary="__未配置好的工程——stm32f407VET6 稍微修改了一下介绍">
       <option name="closed" value="true" />

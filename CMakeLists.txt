@@ -2,8 +2,6 @@
 # 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
 set(APP_DIR Application/signalGenerator)
 # --------------------------------------选择你的项目------------------------------
-
-
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_VERSION 1)
 cmake_minimum_required(VERSION 3.29)
@@ -64,6 +62,10 @@ string(REGEX REPLACE "^.*/(.+)$" "\\1" APP_DIR_LAST_PART "${APP_DIR}")
 # 拼接新的 UI_DIR
 set(UI_DIR "GUI/UI/${APP_DIR_LAST_PART}")
 
+# 设置编译目录
+set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
+set(LIB_DIR ${BUILD_DIR}/lib)
+set(BIN_DIR ${BUILD_DIR}/bin)
 
 #-------------------------------------------库-------------------------------------------
 # 官方驱动库
@@ -76,6 +78,9 @@ target_include_directories(libdrivers PUBLIC
         Drivers/CMSIS/Device/ST/STM32F4xx/Include
         Drivers/CMSIS/Include
 )
+# 设置静态库的输出目录
+set_target_properties(libdrivers PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+
 
 #---------------------第三方库-----------------------
 # -----lvgl库-----
@@ -93,6 +98,9 @@ target_include_directories(liblvgl PUBLIC
 )
 # 依赖BSP中的lcd库 耦合有些严重，后面慢慢改
 target_link_libraries(liblvgl PUBLIC libdrivers)
+# 设置静态库的输出目录
+set_target_properties(liblvgl PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+
 
 # ------FreeRTOS库------
 # 不愧是CubeMX生成的库，和HAL耦合得太严重了
@@ -113,6 +121,9 @@ target_include_directories(libfreertos PUBLIC
         Library/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
         Library/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
 )
+# 设置静态库的输出目录
+set_target_properties(libfreertos PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+
 
 # ------DSP库------
 file(GLOB_RECURSE DSP_SRC
@@ -126,6 +137,8 @@ target_include_directories(libdsp PUBLIC
         Library/CMSIS/DSP/Include
         Library/CMSIS/DSP/PrivateInclude
 )
+# 设置静态库的输出目录
+set_target_properties(libdsp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
 #---------------------用户库-----------------------
@@ -136,6 +149,9 @@ target_include_directories(libbsp PUBLIC
         BSP/inc
 )
 target_link_libraries(libbsp PUBLIC libdrivers liblvgl)
+# 设置静态库的输出目录
+set_target_properties(libbsp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+
 
 
 # ------Data库------
@@ -144,6 +160,9 @@ add_library(libdata STATIC ${DATA_SRC})
 target_include_directories(libdata INTERFACE
         Library/Data
 )
+# 设置静态库的输出目录
+set_target_properties(libdata PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+
 
 # ------GUI库------
 file(GLOB_RECURSE GUI_SRC
@@ -151,6 +170,7 @@ file(GLOB_RECURSE GUI_SRC
         "GUI/Base/GUI.cpp"
         "GUI/Component/*.cpp"
         "GUI/Events/*.cpp"
+        "GUI/Render/*.cpp"
 )
 add_library(libgui STATIC ${GUI_SRC})
 target_include_directories(libgui PUBLIC
@@ -158,9 +178,13 @@ target_include_directories(libgui PUBLIC
         GUI/Base
         GUI/Component
         GUI/Events
+        GUI/Render
 )
 # 依赖lvgl库
 target_link_libraries(libgui PUBLIC liblvgl libbsp)
+# 设置静态库的输出目录
+set_target_properties(libgui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+
 
 
 # ------Module库------
@@ -168,6 +192,9 @@ file(GLOB_RECURSE MODULE_SRC "Module/src/*.cpp")
 add_library(libmodule STATIC ${MODULE_SRC})
 target_include_directories(libmodule PUBLIC Module/inc)
 target_link_libraries(libmodule PRIVATE libbsp libdsp libdata)
+# 设置静态库的输出目录
+set_target_properties(libmodule PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+
 
 # ------Application库------
 file(GLOB_RECURSE APPLICATION_SRC "${APP_DIR}/app.cpp" "Application/Base/*.cpp")
@@ -175,9 +202,11 @@ add_library(libapp STATIC ${APPLICATION_SRC})
 target_include_directories(libapp PUBLIC Application/Base)
 # 需要链接 libdsp libdata libgui libbsp libmodule等，根据需要选
 target_link_libraries(libapp PUBLIC libdsp libdata libgui libbsp libmodule)
+# 设置静态库的输出目录
+set_target_properties(libapp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
-# 包含公共目录
+# ---------包含公共目录--------
 include_directories(Application/Conf  ${APP_DIR})
 
 # 这里面不能直接添加到静态库里
@@ -186,6 +215,7 @@ file(GLOB_RECURSE SOURCES "Core/*.*")
 # 设置链接脚本
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld)
 
+# 链接标志
 add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
 add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
 add_link_options(-T ${LINKER_SCRIPT})
@@ -199,14 +229,16 @@ add_link_options(-T ${LINKER_SCRIPT})
 #特别适用于某些架构，如 ARM。
 #-Wl,--strip-all：删除所有符号表和调试信息。可以显著减小二进制文件的大小，但会影响调试体验。
 #-Wl,--strip-debug：仅删除调试信息。
-add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map)
+add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${BIN_DIR}/${PROJECT_NAME}.map)
 #add_link_options(-Wl,--strip-all)# 好像没有作用
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
 target_link_libraries(${PROJECT_NAME}.elf PRIVATE libapp)
+# 设置静态库的输出目录
+set_target_properties(${PROJECT_NAME}.elf PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
 
-set(HEX_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.hex)
-set(BIN_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.bin)
+set(HEX_FILE ${BIN_DIR}/${PROJECT_NAME}.hex)
+set(BIN_FILE ${BIN_DIR}/${PROJECT_NAME}.bin)
 
 # 添加自定义命令：
 # 生成十六进制和二进制文件
