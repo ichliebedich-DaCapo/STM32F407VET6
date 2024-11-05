@@ -220,7 +220,7 @@ uint8_t Buf[point_cnt];
 bool is_fps = false;// 是否开启FPS -> keyk15
 bool is_fps_time = false;// 是否开启FPS时间 -> keyk14
 bool is_wave = false;// 是否开启实际波形 -> keyk7
-uint8_t wave_cnt = 128;//显示点数 -> keyk8、keyk9
+uint8_t wave_cnt = 100;//显示点数 -> keyk8、keyk9
 uint8_t wave_type = 1;// 波形类型 keyk10 过一段时间会消失
 
 // keyk13
@@ -262,10 +262,10 @@ public:
                 }
             }
         }
+
         // 防止数据溢出
         uint8_t wave_date = sine_wave[wave_index] + bias;
         wave_date = (wave_date > max_value) ? max_value : (wave_date < 0) ? 0 : wave_date;
-
 
         // 选择算法绘制波形
         switch (wave_type)
@@ -301,14 +301,13 @@ public:
         }
 
 
-        if (wave_index >= sine_count - 1)[[unlikely]]
+        wave_index += index_offset;
+        if (wave_index >= sine_count)[[unlikely]]
         {
-            wave_index -= sine_count - 1;// 尽量让转折处柔和一些
-        } else
-        {
-            wave_index += index_offset;
+            wave_index -=sine_count;// 尽量让转折处柔和一些
         }
 
+        // 显示FPS
         if (is_fps)
             Tools::fps(is_fps_time);
     }
