@@ -32,9 +32,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】合并前夕2">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】略微优化了CMakelists">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1874,15 +1873,7 @@
       <workItem from="1730694172834" duration="1511000" />
       <workItem from="1730697414966" duration="410000" />
       <workItem from="1730708894404" duration="24726000" />
-      <workItem from="1730781885391" duration="523000" />
-    </task>
-    <task id="LOCAL-00003" summary="__未配置好的工程——stm32f407VET6 稍微修改了一下介绍">
-      <option name="closed" value="true" />
-      <created>1728211579412</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1728211579412</updated>
+      <workItem from="1730781885391" duration="645000" />
     </task>
     <task id="LOCAL-00004" summary="__【未配置好】为使用CLion集成的FreeRTOS功能，补充相关内容">
       <option name="closed" value="true" />
@@ -2268,7 +2259,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730736973300</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="【双音频信号发生器】略微优化了CMakelists">
+      <option name="closed" value="true" />
+      <created>1730782464123</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1730782464123</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2303,7 +2302,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【初始】开始引入LVGL模拟器" />
     <MESSAGE value="【初始】主项目——发生了一件奇怪的事情，即便没有使用GUI，ROM也会爆满。正在尝试解决……" />
     <MESSAGE value="【初始】主项目——初步判断是ui.cpp导致ROM爆了，原因不明" />
     <MESSAGE value="【初始】主项目——已解决。吃个饭回来，发现原因是使用了cout，ROM直接增加了两百多KB" />
@@ -2328,7 +2326,8 @@
     <MESSAGE value="【双音频信号发生器】调整项目组织结构" />
     <MESSAGE value="【双音频信号发生器】完成了这次的项目优化，后面还有许多不妥之处，后续再慢慢改" />
     <MESSAGE value="【双音频信号发生器】完善了一下Readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="【双音频信号发生器】完善了一下Readme" />
+    <MESSAGE value="【双音频信号发生器】略微优化了CMakelists" />
+    <option name="LAST_COMMIT_MESSAGE" value="【双音频信号发生器】略微优化了CMakelists" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
