@@ -5,8 +5,9 @@
 #ifndef FURINA_WAVEDATA_H
 #define FURINA_WAVEDATA_H
 
+#include <stdint.h>
 #include "JYZQ_Conf.h"
-#include <stdint-gcc.h>
+//#include <stdint-gcc.h>
 /**
  * @brief 波形数据
  * @details 使用的是MATLAB生成的波形数据，之所以不使用Python是因为Python的精度没有MATLAB高

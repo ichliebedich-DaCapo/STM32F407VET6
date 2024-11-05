@@ -6,7 +6,8 @@ set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_VERSION 1)
 cmake_minimum_required(VERSION 3.29)
 
-# specify cross-compilers and tools
+# -----------------编译器-----------------
+# -------gcc-------
 set(CMAKE_C_COMPILER arm-none-eabi-gcc)
 set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
 set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
@@ -14,45 +15,91 @@ set(CMAKE_AR arm-none-eabi-ar)
 set(CMAKE_OBJCOPY arm-none-eabi-objcopy)
 set(CMAKE_OBJDUMP arm-none-eabi-objdump)
 set(SIZE arm-none-eabi-size)
+# -------Clang------
+# 我的评价是：缺少各种库。查看了STM32提供的固件包，压根没有clang的启动文件，这一点与TI相比弗如远甚。
+# 继续搞下去，只会是浪费时间，因为从目前编译的情况来看，编译速度很慢很慢
+#set(CMAKE_C_COMPILER clang)
+#set(CMAKE_CXX_COMPILER clang++)
+#set(CMAKE_ASM_COMPILER clang)
+#set(CMAKE_AR llvm-ar)
+#set(CMAKE_OBJCOPY llvm-objcopy)
+#set(CMAKE_OBJDUMP llvm-objdump)
+#set(SIZE llvm-size)
+
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
-# project settings
+# -----------------工程设置-----------------
 project(Furina C CXX ASM)
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_STANDARD 11)
 
-# 添加编译标志
-#Uncomment for hardware floating point
+# -----------------判断编译器类别-----------------
+if (${CMAKE_C_COMPILER_ID} STREQUAL "GNU")
+    message(STATUS "Using GCC compiler")
+    set(COMPILER_IS_GCC TRUE)
+elseif (${CMAKE_C_COMPILER_ID} STREQUAL "Clang")
+    message(STATUS "Using Clang compiler")
+    set(COMPILER_IS_CLANG TRUE)
+else ()
+    message(WARNING "Unsupported compiler: ${CMAKE_C_COMPILER_ID}")
+endif ()
+
+
+# -----------添加宏定义----------
 add_compile_definitions(ARM_MATH_CM4;ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING)
-add_compile_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
+# 使用Debug，使用HAL库。    -DUSE_FULL_LL_DRIVER 使用LL库
+add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx)
 
-#Uncomment for software floating point
-#add_compile_options(-mfloat-abi=soft)
 
-add_compile_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
+# 根据编译器类型设置特定编译选项
+if (COMPILER_IS_GCC)
+    add_compile_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
+    # 硬件浮点和软件浮点，任选一个
+    add_compile_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
+    #add_compile_options(-mfloat-abi=soft)
+
+elseif (COMPILER_IS_CLANG)
+    add_compile_options(-target armv7em-none-eabi )
+#    add_compile_options(-mcpu=cortex-m4 -mthumb )
+    # 硬件浮点和软件浮点，任选一个
+    add_compile_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
+    link_directories("E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain_v13_3/lib/gcc/arm-none-eabi/13.3.1")
+    link_directories("E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain_v13_3/lib/gcc/arm-none-eabi/13.3.1")
+endif ()
+
+
 add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-length=0)
 
 # Enable assembler files preprocessing
 add_compile_options($<$<COMPILE_LANGUAGE:ASM>:-x$<SEMICOLON>assembler-with-cpp>)
 
-# 选择优化级别（真是见鬼！在CMake配置文件改了构建选项，结果没反应，干脆手动操作）
-#-O0：无优化，适合调试。
-#-O1：基本优化，适合快速迭代开发。
-#-O2：中级优化，适合大多数生产环境。
-#-O3：高级优化，适合对性能要求较高的应用。
-#-Ofast：极端优化，适合对性能要求极高且对标准合规性要求不高的应用。
-#-Og：调试优化，适合开发和调试阶段。
-#-Os:优化生成的代码大小，而不是性能。
-#-Oz:极度优化大小,进一步优化生成的代码大小，比 -Os更激进,可能会牺牲一些性能。
-#-flto:在链接阶段进行优化,允许进行跨文件的优化，进一步提高性能，但耗时间（项目本来就小我不在乎）
-#-fprofile-generate（生成配置文件） 和 -fprofile-use（基于配置文件的优化）
-add_compile_options(-Ofast -g)
-# 不调试了再开启
-#add_compile_options(-flto )
-
-#添加宏定义
-# 使用Debug，使用HAL库。    -DUSE_FULL_LL_DRIVER 使用LL库
-add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx)
+if (COMPILER_IS_GCC)
+    # 选择优化级别（真是见鬼！在CMake配置文件改了构建选项，结果没反应，干脆手动操作）
+    #-O0：无优化，适合调试。
+    #-O1：基本优化，适合快速迭代开发。
+    #-O2：中级优化，适合大多数生产环境。
+    #-O3：高级优化，适合对性能要求较高的应用。
+    #-Ofast：极端优化，适合对性能要求极高且对标准合规性要求不高的应用。
+    #-Og：调试优化，适合开发和调试阶段。
+    #-Os:优化生成的代码大小，而不是性能。
+    #-Oz:极度优化大小,进一步优化生成的代码大小，比 -Os更激进,可能会牺牲一些性能。
+    #-flto:在链接阶段进行优化,允许进行跨文件的优化，进一步提高性能，但耗时间（项目本来就小我不在乎）
+    #-fprofile-generate（生成配置文件） 和 -fprofile-use（基于配置文件的优化）
+    add_compile_options(-Ofast -g)
+    # 不调试了再开启
+    #add_compile_options(-flto )
+elseif (COMPILER_IS_CLANG)
+    add_compile_options(
+            -O3 -ffast-math
+            -g3
+            -Wall
+            -Wextra
+#            -Werror
+    )
+    # 禁用依赖扫描
+#    set(CMAKE_CXX_DEPFILE_FORMAT none)
+#    set(CMAKE_CXX_DEPENDS_GENERATOR "")
+endif ()
 
 # ----------------对选择的项目进行字符串处理，以匹配对应的UI文件--------------
 
@@ -90,7 +137,7 @@ file(GLOB_RECURSE LVGL_SRC
         "Library/Third_Party/lvgl/examples/porting/*.c"
 )
 add_library(liblvgl STATIC ${LVGL_SRC})
-target_include_directories(liblvgl PRIVATE  BSP/inc)
+target_include_directories(liblvgl PRIVATE BSP/inc)
 target_include_directories(liblvgl PUBLIC
         Library/Third_Party/
         Library/Third_Party/lvgl/src
@@ -153,7 +200,6 @@ target_link_libraries(libbsp PUBLIC libdrivers liblvgl)
 set_target_properties(libbsp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
-
 # ------Data库------
 file(GLOB_RECURSE DATA_SRC "Library/Data/*.c")
 add_library(libdata STATIC ${DATA_SRC})
@@ -186,7 +232,6 @@ target_link_libraries(libgui PUBLIC liblvgl libbsp)
 set_target_properties(libgui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
-
 # ------Module库------
 file(GLOB_RECURSE MODULE_SRC "Module/src/*.cpp")
 add_library(libmodule STATIC ${MODULE_SRC})
@@ -207,7 +252,7 @@ set_target_properties(libapp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
 # ---------包含公共目录--------
-include_directories(Application/Conf  ${APP_DIR})
+include_directories(Application/Conf ${APP_DIR})
 
 # 这里面不能直接添加到静态库里
 file(GLOB_RECURSE SOURCES "Core/*.*")
@@ -216,8 +261,12 @@ file(GLOB_RECURSE SOURCES "Core/*.*")
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld)
 
 # 链接标志
+if (COMPILER_IS_GCC)
+    add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
+elseif (COMPILER_IS_CLANG)
+    add_link_options(-mcpu=cortex-m4 )
+endif ()
 add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
-add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
 add_link_options(-T ${LINKER_SCRIPT})
 
 # 设置链接选项

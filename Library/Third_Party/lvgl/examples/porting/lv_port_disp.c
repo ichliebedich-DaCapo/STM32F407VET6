@@ -101,6 +101,7 @@ void disp_disable_update(void)
 
 static void disp_flush(lv_disp_drv_t *disp_drv1, const lv_area_t *area, lv_color_t *color_p)
 {
+    (void)disp_drv1;
 #ifdef USE_FSMC_DMA
     LCD_Set_Window(area->x1, area->y1, area->x2, area->y2);//设置LCD屏幕的扫描区域
     HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream6, (uint32_t) color_p, (uint32_t) TFT_DATA_ADDR,
@@ -114,6 +115,8 @@ static void disp_flush(lv_disp_drv_t *disp_drv1, const lv_area_t *area, lv_color
 
 void LVGL_LCD_FSMC_DMA_pCallback(DMA_HandleTypeDef *_hdma)
 {
+   ( void)_hdma;
+
     // lv_disp_flush_ready(&disp_drv);
     //为了减少栈帧的使用
     disp_drv.draw_buf->flushing = 0;
