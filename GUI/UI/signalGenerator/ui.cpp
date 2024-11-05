@@ -403,6 +403,12 @@ auto Screen::init() -> void
 {
     Component::set_parent(gui->main.screen);
 
+    // 设置边框
+    Component::init(gui->main.rect);
+    Component::set_pos_size(78,36,324,208);
+    Component::border_radius(5);
+
+
     // 初始化器
     Button customBtn;
     customBtn.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);

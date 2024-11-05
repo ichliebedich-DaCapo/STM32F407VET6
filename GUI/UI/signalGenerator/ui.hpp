@@ -18,6 +18,7 @@ struct lv_ui_t
     struct
     {
         Obj screen;// 屏幕自身
+        Obj rect;//示波器方框
         Obj btn_mode;// 模式
         Obj btn_mode_label;
         Obj label_mode;
