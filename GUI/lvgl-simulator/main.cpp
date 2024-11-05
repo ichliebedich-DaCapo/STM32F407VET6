@@ -6,25 +6,28 @@
 /*********************
  *      INCLUDES
  *********************/
-#define _DEFAULT_SOURCE /* needed for usleep() */
+#define SDL_MAIN_HANDLED        /*To fix SDL's "undefined reference to WinMain" issue*/
 
+// 标准库
+#include <SDL2/SDL.h>
+#include <pthread.h>
+#include <cmath>
 #include <cstdlib>
 #include <unistd.h>
 
-#define SDL_MAIN_HANDLED        /*To fix SDL's "undefined reference to WinMain" issue*/
-
-#include <SDL2/SDL.h>
+// lvgl库
 #include "lvgl/lvgl.h"
+
+// lvgl显示和输入驱动
 #include "lv_drivers/display/monitor.h"
 #include "lv_drivers/indev/mouse.h"
 #include "lv_drivers/indev/mousewheel.h"
 #include "lv_drivers/indev/keyboard.h"
-#include <pthread.h>
-#include <cmath>
 
 #if LV_USE_FREEMASTER
 #include "external_data_init.h"
 #endif
+
 // 引入头文件
 #include "GUI.hpp"
 
@@ -58,7 +61,6 @@ int main(int argc, char **argv)
         sim_conf(argc, argv);
     }
 #endif
-
     /* local threads will run */
     keep_running = 1;
 
@@ -99,7 +101,7 @@ int main(int argc, char **argv)
 #if LV_USE_FREEMASTER
         pthread_mutex_unlock(&lvgl_mutex);
 #endif
-        usleep(5 * 1000);// 5ms休眠一次
+        SDL_Delay(5);// 5ms休眠一次
     }
 
 #if LV_USE_FREEMASTER
