@@ -256,13 +256,11 @@ public:
             }
         }
         // 防止数据溢出
-        int wave_date = sine_wave[wave_index] + bias;
+        uint8_t wave_date = sine_wave[wave_index] + bias;
         wave_date = (wave_date > max_value) ? max_value : (wave_date < 0) ? 0 : wave_date;
 
-        WaveCurve::draw_curve<WaveCurve::Type::BezierCurve3, uint8_t>(Buf,point_cnt, static_cast<uint8_t>(wave_date),
-                                                                                start_x,
-                                                                                start_y, chart_width, chart_height, 255,
-                                                                                0xFFFF, 0);
+        WaveCurve<>::draw_curve<WaveCurveType::BezierCurve3, uint8_t>(Buf, point_cnt, wave_date, start_x, start_y,
+                                                                      chart_width, chart_height, 255, 0xFFFF, 0);
 
         if (wave_index >= sine_count - 1)[[unlikely]]
         {

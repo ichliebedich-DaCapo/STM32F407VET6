@@ -20,7 +20,7 @@ set(LVGL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/resource)
 set(SIMULATOR_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(COMPONENT_DIR ${PROJECT_SOURCE_DIR}/Component)
 set(EVENTS_DIR ${PROJECT_SOURCE_DIR}/Events)
-
+set(RENDER_DIR ${PROJECT_SOURCE_DIR}/Render)
 # 生成的目标文件目录
 set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
 set(BIN_DIR ${BUILD_DIR}/bin)
@@ -62,6 +62,18 @@ target_include_directories(libdriver PUBLIC
 # 设置静态库的输出目录
 set_target_properties(libdriver PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
+#---------------Render库---------------
+# 渲染，即实现底层绘制算法
+file(GLOB_RECURSE RENDER_SRCS "${RENDER_DIR}/*.cpp")
+add_library(librender STATIC ${RENDER_SRCS})
+target_include_directories(librender PUBLIC
+        ${RENDER_DIR}
+)
+target_link_libraries(librender PUBLIC libdriver)
+# 设置静态库的输出目录
+set_target_properties(librender PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+
+
 #---------------GUI库---------------
 file(GLOB_RECURSE COMPONENT_SRCS "${COMPONENT_DIR}/*.*")
 file(GLOB_RECURSE EVENTS_SRCS "${EVENTS_DIR}/*.*")
@@ -79,13 +91,13 @@ target_include_directories(libgui PUBLIC
         ${COMPONENT_DIR}
         ${EVENTS_DIR}
 )
-target_link_libraries(libgui PUBLIC liblvgl)
+target_link_libraries(libgui PUBLIC liblvgl librender)
 # 设置静态库的输出目录
 set_target_properties(libgui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
 # 链接外部库
-set(LIBRARIES  pthread stdc++ m SDL2  decoder openh264 rlottie jansson curl )
+set(LIBRARIES pthread stdc++ m SDL2 decoder openh264 rlottie jansson curl)
 set(LIBFILE_PATH resource/lib/native)
 # 全局设置应该链接的库的目录
 link_directories(${LIBFILE_PATH} ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib)
@@ -94,7 +106,7 @@ link_directories(${LIBFILE_PATH} ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib)
 add_executable(${PROJECT_NAME} ${SIMULATOR_DIR}/main.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE libdriver libgui ${LIBRARIES})
 # 动态库或者可执行文件的生成位置
-set_target_properties(${PROJECT_NAME} PROPERTIES  RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
+set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
 
 # 复制程序运行所必需的库文件
 add_custom_target(copy_libs
