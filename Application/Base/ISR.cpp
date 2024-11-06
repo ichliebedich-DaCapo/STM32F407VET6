@@ -17,7 +17,7 @@ extern void timer6_isr();
 extern void adc1_isr();
 
 // 弱定义，避免找不到
-__weak void timer6_isr() {} // 万一忘记定义了也没报错那可就糟糕了
+
 __weak void adc1_isr() {}
 
 /*TIM中断回调函数*/
@@ -31,13 +31,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 extern "C"
 {
-void TIM6_DAC_IRQHandler()
-{
 
-    // 我把TIM7当做系统时钟，所以并不需要判断中断源
-    __HAL_TIM_CLEAR_FLAG(&htim6, TIM_FLAG_UPDATE);
-    timer6_isr();
-}
 
 }
 

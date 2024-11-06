@@ -29,7 +29,7 @@ public:
     static inline auto set_text_color(Color color) -> void;
 
     // 设置文本对齐方式
-    [[maybe_unused]] static inline auto set_text_align(Align align) -> void;
+    [[maybe_unused]] static inline auto set_text_align(Align align,Obj obj=_obj) -> void;
 
     // 设置文本内容
     static inline auto set_text(Strings text,Obj obj=_obj) -> void;
@@ -94,9 +94,9 @@ inline auto Text::set_text_color(lv_color_t color) -> void
     lv_obj_set_style_text_color(_obj, color, selector_default);
 }
 
-[[maybe_unused]] inline auto Text::set_text_align(lv_text_align_t align) -> void
+[[maybe_unused]] inline auto Text::set_text_align(lv_text_align_t align,Obj obj) -> void
 {
-    lv_obj_set_style_text_align(_obj, align, selector_default);
+    lv_obj_set_style_text_align(obj, align, selector_default);
 }
 
 inline auto Text::set_text(Strings text,Obj obj) -> void

@@ -17,7 +17,7 @@ ___
 [arm-toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
 &nbsp;arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi
 <br>
-`分支说明`:main分支是已经测试通过，ZQ和DV分支是两条测试用的分支  &nbsp;&nbsp;&nbsp;&nbsp; JY快更新你的DV
+`分支说明`:main分支是已经测试稳定通过的，ZQ和DV分支是两条测试用的分支  &nbsp;&nbsp;&nbsp;&nbsp; JY快更新你的DV
 <br>
 `其他`：工程里嵌套了一个来自GUI Guider的lvgl模拟器，目录为GUI/lvgl_simulator，使用的是GUI Guider的工具链，编译出的是32位程序。
 <!-- 鉴于原工具链有些慢，后面有空换一下工具链。-->

@@ -3,8 +3,8 @@
 #include "cmsis_os2.h"
 #endif// APP_NO_RTOS
 
-#include "keyTaskHandler.hpp"
 #include "GUI.hpp"
+#include "key.hpp"
 
 extern void app_init();// 应用程序初始化函数,强制定义
 

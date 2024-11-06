@@ -17,10 +17,22 @@
 #include "lv_drivers/display/monitor.h"
 
 #endif
-
-
 #include <cstring> // 引入string.h以使用memmove
 #include <valarray>
+
+// 枚举体
+enum class WaveCurveType
+{
+    // 插值画线
+    Interpolated_Line,
+    // 二次贝塞尔曲线
+    BezierCurve2,
+    // 三次贝塞尔曲线
+    BezierCurve3,
+    // Catmull-Rom样条曲线
+    // 开-Og优化可以使用，-O2以上会直接卡死，我也不明白
+    CatmullRomSp_line,
+};
 
 /**
  * @brief 绘制波形曲线
@@ -31,39 +43,27 @@
  *          如果波形数据变化剧烈，建议不要使用线性插值。样条曲线更适合各种波形数据，非常均匀，不过要注意的是下面的样条曲线算法在-Og优化下没有问题，不知道什么原因。
  */
 
+
+template<typename Coord=uint16_t>
 class WaveCurve
 {
 public:
-    // 这个也是够蠢的，必须把声明放在前面，不然找不到
-    enum class Type
-    {
-        // 插值画线
-        Interpolated_Line,
-        // 二次贝塞尔曲线
-        BezierCurve2,
-        // 三次贝塞尔曲线
-        BezierCurve3,
-        // Catmull-Rom样条曲线
-        // 开-Og优化可以使用，-O2以上会直接卡死，我也不明白
-        CatmullRomSp_line,
-    };
-public:
     // 绘制曲线_插值画线
-    template<WaveCurve::Type draw_type, typename Data=uint16_t, typename Color=uint16_t, typename Coord=uint16_t>
-    static auto
+    template<WaveCurveType draw_type, typename Data=uint16_t, typename Color=uint16_t>
+    [[maybe_unused]] static auto
     draw_curve(Data data[], Coord N, Data value, Coord Start_x,
                Coord Start_y,
                Coord Width,
                Coord Height, Data Max_Value, Color bg_color, Color color) -> void;
 
 protected:
-    // 模板类，用于确定绘制函数
-    template<WaveCurve::Type draw_type, typename Coord, typename Color>
+    // 模板特化，用于确定绘制函数
+    template<WaveCurveType draw_type, typename Color>
     struct DrawFunction;
 
 private:
     // 获取一次绘制所需的点数
-    template<WaveCurve::Type draw_type>
+    template<WaveCurveType draw_type>
     static inline constexpr auto getOncePoints() -> uint16_t;
 
     // 交换指针
@@ -96,8 +96,9 @@ private:
 
 };
 
+template<typename Coord>
 template<typename T>
-auto WaveCurve::switch_ptr(T *&p1, T *&p2) -> void
+auto WaveCurve<Coord>::switch_ptr(T *&p1, T *&p2) -> void
 {
     T *tmp = p1;
     p1 = p2;
@@ -106,13 +107,14 @@ auto WaveCurve::switch_ptr(T *&p1, T *&p2) -> void
 
 
 // 获取一次绘制所需的点数
-template<WaveCurve::Type draw_type>
-constexpr auto WaveCurve::getOncePoints() -> uint16_t
+template<typename Coord>
+template<WaveCurveType draw_type>
+constexpr auto WaveCurve<Coord>::getOncePoints() -> uint16_t
 {
-    if constexpr (draw_type == Type::BezierCurve2)
+    if constexpr (draw_type == WaveCurveType::BezierCurve2)
     {
         return 3;// 三个点
-    } else if constexpr (draw_type == Type::BezierCurve3 || draw_type == Type::CatmullRomSp_line)
+    } else if constexpr (draw_type == WaveCurveType::BezierCurve3 || draw_type == WaveCurveType::CatmullRomSp_line)
     {
         return 4; // 四个点
     } else // 默认为 Type::Interpolated_Line线性插值算法
@@ -131,9 +133,9 @@ constexpr auto WaveCurve::getOncePoints() -> uint16_t
  * @note 插值画线算法，使用Bresenham算法，插值点数由模板参数决定，默认为2，即线性插值。
  *        为了与其他函数一致，所以使用了 draw_buff_y[0]用于存储临时的y坐标
  */
-
-template<typename Coord, typename Color>
-struct WaveCurve::DrawFunction<WaveCurve::Type::Interpolated_Line, Coord, Color>
+template<typename Coord>
+template<typename Color>
+struct WaveCurve<Coord>::DrawFunction<WaveCurveType::Interpolated_Line, Color>
 {
 
     static auto inline
@@ -195,8 +197,9 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::Interpolated_Line, Coord, Color>
 };
 
 // 二次贝塞尔曲线
-template<typename Coord, typename Color>
-struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve2, Coord, Color>
+template<typename Coord>
+template<typename Color>
+struct WaveCurve<Coord>::DrawFunction<WaveCurveType::BezierCurve2, Color>
 {
     static auto inline draw(const Coord x[], const Coord y[], Color &bg_color, Color &color) -> void
     {
@@ -220,8 +223,9 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve2, Coord, Color>
 };
 
 // 三次贝塞尔曲线
-template<typename Coord, typename Color>
-struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve3, Coord, Color>
+template<typename Coord>
+template<typename Color>
+struct WaveCurve<Coord>::DrawFunction<WaveCurveType::BezierCurve3, Color>
 {
     static auto inline draw(const Coord x[], const Coord y[], Color &bg_color, Color &color) -> void
     {
@@ -250,8 +254,9 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve3, Coord, Color>
 };
 
 // Catmull-Rom样条曲线
-template<typename Coord, typename Color>
-struct WaveCurve::DrawFunction<WaveCurve::Type::CatmullRomSp_line, Coord, Color>
+template<typename Coord>
+template<typename Color>
+struct WaveCurve<Coord>::DrawFunction<WaveCurveType::CatmullRomSp_line, Color>
 {
     static auto inline draw(const Coord x[], const Coord y[], Color &bg_color, Color &color) -> void
     {
@@ -300,9 +305,11 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::CatmullRomSp_line, Coord, Color>
  * @param Height 绘制区域的高度
  * @param Max_Value 样本数据的最大值
  */
-template<WaveCurve::Type draw_type, typename Data, typename Color, typename Coord>
-auto WaveCurve::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Coord Start_y, Coord Width, Coord Height,
-                           Data Max_Value, Color bg_color, Color color) -> void
+template<typename Coord>
+template<WaveCurveType draw_type, typename Data, typename Color>
+[[maybe_unused]]auto
+WaveCurve<Coord>::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Coord Start_y, Coord Width, Coord Height,
+                             Data Max_Value, Color bg_color, Color color) -> void
 {
     /*******************前置条件*********************/
     // 定义一个常量，使用lambda表达式这种解决方法我是真没想到，不过这里用静态内联函数+模板+constexpr的组合
@@ -319,7 +326,7 @@ auto WaveCurve::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Coor
     Coord y_temp;// 不使用会被自动优化掉，不用担心
 
     // 进行前置计算
-    if constexpr (draw_type == Type::Interpolated_Line)
+    if constexpr (draw_type == WaveCurveType::Interpolated_Line)
         draw_buff_y[0] = (Coord) (Start_y + Height - value * ratio);
     else
     {
@@ -342,7 +349,7 @@ auto WaveCurve::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Coor
         }
 
         // 绘制曲线
-        DrawFunction<draw_type, Coord, Color>::draw(x, y, bg_color, color);
+        DrawFunction<draw_type, Color>::draw(x, y, bg_color, color);
     }
 
     /********************更新数据*******************/
