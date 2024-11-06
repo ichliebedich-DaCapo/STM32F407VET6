@@ -245,11 +245,17 @@ public:
     // 减偏置
     static inline auto sub_bias() -> void;
 
+    // 获取偏置
+    static inline auto get_bias() -> int8_t;
+
     // 加比例
     static inline auto add_ratio() -> void;
 
     // 减比例
     static inline auto sub_ratio() -> void;
+
+    // 获取比例
+    static inline auto get_ratio() -> uint8_t;
 
     // 打印时间
     static inline auto print_tick() -> void;
@@ -269,7 +275,6 @@ public:
     // 切换波形类型
     static inline auto switch_wave_type() -> void;
 
-
     // 波形已产生
     static inline auto wave_is_generate() -> void;
 
@@ -281,6 +286,15 @@ public:
 
     // 减少时钟周期
     static inline auto sub_period() -> void;
+
+    // 获取时钟周期
+    static inline auto get_period() -> uint32_t;
+
+    // 获取波形模式
+    static inline auto get_mode() -> bool ;
+
+    // 获取频率
+    static inline auto get_freq() -> bool;
 
 private:
     // 设置频率,true表示16K，false表示8K
@@ -341,7 +355,7 @@ auto Screen::init() -> void
     label.init(gui->main.label_bias, 118, 300, 80, 20, "偏置：0");
 
 //     按钮_频率：8K、16K
-    customBtn.init(gui->main.btn_freq, gui->main.btn_freq_label, 400, 265, 40, 30, "8K");// 根据对称性，x：480-40-40
+    customBtn.init(gui->main.btn_freq, gui->main.btn_freq_label, 400, 265, 40, 30, "800");// 根据对称性，x：480-40-40
     label.init(gui->main.label_freq, 405, 300, 40, 20, "频率");
 
 //     按钮_占比：+、-
@@ -461,7 +475,7 @@ auto SignalGenerator::handler() -> void
     }
 
     // 防止数据溢出
-    uint8_t wave_date = sine_wave[wave_index] + bias;
+    int wave_date = sine_wave[wave_index] + bias;
     wave_date = (wave_date > max_value) ? max_value : (wave_date < 0) ? 0 : wave_date;
 
     // 选择算法绘制波形
@@ -582,11 +596,12 @@ auto SignalGenerator::print_tick() -> void
 
 
 // 设置频率,true表示16K，false表示8K
+// 由于800与1K没什么区分度，这里实际使用了8K与16K的关系，即两倍
 auto SignalGenerator::set_freq(bool freq) -> void
 {
     _freq = freq;
     index_offset = _freq ? index_offset_16K : index_offset_8K;
-    Text::set_text(_freq ? "16K" : "8K", GUI_Base::get_ui()->main.btn_freq_label);
+    Text::set_text(_freq ? "1K" : "800", GUI_Base::get_ui()->main.btn_freq_label);
 
 #if Strong_Print
     timer.set_period(_freq ? Freq_16K : Freq_8K);
@@ -723,7 +738,7 @@ auto SignalGenerator::add_period() -> void
     char buf[14];
     if (period < 9000)
         period += 100;
-    sprintf(buf, "周期：%d.%ds", period/1000,period%1000/100);
+    sprintf(buf, "周期：%lu.%lus", period/1000,period%1000/100);
     Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_period);
 }
 
@@ -732,8 +747,34 @@ auto SignalGenerator::sub_period() -> void
     char buf[14];
     if (period > 100)
         period -= 100;
-    sprintf(buf, "周期：%d.%ds", period/1000,period%1000/100);
+    sprintf(buf, "周期：%lu.%lus", period/1000,period%1000/100);
     Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_period);
+}
+
+auto SignalGenerator::get_period() -> uint32_t
+{
+    return period;
+}
+
+
+auto SignalGenerator::get_ratio() -> uint8_t
+{
+    return _ratio;
+}
+
+auto SignalGenerator::get_bias() -> int8_t
+{
+    return bias;
+}
+
+auto SignalGenerator::get_mode() -> bool
+{
+    return _mode;
+}
+
+auto SignalGenerator::get_freq() -> bool
+{
+    return _freq;
 }
 
 
@@ -791,5 +832,38 @@ auto uiInterface::add_period() -> void
 auto uiInterface::sub_period() -> void
 {
     SignalGenerator::sub_period();
+}
+
+auto uiInterface::get_period() -> uint32_t
+{
+    return SignalGenerator::get_period();
+}
+
+auto uiInterface::get_ratio() -> uint8_t
+{
+    return SignalGenerator::get_ratio();
+}
+
+auto uiInterface::get_bias() -> int8_t
+{
+    return SignalGenerator::get_bias();
+}
+
+/**
+ * @brief 获取模式
+ * @return ture为混频，false为单频
+ */
+auto uiInterface::get_mode() -> bool
+{
+    return SignalGenerator::get_mode();
+}
+
+/**
+ * @brief 获取频率
+ * @return false为800，true为1K
+ */
+auto uiInterface::get_freq() -> bool
+{
+    return SignalGenerator::get_freq();
 }
 

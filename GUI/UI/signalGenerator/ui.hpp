@@ -86,6 +86,21 @@ public:
 
     // 减少时钟周期
     static auto sub_period() -> void;
+
+    // 获取时钟周期
+    static auto get_period() -> uint32_t;
+
+    // 获取比例
+    static auto get_ratio() -> uint8_t;
+
+    // 获取偏置
+    static auto get_bias() -> int8_t;
+
+    // 获取波形类型
+    static auto get_mode() -> bool ;
+
+    // 获取频率
+    static auto get_freq() -> bool;
 };
 
 
