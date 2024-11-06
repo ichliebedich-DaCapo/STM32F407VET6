@@ -86,13 +86,13 @@ public:
 
 
 private:
-    static auto reset_count() -> void { count = get_clock(); }// 重置计数
+    static inline auto reset_count() -> void { count = get_clock(); }// 重置计数
 
-    static auto get_clock() -> uint32_t { return HAL_GetTick(); }// 获取当前时间
+    static inline auto get_clock() -> uint32_t { return HAL_GetTick(); }// 获取当前时间
 
     static auto set_duty(WaveDuty wave_duty) -> void{ switch_count = max_count * static_cast<uint8_t>(wave_duty) / 10;}// 设置占空比
 
-    static auto switch_freq() -> void
+    static inline auto switch_freq() -> void
     {
         // 交换频率
         if (freq == WaveFreq::Freq_8K)

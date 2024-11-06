@@ -1,5 +1,5 @@
 //
-// Created by 34753 on 2024/10/12.
+// Created by fairy on 2024/10/12.
 //
 
 #include "wave_signal.hpp"
@@ -36,15 +36,13 @@ auto WaveSignal::off() -> void
  * @brief 生成波形
  * @details 在ISR中调用即可
  */
+#define DAC1_DR *((volatile uint32_t *)(0x40007408))
+
 auto WaveSignal::generate() -> void
 {
-//    volatile uint16_t data=sineWave[index++]<<4;
-    HAL_DAC_SetValue(&hdac, DAC1_CHANNEL_1, DAC_ALIGN_12B_R,sine_wave[index]<<4);
-    ++index;
-    if(index>=128)
-    {
-        index=0;
-    }
+//    HAL_DAC_SetValue(&hdac, DAC1_CHANNEL_1, DAC_ALIGN_12B_R,sine_wave[index]<<4);
+    static bool flag = true;
+    DAC1_DR = sineWave[index++] << 4;
     // 检测模式
     if (mode == WaveMode::MIX_FREQ)
     {
@@ -59,15 +57,20 @@ auto WaveSignal::generate() -> void
         }
 
         // 切频处理
-        if (temp_count == switch_count)
+        if(flag)// 判断是否是第一次
         {
-            switch_freq();
-           /* 这个时候可以做一些别的处理，比如切换波形，但是这个机制还没有完善（低耦合）*/
+            if (temp_count >= switch_count)
+            {
+                flag = false;
+                switch_freq();
+                /* 这个时候可以做一些别的处理，比如切换波形，但是这个机制还没有完善（低耦合）*/
+            }
         }
 
         // 计数值满就切频
-        if (count == max_count)
+        if (temp_count >= max_count)
         {
+            flag = true;
             // 重置计数值
             reset_count();
             switch_freq();
@@ -88,12 +91,11 @@ auto WaveSignal::set_frequency(WaveFreq wave_freq) -> void
     switch (wave_freq)
     {
         case WaveFreq::Freq_8K:
-#warning "4个周期为386ms，即T=96.5ms，实际只有10.05*128Hz，真是奇怪"
-            timer6_set_freq(FREQ_84M_to_128x8K);// 256*8K
+            timer6_set_freq(FREQ_84M_to_256x800);// 256*800
             break;
 
         case WaveFreq::Freq_16K:
-            timer6_set_freq(FREQ_84M_to_128x16K);// 256*16K
+            timer6_set_freq(FREQ_84M_to_256x1k);// 256*1k
             break;
 
         default:
