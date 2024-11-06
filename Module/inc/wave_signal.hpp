@@ -39,10 +39,6 @@ public:
 
     static auto set_frequency(WaveFreq wave_freq) -> void;
 
-
-private:
-
-
 private:
 //    static inline const uint8_t *pWave=sineWave;// 现在是常量指针，默认指向正弦波。如果需要噪声，那么需要把它们变为普通指针
 };
