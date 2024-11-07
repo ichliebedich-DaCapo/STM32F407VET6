@@ -337,7 +337,6 @@ auto Screen::init() -> void
     Component::set_pos_size(78, 36, 324, 208);
     Component::border_radius(5);
 
-
     // 初始化器
     Button customBtn;
     customBtn.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
@@ -364,7 +363,6 @@ auto Screen::init() -> void
     label.init(gui->main.label_ratio, 298, 300, 80, 20, "占比：50%");
 
 //     图片按钮：停止、播放
-// 中心y轴为280
     ImageButton::init(gui->main.imgbtn_play, 216, 256, 48, 48, &_btn_list_play_alpha_48x48,
                       &_btn_list_pause_alpha_48x48);
 
@@ -376,7 +374,6 @@ auto Screen::init() -> void
 
     // 标签：时刻
     label.init(gui->main.label_tick, 5, 50, 50, 80, "tick：\n0");
-//    Text::set_text_color(Color_Firefly_Green);
 
     // 标签：显示点数
     label.init(gui->main.label_wave_cnt, 5, 110, 60, 80, "点数：128");
@@ -390,8 +387,6 @@ auto Screen::init() -> void
     // 标签：波形生成
     label.init(gui->main.label_wave_generate, 430, 200, 50, 80, "波形已产生");
     Text::hidden(gui->main.label_wave_generate);
-
-
 
     // 标签：标题
     label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
@@ -718,7 +713,7 @@ auto SignalGenerator::switch_wave_type() -> void
             sprintf(buf, "无效曲线");
             break;
     }
-    LCD_Color_Clean(80, 40, 400, 240, 0xFFFF);
+//    LCD_Color_Clean(80, 40, 400, 240, 0xFFFF);
     Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_type);
 }
 

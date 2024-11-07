@@ -4,7 +4,6 @@
 #ifndef SIMULATOR_WAVECURVE_HPP
 #define SIMULATOR_WAVECURVE_HPP
 
-#include "JYZQ_Conf.h"
 
 /* 预编译命令 */
 // 用于区分模拟器和真机

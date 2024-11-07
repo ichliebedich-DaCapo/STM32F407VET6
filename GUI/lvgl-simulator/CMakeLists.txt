@@ -36,7 +36,7 @@ add_compile_options(-O2 -g -DLV_CONF_INCLUDE_SIMPLE=1)
 
 #------------------------------------------库-------------------------------------------
 # 添加公共目录
-include_directories(${APP_DIR}/Conf ${APP_DIR}/${APP})
+#include_directories(${APP_DIR}/Conf ${APP_DIR}/${APP})
 
 #---------------lvgl库---------------
 file(GLOB_RECURSE LVGL_SRCS "resource/lvgl/*.c")

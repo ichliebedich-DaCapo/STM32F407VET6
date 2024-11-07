@@ -32,9 +32,18 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】基本功能已全部完备，可以添加CPU温度显示了">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】CPU温度显示有空再添加吧">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/inc/wave_signal.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/wave_signal.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI_Base.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI_Base.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Render/WaveCurve.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Render/WaveCurve.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/某些可能的奇技淫巧.bat" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1573,6 +1582,12 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="main" />
@@ -1650,29 +1665,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "OpenOCD 下载并运行.OCD Furina.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "ZQ",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "CMakeSettings",
-    "structure.view.defaults.are.configured": "true",
-    "two.files.diff.last.used.file": "D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;OpenOCD 下载并运行.OCD Furina.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ZQ&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CMakeSettings&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
+    &quot;two.files.diff.last.used.file&quot;: &quot;D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Embedded\MCU\STM32\Furina\Module" />
@@ -1877,6 +1892,9 @@
       <workItem from="1730859505957" duration="665000" />
       <workItem from="1730866119606" duration="2559000" />
       <workItem from="1730877719718" duration="7566000" />
+      <workItem from="1730896865625" duration="5652000" />
+      <workItem from="1730976620977" duration="72000" />
+      <workItem from="1730976866478" duration="19000" />
     </task>
     <task id="LOCAL-00007" summary="__【未配置好】选出了一些从C++11到C++17中适合单片机开发的特性">
       <option name="closed" value="true" />
@@ -2292,7 +2310,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="ZQ" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>

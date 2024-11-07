@@ -138,7 +138,7 @@ static void hal_init()
      */
     static lv_disp_draw_buf_t disp_buf1;
     static lv_color_t buf1_1[MONITOR_HOR_RES * MONITOR_VER_RES];
-    lv_disp_draw_buf_init(&disp_buf1, buf1_1, NULL, MONITOR_HOR_RES * MONITOR_VER_RES);
+    lv_disp_draw_buf_init(&disp_buf1, buf1_1, nullptr, MONITOR_HOR_RES * MONITOR_VER_RES);
 
     /* 创建显示设备
      * 初始化显示驱动程序，并设置其属性，如缓冲区、刷新回调函数、水平分辨率和垂直分辨率

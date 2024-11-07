@@ -9,7 +9,10 @@
 //#include "stm32f4xx_hal.h"
 #include "events.hpp"
 //#include "lv_port_disp.h"
+#ifdef ARM_MATH_CM4
 #ifndef APP_NO_RTOS
+
+
 #include "cmsis_os2.h"
 
 const osThreadAttr_t voiceTask_attributes = {
@@ -17,7 +20,7 @@ const osThreadAttr_t voiceTask_attributes = {
         .stack_size = 512 * 4,
         .priority = (osPriority_t) osPriorityNormal,
 };
-
+#endif
 #endif
 
 // 函数
@@ -28,12 +31,14 @@ auto GUI::init() -> void
 //    lv_port_disp_init();// 进入临界保护区
 //    __enable_irq();
 
+#ifdef ARM_MATH_CM4
 #ifndef APP_NO_RTOS
     osThreadNew([](void *argument) -> void
                 {
                     osDelay(5);
                     lv_timer_handler();
                 }, nullptr, &voiceTask_attributes);
+#endif
 #endif
 
     gui->main.screen = lv_obj_create(nullptr);

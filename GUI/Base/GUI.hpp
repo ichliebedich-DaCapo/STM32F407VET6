@@ -5,7 +5,7 @@
 #define FURINA_GUI_HPP
 
 #include <cstdio>
-#include "JYZQ_Conf.h"
+
 /* 预编译命令 */
 #if 1
 // 头文件
