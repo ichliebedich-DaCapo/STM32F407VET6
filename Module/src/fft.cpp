@@ -3,7 +3,7 @@
 //
 
 #include "fft.hpp"
-#include "arm_const_structs.h"
+
 
 #ifdef USE_FFT
 

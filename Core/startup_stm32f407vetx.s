@@ -237,6 +237,12 @@ g_pfnVectors:
 * this definition.
 * 
 *******************************************************************************/
+/*为了防止忘记定义中断处理函数，或者定义了但没有链接成功，我就把下面的虚定义给注释了。因为它们在调试的时候
+*都只会进入到Default_Handler里，所以我把新的虚定义写在了stm32f4xx_it.c里，确保进入死循环时，可以根据
+* 函数名或者下面的注释来定位到那个函数，从而知道是哪里没有定义。
+*当然这也有些隐患，比如你没有使用stm32f4xx_it.c或者有些在我这是定义了的中断，但你不需要用到等
+*/
+/*
    .weak      NMI_Handler
    .thumb_set NMI_Handler,Default_Handler
   
@@ -506,3 +512,4 @@ g_pfnVectors:
 
    .weak      FPU_IRQHandler                  
    .thumb_set FPU_IRQHandler,Default_Handler  
+*/

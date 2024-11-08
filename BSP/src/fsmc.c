@@ -1,5 +1,5 @@
 //
-// Created by 34753 on 2024/10/7.
+// Created by fairy on 2024/10/7.
 //
 
 #include "fsmc.h"
@@ -9,8 +9,6 @@
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx.h"//内嵌了stm32f4xx_ll_fsmc.h
 
-// 下面这个函数由lv_port_disp来实现
-extern void LVGL_LCD_FSMC_DMA_pCallback(DMA_HandleTypeDef *_hdma);
 
 
 SRAM_HandleTypeDef hsram1;//TFT模块
@@ -135,9 +133,36 @@ void fsmc_dma_init()
     HAL_NVIC_EnableIRQ(DMA2_Stream6_IRQn);
     /*注册回调函数
     * 流程：开启DMA中断后，DMA开始传输数据，传输完之后回到【pCallback】，需要注意的是中断处理函数得要定义*/
-    HAL_DMA_RegisterCallback(&hdma_memtomem_dma2_stream6, HAL_DMA_XFER_CPLT_CB_ID, LVGL_LCD_FSMC_DMA_pCallback);
+//    HAL_DMA_RegisterCallback(&hdma_memtomem_dma2_stream6, HAL_DMA_XFER_CPLT_CB_ID, (void(*)(DMA_HandleTypeDef *))pCallback);
 }
 
+///**
+// * @brief DMA中断
+//*/
+//// 主打一个狂野
+//#define DMA2_S6CR (*((volatile uint32_t *)0x400264A0))
+//// DMA中断,里面他宝贝的真啰嗦
+//void DMA2_Stream6_IRQHandler(void)
+//{
+//    HAL_DMA_IRQHandler(&hdma_memtomem_dma2_stream6);
+//
+//    /*  检查传输完成标志（TCIF）是否被设置，即是否传输完成标志位*/
+////    if (DMA2->HISR & 0x1 << 21)
+////    {
+////        DMA2->HISR &= ~(0x1 << 21);// 清除标志位
+////        // 检查中断使能标志位
+////        if (DMA2_S6CR & (DMA_IT_TC))
+////        {
+////            DMA2_S6CR &= ~(DMA_IT_TC);// 清除标志位
+////            /* Change the DMA state */
+////            hdma_memtomem_dma2_stream6.State = HAL_DMA_STATE_READY;// 不能少,因为Start_IT里需要靠它来开启
+////            /* Process Unlocked */
+////            __HAL_UNLOCK(&hdma_memtomem_dma2_stream6);// 不能少
+////        }
+////        //
+////        LVGL_LCD_FSMC_DMA_pCallback();
+////    }
+//}
 
 
 #endif

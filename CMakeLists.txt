@@ -17,7 +17,7 @@ set(CMAKE_OBJDUMP arm-none-eabi-objdump)
 set(SIZE arm-none-eabi-size)
 # -------Clang------
 # 我的评价是：缺少各种库。查看了STM32提供的固件包，压根没有clang的启动文件，这一点与TI相比弗如远甚。
-# 继续搞下去，只会是浪费时间，因为从目前编译的情况来看，编译速度很慢很慢
+# 继续搞下去，只会是浪费时间，并且从目前编译的情况来看，编译速度很慢很慢
 #set(CMAKE_C_COMPILER clang)
 #set(CMAKE_CXX_COMPILER clang++)
 #set(CMAKE_ASM_COMPILER clang)
@@ -73,6 +73,8 @@ add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-le
 # Enable assembler files preprocessing
 add_compile_options($<$<COMPILE_LANGUAGE:ASM>:-x$<SEMICOLON>assembler-with-cpp>)
 
+
+# 如果不开优化，使用LVGL时有可能因为栈爆而导致数组越界，进而进入硬件错误中断。至少需要开-Og
 if (COMPILER_IS_GCC)
     # 选择优化级别（真是见鬼！在CMake配置文件改了构建选项，结果没反应，干脆手动操作）
     #-O0：无优化，适合调试。
@@ -83,19 +85,13 @@ if (COMPILER_IS_GCC)
     #-Og：调试优化，适合开发和调试阶段。
     #-Os:优化生成的代码大小，而不是性能。
     #-Oz:极度优化大小,进一步优化生成的代码大小，比 -Os更激进,可能会牺牲一些性能。
-    #-flto:在链接阶段进行优化,允许进行跨文件的优化，进一步提高性能，但耗时间（项目本来就小我不在乎）
+    #-flto:在链接阶段进行优化,允许进行跨文件的优化，进一步提高性能，但耗时间（项目本来就小我不在乎），并且这个优化容易出问题（这个我很在乎）
     #-fprofile-generate（生成配置文件） 和 -fprofile-use（基于配置文件的优化）
     add_compile_options(-Ofast -g)
     # 不调试了再开启
     #add_compile_options(-flto )
 elseif (COMPILER_IS_CLANG)
-    add_compile_options(
-            -O3 -ffast-math
-            -g3
-            -Wall
-            -Wextra
-#            -Werror
-    )
+    add_compile_options( -O3 -ffast-math -g3  -Wextra)
     # 禁用依赖扫描
 #    set(CMAKE_CXX_DEPFILE_FORMAT none)
 #    set(CMAKE_CXX_DEPENDS_GENERATOR "")
@@ -213,7 +209,7 @@ set_target_properties(libdata PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 # ------GUI库------
 file(GLOB_RECURSE GUI_SRC
         "${UI_DIR}/*.*"
-        "GUI/Base/GUI.cpp"
+        "GUI/Base/*.cpp"
         "GUI/Component/*.cpp"
         "GUI/Events/*.cpp"
         "GUI/Render/*.cpp"
@@ -236,13 +232,13 @@ set_target_properties(libgui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 file(GLOB_RECURSE MODULE_SRC "Module/src/*.cpp")
 add_library(libmodule STATIC ${MODULE_SRC})
 target_include_directories(libmodule PUBLIC Module/inc)
-target_link_libraries(libmodule PRIVATE libbsp libdsp libdata)
+target_link_libraries(libmodule PRIVATE libdsp libdata)
 # 设置静态库的输出目录
 set_target_properties(libmodule PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
 # ------Application库------
-file(GLOB_RECURSE APPLICATION_SRC "${APP_DIR}/app.cpp" "Application/Base/*.cpp")
+file(GLOB_RECURSE APPLICATION_SRC "${APP_DIR}/app.cpp" "Application/Base/main.cpp" "Application/Base/baseInit.cpp")
 add_library(libapp STATIC ${APPLICATION_SRC})
 target_include_directories(libapp PUBLIC Application/Base)
 # 需要链接 libdsp libdata libgui libbsp libmodule等，根据需要选
@@ -254,8 +250,8 @@ set_target_properties(libapp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 # ---------包含公共目录--------
 include_directories(Application/Conf ${APP_DIR})
 
-# 这里面不能直接添加到静态库里
-file(GLOB_RECURSE SOURCES "Core/*.*")
+# 这里面不能直接添加到静态库里 否则链接时会出现找不到定义的现象
+file(GLOB_RECURSE SOURCES "Core/*.*" "Application/Base/ISR.cpp")
 
 # 设置链接脚本
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld)

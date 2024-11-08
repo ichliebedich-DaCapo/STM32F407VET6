@@ -8,7 +8,7 @@
 #include "JYZQ_Conf.h"
 #ifdef USE_WAVE_SIGNAL
 #include "waveData.h"
-#include "stm32f4xx_hal.h"
+
 
 // 波形类型
 //enum class WaveType : uint8_t
@@ -32,12 +32,10 @@ enum class WaveFreq : uint8_t
 class WaveSignal
 {
 public:
-    static auto on() -> void;
-
-    static auto off() -> void;
 
 
-    static auto set_frequency(WaveFreq wave_freq) -> void;
+
+
 
 private:
 //    static inline const uint8_t *pWave=sineWave;// 现在是常量指针，默认指向正弦波。如果需要噪声，那么需要把它们变为普通指针

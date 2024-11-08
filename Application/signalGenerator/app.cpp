@@ -76,14 +76,13 @@ void key_handler()
             Button::click(GUI_Base::get_ui()->main.btn_ratio_add);
             break;
 
-
         case keyk6:// 频率
             if (Key::stateHandler(KEY_STATE_TWO))
             {
-                WaveSignal::set_frequency(WaveFreq::Freq_16K);
+                timer6_set_freq(FREQ_84M_to_256x1k);// 256*1k
             } else
             {
-                WaveSignal::set_frequency(WaveFreq::Freq_8K);
+                timer6_set_freq(FREQ_84M_to_256x800);// 256*800
             }
             if (uiInterface::get_mode())
             {
@@ -97,11 +96,13 @@ void key_handler()
             if (Key::stateHandler(KEY_STATE_TWO))
             {
                 uiInterface::wave_is_generate();
-                WaveSignal::on();
+                timer6_start_it();
+                dac_start();
             } else
             {
                 uiInterface::wave_is_not_generate();
-                WaveSignal::off();
+                timer6_stop_it();
+                dac_stop();
             }
             break;
 

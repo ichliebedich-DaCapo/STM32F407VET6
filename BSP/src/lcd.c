@@ -1,13 +1,14 @@
 //
-// Created by 34753 on 2024/9/22.
+// Created by fairy on 2024/9/22.
 //
 
 #include "lcd.h"
 
 #ifdef USE_LCD
-
+#include "fsmc.h"
 #include "stm32f4xx_hal.h"
 
+extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
 
 /********************************************************************
  * 名称 : LCD_Init9481
@@ -209,6 +210,16 @@ void lcd_init(void)
 #endif
 }
 
+void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t * color_p)
+{
+#ifdef USE_FSMC_DMA
+    LCD_Set_Window(x1, y1, x2, y2);//设置LCD屏幕的扫描区域
+    HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream6, (uint32_t) color_p, (uint32_t) TFT_DATA_ADDR,
+                     ((x2 + 1) - x1) * ((y2 + 1) - y1));
+#else
+    LCD_Color_Fill(area->x1, area->y1, area->x2, area->y2, (const uint16_t *)color_p);
+#endif
+}
 
 
 

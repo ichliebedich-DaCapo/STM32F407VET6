@@ -32,18 +32,34 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】CPU温度显示有空再添加吧">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】解决办法很简单：取消模板函数，直接把flush结构体改掉，然后再把变量声明和定义分属两个文件。另一种就是使用单例模式">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/ISR.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/signalGenerator/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/signalGenerator/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/CPU_RunTime.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/CPU_RunTime.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/baseInit.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/baseInit.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/fsmc.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/fsmc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/lcd.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/lcd.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/CPU_RunTime.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/CPU_RunTime.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/baseInit.c" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/baseInit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/fsmc.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/fsmc.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/lcd.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/startup_stm32f407vetx.s" beforeDir="false" afterPath="$PROJECT_DIR$/Core/startup_stm32f407vetx.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/stm32f4xx_it.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/Base/GUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/Base/GUI.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI_Base.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI_Base.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Render/WaveCurve.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Render/WaveCurve.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/test.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/某些可能的奇技淫巧.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/inc/fft.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/fft.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/inc/flash_storage.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/flash_storage.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/inc/key.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/key.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/inc/wave_signal.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/wave_signal.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/src/cpu_temperature.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/src/cpu_temperature.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/src/fft.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/src/fft.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/src/key.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/src/key.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/src/wave_signal.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/src/wave_signal.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +99,7 @@
         <entry key="STM32F407.svd|g:GPIO" value="-C" />
         <entry key="STM32F407.svd|g:I2C" value="-C" />
         <entry key="STM32F407.svd|g:SPI" value="-C" />
-        <entry key="STM32F407.svd|g:TIM" value="-E" />
+        <entry key="STM32F407.svd|g:TIM" value="-C" />
         <entry key="STM32F407.svd|g:USART" value="-C" />
         <entry key="STM32F407.svd|g:USB_OTG_FS" value="-C" />
         <entry key="STM32F407.svd|g:USB_OTG_HS" value="-C" />
@@ -375,18 +391,18 @@
         <entry key="STM32F407.svd|p:C_ADC|CCR" value="HC" />
         <entry key="STM32F407.svd|p:C_ADC|CDR" value="HC" />
         <entry key="STM32F407.svd|p:C_ADC|CSR" value="HC" />
-        <entry key="STM32F407.svd|p:DAC" value="-E" />
+        <entry key="STM32F407.svd|p:DAC" value="-C" />
         <entry key="STM32F407.svd|p:DAC|CR" value="HC" />
         <entry key="STM32F407.svd|p:DAC|DHR12L1" value="HC" />
         <entry key="STM32F407.svd|p:DAC|DHR12L2" value="HC" />
         <entry key="STM32F407.svd|p:DAC|DHR12LD" value="HC" />
-        <entry key="STM32F407.svd|p:DAC|DHR12R1" value="HE" />
+        <entry key="STM32F407.svd|p:DAC|DHR12R1" value="HC" />
         <entry key="STM32F407.svd|p:DAC|DHR12R2" value="HC" />
         <entry key="STM32F407.svd|p:DAC|DHR12RD" value="HC" />
         <entry key="STM32F407.svd|p:DAC|DHR8R1" value="HC" />
         <entry key="STM32F407.svd|p:DAC|DHR8R2" value="HC" />
         <entry key="STM32F407.svd|p:DAC|DHR8RD" value="HC" />
-        <entry key="STM32F407.svd|p:DAC|DOR1" value="HE" />
+        <entry key="STM32F407.svd|p:DAC|DOR1" value="HC" />
         <entry key="STM32F407.svd|p:DAC|DOR2" value="HC" />
         <entry key="STM32F407.svd|p:DAC|SR" value="HC" />
         <entry key="STM32F407.svd|p:DAC|SWTRIGR" value="HC" />
@@ -1471,12 +1487,12 @@
         <entry key="STM32F407.svd|p:TIM5|PSC" value="HC" />
         <entry key="STM32F407.svd|p:TIM5|SMCR" value="HC" />
         <entry key="STM32F407.svd|p:TIM5|SR" value="HC" />
-        <entry key="STM32F407.svd|p:TIM6" value="-E" />
+        <entry key="STM32F407.svd|p:TIM6" value="-C" />
         <entry key="STM32F407.svd|p:TIM6|ARR" value="HC" />
         <entry key="STM32F407.svd|p:TIM6|CNT" value="HC" />
         <entry key="STM32F407.svd|p:TIM6|CR1" value="HC" />
         <entry key="STM32F407.svd|p:TIM6|CR2" value="HC" />
-        <entry key="STM32F407.svd|p:TIM6|DIER" value="HE" />
+        <entry key="STM32F407.svd|p:TIM6|DIER" value="HC" />
         <entry key="STM32F407.svd|p:TIM6|EGR" value="HC" />
         <entry key="STM32F407.svd|p:TIM6|PSC" value="HC" />
         <entry key="STM32F407.svd|p:TIM6|SR" value="HC" />
@@ -1637,7 +1653,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/BSP/Core/system_stm32f4xx.c" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/Core/startup_stm32f407vetx.s" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/startup_stm32f407xx.s" root0="SKIP_INSPECTION" />
@@ -1667,7 +1683,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;OpenOCD 下载并运行.OCD Furina.executor&quot;: &quot;Run&quot;,
+    &quot;OpenOCD 下载并运行.OCD Furina.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
@@ -1690,14 +1706,19 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Embedded\MCU\STM32\Furina\Application\Base" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Module" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Conf" />
-      <recent name="D:\Embedded\MCU\STM32\Furina\Application\Base" />
       <recent name="D:\Embedded\MCU\STM32\Furina\BSP\Core" />
       <recent name="D:\Embedded\MCU\STM32\Furina\BSP\Base" />
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -1895,6 +1916,9 @@
       <workItem from="1730896865625" duration="5652000" />
       <workItem from="1730976620977" duration="72000" />
       <workItem from="1730976866478" duration="19000" />
+      <workItem from="1730990078132" duration="5371000" />
+      <workItem from="1731050563510" duration="13946000" />
+      <workItem from="1731071057537" duration="3171000" />
     </task>
     <task id="LOCAL-00007" summary="__【未配置好】选出了一些从C++11到C++17中适合单片机开发的特性">
       <option name="closed" value="true" />
@@ -2353,7 +2377,7 @@
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
-        <watch expression="count" />
+        <watch expression="$control" />
       </configuration>
     </watches-manager>
   </component>
