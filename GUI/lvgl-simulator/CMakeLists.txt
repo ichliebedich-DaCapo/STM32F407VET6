@@ -36,7 +36,7 @@ add_compile_options(-O2 -g -DLV_CONF_INCLUDE_SIMPLE=1)
 
 #------------------------------------------库-------------------------------------------
 # 添加公共目录
-include_directories(${APP_DIR}/Conf ${APP_DIR}/${APP})
+#include_directories(${APP_DIR}/Conf ${APP_DIR}/${APP})
 
 #---------------lvgl库---------------
 file(GLOB_RECURSE LVGL_SRCS "resource/lvgl/*.c")
@@ -97,7 +97,7 @@ set_target_properties(libgui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
 # 链接外部库
-set(LIBRARIES pthread stdc++ m SDL2 decoder openh264 rlottie jansson curl)
+set(LIBRARIES   SDL2)
 set(LIBFILE_PATH resource/lib/native)
 # 全局设置应该链接的库的目录
 link_directories(${LIBFILE_PATH} ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib)
@@ -111,11 +111,6 @@ set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_
 # 复制程序运行所必需的库文件
 add_custom_target(copy_libs
         COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SIMULATOR_DIR}/SDL2/lib/SDL2.dll ${BIN_DIR}/SDL2.dll
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SIMULATOR_DIR}/multi_thread/libgcc_s_dw2-1.dll ${BIN_DIR}/libgcc_s_dw2-1.dll
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SIMULATOR_DIR}/multi_thread/pthreadGC-3.dll ${BIN_DIR}/pthreadGC-3.dll
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SIMULATOR_DIR}/multi_thread/libjansson-4.dll ${BIN_DIR}/libjansson-4.dll
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SIMULATOR_DIR}/multi_thread/libcurl.dll ${BIN_DIR}/libcurl.dll
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SIMULATOR_DIR}/SDL2/lib/libopenh264.dll ${BIN_DIR}/libopenh264.dll
 )
 add_dependencies(${PROJECT_NAME} copy_libs)
 

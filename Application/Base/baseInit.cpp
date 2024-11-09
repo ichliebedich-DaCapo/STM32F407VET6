@@ -1,22 +1,24 @@
 //
-// Created by 34753 on 2024/9/22.
+// Created by fairy on 2024/9/22.
 //
 
-#include "baseInit.h"
+#include "baseInit.hpp"
 #include "stm32f4xx_hal.h"
-#include "stm32f4xx_hal_tim.h"
 #include "lvgl.h"
 #include "lcd.h"
 #include "fsmc.h"
 #include "key_exit.h"
-#if FreeRTOS_DEBUG
 
+#if FreeRTOS_DEBUG
 #include "CPU_RunTime.h"
 #include "lv_port_disp.h"
+#include "GUI.hpp"
 
 #endif
 
 TIM_HandleTypeDef htim7;
+extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
+
 
 static inline void SystemClock_Config();
 
@@ -30,19 +32,14 @@ void BaseInit()
     ConfigureTimerForRunTimeStats();
 #endif
 
-    // 启用基础GPIO时钟
-    __HAL_RCC_GPIOC_CLK_ENABLE();
-    __HAL_RCC_GPIOH_CLK_ENABLE();
-    __HAL_RCC_GPIOA_CLK_ENABLE();
-
     fsmc_init();
     lcd_init();// 初始化LCD
     key_exti_init();
+
 #ifdef USE_FSMC_DMA
     fsmc_dma_init();// 初始化FSMC+DMA
 #endif
     lv_init();// 混账，搞了半天是因为漏加你才死机
-    lv_port_disp_init();// 进入临界保护区
 }
 
 
@@ -93,6 +90,11 @@ void HAL_MspInit(void)
 {
     __HAL_RCC_SYSCFG_CLK_ENABLE();
     __HAL_RCC_PWR_CLK_ENABLE();
+
+    // 启用基础GPIO时钟
+    __HAL_RCC_GPIOC_CLK_ENABLE();
+    __HAL_RCC_GPIOH_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
 
     HAL_NVIC_SetPriority(PendSV_IRQn, 15, 0);
 }
@@ -183,6 +185,8 @@ inline void HAL_ResumeTick(void)
 }
 
 // TIM7中断处理函数
+extern "C"
+{
 void TIM7_IRQHandler()
 {
 //    if (__HAL_TIM_GET_IT_SOURCE(&htim7, TIM_IT_UPDATE) != RESET)
@@ -192,12 +196,15 @@ void TIM7_IRQHandler()
 //        lv_tick_inc(1);
 //    }
 
-    // 我把TIM7当做系统时钟，所以并不需要判断中断源
+    // 我把TIM7当做系统时钟，只用到了基础定时器的更新计时功能，所以并不需要判断中断源
     __HAL_TIM_CLEAR_FLAG(&htim7, TIM_FLAG_UPDATE);
     HAL_IncTick();
     lv_tick_inc(1);
 }
+}
 
+
+#undef DMA2_S6CR
 
 #ifdef  USE_FULL_ASSERT
 /**

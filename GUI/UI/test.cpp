@@ -78,7 +78,7 @@ int keyboard_thread(void *data)
 
 
                 case 'g':
-                    uiInterface::sub_wave_cnt();
+                    uiInterface::switch_wave_type();
                     printf("E pressed\n");
                     break;
 

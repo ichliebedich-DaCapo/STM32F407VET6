@@ -6,8 +6,15 @@
 #define FURINA_CPU_RUNTIME_H
 #include "JYZQ_Conf.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #if FreeRTOS_DEBUG
 void ConfigureTimerForRunTimeStats();
 #endif
 
+#ifdef __cplusplus
+}
+#endif
 #endif //FURINA_CPU_RUNTIME_H

@@ -6,7 +6,7 @@
 #define FURINA_DSP_HPP
 
 #include "JYZQ_Conf.h"
-#include "arm_math.h"
+
 /* 预编译命令 */
 #ifdef USE_FFT
 // 头文件
