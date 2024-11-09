@@ -584,9 +584,7 @@ auto SignalGenerator::sub_ratio() -> void
 
 auto SignalGenerator::print_tick() -> void
 {
-    char buf[12];
-    sprintf(buf, "tick：\n%lu", get_tick());
-    Text::set_text(buf, GUI_Base::get_ui()->main.label_tick);
+    Text::set_text(GUI_Base::get_ui()->main.label_tick, "tick：\n%lu", get_tick());
 }
 
 

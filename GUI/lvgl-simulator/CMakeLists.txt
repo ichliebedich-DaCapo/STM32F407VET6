@@ -10,6 +10,7 @@ project(Simulator)
 
 # 设置编译器
 set(CMAKE_C_COMPILER gcc)
+set(CMAKE_CXX_COMPILER g++)
 set(CMAKE_CXX_STANDARD 20)
 
 # 定义路径
@@ -28,7 +29,11 @@ set(LIB_DIR ${BUILD_DIR}/lib)
 
 # 编译选项
 # 开-O2和-O3有时候会卡死，但相同情况下真机没有问题
-add_compile_options(-O2 -g -DLV_CONF_INCLUDE_SIMPLE=1)
+
+add_compile_options(-O2 -g -DLV_CONF_INCLUDE_SIMPLE=1 )
+
+# 设置 C++ 编译器的特定选项
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fconcepts")
 
 # 添加链接选项,显示内存分布，但现在不能使用
 #add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${BIN_DIR}/${PROJECT_NAME}.map)

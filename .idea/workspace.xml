@@ -33,10 +33,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】可以先整理模拟器，然后再继续优化算法，比如数组索引等">
-      <change afterPath="$PROJECT_DIR$/GUI/Component/FPS.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/Render/Tools.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Component/text.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/text.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1893,7 +1893,7 @@
       <workItem from="1731071057537" duration="11664000" />
       <workItem from="1731126680338" duration="11017000" />
       <workItem from="1731138557520" duration="3000" />
-      <workItem from="1731146753731" duration="630000" />
+      <workItem from="1731146753731" duration="1566000" />
     </task>
     <task id="LOCAL-00010" summary="__【未配置好】根据远古代码写的SPI Flash驱动">
       <option name="closed" value="true" />
