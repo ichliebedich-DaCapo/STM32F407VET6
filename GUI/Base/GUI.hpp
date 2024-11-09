@@ -29,7 +29,16 @@ namespace
     constexpr uint16_t MY_DISP_HOR_RES = 480;
     constexpr uint16_t MY_DISP_VER_RES = 320;
     constexpr uint16_t MY_DISP_BUF_SIZE = 20;
+
+    lv_disp_drv_t disp_drv{};
 }
+static inline auto LVGL_LCD_FSMC_DMA_pCallback() -> void
+{
+    disp_drv.draw_buf->flushing = 0;
+    disp_drv.draw_buf->flushing_last = 0;
+}
+
+
 
 /**
  * @brief GUI类
@@ -62,6 +71,7 @@ auto GUI::handler() -> void
 {
     lv_task_handler();
 }
+
 
 /**
  * @brief 回调函数

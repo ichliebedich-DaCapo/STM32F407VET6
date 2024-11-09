@@ -12,7 +12,6 @@ extern "C" {
 #endif
 
 
-
 void fsmc_init();
 #ifdef USE_FSMC_DMA
 void fsmc_dma_init();

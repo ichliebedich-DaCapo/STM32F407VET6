@@ -17,7 +17,7 @@
 #include "adc.h"
 #include "key.hpp"
 #include "GUI.hpp"
-
+#include "fsmc.h"
 
 #define KEY_RAM (*((volatile unsigned short *)0x6006000C)) // 键盘接口地址
 extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;

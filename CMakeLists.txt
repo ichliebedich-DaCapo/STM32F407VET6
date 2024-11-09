@@ -2,11 +2,17 @@
 # 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
 set(APP_DIR Application/signalGenerator)
 # --------------------------------------选择你的项目------------------------------
+# 是否使用独立静态库链接
+# 注释后，可以使用链接优化-flto，并且默认开启链接优化
+set(STATIC_MODULE_LD True)
+# --------------------------------------某些配置------------------------------
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_VERSION 1)
 cmake_minimum_required(VERSION 3.29)
+#设置编译目标类型为静态，必须放在project语句前面
+set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
-# -----------------编译器-----------------
+# ----------------------------------设置编译工具-------------------------------
 # -------gcc-------
 set(CMAKE_C_COMPILER arm-none-eabi-gcc)
 set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
@@ -26,14 +32,13 @@ set(SIZE arm-none-eabi-size)
 #set(CMAKE_OBJDUMP llvm-objdump)
 #set(SIZE llvm-size)
 
-set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
-
 # -----------------工程设置-----------------
+
 project(Furina C CXX ASM)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_C_STANDARD 11)
 
-# -----------------判断编译器类别-----------------
+# ----------------------判断编译器类别--------------------
 if (${CMAKE_C_COMPILER_ID} STREQUAL "GNU")
     message(STATUS "Using GCC compiler")
     set(COMPILER_IS_GCC TRUE)
@@ -45,12 +50,12 @@ else ()
 endif ()
 
 
-# -----------添加宏定义----------
+# ------------------------添加宏定义--------------------------
 add_compile_definitions(ARM_MATH_CM4;ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING)
 # 使用Debug，使用HAL库。    -DUSE_FULL_LL_DRIVER 使用LL库
 add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx)
 
-
+#--------------------------编译选项----------------------------
 # 根据编译器类型设置特定编译选项
 if (COMPILER_IS_GCC)
     add_compile_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
@@ -59,8 +64,8 @@ if (COMPILER_IS_GCC)
     #add_compile_options(-mfloat-abi=soft)
 
 elseif (COMPILER_IS_CLANG)
-    add_compile_options(-target armv7em-none-eabi )
-#    add_compile_options(-mcpu=cortex-m4 -mthumb )
+    add_compile_options(-target armv7em-none-eabi)
+    #    add_compile_options(-mcpu=cortex-m4 -mthumb )
     # 硬件浮点和软件浮点，任选一个
     add_compile_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
     link_directories("E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain_v13_3/lib/gcc/arm-none-eabi/13.3.1")
@@ -68,11 +73,10 @@ elseif (COMPILER_IS_CLANG)
 endif ()
 
 
+#---------------------------优化选项--------------------------
 add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-length=0)
-
 # Enable assembler files preprocessing
 add_compile_options($<$<COMPILE_LANGUAGE:ASM>:-x$<SEMICOLON>assembler-with-cpp>)
-
 
 # 如果不开优化，使用LVGL时有可能因为栈爆而导致数组越界，进而进入硬件错误中断。至少需要开-Og
 if (COMPILER_IS_GCC)
@@ -88,24 +92,25 @@ if (COMPILER_IS_GCC)
     #-flto:在链接阶段进行优化,允许进行跨文件的优化，进一步提高性能，但耗时间（项目本来就小我不在乎），并且这个优化容易出问题（这个我很在乎）
     #-fprofile-generate（生成配置文件） 和 -fprofile-use（基于配置文件的优化）
     add_compile_options(-Ofast -g)
-    # 不调试了再开启
-    #add_compile_options(-flto )
+    # 必须关闭静态库独立模块编译，才能够使用链接优化
+    if (NOT STATIC_MODULE_LD)
+        add_compile_options(-flto )
+    endif ()
 elseif (COMPILER_IS_CLANG)
-    add_compile_options( -O3 -ffast-math -g3  -Wextra)
+    add_compile_options(-O3 -ffast-math -g3 -Wextra)
     # 禁用依赖扫描
-#    set(CMAKE_CXX_DEPFILE_FORMAT none)
-#    set(CMAKE_CXX_DEPENDS_GENERATOR "")
+    #    set(CMAKE_CXX_DEPFILE_FORMAT none)
+    #    set(CMAKE_CXX_DEPENDS_GENERATOR "")
 endif ()
 
 # ----------------对选择的项目进行字符串处理，以匹配对应的UI文件--------------
 
 # 提取 APP_DIR 的末尾部分
 string(REGEX REPLACE "^.*/(.+)$" "\\1" APP_DIR_LAST_PART "${APP_DIR}")
-
 # 拼接新的 UI_DIR
 set(UI_DIR "GUI/UI/${APP_DIR_LAST_PART}")
 
-# 设置编译目录
+# ----设置编译目录----
 set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
 set(LIB_DIR ${BUILD_DIR}/lib)
 set(BIN_DIR ${BUILD_DIR}/bin)
@@ -113,14 +118,15 @@ set(BIN_DIR ${BUILD_DIR}/bin)
 #-------------------------------------------库-------------------------------------------
 # 官方驱动库
 file(GLOB_RECURSE DRIVERS_SRC "Drivers/STM32F4xx_HAL_Driver/Src/*.c")
-add_library(libdrivers STATIC ${DRIVERS_SRC})
-target_include_directories(libdrivers PUBLIC
+set(DRIVERS_DIR
         Drivers
         Drivers/STM32F4xx_HAL_Driver/Inc
         Drivers/STM32F4xx_HAL_Driver/Inc/Legacy
         Drivers/CMSIS/Device/ST/STM32F4xx/Include
         Drivers/CMSIS/Include
 )
+add_library(libdrivers STATIC ${DRIVERS_SRC})
+target_include_directories(libdrivers PUBLIC ${DRIVERS_DIR})
 # 设置静态库的输出目录
 set_target_properties(libdrivers PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
@@ -129,16 +135,17 @@ set_target_properties(libdrivers PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 # -----lvgl库-----
 file(GLOB_RECURSE LVGL_SRC
         # LVGL库
-        "Library/Third_Party/lvgl/src/*.c"
-        "Library/Third_Party/lvgl/examples/porting/*.c"
+        "Library/Third_Party/LVGL/lvgl/src/*.c"
+        "Library/Third_Party/LVGL/lvgl/examples/porting/*.c"
+)
+set(LVGL_DIR
+        Library/Third_Party/LVGL
+        Library/Third_Party/LVGL/lvgl/src
+        Library/Third_Party/LVGL/lvgl/examples/porting
 )
 add_library(liblvgl STATIC ${LVGL_SRC})
 target_include_directories(liblvgl PRIVATE BSP/inc)
-target_include_directories(liblvgl PUBLIC
-        Library/Third_Party/
-        Library/Third_Party/lvgl/src
-        Library/Third_Party/lvgl/examples/porting
-)
+target_include_directories(liblvgl PUBLIC ${LVGL_DIR})
 # 依赖BSP中的lcd库 耦合有些严重，后面慢慢改
 target_link_libraries(liblvgl PUBLIC libdrivers)
 # 设置静态库的输出目录
@@ -152,18 +159,19 @@ file(GLOB_RECURSE FREERTOS_SRC
         "Library/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c"
         "Library/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c"
 )
+set(FREERTOS_DIR
+        Library/Third_Party/FreeRTOS
+        Library/Third_Party/FreeRTOS/Source/include
+        Library/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
+        Library/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
+)
 add_library(libfreertos STATIC ${FREERTOS_SRC})
 target_include_directories(libfreertos PRIVATE
         Drivers
         Drivers/STM32F4xx_HAL_Driver/Inc
         Drivers/CMSIS/Include
         Drivers/CMSIS/Device/ST/STM32F4xx/Include)
-target_include_directories(libfreertos PUBLIC
-        Library/Third_Party/FreeRTOS
-        Library/Third_Party/FreeRTOS/Source/include
-        Library/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
-        Library/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
-)
+target_include_directories(libfreertos PUBLIC ${FREERTOS_DIR})
 # 设置静态库的输出目录
 set_target_properties(libfreertos PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
@@ -174,12 +182,13 @@ file(GLOB_RECURSE DSP_SRC
         "Library/CMSIS/DSP/Source/TransformFunctions/arm_cfft_init_f32.c"
         "Library/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_f32.c"
 )
-add_library(libdsp STATIC ${DSP_SRC})
-target_include_directories(libdsp PRIVATE Drivers/CMSIS/Include)
-target_include_directories(libdsp PUBLIC
+set(DSP_DIR
         Library/CMSIS/DSP/Include
         Library/CMSIS/DSP/PrivateInclude
 )
+add_library(libdsp STATIC ${DSP_SRC})
+target_include_directories(libdsp PRIVATE Drivers/CMSIS/Include)
+target_include_directories(libdsp PUBLIC ${DSP_DIR})
 # 设置静态库的输出目录
 set_target_properties(libdsp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
@@ -187,10 +196,11 @@ set_target_properties(libdsp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 #---------------------用户库-----------------------
 # ------BSP库------
 file(GLOB_RECURSE BSP_SRC "BSP/src/*.c")
-add_library(libbsp STATIC ${BSP_SRC})
-target_include_directories(libbsp PUBLIC
+set(BSP_DIR
         BSP/inc
 )
+add_library(libbsp STATIC ${BSP_SRC})
+target_include_directories(libbsp PUBLIC ${BSP_DIR})
 target_link_libraries(libbsp PUBLIC libdrivers liblvgl)
 # 设置静态库的输出目录
 set_target_properties(libbsp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
@@ -198,10 +208,11 @@ set_target_properties(libbsp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 # ------Data库------
 file(GLOB_RECURSE DATA_SRC "Library/Data/*.c")
-add_library(libdata STATIC ${DATA_SRC})
-target_include_directories(libdata INTERFACE
+set(DATA_DIR
         Library/Data
 )
+add_library(libdata STATIC ${DATA_SRC})
+target_include_directories(libdata INTERFACE ${DATA_DIR})
 # 设置静态库的输出目录
 set_target_properties(libdata PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
@@ -214,14 +225,15 @@ file(GLOB_RECURSE GUI_SRC
         "GUI/Events/*.cpp"
         "GUI/Render/*.cpp"
 )
-add_library(libgui STATIC ${GUI_SRC})
-target_include_directories(libgui PUBLIC
+set(GUI_DIR
         ${UI_DIR}
         GUI/Base
         GUI/Component
         GUI/Events
         GUI/Render
 )
+add_library(libgui STATIC ${GUI_SRC})
+target_include_directories(libgui PUBLIC ${GUI_DIR})
 # 依赖lvgl库
 target_link_libraries(libgui PUBLIC liblvgl libbsp)
 # 设置静态库的输出目录
@@ -230,8 +242,11 @@ set_target_properties(libgui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 # ------Module库------
 file(GLOB_RECURSE MODULE_SRC "Module/src/*.cpp")
+set(MODULE_DIR
+        Module/inc
+)
 add_library(libmodule STATIC ${MODULE_SRC})
-target_include_directories(libmodule PUBLIC Module/inc)
+target_include_directories(libmodule PUBLIC ${MODULE_DIR})
 target_link_libraries(libmodule PRIVATE libdsp libdata)
 # 设置静态库的输出目录
 set_target_properties(libmodule PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
@@ -239,8 +254,11 @@ set_target_properties(libmodule PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 # ------Application库------
 file(GLOB_RECURSE APPLICATION_SRC "${APP_DIR}/app.cpp" "Application/Base/main.cpp" "Application/Base/baseInit.cpp")
+set(APPLICATION_DIR
+        Application/Base
+)
 add_library(libapp STATIC ${APPLICATION_SRC})
-target_include_directories(libapp PUBLIC Application/Base)
+target_include_directories(libapp PUBLIC ${APPLICATION_DIR})
 # 需要链接 libdsp libdata libgui libbsp libmodule等，根据需要选
 target_link_libraries(libapp PUBLIC libdsp libdata libgui libbsp libmodule)
 # 设置静态库的输出目录
@@ -248,10 +266,32 @@ set_target_properties(libapp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
 # ---------包含公共目录--------
-include_directories(Application/Conf ${APP_DIR})
-
-# 这里面不能直接添加到静态库里 否则链接时会出现找不到定义的现象
-file(GLOB_RECURSE SOURCES "Core/*.*" "Application/Base/ISR.cpp")
+if (STATIC_MODULE_LD)
+    include_directories(Application/Conf ${APP_DIR})
+    # 这里面不能直接添加到静态库里 否则链接时会出现找不到定义的现象
+    file(GLOB_RECURSE SOURCES "Core/*.*" "Application/Base/ISR.cpp")
+else ()
+    include_directories(Application/Conf ${APP_DIR}
+            ${DRIVERS_DIR}
+            ${LVGL_DIR}
+            #            ${FREERTOS_DIR}
+            ${BSP_DIR}
+            ${DATA_DIR}
+            ${GUI_DIR}
+            ${MODULE_DIR}
+            ${APPLICATION_DIR}
+    )
+    file(GLOB_RECURSE SOURCES "Core/*.*" "Application/Base/ISR.cpp"
+            ${DRIVERS_SRC}
+            ${LVGL_SRC}
+            #            ${FREERTOS_SRC}
+            ${BSP_SRC}
+            ${DATA_SRC}
+            ${GUI_SRC}
+            ${MODULE_SRC}
+            ${APPLICATION_SRC}
+    )
+endif ()
 
 # 设置链接脚本
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld)
@@ -261,7 +301,7 @@ add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
 if (COMPILER_IS_GCC)
     add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
 elseif (COMPILER_IS_CLANG)
-    add_link_options(-mcpu=cortex-m4 )
+    add_link_options(-mcpu=cortex-m4)
 endif ()
 add_link_options(-T ${LINKER_SCRIPT})
 
@@ -277,11 +317,17 @@ add_link_options(-T ${LINKER_SCRIPT})
 add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${BIN_DIR}/${PROJECT_NAME}.map)
 #add_link_options(-Wl,--strip-all)# 好像没有作用
 
+# 设置链接目标
 add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
-target_link_libraries(${PROJECT_NAME}.elf PRIVATE libapp)
-# 设置静态库的输出目录
-set_target_properties(${PROJECT_NAME}.elf PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
 
+# 是否链接静态库
+if (STATIC_MODULE_LD)
+    target_link_libraries(${PROJECT_NAME}.elf PRIVATE libapp)
+    # 设置静态库的输出目录
+    set_target_properties(${PROJECT_NAME}.elf PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
+endif ()
+
+# 定义hex和bin文件
 set(HEX_FILE ${BIN_DIR}/${PROJECT_NAME}.hex)
 set(BIN_FILE ${BIN_DIR}/${PROJECT_NAME}.bin)
 
@@ -290,5 +336,4 @@ set(BIN_FILE ${BIN_DIR}/${PROJECT_NAME}.bin)
 add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
         COMMAND ${CMAKE_OBJCOPY} -Oihex $<TARGET_FILE:${PROJECT_NAME}.elf> ${HEX_FILE}
         COMMAND ${CMAKE_OBJCOPY} -Obinary $<TARGET_FILE:${PROJECT_NAME}.elf> ${BIN_FILE}
-        COMMENT "Building ${HEX_FILE}
-Building ${BIN_FILE}")
+        COMMENT "Building ${HEX_FILE}   Building ${BIN_FILE}")
