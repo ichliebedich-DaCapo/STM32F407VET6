@@ -201,7 +201,7 @@
 // 常量
 //constexpr uint32_t Freq_8K = 30;
 //constexpr uint32_t Freq_16K = 15;
-constexpr uint32_t Freq_8K = 70;
+constexpr uint32_t Freq_8K = 75;
 constexpr uint32_t Freq_16K = 12;
 constexpr uint8_t index_offset_8K = 2;// 8K下索引递增值
 constexpr uint8_t index_offset_16K = 4;// 16K下索引递增值
@@ -392,9 +392,9 @@ auto Screen::init() -> void
     label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
     label.init(gui->main.label_title, 190, 13, 140, 30, "双音频信号发生器");
 
-    // fps
-    Tools::fps_init(&lv_customer_font_SourceHanSerifSC_Regular_13, 415, 0);
-    Tools::set_right();
+    // print
+    FPS::init(&lv_customer_font_SourceHanSerifSC_Regular_13, 415, 0);
+    FPS::set_right();
 }
 
 
@@ -515,7 +515,7 @@ auto SignalGenerator::handler() -> void
 
     // 显示FPS
     if (is_fps)
-        Tools::fps(is_fps_time);
+        FPS::print(is_fps_time);
 }
 
 
@@ -524,7 +524,7 @@ auto SignalGenerator::start() -> void
     tick_timer.resume();
     // 重置FPS刷新计数
     if (is_fps)
-        Tools::restart_fps();
+        FPS::restart();
 }
 
 auto SignalGenerator::stop() -> void
@@ -584,9 +584,7 @@ auto SignalGenerator::sub_ratio() -> void
 
 auto SignalGenerator::print_tick() -> void
 {
-    char buf[12];
-    sprintf(buf, "tick：\n%lu", get_tick());
-    Text::set_text(buf, GUI_Base::get_ui()->main.label_tick);
+    Text::set_text(GUI_Base::get_ui()->main.label_tick, "tick：\n%lu", get_tick());
 }
 
 
@@ -640,7 +638,7 @@ auto SignalGenerator::show_fps(bool is_show) -> void
 {
     is_fps = is_show;
     if (is_show)
-        Tools::restart_fps();
+        FPS::restart();
 }
 
 /**

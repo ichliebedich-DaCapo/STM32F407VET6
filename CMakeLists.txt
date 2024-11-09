@@ -4,7 +4,7 @@ set(APP_DIR Application/signalGenerator)
 # --------------------------------------选择你的项目------------------------------
 # 是否使用独立静态库链接
 # 注释后，可以使用链接优化-flto，并且默认开启链接优化
-#set(STATIC_MODULE_LD True)
+set(STATIC_MODULE_LD True)
 # --------------------------------------某些配置------------------------------
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_VERSION 1)

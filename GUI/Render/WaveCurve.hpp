@@ -16,6 +16,7 @@
 #include "lv_drivers/display/monitor.h"
 
 #endif
+
 #include <cstring> // 引入string.h以使用memmove
 #include <valarray>
 
@@ -69,10 +70,35 @@ private:
     template<typename T>
     static inline auto switch_ptr(T *&p1, T *&p2) -> void;
 
+    static inline auto get_index(const Coord &N, const auto &index) -> Coord
+    {
+
+        if (index + index_offset >= N)
+        {
+            return index + index_offset - N;
+        } else
+        {
+            return index + index_offset;
+        }
+
+    }
+
+    static inline auto add_index(Coord N) -> void
+    {
+        ++index_offset;
+        if (index_offset == N)
+            index_offset = 0;
+    }
+
+
+
+
 private:
     // 定义步长，决定曲线的平滑度
     static constexpr float smoothness = 0.1f;// 定为0.1比较适合，不推荐改，再小会非常卡，太大曲线会不连续
     static constexpr uint16_t buffer_size = (uint16_t) (1.0f / smoothness) + 1;
+
+    static inline Coord index_offset = 0;//用于优化索引
 
     // 定义大量静态数组时千万不要把volatile去掉，程序对数组的优化，尤其是静态数组，总是容易优化死
     // 根据我的远古回忆，上次优化导致卡死还是在使用TI(默认-O2还是-O3来着)时，定义了一个很小的静态数组，结果排查了半天
@@ -344,7 +370,7 @@ WaveCurve<Coord>::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Co
         for (int j = 0; j < once_points; ++j)
         {
             x[j] = (Coord) (Start_x + (float) (i + j) * step);
-            y[j] = (Coord) (Start_y + Height - (data[i + j] * ratio));
+            y[j] = (Coord) (Start_y + Height - (data[get_index(N,i + j)] * ratio));
         }
 
         // 绘制曲线
@@ -352,8 +378,11 @@ WaveCurve<Coord>::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Co
     }
 
     /********************更新数据*******************/
-    memmove(data, data + 1, (N - 1) * sizeof(data[0]));// 将数据左移一位
-    data[N - 1] = value;// 一放在前面就会卡死，不知缘由 总不能是该死的优化导致的吧
+    add_index(N);
+    data[index_offset?index_offset-1: N - 1] = value;
+//    data[N - 1] = value;// 这个错误也挺具备观赏性的
+//    memmove(data, data + 1, (N - 1) * sizeof(data[0]));// 将数据左移一位
+//    data[N - 1] = value;// 一放在前面就会卡死，不知缘由 总不能是该死的优化导致的吧
 }
 
 #endif //SIMULATOR_WAVECURVE_HPP
