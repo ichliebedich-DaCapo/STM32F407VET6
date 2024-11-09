@@ -148,8 +148,6 @@ protected:
     static inline _lv_obj_t *_parent;
 
     /*初始化器*/
-
-
 };
 
 // 设置父对象

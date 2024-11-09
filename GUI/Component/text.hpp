@@ -41,7 +41,6 @@ public:
     /*自定义初始化函数*/
     inline auto init(Obj text,  Coord x, Coord y, Coord w, Coord h,Strings string= nullptr,Color text_color=lv_color_hex(0))->void ;
 
-
     // 设置文本框字体
     [[maybe_unused]] inline auto init_font(Font font) -> void;
 

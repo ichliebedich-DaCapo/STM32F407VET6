@@ -34,6 +34,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】可以先整理模拟器，然后再继续优化算法，比如数组索引等">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Component/component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/component.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/Component/text.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/text.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
