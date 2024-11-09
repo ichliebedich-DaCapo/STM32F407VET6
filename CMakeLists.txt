@@ -4,7 +4,7 @@ set(APP_DIR Application/signalGenerator)
 # --------------------------------------选择你的项目------------------------------
 # 是否使用独立静态库链接
 # 注释后，可以使用链接优化-flto，并且默认开启链接优化
-set(STATIC_MODULE_LD True)
+#set(STATIC_MODULE_LD True)
 # --------------------------------------某些配置------------------------------
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_VERSION 1)
@@ -75,7 +75,7 @@ endif ()
 
 #---------------------------优化选项--------------------------
 add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-length=0)
-# Enable assembler files preprocessing
+# 允许预处理器处理汇编文件
 add_compile_options($<$<COMPILE_LANGUAGE:ASM>:-x$<SEMICOLON>assembler-with-cpp>)
 
 # 如果不开优化，使用LVGL时有可能因为栈爆而导致数组越界，进而进入硬件错误中断。至少需要开-Og
@@ -94,7 +94,14 @@ if (COMPILER_IS_GCC)
     add_compile_options(-Ofast -g)
     # 必须关闭静态库独立模块编译，才能够使用链接优化
     if (NOT STATIC_MODULE_LD)
+#仅使用 add_compile_options(-flto)：
+#   结果：编译器生成的中间表示（IR）包含优化所需的信息，但链接器不会进行优化。
+#   问题：LTO 的效果不完整，性能提升有限。
+#仅使用 add_link_options(-flto)：
+#   结果：链接器尝试进行优化，但编译器生成的对象文件可能不包含足够的信息。
+#   问题：链接器无法进行有效的优化，可能导致编译错误或优化失败。
         add_compile_options(-flto )
+        add_link_options(-flto)
     endif ()
 elseif (COMPILER_IS_CLANG)
     add_compile_options(-O3 -ffast-math -g3 -Wextra)
@@ -201,7 +208,7 @@ set(BSP_DIR
 )
 add_library(libbsp STATIC ${BSP_SRC})
 target_include_directories(libbsp PUBLIC ${BSP_DIR})
-target_link_libraries(libbsp PUBLIC libdrivers liblvgl)
+target_link_libraries(libbsp PUBLIC libdrivers)
 # 设置静态库的输出目录
 set_target_properties(libbsp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
@@ -323,7 +330,7 @@ add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
 # 是否链接静态库
 if (STATIC_MODULE_LD)
     target_link_libraries(${PROJECT_NAME}.elf PRIVATE libapp)
-    # 设置静态库的输出目录
+    # 设置可执行文件的输出目录
     set_target_properties(${PROJECT_NAME}.elf PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
 endif ()
 
