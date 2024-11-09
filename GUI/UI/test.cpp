@@ -1,3 +1,9 @@
+/**
+ *  @brief 测试用的文件
+ *  @note 本文件一是为了能加载出UI这个文件夹，二为测试，给模拟器开一些“洞”，以更自由地测试。
+ */
+
+
 #include <cmath>
 #include <unistd.h>
 #include "lvgl.h"
