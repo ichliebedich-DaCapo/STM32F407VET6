@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 {
     lv_init();
     hal_init();
-    GUI::init();
+    GUI::resource_init();
 
     // 自定义线程
     SDL_CreateThread(keyboard_thread, "tick", nullptr);

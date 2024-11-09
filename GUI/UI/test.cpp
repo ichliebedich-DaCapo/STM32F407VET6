@@ -100,6 +100,6 @@ int keyboard_thread(void *data)
         }
     }
 
-    return 0;  /* 这个函数实际上永远不会返回，因为它一直在循环中运行 */
+    return keep_running;  /* 这个函数实际上永远不会返回，因为它一直在循环中运行 */
 }
 

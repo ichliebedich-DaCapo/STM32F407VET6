@@ -32,7 +32,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】略微优化了CMakelists">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】可以先整理模拟器，然后再继续优化算法，比如数组索引等">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -1890,6 +1890,7 @@
       <workItem from="1731071057537" duration="11664000" />
       <workItem from="1731126680338" duration="11017000" />
       <workItem from="1731138557520" duration="3000" />
+      <workItem from="1731146753731" duration="3000" />
     </task>
     <task id="LOCAL-00010" summary="__【未配置好】根据远古代码写的SPI Flash驱动">
       <option name="closed" value="true" />

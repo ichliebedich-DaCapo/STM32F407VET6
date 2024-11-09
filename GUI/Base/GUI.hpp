@@ -22,8 +22,6 @@
 #define SIMPLE_FPS 1 // 启用简单FPS，减少一点点FPS显示对实际帧率的影响。不严谨地对于某个简单的测试来说，从30ms减少到了21ms
 
 /*匿名命名空间，专治各种函数变量暴露狂*/
-//extern lv_disp_drv_t disp_drv;
-
 namespace
 {
     constexpr uint16_t MY_DISP_HOR_RES = 480;
@@ -54,7 +52,11 @@ public:
     // 刷新回调
     static inline auto LVGL_LCD_FSMC_DMA_pCallback()->void;
 
+#ifdef  ARM_MATH_CM4
 private:
+#else
+public:
+#endif
     static auto resource_init() -> void;// 初始化界面
 
     template<void (*flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)>
