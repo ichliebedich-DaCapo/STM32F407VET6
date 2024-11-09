@@ -201,7 +201,7 @@
 // 常量
 //constexpr uint32_t Freq_8K = 30;
 //constexpr uint32_t Freq_16K = 15;
-constexpr uint32_t Freq_8K = 24;
+constexpr uint32_t Freq_8K = 75;
 constexpr uint32_t Freq_16K = 12;
 constexpr uint8_t index_offset_8K = 2;// 8K下索引递增值
 constexpr uint8_t index_offset_16K = 4;// 16K下索引递增值
