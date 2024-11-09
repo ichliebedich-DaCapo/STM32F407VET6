@@ -32,9 +32,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】整合了链接优化选项">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】略微优化了CMakelists">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1694,11 +1693,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="libapp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libapp" CONFIG_NAME="Release">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -1894,15 +1888,8 @@
       <workItem from="1730990078132" duration="5371000" />
       <workItem from="1731050563510" duration="13946000" />
       <workItem from="1731071057537" duration="11664000" />
-      <workItem from="1731126680338" duration="10561000" />
-    </task>
-    <task id="LOCAL-00009" summary="__【未配置好】略微修改了一下JYZQ_Conf.h">
-      <option name="closed" value="true" />
-      <created>1728393280058</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1728393280058</updated>
+      <workItem from="1731126680338" duration="11017000" />
+      <workItem from="1731138557520" duration="3000" />
     </task>
     <task id="LOCAL-00010" summary="__【未配置好】根据远古代码写的SPI Flash驱动">
       <option name="closed" value="true" />
@@ -2288,7 +2275,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731134723294</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="【双音频信号发生器】略微优化了CMakelists">
+      <option name="closed" value="true" />
+      <created>1731138259424</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1731138259424</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2342,13 +2337,13 @@
     <MESSAGE value="【双音频信号发生器】调整项目组织结构" />
     <MESSAGE value="【双音频信号发生器】完成了这次的项目优化，后面还有许多不妥之处，后续再慢慢改" />
     <MESSAGE value="【双音频信号发生器】完善了一下Readme" />
-    <MESSAGE value="【双音频信号发生器】略微优化了CMakelists" />
     <MESSAGE value="【双音频信号发生器】实测过程中，发现定时器的psc和arr有些古怪：比如我明明把psc与arr颠倒了却仍得到相同的结果，另外arr在1和0范围内有些古怪。128*8K有些高，卡在定时器中断里不出来，这并不应该" />
     <MESSAGE value="【双音频信号发生器】硬件基本功能已正确，可整一些花活了" />
     <MESSAGE value="【双音频信号发生器】基本功能已全部完备，可以添加CPU温度显示了" />
     <MESSAGE value="【双音频信号发生器】成功降低程序的耦合" />
     <MESSAGE value="【双音频信号发生器】整合了链接优化选项" />
-    <option name="LAST_COMMIT_MESSAGE" value="【双音频信号发生器】整合了链接优化选项" />
+    <MESSAGE value="【双音频信号发生器】略微优化了CMakelists" />
+    <option name="LAST_COMMIT_MESSAGE" value="【双音频信号发生器】略微优化了CMakelists" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
