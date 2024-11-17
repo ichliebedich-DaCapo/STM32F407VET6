@@ -44,15 +44,24 @@ void usart1_init() {
 }
 
 
-int fputc(int ch, FILE *f)
+//int fputc(int ch, FILE *f)
+//
+//{
+//    while(1){}
+//      HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xffff);
+////    while( __HAL_UART_GET_FLAG(&huart1, UART_FLAG_TXE)==RESET);
+////    huart1.Instance->DR=ch;
+//
+//  return ch;
+//
+//}
 
+// gcc专用重定向
+#ifdef __GNUC__
+int _write(int fd, char *ptr, int len)
 {
-
-      HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xffff);
-//    while( __HAL_UART_GET_FLAG(&huart1, UART_FLAG_TXE)==RESET);
-//    huart1.Instance->DR=ch;
-
-  return ch;
-
+  HAL_UART_Transmit(&huart1, (uint8_t*)ptr, len, 0xFFFF);
+  return len;
 }
+#endif
 #endif

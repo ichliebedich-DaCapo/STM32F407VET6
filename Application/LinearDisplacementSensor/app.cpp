@@ -11,8 +11,6 @@
 #include "key.hpp"
 #include "usart.h"
 
-#define BUFFER_SIZE 100
-float adcValues[BUFFER_SIZE]{};
 
 void app_init()
 {
@@ -26,18 +24,16 @@ void key_handler()
   switch (Key::getCode())
     {
         case keyk0://开始采集数据
-//               if (Key::stateHandler(KEY_STATE_TWO))
-//            {
-//                   adc1_start_it();
-//
-//            } else
-//            {
-//                   adc1_stop_it();
-//
-//            }
-                 printf("abcdefg\r\n");
-                 printf("123456\r\n");
-                 printf("中文\r\n");
+               if (Key::stateHandler(KEY_STATE_TWO))
+            {
+                   adc1_start_it();
+
+            } else
+            {
+                   adc1_stop_it();
+
+            }
+
             break;
 
         default:
@@ -48,14 +44,10 @@ void key_handler()
 // 用于采集ADC数据
 void adc1_isr()
 {
-    static uint16_t index = 0;
     // 获取ADC值
     uint16_t adcValue = HAL_ADC_GetValue(&hadc1);
 
-    // 将ADC值存入数组
-    adcValues[index] = adcValue/4095.0f*200;
-
-    // 更新索引，循环使用数组
-    index = (index + 1) % BUFFER_SIZE;
+   // 打印ADC值
+    printf("%.2f\r\n",adcValue/4095.0f*200);
 
 }

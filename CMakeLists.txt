@@ -5,7 +5,7 @@ set(APP_DIR Application/LinearDisplacementSensor)
 # --------------------------------------选择你的项目------------------------------
 # 是否使用独立静态库链接
 # 注释后，可以使用链接优化-flto，并且默认开启链接优化
-set(STATIC_MODULE_LD True)
+#set(STATIC_MODULE_LD True)
 # --------------------------------------某些配置------------------------------
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_VERSION 1)
@@ -104,8 +104,8 @@ if (COMPILER_IS_GCC)
 #仅使用 add_link_options(-flto)：
 #   结果：链接器尝试进行优化，但编译器生成的对象文件可能不包含足够的信息。
 #   问题：链接器无法进行有效的优化，可能导致编译错误或优化失败。
-        add_compile_options(-flto )
-        add_link_options(-flto)
+#        add_compile_options(-flto )
+#        add_link_options(-flto)
     endif ()
 elseif (COMPILER_IS_CLANG)
     add_compile_options(-O3 -ffast-math -g3 -Wextra)
