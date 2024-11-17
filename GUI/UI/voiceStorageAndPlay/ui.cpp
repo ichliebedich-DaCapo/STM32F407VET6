@@ -42,10 +42,8 @@ LV_Timer spectrum_timer;
 
 auto Screen::init() -> void
 {
-
     Component::set_parent(gui->main.screen);
     /******************************************文本框***************************************/
-
     Text label;
     label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_12);
 
@@ -55,7 +53,6 @@ auto Screen::init() -> void
     Text::set_space(2);
 
     //Write codes screen_label_slider_time
-//    label.init(gui->main.label_slider_time, 420, 288, 36, 12,"0:00",lv_color_hex(0x8a86b8));
     label.init(gui->main.label_slider_time, 420, 240, 40, 50,"0:00",lv_color_hex(0x8a86b8));
 
     //Write codes screen_label_title_music
@@ -64,7 +61,6 @@ auto Screen::init() -> void
     Text::set_text_align(LV_TEXT_ALIGN_CENTER);// 文本居中
 
     /*************************************图片*************************************/
-
     //Write codes screen_img_slider_flag
     Image::init(gui->main.img_slider_flag, 235, 152, 15, 15,&_icn_slider_alpha_15x15);
 
@@ -78,15 +74,12 @@ auto Screen::init() -> void
     //Write codes screen_imgbtn_slow
     ImageButton::init(gui->main.imgbtn_slow, 122, 240, 37, 37, &_btn_prev_alpha_37x37);
 
-
     /******************************************滑条***************************************/
     //Write codes screen_slider
     Slider::init(gui->main.slider,42, 294, 342, 1,0,100,lv_color_hex(0x2195f6), 100,&_icn_slider_alpha_15x15);
 
-
     /***自定义组件***/
     Component::init(gui->main.spectrum);
-//    Component::remove_all_style();
     Component::set_pos_size(spectrum_start_x - 4, spectrum_start_y, spectrum_width + 6, spectrum_height + 1);
 }
 

@@ -4,7 +4,6 @@
 #ifndef SIMULATOR_WAVECURVE_HPP
 #define SIMULATOR_WAVECURVE_HPP
 
-#include "JYZQ_Conf.h"
 
 /* 预编译命令 */
 // 用于区分模拟器和真机
@@ -18,9 +17,22 @@
 
 #endif
 
-
 #include <cstring> // 引入string.h以使用memmove
 #include <valarray>
+
+// 枚举体
+enum class WaveCurveType
+{
+    // 插值画线
+    Interpolated_Line,
+    // 二次贝塞尔曲线
+    BezierCurve2,
+    // 三次贝塞尔曲线
+    BezierCurve3,
+    // Catmull-Rom样条曲线
+    // 开-Og优化可以使用，-O2以上会直接卡死，我也不明白
+    CatmullRomSp_line,
+};
 
 /**
  * @brief 绘制波形曲线
@@ -31,49 +43,62 @@
  *          如果波形数据变化剧烈，建议不要使用线性插值。样条曲线更适合各种波形数据，非常均匀，不过要注意的是下面的样条曲线算法在-Og优化下没有问题，不知道什么原因。
  */
 
+
+template<typename Coord=uint16_t>
 class WaveCurve
 {
 public:
-    // 这个也是够蠢的，必须把声明放在前面，不然找不到
-    enum class Type
-    {
-        // 插值画线
-        Interpolated_Line,
-        // 二次贝塞尔曲线
-        BezierCurve2,
-        // 三次贝塞尔曲线
-        BezierCurve3,
-        // Catmull-Rom样条曲线
-        // 开-Og优化可以使用，-O2以上会直接卡死，我也不明白
-        CatmullRomSp_line,
-    };
-public:
     // 绘制曲线_插值画线
-    template<WaveCurve::Type draw_type, typename Data=uint16_t, typename Color=uint16_t, typename Coord=uint16_t>
-    static auto
+    template<WaveCurveType draw_type, typename Data=uint16_t, typename Color=uint16_t>
+    [[maybe_unused]] static auto
     draw_curve(Data data[], Coord N, Data value, Coord Start_x,
                Coord Start_y,
                Coord Width,
                Coord Height, Data Max_Value, Color bg_color, Color color) -> void;
 
 protected:
-    // 模板类，用于确定绘制函数
-    template<WaveCurve::Type draw_type, typename Coord, typename Color>
+    // 模板特化，用于确定绘制函数
+    template<WaveCurveType draw_type, typename Color>
     struct DrawFunction;
 
 private:
     // 获取一次绘制所需的点数
-    template<WaveCurve::Type draw_type>
+    template<WaveCurveType draw_type>
     static inline constexpr auto getOncePoints() -> uint16_t;
 
     // 交换指针
     template<typename T>
     static inline auto switch_ptr(T *&p1, T *&p2) -> void;
 
+    static inline auto get_index(const Coord &N, const auto &index) -> Coord
+    {
+
+        if (index + index_offset >= N)
+        {
+            return index + index_offset - N;
+        } else
+        {
+            return index + index_offset;
+        }
+
+    }
+
+    static inline auto add_index(Coord N) -> void
+    {
+        ++index_offset;
+        if (index_offset == N)
+            index_offset = 0;
+    }
+
+
+
+
 private:
     // 定义步长，决定曲线的平滑度
     static constexpr float smoothness = 0.1f;// 定为0.1比较适合，不推荐改，再小会非常卡，太大曲线会不连续
     static constexpr uint16_t buffer_size = (uint16_t) (1.0f / smoothness) + 1;
+
+    static inline Coord index_offset = 0;//用于优化索引
 
     // 定义大量静态数组时千万不要把volatile去掉，程序对数组的优化，尤其是静态数组，总是容易优化死
     // 根据我的远古回忆，上次优化导致卡死还是在使用TI(默认-O2还是-O3来着)时，定义了一个很小的静态数组，结果排查了半天
@@ -96,8 +121,9 @@ private:
 
 };
 
+template<typename Coord>
 template<typename T>
-auto WaveCurve::switch_ptr(T *&p1, T *&p2) -> void
+auto WaveCurve<Coord>::switch_ptr(T *&p1, T *&p2) -> void
 {
     T *tmp = p1;
     p1 = p2;
@@ -106,13 +132,14 @@ auto WaveCurve::switch_ptr(T *&p1, T *&p2) -> void
 
 
 // 获取一次绘制所需的点数
-template<WaveCurve::Type draw_type>
-constexpr auto WaveCurve::getOncePoints() -> uint16_t
+template<typename Coord>
+template<WaveCurveType draw_type>
+constexpr auto WaveCurve<Coord>::getOncePoints() -> uint16_t
 {
-    if constexpr (draw_type == Type::BezierCurve2)
+    if constexpr (draw_type == WaveCurveType::BezierCurve2)
     {
         return 3;// 三个点
-    } else if constexpr (draw_type == Type::BezierCurve3 || draw_type == Type::CatmullRomSp_line)
+    } else if constexpr (draw_type == WaveCurveType::BezierCurve3 || draw_type == WaveCurveType::CatmullRomSp_line)
     {
         return 4; // 四个点
     } else // 默认为 Type::Interpolated_Line线性插值算法
@@ -131,9 +158,9 @@ constexpr auto WaveCurve::getOncePoints() -> uint16_t
  * @note 插值画线算法，使用Bresenham算法，插值点数由模板参数决定，默认为2，即线性插值。
  *        为了与其他函数一致，所以使用了 draw_buff_y[0]用于存储临时的y坐标
  */
-
-template<typename Coord, typename Color>
-struct WaveCurve::DrawFunction<WaveCurve::Type::Interpolated_Line, Coord, Color>
+template<typename Coord>
+template<typename Color>
+struct WaveCurve<Coord>::DrawFunction<WaveCurveType::Interpolated_Line, Color>
 {
 
     static auto inline
@@ -195,8 +222,9 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::Interpolated_Line, Coord, Color>
 };
 
 // 二次贝塞尔曲线
-template<typename Coord, typename Color>
-struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve2, Coord, Color>
+template<typename Coord>
+template<typename Color>
+struct WaveCurve<Coord>::DrawFunction<WaveCurveType::BezierCurve2, Color>
 {
     static auto inline draw(const Coord x[], const Coord y[], Color &bg_color, Color &color) -> void
     {
@@ -220,8 +248,9 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve2, Coord, Color>
 };
 
 // 三次贝塞尔曲线
-template<typename Coord, typename Color>
-struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve3, Coord, Color>
+template<typename Coord>
+template<typename Color>
+struct WaveCurve<Coord>::DrawFunction<WaveCurveType::BezierCurve3, Color>
 {
     static auto inline draw(const Coord x[], const Coord y[], Color &bg_color, Color &color) -> void
     {
@@ -250,8 +279,9 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::BezierCurve3, Coord, Color>
 };
 
 // Catmull-Rom样条曲线
-template<typename Coord, typename Color>
-struct WaveCurve::DrawFunction<WaveCurve::Type::CatmullRomSp_line, Coord, Color>
+template<typename Coord>
+template<typename Color>
+struct WaveCurve<Coord>::DrawFunction<WaveCurveType::CatmullRomSp_line, Color>
 {
     static auto inline draw(const Coord x[], const Coord y[], Color &bg_color, Color &color) -> void
     {
@@ -300,9 +330,11 @@ struct WaveCurve::DrawFunction<WaveCurve::Type::CatmullRomSp_line, Coord, Color>
  * @param Height 绘制区域的高度
  * @param Max_Value 样本数据的最大值
  */
-template<WaveCurve::Type draw_type, typename Data, typename Color, typename Coord>
-auto WaveCurve::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Coord Start_y, Coord Width, Coord Height,
-                           Data Max_Value, Color bg_color, Color color) -> void
+template<typename Coord>
+template<WaveCurveType draw_type, typename Data, typename Color>
+[[maybe_unused]]auto
+WaveCurve<Coord>::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Coord Start_y, Coord Width, Coord Height,
+                             Data Max_Value, Color bg_color, Color color) -> void
 {
     /*******************前置条件*********************/
     // 定义一个常量，使用lambda表达式这种解决方法我是真没想到，不过这里用静态内联函数+模板+constexpr的组合
@@ -319,7 +351,7 @@ auto WaveCurve::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Coor
     Coord y_temp;// 不使用会被自动优化掉，不用担心
 
     // 进行前置计算
-    if constexpr (draw_type == Type::Interpolated_Line)
+    if constexpr (draw_type == WaveCurveType::Interpolated_Line)
         draw_buff_y[0] = (Coord) (Start_y + Height - value * ratio);
     else
     {
@@ -338,16 +370,19 @@ auto WaveCurve::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Coor
         for (int j = 0; j < once_points; ++j)
         {
             x[j] = (Coord) (Start_x + (float) (i + j) * step);
-            y[j] = (Coord) (Start_y + Height - (data[i + j] * ratio));
+            y[j] = (Coord) (Start_y + Height - (data[get_index(N,i + j)] * ratio));
         }
 
         // 绘制曲线
-        DrawFunction<draw_type, Coord, Color>::draw(x, y, bg_color, color);
+        DrawFunction<draw_type, Color>::draw(x, y, bg_color, color);
     }
 
     /********************更新数据*******************/
-    memmove(data, data + 1, (N - 1) * sizeof(data[0]));// 将数据左移一位
-    data[N - 1] = value;// 一放在前面就会卡死，不知缘由 总不能是该死的优化导致的吧
+    add_index(N);
+    data[index_offset?index_offset-1: N - 1] = value;
+//    data[N - 1] = value;// 这个错误也挺具备观赏性的
+//    memmove(data, data + 1, (N - 1) * sizeof(data[0]));// 将数据左移一位
+//    data[N - 1] = value;// 一放在前面就会卡死，不知缘由 总不能是该死的优化导致的吧
 }
 
 #endif //SIMULATOR_WAVECURVE_HPP

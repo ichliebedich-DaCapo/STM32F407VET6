@@ -43,9 +43,6 @@
 class Key
 {
 public:
-    // 成员函数
-    static void init();
-
     static auto setCode(uint8_t keycode) { code = keycode; }
 
     [[nodiscard]] static auto getCode() { return code; }// 获取键值
@@ -68,4 +65,11 @@ private:
     static inline uint8_t sign=0;// 标志
 #endif// APP_NO_RTOS
 };
+
+#ifndef APP_NO_RTOS
+void keyTaskHandler_init();
+#else
+
+#endif
+
 #endif //FURINA_KEY_HPP

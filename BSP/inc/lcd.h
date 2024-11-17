@@ -109,6 +109,8 @@ static inline void LCD_Set_Pixel(uint16_t x, uint16_t y, uint16_t color)
 /*液晶初始化*/
 void lcd_init(void);
 
+/*液晶填充函数*/
+void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t * color_p);
 
 #ifdef __cplusplus
 }

@@ -1,5 +1,5 @@
 //
-// Created by 34753 on 2024/10/7.
+// Created by fairy on 2024/10/7.
 //
 
 #include "key_exit.h"
@@ -19,7 +19,7 @@ void key_exti_init()
     GPIO_InitStructure.Pin = GPIO_PIN_0;
 
     HAL_GPIO_Init(GPIOB, &GPIO_InitStructure);
-    HAL_NVIC_SetPriority(EXTI0_IRQn, 0x05, 0x00);
+    HAL_NVIC_SetPriority(EXTI0_IRQn, 0x03, 0x00);
     HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 
 
@@ -30,5 +30,4 @@ void key_exti_init()
 //    HAL_NVIC_EnableIRQ(EXTI1_IRQn);
 //#endif
 }
-
 #endif

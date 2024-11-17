@@ -3,7 +3,6 @@
 //
 
 #include "cpu_temperature.hpp"
-#include "adc.h"
 
 //#if USE_CPU_TEMPERATURE
 

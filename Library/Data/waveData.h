@@ -5,8 +5,9 @@
 #ifndef FURINA_WAVEDATA_H
 #define FURINA_WAVEDATA_H
 
+#include <stdint.h>
 #include "JYZQ_Conf.h"
-#include <stdint-gcc.h>
+//#include <stdint-gcc.h>
 /**
  * @brief 波形数据
  * @details 使用的是MATLAB生成的波形数据，之所以不使用Python是因为Python的精度没有MATLAB高
@@ -16,7 +17,6 @@ extern const uint8_t sineWave[256];
 extern const uint8_t triangleWave[256];
 extern const uint8_t squareWave[256];
 extern const uint8_t sawtoothWave[256];
-
 /*% 定义参数
         N = 256; % 采样点数
         t = (0:N-1) / (N-1); % 时间向量，确保最后一个点和第一个点对齐

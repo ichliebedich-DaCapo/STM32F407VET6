@@ -2,11 +2,10 @@
 // Created by fairy on 2024/9/22.
 //
 #include "key.hpp"
-#include "key_exit.h"
-#include "stm32f4xx_hal.h"
+
 
 extern void key_handler();
-__weak void key_handler(){/*由用户自己实现*/}
+__attribute__((weak)) void key_handler(){/*由用户自己实现*/}
 
 /**
  * 设置按键状态函数
@@ -25,10 +24,7 @@ uint8_t Key::stateHandler(uint8_t maxKeyStates)
     return temp;
 }
 
-void Key::init()
-{
-    key_exti_init();
-}
+
 
 #ifdef APP_NO_RTOS
 auto Key::handler() -> void
@@ -51,6 +47,78 @@ auto Key::handler()-> void{}
 //}
 //#endif
 
+
+
+
+#ifndef APP_NO_RTOS
+#include "cmsis_os2.h"
+
+osSemaphoreId_t keySemHandle;
+
+
+osThreadId_t keyTaskHandler;
+const osThreadAttr_t keyTask_attributes = {
+        .name = "keyTask",
+        .stack_size = 256 * 4,
+        .priority = (osPriority_t) osPriorityNormal,
+};
+
+void keyTask(void *argument);
+
+
+// 初始化按键任务
+void keyTaskHandler_init()
+{
+    Key::init();
+    keyTaskHandler = osThreadNew(keyTask, nullptr, &keyTask_attributes);
+    // 创建二值信号量，初始值为0
+    keySemHandle = osSemaphoreNew(1, 0, nullptr);
+}
+
+// 按键任务处理
+void keyTask(void *argument)
+{
+    for(;;)
+    {
+        osSemaphoreAcquire(keySemHandle, osWaitForever);
+        /* xxx_taskHandle(); */
+
+    }
+}
+#endif
+
+
+
+//// 外部中断回调函数,先放在这，以后找到合适的位置再安放
+//void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+//{
+//    switch (GPIO_Pin)
+//    {
+//        /*开启外部中断0*/
+//
+//        case GPIO_PIN_0:
+//            Key::setCode(KEY_RAM & 0xF);//获取键值
+//
+//#ifndef APP_NO_RTOS
+//            /*释放信号量*/
+//            osSemaphoreRelease(keySemHandle);
+//#else
+//            Key::setSign();
+//#endif
+//            break;
+//
+//            /*开启外部中断1*/
+//
+//        case GPIO_PIN_1:
+//#if EXTI1_OPEN
+//            //    frequency = FPGA_RAM;
+//            osSemaphoreRelease(keySemHandle);
+//            break;
+//#endif
+//        default:
+//            break;
+//    }
+//}
 
 
 

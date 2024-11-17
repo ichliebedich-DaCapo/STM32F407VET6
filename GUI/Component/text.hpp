@@ -29,17 +29,17 @@ public:
     static inline auto set_text_color(Color color) -> void;
 
     // 设置文本对齐方式
-    [[maybe_unused]] static inline auto set_text_align(Align align) -> void;
+    [[maybe_unused]] static inline auto set_text_align(Align align,Obj obj=_obj) -> void;
 
     // 设置文本内容
     static inline auto set_text(Strings text,Obj obj=_obj) -> void;
 
     // 设置文本内容格式化
-    [[maybe_unused]] static inline auto set_text_fmt(Strings fmt, ...) -> void;
+    [[maybe_unused]] static inline auto set_text(Strings fmt, auto... args) -> void;
+    [[maybe_unused]] static inline auto set_text(Obj obj, Strings fmt, auto... args) -> void;
 
     /*自定义初始化函数*/
     inline auto init(Obj text,  Coord x, Coord y, Coord w, Coord h,Strings string= nullptr,Color text_color=lv_color_hex(0))->void ;
-
 
     // 设置文本框字体
     [[maybe_unused]] inline auto init_font(Font font) -> void;
@@ -94,9 +94,9 @@ inline auto Text::set_text_color(lv_color_t color) -> void
     lv_obj_set_style_text_color(_obj, color, selector_default);
 }
 
-[[maybe_unused]] inline auto Text::set_text_align(lv_text_align_t align) -> void
+[[maybe_unused]] inline auto Text::set_text_align(lv_text_align_t align,Obj obj) -> void
 {
-    lv_obj_set_style_text_align(_obj, align, selector_default);
+    lv_obj_set_style_text_align(obj, align, selector_default);
 }
 
 inline auto Text::set_text(Strings text,Obj obj) -> void
@@ -105,20 +105,27 @@ inline auto Text::set_text(Strings text,Obj obj) -> void
 }
 
 /**
- * @brief 设置文本内容格式化
- * @param fmt
- * @param ...
+ * @brief 设置格式化文本内容
+ * @param fmt 格式字符串
+ * @param args 变长参数
  * @note 莫名其妙出现混账的乱码问题，感觉不出有什么错误，可确实显示不对，真是魂淡
+ *      使用auto简化之后就没有任何问题了，只能说auto既能简化，还不用管这些乱七八糟的的事，真神
+ *      使用前一定要设置好对象，该函数由于变长参数，无法在后面追加Obj参数,所以无法设置缺省
  */
-[[maybe_unused]] inline auto Text::set_text_fmt(Strings fmt, ...) -> void
+
+[[maybe_unused]] inline auto Text::set_text(Strings fmt, auto... args) -> void
 {
-    va_list args;
-    va_start(args, fmt);
-    lv_label_set_text_fmt(_obj, fmt, args);
-    va_end(args);
+    lv_label_set_text_fmt(_obj, fmt, args...);
+}
+[[maybe_unused]] inline auto Text::set_text(Obj obj, Strings fmt, auto... args) -> void
+{
+    lv_label_set_text_fmt(obj, fmt, args...);
 }
 
-
+/**
+ * @brief 初始化字体
+ * @param font
+ */
 [[maybe_unused]] auto Text::init_font(Font font) -> void
 {
     _font = font;

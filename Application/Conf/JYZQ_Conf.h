@@ -57,8 +57,14 @@
 #define FREQ_84M_to_20K   41,99  // 84MHz -> 20KHz
 
 // 针对于音频的频率（默认采样点为256个）
-#define FREQ_84M_to_256x8K  1,39   // 84MHz -> 256*8KHz
-#define FREQ_84M_to_256x16K  2,19  // 84MHz -> 256*16KHz
+#define FREQ_84M_to_256x8K  1,19  // 84MHz -> 256*8KHz
+#define FREQ_84M_to_256x16K  1,9  // 84MHz -> 256*16KHz
+#define FREQ_84M_to_128x8K 1,40 // 84MHz -> 128*8KHz
+#define FREQ_84M_to_128x16K 1,19 // 84MHz -> 128*16KHz
+#define FREQ_84M_to_256x800 40,9 // 84MHz -> 256*800Hz
+#define FREQ_84M_to_256x1k  40,7 // 84MHz -> 256*1KHz
+
+
 
 // ************************************************************ //
 

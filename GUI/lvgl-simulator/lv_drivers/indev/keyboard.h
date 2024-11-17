@@ -68,6 +68,19 @@ void keyboard_handler(SDL_Event *event);
  *      MACROS
  **********************/
 
+/**********************
+ *      自定义接口
+ **********************/
+
+
+/**
+ * @brief 获取键盘输入
+ * @param keycode 输入的keycode
+ * @return true: 有输入，false: 无输入
+ * @note 很明显会有键盘抖动，或者说这是持续检测
+ */
+bool keyboard_get_input(uint32_t*keycode);
+bool keyboard_get_state();
 #endif /*USE_KEYBOARD*/
 
 #ifdef __cplusplus

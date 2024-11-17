@@ -1,5 +1,5 @@
 //
-// Created by 34753 on 2024/10/7.
+// Created by fairy on 2024/10/7.
 //
 
 #ifndef FURINA_FSMC_H
@@ -10,7 +10,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 
 
 void fsmc_init();

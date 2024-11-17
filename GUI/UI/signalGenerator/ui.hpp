@@ -4,8 +4,8 @@
 #ifndef SIMULATOR_UI_HPP
 #define SIMULATOR_UI_HPP
 
-#include "JYZQ_Conf.h"
 #include "lvgl.h"
+
 /* 预编译命令 */
 #if 1
 
@@ -18,6 +18,7 @@ struct lv_ui_t
     struct
     {
         Obj screen;// 屏幕自身
+        Obj rect;//示波器方框
         Obj btn_mode;// 模式
         Obj btn_mode_label;
         Obj label_mode;
@@ -39,12 +40,69 @@ struct lv_ui_t
         Obj label_title;// 标题
         Obj imgbtn_play;// 播放键
         Obj label_cpu;
+        Obj label_wave_cnt;// 波形点数
+        Obj label_wave_type;// 波形类型
+        Obj label_wave_generate;// 波形生成
+        Obj label_wave_period;// 波形周期
     } main;// 主屏幕
 
 };
 
 // 取别名
 using lv_ui_t = struct lv_ui_t;
+
+
+// 对外接口
+class uiInterface
+{
+public:
+    // 是否显示FPS
+    static auto show_fps(bool is_show) -> void;
+
+    // 是否显示FPS一帧时间
+    static auto set_fps_mode(bool fps_mode) -> void;
+
+    // 增加波形点数
+    static auto add_wave_cnt() -> void;
+
+    // 减少波形点数
+    static auto sub_wave_cnt() -> void;
+
+    // 切换波形类型
+    static auto switch_wave_type() -> void;
+
+    // 波形已产生
+    static auto wave_is_generate() -> void;
+
+    // 波形没有产生
+    static auto wave_is_not_generate() -> void;
+
+    // 清屏
+    static auto clear_screen() -> void;
+
+    // 增加时钟周期
+    static auto add_period() -> void;
+
+    // 减少时钟周期
+    static auto sub_period() -> void;
+
+    // 获取时钟周期
+    static auto get_period() -> uint32_t;
+
+    // 获取比例
+    static auto get_ratio() -> uint8_t;
+
+    // 获取偏置
+    static auto get_bias() -> int8_t;
+
+    // 获取波形类型
+    static auto get_mode() -> bool ;
+
+    // 获取频率
+    static auto get_freq() -> bool;
+};
+
+
 
 
 // 加载资源文件
