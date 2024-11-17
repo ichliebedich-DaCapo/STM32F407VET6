@@ -31,16 +31,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【直线位移传感器】控制GUI是否编译">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2024_11_5_00_39____.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2024_11_6_17_36____.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2024_11_9_15_52____.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/___.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行合并之前于_2024_11_5_00_39_取消提交了更改_[更改]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行合并之前于_2024_11_6_17_36_取消提交了更改_[更改]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行合并之前于_2024_11_9_15_52_取消提交了更改_[更改]/shelved.patch" beforeDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【直线位移传感器】ADC配置完毕">
+      <change afterPath="$PROJECT_DIR$/BSP/inc/usart.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BSP/src/usart.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Drivers/stm32f4xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers/stm32f4xx_hal_conf.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1635,6 +1630,7 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Core/startup_stm32f407vetx.s" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/syscalls.c" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/startup_stm32f407xx.s" root0="SKIP_INSPECTION" />
@@ -1687,11 +1683,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\David\CLionProjects\STM32F407VET6\BSP\src" />
+      <recent name="C:\Users\David\CLionProjects\STM32F407VET6\BSP\inc" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Base" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Module" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Conf" />
-      <recent name="D:\Embedded\MCU\STM32\Furina\BSP\Core" />
-      <recent name="D:\Embedded\MCU\STM32\Furina\BSP\Base" />
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
@@ -1897,23 +1893,7 @@
       <workItem from="1731126680338" duration="11017000" />
       <workItem from="1731138557520" duration="3000" />
       <workItem from="1731146753731" duration="2111000" />
-      <workItem from="1731819970455" duration="2320000" />
-    </task>
-    <task id="LOCAL-00011" summary="__【未配置好】与AI合力编写了w25qxx的驱动，然后启用了stm32的断言机制,并删除了一下LL库（因为缺失stm32_assert.h文件）">
-      <option name="closed" value="true" />
-      <created>1728450200944</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1728450200944</updated>
-    </task>
-    <task id="LOCAL-00012" summary="__【未配置好】添加了“是否启用RTOS”的宏。使用了__weak让代码隔离得更明显，用户只需专心编写应用、模块、BSP三级的代码。">
-      <option name="closed" value="true" />
-      <created>1728489151386</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1728489151387</updated>
+      <workItem from="1731819970455" duration="7042000" />
     </task>
     <task id="LOCAL-00013" summary="__【未配置好】增添了一点解释">
       <option name="closed" value="true" />
@@ -2291,7 +2271,23 @@
       <option name="project" value="LOCAL" />
       <updated>1731819829208</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="【直线位移传感器】ADC配置完毕">
+      <option name="closed" value="true" />
+      <created>1731824158483</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1731824158483</updated>
+    </task>
+    <task id="LOCAL-00061" summary="【直线位移传感器】ADC配置完毕">
+      <option name="closed" value="true" />
+      <created>1731824197141</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1731824197141</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2326,7 +2322,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【初始】主项目——SPI_Flash已经调通，可以进行上层应用的开发了" />
     <MESSAGE value="【语音存储与回放】稍微优化了Flash读写函数" />
     <MESSAGE value="【语音存储与回放】启用了DMA用于FSMC传输数据，准备测试分支的读取内部温度传感器" />
     <MESSAGE value="【语音存储与回放】更新了Readme" />
@@ -2351,18 +2346,10 @@
     <MESSAGE value="【双音频信号发生器】整合了链接优化选项" />
     <MESSAGE value="【双音频信号发生器】略微优化了CMakelists" />
     <MESSAGE value="【直线位移传感器】控制GUI是否编译" />
-    <option name="LAST_COMMIT_MESSAGE" value="【直线位移传感器】控制GUI是否编译" />
+    <MESSAGE value="【直线位移传感器】ADC配置完毕" />
+    <option name="LAST_COMMIT_MESSAGE" value="【直线位移传感器】ADC配置完毕" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Application/LinearDisplacementSensor/app.cpp</url>
-          <line>50</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
         <watch expression="$control" language="ObjectiveC" />
