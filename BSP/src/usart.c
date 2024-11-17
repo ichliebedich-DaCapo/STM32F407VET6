@@ -2,12 +2,12 @@
 // Created by DV on 2024/11/17.
 //
 
-#include <stdio.h>
-#include "usart.h"
 
-#if 1
+#include "usart.h"
+#ifdef USE_USART
 // 头文件
 #include "stm32f4xx_hal.h"
+#include <stdio.h>
 
 // 变量
 UART_HandleTypeDef huart1;

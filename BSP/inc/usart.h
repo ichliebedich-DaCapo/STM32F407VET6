@@ -7,7 +7,7 @@
 
 #include "JYZQ_Conf.h"
 /* 预编译命令 */
-#if 1
+#ifdef USE_USART
 // 头文件
 
 #ifdef __cplusplus
@@ -17,7 +17,7 @@ extern "C" {
 
 
 // 接口
-
+void usart1_init() ;
 #ifdef __cplusplus
 }
 #endif

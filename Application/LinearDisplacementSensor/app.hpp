@@ -15,5 +15,6 @@
 #define USE_TIMER // 使用定时器
 #define USE_ADC  // 使用ADC
 #define USE_DAC // 使用DAC
+#define USE_USART // 使用串口
 
 #endif //FURINA_APP_HPP

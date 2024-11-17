@@ -40,7 +40,7 @@
 #define USE_TIMER__ // 使用定时器
 #define USE_ADC__  // 使用ADC
 #define USE_DAC__ // 使用DAC
-
+#define USE_USART__  // 使用UART
 
 
 /****************************宏定义的频率****************************/
