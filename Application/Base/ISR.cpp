@@ -16,7 +16,9 @@
 #include "timer.h"
 #include "adc.h"
 #include "key.hpp"
+#ifdef GUI_ENABLE
 #include "GUI.hpp"
+#endif
 #include "fsmc.h"
 
 #define KEY_RAM (*((volatile unsigned short *)0x6006000C)) // 键盘接口地址
@@ -88,7 +90,9 @@ void DMA2_Stream6_IRQHandler(void)
             /* Process Unlocked */
             __HAL_UNLOCK(&hdma_memtomem_dma2_stream6);// 不能少
         }
+#ifdef GUI_ENABLE
         GUI::LVGL_LCD_FSMC_DMA_pCallback();
+#endif
     }
 }
 }

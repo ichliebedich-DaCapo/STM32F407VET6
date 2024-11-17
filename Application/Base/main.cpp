@@ -2,8 +2,9 @@
 #ifndef APP_NO_RTOS // 是否启用RTOS
 #include "cmsis_os2.h"
 #endif// APP_NO_RTOS
-
+#ifdef GUI_ENABLE
 #include "GUI.hpp"
+#endif
 #include "key.hpp"
 #include "lcd.h"
 
@@ -27,7 +28,9 @@ int main()
     osKernelInitialize();// FreeRTOS内核初始化
 #endif// APP_NO_RTOS
 
+#ifdef GUI_ENABLE
     GUI::init<lcd_flush>();
+#endif
     app_init();
 
 /*主事件循环或调度器*/
@@ -36,7 +39,9 @@ int main()
 #else
     for (;;)
     {
+#ifdef GUI_ENABLE
         GUI::handler();
+#endif
         Key::handler();
         background_handler();
     }
