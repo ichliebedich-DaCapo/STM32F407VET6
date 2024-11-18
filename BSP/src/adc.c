@@ -44,7 +44,7 @@ void adc1_init()
 
     sConfig.Channel = ADC_CHANNEL_0;
     sConfig.Rank = 1;
-    sConfig.SamplingTime = ADC_SAMPLETIME_56CYCLES;
+    sConfig.SamplingTime = ADC_SAMPLETIME_480CYCLES;
     HAL_ADC_ConfigChannel(&hadc1, &sConfig);
 
     /* ADC1 interrupt Init */

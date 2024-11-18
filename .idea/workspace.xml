@@ -14,15 +14,15 @@
   </component>
   <component name="CMakeRunConfigurationManager">
     <generated>
-      <config projectName="Furina" targetName="libfreertos" />
       <config projectName="Furina" targetName="libdata" />
+      <config projectName="Furina" targetName="libfreertos" />
       <config projectName="Furina" targetName="liblvgl" />
       <config projectName="Furina" targetName="libmodule" />
       <config projectName="Furina" targetName="Furina.elf" />
       <config projectName="Furina" targetName="libdrivers" />
       <config projectName="Furina" targetName="libbsp" />
-      <config projectName="Furina" targetName="libdsp" />
       <config projectName="Furina" targetName="libapp" />
+      <config projectName="Furina" targetName="libdsp" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -31,10 +31,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【直线位移传感器】添加SVD文件">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【直线位移传感器】解决print重定向问题，基本完成">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/usart.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/adc.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/adc.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,7 +68,7 @@
     <option name="nodes">
       <map>
         <entry key="STM32F407.svd" value="-E" />
-        <entry key="STM32F407.svd|g:ADC" value="-C" />
+        <entry key="STM32F407.svd|g:ADC" value="-E" />
         <entry key="STM32F407.svd|g:CAN" value="-C" />
         <entry key="STM32F407.svd|g:DMA" value="-C" />
         <entry key="STM32F407.svd|g:Ethernet" value="-C" />
@@ -79,10 +79,10 @@
         <entry key="STM32F407.svd|g:USART" value="-E" />
         <entry key="STM32F407.svd|g:USB_OTG_FS" value="-C" />
         <entry key="STM32F407.svd|g:USB_OTG_HS" value="-C" />
-        <entry key="STM32F407.svd|p:ADC1" value="-C" />
+        <entry key="STM32F407.svd|p:ADC1" value="-E" />
         <entry key="STM32F407.svd|p:ADC1|CR1" value="HC" />
         <entry key="STM32F407.svd|p:ADC1|CR2" value="HC" />
-        <entry key="STM32F407.svd|p:ADC1|DR" value="HC" />
+        <entry key="STM32F407.svd|p:ADC1|DR" value="HE" />
         <entry key="STM32F407.svd|p:ADC1|HTR" value="HC" />
         <entry key="STM32F407.svd|p:ADC1|JDR1" value="HC" />
         <entry key="STM32F407.svd|p:ADC1|JDR2" value="HC" />
@@ -1696,6 +1696,11 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="libapp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libapp" CONFIG_NAME="Release">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -1737,7 +1742,7 @@
       </method>
     </configuration>
     <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
-      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="C:\Users\David\CLionProjects\STM32F407VET6\stlink.cfg" reset-type="RUN" download-type="UPDATED_ONLY">
+      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Program\stm32\STM32F407VET6\stlink.cfg" reset-type="RUN" download-type="UPDATED_ONLY">
         <debugger kind="GDB" isBundled="true" />
       </openocd>
       <method v="2">
@@ -1889,15 +1894,9 @@
       <workItem from="1731138557520" duration="3000" />
       <workItem from="1731146753731" duration="2111000" />
       <workItem from="1731819970455" duration="9683000" />
-      <workItem from="1731833480751" duration="1356000" />
-    </task>
-    <task id="LOCAL-00015" summary="__【未配置好】快把语言存储与回放这个小项目写完了，但是手头还没有单片机！！">
-      <option name="closed" value="true" />
-      <created>1728721193957</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1728721193957</updated>
+      <workItem from="1731833480751" duration="1720000" />
+      <workItem from="1731835242420" duration="2896000" />
+      <workItem from="1731937742245" duration="8131000" />
     </task>
     <task id="LOCAL-00016" summary="__【未配置好】优化了一些细节。这个__weak大抵是发挥作用的吧，但编译后的内存竟然只增加了1%左右。等手头有单片机后再测试">
       <option name="closed" value="true" />
@@ -2283,7 +2282,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731832862694</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="【直线位移传感器】解决print重定向问题，基本完成">
+      <option name="closed" value="true" />
+      <created>1731835188255</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1731835188255</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2318,7 +2325,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【语音存储与回放】更新了Readme" />
     <MESSAGE value="【语音存储与回放】更新了Readme,创建了一个新分支ZQ用于测试" />
     <MESSAGE value="【双音频信号发生器】发现绘制图表时会有很严重的性能问题。现准备尝试双缓冲" />
     <MESSAGE value="【双音频信号发生器】尝试用基本LCD函数来实现波形绘制" />
@@ -2343,7 +2349,8 @@
     <MESSAGE value="【直线位移传感器】ADC配置完毕" />
     <MESSAGE value="【直线位移传感器】usart重定向完成" />
     <MESSAGE value="【直线位移传感器】添加SVD文件" />
-    <option name="LAST_COMMIT_MESSAGE" value="【直线位移传感器】添加SVD文件" />
+    <MESSAGE value="【直线位移传感器】解决print重定向问题，基本完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="【直线位移传感器】解决print重定向问题，基本完成" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

@@ -5,7 +5,8 @@ set(APP_DIR Application/LinearDisplacementSensor)
 # --------------------------------------选择你的项目------------------------------
 # 是否使用独立静态库链接
 # 注释后，可以使用链接优化-flto，并且默认开启链接优化
-#set(STATIC_MODULE_LD True)
+# ld链接器无法自动创建目录以存放map文件，所以注释下面时需要确保存在bin目录
+set(STATIC_MODULE_LD True)
 # --------------------------------------某些配置------------------------------
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_VERSION 1)

@@ -1,7 +1,9 @@
 //
 // Created by DV on 2024/11/17.
 //
-
+//PA0 -->ADC1
+//PA9 -->TXD
+//GND -->GND
 #include <cstdio>
 #include "app.hpp"
 
@@ -24,11 +26,20 @@ void key_handler()
   switch (Key::getCode())
     {
         case keyk0://开始采集数据
-               if (Key::stateHandler(KEY_STATE_TWO))
-            {
+               if (Key::stateHandler(KEY_STATE_NONE))
+               {
                    adc1_start_it();
+               }
 
-            } else
+//            } else
+//            {
+//                   adc1_stop_it();
+//
+//            }
+
+            break;
+        case keyk1://开始采集数据
+               if (Key::stateHandler(KEY_STATE_NONE))
             {
                    adc1_stop_it();
 
@@ -48,6 +59,6 @@ void adc1_isr()
     uint16_t adcValue = HAL_ADC_GetValue(&hadc1);
 
    // 打印ADC值
-    printf("%.2f\r\n",adcValue/4095.0f*200);
+    printf("%f\r\n",adcValue/4095.0f*3.3*30/3.3);//真实电压*电压密度=长度
 
 }
