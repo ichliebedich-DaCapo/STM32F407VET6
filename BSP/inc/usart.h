@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 // 宏定义
-
+// 变量
 
 // 接口
 void usart1_init() ;

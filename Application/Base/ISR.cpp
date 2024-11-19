@@ -16,6 +16,7 @@
 #include "timer.h"
 #include "adc.h"
 #include "key.hpp"
+#include "usart.h"
 #ifdef GUI_ENABLE
 #include "GUI.hpp"
 #endif
@@ -95,4 +96,6 @@ void DMA2_Stream6_IRQHandler(void)
 #endif
     }
 }
+
+
 }

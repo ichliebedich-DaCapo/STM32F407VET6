@@ -31,11 +31,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【直线位移传感器】解决print重定向问题，基本完成">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【直线位移传感器】ADC采集公式修正">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/ISR.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/adc.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/adc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/usart.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/usart.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/usart.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +69,7 @@
     <option name="nodes">
       <map>
         <entry key="STM32F407.svd" value="-E" />
-        <entry key="STM32F407.svd|g:ADC" value="-E" />
+        <entry key="STM32F407.svd|g:ADC" value="-C" />
         <entry key="STM32F407.svd|g:CAN" value="-C" />
         <entry key="STM32F407.svd|g:DMA" value="-C" />
         <entry key="STM32F407.svd|g:Ethernet" value="-C" />
@@ -79,10 +80,10 @@
         <entry key="STM32F407.svd|g:USART" value="-E" />
         <entry key="STM32F407.svd|g:USB_OTG_FS" value="-C" />
         <entry key="STM32F407.svd|g:USB_OTG_HS" value="-C" />
-        <entry key="STM32F407.svd|p:ADC1" value="-E" />
+        <entry key="STM32F407.svd|p:ADC1" value="-C" />
         <entry key="STM32F407.svd|p:ADC1|CR1" value="HC" />
         <entry key="STM32F407.svd|p:ADC1|CR2" value="HC" />
-        <entry key="STM32F407.svd|p:ADC1|DR" value="HE" />
+        <entry key="STM32F407.svd|p:ADC1|DR" value="HC" />
         <entry key="STM32F407.svd|p:ADC1|HTR" value="HC" />
         <entry key="STM32F407.svd|p:ADC1|JDR1" value="HC" />
         <entry key="STM32F407.svd|p:ADC1|JDR2" value="HC" />
@@ -1535,7 +1536,7 @@
         <entry key="STM32F407.svd|p:UART5|SR" value="HC" />
         <entry key="STM32F407.svd|p:USART1" value="-E" />
         <entry key="STM32F407.svd|p:USART1|BRR" value="HC" />
-        <entry key="STM32F407.svd|p:USART1|CR1" value="HC" />
+        <entry key="STM32F407.svd|p:USART1|CR1" value="HE" />
         <entry key="STM32F407.svd|p:USART1|CR2" value="HC" />
         <entry key="STM32F407.svd|p:USART1|CR3" value="HC" />
         <entry key="STM32F407.svd|p:USART1|DR" value="HE" />
@@ -1692,11 +1693,6 @@
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
     <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -1896,15 +1892,10 @@
       <workItem from="1731819970455" duration="9683000" />
       <workItem from="1731833480751" duration="1720000" />
       <workItem from="1731835242420" duration="2896000" />
-      <workItem from="1731937742245" duration="8131000" />
-    </task>
-    <task id="LOCAL-00016" summary="__【未配置好】优化了一些细节。这个__weak大抵是发挥作用的吧，但编译后的内存竟然只增加了1%左右。等手头有单片机后再测试">
-      <option name="closed" value="true" />
-      <created>1728722121974</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1728722121974</updated>
+      <workItem from="1731937742245" duration="10165000" />
+      <workItem from="1731988784042" duration="855000" />
+      <workItem from="1731994158433" duration="4061000" />
+      <workItem from="1732019218712" duration="9247000" />
     </task>
     <task id="LOCAL-00017" summary="__【未配置好】准备着手双音频信号发生器">
       <option name="closed" value="true" />
@@ -2290,7 +2281,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731835188255</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="【直线位移传感器】ADC采集公式修正">
+      <option name="closed" value="true" />
+      <created>1731946489048</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1731946489048</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2325,7 +2324,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【语音存储与回放】更新了Readme,创建了一个新分支ZQ用于测试" />
     <MESSAGE value="【双音频信号发生器】发现绘制图表时会有很严重的性能问题。现准备尝试双缓冲" />
     <MESSAGE value="【双音频信号发生器】尝试用基本LCD函数来实现波形绘制" />
     <MESSAGE value="【双音频信号发生器】示波器绘制算法勉强可以使用，只不过在真机上运行会导致图形紊乱，猜测可能是数据类型导致的" />
@@ -2350,13 +2348,16 @@
     <MESSAGE value="【直线位移传感器】usart重定向完成" />
     <MESSAGE value="【直线位移传感器】添加SVD文件" />
     <MESSAGE value="【直线位移传感器】解决print重定向问题，基本完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="【直线位移传感器】解决print重定向问题，基本完成" />
+    <MESSAGE value="【直线位移传感器】ADC采集公式修正" />
+    <option name="LAST_COMMIT_MESSAGE" value="【直线位移传感器】ADC采集公式修正" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
         <watch expression="$control" language="ObjectiveC" />
         <watch expression="adcValues" />
+        <watch expression="rxBuffer" />
+        <watch expression="rxBuffer[1]" />
       </configuration>
     </watches-manager>
   </component>
