@@ -35,7 +35,6 @@ set(SIZE arm-none-eabi-size)
 #set(SIZE llvm-size)
 
 # -----------------工程设置-----------------
-
 project(Furina C CXX ASM)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_C_STANDARD 11)
@@ -264,16 +263,23 @@ target_link_libraries(libmodule PRIVATE libdsp libdata)
 # 设置静态库的输出目录
 set_target_properties(libmodule PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
+# -------AI库-------
+file(GLOB_RECURSE AI_SRC "AI/${APP_DIR_LAST_PART}/App/*.c")
+set(AI_DIR AI/${APP_DIR_LAST_PART}/App AI/${APP_DIR_LAST_PART})
+add_library(libai STATIC ${AI_SRC})
+target_include_directories(libai PUBLIC ${AI_DIR})
+
+# 设置静态库的输出目录
+set_target_properties(libai PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+
 
 # ------Application库------
 file(GLOB_RECURSE APPLICATION_SRC "${APP_DIR}/app.cpp" "Application/Base/main.cpp" "Application/Base/baseInit.cpp")
-set(APPLICATION_DIR
-        Application/Base
-)
+set(APPLICATION_DIR Application/Base)
 add_library(libapp STATIC ${APPLICATION_SRC})
 target_include_directories(libapp PUBLIC ${APPLICATION_DIR})
 # 需要链接 libdsp libdata libgui libbsp libmodule等，根据需要选
-target_link_libraries(libapp PUBLIC libdsp libdata libbsp libmodule)
+target_link_libraries(libapp PUBLIC libdsp libdata libbsp libmodule libai)
 if(GUI_ENABLE)
     target_link_libraries(libapp PUBLIC libgui)
 endif ()
@@ -281,53 +287,56 @@ endif ()
 set_target_properties(libapp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
-# ---------包含公共目录--------
+
+
+# ----------------包含公共目录---------------
+# 公共目录
+include_directories(Library/ST/AI/Inc)
+include_directories(Application/Conf ${APP_DIR})
+
+# 定义公共的头文件目录和源文件
+set(COMMON_INCLUDE_DIRS
+    ${DRIVERS_DIR}
+    ${BSP_DIR}
+    ${DATA_DIR}
+    ${MODULE_DIR}
+    ${AI_DIR}
+    ${APPLICATION_DIR}
+)
+
+set(COMMON_SOURCES
+    "Core/*.*"
+    "Application/Base/ISR.cpp"
+    ${DRIVERS_SRC}
+    ${BSP_SRC}
+    ${DATA_SRC}
+    ${MODULE_SRC}
+    ${AI_SRC}
+    ${APPLICATION_SRC}
+)
+
 if (STATIC_MODULE_LD)
-    include_directories(Application/Conf ${APP_DIR})
     # 这里面不能直接添加到静态库里 否则链接时会出现找不到定义的现象
     file(GLOB_RECURSE SOURCES "Core/*.*" "Application/Base/ISR.cpp")
 else ()
-    if(GUI_ENABLE)
-    include_directories(Application/Conf ${APP_DIR}
-            ${DRIVERS_DIR}
+    if (GUI_ENABLE)
+        list(APPEND COMMON_INCLUDE_DIRS
             ${LVGL_DIR}
-            #            ${FREERTOS_DIR}
-            ${BSP_DIR}
-            ${DATA_DIR}
             ${GUI_DIR}
-            ${MODULE_DIR}
-            ${APPLICATION_DIR}
-    )
-    file(GLOB_RECURSE SOURCES "Core/*.*" "Application/Base/ISR.cpp"
-            ${DRIVERS_SRC}
+        )
+        list(APPEND COMMON_SOURCES
             ${LVGL_SRC}
-            #            ${FREERTOS_SRC}
-            ${BSP_SRC}
-            ${DATA_SRC}
             ${GUI_SRC}
-            ${MODULE_SRC}
-            ${APPLICATION_SRC}
-    )
-    else ()
-            include_directories(Application/Conf ${APP_DIR}
-            ${DRIVERS_DIR}
-            #            ${FREERTOS_DIR}
-            ${BSP_DIR}
-            ${DATA_DIR}
-            ${MODULE_DIR}
-            ${APPLICATION_DIR}
-    )
-    file(GLOB_RECURSE SOURCES "Core/*.*" "Application/Base/ISR.cpp"
-            ${DRIVERS_SRC}
-            #            ${FREERTOS_SRC}
-            ${BSP_SRC}
-            ${DATA_SRC}
-            ${MODULE_SRC}
-            ${APPLICATION_SRC}
-    )
+        )
     endif ()
+
+    # 添加公共的头文件目录、源文件
+    include_directories(${COMMON_INCLUDE_DIRS})
+    file(GLOB_RECURSE SOURCES ${COMMON_SOURCES})
 endif ()
 
+
+# -------------------编译链接-------------------
 # 设置链接脚本
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld)
 
@@ -361,6 +370,8 @@ if (STATIC_MODULE_LD)
     # 设置可执行文件的输出目录
     set_target_properties(${PROJECT_NAME}.elf PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
 endif ()
+target_link_libraries(${PROJECT_NAME}.elf INTERFACE :NetworkRuntime910_CM4_GCC.a)
+target_link_directories(${PROJECT_NAME}.elf INTERFACE Library/ST/AI/Lib)
 
 # 定义hex和bin文件
 set(HEX_FILE ${BIN_DIR}/${PROJECT_NAME}.hex)

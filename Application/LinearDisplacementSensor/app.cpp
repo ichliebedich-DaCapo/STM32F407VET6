@@ -12,7 +12,7 @@
 #include "adc.h"
 #include "key.hpp"
 #include "usart.h"
-
+#include "app_x-cube-ai.h"
 extern UART_HandleTypeDef huart1;
 uint8_t rxBuffer[1];
 void app_init()

@@ -1,0 +1,141 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.29"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Furina",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Furina.elf::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Furina.elf-05154d05255edcf89fa8.json",
+					"name" : "Furina.elf",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "libai::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-libai-84ae57502b61cffbc5cd.json",
+					"name" : "libai",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "libapp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-libapp-49a8150a144248b69d46.json",
+					"name" : "libapp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "libbsp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-libbsp-08f66a634fc8e51631ce.json",
+					"name" : "libbsp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "libdata::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-libdata-3141d814829c571934bd.json",
+					"name" : "libdata",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "libdrivers::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-libdrivers-bd022553f51ea316acc4.json",
+					"name" : "libdrivers",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "libdsp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-libdsp-69ff6af6805908dd8549.json",
+					"name" : "libdsp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "libfreertos::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-libfreertos-66dedb3a229c9f825be8.json",
+					"name" : "libfreertos",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "liblvgl::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-liblvgl-cf0f483b0ac712f6786c.json",
+					"name" : "liblvgl",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "libmodule::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-libmodule-7e68f6e2c57e78f420fb.json",
+					"name" : "libmodule",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm",
+		"source" : "D:/Embedded/MCU/STM32/Furina"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
