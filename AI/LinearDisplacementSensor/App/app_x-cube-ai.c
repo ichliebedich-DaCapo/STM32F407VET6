@@ -171,33 +171,6 @@ static int ai_run(void)
     return 0;
 }
 
-int acquire_and_process_data(float input_data, ai_i8 *data[])
-{
-    // 将浮点数转换为整数并归一化到AI模型的输入范围
-    float normalized_data = (input_data - 40.0f) / (50.0f - 40.0f) * (127.0f - (-128.0f)) + (-128.0f);
-    int8_t input_data_int8 = (int8_t)normalized_data;
-
-    // 将处理后的数据填充到输入缓冲区
-    data[0] = &input_data_int8;
-
-    return 0;
-}
-
-
-int post_process(ai_i8 *data[], bool *result)
-{
-    // 假设输出数据是一个数组，这里取第一个元素作为结果
-    int8_t output_data = *data[0];
-
-    // 将输出数据转换为布尔值
-    *result = (output_data > 0); // 假设正数表示 true，负数表示 false
-
-    return 0;
-}
-
-/* USER CODE END 2 */
-
-/* Entry points --------------------------------------------------------------*/
 
 void MX_X_CUBE_AI_Init(void)
 {
@@ -206,70 +179,35 @@ void MX_X_CUBE_AI_Init(void)
 
     ai_boostrap(data_activations0);
     /* USER CODE END 5 */
-}
 
-void MX_X_CUBE_AI_Process(void)
-{
-    /* USER CODE BEGIN 6 */
-    int res = -1;
 
-    printf("TEMPLATE - run - main loop\r\n");
-
-//    if (network)
-//    {
-//
-//        do
-//        {
-//            /* 1 - acquire and pre-process input data */
-////            res = acquire_and_process_data(data_ins);
-//            /* 2 - process the data - call inference engine */
-//            if (res == 0)
-//                res = ai_run();
-//            /* 3- post-process the predictions */
-//            if (res == 0)
-//                res = post_process(data_outs);
-//        } while (res == 0);
-//    }
-
-    if (res)
-    {
-        ai_error err = {AI_ERROR_INVALID_STATE, AI_ERROR_CODE_NETWORK};
-        ai_log_err(err, "Process has FAILED");
-    }
-    /* USER CODE END 6 */
 }
 
 
-bool process_float_data(float input_data)
+int8_t process_float_data(float input_data)
 {
-    bool result = false;
-    int res = -1;
+    float normalized_data = (input_data - 40.0f) / (50.0f - 40.0f) * (127.0f - (-128.0f)) + (-128.0f);
+    int8_t input_data_int8 = (int8_t) normalized_data;
+
+    *data_ins[0] = input_data_int8;
 
     // 获取输入数据并填充到输入缓冲区
-    res = acquire_and_process_data(input_data, data_ins);
-    if (res == 0)
-    {
-        // 运行AI推理
-        res = ai_run();
-    }
+    ai_run();
 
-    if (res == 0)
-    {
-        // 处理推理结果
-        res = post_process(data_outs, &result);
-    }
-
-    if (res != 0)
-    {
-        // 处理错误
-        ai_error err = {AI_ERROR_INVALID_STATE, AI_ERROR_CODE_NETWORK};
-        ai_log_err(err, "Process has FAILED");
-    }
-
-    return result;
+    return *data_outs[0];
 }
 
+static int8_t input;
+static int8_t output;
 
+int8_t process_float_data2(int8_t input_data)
+{
+    *data_ins[0] =input_data;
+    // 获取输入数据并填充到输入缓冲区
+    ai_run();
+
+    return  *data_outs[0];
+}
 
 #ifdef __cplusplus
 }

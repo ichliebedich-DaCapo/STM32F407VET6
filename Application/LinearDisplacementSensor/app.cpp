@@ -18,11 +18,12 @@ extern UART_HandleTypeDef huart1;
 uint8_t rxBuffer[1];
 
 static uint16_t test_index = 0;
+static int8_t test_int8_t = -128;
 bool result = false;
 float test_data[30] = {
-    40.1, 49.1, 40.3, 49.3, 40.5, 49.5, 40.7, 49.7, 40.9, 49.9,
-    41.1, 44.1, 41.3, 44.3, 41.5, 44.5, 41.7, 44.7, 41.9, 44.9,
-    42.1, 42.3, 42.5, 42.7, 42.9, 43.1, 43.3, 43.5, 43.7, 43.9
+        40.1, 49.1, 40.3, 49.3, 40.5, 49.5, 40.7, 49.7, 40.9, 49.9,
+        41.1, 44.1, 41.3, 44.3, 41.5, 44.5, 41.7, 44.7, 41.9, 44.9,
+        42.1, 42.3, 42.5, 42.7, 42.9, 43.1, 43.3, 43.5, 43.7, 43.9
 };
 
 
@@ -45,16 +46,22 @@ void key_handler()
 //            {
 //                adc1_start_it();
 //            }
-            result = process_float_data(test_data[test_index++]);
-            printf("index:%d result:%d\r\n", test_index,result);
-
+//            result = process_float_data(test_data[test_index]);
+//            printf("index:%d result:%d\r\n", test_index,result);
+//            test_index++;
+            for (int i = 0; i < 255; ++i)
+            {
+                result = process_float_data(test_int8_t);
+                printf("index:%d result:%d\r\n",test_int8_t, result);
+                test_int8_t++;
+            }
             break;
         case keyk1://开始采集数据
-            if (Key::stateHandler(KEY_STATE_NONE))
-            {
-                adc1_stop_it();
-
-            }
+//            if (Key::stateHandler(KEY_STATE_NONE))
+//            {
+//                adc1_stop_it();
+//
+//            }
 
             break;
 

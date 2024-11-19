@@ -27,7 +27,8 @@ extern "C" {
 
 void MX_X_CUBE_AI_Init(void);
 void MX_X_CUBE_AI_Process(void);
-bool process_float_data(float input_data);
+int8_t  process_float_data(float input_data);
+int8_t  process_float_data2(int8_t input_data);
 #ifdef __cplusplus
 }
 #endif
