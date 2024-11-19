@@ -32,7 +32,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【准备】什么辣鸡gitignore，草" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【准备】是我错了">
+      <change beforePath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -1900,15 +1902,7 @@
       <workItem from="1731832462157" duration="36000" />
       <workItem from="1731937309645" duration="21000" />
       <workItem from="1732030432676" duration="5512000" />
-      <workItem from="1732035994900" duration="128000" />
-    </task>
-    <task id="LOCAL-00013" summary="__【未配置好】增添了一点解释">
-      <option name="closed" value="true" />
-      <created>1728490638318</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1728490638318</updated>
+      <workItem from="1732035994900" duration="520000" />
     </task>
     <task id="LOCAL-00014" summary="__【未配置好】添加了ADC、DAC、定时器驱动，添加了ISR.cpp用于处理中断回调。此外，开始编写player模块，但还没理清与应用、驱动之间的关系，低耦合高内聚真难搞啊">
       <option name="closed" value="true" />
@@ -2294,7 +2288,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732036112221</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="【准备】是我错了">
+      <option name="closed" value="true" />
+      <created>1732036146573</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1732036146573</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2329,7 +2331,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【语音存储与回放】启用了DMA用于FSMC传输数据，准备测试分支的读取内部温度传感器" />
     <MESSAGE value="【语音存储与回放】更新了Readme" />
     <MESSAGE value="【语音存储与回放】更新了Readme,创建了一个新分支ZQ用于测试" />
     <MESSAGE value="【双音频信号发生器】发现绘制图表时会有很严重的性能问题。现准备尝试双缓冲" />
@@ -2354,14 +2355,8 @@
     <MESSAGE value="【双音频信号发生器】准备合并" />
     <MESSAGE value="【跨越】已经把AI模型初步部署进工程里了" />
     <MESSAGE value="【准备】什么辣鸡gitignore，草" />
-    <option name="LAST_COMMIT_MESSAGE" value="【准备】什么辣鸡gitignore，草" />
-  </component>
-  <component name="XDebuggerManager">
-    <watches-manager>
-      <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
-        <watch expression="$control" />
-      </configuration>
-    </watches-manager>
+    <MESSAGE value="【准备】是我错了" />
+    <option name="LAST_COMMIT_MESSAGE" value="【准备】是我错了" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

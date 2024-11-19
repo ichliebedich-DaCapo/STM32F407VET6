@@ -46,7 +46,7 @@ void key_handler()
 //                adc1_start_it();
 //            }
             result = process_float_data(test_data[test_index++]);
-            printf("result:%d\r\n", result);
+            printf("index:%d result:%d\r\n", test_index,result);
 
             break;
         case keyk1://开始采集数据
