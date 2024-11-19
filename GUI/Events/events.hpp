@@ -8,7 +8,6 @@
 #include "GUI_Base.hpp"
 
 
-
 /*************别名***************/
 
 //using stateHandler = void (*)(bool);
@@ -190,7 +189,6 @@ auto Events::bond(Obj obj, lv_event_cb_t event_cb, void *user_data, lv_event_cod
 //            break;
 //    }
 //}
-
 
 
 

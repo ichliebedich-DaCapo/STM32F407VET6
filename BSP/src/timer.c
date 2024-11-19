@@ -70,6 +70,7 @@ void timer6_init(uint32_t arr, uint32_t psc)
 }
 
 extern void timer6_isr();
+__weak void timer6_isr() {}
 void TIM6_DAC_IRQHandler()
 {
     // 我把TIM7当做系统时钟，所以并不需要判断中断源

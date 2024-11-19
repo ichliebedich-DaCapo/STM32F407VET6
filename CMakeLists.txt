@@ -1,9 +1,11 @@
 # --------------------------------------选择你的项目--------------------------------
 # 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
-set(APP_DIR Application/signalGenerator)
+set(APP_DIR Application/LinearDisplacementSensor)
+#set(GUI_ENABLE True)
 # --------------------------------------选择你的项目------------------------------
 # 是否使用独立静态库链接
 # 注释后，可以使用链接优化-flto，并且默认开启链接优化
+# ld链接器无法自动创建目录以存放map文件，所以注释下面时需要确保存在bin目录
 set(STATIC_MODULE_LD True)
 # --------------------------------------某些配置------------------------------
 set(CMAKE_SYSTEM_NAME Generic)
@@ -54,6 +56,9 @@ endif ()
 add_compile_definitions(ARM_MATH_CM4;ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING)
 # 使用Debug，使用HAL库。    -DUSE_FULL_LL_DRIVER 使用LL库
 add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx)
+if(GUI_ENABLE)
+    add_definitions(-DGUI_ENABLE)
+endif ()
 
 #--------------------------编译选项----------------------------
 # 根据编译器类型设置特定编译选项
@@ -100,8 +105,8 @@ if (COMPILER_IS_GCC)
 #仅使用 add_link_options(-flto)：
 #   结果：链接器尝试进行优化，但编译器生成的对象文件可能不包含足够的信息。
 #   问题：链接器无法进行有效的优化，可能导致编译错误或优化失败。
-        add_compile_options(-flto )
-        add_link_options(-flto)
+#        add_compile_options(-flto )
+#        add_link_options(-flto)
     endif ()
 elseif (COMPILER_IS_CLANG)
     add_compile_options(-O3 -ffast-math -g3 -Wextra)
@@ -225,6 +230,7 @@ set_target_properties(libdata PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
 # ------GUI库------
+if (GUI_ENABLE)
 file(GLOB_RECURSE GUI_SRC
         "${UI_DIR}/*.*"
         "GUI/Base/*.cpp"
@@ -245,7 +251,7 @@ target_include_directories(libgui PUBLIC ${GUI_DIR})
 target_link_libraries(libgui PUBLIC liblvgl libbsp)
 # 设置静态库的输出目录
 set_target_properties(libgui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
-
+endif ()
 
 # ------Module库------
 file(GLOB_RECURSE MODULE_SRC "Module/src/*.cpp")
@@ -267,7 +273,10 @@ set(APPLICATION_DIR
 add_library(libapp STATIC ${APPLICATION_SRC})
 target_include_directories(libapp PUBLIC ${APPLICATION_DIR})
 # 需要链接 libdsp libdata libgui libbsp libmodule等，根据需要选
-target_link_libraries(libapp PUBLIC libdsp libdata libgui libbsp libmodule)
+target_link_libraries(libapp PUBLIC libdsp libdata libbsp libmodule)
+if(GUI_ENABLE)
+    target_link_libraries(libapp PUBLIC libgui)
+endif ()
 # 设置静态库的输出目录
 set_target_properties(libapp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
@@ -278,6 +287,7 @@ if (STATIC_MODULE_LD)
     # 这里面不能直接添加到静态库里 否则链接时会出现找不到定义的现象
     file(GLOB_RECURSE SOURCES "Core/*.*" "Application/Base/ISR.cpp")
 else ()
+    if(GUI_ENABLE)
     include_directories(Application/Conf ${APP_DIR}
             ${DRIVERS_DIR}
             ${LVGL_DIR}
@@ -298,6 +308,24 @@ else ()
             ${MODULE_SRC}
             ${APPLICATION_SRC}
     )
+    else ()
+            include_directories(Application/Conf ${APP_DIR}
+            ${DRIVERS_DIR}
+            #            ${FREERTOS_DIR}
+            ${BSP_DIR}
+            ${DATA_DIR}
+            ${MODULE_DIR}
+            ${APPLICATION_DIR}
+    )
+    file(GLOB_RECURSE SOURCES "Core/*.*" "Application/Base/ISR.cpp"
+            ${DRIVERS_SRC}
+            #            ${FREERTOS_SRC}
+            ${BSP_SRC}
+            ${DATA_SRC}
+            ${MODULE_SRC}
+            ${APPLICATION_SRC}
+    )
+    endif ()
 endif ()
 
 # 设置链接脚本
