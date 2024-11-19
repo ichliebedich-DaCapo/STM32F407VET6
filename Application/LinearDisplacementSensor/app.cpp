@@ -13,14 +13,27 @@
 #include "key.hpp"
 #include "usart.h"
 #include "app_x-cube-ai.h"
+
 extern UART_HandleTypeDef huart1;
 uint8_t rxBuffer[1];
+
+static uint16_t test_index = 0;
+bool result = false;
+float test_data[30] = {
+    40.1, 49.1, 40.3, 49.3, 40.5, 49.5, 40.7, 49.7, 40.9, 49.9,
+    41.1, 44.1, 41.3, 44.3, 41.5, 44.5, 41.7, 44.7, 41.9, 44.9,
+    42.1, 42.3, 42.5, 42.7, 42.9, 43.1, 43.3, 43.5, 43.7, 43.9
+};
+
+
 void app_init()
 {
-   adc1_init();
-   timer2_init(FREQ_84M_to_100);
-   usart1_init();
-   HAL_UART_Receive_IT(&huart1, rxBuffer, 1);
+    adc1_init();
+    timer2_init(FREQ_84M_to_100);
+    usart1_init();
+    HAL_UART_Receive_IT(&huart1, rxBuffer, 1);
+
+    MX_X_CUBE_AI_Init();
 }
 
 void key_handler()
@@ -28,16 +41,12 @@ void key_handler()
     switch (Key::getCode())
     {
         case keyk0://开始采集数据
-            if (Key::stateHandler(KEY_STATE_NONE))
-            {
-                adc1_start_it();
-            }
-
-//            } else
+//            if (Key::stateHandler(KEY_STATE_NONE))
 //            {
-//                   adc1_stop_it();
-//
+//                adc1_start_it();
 //            }
+            result = process_float_data(test_data[test_index++]);
+            printf("result:%d\r\n", result);
 
             break;
         case keyk1://开始采集数据
@@ -62,7 +71,8 @@ void key_handler()
 }
 /**实现中断服务例程*/
 // 用于采集ADC数据
-void adc1_isr() {
+void adc1_isr()
+{
     // 获取ADC值
     uint16_t adcValue = HAL_ADC_GetValue(&hadc1);
     // 打印ADC值
