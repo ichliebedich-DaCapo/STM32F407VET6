@@ -1,30 +1,30 @@
 ST Edge AI Core v1.0.0-19894
-Created date          : 2024-11-19 23:30:43
-Parameters            : generate --target stm32f4 --name network -m D:/Script/python/expr_com/training_model_test/model/stm32_model.tflite --compression none --verbosity 1 --allocate-inputs --allocate-outputs --workspace C:/Users/fairy/AppData/Local/Temp/mxAI_workspace104570107868005571192625191578325 --output C:/Users/fairy/.stm32cubemx/network_output
+Created date          : 2024-11-20 13:59:46
+Parameters            : generate --target stm32f4 --name network -m D:/Script/python/expr_com/training_model_test2/model/stm32_model.tflite --compression none --verbosity 1 --allocate-inputs --allocate-outputs --workspace C:/Users/fairy/AppData/Local/Temp/mxAI_workspace6260003125030016625122510454481803 --output C:/Users/fairy/.stm32cubemx/network_output
 
 Exec/report summary (generate)
------------------------------------------------------------------------------------------------------------
-model file         :   D:\Script\python\expr_com\training_model_test\model\stm32_model.tflite              
-type               :   tflite                                                                              
-c_name             :   network                                                                             
-compression        :   none                                                                                
-options            :   allocate-inputs, allocate-outputs                                                   
-optimization       :   balanced                                                                            
-target/series      :   stm32f4                                                                             
-workspace dir      :   C:\Users\fairy\AppData\Local\Temp\mxAI_workspace104570107868005571192625191578325   
-output dir         :   C:\Users\fairy\.stm32cubemx\network_output                                          
-model_fmt          :   float                                                                               
-model_name         :   stm32_model                                                                         
-model_hash         :   0x0f54bd1cbf2f3447e435429b3e84fdc2                                                  
-params #           :   237 items (948 B)                                                                   
------------------------------------------------------------------------------------------------------------
-input 1/1          :   'serving_default_keras_tensor0', f32(1x1), 4 Bytes, activations                     
-output 1/1         :   'nl_3', f32(1x1), 4 Bytes, activations                                              
-macc               :   275                                                                                 
-weights (ro)       :   948 B (948 B) (1 segment)                                                           
-activations (rw)   :   112 B (112 B) (1 segment) *                                                         
-ram (total)        :   112 B (112 B) = 112 + 0 + 0                                                         
------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+model file         :   D:\Script\python\expr_com\training_model_test2\model\stm32_model.tflite              
+type               :   tflite                                                                               
+c_name             :   network                                                                              
+compression        :   none                                                                                 
+options            :   allocate-inputs, allocate-outputs                                                    
+optimization       :   balanced                                                                             
+target/series      :   stm32f4                                                                              
+workspace dir      :   C:\Users\fairy\AppData\Local\Temp\mxAI_workspace6260003125030016625122510454481803   
+output dir         :   C:\Users\fairy\.stm32cubemx\network_output                                           
+model_fmt          :   float                                                                                
+model_name         :   stm32_model                                                                          
+model_hash         :   0x4ee374e36f774654233bfa581a0f7d31                                                   
+params #           :   237 items (948 B)                                                                    
+------------------------------------------------------------------------------------------------------------
+input 1/1          :   'serving_default_keras_tensor0', f32(1x1), 4 Bytes, activations                      
+output 1/1         :   'nl_3', f32(1x1), 4 Bytes, activations                                               
+macc               :   275                                                                                  
+weights (ro)       :   948 B (948 B) (1 segment)                                                            
+activations (rw)   :   112 B (112 B) (1 segment) *                                                          
+ram (total)        :   112 B (112 B) = 112 + 0 + 0                                                          
+------------------------------------------------------------------------------------------------------------
 (*) 'input'/'output' buffers can be used from the activations buffer
 
 Model name - stm32_model

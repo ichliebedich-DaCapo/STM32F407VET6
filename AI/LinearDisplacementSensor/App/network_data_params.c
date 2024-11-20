@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    network_data_params.c
   * @author  AST Embedded Analytics Research Platform
-  * @date    2024-11-19T23:30:43+0800
+  * @date    2024-11-20T13:59:46+0800
   * @brief   AI Tool Automatic Code Generator for Embedded NN computing
   ******************************************************************************
   * Copyright (c) 2024 STMicroelectronics.
@@ -30,36 +30,36 @@ ai_handle g_network_activations_table[1 + 2] = {
 /**  Weights Section  ********************************************************/
 AI_ALIGNED(32)
 const ai_u64 s_network_weights_array_u64[119] = {
-  0x3f168a333ee7edb5U, 0x3f12583fbe6c2d8cU, 0x3ec060183ed8ec05U, 0x3d7dae0ebdd415e0U,
-  0x3d669779beba1c47U, 0xc004a1aabfee5a1cU, 0x3ffabaf600000000U, 0xc0015e583fb0476fU,
-  0x3fc70b4f00000000U, 0xc00b8ad200000000U, 0xbeb30710be65a766U, 0xbe740fc03d5708b0U,
-  0xbc3ccb803ec2933cU, 0x3ea390e4be8ac8edU, 0x3e89b9143db12bc0U, 0x3ebb0aa13e1ad304U,
-  0x3e42651c3e109988U, 0xbe486dcabe6fb4f3U, 0xbf2c26f0bea895c5U, 0x40a8108dbea252a8U,
-  0x3eefd2663efd074bU, 0xbef65b22beb26bd4U, 0x3e132f8a3e7e4537U, 0xbf1063e83eba9b82U,
-  0x40286658be5e3997U, 0xbe8bc8a23c3f8a2bU, 0x3e9cbfbb3cd87fc0U, 0x3dc79b96be9f2512U,
-  0x3ebd58e8be2b1cbeU, 0xbe994a47bebb2c14U, 0xbedc897bbdb7579cU, 0x3dbc21903b9b0380U,
-  0xbeafd0713ec24478U, 0xbe1890963e8bd3fcU, 0xbcd03e203dbd8f18U, 0x3eae806f3efd0c8cU,
-  0xbeaa97923d161eb0U, 0x3f004e21bece73d8U, 0xbf392d9fbe2f0648U, 0x406b38e13ed14a6cU,
-  0xbe813fd6be572848U, 0x3f0a04d4be49b450U, 0xbf0f4e3a3e9c8bceU, 0xbd2da9f3bec4ebf6U,
-  0xc08778ddbe7ce536U, 0xbb21adc83e768926U, 0x3e60113a3e9a3beaU, 0x3e514130bdeee3b7U,
-  0xbef47abcbead430bU, 0x404aad8f3e433b04U, 0x3ec5090b3e9d9e11U, 0xbebf81efbea4b529U,
-  0x3eb6eab1bdec6552U, 0xbded9a743eac2df2U, 0x4079a1fbbe9398f6U, 0xbe7e461f3cdd6000U,
-  0x3d1f9d50bd313e50U, 0x3ec97b90be88a2afU, 0xbea7e9cc3ebab75eU, 0xbe48789c3e1e3de4U,
-  0xbc3318563eadc5daU, 0xbe1189dfbeb5ec71U, 0x3ea86cbbbea824fcU, 0x3f3536d7bcadf860U,
-  0xc000ef1c3c63cfc0U, 0xbe80cdc4be9e29e8U, 0x3d418dc03e0328c8U, 0xbe93de8e3e8d030aU,
-  0x3eba429abe9e299aU, 0x3ee4a926be46c17cU, 0xbd5269983d873910U, 0xbe4db0ea3e5dc844U,
-  0xbd908c84be6e2826U, 0x3dece320be7091e7U, 0xbec648843e832318U, 0x3ecd3a1e3e29921bU,
-  0xbe04b8f1bd89a0f4U, 0xbd9cd6303eb048a5U, 0x3f31e5b0bee6f7bfU, 0xc029449c3da76ef8U,
-  0x3e5603373e8dbc63U, 0xbdaea0153ed01e50U, 0xbbbac9fb3d77fd08U, 0xbe979cf5bdc5f6d0U,
-  0x400caec73e6d0a40U, 0xbec0cb6dbdce818cU, 0x3d358660bce14590U, 0x3e30cbac3eb0ba9aU,
-  0xbe91e70e3e305b88U, 0xbed2a269bc996bd0U, 0xbe599aa7bd8ee60fU, 0xbd04b7ee3eab44a4U,
-  0x3e200c4c3e8ebe86U, 0xbeeccc50beaf7383U, 0x3e013dd0bee91160U, 0xbeb25429be2d45e4U,
-  0xbe51cbd6bedaf663U, 0xbe9635debcb126d0U, 0xbd37c3d0be727ba2U, 0xbecdfa46bc9987d0U,
-  0xc01c135600000000U, 0xbca91e41bfb73d40U, 0xbfe7b9bb00000000U, 0xbfca79b43ff7f204U,
-  0xbfe0a7e3U, 0x3fb1ff7cU, 0x3fb0014400000000U, 0xbfbd8439U,
-  0xbbc4c5ddU, 0xbf30db683efca8b2U, 0x3ca9a517bf565c70U, 0xbf71da42bdaf58b0U,
-  0xbed11cf2402acfb0U, 0x3e2887ecbf197dfcU, 0xbdf9b6c03eaddd6cU, 0x3f1f87893ed0392cU,
-  0xbe0da056bef8b115U, 0xbeaabb64be54088eU, 0x3fad2ce8U,
+  0xbdd848d83d9bc539U, 0xbc182917bd2ee8f0U, 0x3ea2cf8bbcf80340U, 0xbec4063bbbed3c80U,
+  0xbf02fb8e3f33ed03U, 0x40302143U, 0x401722b400000000U, 0xc014c36e00000000U,
+  0x0U, 0xc02be65bU, 0xbec30d8fbe86de82U, 0x3eafcb8abe778cffU,
+  0xbe43d3323c38fb40U, 0x3edc1582be825f7fU, 0x3e1e268c3d831630U, 0xbe553f20be0d7b03U,
+  0xbf8929a83ca983c0U, 0x3d86224fbe5012a0U, 0x3df4a9d0be50c098U, 0x3e9d510c3f01bdacU,
+  0x3e939e9ebec401a4U, 0xbee1d4d33e92ffd6U, 0xbe31b785beb61478U, 0x3e832bf23ed0b230U,
+  0x3e1978143e8d2562U, 0xbedb95f2bf157371U, 0xbf46ee7abe3be2e0U, 0x3e03ca84beb4a8f0U,
+  0xbee4db6ebe35cc0eU, 0xbe0dd5da3f1afb65U, 0x3ead4018bef39058U, 0xbf2ad422becac3ccU,
+  0x3e4af061be05bbcaU, 0xbe71e56bbebb66b6U, 0x3e87e1563ed21696U, 0xbe9e994ebee013c3U,
+  0x3e9bd4a8be525034U, 0x3ebe2bda3e6dcc2cU, 0x3ed7661ebe9bc3c0U, 0xbeda3efdbda321e4U,
+  0xbd1240803ef3c603U, 0x3f5029533e6f25b4U, 0xbf3ffd23bcc045b0U, 0x3edc13d4bdb96e70U,
+  0x3e3943bc3de4c504U, 0x3e9c6e56bd2e30ddU, 0xbf00e71a3ec7fb40U, 0x3d00f184bd66d438U,
+  0xbeb3c3563e0c9b88U, 0xbed2b3913eb0f232U, 0xbd4fe3603ee341d5U, 0x3f2df9963ea1e39aU,
+  0xbed23eb0bec51c22U, 0xbd5de160be295692U, 0xbea5f5d4be1952c3U, 0xbc8af2b0beaf92ccU,
+  0xbf3d96123c4e3e20U, 0x3f338446bced6f90U, 0x3ed7e658be04da94U, 0xbe57ce863e9e844aU,
+  0x3ec46430bec9afceU, 0xbe31ec74bec52e7aU, 0x3e8945883e6be150U, 0x3d4341d03ea8dd56U,
+  0xbe0e80de3f2140a2U, 0x3e530cf4beec2438U, 0x3e050d873e47865cU, 0x3dc42db7be004150U,
+  0x3dd7ddc0beb44feaU, 0x3e067e903d7052c8U, 0xbe7297523f16c9e6U, 0x3ee59f163de57250U,
+  0xbf2877d1be93e618U, 0xbe87e221bec48562U, 0x3d0aa2283e28d96dU, 0xbdc9f3203f3f2ebfU,
+  0x3e8ebab53dcdaf50U, 0xbed96f4cbe6009a1U, 0xbe6d0df23e7d0ee8U, 0xbe4da50ebdeaccc9U,
+  0xbdbcd5103f9b0691U, 0x3f75e3083e47eda8U, 0xbef833d9be5914d0U, 0xbe80b970be9e14c8U,
+  0xbccd0c20bf1a12bdU, 0xbd542120bce8c0e0U, 0xbe0d50d4bed3b136U, 0xbedc715a3e881e62U,
+  0x3e34c8d83d6b98d0U, 0xbdb01428bde0b470U, 0x3db10eb83f7f3863U, 0x3f5b5627be30a556U,
+  0xbf14add03e971ed4U, 0x3df244883ecd690cU, 0x3d4b7a40bec5be24U, 0x3daedd60bf094304U,
+  0xbf8666c5bedcc04aU, 0x3f31e4b2be663c1cU, 0x3ed03ffebe186176U, 0xbec54ac93ea93754U,
+  0xc00953c400000000U, 0xc019c5493ea3a2bdU, 0xbd19c56abfeb86c6U, 0xbfed97903fdb2a70U,
+  0xbfeaeff53fe1c3e7U, 0x3e9d8f3cbff317ebU, 0x3fd8523b3fd98133U, 0x402f6096U,
+  0xbff8eeee40332c9dU, 0xbf9237ab3ee81afeU, 0xbfb593003cd5a260U, 0x3e2f37c8c00edf2eU,
+  0xbf427ead3f777650U, 0xbfad02bb4037805cU, 0xba9bf9b3bf0e0378U, 0x3f8828553f484baeU,
+  0x3d3cab90413dbb96U, 0xc02868a74127658fU, 0x3fdf9c15U,
 };
 
 

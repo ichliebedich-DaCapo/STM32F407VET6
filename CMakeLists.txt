@@ -269,6 +269,7 @@ set(AI_DIR AI/${APP_DIR_LAST_PART}/App AI/${APP_DIR_LAST_PART})
 add_library(libai STATIC ${AI_SRC})
 target_include_directories(libai PUBLIC ${AI_DIR})
 target_link_libraries(libai INTERFACE :NetworkRuntime910_CM4_GCC.a)
+target_link_libraries(libai PRIVATE libdrivers)
 target_link_directories(libai INTERFACE Library/ST/AI/Lib)
 # 设置静态库的输出目录
 set_target_properties(libai PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})

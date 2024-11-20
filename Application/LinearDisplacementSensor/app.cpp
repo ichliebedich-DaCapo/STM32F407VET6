@@ -16,10 +16,15 @@
 
 extern UART_HandleTypeDef huart1;
 uint8_t rxBuffer[1];
-
+extern "C"
+{
+    float process_data_float(float input);
+}
 static uint16_t test_index = 0;
 static int8_t test_int8_t = -128;
-bool result = false;
+float result = false;
+float input=0;
+
 float test_data[30] = {
         40.1, 49.1, 40.3, 49.3, 40.5, 49.5, 40.7, 49.7, 40.9, 49.9,
         41.1, 44.1, 41.3, 44.3, 41.5, 44.5, 41.7, 44.7, 41.9, 44.9,
@@ -49,11 +54,11 @@ void key_handler()
 //            result = process_float_data(test_data[test_index]);
 //            printf("index:%d result:%d\r\n", test_index,result);
 //            test_index++;
-            for (int i = 0; i < 255; ++i)
+            for (int i = 0; i < 500; ++i)
             {
-                result = process_float_data(test_int8_t);
-                printf("index:%d result:%d\r\n",test_int8_t, result);
-                test_int8_t++;
+                result =process_data_float(input);
+                printf("index:%f result:%f\r\n",input, result);
+                input+=0.3;
             }
             break;
         case keyk1://开始采集数据
@@ -76,6 +81,12 @@ void key_handler()
 
     }
 }
+void backgroud_handler()
+{
+//    MX_X_CUBE_AI_Process();
+}
+
+
 /**实现中断服务例程*/
 // 用于采集ADC数据
 void adc1_isr()
