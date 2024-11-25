@@ -18,7 +18,7 @@ uint8_t rxBuffer[1];
 void app_init()
 {
    adc1_init();
-   timer2_init(FREQ_84M_to_100);
+   timer2_init(FREQ_84M_to_50);
    usart1_init();
    HAL_UART_Receive_IT(&huart1, rxBuffer, 1);
 }
@@ -66,7 +66,7 @@ void adc1_isr() {
     // 获取ADC值
     uint16_t adcValue = HAL_ADC_GetValue(&hadc1);
     // 打印ADC值
-    printf("%f\r\n", adcValue / 4095.0f * 3.3 * 30 / 3.3);//方案1：传输给单片机处理 真实电压*电压密度=长度
+    printf("%f\r\n", (4095-adcValue) / 4095.0f * 3.3 * 5 / 3.3);//方案1：传输给单片机处理 真实电压*电压密度=长度
 //    printf("%d\r\n", adcValue);//方案2：传输给上位机处理
 
 }

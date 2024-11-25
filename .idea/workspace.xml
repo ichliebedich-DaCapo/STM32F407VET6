@@ -33,10 +33,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【直线位移传感器】ADC采集公式修正">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/ISR.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/usart.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/usart.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/usart.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1896,6 +1894,8 @@
       <workItem from="1731988784042" duration="855000" />
       <workItem from="1731994158433" duration="4061000" />
       <workItem from="1732019218712" duration="9247000" />
+      <workItem from="1732445754873" duration="4070000" />
+      <workItem from="1732537736311" duration="314000" />
     </task>
     <task id="LOCAL-00017" summary="__【未配置好】准备着手双音频信号发生器">
       <option name="closed" value="true" />
@@ -2355,7 +2355,6 @@
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
         <watch expression="$control" language="ObjectiveC" />
-        <watch expression="adcValues" />
         <watch expression="rxBuffer" />
         <watch expression="rxBuffer[1]" />
       </configuration>
