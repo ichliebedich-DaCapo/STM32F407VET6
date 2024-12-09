@@ -31,7 +31,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【直线位移传感器】ADC采集公式修正">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【直线位移传感器】计时器频率改成50hz">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.cpp" afterDir="false" />
@@ -1895,15 +1895,12 @@
       <workItem from="1731994158433" duration="4061000" />
       <workItem from="1732019218712" duration="9247000" />
       <workItem from="1732445754873" duration="4070000" />
-      <workItem from="1732537736311" duration="314000" />
-    </task>
-    <task id="LOCAL-00017" summary="__【未配置好】准备着手双音频信号发生器">
-      <option name="closed" value="true" />
-      <created>1728749785076</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1728749785076</updated>
+      <workItem from="1732537736311" duration="351000" />
+      <workItem from="1732550079280" duration="624000" />
+      <workItem from="1732601582697" duration="2490000" />
+      <workItem from="1733583835153" duration="2939000" />
+      <workItem from="1733627883023" duration="2089000" />
+      <workItem from="1733740919035" duration="2000" />
     </task>
     <task id="LOCAL-00018" summary="__【未配置好】测试1">
       <option name="closed" value="true" />
@@ -2289,7 +2286,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731946489048</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="【直线位移传感器】计时器频率改成50hz">
+      <option name="closed" value="true" />
+      <created>1732538076350</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1732538076351</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2324,7 +2329,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【双音频信号发生器】发现绘制图表时会有很严重的性能问题。现准备尝试双缓冲" />
     <MESSAGE value="【双音频信号发生器】尝试用基本LCD函数来实现波形绘制" />
     <MESSAGE value="【双音频信号发生器】示波器绘制算法勉强可以使用，只不过在真机上运行会导致图形紊乱，猜测可能是数据类型导致的" />
     <MESSAGE value="【双音频信号发生器】已解决紊乱问题，现在尝试解决优化速率" />
@@ -2349,7 +2353,8 @@
     <MESSAGE value="【直线位移传感器】添加SVD文件" />
     <MESSAGE value="【直线位移传感器】解决print重定向问题，基本完成" />
     <MESSAGE value="【直线位移传感器】ADC采集公式修正" />
-    <option name="LAST_COMMIT_MESSAGE" value="【直线位移传感器】ADC采集公式修正" />
+    <MESSAGE value="【直线位移传感器】计时器频率改成50hz" />
+    <option name="LAST_COMMIT_MESSAGE" value="【直线位移传感器】计时器频率改成50hz" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
