@@ -6,7 +6,7 @@
 #include "w25qxx.h"
 #include "timer.h"
 #include "spi.h"
-
+#include "GUI.hpp"
 // 宏定义
 // 读取数据基址
 #define  READ_DATA_BASE (((volatile unsigned short *)0x60000000))
