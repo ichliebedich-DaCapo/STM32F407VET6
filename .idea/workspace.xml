@@ -31,10 +31,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【直线位移传感器】计时器频率改成50hz">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【直线位移传感器】计时器频率改成200hz">
+      <change afterPath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Application/StorageOscilloscope/app.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/w25qxx.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/w25qxx.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/w25qxx.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/w25qxx.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -571,12 +574,12 @@
         <entry key="STM32F407.svd|p:Ethernet_PTP|PTPTSSR" value="HC" />
         <entry key="STM32F407.svd|p:Ethernet_PTP|PTPTTHR" value="HC" />
         <entry key="STM32F407.svd|p:Ethernet_PTP|PTPTTLR" value="HC" />
-        <entry key="STM32F407.svd|p:FLASH" value="-C" />
+        <entry key="STM32F407.svd|p:FLASH" value="-E" />
         <entry key="STM32F407.svd|p:FLASH|ACR" value="HC" />
         <entry key="STM32F407.svd|p:FLASH|CR" value="HC" />
         <entry key="STM32F407.svd|p:FLASH|KEYR" value="HC" />
         <entry key="STM32F407.svd|p:FLASH|OPTCR" value="HC" />
-        <entry key="STM32F407.svd|p:FLASH|OPTKEYR" value="HC" />
+        <entry key="STM32F407.svd|p:FLASH|OPTKEYR" value="HE" />
         <entry key="STM32F407.svd|p:FLASH|SR" value="HC" />
         <entry key="STM32F407.svd|p:FSMC" value="-C" />
         <entry key="STM32F407.svd|p:FSMC|BCR1" value="HC" />
@@ -1674,7 +1677,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.cidr.embedded.config&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.C/C++&quot;,
     &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
     &quot;two.files.diff.last.used.file&quot;: &quot;D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -1900,15 +1903,9 @@
       <workItem from="1732601582697" duration="2490000" />
       <workItem from="1733583835153" duration="2939000" />
       <workItem from="1733627883023" duration="2089000" />
-      <workItem from="1733740919035" duration="2000" />
-    </task>
-    <task id="LOCAL-00018" summary="__【未配置好】测试1">
-      <option name="closed" value="true" />
-      <created>1728804877009</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1728804877009</updated>
+      <workItem from="1733740919035" duration="6276000" />
+      <workItem from="1733747218603" duration="10496000" />
+      <workItem from="1733817215669" duration="3492000" />
     </task>
     <task id="LOCAL-00019" summary="__【未配置好】测试1">
       <option name="closed" value="true" />
@@ -2294,7 +2291,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732538076351</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="【直线位移传感器】计时器频率改成200hz">
+      <option name="closed" value="true" />
+      <created>1733740958453</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1733740958453</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2316,7 +2321,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="DV" />
+                        <option value="origin/DV" />
                       </list>
                     </value>
                   </entry>
@@ -2329,7 +2334,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【双音频信号发生器】尝试用基本LCD函数来实现波形绘制" />
     <MESSAGE value="【双音频信号发生器】示波器绘制算法勉强可以使用，只不过在真机上运行会导致图形紊乱，猜测可能是数据类型导致的" />
     <MESSAGE value="【双音频信号发生器】已解决紊乱问题，现在尝试解决优化速率" />
     <MESSAGE value="【双音频信号发生器】准备解决绘制漏墨问题" />
@@ -2354,7 +2358,8 @@
     <MESSAGE value="【直线位移传感器】解决print重定向问题，基本完成" />
     <MESSAGE value="【直线位移传感器】ADC采集公式修正" />
     <MESSAGE value="【直线位移传感器】计时器频率改成50hz" />
-    <option name="LAST_COMMIT_MESSAGE" value="【直线位移传感器】计时器频率改成50hz" />
+    <MESSAGE value="【直线位移传感器】计时器频率改成200hz" />
+    <option name="LAST_COMMIT_MESSAGE" value="【直线位移传感器】计时器频率改成200hz" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -2362,6 +2367,7 @@
         <watch expression="$control" language="ObjectiveC" />
         <watch expression="rxBuffer" />
         <watch expression="rxBuffer[1]" />
+        <watch expression="read_data" />
       </configuration>
     </watches-manager>
   </component>
