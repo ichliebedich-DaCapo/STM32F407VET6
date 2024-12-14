@@ -31,7 +31,26 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】按键处理任务和后台读取任务框架搭好了" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】按键处理任务和后台读取任务框架搭好了">
+      <change afterPath="$PROJECT_DIR$/GUI/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/.idea/GUI.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/UI/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/UI/.idea/UI.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/UI/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/_btn_list_pause_alpha_48x48.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/_btn_list_play_alpha_48x48.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/font.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/lv_customer_font_SourceHanSerifSC_Regular_13.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/lv_customer_font_SourceHanSerifSC_Regular_15.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/w25qxx.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/w25qxx.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -1670,7 +1689,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.C/C++&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
     &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
     &quot;two.files.diff.last.used.file&quot;: &quot;D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -1687,6 +1706,11 @@
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
     <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -1898,15 +1922,12 @@
       <workItem from="1733627883023" duration="2089000" />
       <workItem from="1733740919035" duration="6276000" />
       <workItem from="1733747218603" duration="10496000" />
-      <workItem from="1733817215669" duration="3845000" />
-    </task>
-    <task id="LOCAL-00020" summary="__【未配置好】测试2">
-      <option name="closed" value="true" />
-      <created>1728806681900</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1728806681900</updated>
+      <workItem from="1733817215669" duration="5616000" />
+      <workItem from="1733826178797" duration="660000" />
+      <workItem from="1733840910186" duration="2771000" />
+      <workItem from="1733885583420" duration="3022000" />
+      <workItem from="1734139004421" duration="1324000" />
+      <workItem from="1734141900784" duration="7023000" />
     </task>
     <task id="LOCAL-00021" summary="__【未配置好】测试">
       <option name="closed" value="true" />
@@ -2292,7 +2313,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733821061177</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="【简易存储示波器】按键处理任务和后台读取任务框架搭好了">
+      <option name="closed" value="true" />
+      <created>1733821324431</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1733821324431</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

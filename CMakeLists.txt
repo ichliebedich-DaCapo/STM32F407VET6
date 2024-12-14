@@ -329,7 +329,9 @@ else ()
 endif ()
 
 # 设置链接脚本
-set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld)
+set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld
+        GUI/UI/StorageOscilloscope/ui.cpp
+        GUI/UI/StorageOscilloscope/ui.hpp)
 
 # 链接标志
 add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)

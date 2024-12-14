@@ -181,8 +181,7 @@ static inline void SPI_FLASH_ReceiveData(uint8_t *pBuffer, uint16_t NumBytes)
 /************************接口函数********************/
 
 /**
- * @brief 初始化SPI Flash
- * @details 先进行硬件SPI2的初始化，再进行片选引脚的初始化
+ * @brief 初始化SPI Flash * @details 先进行硬件SPI2的初始化，再进行片选引脚的初始化
  *          然后初始化SPI Flash的参数
  */
 void w25qxx_init(void)
