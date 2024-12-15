@@ -25,17 +25,19 @@
 #define WriteStatusReg 0x01
 #define ReadData 0x03
 #define PageProgram 0x02 // 页写入
-#define BlockErase 0xD8  // 块擦除
-#define SectorErase 0x20
+#define SectorErase 0xD8
 #define ChipErase 0xC7 // 整片擦除
 
 /*标志*/
 #define Dummy_Byte 0xFF
 #define WIP_Flag 0x01
 
+/*FLASH页大小*/
+#define W25QXX_PAGE_SIZE 256
+
 /************************内联函数********************/
 
-// 初始化片选引脚
+// 【暂时没用，本体在SPI文件】初始化片选引脚
 static inline void w25qxx_spi_select(void)
 {
 #ifndef USE_HARD_CS
@@ -179,12 +181,17 @@ static inline void SPI_FLASH_ReceiveData(uint8_t *pBuffer, uint16_t NumBytes)
 /************************接口函数********************/
 
 /**
- * @brief 初始化SPI Flash
- * @details 先进行硬件SPI3的初始化，再进行片选引脚的初始化
+ * @brief 初始化SPI Flash * @details 先进行硬件SPI2的初始化，再进行片选引脚的初始化
  *          然后初始化SPI Flash的参数
  */
 void w25qxx_init(void)
 {
+    /**
+     * D     ------> 1：MOSI
+     * Q     ------> 2：MISO
+     * C     ------> 3：SCLOCK
+     * S     ------> 4：CS
+
     /*初始化可以不进行，默认为0x00*/
     SPI_FLASH_WriteEnable(); // 使能读写
 #ifndef USE_HARD_CS
@@ -209,6 +216,7 @@ void w25qxx_init(void)
  * @brief  擦除FLASH扇区
  * @param  SectorAddr：要擦除的扇区地址
  * @retval 无
+ * @note SECTOR ERASE命令的地址可以是该扇区内的任意地址
  */
 void w25qxx_sector_erase(uint32_t SectorAddr)
 {
@@ -245,6 +253,86 @@ void w25qxx_page_write(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToW
     SPI_FLASH_TransmitData(pBuffer, NumByteToWrite);
     SPI_FLASH_EndWrite();
 }
+/**
+ * @brief  将任意长度的数据写入FLASH
+ * @param  pBuffer，要写入数据的指针
+ * @param  WriteAddr，写入地址
+ * @param  NumByteToWrite，写入数据长度
+ * @retval 无
+ */
+void w25qxx_buffer_write(uint8_t *pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite)
+{
+    uint16_t bytesToWrite;
+    uint32_t currentAddr = WriteAddr;
+
+    while (NumByteToWrite > 0)
+    {
+        // 计算当前页剩余空间
+        uint16_t pageOffset = currentAddr % W25QXX_PAGE_SIZE;
+        bytesToWrite = W25QXX_PAGE_SIZE - pageOffset;
+
+        // 如果剩余数据小于等于当前页剩余空间，则直接写入剩余数据
+        if (bytesToWrite > NumByteToWrite)
+        {
+            bytesToWrite = NumByteToWrite;
+        }
+
+        // 擦除目标页（如果需要）
+        if (pageOffset == 0)
+        {
+            w25qxx_sector_erase(currentAddr);
+        }
+
+        // 写入数据
+        w25qxx_page_write(pBuffer, currentAddr, bytesToWrite);
+
+        // 更新指针和计数
+        currentAddr += bytesToWrite;
+        pBuffer += bytesToWrite;
+        NumByteToWrite -= bytesToWrite;
+    }
+}
+
+/**
+ * @brief  将uint16_t数组写入FLASH
+ * @param  pBuf16，要写入的uint16_t数据指针
+ * @param  WriteAddr，写入地址
+ * @param  NumHalfWordsToWrite，写入的半字（uint16_t）数量
+ * @retval 无
+ */
+void w25qxx_buffer_write_uint16(uint16_t *pBuf16, uint32_t WriteAddr, uint16_t NumHalfWordsToWrite)
+{
+    uint16_t bytesToWrite;
+    uint32_t currentAddr = WriteAddr;
+
+    while (NumHalfWordsToWrite > 0)
+    {
+        // 计算当前页剩余空间
+        uint16_t pageOffset = currentAddr % W25QXX_PAGE_SIZE;
+        bytesToWrite = (W25QXX_PAGE_SIZE - pageOffset) / 2;
+
+        // 如果剩余数据小于等于当前页剩余空间，则直接写入剩余数据
+        if (bytesToWrite > NumHalfWordsToWrite)
+        {
+            bytesToWrite = NumHalfWordsToWrite;
+        }
+
+        // 擦除目标页（如果需要）
+        if (pageOffset == 0)
+        {
+            w25qxx_sector_erase(currentAddr);
+        }
+
+        // 写入数据
+        w25qxx_page_write((uint8_t *)pBuf16, currentAddr, bytesToWrite * 2);
+
+        // 更新指针和计数
+        currentAddr += bytesToWrite * 2;
+        pBuf16 += bytesToWrite;
+        NumHalfWordsToWrite -= bytesToWrite;
+    }
+}
+
 
 /**
  * @brief  读取FLASH数据
@@ -280,6 +368,42 @@ uint8_t w25qxx_read_byte(uint32_t ReadAddr)
 #endif
     return temp;
 }
+
+
+/**
+ * @brief  从FLASH读取uint16_t数组
+ * @param  pBuf16，存储读出数据的uint16_t指针
+ * @param  ReadAddr，读取地址
+ * @param  NumHalfWordsToRead，读取的半字（uint16_t）数量
+ * @retval 无
+ */
+void w25qxx_buffer_read_uint16(uint16_t *pBuf16, uint32_t ReadAddr, uint16_t NumHalfWordsToRead)
+{
+    uint16_t bytesToRead;
+    uint32_t currentAddr = ReadAddr;
+
+    while (NumHalfWordsToRead > 0)
+    {
+        // 计算当前页剩余空间
+        uint16_t pageOffset = currentAddr % W25QXX_PAGE_SIZE;
+        bytesToRead = (W25QXX_PAGE_SIZE - pageOffset) / 2;
+
+        // 如果剩余数据小于等于当前页剩余空间，则直接读取剩余数据
+        if (bytesToRead > NumHalfWordsToRead)
+        {
+            bytesToRead = NumHalfWordsToRead;
+        }
+
+        // 读取数据
+        w25qxx_buffer_read((uint8_t *)pBuf16, currentAddr, bytesToRead * 2);
+
+        // 更新指针和计数
+        currentAddr += bytesToRead * 2;
+        pBuf16 += bytesToRead;
+        NumHalfWordsToRead -= bytesToRead;
+    }
+}
+
 
 void w25qxx_write_byte(uint32_t WriteAddr, uint8_t byte)
 {

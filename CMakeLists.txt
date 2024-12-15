@@ -1,6 +1,6 @@
 # --------------------------------------选择你的项目--------------------------------
 # 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
-set(APP_DIR Application/LinearDisplacementSensor)
+set(APP_DIR Application/StorageOscilloscope)
 #set(GUI_ENABLE True)
 set (AI_ENABLE True)
 # --------------------------------------选择你的项目------------------------------
@@ -346,7 +346,9 @@ endif ()
 
 # -------------------编译链接-------------------
 # 设置链接脚本
-set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld)
+set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld
+        GUI/UI/StorageOscilloscope/ui.cpp
+        GUI/UI/StorageOscilloscope/ui.hpp)
 
 # 链接标志
 add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
