@@ -32,18 +32,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【阻碍】无论输入什么都只输出1，得要先排除浮点数据造成的影响">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【跨越】我的第一个AI模型">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/app_x-cube-ai.c" beforeDir="false" afterPath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/app_x-cube-ai.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/app_x-cube-ai.h" beforeDir="false" afterPath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/app_x-cube-ai.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/network.c" beforeDir="false" afterPath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/network.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/network.h" beforeDir="false" afterPath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/network.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/network_config.h" beforeDir="false" afterPath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/network_config.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/network_data.c" beforeDir="false" afterPath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/network_data.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/network_data.h" beforeDir="false" afterPath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/network_data.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/network_data_params.c" beforeDir="false" afterPath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/network_data_params.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/network_data_params.h" beforeDir="false" afterPath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/network_data_params.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/network_generate_report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AI/LinearDisplacementSensor/App/network_generate_report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
     </list>
@@ -1644,9 +1635,6 @@
     <setting file="file://$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/startup_stm32f407xx.s" root0="SKIP_INSPECTION" />
   </component>
-  <component name="OCResolveContextSettings">
-    <option name="configuration" value="0-Default-libai" />
-  </component>
   <component name="PerforceDirect.Settings">
     <option name="CHARSET" value="none" />
   </component>
@@ -1670,29 +1658,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "OpenOCD 下载并运行.OCD Furina.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "ZQ",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.grazie",
-    "structure.view.defaults.are.configured": "true",
-    "two.files.diff.last.used.file": "D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;OpenOCD 下载并运行.OCD Furina.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ZQ&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.grazie&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
+    &quot;two.files.diff.last.used.file&quot;: &quot;D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Embedded\MCU\STM32\Furina\AI\LinearDisplacementSensor\App" />
@@ -1703,11 +1691,6 @@
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release-MinGW_ARM" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -1918,15 +1901,16 @@
       <workItem from="1731937309645" duration="21000" />
       <workItem from="1732030432676" duration="5512000" />
       <workItem from="1732035994900" duration="3928000" />
-      <workItem from="1732070356664" duration="11063000" />
-    </task>
-    <task id="LOCAL-00016" summary="__【未配置好】优化了一些细节。这个__weak大抵是发挥作用的吧，但编译后的内存竟然只增加了1%左右。等手头有单片机后再测试">
-      <option name="closed" value="true" />
-      <created>1728722121974</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1728722121974</updated>
+      <workItem from="1732070356664" duration="11603000" />
+      <workItem from="1732092031903" duration="2999000" />
+      <workItem from="1732386998477" duration="4232000" />
+      <workItem from="1732428943434" duration="2412000" />
+      <workItem from="1733506190475" duration="319000" />
+      <workItem from="1733532159885" duration="358000" />
+      <workItem from="1733584671219" duration="2096000" />
+      <workItem from="1733628473886" duration="1999000" />
+      <workItem from="1733914853746" duration="34000" />
+      <workItem from="1734251679101" duration="3000" />
     </task>
     <task id="LOCAL-00017" summary="__【未配置好】准备着手双音频信号发生器">
       <option name="closed" value="true" />
@@ -2312,7 +2296,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732039874063</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="【跨越】我的第一个AI模型">
+      <option name="closed" value="true" />
+      <created>1732083609388</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1732083609389</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2334,7 +2326,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="ZQ" />
+                        <option value="origin/ZQ" />
                       </list>
                     </value>
                   </entry>
@@ -2347,7 +2339,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【双音频信号发生器】发现绘制图表时会有很严重的性能问题。现准备尝试双缓冲" />
     <MESSAGE value="【双音频信号发生器】尝试用基本LCD函数来实现波形绘制" />
     <MESSAGE value="【双音频信号发生器】示波器绘制算法勉强可以使用，只不过在真机上运行会导致图形紊乱，猜测可能是数据类型导致的" />
     <MESSAGE value="【双音频信号发生器】已解决紊乱问题，现在尝试解决优化速率" />
@@ -2372,7 +2363,8 @@
     <MESSAGE value="【准备】是我错了" />
     <MESSAGE value="【跨越】AI模型能跑，但我没有掌握如何处理输入与输出数据" />
     <MESSAGE value="【阻碍】无论输入什么都只输出1，得要先排除浮点数据造成的影响" />
-    <option name="LAST_COMMIT_MESSAGE" value="【阻碍】无论输入什么都只输出1，得要先排除浮点数据造成的影响" />
+    <MESSAGE value="【跨越】我的第一个AI模型" />
+    <option name="LAST_COMMIT_MESSAGE" value="【跨越】我的第一个AI模型" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

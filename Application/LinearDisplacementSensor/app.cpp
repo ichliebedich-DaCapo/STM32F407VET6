@@ -4,7 +4,9 @@
 //PA0 -->ADC1
 //PA9 -->TXD
 //GND -->GND
+#include <cmath>
 #include <cstdio>
+#include <valarray>
 #include "app.hpp"
 
 #include "timer.h"
@@ -18,12 +20,12 @@ extern UART_HandleTypeDef huart1;
 uint8_t rxBuffer[1];
 extern "C"
 {
-    float process_data_float(float input);
+float process_data_float(float input);
 }
 static uint16_t test_index = 0;
 static int8_t test_int8_t = -128;
 float result = false;
-float input=0;
+float input = 0;
 
 float test_data[30] = {
         40.1, 49.1, 40.3, 49.3, 40.5, 49.5, 40.7, 49.7, 40.9, 49.9,
@@ -35,7 +37,7 @@ float test_data[30] = {
 void app_init()
 {
     adc1_init();
-    timer2_init(FREQ_84M_to_100);
+    timer2_init(FREQ_84M_to_200);
     usart1_init();
     HAL_UART_Receive_IT(&huart1, rxBuffer, 1);
 
@@ -47,40 +49,25 @@ void key_handler()
     switch (Key::getCode())
     {
         case keyk0://开始采集数据
-//            if (Key::stateHandler(KEY_STATE_NONE))
-//            {
-//                adc1_start_it();
-//            }
-//            result = process_float_data(test_data[test_index]);
-//            printf("index:%d result:%d\r\n", test_index,result);
-//            test_index++;
-            for (int i = 0; i < 500; ++i)
-            {
-                result =process_data_float(input);
-                printf("index:%f result:%f\r\n",input, result);
-                input+=0.3;
-            }
+            adc1_start_it();
             break;
         case keyk1://开始采集数据
-//            if (Key::stateHandler(KEY_STATE_NONE))
-//            {
-//                adc1_stop_it();
-//
-//            }
+            adc1_stop_it();
 
             break;
 
 
         case keyk2://开始采集数据
-
-
             break;
+
+        case keyk3:
 
         default:
             break;
 
     }
 }
+
 void backgroud_handler()
 {
 //    MX_X_CUBE_AI_Process();
@@ -94,7 +81,7 @@ void adc1_isr()
     // 获取ADC值
     uint16_t adcValue = HAL_ADC_GetValue(&hadc1);
     // 打印ADC值
-    printf("%f\r\n", adcValue / 4095.0f * 3.3 * 30 / 3.3);//方案1：传输给单片机处理 真实电压*电压密度=长度
+    printf("%f\r\n", adcValue / 4095.0f * 3.3 );//方案1：传输给单片机处理 真实电压*电压密度=长度
 //    printf("%d\r\n", adcValue);//方案2：传输给上位机处理
 
 }

@@ -46,6 +46,8 @@
 /****************************宏定义的频率****************************/
 // 用于填入形参表为(uint32_t arr, uint32_t psc)的函数中，以方便修改频率
 #define FREQ_84M_to_100  839,999    // 84MHz -> 100Hz
+#define FREQ_84M_to_200  419,999    // 84MHz -> 200Hz
+#define FREQ_84M_to_400  209,999    // 84MHz -> 400Hz
 #define FREQ_84M_to_500  167,999    // 84MHz -> 500Hz
 #define FREQ_84M_to_1K  83,999    // 84MHz -> 1KHz
 #define FREQ_84M_to_2K   41,999   // 84MHz -> 2KHz

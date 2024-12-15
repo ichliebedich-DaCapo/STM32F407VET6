@@ -2,6 +2,7 @@
 # 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
 set(APP_DIR Application/LinearDisplacementSensor)
 #set(GUI_ENABLE True)
+set (AI_ENABLE True)
 # --------------------------------------选择你的项目------------------------------
 # 是否使用独立静态库链接
 # 注释后，可以使用链接优化-flto，并且默认开启链接优化
@@ -264,16 +265,18 @@ target_link_libraries(libmodule PRIVATE libdsp libdata)
 set_target_properties(libmodule PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 # -------AI库-------
-file(GLOB_RECURSE AI_SRC "AI/${APP_DIR_LAST_PART}/App/*.c")
-set(AI_DIR AI/${APP_DIR_LAST_PART}/App AI/${APP_DIR_LAST_PART})
-add_library(libai STATIC ${AI_SRC})
-target_include_directories(libai PUBLIC ${AI_DIR})
-target_link_libraries(libai INTERFACE :NetworkRuntime910_CM4_GCC.a)
-target_link_libraries(libai PRIVATE libdrivers)
-target_link_directories(libai INTERFACE Library/ST/AI/Lib)
-# 设置静态库的输出目录
-set_target_properties(libai PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+if (AI_ENABLE)
+    file(GLOB_RECURSE AI_SRC "AI/${APP_DIR_LAST_PART}/App/*.c")
+    set(AI_DIR AI/${APP_DIR_LAST_PART}/App AI/${APP_DIR_LAST_PART})
+    add_library(libai STATIC ${AI_SRC})
+    target_include_directories(libai PUBLIC ${AI_DIR})
+    target_link_libraries(libai INTERFACE :NetworkRuntime910_CM4_GCC.a)
+    target_link_libraries(libai PRIVATE libdrivers)
+    target_link_directories(libai INTERFACE Library/ST/AI/Lib)
 
+    # 设置静态库的输出目录
+    set_target_properties(libai PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+endif ()
 
 # ------Application库------
 file(GLOB_RECURSE APPLICATION_SRC "${APP_DIR}/app.cpp" "Application/Base/main.cpp" "Application/Base/baseInit.cpp")
@@ -281,7 +284,10 @@ set(APPLICATION_DIR Application/Base)
 add_library(libapp STATIC ${APPLICATION_SRC})
 target_include_directories(libapp PUBLIC ${APPLICATION_DIR})
 # 需要链接 libdsp libdata libgui libbsp libmodule等，根据需要选
-target_link_libraries(libapp PUBLIC libdsp libdata libbsp libmodule libai)
+target_link_libraries(libapp PUBLIC libdsp libdata libbsp libmodule )
+if(AI_ENABLE)
+    target_link_libraries(libapp PUBLIC libai)
+endif ()
 if(GUI_ENABLE)
     target_link_libraries(libapp PUBLIC libgui)
 endif ()
