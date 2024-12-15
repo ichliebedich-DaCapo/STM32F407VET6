@@ -16,7 +16,6 @@
     <generated>
       <config projectName="Furina" targetName="libfreertos" />
       <config projectName="Furina" targetName="libdata" />
-      <config projectName="Furina" targetName="libai" />
       <config projectName="Furina" targetName="liblvgl" />
       <config projectName="Furina" targetName="libmodule" />
       <config projectName="Furina" targetName="Furina.elf" />
@@ -24,6 +23,7 @@
       <config projectName="Furina" targetName="libbsp" />
       <config projectName="Furina" targetName="libdsp" />
       <config projectName="Furina" targetName="libapp" />
+      <config projectName="Furina" targetName="libgui" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -32,10 +32,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【跨越】我的第一个AI模型">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="准备融合">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -1583,7 +1581,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="ZQ" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -1691,12 +1689,12 @@
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
-    <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release-MinGW_ARM" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration name="libai" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libai" CONFIG_NAME="Release-MinGW_ARM">
+    <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release-MinGW_ARM" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -1731,6 +1729,11 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="libgui" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libgui" CONFIG_NAME="Release-MinGW_ARM">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="liblvgl" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="liblvgl" CONFIG_NAME="Release-MinGW_ARM">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -1751,13 +1754,13 @@
     </configuration>
     <list>
       <item itemvalue="CMake 应用程序.Furina.elf" />
-      <item itemvalue="CMake 应用程序.libai" />
       <item itemvalue="CMake 应用程序.libapp" />
       <item itemvalue="CMake 应用程序.libbsp" />
       <item itemvalue="CMake 应用程序.libdata" />
       <item itemvalue="CMake 应用程序.libdrivers" />
       <item itemvalue="CMake 应用程序.libdsp" />
       <item itemvalue="CMake 应用程序.libfreertos" />
+      <item itemvalue="CMake 应用程序.libgui" />
       <item itemvalue="CMake 应用程序.liblvgl" />
       <item itemvalue="CMake 应用程序.libmodule" />
       <item itemvalue="OpenOCD 下载并运行.OCD Furina" />
@@ -1910,15 +1913,7 @@
       <workItem from="1733584671219" duration="2096000" />
       <workItem from="1733628473886" duration="1999000" />
       <workItem from="1733914853746" duration="34000" />
-      <workItem from="1734251679101" duration="3000" />
-    </task>
-    <task id="LOCAL-00017" summary="__【未配置好】准备着手双音频信号发生器">
-      <option name="closed" value="true" />
-      <created>1728749785076</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1728749785076</updated>
+      <workItem from="1734251679101" duration="1179000" />
     </task>
     <task id="LOCAL-00018" summary="__【未配置好】测试1">
       <option name="closed" value="true" />
@@ -2304,7 +2299,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732083609389</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="准备融合">
+      <option name="closed" value="true" />
+      <created>1734251699351</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1734251699352</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2326,7 +2329,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/ZQ" />
+                        <option value="ZQ" />
                       </list>
                     </value>
                   </entry>
@@ -2339,7 +2342,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【双音频信号发生器】尝试用基本LCD函数来实现波形绘制" />
     <MESSAGE value="【双音频信号发生器】示波器绘制算法勉强可以使用，只不过在真机上运行会导致图形紊乱，猜测可能是数据类型导致的" />
     <MESSAGE value="【双音频信号发生器】已解决紊乱问题，现在尝试解决优化速率" />
     <MESSAGE value="【双音频信号发生器】准备解决绘制漏墨问题" />
@@ -2364,7 +2366,8 @@
     <MESSAGE value="【跨越】AI模型能跑，但我没有掌握如何处理输入与输出数据" />
     <MESSAGE value="【阻碍】无论输入什么都只输出1，得要先排除浮点数据造成的影响" />
     <MESSAGE value="【跨越】我的第一个AI模型" />
-    <option name="LAST_COMMIT_MESSAGE" value="【跨越】我的第一个AI模型" />
+    <MESSAGE value="准备融合" />
+    <option name="LAST_COMMIT_MESSAGE" value="准备融合" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
