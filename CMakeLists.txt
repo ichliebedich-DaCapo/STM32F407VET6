@@ -1,13 +1,18 @@
 # --------------------------------------选择你的项目--------------------------------
 # 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
 set(APP_DIR Application/StorageOscilloscope)
-set(GUI_ENABLE True)
-#set (AI_ENABLE True)
-# --------------------------------------选择你的项目------------------------------
+
+# --------------------------------------某些可选选项------------------------------
 # 是否使用独立静态库链接
 # 注释后，可以使用链接优化-flto，并且默认开启链接优化
 # ld链接器无法自动创建目录以存放map文件，所以注释下面时需要确保存在bin目录
 set(STATIC_MODULE_LD True)
+# 使用GUI
+set(GUI_ENABLE True)
+# 使用AI
+#set (AI_ENABLE True)
+# 添加编译器选项，使得支持Module特性
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts")
 # --------------------------------------某些配置------------------------------
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_VERSION 1)
@@ -208,9 +213,7 @@ set_target_properties(libdsp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 #---------------------用户库-----------------------
 # ------BSP库------
 file(GLOB_RECURSE BSP_SRC "BSP/src/*.c")
-set(BSP_DIR
-        BSP/inc
-)
+set(BSP_DIR BSP/inc)
 add_library(libbsp STATIC ${BSP_SRC})
 target_include_directories(libbsp PUBLIC ${BSP_DIR})
 target_link_libraries(libbsp PUBLIC libdrivers)
@@ -294,8 +297,10 @@ endif ()
 # 设置静态库的输出目录
 set_target_properties(libapp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
-
-
+# -------------------module特性测试-----------------------
+file(GLOB_RECURSE test_modules
+    "Module/src/*.ixx"
+)
 
 # ----------------包含公共目录---------------
 # 公共目录
@@ -371,6 +376,12 @@ add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${BIN_DIR}/${PROJECT
 
 # 设置链接目标
 add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
+
+# 导入模块
+target_sources(libapp PUBLIC
+        FILE_SET CXX_MODULES FILES
+        ${test_modules})
+
 
 # 是否链接静态库
 if (STATIC_MODULE_LD)
