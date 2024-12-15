@@ -32,11 +32,19 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="已经融合，可以正常编译">
-      <change afterPath="$PROJECT_DIR$/Module/src/myModule.ixx" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="测试了module特性，可以正常使用">
+      <change afterPath="$PROJECT_DIR$/Module/inc/flash_storage.ixx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Module/src/flash_storage.cppm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/baseInit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/baseInit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay/app.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/inc/fft.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/fft.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/inc/flash_storage.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/src/fft.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/src/fft.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/src/flash_storage.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/src/myModule.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/src/player.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/src/player.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1916,15 +1924,7 @@
       <workItem from="1733628473886" duration="1999000" />
       <workItem from="1733914853746" duration="34000" />
       <workItem from="1734251679101" duration="6958000" />
-      <workItem from="1734265209046" duration="4104000" />
-    </task>
-    <task id="LOCAL-00019" summary="__【未配置好】测试1">
-      <option name="closed" value="true" />
-      <created>1728805052790</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1728805052790</updated>
+      <workItem from="1734265209046" duration="7916000" />
     </task>
     <task id="LOCAL-00020" summary="__【未配置好】测试2">
       <option name="closed" value="true" />
@@ -2310,7 +2310,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734254062073</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="测试了module特性，可以正常使用">
+      <option name="closed" value="true" />
+      <created>1734270514223</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1734270514223</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2345,7 +2353,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【双音频信号发生器】已解决紊乱问题，现在尝试解决优化速率" />
     <MESSAGE value="【双音频信号发生器】准备解决绘制漏墨问题" />
     <MESSAGE value="【双音频信号发生器】发现漏墨问题的一点端倪" />
     <MESSAGE value="【双音频信号发生器】先搁置样条算法的死机问题，先更改模板函数" />
@@ -2370,7 +2377,8 @@
     <MESSAGE value="【跨越】我的第一个AI模型" />
     <MESSAGE value="准备融合" />
     <MESSAGE value="已经融合，可以正常编译" />
-    <option name="LAST_COMMIT_MESSAGE" value="已经融合，可以正常编译" />
+    <MESSAGE value="测试了module特性，可以正常使用" />
+    <option name="LAST_COMMIT_MESSAGE" value="测试了module特性，可以正常使用" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

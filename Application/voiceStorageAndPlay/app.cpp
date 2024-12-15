@@ -13,7 +13,6 @@
 #include "adc.h"
 #include "dac.h"
 #include "player.hpp"
-#include "flash_storage.hpp"
 #include "GUI.hpp"
 #include "w25qxx.h"
 //const osThreadAttr_t voiceTask_attributes = {
@@ -113,7 +112,7 @@ void key_handler()
 
 void background_handler()
 {
-    FlashStorage::background_processing();
+//    FlashStorage::background_processing();
 }
 
 /**实现中断服务例程*/
@@ -121,13 +120,13 @@ void background_handler()
 void adc1_isr()
 {
     // 12位舍弃低4位
-    FlashStorage::write_isr(HAL_ADC_GetValue(&hadc1) >> 4);
+//    FlashStorage::write_isr(HAL_ADC_GetValue(&hadc1) >> 4);
 }
 
 // 用于播放DAC数据
 void timer6_isr()
 {
     // 把8位数据恢复为12位
-    dac_set_value(FlashStorage::read_isr() << 4);
+//    dac_set_value(FlashStorage::read_isr() << 4);
 }
 

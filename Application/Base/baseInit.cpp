@@ -1,7 +1,6 @@
 //
 // Created by fairy on 2024/9/22.
 //
-
 #include "baseInit.hpp"
 #include "stm32f4xx_hal.h"
 #include "lcd.h"

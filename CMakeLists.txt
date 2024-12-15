@@ -1,6 +1,6 @@
 # --------------------------------------选择你的项目--------------------------------
 # 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
-set(APP_DIR Application/StorageOscilloscope)
+set(APP_DIR Application/voiceStorageAndPlay)
 
 # --------------------------------------某些可选选项------------------------------
 # 是否使用独立静态库链接
@@ -298,8 +298,8 @@ endif ()
 set_target_properties(libapp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 # -------------------module特性测试-----------------------
-file(GLOB_RECURSE test_modules
-    "Module/src/*.ixx"
+file(GLOB_RECURSE cxx_modules
+    "Module/inc/*.ixx" "Module/src/*.cppm"
 )
 
 # ----------------包含公共目录---------------
@@ -380,7 +380,7 @@ add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
 # 导入模块
 target_sources(libapp PUBLIC
         FILE_SET CXX_MODULES FILES
-        ${test_modules})
+        ${cxx_modules})
 
 
 # 是否链接静态库
