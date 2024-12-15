@@ -32,24 +32,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】按键处理任务和后台读取任务框架搭好了">
-      <change afterPath="$PROJECT_DIR$/GUI/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/.idea/GUI.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/UI/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/UI/.idea/UI.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/UI/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/_btn_list_pause_alpha_48x48.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/_btn_list_play_alpha_48x48.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/font.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/lv_customer_font_SourceHanSerifSC_Regular_13.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/lv_customer_font_SourceHanSerifSC_Regular_15.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/w25qxx.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/w25qxx.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/font.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/lv_customer_font_SourceHanSerifSC_Regular_15.c" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/lv_customer_font_SourceHanSerifSC_Regular_15.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -2343,7 +2331,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/DV" />
+                        <option value="DV" />
                       </list>
                     </value>
                   </entry>

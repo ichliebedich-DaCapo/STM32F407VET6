@@ -28,7 +28,7 @@ bool read_flag=false;
 bool continuous_read_flag=false;
 bool latch_data_flag=false;
 //变量
-uint16_t temp_data[400];
+uint16_t temp_data[400];//读取到的临时数组
 uint16_t test_data[400] = {
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
     10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
