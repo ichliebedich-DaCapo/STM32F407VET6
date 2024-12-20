@@ -5,6 +5,16 @@ export
 {
 #include <cstdint>
 
+    /**
+     * @brief Flash存储器读写算法
+     * @note
+     *    1.该算法为单线程算法，即只能由一个线程调用该算法，否则会出错
+     *    2，内置了两个缓冲区，一个作为后台缓冲区，一个作为前台缓冲区，前台缓冲区用于读取ADC的数据，后台缓冲区用于
+     *    在主循环里向存储器里写入数据
+     *    3，当前台缓冲区满时，会自动切换两个缓冲区，并重置索引
+     *    4，之所以要读取一页，那是因为要做傅里叶变换
+     *
+     */
     template<
             void (*WriteFunc)(const uint8_t *data, uint32_t length, uint32_t address),
             void (*ReadFunc)(uint8_t *data, uint32_t length, uint32_t address),
@@ -13,11 +23,10 @@ export
     class FlashStorage
     {
     public:
-        static auto read_isr_ready() -> void;
 
-        static auto write_isr_ready() -> void;
 
-        static auto read_isr() -> uint8_t;
+        // 预写入，用于在开始写入之前进行的一次地址归整操作。
+        static auto write_isr_pre(uint32_t address=256) -> void;
 
         static auto write_isr(uint8_t byte) -> void;
 
@@ -28,63 +37,51 @@ export
         // 切换缓冲区并重置索引
         static auto switch_buffer() -> void
         {
+            // 重置索引
             reset_index();
             uint8_t *temp = pBackBuffer;
             pBackBuffer = pForeBuffer;
             pForeBuffer = temp;
         }
 
-        static auto set_read_sign() -> void { status |= static_cast<uint8_t>(Flags::READ_WRITE_FLAG); }// 设置读标志
-
-        static auto set_write_sign() -> void { status &= ~static_cast<uint8_t>(Flags::READ_WRITE_FLAG); }// 设置写标志
-
-        static auto set_read_full_sign() -> void { status |= static_cast<uint8_t>(Flags::READ_FULL_FLAG); }// 设置读满标志
 
         static auto set_write_full_sign() -> void { status |= static_cast<uint8_t>(Flags::WRITE_FULL_FLAG); }// 设置写满标志
 
+        // 设置写残缺标志
         static auto
-        set_read_incomplete_sign() -> void { status |= static_cast<uint8_t>(Flags::READ_INCOMPLETE_FLAG); }// 设置读残缺标志
+        set_write_incomplete_sign() -> void { status |= static_cast<uint8_t>(Flags::WRITE_INCOMPLETE_FLAG); }
 
-        static auto
-        set_write_incomplete_sign() -> void { status |= static_cast<uint8_t>(Flags::WRITE_INCOMPLETE_FLAG); }// 设置写残缺标志
 
-        static auto check_read_sign() -> uint8_t
-        {
-            return status & static_cast<uint8_t>(Flags::READ_WRITE_FLAG);
-        }// 检测读标志
-
-        static auto check_write_sign() -> uint8_t
-        {
-            return !(status & static_cast<uint8_t>(Flags::READ_WRITE_FLAG));
-        }// 检测写标志
-
-        static auto check_read_full_sign() -> uint8_t
-        {
-            return status & static_cast<uint8_t>(Flags::READ_FULL_FLAG);
-        }// 检测读满标志
-
+        // 检测写满标志
         static auto check_write_full_sign() -> uint8_t
         {
-            return status & static_cast<uint8_t>(Flags::WRITE_FULL_FLAG);
-        }// 检测写满标志
+            if (status & static_cast<uint8_t>(Flags::WRITE_FULL_FLAG))
+            {
+                clear_write_full_sign();
+                return 1;
+            } else
+            {
+                return 0;
+            }
+        }
 
-        static auto check_read_incomplete_sign() -> uint8_t
-        {
-            return status & static_cast<uint8_t>(Flags::READ_INCOMPLETE_FLAG);
-        }// 检测读残缺标志
 
+        // 检测写残缺标志
         static auto check_write_incomplete_sign() -> uint8_t
         {
-            return status & static_cast<uint8_t>(Flags::WRITE_INCOMPLETE_FLAG);
-        }// 检测写残缺标志
+            if (status & static_cast<uint8_t>(Flags::WRITE_INCOMPLETE_FLAG))
+            {
+                clear_write_incomplete_sign();
+                return 1;
+            } else
+            {
+                return 0;
+            }
+        }
 
-        static auto clear_read_full_sign() -> void { status &= ~static_cast<uint8_t>(Flags::READ_FULL_FLAG); }// 清除读满标志
 
         static auto
         clear_write_full_sign() -> void { status &= ~static_cast<uint8_t>(Flags::WRITE_FULL_FLAG); }// 清除写满标志
-
-        static auto
-        clear_read_incomplete_sign() -> void { status &= ~static_cast<uint8_t>(Flags::READ_INCOMPLETE_FLAG); }// 清除读残缺标志
 
         static auto
         clear_write_incomplete_sign() -> void { status &= ~static_cast<uint8_t>(Flags::WRITE_INCOMPLETE_FLAG); }// 清除写残缺标志
@@ -114,11 +111,8 @@ export
         // 使用 enum class 定义常量,由于它是强类型，必须使用类型转换static_cast并不会占用内存，与constexpr相一样
         enum class Flags : uint8_t
         {
-            READ_WRITE_FLAG = 1U,// 读写标志，默认0为写标志,这样读取预加载时会少一个分支
-            READ_FULL_FLAG = 1U << 1, // 读满标志
-            WRITE_FULL_FLAG = 1U << 2,// 写满标志
-            READ_INCOMPLETE_FLAG = 1U << 3,// 读残缺标志
-            WRITE_INCOMPLETE_FLAG = 1U << 4
+            WRITE_FULL_FLAG = 1U << 0,// 写满标志->从ADC读取到前台缓冲区读满
+            WRITE_INCOMPLETE_FLAG = 1U << 1 // 写残缺标志
         };
 
         // 起始地址预留1页用于存储一些数据信息，比如上次写入地址等等

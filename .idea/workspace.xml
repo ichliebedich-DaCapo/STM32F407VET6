@@ -14,15 +14,15 @@
   </component>
   <component name="CMakeRunConfigurationManager">
     <generated>
-      <config projectName="Furina" targetName="libfreertos" />
       <config projectName="Furina" targetName="libdata" />
+      <config projectName="Furina" targetName="libfreertos" />
       <config projectName="Furina" targetName="liblvgl" />
       <config projectName="Furina" targetName="libmodule" />
       <config projectName="Furina" targetName="Furina.elf" />
       <config projectName="Furina" targetName="libdrivers" />
       <config projectName="Furina" targetName="libbsp" />
-      <config projectName="Furina" targetName="libdsp" />
       <config projectName="Furina" targetName="libapp" />
+      <config projectName="Furina" targetName="libdsp" />
       <config projectName="Furina" targetName="libgui" />
     </generated>
   </component>
@@ -32,19 +32,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="测试了module特性，可以正常使用">
-      <change afterPath="$PROJECT_DIR$/Module/inc/flash_storage.ixx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Module/src/flash_storage.cppm" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="终于可以把模块的声明和实现分开了">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/baseInit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/baseInit.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/inc/fft.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/fft.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/inc/flash_storage.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/src/fft.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/src/fft.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/src/flash_storage.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/src/myModule.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/src/player.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/src/player.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/inc/flash_storage.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/flash_storage.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/src/flash_storage.cppm" beforeDir="false" afterPath="$PROJECT_DIR$/Module/src/flash_storage.cppm" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +63,7 @@
     </option>
     <option name="loadedFiles">
       <list>
-        <option value="E:/Tools/Develop/Embedded/STM32Cube/Repository/STM32F4_svd/STM32F4_svd_V2.0/STM32F407.svd" />
+        <option value="$PROJECT_DIR$/../../../../../Tools/Develop/Embedded/STM32Cube/Repository/STM32F4_svd/STM32F4_svd_V2.0/STM32F407.svd" />
       </list>
     </option>
     <option name="nodes">
@@ -1666,29 +1658,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "OpenOCD 下载并运行.OCD Furina.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "ZQ",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "CPPToolchains",
-    "structure.view.defaults.are.configured": "true",
-    "two.files.diff.last.used.file": "D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;OpenOCD 下载并运行.OCD Furina.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ZQ&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Program/Embedded/MCU/STM32/Furina&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CodeWithMe&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
+    &quot;two.files.diff.last.used.file&quot;: &quot;D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Embedded\MCU\STM32\Furina\AI\LinearDisplacementSensor\App" />
@@ -1700,11 +1694,6 @@
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
     <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release-MinGW_ARM" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -1752,6 +1741,14 @@
     <configuration name="libmodule" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libmodule" CONFIG_NAME="Release-MinGW_ARM">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
+      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Embedded\MCU\STM32\Furina\stlink.cfg" reset-type="RUN" download-type="UPDATED_ONLY">
+        <debugger kind="GDB" isBundled="true" />
+      </openocd>
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
     <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
@@ -1924,15 +1921,25 @@
       <workItem from="1733628473886" duration="1999000" />
       <workItem from="1733914853746" duration="34000" />
       <workItem from="1734251679101" duration="6958000" />
-      <workItem from="1734265209046" duration="7916000" />
-    </task>
-    <task id="LOCAL-00020" summary="__【未配置好】测试2">
-      <option name="closed" value="true" />
-      <created>1728806681900</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1728806681900</updated>
+      <workItem from="1734265209046" duration="8918000" />
+      <workItem from="1734275410126" duration="270000" />
+      <workItem from="1734348601182" duration="4304000" />
+      <workItem from="1734355128333" duration="879000" />
+      <workItem from="1734360489520" duration="215000" />
+      <workItem from="1734413317047" duration="5420000" />
+      <workItem from="1734422338265" duration="212000" />
+      <workItem from="1734422595608" duration="192000" />
+      <workItem from="1734430758139" duration="472000" />
+      <workItem from="1734434237402" duration="460000" />
+      <workItem from="1734438722498" duration="73000" />
+      <workItem from="1734438864311" duration="672000" />
+      <workItem from="1734439793050" duration="82000" />
+      <workItem from="1734440090093" duration="544000" />
+      <workItem from="1734442165612" duration="116000" />
+      <workItem from="1734442401755" duration="1530000" />
+      <workItem from="1734508689897" duration="115000" />
+      <workItem from="1734602853664" duration="44000" />
+      <workItem from="1734679015314" duration="2000" />
     </task>
     <task id="LOCAL-00021" summary="__【未配置好】测试">
       <option name="closed" value="true" />
@@ -2318,7 +2325,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734270514223</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="终于可以把模块的声明和实现分开了">
+      <option name="closed" value="true" />
+      <created>1734273951315</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1734273951315</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2340,7 +2355,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/DV" />
+                        <option value="ZQ" />
                       </list>
                     </value>
                   </entry>
@@ -2353,7 +2368,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【双音频信号发生器】准备解决绘制漏墨问题" />
     <MESSAGE value="【双音频信号发生器】发现漏墨问题的一点端倪" />
     <MESSAGE value="【双音频信号发生器】先搁置样条算法的死机问题，先更改模板函数" />
     <MESSAGE value="【双音频信号发生器】贝塞尔二次曲线，些许漏墨，但速度下降了不少。线性插值也是，真奇怪" />
@@ -2378,7 +2392,8 @@
     <MESSAGE value="准备融合" />
     <MESSAGE value="已经融合，可以正常编译" />
     <MESSAGE value="测试了module特性，可以正常使用" />
-    <option name="LAST_COMMIT_MESSAGE" value="测试了module特性，可以正常使用" />
+    <MESSAGE value="终于可以把模块的声明和实现分开了" />
+    <option name="LAST_COMMIT_MESSAGE" value="终于可以把模块的声明和实现分开了" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
