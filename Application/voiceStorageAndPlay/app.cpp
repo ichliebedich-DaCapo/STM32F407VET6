@@ -5,7 +5,6 @@
 #include "app.hpp"
 
 
-
 #include "lvgl.h"
 #include "key.hpp"
 #include "spi.h"
@@ -15,6 +14,9 @@
 #include "player.hpp"
 #include "GUI.hpp"
 #include "w25qxx.h"
+
+// 导入算法类
+import flash_storage;
 //const osThreadAttr_t voiceTask_attributes = {
 //        .name = "voiceTask",
 //        .stack_size = 128 * 4,
@@ -22,6 +24,12 @@
 //};
 //void VoiceTask(void *argument);
 
+
+// 使用别名
+using W25QXXFlashStorage = FlashStorage<w25qxx_page_write>;
+
+static uint32_t temp=0;
+static uint8_t temp_buffer[512];
 /*语音存储与回放初始化*/
 void app_init()
 {
@@ -76,20 +84,24 @@ void key_handler()
     switch (Key::getCode())
     {
         case keyk0:// 写入1字节
-            adc1_start_it();
-            __BKPT(0);// 设置一个断点
+            // 测试预写入
+            W25QXXFlashStorage::write_isr_pre(259);
             break;
         case keyk1:// 读取1字节
-            adc1_stop_it();
-            __BKPT(0);// 设置一个断点
+            // 测试写入情况
+            for (int i = 0; i < 260; ++i)
+            {
+                W25QXXFlashStorage::write_isr(temp++);
+            }
             break;
         case keyk2:// 读取256字节
-
-            __BKPT(0);// 设置一个断点
+        // 测试读取情况
+            w25qxx_buffer_read(temp_buffer,temp<256?0:temp-256,512);
+            __BKPT(0);
             break;
 
         case keyk3:
-            __BKPT(0);// 设置一个断点
+
         case keyk8:
 
             break;
@@ -112,7 +124,7 @@ void key_handler()
 
 void background_handler()
 {
-//    FlashStorage::background_processing();
+    W25QXXFlashStorage::background_processing();
 }
 
 /**实现中断服务例程*/
