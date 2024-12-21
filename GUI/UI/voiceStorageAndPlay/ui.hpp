@@ -62,6 +62,8 @@ class UI_Interface
 {
 public:
     static auto reset_time() -> void;// 重置进度条时间
+    static auto get_time()->uint32_t ;
+    static auto set_time(uint32_t t)->void;
     static auto resume_record() -> void;// 开启进度条时间
     static auto pause_record() -> void;// 关闭进度条时间
     static auto set_record_state(RecordSampleRate state) -> void;

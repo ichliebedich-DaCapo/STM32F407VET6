@@ -8,7 +8,7 @@ export
     struct FlashInfo
     {
         uint32_t last_write_addr;// 最后一次写入地址
-
+        uint8_t record_rate;// 录音采样率
     };
 
 
@@ -42,8 +42,10 @@ export
         // 鉴于M25P16擦除的最小单位是块，而一块有64KB大小，所以就无法轻易在写入头信息了。只能在整块都擦除的情况下，才能进行头信息写入。
         static auto readInfo() -> FlashInfo;
 
+        static auto get_addr()->uint32_t {return addr;}
+
         // 保存信息
-        static auto saveInfo() -> bool;
+        static auto saveInfo(uint8_t record_rate) -> bool;
 
 ////         擦除所有内容
 //      static auto erase() -> void;
@@ -183,19 +185,24 @@ template<
 >
 auto FlashStorage<WriteFunc, ReadFunc, EraseSectorFunc>::write_isr(uint8_t byte) -> void
 {
-    if (index >= page_size - 1)
-    {
-        pForeBuffer[page_size - 1] = byte;
-        switch_buffer();// 切换缓冲区
-        set_buffer_write_full_sign();// 标记为写满
-    } else if (addr >= static_cast<uint32_t>(Addresses::FLASH_END_ADDR))
+    if(addr >= static_cast<uint32_t>(Addresses::FLASH_END_ADDR))
     {
         // 设置写满标志
         set_write_full_sign();
-    } else
-    {
-        pForeBuffer[index++] = byte;
     }
+    else
+    {
+        if (index >= page_size - 1)
+        {
+            pForeBuffer[page_size - 1] = byte;
+            switch_buffer();// 切换缓冲区
+            set_buffer_write_full_sign();// 标记为写满
+        }  else
+        {
+            pForeBuffer[index++] = byte;
+        }
+    }
+
 }
 
 
@@ -269,7 +276,7 @@ template<
         void (*ReadFunc)(uint8_t *data, uint32_t address, uint16_t length),
         void (*EraseSectorFunc)(uint32_t sectorAddress)
 >
-auto FlashStorage<WriteFunc, ReadFunc, EraseSectorFunc>::saveInfo() -> bool
+auto FlashStorage<WriteFunc, ReadFunc, EraseSectorFunc>::saveInfo(uint8_t record_rate) -> bool
 {
     FlashInfo flashInfo{};
     // 检查
@@ -282,6 +289,7 @@ auto FlashStorage<WriteFunc, ReadFunc, EraseSectorFunc>::saveInfo() -> bool
 
     // 保存信息
     flashInfo.last_write_addr = addr;
+    flashInfo.record_rate = record_rate;
 
     // 写入信息
     WriteFunc(reinterpret_cast<uint8_t *>(&flashInfo), static_cast<uint32_t>(Addresses::FLASH_START_ADDR),

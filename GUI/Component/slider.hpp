@@ -14,7 +14,7 @@ public:
     // 使用前必须设置父对象
     static inline auto init(Obj component) -> void;
 
-    static inline auto set_range(Coord min, Coord max) -> void;
+    static inline auto set_range(Coord min, Coord max, Obj obj = _obj) -> void;
 
     static inline auto set_value(int32_t value, lv_anim_enable_t anim_en = LV_ANIM_OFF, Obj obj = _obj) -> void;
 
@@ -33,9 +33,9 @@ auto Slider::init(Obj component) -> void
     _obj = component;
 }
 
-auto Slider::set_range(Coord min, Coord max) -> void
+auto Slider::set_range(Coord min, Coord max,Obj obj) -> void
 {
-    lv_slider_set_range(_obj, min, max);
+    lv_slider_set_range(obj, min, max);
 }
 
 auto Slider::set_bg_color(Color color, lv_opa_t opa, Selector selector) -> void

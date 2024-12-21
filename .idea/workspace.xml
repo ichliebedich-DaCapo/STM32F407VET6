@@ -32,17 +32,17 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="语音存储与回放可以使用，接下来只要添加各种逻辑即可">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【语音存储与回放】完善了播放速度等逻辑">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/timer.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/timer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/timer.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/timer.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/test.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/font.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/lv_customer_font_SourceHanSerifSC_Regular_12.c" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/lv_customer_font_SourceHanSerifSC_Regular_12.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/lcd.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/w25qxx.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/w25qxx.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/stm32f4xx_it.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Component/slider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/slider.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/inc/flash_storage.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/flash_storage.ixx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1890,15 +1890,7 @@
       <workItem from="1734679015314" duration="2771000" />
       <workItem from="1734694068126" duration="626000" />
       <workItem from="1734743034192" duration="1269000" />
-      <workItem from="1734751179404" duration="16654000" />
-    </task>
-    <task id="LOCAL-00025" summary="__【未配置好】备份">
-      <option name="closed" value="true" />
-      <created>1728892341839</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1728892341839</updated>
+      <workItem from="1734751179404" duration="23877000" />
     </task>
     <task id="LOCAL-00026" summary="__【未配置好】纠正了些许小问题">
       <option name="closed" value="true" />
@@ -2284,7 +2276,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734774212737</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="【语音存储与回放】完善了播放速度等逻辑">
+      <option name="closed" value="true" />
+      <created>1734787622086</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1734787622086</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2319,7 +2319,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【双音频信号发生器】算法基本OK" />
     <MESSAGE value="【双音频信号发生器】调整项目组织结构" />
     <MESSAGE value="【双音频信号发生器】完成了这次的项目优化，后面还有许多不妥之处，后续再慢慢改" />
     <MESSAGE value="【双音频信号发生器】完善了一下Readme" />
@@ -2344,14 +2343,8 @@
     <MESSAGE value="略微完善了flash_storage模块，并编写了测试案例" />
     <MESSAGE value="flash_storage模块测试完毕" />
     <MESSAGE value="语音存储与回放可以使用，接下来只要添加各种逻辑即可" />
-    <option name="LAST_COMMIT_MESSAGE" value="语音存储与回放可以使用，接下来只要添加各种逻辑即可" />
-  </component>
-  <component name="XDebuggerManager">
-    <watches-manager>
-      <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
-        <watch expression="temp" />
-      </configuration>
-    </watches-manager>
+    <MESSAGE value="【语音存储与回放】完善了播放速度等逻辑" />
+    <option name="LAST_COMMIT_MESSAGE" value="【语音存储与回放】完善了播放速度等逻辑" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

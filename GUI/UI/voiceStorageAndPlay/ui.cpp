@@ -84,7 +84,7 @@ auto Screen::init() -> void
 
     /*************************滑条********************/
     //Write codes screen_slider
-    Slider::init(gui->main.slider, 42, 294, 342, 1, 0, 100, lv_color_hex(0x2195f6), 100, &_icn_slider_alpha_15x15);
+    Slider::init(gui->main.slider, 42, 294, 342, 1, 0, 263, lv_color_hex(0x2195f6), 100, &_icn_slider_alpha_15x15);
 
     /***自定义组件***/
     Component::init(gui->main.spectrum);
@@ -282,10 +282,14 @@ auto UI_Interface::set_record_state(RecordSampleRate state) -> void
     {
         case RecordSampleRate::SAMPLE_RATE_8K:
             Text::set_text("采样率:8K", GUI_Base::get_ui()->main.label_record_sample_rate);
+            // 2*2^20/8K = 262.144s
+            Slider::set_range(0, 263, GUI_Base::get_ui()->main.slider);
             break;
 
         case RecordSampleRate::SAMPLE_RATE_16K:
             Text::set_text("采样率:16K", GUI_Base::get_ui()->main.label_record_sample_rate);
+            // 2*2^20/16K = 131.072s
+            Slider::set_range(0, 132, GUI_Base::get_ui()->main.slider);
             break;
 
         default:
@@ -302,11 +306,12 @@ auto UI_Interface::set_play_speed(PlaySpeed speed) -> void
             break;
         case PlaySpeed::SPEED_0_75:
             Text::clear_flag(LV_OBJ_FLAG_HIDDEN, GUI_Base::get_ui()->main.label_play_speed);
-            Text::set_text("慢放×0.25", GUI_Base::get_ui()->main.label_play_speed);
+            Text::set_text("慢放×0.75", GUI_Base::get_ui()->main.label_play_speed);
+            break;
         case PlaySpeed::SPEED_1_5:
             Text::clear_flag(LV_OBJ_FLAG_HIDDEN, GUI_Base::get_ui()->main.label_play_speed);
             Text::set_text("快进×1.5", GUI_Base::get_ui()->main.label_play_speed);
-
+            break;
         default:
             break;
     }
@@ -328,23 +333,34 @@ auto UI_Interface::saveInfo(bool state) -> void
 }
 
 
-
 /**
  * @brief 擦除
  * @note 会自动关闭录音的动画显示
  */
 auto UI_Interface::erasing() -> void
 {
-    record_blink_timer.pause();
     Text::set_text("擦除中", GUI_Base::get_ui()->main.label_record_state);
     Text::clear_flag(LV_OBJ_FLAG_HIDDEN, GUI_Base::get_ui()->main.label_record_state);
+    record_blink_timer.resume();
 }
 
 auto UI_Interface::erase_done() -> void
 {
     Text::set_text("录音中", GUI_Base::get_ui()->main.label_record_state);
     Text::add_flag(LV_OBJ_FLAG_HIDDEN, GUI_Base::get_ui()->main.label_record_state);
+    record_blink_timer.pause();
 }
+
+auto UI_Interface::get_time() -> uint32_t
+{
+    return time;
+}
+
+auto UI_Interface::set_time(uint32_t t) -> void
+{
+    time = t;
+}
+
 #endif
 
 
