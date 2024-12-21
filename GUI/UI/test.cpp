@@ -61,11 +61,11 @@ int keyboard_thread(void *data)
             switch (keycode)
             {
                 case 'a':
-                    UI_Interface::set_play_speed(PlaySpeed::SPEED_0_75);
+                   UI_Interface::saveInfo(true);
                     break;
                 case 's':
 //                    UI_Interface::set_record_state(RecordSampleRate::SAMPLE_RATE_16K);
-
+                    UI_Interface::saveInfo(false);
                     break;
                 case 'd':
 //                    UI_Interface::resume_record();

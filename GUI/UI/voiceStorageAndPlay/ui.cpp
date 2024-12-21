@@ -52,7 +52,8 @@ auto Screen::init() -> void
     label.init(gui->main.label_slider_time, 393, 288, 40, 20, "0:00", lv_color_hex(0x8a86b8));
 
     // 保存状态
-    label.init(gui->main.label_save_state, 10, 5, 50, 20, "未保存", lv_color_hex(0x11a0f5));
+    label.init(gui->main.label_save_state, 10, 5, 50, 20, "未保存", lv_color_hex(0x8a86b8));
+
 
     // 录音状态 需要闪烁
     label.init(gui->main.label_record_state, 10, 25, 50, 20, "录音中", lv_color_hex(0xcd0303));
@@ -307,6 +308,20 @@ auto UI_Interface::set_play_speed(PlaySpeed speed) -> void
 
         default:
             break;
+    }
+
+}
+
+auto UI_Interface::saveInfo(bool state) -> void
+{
+    if (state)
+    {
+        Text::set_text("已保存", GUI_Base::get_ui()->main.label_save_state);
+        Text::set_text_color(lv_color_hex(0x11a0f5), GUI_Base::get_ui()->main.label_save_state);
+    } else
+    {
+        Text::set_text("未保存", GUI_Base::get_ui()->main.label_save_state);
+        Text::set_text_color(lv_color_hex(0x8a86b8), GUI_Base::get_ui()->main.label_save_state);
     }
 
 }

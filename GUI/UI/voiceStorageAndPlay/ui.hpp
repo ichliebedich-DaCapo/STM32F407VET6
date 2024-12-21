@@ -66,6 +66,7 @@ public:
     static auto pause_record() -> void;// 关闭进度条时间
     static auto set_record_state(RecordSampleRate state) -> void;
     static auto set_play_speed(PlaySpeed speed) -> void;
+    static auto saveInfo(bool state) -> void;
 };
 
 
