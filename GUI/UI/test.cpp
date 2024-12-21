@@ -64,12 +64,15 @@ int keyboard_thread(void *data)
                     UI_Interface::set_play_speed(PlaySpeed::SPEED_0_75);
                     break;
                 case 's':
-                    UI_Interface::set_record_state(RecordSampleRate::SAMPLE_RATE_16K);
+//                    UI_Interface::set_record_state(RecordSampleRate::SAMPLE_RATE_16K);
+
                     break;
                 case 'd':
+//                    UI_Interface::resume_record();
                     UI_Interface::resume_record();
                     break;
                 case 'f':
+                    UI_Interface::pause_record();
 //                    uiInterface::add_period();
 //                    printf("下一个波形\n");
 //                    break;

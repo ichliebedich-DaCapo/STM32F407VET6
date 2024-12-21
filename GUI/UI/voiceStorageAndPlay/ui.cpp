@@ -32,7 +32,7 @@ static constexpr float bar_spacing = (float) ((spectrum_width - spectrum_num * b
 // 计时器
 LV_Timer slider_timer;
 LV_Timer spectrum_timer;
-
+LV_Timer record_blink_timer;//用于让录音状态闪烁
 
 /********************************界面初始化******************************/
 
@@ -44,7 +44,7 @@ auto Screen::init() -> void
     label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_12);
 
     // 倍速文本框
-    label.init(gui->main.label_play_speed, 28, 254, 70, 20,"");
+    label.init(gui->main.label_play_speed, 28, 254, 70, 20, "");
     Text::add_flag(LV_OBJ_FLAG_HIDDEN);
 
 
@@ -67,7 +67,7 @@ auto Screen::init() -> void
     Text::set_text_align(LV_TEXT_ALIGN_CENTER);// 文本居中
 
     /*****************************图片************************/
-    //Write codes screen_img_slider_flag
+    // Write codes screen_img_slider_flag
     Image::init(gui->main.img_slider_flag, 235, 152, 15, 15, &_icn_slider_alpha_15x15);
 
     /***********************图片按钮************************/
@@ -143,6 +143,21 @@ auto Events::init() -> void
                                   }
                                   Component::invalidate(GUI_Base::get_ui()->main.spectrum);// 使频谱区域无效，触发重绘
                           ), 30);
+
+    record_blink_timer.create(timer_fun(
+                              // 闪烁录音状态
+                                      static bool is_show = false;
+                                      is_show = !is_show;
+                                      if (is_show)
+                                      {
+                                          Text::clear_flag(LV_OBJ_FLAG_HIDDEN,
+                                                           GUI_Base::get_ui()->main.label_record_state);
+                                      } else
+                                      {
+                                          Text::add_flag(LV_OBJ_FLAG_HIDDEN,
+                                                         GUI_Base::get_ui()->main.label_record_state);
+                                      }
+                              ), 500);
 }
 
 
@@ -224,11 +239,6 @@ auto Spectrum::update() -> void
 }
 
 
-
-
-
-
-
 auto Play::resume() -> void
 {
     slider_timer.resume();
@@ -252,12 +262,14 @@ auto UI_Interface::reset_time() -> void
 auto UI_Interface::resume_record() -> void
 {
     slider_timer.resume();
+    record_blink_timer.resume();
     Text::clear_flag(LV_OBJ_FLAG_HIDDEN, GUI_Base::get_ui()->main.label_record_state);
 }
 
 auto UI_Interface::pause_record() -> void
 {
     slider_timer.pause();
+    record_blink_timer.pause();
     Text::add_flag(LV_OBJ_FLAG_HIDDEN, GUI_Base::get_ui()->main.label_record_state);
 }
 
@@ -267,11 +279,11 @@ auto UI_Interface::set_record_state(RecordSampleRate state) -> void
     switch (state)
     {
         case RecordSampleRate::SAMPLE_RATE_8K:
-            Text::set_text("采样率:8K",GUI_Base::get_ui()->main.label_record_sample_rate);
+            Text::set_text("采样率:8K", GUI_Base::get_ui()->main.label_record_sample_rate);
             break;
 
         case RecordSampleRate::SAMPLE_RATE_16K:
-            Text::set_text("采样率:16K",GUI_Base::get_ui()->main.label_record_sample_rate);
+            Text::set_text("采样率:16K", GUI_Base::get_ui()->main.label_record_sample_rate);
             break;
 
         default:
@@ -284,14 +296,14 @@ auto UI_Interface::set_play_speed(PlaySpeed speed) -> void
     switch (speed)
     {
         case PlaySpeed::SPEED_NORMAL:
-            Text::add_flag(LV_OBJ_FLAG_HIDDEN,GUI_Base::get_ui()->main.label_play_speed);
+            Text::add_flag(LV_OBJ_FLAG_HIDDEN, GUI_Base::get_ui()->main.label_play_speed);
             break;
         case PlaySpeed::SPEED_0_75:
-            Text::clear_flag(LV_OBJ_FLAG_HIDDEN,GUI_Base::get_ui()->main.label_play_speed);
-            Text::set_text("慢放×0.25",GUI_Base::get_ui()->main.label_play_speed);
+            Text::clear_flag(LV_OBJ_FLAG_HIDDEN, GUI_Base::get_ui()->main.label_play_speed);
+            Text::set_text("慢放×0.25", GUI_Base::get_ui()->main.label_play_speed);
         case PlaySpeed::SPEED_1_5:
-            Text::clear_flag(LV_OBJ_FLAG_HIDDEN,GUI_Base::get_ui()->main.label_play_speed);
-            Text::set_text("快进×1.5",GUI_Base::get_ui()->main.label_play_speed);
+            Text::clear_flag(LV_OBJ_FLAG_HIDDEN, GUI_Base::get_ui()->main.label_play_speed);
+            Text::set_text("快进×1.5", GUI_Base::get_ui()->main.label_play_speed);
 
         default:
             break;
