@@ -11,7 +11,7 @@
 /*********************组件*******************/
 struct lv_ui_t
 {
-    using Obj = lv_obj_t*;
+    using Obj = lv_obj_t *;
     struct
     {
         Obj screen;// 屏幕自身
@@ -20,7 +20,7 @@ struct lv_ui_t
         Obj imgbtn_acc;
         Obj label_title_music;
         Obj slider;
-        Obj label_speed;
+        Obj label_play_speed;
         Obj label_slider_time;
         Obj imgbtn_play;
         Obj spectrum;// 频谱
@@ -43,11 +43,29 @@ LV_IMG_DECLARE(_btn_next_alpha_37x37);
 LV_IMG_DECLARE(_btn_list_play_alpha_48x48);
 LV_IMG_DECLARE(_btn_list_pause_alpha_48x48);
 
-class UI_Interface{
+
+// 录音采样率
+enum class RecordSampleRate
+{
+    SAMPLE_RATE_8K,
+    SAMPLE_RATE_16K,
+};
+
+enum class PlaySpeed
+{
+    SPEED_NORMAL,// 正常速度
+    SPEED_0_75,// 0.75倍
+    SPEED_1_5,// 1.5倍
+};
+
+class UI_Interface
+{
 public:
-    static auto reset_time()->void ;// 重置进度条时间
-    static auto resume_timer()->void;// 开启进度条时间
-    static auto stop_timer()->void;// 关闭进度条时间
+    static auto reset_time() -> void;// 重置进度条时间
+    static auto resume_record() -> void;// 开启进度条时间
+    static auto pause_record() -> void;// 关闭进度条时间
+    static auto set_record_state(RecordSampleRate state) -> void;
+    static auto set_play_speed(PlaySpeed speed) -> void;
 };
 
 

@@ -34,9 +34,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="语音存储与回放可以使用，接下来只要添加各种逻辑即可">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/font.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/font.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/test.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.hpp" afterDir="false" />
     </list>
@@ -1886,7 +1884,7 @@
       <workItem from="1734679015314" duration="2771000" />
       <workItem from="1734694068126" duration="626000" />
       <workItem from="1734743034192" duration="1269000" />
-      <workItem from="1734751179404" duration="14418000" />
+      <workItem from="1734751179404" duration="14964000" />
     </task>
     <task id="LOCAL-00025" summary="__【未配置好】备份">
       <option name="closed" value="true" />

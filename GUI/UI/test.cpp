@@ -61,22 +61,14 @@ int keyboard_thread(void *data)
             switch (keycode)
             {
                 case 'a':
-//                    is_fps = !is_fps;
-//                    uiInterface::show_fps(is_fps);
-//                    printf("FPS显示\n");
-//                    break;
-
+                    UI_Interface::set_play_speed(PlaySpeed::SPEED_0_75);
+                    break;
                 case 's':
-//                    is_fps_mode = !is_fps_mode;
-//                    uiInterface::set_fps_mode(is_fps_mode);
-//                    printf("FPS模式\n");
-//                    break;
-
+                    UI_Interface::set_record_state(RecordSampleRate::SAMPLE_RATE_16K);
+                    break;
                 case 'd':
-//                    uiInterface::sub_period();
-//                    printf("上一个波形\n");
-//                    break;
-
+                    UI_Interface::resume_record();
+                    break;
                 case 'f':
 //                    uiInterface::add_period();
 //                    printf("下一个波形\n");
