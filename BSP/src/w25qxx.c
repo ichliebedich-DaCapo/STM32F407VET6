@@ -187,12 +187,12 @@ static inline void SPI_FLASH_ReceiveData(uint8_t *pBuffer, uint16_t NumBytes)
 void w25qxx_init(void)
 {
     /**
-     * D     ------> 1：MOSI
-     * Q     ------> 2：MISO
-     * C     ------> 3：SCLOCK
-     * S     ------> 4：CS
+     * D     ------> 1：MOSI     PC3
+     * Q     ------> 2：MISO     PC2
+     * C     ------> 3：SCLOCK   PB10
+     * S     ------> 4：CS       PB12
 
-    /*初始化可以不进行，默认为0x00*/
+    初始化可以不进行，默认为0x00*/
     SPI_FLASH_WriteEnable(); // 使能读写
 #ifndef USE_HARD_CS
     W25QXX_CS_LOW();

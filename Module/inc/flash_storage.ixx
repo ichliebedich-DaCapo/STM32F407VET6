@@ -176,11 +176,13 @@ auto FlashStorage<WriteFunc, ReadFunc, EraseSectorFunc>::background_processing()
     // 写满标志检测
     if (check_write_full_sign())
     {
+
+
         // 残缺写入检测
         if (check_write_incomplete_sign())
         {
             /* 进行残缺的写入页数据*/
-            WriteFunc(pBackBuffer, addr, addr_remaining);//写入完整一页
+            WriteFunc(pBackBuffer+page_size-addr_remaining, addr, addr_remaining);//写入完整一页
             addr += addr_remaining;
         } else
         {

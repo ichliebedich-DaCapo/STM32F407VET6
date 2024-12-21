@@ -29,6 +29,7 @@ import flash_storage;
 using W25QXXFlashStorage = FlashStorage<w25qxx_page_write>;
 
 static uint32_t temp=0;
+static uint32_t temp_addr=0;
 static uint8_t temp_buffer[512];
 /*语音存储与回放初始化*/
 void app_init()
@@ -86,34 +87,38 @@ void key_handler()
         case keyk0:// 写入1字节
             // 测试预写入
             W25QXXFlashStorage::write_isr_pre(259);
+            __BKPT(0);
             break;
         case keyk1:// 读取1字节
             // 测试写入情况
-            for (int i = 0; i < 260; ++i)
+            for (int i = 0; i < 200; ++i)
             {
                 W25QXXFlashStorage::write_isr(temp++);
             }
+            __BKPT(0);
             break;
         case keyk2:// 读取256字节
         // 测试读取情况
-            w25qxx_buffer_read(temp_buffer,temp<256?0:temp-256,512);
+            w25qxx_buffer_read(temp_buffer,temp_addr,512);
             __BKPT(0);
             break;
 
         case keyk3:
-
+            w25qxx_sector_erase(0);
+            __BKPT(0);
         case keyk8:
-
+            temp+=200;
             break;
         case keyk9:
-
+            temp -= 200;
             break;
 
         case keykE:
-
+            temp_addr += 256;
             break;
-        case keykF:
 
+        case keykF:
+            temp_addr -= 256;
             break;
         default:
             break;

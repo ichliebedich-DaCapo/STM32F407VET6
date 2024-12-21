@@ -142,7 +142,7 @@ void background_handler()
         READ_COMMAND = 0x000;// 传入参数0
         // 等待数据传输完成
         while (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4));// 假设PB4是等待引脚
-        //读取数据
+        // 读取数据
         for (int i = 0; i < 400; i++)
         {
 //          temp_data[i] = READ_DATA_BASE[i];
@@ -150,11 +150,11 @@ void background_handler()
         }
         if (latch_data_flag)
         {
-            w25qxx_buffer_write_uint16(temp_data, continuous_read_times * 400, 400);//这里存储数据到flash
+            w25qxx_buffer_write_uint16(temp_data, continuous_read_times * 400, 400);// 这里存储数据到flash
             continuous_read_times++;
         }
         /***************/
-        //这里绘制图形
+        // 这里绘制图形
         /***************/
         if (!continuous_read_flag)
         {
