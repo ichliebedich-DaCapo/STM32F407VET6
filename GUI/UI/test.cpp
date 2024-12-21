@@ -79,11 +79,15 @@ int keyboard_thread(void *data)
 
 
                 case 'g':
+                    UI_Interface::erasing();
+                    break;
 //                    uiInterface::switch_wave_type();
 //                    printf("E pressed\n");
 //                    break;
 
                 case 'h':
+                    UI_Interface::erase_done();
+                    break;
 //                    uiInterface::add_wave_cnt();
 //                    printf("F pressed\n");
 //                    break;

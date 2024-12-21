@@ -45,17 +45,17 @@ LV_IMG_DECLARE(_btn_list_pause_alpha_48x48);
 
 
 // 录音采样率
-enum class RecordSampleRate
+enum class RecordSampleRate:uint8_t
 {
     SAMPLE_RATE_8K,
     SAMPLE_RATE_16K,
 };
 
-enum class PlaySpeed
+enum class PlaySpeed: uint8_t
 {
-    SPEED_NORMAL,// 正常速度
-    SPEED_0_75,// 0.75倍
-    SPEED_1_5,// 1.5倍
+    SPEED_NORMAL=1,// 正常速度
+    SPEED_0_75=75,// 0.75倍
+    SPEED_1_5=150,// 1.5倍
 };
 
 class UI_Interface
@@ -67,6 +67,8 @@ public:
     static auto set_record_state(RecordSampleRate state) -> void;
     static auto set_play_speed(PlaySpeed speed) -> void;
     static auto saveInfo(bool state) -> void;
+    static auto erasing()->void ;
+    static auto erase_done()->void ;
 };
 
 

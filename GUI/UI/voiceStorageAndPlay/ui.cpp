@@ -153,6 +153,7 @@ auto Events::init() -> void
                                       {
                                           Text::clear_flag(LV_OBJ_FLAG_HIDDEN,
                                                            GUI_Base::get_ui()->main.label_record_state);
+
                                       } else
                                       {
                                           Text::add_flag(LV_OBJ_FLAG_HIDDEN,
@@ -327,6 +328,23 @@ auto UI_Interface::saveInfo(bool state) -> void
 }
 
 
+
+/**
+ * @brief 擦除
+ * @note 会自动关闭录音的动画显示
+ */
+auto UI_Interface::erasing() -> void
+{
+    record_blink_timer.pause();
+    Text::set_text("擦除中", GUI_Base::get_ui()->main.label_record_state);
+    Text::clear_flag(LV_OBJ_FLAG_HIDDEN, GUI_Base::get_ui()->main.label_record_state);
+}
+
+auto UI_Interface::erase_done() -> void
+{
+    Text::set_text("录音中", GUI_Base::get_ui()->main.label_record_state);
+    Text::add_flag(LV_OBJ_FLAG_HIDDEN, GUI_Base::get_ui()->main.label_record_state);
+}
 #endif
 
 
