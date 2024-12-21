@@ -6,7 +6,7 @@
 
 
 /* 预编译命令 */
-#if 1
+
 // 头文件
 #include "ui.hpp"
 
@@ -96,5 +96,4 @@ constexpr auto Tools::get_y_mid_start(Coord value) -> Coord
 
 
 /* 预编译命令 */
-#endif
 #endif //SIMULATOR_GUI_BASE_HPP

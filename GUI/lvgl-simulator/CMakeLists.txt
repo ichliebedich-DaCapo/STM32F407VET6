@@ -1,18 +1,18 @@
 # ----------------------------------设置你的UI路径（选择项目）------------------------------
-set(UI_DIR ../UI/signalGenerator)
+set(UI_DIR ../UI/voiceStorageAndPlay)
 # ----------------------------------设置你的UI路径（选择项目）------------------------------
 
 # 提取最后一个斜杠后的部分
 string(REGEX REPLACE ".*/" "" APP "${UI_DIR}")
 
 cmake_minimum_required(VERSION 3.10)
-project(Simulator)
+project(Simulator C CXX)
 
 # 设置编译器
 set(CMAKE_C_COMPILER gcc)
 set(CMAKE_CXX_COMPILER g++)
-set(CMAKE_CXX_STANDARD 20)
-
+#set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=gnu++2a")
 # 定义路径
 set(PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
 set(APP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../Application)

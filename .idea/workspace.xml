@@ -14,15 +14,15 @@
   </component>
   <component name="CMakeRunConfigurationManager">
     <generated>
-      <config projectName="Furina" targetName="libfreertos" />
       <config projectName="Furina" targetName="libdata" />
+      <config projectName="Furina" targetName="libfreertos" />
       <config projectName="Furina" targetName="liblvgl" />
       <config projectName="Furina" targetName="libmodule" />
       <config projectName="Furina" targetName="Furina.elf" />
       <config projectName="Furina" targetName="libdrivers" />
       <config projectName="Furina" targetName="libbsp" />
-      <config projectName="Furina" targetName="libdsp" />
       <config projectName="Furina" targetName="libapp" />
+      <config projectName="Furina" targetName="libdsp" />
       <config projectName="Furina" targetName="libgui" />
     </generated>
   </component>
@@ -32,9 +32,17 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【双音频信号发生器】可以先整理模拟器，然后再继续优化算法，比如数组索引等">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【语音存储与回放】完善了播放速度等逻辑">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/.idea/lvgl-simulator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/.idea/lvgl-simulator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/lcd.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/w25qxx.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/w25qxx.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/stm32f4xx_it.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Component/slider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/slider.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/inc/flash_storage.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/flash_storage.ixx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1571,7 +1579,7 @@
       </map>
     </option>
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release-MinGW_ARM" />
   <component name="Git.Settings">
     <option name="PUSH_TAGS">
       <GitPushTagMode>
@@ -1658,23 +1666,24 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "OpenOCD 下载并运行.OCD Furina.executor": "Run",
+    "OpenOCD 下载并运行.OCD Furina.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "RunOnceActivity.west.config.association.type.startup.service": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "ZQ",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c",
+    "last_opened_file_path": "E:/Program/Embedded/MCU/STM32/Furina",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "CMakeSettings",
+    "settings.editor.selected.configurable": "CodeWithMe",
     "structure.view.defaults.are.configured": "true",
     "two.files.diff.last.used.file": "D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c",
     "vue.rearranger.settings.migration": "true"
@@ -1682,67 +1691,25 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Embedded\MCU\STM32\Furina\AI\LinearDisplacementSensor\App" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Base" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Module" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Conf" />
       <recent name="D:\Embedded\MCU\STM32\Furina\BSP\Core" />
-      <recent name="D:\Embedded\MCU\STM32\Furina\BSP\Base" />
     </key>
   </component>
-  <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
-    <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="libapp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libapp" CONFIG_NAME="Release">
+    <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release-MinGW_ARM" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
+      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="E:\Program\Embedded\MCU\STM32\final_homework\stlink.cfg" reset-type="RUN" download-type="UPDATED_ONLY">
+        <debugger kind="GDB" isBundled="true" />
+      </openocd>
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="libbsp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libbsp" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="libdata" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdata" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="libdrivers" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdrivers" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="libdsp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdsp" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="libfreertos" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libfreertos" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="libgui" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libgui" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="liblvgl" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="liblvgl" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="libmodule" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libmodule" CONFIG_NAME="Release">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
     <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
@@ -1753,19 +1720,6 @@
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue="CMake 应用程序.Furina.elf" />
-      <item itemvalue="CMake 应用程序.libapp" />
-      <item itemvalue="CMake 应用程序.libbsp" />
-      <item itemvalue="CMake 应用程序.libdata" />
-      <item itemvalue="CMake 应用程序.libdrivers" />
-      <item itemvalue="CMake 应用程序.libdsp" />
-      <item itemvalue="CMake 应用程序.libfreertos" />
-      <item itemvalue="CMake 应用程序.libgui" />
-      <item itemvalue="CMake 应用程序.liblvgl" />
-      <item itemvalue="CMake 应用程序.libmodule" />
-      <item itemvalue="OpenOCD 下载并运行.OCD Furina" />
-    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -1898,134 +1852,45 @@
       <workItem from="1731126680338" duration="11017000" />
       <workItem from="1731138557520" duration="3000" />
       <workItem from="1731146753731" duration="2111000" />
-    </task>
-    <task id="LOCAL-00010" summary="__【未配置好】根据远古代码写的SPI Flash驱动">
-      <option name="closed" value="true" />
-      <created>1728446012159</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1728446012159</updated>
-    </task>
-    <task id="LOCAL-00011" summary="__【未配置好】与AI合力编写了w25qxx的驱动，然后启用了stm32的断言机制,并删除了一下LL库（因为缺失stm32_assert.h文件）">
-      <option name="closed" value="true" />
-      <created>1728450200944</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1728450200944</updated>
-    </task>
-    <task id="LOCAL-00012" summary="__【未配置好】添加了“是否启用RTOS”的宏。使用了__weak让代码隔离得更明显，用户只需专心编写应用、模块、BSP三级的代码。">
-      <option name="closed" value="true" />
-      <created>1728489151386</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1728489151387</updated>
-    </task>
-    <task id="LOCAL-00013" summary="__【未配置好】增添了一点解释">
-      <option name="closed" value="true" />
-      <created>1728490638318</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1728490638318</updated>
-    </task>
-    <task id="LOCAL-00014" summary="__【未配置好】添加了ADC、DAC、定时器驱动，添加了ISR.cpp用于处理中断回调。此外，开始编写player模块，但还没理清与应用、驱动之间的关系，低耦合高内聚真难搞啊">
-      <option name="closed" value="true" />
-      <created>1728541287469</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1728541287469</updated>
-    </task>
-    <task id="LOCAL-00015" summary="__【未配置好】快把语言存储与回放这个小项目写完了，但是手头还没有单片机！！">
-      <option name="closed" value="true" />
-      <created>1728721193957</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1728721193957</updated>
-    </task>
-    <task id="LOCAL-00016" summary="__【未配置好】优化了一些细节。这个__weak大抵是发挥作用的吧，但编译后的内存竟然只增加了1%左右。等手头有单片机后再测试">
-      <option name="closed" value="true" />
-      <created>1728722121974</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1728722121974</updated>
-    </task>
-    <task id="LOCAL-00017" summary="__【未配置好】准备着手双音频信号发生器">
-      <option name="closed" value="true" />
-      <created>1728749785076</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1728749785076</updated>
-    </task>
-    <task id="LOCAL-00018" summary="__【未配置好】测试1">
-      <option name="closed" value="true" />
-      <created>1728804877009</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1728804877009</updated>
-    </task>
-    <task id="LOCAL-00019" summary="__【未配置好】测试1">
-      <option name="closed" value="true" />
-      <created>1728805052790</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1728805052790</updated>
-    </task>
-    <task id="LOCAL-00020" summary="__【未配置好】测试2">
-      <option name="closed" value="true" />
-      <created>1728806681900</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1728806681900</updated>
-    </task>
-    <task id="LOCAL-00021" summary="__【未配置好】测试">
-      <option name="closed" value="true" />
-      <created>1728807014959</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1728807014959</updated>
-    </task>
-    <task id="LOCAL-00022" summary="__【未配置好】测试2">
-      <option name="closed" value="true" />
-      <created>1728807451940</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1728807451940</updated>
-    </task>
-    <task id="LOCAL-00023" summary="__【未配置好】测试3">
-      <option name="closed" value="true" />
-      <created>1728808772020</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1728808772020</updated>
-    </task>
-    <task id="LOCAL-00024" summary="__【未配置好】测试3">
-      <option name="closed" value="true" />
-      <created>1728833901188</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1728833901188</updated>
-    </task>
-    <task id="LOCAL-00025" summary="__【未配置好】备份">
-      <option name="closed" value="true" />
-      <created>1728892341839</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1728892341839</updated>
+      <workItem from="1731804432575" duration="1000" />
+      <workItem from="1731804440550" duration="979000" />
+      <workItem from="1731805439362" duration="4437000" />
+      <workItem from="1731832462157" duration="36000" />
+      <workItem from="1731937309645" duration="21000" />
+      <workItem from="1732030432676" duration="5512000" />
+      <workItem from="1732035994900" duration="3928000" />
+      <workItem from="1732070356664" duration="11603000" />
+      <workItem from="1732092031903" duration="2999000" />
+      <workItem from="1732386998477" duration="4232000" />
+      <workItem from="1732428943434" duration="2412000" />
+      <workItem from="1733506190475" duration="319000" />
+      <workItem from="1733532159885" duration="358000" />
+      <workItem from="1733584671219" duration="2096000" />
+      <workItem from="1733628473886" duration="1999000" />
+      <workItem from="1733914853746" duration="34000" />
+      <workItem from="1734251679101" duration="6958000" />
+      <workItem from="1734265209046" duration="8918000" />
+      <workItem from="1734275410126" duration="270000" />
+      <workItem from="1734348601182" duration="4304000" />
+      <workItem from="1734355128333" duration="879000" />
+      <workItem from="1734360489520" duration="215000" />
+      <workItem from="1734413317047" duration="5420000" />
+      <workItem from="1734422338265" duration="212000" />
+      <workItem from="1734422595608" duration="192000" />
+      <workItem from="1734430758139" duration="472000" />
+      <workItem from="1734434237402" duration="460000" />
+      <workItem from="1734438722498" duration="73000" />
+      <workItem from="1734438864311" duration="672000" />
+      <workItem from="1734439793050" duration="82000" />
+      <workItem from="1734440090093" duration="544000" />
+      <workItem from="1734442165612" duration="116000" />
+      <workItem from="1734442401755" duration="1530000" />
+      <workItem from="1734508689897" duration="115000" />
+      <workItem from="1734602853664" duration="44000" />
+      <workItem from="1734679015314" duration="2771000" />
+      <workItem from="1734694068126" duration="626000" />
+      <workItem from="1734743034192" duration="1269000" />
+      <workItem from="1734751179404" duration="23877000" />
     </task>
     <task id="LOCAL-00026" summary="__【未配置好】纠正了些许小问题">
       <option name="closed" value="true" />
@@ -2291,7 +2156,135 @@
       <option name="project" value="LOCAL" />
       <updated>1731138259424</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="【双音频信号发生器】准备合并">
+      <option name="closed" value="true" />
+      <created>1732030518272</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1732030518272</updated>
+    </task>
+    <task id="LOCAL-00060" summary="【跨越】已经把AI模型初步部署进工程里了">
+      <option name="closed" value="true" />
+      <created>1732033106432</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1732033106432</updated>
+    </task>
+    <task id="LOCAL-00061" summary="【准备】什么辣鸡gitignore，草">
+      <option name="closed" value="true" />
+      <created>1732036112221</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1732036112221</updated>
+    </task>
+    <task id="LOCAL-00062" summary="【准备】是我错了">
+      <option name="closed" value="true" />
+      <created>1732036146573</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1732036146573</updated>
+    </task>
+    <task id="LOCAL-00063" summary="【跨越】AI模型能跑，但我没有掌握如何处理输入与输出数据">
+      <option name="closed" value="true" />
+      <created>1732036617441</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1732036617441</updated>
+    </task>
+    <task id="LOCAL-00064" summary="【阻碍】无论输入什么都只输出1，得要先排除浮点数据造成的影响">
+      <option name="closed" value="true" />
+      <created>1732039874063</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1732039874063</updated>
+    </task>
+    <task id="LOCAL-00065" summary="【跨越】我的第一个AI模型">
+      <option name="closed" value="true" />
+      <created>1732083609388</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1732083609389</updated>
+    </task>
+    <task id="LOCAL-00066" summary="准备融合">
+      <option name="closed" value="true" />
+      <created>1734251699351</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1734251699352</updated>
+    </task>
+    <task id="LOCAL-00067" summary="已经融合，可以正常编译">
+      <option name="closed" value="true" />
+      <created>1734254062073</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1734254062073</updated>
+    </task>
+    <task id="LOCAL-00068" summary="测试了module特性，可以正常使用">
+      <option name="closed" value="true" />
+      <created>1734270514223</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1734270514223</updated>
+    </task>
+    <task id="LOCAL-00069" summary="终于可以把模块的声明和实现分开了">
+      <option name="closed" value="true" />
+      <created>1734273951315</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1734273951315</updated>
+    </task>
+    <task id="LOCAL-00070" summary="略微调整了flash_storage模块的编写">
+      <option name="closed" value="true" />
+      <created>1734680719286</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1734680719286</updated>
+    </task>
+    <task id="LOCAL-00071" summary="略微完善了flash_storage模块，并编写了测试案例">
+      <option name="closed" value="true" />
+      <created>1734682045548</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1734682045548</updated>
+    </task>
+    <task id="LOCAL-00072" summary="flash_storage模块测试完毕">
+      <option name="closed" value="true" />
+      <created>1734755295553</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1734755295553</updated>
+    </task>
+    <task id="LOCAL-00073" summary="语音存储与回放可以使用，接下来只要添加各种逻辑即可">
+      <option name="closed" value="true" />
+      <created>1734774212737</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1734774212737</updated>
+    </task>
+    <task id="LOCAL-00074" summary="【语音存储与回放】完善了播放速度等逻辑">
+      <option name="closed" value="true" />
+      <created>1734787622086</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1734787622086</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2326,22 +2319,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【初始】主项目——简单测试了一下驱动模块与UI事件的对接，可以初步完成一些基本操作，但还需要改进。添加一些对外接口" />
-    <MESSAGE value="【初始】主项目——SPI_Flash已经调通，可以进行上层应用的开发了" />
-    <MESSAGE value="【语音存储与回放】稍微优化了Flash读写函数" />
-    <MESSAGE value="【语音存储与回放】启用了DMA用于FSMC传输数据，准备测试分支的读取内部温度传感器" />
-    <MESSAGE value="【语音存储与回放】更新了Readme" />
-    <MESSAGE value="【语音存储与回放】更新了Readme,创建了一个新分支ZQ用于测试" />
-    <MESSAGE value="【双音频信号发生器】发现绘制图表时会有很严重的性能问题。现准备尝试双缓冲" />
-    <MESSAGE value="【双音频信号发生器】尝试用基本LCD函数来实现波形绘制" />
-    <MESSAGE value="【双音频信号发生器】示波器绘制算法勉强可以使用，只不过在真机上运行会导致图形紊乱，猜测可能是数据类型导致的" />
-    <MESSAGE value="【双音频信号发生器】已解决紊乱问题，现在尝试解决优化速率" />
-    <MESSAGE value="【双音频信号发生器】准备解决绘制漏墨问题" />
-    <MESSAGE value="【双音频信号发生器】发现漏墨问题的一点端倪" />
-    <MESSAGE value="【双音频信号发生器】先搁置样条算法的死机问题，先更改模板函数" />
-    <MESSAGE value="【双音频信号发生器】贝塞尔二次曲线，些许漏墨，但速度下降了不少。线性插值也是，真奇怪" />
-    <MESSAGE value="【双音频信号发生器】贝塞尔二次曲线_又见漏墨端倪，真机上右一小块没有正常显示，模拟器上可以" />
-    <MESSAGE value="【双音频信号发生器】算法基本OK" />
     <MESSAGE value="【双音频信号发生器】调整项目组织结构" />
     <MESSAGE value="【双音频信号发生器】完成了这次的项目优化，后面还有许多不妥之处，后续再慢慢改" />
     <MESSAGE value="【双音频信号发生器】完善了一下Readme" />
@@ -2351,14 +2328,23 @@
     <MESSAGE value="【双音频信号发生器】成功降低程序的耦合" />
     <MESSAGE value="【双音频信号发生器】整合了链接优化选项" />
     <MESSAGE value="【双音频信号发生器】略微优化了CMakelists" />
-    <option name="LAST_COMMIT_MESSAGE" value="【双音频信号发生器】略微优化了CMakelists" />
-  </component>
-  <component name="XDebuggerManager">
-    <watches-manager>
-      <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
-        <watch expression="$control" />
-      </configuration>
-    </watches-manager>
+    <MESSAGE value="【双音频信号发生器】准备合并" />
+    <MESSAGE value="【跨越】已经把AI模型初步部署进工程里了" />
+    <MESSAGE value="【准备】什么辣鸡gitignore，草" />
+    <MESSAGE value="【准备】是我错了" />
+    <MESSAGE value="【跨越】AI模型能跑，但我没有掌握如何处理输入与输出数据" />
+    <MESSAGE value="【阻碍】无论输入什么都只输出1，得要先排除浮点数据造成的影响" />
+    <MESSAGE value="【跨越】我的第一个AI模型" />
+    <MESSAGE value="准备融合" />
+    <MESSAGE value="已经融合，可以正常编译" />
+    <MESSAGE value="测试了module特性，可以正常使用" />
+    <MESSAGE value="终于可以把模块的声明和实现分开了" />
+    <MESSAGE value="略微调整了flash_storage模块的编写" />
+    <MESSAGE value="略微完善了flash_storage模块，并编写了测试案例" />
+    <MESSAGE value="flash_storage模块测试完毕" />
+    <MESSAGE value="语音存储与回放可以使用，接下来只要添加各种逻辑即可" />
+    <MESSAGE value="【语音存储与回放】完善了播放速度等逻辑" />
+    <option name="LAST_COMMIT_MESSAGE" value="【语音存储与回放】完善了播放速度等逻辑" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -10,17 +10,13 @@
 #include "imageButton.hpp"
 #include "image.hpp"
 #include "slider.hpp"
+#include "ui.hpp"
 
 
 #if 1
 /********变量声明********/
-enum PlaySpeed
-{
-    LV_PLAYSPEED_NORMAL,// 正常播放
-    LV_PLAYSPEED_ACC,// 快进1.75
-    LV_PLAYSPEED_SLOW,//慢放0.25
-};
-static uint32_t time=0;
+
+static uint32_t time = 0;
 
 static constexpr uint16_t fft_num = 256;
 static constexpr uint16_t spectrum_start_x = 50;
@@ -36,47 +32,59 @@ static constexpr float bar_spacing = (float) ((spectrum_width - spectrum_num * b
 // 计时器
 LV_Timer slider_timer;
 LV_Timer spectrum_timer;
-
+LV_Timer record_blink_timer;//用于让录音状态闪烁
 
 /********************************界面初始化******************************/
 
 auto Screen::init() -> void
 {
     Component::set_parent(gui->main.screen);
-    /******************************************文本框***************************************/
+    /*************************文本框**********************/
     Text label;
     label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_12);
 
-    //Write codes screen_label_speed
-    label.init(gui->main.label_speed,392, 26,74,13);
+    // 倍速文本框
+    label.init(gui->main.label_play_speed, 28, 254, 70, 20, "");
     Text::add_flag(LV_OBJ_FLAG_HIDDEN);
-    Text::set_space(2);
 
-    //Write codes screen_label_slider_time
-    label.init(gui->main.label_slider_time, 420, 240, 40, 50,"0:00",lv_color_hex(0x8a86b8));
 
-    //Write codes screen_label_title_music
+    // 进度条时间
+    label.init(gui->main.label_slider_time, 393, 288, 40, 20, "0:00", lv_color_hex(0x8a86b8));
+
+    // 保存状态
+    label.init(gui->main.label_save_state, 10, 5, 50, 20, "未保存", lv_color_hex(0x8a86b8));
+
+
+    // 录音状态 需要闪烁
+    label.init(gui->main.label_record_state, 10, 25, 50, 20, "录音中", lv_color_hex(0xcd0303));
+    Text::add_flag(LV_OBJ_FLAG_HIDDEN);
+
+    // 采样率
+    label.init(gui->main.label_record_sample_rate, 410, 5, 70, 20, "采样率:8K", lv_color_hex(0x504d6d));
+
+    // 项目标题
     label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_14);
-    label.init(gui->main.label_title_music,150, 10, 180, 21,"语音存储与回放",lv_color_hex(0x504d6d));
+    label.init(gui->main.label_title_music, 150, 10, 180, 21, "语音存储与回放", lv_color_hex(0x504d6d));
     Text::set_text_align(LV_TEXT_ALIGN_CENTER);// 文本居中
 
-    /*************************************图片*************************************/
-    //Write codes screen_img_slider_flag
-    Image::init(gui->main.img_slider_flag, 235, 152, 15, 15,&_icn_slider_alpha_15x15);
+    /*****************************图片************************/
+    // Write codes screen_img_slider_flag
+    Image::init(gui->main.img_slider_flag, 235, 152, 15, 15, &_icn_slider_alpha_15x15);
 
-    /************************************图片按钮************************************/
+    /***********************图片按钮************************/
     //Write codes screen_imgbtn_play
-    ImageButton::init(gui->main.imgbtn_play,216, 234, 48, 48,&_btn_list_play_alpha_48x48, &_btn_list_pause_alpha_48x48);
+    ImageButton::init(gui->main.imgbtn_play, 216, 234, 48, 48, &_btn_list_play_alpha_48x48,
+                      &_btn_list_pause_alpha_48x48);
 
     //Write codes screen_imgbtn_acc
-    ImageButton::init(gui->main.imgbtn_acc,318, 240, 37, 37,&_btn_next_alpha_37x37);
+    ImageButton::init(gui->main.imgbtn_acc, 318, 240, 37, 37, &_btn_next_alpha_37x37);
 
     //Write codes screen_imgbtn_slow
     ImageButton::init(gui->main.imgbtn_slow, 122, 240, 37, 37, &_btn_prev_alpha_37x37);
 
-    /******************************************滑条***************************************/
+    /*************************滑条********************/
     //Write codes screen_slider
-    Slider::init(gui->main.slider,42, 294, 342, 1,0,100,lv_color_hex(0x2195f6), 100,&_icn_slider_alpha_15x15);
+    Slider::init(gui->main.slider, 42, 294, 342, 1, 0, 263, lv_color_hex(0x2195f6), 100, &_icn_slider_alpha_15x15);
 
     /***自定义组件***/
     Component::init(gui->main.spectrum);
@@ -90,8 +98,6 @@ class Play : public GUI_Base
 public:
     static auto resume() -> void;// 恢复播放
     static auto pause() -> void;// 暂停播放
-    static auto print_speed(enum PlaySpeed speed) -> void;// 显示播放速度信息
-    static auto set_speed(enum PlaySpeed speed) -> void;// 设置播放速度
 };
 
 // 频谱组件
@@ -106,9 +112,6 @@ public:
 class Event : public GUI_Base
 {
 public: // 通用事件
-    static auto acc(bool is_checked) -> void;// 快进按钮
-    static auto slow(bool is_checked) -> void;
-
     static auto play(bool is_checked) -> void;// 播放暂停按钮
 public:// 自定义事件
     static inline auto spectrum_draw(lv_event_t *e) -> void { Spectrum::draw(e); }
@@ -117,8 +120,6 @@ public:// 自定义事件
 
 auto Events::init() -> void
 {
-    Events::bond(gui->main.imgbtn_acc, imgbtn_fun(Event::acc));// 快进按钮
-    Events::bond(gui->main.imgbtn_slow, imgbtn_fun(Event::slow));// 慢放按钮
     Events::bond(gui->main.imgbtn_play, imgbtn_fun(Event::play));// 播放暂停按钮
     Events::bond(gui->main.screen, Event::spectrum_draw);
 
@@ -127,7 +128,7 @@ auto Events::init() -> void
                                 time++;
                                 char buf[8];
                                 sprintf(buf, "%d:%02d", time / 60, time % 60);
-                                Text::set_text(buf,GUI_Base::get_ui()->main.label_slider_time);
+                                Text::set_text(buf, GUI_Base::get_ui()->main.label_slider_time);
                                 Slider::set_value(time, LV_ANIM_ON, GUI_Base::get_ui()->main.slider);
                         ), 1000);
 
@@ -143,15 +144,27 @@ auto Events::init() -> void
                                   }
                                   Component::invalidate(GUI_Base::get_ui()->main.spectrum);// 使频谱区域无效，触发重绘
                           ), 30);
+
+    record_blink_timer.create(timer_fun(
+                              // 闪烁录音状态
+                                      static bool is_show = false;
+                                      is_show = !is_show;
+                                      if (is_show)
+                                      {
+                                          Text::clear_flag(LV_OBJ_FLAG_HIDDEN,
+                                                           GUI_Base::get_ui()->main.label_record_state);
+
+                                      } else
+                                      {
+                                          Text::add_flag(LV_OBJ_FLAG_HIDDEN,
+                                                         GUI_Base::get_ui()->main.label_record_state);
+                                      }
+                              ), 500);
 }
 
 
 ///*****************************实现接口*********************************/
-auto Event::acc(bool is_checked) -> void
-{
-    Play::print_speed(is_checked ? LV_PLAYSPEED_ACC : LV_PLAYSPEED_NORMAL);// 显示播放速度信息
-    Play::set_speed(is_checked ? LV_PLAYSPEED_ACC : LV_PLAYSPEED_NORMAL);// 快进
-}
+
 
 auto Event::play(bool is_checked) -> void
 {
@@ -164,11 +177,6 @@ auto Event::play(bool is_checked) -> void
     }
 }
 
-auto Event::slow(bool is_checked) -> void
-{
-    Play::print_speed(is_checked ? LV_PLAYSPEED_SLOW : LV_PLAYSPEED_NORMAL);// 显示播放速度信息
-    Play::set_speed(is_checked ? LV_PLAYSPEED_SLOW : LV_PLAYSPEED_NORMAL);// 快进
-}
 
 auto Spectrum::draw(lv_event_t *e) -> void
 {
@@ -233,52 +241,6 @@ auto Spectrum::update() -> void
 }
 
 
-/**
- * @brief 播放速度显示
- * @param speed 播放速度
- */
-auto Play::print_speed(enum PlaySpeed speed) -> void
-{
-    switch (speed)
-    {
-        case LV_PLAYSPEED_ACC:
-            lv_obj_clear_flag(gui->main.label_speed, LV_OBJ_FLAG_HIDDEN);
-            lv_label_set_text(gui->main.label_speed, "快进×1.75");
-            break;
-        case LV_PLAYSPEED_SLOW:
-            lv_obj_clear_flag(gui->main.label_speed, LV_OBJ_FLAG_HIDDEN);
-            lv_label_set_text(gui->main.label_speed, "慢放×0.25");
-            break;
-        case LV_PLAYSPEED_NORMAL:
-        default:
-            lv_obj_add_flag(gui->main.label_speed, LV_OBJ_FLAG_HIDDEN);
-            break;
-    }
-}
-
-
-/**
- * @brief 设置播放速度
- * @param speed 播放速度
- */
-auto Play::set_speed(enum PlaySpeed speed) -> void
-{
-    switch (speed)
-    {
-        case LV_PLAYSPEED_ACC:
-#warning "设置速度"
-
-            break;
-        case LV_PLAYSPEED_SLOW:
-
-            break;
-        case LV_PLAYSPEED_NORMAL:
-
-        default:
-            break;
-    }
-}
-
 auto Play::resume() -> void
 {
     slider_timer.resume();
@@ -293,4 +255,112 @@ auto Play::pause() -> void
 }
 
 
+/***********************对外接口*************************/
+auto UI_Interface::reset_time() -> void
+{
+    time = 0;
+}
+
+auto UI_Interface::resume_record() -> void
+{
+    slider_timer.resume();
+    record_blink_timer.resume();
+    Text::clear_flag(LV_OBJ_FLAG_HIDDEN, GUI_Base::get_ui()->main.label_record_state);
+}
+
+auto UI_Interface::pause_record() -> void
+{
+    slider_timer.pause();
+    record_blink_timer.pause();
+    Text::add_flag(LV_OBJ_FLAG_HIDDEN, GUI_Base::get_ui()->main.label_record_state);
+}
+
+// 设置录音采样率
+auto UI_Interface::set_record_state(RecordSampleRate state) -> void
+{
+    switch (state)
+    {
+        case RecordSampleRate::SAMPLE_RATE_8K:
+            Text::set_text("采样率:8K", GUI_Base::get_ui()->main.label_record_sample_rate);
+            // 2*2^20/8K = 262.144s
+            Slider::set_range(0, 263, GUI_Base::get_ui()->main.slider);
+            break;
+
+        case RecordSampleRate::SAMPLE_RATE_16K:
+            Text::set_text("采样率:16K", GUI_Base::get_ui()->main.label_record_sample_rate);
+            // 2*2^20/16K = 131.072s
+            Slider::set_range(0, 132, GUI_Base::get_ui()->main.slider);
+            break;
+
+        default:
+            break;
+    }
+}
+
+auto UI_Interface::set_play_speed(PlaySpeed speed) -> void
+{
+    switch (speed)
+    {
+        case PlaySpeed::SPEED_NORMAL:
+            Text::add_flag(LV_OBJ_FLAG_HIDDEN, GUI_Base::get_ui()->main.label_play_speed);
+            break;
+        case PlaySpeed::SPEED_0_75:
+            Text::clear_flag(LV_OBJ_FLAG_HIDDEN, GUI_Base::get_ui()->main.label_play_speed);
+            Text::set_text("慢放×0.75", GUI_Base::get_ui()->main.label_play_speed);
+            break;
+        case PlaySpeed::SPEED_1_5:
+            Text::clear_flag(LV_OBJ_FLAG_HIDDEN, GUI_Base::get_ui()->main.label_play_speed);
+            Text::set_text("快进×1.5", GUI_Base::get_ui()->main.label_play_speed);
+            break;
+        default:
+            break;
+    }
+
+}
+
+auto UI_Interface::saveInfo(bool state) -> void
+{
+    if (state)
+    {
+        Text::set_text("已保存", GUI_Base::get_ui()->main.label_save_state);
+        Text::set_text_color(lv_color_hex(0x11a0f5), GUI_Base::get_ui()->main.label_save_state);
+    } else
+    {
+        Text::set_text("未保存", GUI_Base::get_ui()->main.label_save_state);
+        Text::set_text_color(lv_color_hex(0x8a86b8), GUI_Base::get_ui()->main.label_save_state);
+    }
+
+}
+
+
+/**
+ * @brief 擦除
+ * @note 会自动关闭录音的动画显示
+ */
+auto UI_Interface::erasing() -> void
+{
+    Text::set_text("擦除中", GUI_Base::get_ui()->main.label_record_state);
+    Text::clear_flag(LV_OBJ_FLAG_HIDDEN, GUI_Base::get_ui()->main.label_record_state);
+    record_blink_timer.resume();
+}
+
+auto UI_Interface::erase_done() -> void
+{
+    Text::set_text("录音中", GUI_Base::get_ui()->main.label_record_state);
+    Text::add_flag(LV_OBJ_FLAG_HIDDEN, GUI_Base::get_ui()->main.label_record_state);
+    record_blink_timer.pause();
+}
+
+auto UI_Interface::get_time() -> uint32_t
+{
+    return time;
+}
+
+auto UI_Interface::set_time(uint32_t t) -> void
+{
+    time = t;
+}
+
 #endif
+
+

@@ -1,10 +1,18 @@
 # --------------------------------------选择你的项目--------------------------------
 # 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
-set(APP_DIR Application/signalGenerator)
-# --------------------------------------选择你的项目------------------------------
+set(APP_DIR Application/voiceStorageAndPlay)
+
+# --------------------------------------某些可选选项------------------------------
 # 是否使用独立静态库链接
 # 注释后，可以使用链接优化-flto，并且默认开启链接优化
+# ld链接器无法自动创建目录以存放map文件，所以注释下面时需要确保存在bin目录
 set(STATIC_MODULE_LD True)
+# 使用GUI
+set(GUI_ENABLE True)
+# 使用AI
+#set (AI_ENABLE True)
+# 添加编译器选项，使得支持Module特性
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts")
 # --------------------------------------某些配置------------------------------
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_VERSION 1)
@@ -33,7 +41,6 @@ set(SIZE arm-none-eabi-size)
 #set(SIZE llvm-size)
 
 # -----------------工程设置-----------------
-
 project(Furina C CXX ASM)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_C_STANDARD 11)
@@ -54,6 +61,9 @@ endif ()
 add_compile_definitions(ARM_MATH_CM4;ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING)
 # 使用Debug，使用HAL库。    -DUSE_FULL_LL_DRIVER 使用LL库
 add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx)
+if(GUI_ENABLE)
+    add_definitions(-DGUI_ENABLE)
+endif ()
 
 #--------------------------编译选项----------------------------
 # 根据编译器类型设置特定编译选项
@@ -91,7 +101,7 @@ if (COMPILER_IS_GCC)
     #-Oz:极度优化大小,进一步优化生成的代码大小，比 -Os更激进,可能会牺牲一些性能。
     #-flto:在链接阶段进行优化,允许进行跨文件的优化，进一步提高性能，但耗时间（项目本来就小我不在乎），并且这个优化容易出问题（这个我很在乎）
     #-fprofile-generate（生成配置文件） 和 -fprofile-use（基于配置文件的优化）
-    add_compile_options(-Ofast -g)
+    add_compile_options(-O2 -g3)
     # 必须关闭静态库独立模块编译，才能够使用链接优化
     if (NOT STATIC_MODULE_LD)
 #仅使用 add_compile_options(-flto)：
@@ -100,8 +110,8 @@ if (COMPILER_IS_GCC)
 #仅使用 add_link_options(-flto)：
 #   结果：链接器尝试进行优化，但编译器生成的对象文件可能不包含足够的信息。
 #   问题：链接器无法进行有效的优化，可能导致编译错误或优化失败。
-        add_compile_options(-flto )
-        add_link_options(-flto)
+#        add_compile_options(-flto )
+#        add_link_options(-flto)
     endif ()
 elseif (COMPILER_IS_CLANG)
     add_compile_options(-O3 -ffast-math -g3 -Wextra)
@@ -203,9 +213,7 @@ set_target_properties(libdsp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 #---------------------用户库-----------------------
 # ------BSP库------
 file(GLOB_RECURSE BSP_SRC "BSP/src/*.c")
-set(BSP_DIR
-        BSP/inc
-)
+set(BSP_DIR BSP/inc)
 add_library(libbsp STATIC ${BSP_SRC})
 target_include_directories(libbsp PUBLIC ${BSP_DIR})
 target_link_libraries(libbsp PUBLIC libdrivers)
@@ -225,6 +233,7 @@ set_target_properties(libdata PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
 # ------GUI库------
+if (GUI_ENABLE)
 file(GLOB_RECURSE GUI_SRC
         "${UI_DIR}/*.*"
         "GUI/Base/*.cpp"
@@ -245,7 +254,7 @@ target_include_directories(libgui PUBLIC ${GUI_DIR})
 target_link_libraries(libgui PUBLIC liblvgl libbsp)
 # 设置静态库的输出目录
 set_target_properties(libgui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
-
+endif ()
 
 # ------Module库------
 file(GLOB_RECURSE MODULE_SRC "Module/src/*.cpp")
@@ -258,50 +267,91 @@ target_link_libraries(libmodule PRIVATE libdsp libdata)
 # 设置静态库的输出目录
 set_target_properties(libmodule PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
+# -------AI库-------
+if (AI_ENABLE)
+    file(GLOB_RECURSE AI_SRC "AI/${APP_DIR_LAST_PART}/App/*.c")
+    set(AI_DIR AI/${APP_DIR_LAST_PART}/App AI/${APP_DIR_LAST_PART})
+    add_library(libai STATIC ${AI_SRC})
+    target_include_directories(libai PUBLIC ${AI_DIR})
+    target_link_libraries(libai INTERFACE :NetworkRuntime910_CM4_GCC.a)
+    target_link_libraries(libai PRIVATE libdrivers)
+    target_link_directories(libai INTERFACE Library/ST/AI/Lib)
+
+    # 设置静态库的输出目录
+    set_target_properties(libai PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+endif ()
 
 # ------Application库------
 file(GLOB_RECURSE APPLICATION_SRC "${APP_DIR}/app.cpp" "Application/Base/main.cpp" "Application/Base/baseInit.cpp")
-set(APPLICATION_DIR
-        Application/Base
-)
+set(APPLICATION_DIR Application/Base)
 add_library(libapp STATIC ${APPLICATION_SRC})
 target_include_directories(libapp PUBLIC ${APPLICATION_DIR})
 # 需要链接 libdsp libdata libgui libbsp libmodule等，根据需要选
-target_link_libraries(libapp PUBLIC libdsp libdata libgui libbsp libmodule)
+target_link_libraries(libapp PUBLIC libdsp libdata libbsp libmodule )
+if(AI_ENABLE)
+    target_link_libraries(libapp PUBLIC libai)
+endif ()
+if(GUI_ENABLE)
+    target_link_libraries(libapp PUBLIC libgui)
+endif ()
 # 设置静态库的输出目录
 set_target_properties(libapp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
+# -------------------module特性测试-----------------------
+file(GLOB_RECURSE cxx_modules
+    "Module/inc/*.ixx" "Module/src/*.cppm"
+)
 
-# ---------包含公共目录--------
+# ----------------包含公共目录---------------
+# 公共目录
+include_directories(Library/ST/AI/Inc)
+include_directories(Application/Conf ${APP_DIR})
+
+# 定义公共的头文件目录和源文件
+set(COMMON_INCLUDE_DIRS
+    ${DRIVERS_DIR}
+    ${BSP_DIR}
+    ${DATA_DIR}
+    ${MODULE_DIR}
+    ${AI_DIR}
+    ${APPLICATION_DIR}
+)
+
+set(COMMON_SOURCES
+    "Core/*.*"
+    "Application/Base/ISR.cpp"
+    ${DRIVERS_SRC}
+    ${BSP_SRC}
+    ${DATA_SRC}
+    ${MODULE_SRC}
+    ${AI_SRC}
+    ${APPLICATION_SRC}
+)
+
 if (STATIC_MODULE_LD)
-    include_directories(Application/Conf ${APP_DIR})
     # 这里面不能直接添加到静态库里 否则链接时会出现找不到定义的现象
     file(GLOB_RECURSE SOURCES "Core/*.*" "Application/Base/ISR.cpp")
 else ()
-    include_directories(Application/Conf ${APP_DIR}
-            ${DRIVERS_DIR}
+    if (GUI_ENABLE)
+        list(APPEND COMMON_INCLUDE_DIRS
             ${LVGL_DIR}
-            #            ${FREERTOS_DIR}
-            ${BSP_DIR}
-            ${DATA_DIR}
             ${GUI_DIR}
-            ${MODULE_DIR}
-            ${APPLICATION_DIR}
-    )
-    file(GLOB_RECURSE SOURCES "Core/*.*" "Application/Base/ISR.cpp"
-            ${DRIVERS_SRC}
+        )
+        list(APPEND COMMON_SOURCES
             ${LVGL_SRC}
-            #            ${FREERTOS_SRC}
-            ${BSP_SRC}
-            ${DATA_SRC}
             ${GUI_SRC}
-            ${MODULE_SRC}
-            ${APPLICATION_SRC}
-    )
+        )
+    endif ()
+
+    # 添加公共的头文件目录、源文件
+    include_directories(${COMMON_INCLUDE_DIRS})
+    file(GLOB_RECURSE SOURCES ${COMMON_SOURCES})
 endif ()
 
+
+# -------------------编译链接-------------------
 # 设置链接脚本
-set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld)
+set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld )
 
 # 链接标志
 add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
@@ -327,12 +377,20 @@ add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${BIN_DIR}/${PROJECT
 # 设置链接目标
 add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
 
+# 导入模块
+target_sources(libapp PUBLIC
+        FILE_SET CXX_MODULES FILES
+        ${cxx_modules})
+
+
 # 是否链接静态库
 if (STATIC_MODULE_LD)
     target_link_libraries(${PROJECT_NAME}.elf PRIVATE libapp)
     # 设置可执行文件的输出目录
     set_target_properties(${PROJECT_NAME}.elf PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
 endif ()
+target_link_libraries(${PROJECT_NAME}.elf INTERFACE :NetworkRuntime910_CM4_GCC.a)
+target_link_directories(${PROJECT_NAME}.elf INTERFACE Library/ST/AI/Lib)
 
 # 定义hex和bin文件
 set(HEX_FILE ${BIN_DIR}/${PROJECT_NAME}.hex)

@@ -1,0 +1,469 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:9 (project)"
+    message: |
+      The system is: Windows - 10.0.22631 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:9 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+      Compiler: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-gcc-13.3.1.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      1
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-exit.o): in function `exit':
+      exit.c:(.text.exit+0x28): undefined reference to `_exit'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-closer.o): in function `_close_r':
+      closer.c:(.text._close_r+0x18): undefined reference to `_close'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-lseekr.o): in function `_lseek_r':
+      lseekr.c:(.text._lseek_r+0x24): undefined reference to `_lseek'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-readr.o): in function `_read_r':
+      readr.c:(.text._read_r+0x24): undefined reference to `_read'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-writer.o): in function `_write_r':
+      writer.c:(.text._write_r+0x24): undefined reference to `_write'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-sbrkr.o): in function `_sbrk_r':
+      sbrkr.c:(.text._sbrk_r+0x18): undefined reference to `_sbrk'
+      collect2.exe: error: ld returned 1 exit status
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:9 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-gcc-13.3.1.exe 
+      Build flags: 
+      Id flags: -c 
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
+      
+      The C compiler identification is GNU, found in:
+        D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/3.29.6/CompilerIdC/CMakeCCompilerId.o
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:9 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+      Compiler: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-g++.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      1
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-exit.o): in function `exit':
+      exit.c:(.text.exit+0x28): undefined reference to `_exit'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-closer.o): in function `_close_r':
+      closer.c:(.text._close_r+0x18): undefined reference to `_close'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-lseekr.o): in function `_lseek_r':
+      lseekr.c:(.text._lseek_r+0x24): undefined reference to `_lseek'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-readr.o): in function `_read_r':
+      readr.c:(.text._read_r+0x24): undefined reference to `_read'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-writer.o): in function `_write_r':
+      writer.c:(.text._write_r+0x24): undefined reference to `_write'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-sbrkr.o): in function `_sbrk_r':
+      sbrkr.c:(.text._sbrk_r+0x18): undefined reference to `_sbrk'
+      collect2.exe: error: ld returned 1 exit status
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:9 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-g++.exe 
+      Build flags: 
+      Id flags: -c 
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
+      
+      The CXX compiler identification is GNU, found in:
+        D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/3.29.6/CompilerIdCXX/CMakeCXXCompilerId.o
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:67 (try_compile)"
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:9 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-z5uy2w"
+      binary: "D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-z5uy2w"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-z5uy2w'
+        
+        Run Build Command(s): D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/bin/cmake.exe -E env VERBOSE=1 D:/Tools/Working_tools/JetBrains/CLion/bin/mingw/bin/mingw32-make.exe -f Makefile cmTC_dd7ea/fast
+        D:/Tools/Working_tools/JetBrains/CLion/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_dd7ea.dir\\build.make CMakeFiles/cmTC_dd7ea.dir/build
+        mingw32-make[1]: Entering directory 'D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-z5uy2w'
+        Building C object CMakeFiles/cmTC_dd7ea.dir/CMakeCCompilerABI.c.obj
+        D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-gcc-13.3.1.exe   -fdiagnostics-color=always   -v -o CMakeFiles\\cmTC_dd7ea.dir\\CMakeCCompilerABI.c.obj -c D:\\Tools\\Working_tools\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\share\\cmake-3.29\\Modules\\CMakeCCompilerABI.c
+        Using built-in specs.
+        COLLECT_GCC=D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-gcc-13.3.1.exe
+        Target: arm-none-eabi
+        Configured with: /data/jenkins/workspace/GNU-toolchain/arm-13/src/gcc/configure --target=arm-none-eabi --prefix=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install --with-gmp=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-mpfr=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-mpc=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-isl=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --disable-shared --disable-nls --disable-threads --disable-tls --enable-checking=release --enable-languages=c,c++,fortran --with-newlib --with-gnu-as --with-headers=yes --with-gnu-ld --with-native-system-header-dir=/include --with-sysroot=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install/arm-none-eabi --with-multilib-list=aprofile,rmprofile --with-libiconv-prefix=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --enable-mingw-wildcard --host=i686-w64-mingw32 --with-pkgversion='Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)' --with-bugurl=https://bugs.linaro.org/
+        Thread model: single
+        Supported LTO compression algorithms: zlib
+        gcc version 13.3.1 20240614 (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_dd7ea.dir\\CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles\\cmTC_dd7ea.dir\\'
+         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/cc1.exe -quiet -v -iprefix D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/ -isysroot D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi -D__USES_INITFINI__ D:\\Tools\\Working_tools\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\share\\cmake-3.29\\Modules\\CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles\\cmTC_dd7ea.dir\\ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -version -fdiagnostics-color=always -o C:\\Users\\David\\AppData\\Local\\Temp\\ccz64taP.s
+        GNU C17 (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) version 13.3.1 20240614 (arm-none-eabi)
+        	compiled by GNU C version 9.3-win32 20200320, GMP version 6.2.1, MPFR version 3.1.6, MPC version 1.0.3, isl version isl-0.15-1-g835ea3a-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/include"
+        ignoring nonexistent directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install/lib/gcc/arm-none-eabi/13.3.1/../../../../include"
+        ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/include-fixed"
+        ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include"
+        ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include
+         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include-fixed
+         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include
+        End of search list.
+        Compiler executable checksum: d51ba7f24bad5b83998bb941572c85c4
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_dd7ea.dir\\CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles\\cmTC_dd7ea.dir\\'
+         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles\\cmTC_dd7ea.dir\\CMakeCCompilerABI.c.obj C:\\Users\\David\\AppData\\Local\\Temp\\ccz64taP.s
+        GNU assembler version 2.42.0 (arm-none-eabi) using BFD version (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 2.42.0.20240614
+        COMPILER_PATH=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/
+        LIBRARY_PATH=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/lib/
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_dd7ea.dir\\CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles\\cmTC_dd7ea.dir\\CMakeCCompilerABI.c.'
+        Linking C executable cmTC_dd7ea.exe
+        D:\\Tools\\Working_tools\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\bin\\cmake.exe -E cmake_link_script CMakeFiles\\cmTC_dd7ea.dir\\link.txt --verbose=1
+        D:\\Tools\\Working_tools\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\bin\\cmake.exe -E rm -f CMakeFiles\\cmTC_dd7ea.dir/objects.a
+        D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-ar.exe qc CMakeFiles\\cmTC_dd7ea.dir/objects.a @CMakeFiles\\cmTC_dd7ea.dir\\objects1.rsp
+        D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-gcc-13.3.1.exe  -v -Wl,-v -Wl,--whole-archive CMakeFiles\\cmTC_dd7ea.dir/objects.a -Wl,--no-whole-archive -o cmTC_dd7ea.exe -Wl,--out-implib,libcmTC_dd7ea.dll.a -Wl,--major-image-version,0,--minor-image-version,0
+        Using built-in specs.
+        COLLECT_GCC=D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-gcc-13.3.1.exe
+        COLLECT_LTO_WRAPPER=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/lto-wrapper.exe
+        Target: arm-none-eabi
+        Configured with: /data/jenkins/workspace/GNU-toolchain/arm-13/src/gcc/configure --target=arm-none-eabi --prefix=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install --with-gmp=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-mpfr=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-mpc=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-isl=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --disable-shared --disable-nls --disable-threads --disable-tls --enable-checking=release --enable-languages=c,c++,fortran --with-newlib --with-gnu-as --with-headers=yes --with-gnu-ld --with-native-system-header-dir=/include --with-sysroot=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install/arm-none-eabi --with-multilib-list=aprofile,rmprofile --with-libiconv-prefix=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --enable-mingw-wildcard --host=i686-w64-mingw32 --with-pkgversion='Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)' --with-bugurl=https://bugs.linaro.org/
+        Thread model: single
+        Supported LTO compression algorithms: zlib
+        gcc version 13.3.1 20240614 (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 
+        COMPILER_PATH=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/
+        LIBRARY_PATH=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_dd7ea.exe' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'cmTC_dd7ea.'
+         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/collect2.exe -plugin D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/liblto_plugin.dll -plugin-opt=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\David\\AppData\\Local\\Temp\\ccpKFOMp.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc --sysroot=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi -X -o cmTC_dd7ea.exe D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crti.o D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crtbegin.o D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crt0.o -LD:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1 -LD:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc -LD:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib -LD:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/lib -v --whole-archive CMakeFiles\\cmTC_dd7ea.dir/objects.a --no-whole-archive --out-implib libcmTC_dd7ea.dll.a --major-image-version 0 --minor-image-version 0 --start-group -lgcc -lc --end-group D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crtend.o D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crtn.o
+        collect2 version 13.3.1 20240614
+        D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe -plugin D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/liblto_plugin.dll -plugin-opt=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\David\\AppData\\Local\\Temp\\ccpKFOMp.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc --sysroot=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi -X -o cmTC_dd7ea.exe D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crti.o D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crtbegin.o D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crt0.o -LD:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1 -LD:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc -LD:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib -LD:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/lib -v --whole-archive CMakeFiles\\cmTC_dd7ea.dir/objects.a --no-whole-archive --out-implib libcmTC_dd7ea.dll.a --major-image-version 0 --minor-image-version 0 --start-group -lgcc -lc --end-group D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crtend.o D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crtn.o
+        GNU ld (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 2.42.0.20240614
+        D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: unrecognized option '--major-image-version'
+        D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: use the --help option for usage information
+        collect2.exe: error: ld returned 1 exit status
+        mingw32-make[1]: *** [CMakeFiles\\cmTC_dd7ea.dir\\build.make:99: cmTC_dd7ea.exe] Error 1
+        mingw32-make[1]: Leaving directory 'D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-z5uy2w'
+        mingw32-make: *** [Makefile:126: cmTC_dd7ea/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeTestCCompiler.cmake:56 (try_compile)"
+      - "CMakeLists.txt:9 (project)"
+    checks:
+      - "Check for working C compiler: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-gcc-13.3.1.exe"
+    directories:
+      source: "D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-32jl93"
+      binary: "D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-32jl93"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_C_COMPILER_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-32jl93'
+        
+        Run Build Command(s): D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/bin/cmake.exe -E env VERBOSE=1 D:/Tools/Working_tools/JetBrains/CLion/bin/mingw/bin/mingw32-make.exe -f Makefile cmTC_09f6e/fast
+        D:/Tools/Working_tools/JetBrains/CLion/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_09f6e.dir\\build.make CMakeFiles/cmTC_09f6e.dir/build
+        mingw32-make[1]: Entering directory 'D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-32jl93'
+        Building C object CMakeFiles/cmTC_09f6e.dir/testCCompiler.c.obj
+        D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-gcc-13.3.1.exe   -fdiagnostics-color=always -o CMakeFiles\\cmTC_09f6e.dir\\testCCompiler.c.obj -c D:\\Program\\stm32\\STM32F407VET6\\GUI\\lvgl-simulator\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-32jl93\\testCCompiler.c
+        Linking C executable cmTC_09f6e.exe
+        D:\\Tools\\Working_tools\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\bin\\cmake.exe -E cmake_link_script CMakeFiles\\cmTC_09f6e.dir\\link.txt --verbose=1
+        D:\\Tools\\Working_tools\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\bin\\cmake.exe -E rm -f CMakeFiles\\cmTC_09f6e.dir/objects.a
+        D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-ar.exe qc CMakeFiles\\cmTC_09f6e.dir/objects.a @CMakeFiles\\cmTC_09f6e.dir\\objects1.rsp
+        D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-gcc-13.3.1.exe -Wl,--whole-archive CMakeFiles\\cmTC_09f6e.dir/objects.a -Wl,--no-whole-archive -o cmTC_09f6e.exe -Wl,--out-implib,libcmTC_09f6e.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_09f6e.dir\\linkLibs.rsp
+        D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: unrecognized option '--major-image-version'
+        D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: use the --help option for usage information
+        collect2.exe: error: ld returned 1 exit status
+        mingw32-make[1]: *** [CMakeFiles\\cmTC_09f6e.dir\\build.make:100: cmTC_09f6e.exe] Error 1
+        mingw32-make[1]: Leaving directory 'D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-32jl93'
+        mingw32-make: *** [Makefile:126: cmTC_09f6e/fast] Error 2
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:9 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+      Compiler: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-gcc-13.3.1.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      1
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-exit.o): in function `exit':
+      exit.c:(.text.exit+0x28): undefined reference to `_exit'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-closer.o): in function `_close_r':
+      closer.c:(.text._close_r+0x18): undefined reference to `_close'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-lseekr.o): in function `_lseek_r':
+      lseekr.c:(.text._lseek_r+0x24): undefined reference to `_lseek'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-readr.o): in function `_read_r':
+      readr.c:(.text._read_r+0x24): undefined reference to `_read'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-writer.o): in function `_write_r':
+      writer.c:(.text._write_r+0x24): undefined reference to `_write'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-sbrkr.o): in function `_sbrk_r':
+      sbrkr.c:(.text._sbrk_r+0x18): undefined reference to `_sbrk'
+      collect2.exe: error: ld returned 1 exit status
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:9 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-gcc-13.3.1.exe 
+      Build flags: 
+      Id flags: -c 
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
+      
+      The C compiler identification is GNU, found in:
+        D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/3.29.6/CompilerIdC/CMakeCCompilerId.o
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:9 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+      Compiler: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-g++.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      1
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-exit.o): in function `exit':
+      exit.c:(.text.exit+0x28): undefined reference to `_exit'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-closer.o): in function `_close_r':
+      closer.c:(.text._close_r+0x18): undefined reference to `_close'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-lseekr.o): in function `_lseek_r':
+      lseekr.c:(.text._lseek_r+0x24): undefined reference to `_lseek'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-readr.o): in function `_read_r':
+      readr.c:(.text._read_r+0x24): undefined reference to `_read'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-writer.o): in function `_write_r':
+      writer.c:(.text._write_r+0x24): undefined reference to `_write'
+      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-sbrkr.o): in function `_sbrk_r':
+      sbrkr.c:(.text._sbrk_r+0x18): undefined reference to `_sbrk'
+      collect2.exe: error: ld returned 1 exit status
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:9 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-g++.exe 
+      Build flags: 
+      Id flags: -c 
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
+      
+      The CXX compiler identification is GNU, found in:
+        D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/3.29.6/CompilerIdCXX/CMakeCXXCompilerId.o
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:67 (try_compile)"
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:9 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-d1m4d4"
+      binary: "D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-d1m4d4"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-d1m4d4'
+        
+        Run Build Command(s): D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/bin/cmake.exe -E env VERBOSE=1 D:/Tools/Working_tools/JetBrains/CLion/bin/mingw/bin/mingw32-make.exe -f Makefile cmTC_19e09/fast
+        D:/Tools/Working_tools/JetBrains/CLion/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_19e09.dir\\build.make CMakeFiles/cmTC_19e09.dir/build
+        mingw32-make[1]: Entering directory 'D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-d1m4d4'
+        Building C object CMakeFiles/cmTC_19e09.dir/CMakeCCompilerABI.c.obj
+        D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-gcc-13.3.1.exe   -fdiagnostics-color=always   -v -o CMakeFiles\\cmTC_19e09.dir\\CMakeCCompilerABI.c.obj -c D:\\Tools\\Working_tools\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\share\\cmake-3.29\\Modules\\CMakeCCompilerABI.c
+        Using built-in specs.
+        COLLECT_GCC=D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-gcc-13.3.1.exe
+        Target: arm-none-eabi
+        Configured with: /data/jenkins/workspace/GNU-toolchain/arm-13/src/gcc/configure --target=arm-none-eabi --prefix=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install --with-gmp=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-mpfr=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-mpc=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-isl=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --disable-shared --disable-nls --disable-threads --disable-tls --enable-checking=release --enable-languages=c,c++,fortran --with-newlib --with-gnu-as --with-headers=yes --with-gnu-ld --with-native-system-header-dir=/include --with-sysroot=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install/arm-none-eabi --with-multilib-list=aprofile,rmprofile --with-libiconv-prefix=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --enable-mingw-wildcard --host=i686-w64-mingw32 --with-pkgversion='Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)' --with-bugurl=https://bugs.linaro.org/
+        Thread model: single
+        Supported LTO compression algorithms: zlib
+        gcc version 13.3.1 20240614 (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_19e09.dir\\CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles\\cmTC_19e09.dir\\'
+         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/cc1.exe -quiet -v -iprefix D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/ -isysroot D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi -D__USES_INITFINI__ D:\\Tools\\Working_tools\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\share\\cmake-3.29\\Modules\\CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles\\cmTC_19e09.dir\\ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -version -fdiagnostics-color=always -o C:\\Users\\David\\AppData\\Local\\Temp\\ccLMzSiY.s
+        GNU C17 (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) version 13.3.1 20240614 (arm-none-eabi)
+        	compiled by GNU C version 9.3-win32 20200320, GMP version 6.2.1, MPFR version 3.1.6, MPC version 1.0.3, isl version isl-0.15-1-g835ea3a-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/include"
+        ignoring nonexistent directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install/lib/gcc/arm-none-eabi/13.3.1/../../../../include"
+        ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/include-fixed"
+        ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include"
+        ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include
+         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include-fixed
+         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include
+        End of search list.
+        Compiler executable checksum: d51ba7f24bad5b83998bb941572c85c4
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_19e09.dir\\CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles\\cmTC_19e09.dir\\'
+         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles\\cmTC_19e09.dir\\CMakeCCompilerABI.c.obj C:\\Users\\David\\AppData\\Local\\Temp\\ccLMzSiY.s
+        GNU assembler version 2.42.0 (arm-none-eabi) using BFD version (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 2.42.0.20240614
+        COMPILER_PATH=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/
+        LIBRARY_PATH=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/lib/
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles\\cmTC_19e09.dir\\CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles\\cmTC_19e09.dir\\CMakeCCompilerABI.c.'
+        Linking C executable cmTC_19e09.exe
+        D:\\Tools\\Working_tools\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\bin\\cmake.exe -E cmake_link_script CMakeFiles\\cmTC_19e09.dir\\link.txt --verbose=1
+        D:\\Tools\\Working_tools\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\bin\\cmake.exe -E rm -f CMakeFiles\\cmTC_19e09.dir/objects.a
+        D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-ar.exe qc CMakeFiles\\cmTC_19e09.dir/objects.a @CMakeFiles\\cmTC_19e09.dir\\objects1.rsp
+        D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-gcc-13.3.1.exe  -v -Wl,-v -Wl,--whole-archive CMakeFiles\\cmTC_19e09.dir/objects.a -Wl,--no-whole-archive -o cmTC_19e09.exe -Wl,--out-implib,libcmTC_19e09.dll.a -Wl,--major-image-version,0,--minor-image-version,0
+        Using built-in specs.
+        COLLECT_GCC=D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-gcc-13.3.1.exe
+        COLLECT_LTO_WRAPPER=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/lto-wrapper.exe
+        Target: arm-none-eabi
+        Configured with: /data/jenkins/workspace/GNU-toolchain/arm-13/src/gcc/configure --target=arm-none-eabi --prefix=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install --with-gmp=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-mpfr=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-mpc=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-isl=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --disable-shared --disable-nls --disable-threads --disable-tls --enable-checking=release --enable-languages=c,c++,fortran --with-newlib --with-gnu-as --with-headers=yes --with-gnu-ld --with-native-system-header-dir=/include --with-sysroot=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install/arm-none-eabi --with-multilib-list=aprofile,rmprofile --with-libiconv-prefix=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --enable-mingw-wildcard --host=i686-w64-mingw32 --with-pkgversion='Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)' --with-bugurl=https://bugs.linaro.org/
+        Thread model: single
+        Supported LTO compression algorithms: zlib
+        gcc version 13.3.1 20240614 (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 
+        COMPILER_PATH=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/
+        LIBRARY_PATH=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_19e09.exe' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'cmTC_19e09.'
+         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/collect2.exe -plugin D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/liblto_plugin.dll -plugin-opt=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\David\\AppData\\Local\\Temp\\ccNyqJJk.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc --sysroot=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi -X -o cmTC_19e09.exe D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crti.o D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crtbegin.o D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crt0.o -LD:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1 -LD:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc -LD:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib -LD:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/lib -v --whole-archive CMakeFiles\\cmTC_19e09.dir/objects.a --no-whole-archive --out-implib libcmTC_19e09.dll.a --major-image-version 0 --minor-image-version 0 --start-group -lgcc -lc --end-group D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crtend.o D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crtn.o
+        collect2 version 13.3.1 20240614
+        D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe -plugin D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/liblto_plugin.dll -plugin-opt=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\David\\AppData\\Local\\Temp\\ccNyqJJk.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc --sysroot=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi -X -o cmTC_19e09.exe D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crti.o D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crtbegin.o D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crt0.o -LD:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1 -LD:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc -LD:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib -LD:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/lib -v --whole-archive CMakeFiles\\cmTC_19e09.dir/objects.a --no-whole-archive --out-implib libcmTC_19e09.dll.a --major-image-version 0 --minor-image-version 0 --start-group -lgcc -lc --end-group D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crtend.o D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/crtn.o
+        GNU ld (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 2.42.0.20240614
+        D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: unrecognized option '--major-image-version'
+        D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: use the --help option for usage information
+        collect2.exe: error: ld returned 1 exit status
+        mingw32-make[1]: *** [CMakeFiles\\cmTC_19e09.dir\\build.make:99: cmTC_19e09.exe] Error 1
+        mingw32-make[1]: Leaving directory 'D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-d1m4d4'
+        mingw32-make: *** [Makefile:126: cmTC_19e09/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeTestCCompiler.cmake:56 (try_compile)"
+      - "CMakeLists.txt:9 (project)"
+    checks:
+      - "Check for working C compiler: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-gcc-13.3.1.exe"
+    directories:
+      source: "D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-pnk8w7"
+      binary: "D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-pnk8w7"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_C_COMPILER_WORKS"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-pnk8w7'
+        
+        Run Build Command(s): D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/bin/cmake.exe -E env VERBOSE=1 D:/Tools/Working_tools/JetBrains/CLion/bin/mingw/bin/mingw32-make.exe -f Makefile cmTC_7df2f/fast
+        D:/Tools/Working_tools/JetBrains/CLion/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_7df2f.dir\\build.make CMakeFiles/cmTC_7df2f.dir/build
+        mingw32-make[1]: Entering directory 'D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-pnk8w7'
+        Building C object CMakeFiles/cmTC_7df2f.dir/testCCompiler.c.obj
+        D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-gcc-13.3.1.exe   -fdiagnostics-color=always -o CMakeFiles\\cmTC_7df2f.dir\\testCCompiler.c.obj -c D:\\Program\\stm32\\STM32F407VET6\\GUI\\lvgl-simulator\\cmake-build-debug\\CMakeFiles\\CMakeScratch\\TryCompile-pnk8w7\\testCCompiler.c
+        Linking C executable cmTC_7df2f.exe
+        D:\\Tools\\Working_tools\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\bin\\cmake.exe -E cmake_link_script CMakeFiles\\cmTC_7df2f.dir\\link.txt --verbose=1
+        D:\\Tools\\Working_tools\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\bin\\cmake.exe -E rm -f CMakeFiles\\cmTC_7df2f.dir/objects.a
+        D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-ar.exe qc CMakeFiles\\cmTC_7df2f.dir/objects.a @CMakeFiles\\cmTC_7df2f.dir\\objects1.rsp
+        D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-gcc-13.3.1.exe -Wl,--whole-archive CMakeFiles\\cmTC_7df2f.dir/objects.a -Wl,--no-whole-archive -o cmTC_7df2f.exe -Wl,--out-implib,libcmTC_7df2f.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_7df2f.dir\\linkLibs.rsp
+        D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: unrecognized option '--major-image-version'
+        D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: use the --help option for usage information
+        collect2.exe: error: ld returned 1 exit status
+        mingw32-make[1]: *** [CMakeFiles\\cmTC_7df2f.dir\\build.make:100: cmTC_7df2f.exe] Error 1
+        mingw32-make[1]: Leaving directory 'D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-pnk8w7'
+        mingw32-make: *** [Makefile:126: cmTC_7df2f/fast] Error 2
+        
+      exitCode: 2
+...

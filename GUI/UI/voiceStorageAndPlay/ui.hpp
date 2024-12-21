@@ -9,24 +9,29 @@
 #if 1
 // 头文件
 /*********************组件*******************/
-typedef struct
+struct lv_ui_t
 {
+    using Obj = lv_obj_t *;
     struct
     {
-        lv_obj_t *screen;// 屏幕自身
-        lv_obj_t *img_slider_flag;
-        lv_obj_t *imgbtn_slow;
-        lv_obj_t *imgbtn_acc;
-        lv_obj_t *label_title_music;
-        lv_obj_t *slider;
-        lv_obj_t *label_speed;
-        lv_obj_t *label_slider_time;
-        lv_obj_t *imgbtn_play;
-        lv_obj_t *spectrum;// 频谱
+        Obj screen;// 屏幕自身
+        Obj img_slider_flag;
+        Obj imgbtn_slow;
+        Obj imgbtn_acc;
+        Obj label_title_music;
+        Obj slider;
+        Obj label_play_speed;
+        Obj label_slider_time;
+        Obj imgbtn_play;
+        Obj spectrum;// 频谱
+        Obj label_record_state;// 录音状态
+        Obj label_save_state;// 保存状态
+        Obj label_record_sample_rate;// 录音采样率
     } main;// 主屏幕
 
-}lv_ui_t;
-
+};
+// 取别名
+using lv_ui_t = struct lv_ui_t;
 
 // 加载资源文件
 LV_FONT_DECLARE(lv_customer_font_SourceHanSerifSC_Regular_14)
@@ -37,6 +42,37 @@ LV_IMG_DECLARE(_btn_prev_alpha_37x37);
 LV_IMG_DECLARE(_btn_next_alpha_37x37);
 LV_IMG_DECLARE(_btn_list_play_alpha_48x48);
 LV_IMG_DECLARE(_btn_list_pause_alpha_48x48);
+
+
+// 录音采样率
+enum class RecordSampleRate:uint8_t
+{
+    SAMPLE_RATE_8K,
+    SAMPLE_RATE_16K,
+};
+
+enum class PlaySpeed: uint8_t
+{
+    SPEED_NORMAL=1,// 正常速度
+    SPEED_0_75=75,// 0.75倍
+    SPEED_1_5=150,// 1.5倍
+};
+
+class UI_Interface
+{
+public:
+    static auto reset_time() -> void;// 重置进度条时间
+    static auto get_time()->uint32_t ;
+    static auto set_time(uint32_t t)->void;
+    static auto resume_record() -> void;// 开启进度条时间
+    static auto pause_record() -> void;// 关闭进度条时间
+    static auto set_record_state(RecordSampleRate state) -> void;
+    static auto set_play_speed(PlaySpeed speed) -> void;
+    static auto saveInfo(bool state) -> void;
+    static auto erasing()->void ;
+    static auto erase_done()->void ;
+};
+
 
 
 

@@ -1,0 +1,45 @@
+D:\Tools\Working_tools\JetBrains\CLion\bin\cmake\win\x64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-gcc-13.3.1.exe -DCMAKE_CXX_COMPILER=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-g++.exe -G "MinGW Makefiles" -S D:\Program\stm32\STM32F407VET6\GUI\lvgl-simulator -B D:\Program\stm32\STM32F407VET6\GUI\lvgl-simulator\cmake-build-debug
+-- The C compiler identification is GNU 13.3.1
+-- The CXX compiler identification is GNU 13.3.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - failed
+-- Check for working C compiler: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-gcc-13.3.1.exe
+-- Check for working C compiler: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-gcc-13.3.1.exe - broken
+CMake Error at D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeTestCCompiler.cmake:67 (message):
+  The C compiler
+
+    "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-gcc-13.3.1.exe"
+
+  is not able to compile a simple test program.
+
+  It fails with the following output:
+
+    Change Dir: 'D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-pnk8w7'
+    
+    Run Build Command(s): D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/bin/cmake.exe -E env VERBOSE=1 D:/Tools/Working_tools/JetBrains/CLion/bin/mingw/bin/mingw32-make.exe -f Makefile cmTC_7df2f/fast
+    D:/Tools/Working_tools/JetBrains/CLion/bin/mingw/bin/mingw32-make.exe  -f CMakeFiles\cmTC_7df2f.dir\build.make CMakeFiles/cmTC_7df2f.dir/build
+    mingw32-make[1]: Entering directory 'D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-pnk8w7'
+    Building C object CMakeFiles/cmTC_7df2f.dir/testCCompiler.c.obj
+    D:\Tools\Other_tools\ARM\arm-gnu-toolchain_v13_3\bin\arm-none-eabi-gcc-13.3.1.exe   -fdiagnostics-color=always -o CMakeFiles\cmTC_7df2f.dir\testCCompiler.c.obj -c D:\Program\stm32\STM32F407VET6\GUI\lvgl-simulator\cmake-build-debug\CMakeFiles\CMakeScratch\TryCompile-pnk8w7\testCCompiler.c
+    Linking C executable cmTC_7df2f.exe
+    D:\Tools\Working_tools\JetBrains\CLion\bin\cmake\win\x64\bin\cmake.exe -E cmake_link_script CMakeFiles\cmTC_7df2f.dir\link.txt --verbose=1
+    D:\Tools\Working_tools\JetBrains\CLion\bin\cmake\win\x64\bin\cmake.exe -E rm -f CMakeFiles\cmTC_7df2f.dir/objects.a
+    D:\Tools\Other_tools\ARM\arm-gnu-toolchain_v13_3\bin\arm-none-eabi-ar.exe qc CMakeFiles\cmTC_7df2f.dir/objects.a @CMakeFiles\cmTC_7df2f.dir\objects1.rsp
+    D:\Tools\Other_tools\ARM\arm-gnu-toolchain_v13_3\bin\arm-none-eabi-gcc-13.3.1.exe -Wl,--whole-archive CMakeFiles\cmTC_7df2f.dir/objects.a -Wl,--no-whole-archive -o cmTC_7df2f.exe -Wl,--out-implib,libcmTC_7df2f.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\cmTC_7df2f.dir\linkLibs.rsp
+    D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: unrecognized option '--major-image-version'
+    D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: use the --help option for usage information
+    collect2.exe: error: ld returned 1 exit status
+    mingw32-make[1]: *** [CMakeFiles\cmTC_7df2f.dir\build.make:100: cmTC_7df2f.exe] Error 1
+    mingw32-make[1]: Leaving directory 'D:/Program/stm32/STM32F407VET6/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-pnk8w7'
+    mingw32-make: *** [Makefile:126: cmTC_7df2f/fast] Error 2
+    
+    
+
+  
+
+  CMake will not be able to correctly generate this project.
+Call Stack (most recent call first):
+  CMakeLists.txt:9 (project)
+
+
+-- Configuring incomplete, errors occurred!

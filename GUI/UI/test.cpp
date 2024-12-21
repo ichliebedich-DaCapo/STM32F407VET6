@@ -61,44 +61,43 @@ int keyboard_thread(void *data)
             switch (keycode)
             {
                 case 'a':
-                    is_fps = !is_fps;
-                    uiInterface::show_fps(is_fps);
-                    printf("FPS显示\n");
+                   UI_Interface::saveInfo(true);
                     break;
-
                 case 's':
-                    is_fps_mode = !is_fps_mode;
-                    uiInterface::set_fps_mode(is_fps_mode);
-                    printf("FPS模式\n");
+//                    UI_Interface::set_record_state(RecordSampleRate::SAMPLE_RATE_16K);
+                    UI_Interface::saveInfo(false);
                     break;
-
                 case 'd':
-                    uiInterface::sub_period();
-                    printf("上一个波形\n");
+//                    UI_Interface::resume_record();
+                    UI_Interface::resume_record();
                     break;
-
                 case 'f':
-                    uiInterface::add_period();
-                    printf("下一个波形\n");
-                    break;
+                    UI_Interface::pause_record();
+//                    uiInterface::add_period();
+//                    printf("下一个波形\n");
+//                    break;
 
 
                 case 'g':
-                    uiInterface::switch_wave_type();
-                    printf("E pressed\n");
+                    UI_Interface::erasing();
                     break;
+//                    uiInterface::switch_wave_type();
+//                    printf("E pressed\n");
+//                    break;
 
                 case 'h':
-                    uiInterface::add_wave_cnt();
-                    printf("F pressed\n");
+                    UI_Interface::erase_done();
                     break;
+//                    uiInterface::add_wave_cnt();
+//                    printf("F pressed\n");
+//                    break;
 
                 case 'j':
-                    is_generate = !is_generate;
-                    if (is_generate)
-                        uiInterface::wave_is_generate();
-                    else
-                        uiInterface::wave_is_not_generate();
+//                    is_generate = !is_generate;
+//                    if (is_generate)
+//                        uiInterface::wave_is_generate();
+//                    else
+//                        uiInterface::wave_is_not_generate();
 
                 default:
                     break;
