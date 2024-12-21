@@ -10,6 +10,7 @@
 #include "imageButton.hpp"
 #include "image.hpp"
 #include "slider.hpp"
+#include "ui.hpp"
 
 
 #if 1
@@ -92,6 +93,7 @@ public:
     static auto pause() -> void;// 暂停播放
     static auto print_speed(enum PlaySpeed speed) -> void;// 显示播放速度信息
     static auto set_speed(enum PlaySpeed speed) -> void;// 设置播放速度
+    static auto reset_time()->void ;// 重置时间
 };
 
 // 频谱组件
@@ -292,5 +294,28 @@ auto Play::pause() -> void
     spectrum_timer.pause();
 }
 
+auto Play::reset_time() -> void
+{
+    time = 0;
+}
+
+/***********************对外接口*************************/
+auto UI_Interface::reset_time() -> void
+{
+    Play::reset_time();
+}
+
+auto UI_Interface::resume_timer() -> void
+{
+    slider_timer.resume();
+}
+
+auto UI_Interface::stop_timer() -> void
+{
+    slider_timer.pause();
+}
+
 
 #endif
+
+

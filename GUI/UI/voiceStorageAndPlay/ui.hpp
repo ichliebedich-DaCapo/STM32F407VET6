@@ -38,6 +38,14 @@ LV_IMG_DECLARE(_btn_next_alpha_37x37);
 LV_IMG_DECLARE(_btn_list_play_alpha_48x48);
 LV_IMG_DECLARE(_btn_list_pause_alpha_48x48);
 
+class UI_Interface{
+public:
+    static auto reset_time()->void ;// 重置进度条时间
+    static auto resume_timer()->void;// 开启进度条时间
+    static auto stop_timer()->void;// 关闭进度条时间
+};
+
+
 
 
 /* 预编译命令 */

@@ -32,11 +32,14 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="略微完善了flash_storage模块，并编写了测试案例">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="flash_storage模块测试完毕">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/ISR.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/w25qxx.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/w25qxx.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/inc/flash_storage.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/flash_storage.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/inc/player.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/player.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1884,15 +1887,7 @@
       <workItem from="1734679015314" duration="2771000" />
       <workItem from="1734694068126" duration="626000" />
       <workItem from="1734743034192" duration="1269000" />
-      <workItem from="1734751179404" duration="1609000" />
-    </task>
-    <task id="LOCAL-00023" summary="__【未配置好】测试3">
-      <option name="closed" value="true" />
-      <created>1728808772020</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1728808772020</updated>
+      <workItem from="1734751179404" duration="12762000" />
     </task>
     <task id="LOCAL-00024" summary="__【未配置好】测试3">
       <option name="closed" value="true" />
@@ -2278,7 +2273,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734682045548</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="flash_storage模块测试完毕">
+      <option name="closed" value="true" />
+      <created>1734755295553</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1734755295553</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2313,7 +2316,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【双音频信号发生器】贝塞尔二次曲线，些许漏墨，但速度下降了不少。线性插值也是，真奇怪" />
     <MESSAGE value="【双音频信号发生器】贝塞尔二次曲线_又见漏墨端倪，真机上右一小块没有正常显示，模拟器上可以" />
     <MESSAGE value="【双音频信号发生器】算法基本OK" />
     <MESSAGE value="【双音频信号发生器】调整项目组织结构" />
@@ -2338,7 +2340,15 @@
     <MESSAGE value="终于可以把模块的声明和实现分开了" />
     <MESSAGE value="略微调整了flash_storage模块的编写" />
     <MESSAGE value="略微完善了flash_storage模块，并编写了测试案例" />
-    <option name="LAST_COMMIT_MESSAGE" value="略微完善了flash_storage模块，并编写了测试案例" />
+    <MESSAGE value="flash_storage模块测试完毕" />
+    <option name="LAST_COMMIT_MESSAGE" value="flash_storage模块测试完毕" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
+        <watch expression="temp" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
