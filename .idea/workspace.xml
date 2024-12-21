@@ -32,14 +32,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="flash_storage模块测试完毕">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="语音存储与回放可以使用，接下来只要添加各种逻辑即可">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/ISR.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/font.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/font.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/voiceStorageAndPlay/ui.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/inc/flash_storage.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/flash_storage.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/inc/player.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/player.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1887,15 +1886,7 @@
       <workItem from="1734679015314" duration="2771000" />
       <workItem from="1734694068126" duration="626000" />
       <workItem from="1734743034192" duration="1269000" />
-      <workItem from="1734751179404" duration="12762000" />
-    </task>
-    <task id="LOCAL-00024" summary="__【未配置好】测试3">
-      <option name="closed" value="true" />
-      <created>1728833901188</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1728833901188</updated>
+      <workItem from="1734751179404" duration="14418000" />
     </task>
     <task id="LOCAL-00025" summary="__【未配置好】备份">
       <option name="closed" value="true" />
@@ -2281,7 +2272,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734755295553</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="语音存储与回放可以使用，接下来只要添加各种逻辑即可">
+      <option name="closed" value="true" />
+      <created>1734774212737</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1734774212737</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2316,7 +2315,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【双音频信号发生器】贝塞尔二次曲线_又见漏墨端倪，真机上右一小块没有正常显示，模拟器上可以" />
     <MESSAGE value="【双音频信号发生器】算法基本OK" />
     <MESSAGE value="【双音频信号发生器】调整项目组织结构" />
     <MESSAGE value="【双音频信号发生器】完成了这次的项目优化，后面还有许多不妥之处，后续再慢慢改" />
@@ -2341,7 +2339,8 @@
     <MESSAGE value="略微调整了flash_storage模块的编写" />
     <MESSAGE value="略微完善了flash_storage模块，并编写了测试案例" />
     <MESSAGE value="flash_storage模块测试完毕" />
-    <option name="LAST_COMMIT_MESSAGE" value="flash_storage模块测试完毕" />
+    <MESSAGE value="语音存储与回放可以使用，接下来只要添加各种逻辑即可" />
+    <option name="LAST_COMMIT_MESSAGE" value="语音存储与回放可以使用，接下来只要添加各种逻辑即可" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

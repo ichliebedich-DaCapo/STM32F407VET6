@@ -21,7 +21,7 @@ enum PlaySpeed
     LV_PLAYSPEED_ACC,// 快进1.75
     LV_PLAYSPEED_SLOW,//慢放0.25
 };
-static uint32_t time=0;
+static uint32_t time = 0;
 
 static constexpr uint16_t fft_num = 256;
 static constexpr uint16_t spectrum_start_x = 50;
@@ -44,40 +44,51 @@ LV_Timer spectrum_timer;
 auto Screen::init() -> void
 {
     Component::set_parent(gui->main.screen);
-    /******************************************文本框***************************************/
+    /*************************文本框**********************/
     Text label;
     label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_12);
 
-    //Write codes screen_label_speed
-    label.init(gui->main.label_speed,392, 26,74,13);
+    // 倍速文本框
+    label.init(gui->main.label_speed, 392, 26, 74, 13);
     Text::add_flag(LV_OBJ_FLAG_HIDDEN);
     Text::set_space(2);
 
-    //Write codes screen_label_slider_time
-    label.init(gui->main.label_slider_time, 420, 240, 40, 50,"0:00",lv_color_hex(0x8a86b8));
+    // 进度条时间
+    label.init(gui->main.label_slider_time, 420, 240, 40, 20, "0:00", lv_color_hex(0x8a86b8));
 
-    //Write codes screen_label_title_music
+    // 保存状态
+    label.init(gui->main.label_save_state, 10, 5, 50, 20, "未保存", lv_color_hex(0x11a0f5));
+
+    // 录音状态 需要闪烁
+    label.init(gui->main.label_record_state, 10, 25, 50, 20, "录音中", lv_color_hex(0xcd0303));
+//    Text::add_flag(LV_OBJ_FLAG_HIDDEN);
+
+    // 采样率
+    label.init(gui->main.label_record_sample_rate, 410, 5, 70, 20, "采样率:8K", lv_color_hex(0x504d6d));
+
+    // 项目标题
     label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_14);
-    label.init(gui->main.label_title_music,150, 10, 180, 21,"语音存储与回放",lv_color_hex(0x504d6d));
+    label.init(gui->main.label_title_music, 150, 10, 180, 21, "语音存储与回放", lv_color_hex(0x504d6d));
     Text::set_text_align(LV_TEXT_ALIGN_CENTER);// 文本居中
 
-    /*************************************图片*************************************/
+    /*****************************图片************************/
     //Write codes screen_img_slider_flag
-    Image::init(gui->main.img_slider_flag, 235, 152, 15, 15,&_icn_slider_alpha_15x15);
+    Image::init(gui->main.img_slider_flag, 235, 152, 15, 15, &_icn_slider_alpha_15x15);
 
-    /************************************图片按钮************************************/
+    /***********************图片按钮************************/
     //Write codes screen_imgbtn_play
-    ImageButton::init(gui->main.imgbtn_play,216, 234, 48, 48,&_btn_list_play_alpha_48x48, &_btn_list_pause_alpha_48x48);
+    ImageButton::init(gui->main.imgbtn_play, 216, 234, 48, 48, &_btn_list_play_alpha_48x48,
+                      &_btn_list_pause_alpha_48x48);
 
     //Write codes screen_imgbtn_acc
-    ImageButton::init(gui->main.imgbtn_acc,318, 240, 37, 37,&_btn_next_alpha_37x37);
+    ImageButton::init(gui->main.imgbtn_acc, 318, 240, 37, 37, &_btn_next_alpha_37x37);
 
     //Write codes screen_imgbtn_slow
     ImageButton::init(gui->main.imgbtn_slow, 122, 240, 37, 37, &_btn_prev_alpha_37x37);
 
-    /******************************************滑条***************************************/
+    /*************************滑条********************/
     //Write codes screen_slider
-    Slider::init(gui->main.slider,42, 294, 342, 1,0,100,lv_color_hex(0x2195f6), 100,&_icn_slider_alpha_15x15);
+    Slider::init(gui->main.slider, 42, 294, 342, 1, 0, 100, lv_color_hex(0x2195f6), 100, &_icn_slider_alpha_15x15);
 
     /***自定义组件***/
     Component::init(gui->main.spectrum);
@@ -93,7 +104,7 @@ public:
     static auto pause() -> void;// 暂停播放
     static auto print_speed(enum PlaySpeed speed) -> void;// 显示播放速度信息
     static auto set_speed(enum PlaySpeed speed) -> void;// 设置播放速度
-    static auto reset_time()->void ;// 重置时间
+    static auto reset_time() -> void;// 重置时间
 };
 
 // 频谱组件
@@ -129,7 +140,7 @@ auto Events::init() -> void
                                 time++;
                                 char buf[8];
                                 sprintf(buf, "%d:%02d", time / 60, time % 60);
-                                Text::set_text(buf,GUI_Base::get_ui()->main.label_slider_time);
+                                Text::set_text(buf, GUI_Base::get_ui()->main.label_slider_time);
                                 Slider::set_value(time, LV_ANIM_ON, GUI_Base::get_ui()->main.slider);
                         ), 1000);
 

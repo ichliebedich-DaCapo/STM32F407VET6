@@ -9,24 +9,29 @@
 #if 1
 // 头文件
 /*********************组件*******************/
-typedef struct
+struct lv_ui_t
 {
+    using Obj = lv_obj_t*;
     struct
     {
-        lv_obj_t *screen;// 屏幕自身
-        lv_obj_t *img_slider_flag;
-        lv_obj_t *imgbtn_slow;
-        lv_obj_t *imgbtn_acc;
-        lv_obj_t *label_title_music;
-        lv_obj_t *slider;
-        lv_obj_t *label_speed;
-        lv_obj_t *label_slider_time;
-        lv_obj_t *imgbtn_play;
-        lv_obj_t *spectrum;// 频谱
+        Obj screen;// 屏幕自身
+        Obj img_slider_flag;
+        Obj imgbtn_slow;
+        Obj imgbtn_acc;
+        Obj label_title_music;
+        Obj slider;
+        Obj label_speed;
+        Obj label_slider_time;
+        Obj imgbtn_play;
+        Obj spectrum;// 频谱
+        Obj label_record_state;// 录音状态
+        Obj label_save_state;// 保存状态
+        Obj label_record_sample_rate;// 录音采样率
     } main;// 主屏幕
 
-}lv_ui_t;
-
+};
+// 取别名
+using lv_ui_t = struct lv_ui_t;
 
 // 加载资源文件
 LV_FONT_DECLARE(lv_customer_font_SourceHanSerifSC_Regular_14)

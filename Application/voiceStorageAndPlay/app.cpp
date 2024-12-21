@@ -175,7 +175,6 @@ void key_handler()
 
         case keykF:
             Player::erase();
-            __BKPT(0);
 
         default:
             break;
