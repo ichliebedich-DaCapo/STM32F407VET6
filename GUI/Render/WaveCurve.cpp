@@ -56,8 +56,8 @@ void draw_interpolated_line_simple(uint16_t start_x, uint16_t start_y, const uin
 
     for (size_t i = 1; i < actual_length; ++i) {
         // 计算当前点的 x 和 y 坐标
-        float current_x = start_x + ((float)i / (actual_length - 1)) * 324.0f; // 使用浮点数进行插值
-        float current_y = start_y - y[start_index + i] * 0.5f;
+        float current_x = start_x + ((float)i / (actual_length - 1)) * 321.0f; // 使用浮点数进行插值，修改这行要同时修改右移函数和左移、start_x、start_y
+        float current_y = start_y - y[start_index + i] *  0.7f;//205.0f/255
 
         // 使用 Bresenham 算法绘制上一个点和当前点之间的线段
         draw_bresenham_segment((int32_t)round(prev_x), (int32_t)round(prev_y), (int32_t)round(current_x), (int32_t)round(current_y), color);

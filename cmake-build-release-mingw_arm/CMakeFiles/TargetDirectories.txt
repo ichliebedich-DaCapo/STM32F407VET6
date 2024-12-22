@@ -1,0 +1,12 @@
+D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/libdrivers.dir
+D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/liblvgl.dir
+D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/libfreertos.dir
+D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/libdsp.dir
+D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/libbsp.dir
+D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/libdata.dir
+D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/libgui.dir
+D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/libmodule.dir
+D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/libapp.dir
+D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/Furina.elf.dir
+D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/edit_cache.dir
+D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/rebuild_cache.dir

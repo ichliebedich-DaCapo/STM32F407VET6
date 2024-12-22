@@ -23,8 +23,12 @@ constexpr uint8_t index_offset_16K = 4;// 16K下索引递增值
 constexpr uint16_t point_cnt = 256;// 点的数量
 constexpr uint16_t chart_width = 320;
 constexpr uint16_t chart_height = 200;
+
+//Component::set_pos_size(78, 36, 324, 208);
+//Component::border_radius(5);
 constexpr uint16_t start_x = 80;
-constexpr uint16_t start_y = 40;
+constexpr uint16_t start_y = 242;
+
 constexpr uint16_t sine_count = 128;// 采样点数量
 constexpr uint16_t square_count = 200;
 constexpr uint16_t max_value = 255;
@@ -67,8 +71,10 @@ private:
 private:
     static inline uint32_t count = 0;// 用于计时
     static inline uint8_t wave_cnt = 100;//显示点数 -> keyk8、keyk9
-    static inline uint8_t wave_index = 0;
-    static inline uint8_t index_offset = 1;
+    static inline uint8_t length = 200;
+    static inline uint16_t array_length = 400;
+    static inline uint8_t wave_index = 100;
+    static inline uint8_t index_offset = 5;
     static inline bool _trigger_mode = false;// 默认模式为单次触发
 };
 
@@ -145,15 +151,8 @@ auto Events::init() -> void
 }
 auto StorageOscilloscope::handler() -> void
 {
-    int wave_date = square_wave[wave_index]; // 瞎抄的
-    wave_date = (wave_date > max_value) ? max_value : (wave_date < 0) ? 0 : wave_date;
-
-    draw_interpolated_line_simple(78,36+208-1,square_wave,200,200,400,0);
-    wave_index += index_offset;
-    if (wave_index >= square_count)[[unlikely]]
-    {
-        wave_index -= square_count;// 尽量让转折处柔和一些
-    }
+    draw_interpolated_line_simple(start_x,start_y,square_wave,length,wave_index,array_length,0);
+//    draw_interpolated_line_simple(start_x,start_y,sine_wave,length,wave_index,array_length,0);
 }
 auto StorageOscilloscope::print_tick() -> void
 {
@@ -194,23 +193,38 @@ auto StorageOscilloscope::switch_trigger_mode() -> void
     update_count();
 }
 // 图像左移
-auto StorageOscilloscope::left_shift() -> void
-{
-    if (display_start_index == 0) {
-        // 如果已经是最左边了，则不能继续左移
-        return;
+void StorageOscilloscope::left_shift() {
+    // 确保新的wave_index不会超出array_length - length
+    if (wave_index + index_offset < array_length - length) {
+        wave_index += index_offset;
+    } else {
+        // 如果wave_index + length接近或超过array_length，则设置为最大允许值
+        wave_index = array_length - length;
     }
-    // 左移时，索引减小
 
+    // 可选：重新绘制图像或更新UI以反映新的显示窗口
+     LCD_Color_Clean(80, 38, 400, 242,0xFFFF);//修改这行要同时修改右移函数和画波形函数、start_x、start_y
+     draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_index, array_length,0);
+//    draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_index, array_length, 0);
 }
 // 图像右移
-auto StorageOscilloscope::right_shift() -> void
-{
-    // 右移时，索引增加
-    wave_index += index_offset;
-    if (wave_index >= sine_count) {
-        wave_index -= sine_count; // 循环回到数组开头
+void StorageOscilloscope::right_shift() {
+    // 确保新的wave_index不会小于0
+    if (wave_index >= index_offset) {
+        wave_index -= index_offset;
+    } else {
+        wave_index = 0; // 如果wave_index小于index_offset，则设置为0
     }
+
+    // 确保新的wave_index加上length不会超出array_length
+    if (wave_index + length > array_length) {
+        length = array_length - wave_index; // 调整显示长度以适应新的wave_index
+    }
+
+    // 可选：重新绘制图像或更新UI以反映新的显示窗口
+    LCD_Color_Clean(80, 38, 400, 242,0xFFFF);//修改这行要同时修改左移函数和画波形函数、start_x、start_y
+    draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_index, array_length, 0);
+//    draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_index, array_length, 0);
 }
 // 设置扫描速度
 auto StorageOscilloscope::switch_scan_speed() -> void
