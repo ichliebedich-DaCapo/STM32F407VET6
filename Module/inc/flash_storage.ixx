@@ -7,7 +7,10 @@ export
 
     struct FlashInfo
     {
-        uint32_t last_write_addr;// 最后一次写入地址
+        uint32_t last_record_addr;// 最后一次录音地址
+        uint32_t last_play_addr;// 最后一次播放地址
+        uint32_t record_time;// 录音时间
+        uint32_t play_time;// 播放时间
         uint8_t record_rate;// 录音采样率
     };
 
@@ -44,8 +47,12 @@ export
 
         static auto get_addr()->uint32_t {return addr;}
 
+        static auto set_addr(uint32_t address){addr = address;}
+
         // 保存信息
-        static auto saveInfo(uint8_t record_rate) -> bool;
+        static auto saveInfo(FlashInfo flashInfo) -> bool;
+
+
 
 ////         擦除所有内容
 //      static auto erase() -> void;
@@ -257,8 +264,7 @@ template<
 auto FlashStorage<WriteFunc, ReadFunc, EraseSectorFunc>::readInfo() -> FlashInfo
 {
     FlashInfo flashInfo{};
-    ReadFunc(reinterpret_cast<uint8_t *>(&flashInfo), static_cast<uint32_t>(Addresses::FLASH_START_ADDR),
-             sizeof(FlashInfo));
+    ReadFunc(reinterpret_cast<uint8_t *>(&flashInfo), 0,sizeof(FlashInfo));
     return flashInfo;
 }
 
@@ -276,24 +282,20 @@ template<
         void (*ReadFunc)(uint8_t *data, uint32_t address, uint16_t length),
         void (*EraseSectorFunc)(uint32_t sectorAddress)
 >
-auto FlashStorage<WriteFunc, ReadFunc, EraseSectorFunc>::saveInfo(uint8_t record_rate) -> bool
+auto FlashStorage<WriteFunc, ReadFunc, EraseSectorFunc>::saveInfo(FlashInfo flashInfo) -> bool
 {
-    FlashInfo flashInfo{};
+    // 使用volatile，不然会被优化掉
+//    volatile FlashInfo flashInfo{};
     // 检查
 
-    if (readInfo().last_write_addr != static_cast<uint32_t>(Addresses::FLASH_DUMMY_ADDR))
+    if (readInfo().last_record_addr != static_cast<uint32_t>(Addresses::FLASH_DUMMY_ADDR))
     {
         // 已经保存过信息，不需要再次保存，除非重新擦除Flash
         return false;
     }
 
-    // 保存信息
-    flashInfo.last_write_addr = addr;
-    flashInfo.record_rate = record_rate;
-
     // 写入信息
-    WriteFunc(reinterpret_cast<uint8_t *>(&flashInfo), static_cast<uint32_t>(Addresses::FLASH_START_ADDR),
-              sizeof(flashInfo));
+    WriteFunc((uint8_t *)(&flashInfo), 0,sizeof(flashInfo));
     return true;
 }
 
