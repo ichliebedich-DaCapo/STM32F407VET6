@@ -67,7 +67,7 @@ private:
     static inline uint8_t wave_cnt = 100;//显示点数 -> keyk8、keyk9
     static inline uint8_t wave_index = 0;
     static inline uint8_t index_offset = 1;
-    static inline bool _trigger_mode = false;// 默认模式为单词触发
+    static inline bool _trigger_mode = false;// 默认模式为单次触发
 };
 
 //
@@ -107,6 +107,8 @@ auto Screen::init() -> void
     //     图片按钮：停止、播放
     ImageButton::init(gui->main.imgbtn_play, 216, 256, 48, 48, &_btn_list_play_alpha_48x48,
                       &_btn_list_pause_alpha_48x48);
+
+
 }
 
 ///***********************函数实现***********************/
@@ -141,12 +143,13 @@ auto Events::init() -> void
 }
 auto StorageOscilloscope::handler() -> void
 {
-    int wave_date; //还没赋值
+    int wave_date = sine_wave[wave_index]; // 瞎抄的
     wave_date = (wave_date > max_value) ? max_value : (wave_date < 0) ? 0 : wave_date;
     WaveCurve<>::draw_curve<WaveCurveType::Interpolated_Line, uint8_t>(Buf, wave_cnt, wave_date, start_x,
                                                                        start_y,
                                                                        chart_width, chart_height, 255,
                                                                        0xFFFF, 0);
+
     wave_index += index_offset;
     if (wave_index >= sine_count)[[unlikely]]
     {
@@ -194,12 +197,20 @@ auto StorageOscilloscope::switch_trigger_mode() -> void
 // 图像左移
 auto StorageOscilloscope::left_shift() -> void
 {
-
+    // 左移时，索引减小
+    wave_index -= index_offset;
+    if (wave_index < 0) {
+        wave_index += sine_count; // 循环回到数组末尾
+    }
 }
 // 图像右移
 auto StorageOscilloscope::right_shift() -> void
 {
-
+    // 右移时，索引增加
+    wave_index += index_offset;
+    if (wave_index >= sine_count) {
+        wave_index -= sine_count; // 循环回到数组开头
+    }
 }
 // 设置扫描速度
 auto StorageOscilloscope::switch_scan_speed() -> void

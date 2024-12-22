@@ -31,13 +31,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】按键处理任务和后台读取任务框架搭好了">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】UI框架好了">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/font.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/lv_customer_font_SourceHanSerifSC_Regular_15.c" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/lv_customer_font_SourceHanSerifSC_Regular_15.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1698,11 +1694,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="libapp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libapp" CONFIG_NAME="Release">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -1916,14 +1907,10 @@
       <workItem from="1733885583420" duration="3022000" />
       <workItem from="1734139004421" duration="1324000" />
       <workItem from="1734141900784" duration="7023000" />
-    </task>
-    <task id="LOCAL-00021" summary="__【未配置好】测试">
-      <option name="closed" value="true" />
-      <created>1728807014959</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1728807014959</updated>
+      <workItem from="1734251275641" duration="100000" />
+      <workItem from="1734743539008" duration="1203000" />
+      <workItem from="1734764243874" duration="3853000" />
+      <workItem from="1734830802338" duration="1000" />
     </task>
     <task id="LOCAL-00022" summary="__【未配置好】测试2">
       <option name="closed" value="true" />
@@ -2309,7 +2296,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733821324431</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="【简易存储示波器】UI框架好了">
+      <option name="closed" value="true" />
+      <created>1734251312633</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1734251312633</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2331,7 +2326,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="DV" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -2344,7 +2339,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【双音频信号发生器】已解决紊乱问题，现在尝试解决优化速率" />
     <MESSAGE value="【双音频信号发生器】准备解决绘制漏墨问题" />
     <MESSAGE value="【双音频信号发生器】发现漏墨问题的一点端倪" />
     <MESSAGE value="【双音频信号发生器】先搁置样条算法的死机问题，先更改模板函数" />
@@ -2369,7 +2363,8 @@
     <MESSAGE value="【直线位移传感器】计时器频率改成50hz" />
     <MESSAGE value="【直线位移传感器】计时器频率改成200hz" />
     <MESSAGE value="【简易存储示波器】按键处理任务和后台读取任务框架搭好了" />
-    <option name="LAST_COMMIT_MESSAGE" value="【简易存储示波器】按键处理任务和后台读取任务框架搭好了" />
+    <MESSAGE value="【简易存储示波器】UI框架好了" />
+    <option name="LAST_COMMIT_MESSAGE" value="【简易存储示波器】UI框架好了" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
