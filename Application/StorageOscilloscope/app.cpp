@@ -79,6 +79,24 @@ void app_init()
     timer6_init(FREQ_84M_to_100);// 分频为16KHz
     //w25qxx_sector_erase(0);
 
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+    GPIO_InitStruct.Pin = GPIO_PIN_4;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
+
+    GPIO_InitStruct.Pin = GPIO_PIN_5;
+    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStruct.Pull = GPIO_PULLUP;
+    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+    HAL_Delay(50);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
+    HAL_Delay(60);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
+
 }
 
 void key_handler()
@@ -129,6 +147,29 @@ void key_handler()
             __BKPT(0);
             break;
 
+        case keyk8:
+            // 测试读命令
+            READ_COMMAND =0;
+            __BKPT(0);
+            while (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_5));
+            __BKPT();
+            break;
+
+        case keyk9:
+            // 测试读取
+            for(int i=0;i<400;i++)
+            {
+                temp_data[i]=READ_DATA_BASE[i];
+            }
+            __BKPT();
+            break;
+
+        case keykA:
+            break;
+
+        case keykB:
+            break;
+
         default:
             break;
     }
@@ -141,7 +182,7 @@ void background_handler()
         // 发送读取数据命令
         READ_COMMAND = 0x000;// 传入参数0
         // 等待数据传输完成
-        while (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4));// 假设PB4是等待引脚
+        while (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_4));// 假设PB4是等待引脚
         // 读取数据
         for (int i = 0; i < 400; i++)
         {
