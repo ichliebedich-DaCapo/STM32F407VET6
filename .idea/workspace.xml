@@ -33,7 +33,15 @@
   <component name="ChangeListManager">
     <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】UI框架好了">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Render/WaveCurve.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Render/WaveCurve.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/font.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/wave.h" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/wave.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
+    </list>
+    <list id="226a4da6-948d-4efd-966f-49a1ee475c55" name="34753 进行的更改" comment="">
+      <change afterPath="$PROJECT_DIR$/GUI/Render/WaveCurve.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Render/WaveCurve.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Render/WaveCurve.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1633,6 +1641,14 @@
     <setting file="file://$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/startup_stm32f407xx.s" root0="SKIP_INSPECTION" />
   </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/GUI/Render/WaveCurve.hpp">
+      <ranges>
+        <range start1="223" end1="223" start2="223" end2="227" changelist="6de06172-1616-4cb1-8db7-c29cbfc649a3" />
+        <range start1="386" end1="386" start2="390" end2="406" changelist="226a4da6-948d-4efd-966f-49a1ee475c55" />
+      </ranges>
+    </file>
+  </component>
   <component name="PerforceDirect.Settings">
     <option name="CHARSET" value="none" />
   </component>
@@ -1911,6 +1927,7 @@
       <workItem from="1734743539008" duration="1203000" />
       <workItem from="1734764243874" duration="3853000" />
       <workItem from="1734830802338" duration="1000" />
+      <workItem from="1734861685065" duration="1200000" />
     </task>
     <task id="LOCAL-00022" summary="__【未配置好】测试2">
       <option name="closed" value="true" />

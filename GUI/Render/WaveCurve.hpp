@@ -221,6 +221,10 @@ struct WaveCurve<Coord>::DrawFunction<WaveCurveType::Interpolated_Line, Color>
     }
 };
 
+
+
+
+
 // 二次贝塞尔曲线
 template<typename Coord>
 template<typename Color>
@@ -384,5 +388,21 @@ WaveCurve<Coord>::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Co
 //    memmove(data, data + 1, (N - 1) * sizeof(data[0]));// 将数据左移一位
 //    data[N - 1] = value;// 一放在前面就会卡死，不知缘由 总不能是该死的优化导致的吧
 }
+
+
+// ***************************绘制功能代码****************************
+
+/**
+ * @brief 线性插值算法
+ * @param start_x
+ * @param start_y
+ * @param y
+ * @param length
+ * @param bg_color
+ * @param color
+ */
+void draw_interpolated_line_simple(uint16_t start_x, uint16_t start_y, const uint8_t y[], size_t length,size_t start_index, size_t array_length,uint16_t color);
+
+
 
 #endif //SIMULATOR_WAVECURVE_HPP

@@ -70,7 +70,8 @@ set_target_properties(libdriver PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 #---------------Render库---------------
 # 渲染，即实现底层绘制算法
 file(GLOB_RECURSE RENDER_SRCS "${RENDER_DIR}/*.cpp")
-add_library(librender STATIC ${RENDER_SRCS})
+add_library(librender STATIC ${RENDER_SRCS}
+        ../Render/WaveCurve.cpp)
 target_include_directories(librender PUBLIC
         ${RENDER_DIR}
 )
