@@ -47,8 +47,8 @@ LV_IMG_DECLARE(_btn_list_pause_alpha_48x48);
 // 录音采样率
 enum class RecordSampleRate:uint8_t
 {
-    SAMPLE_RATE_8K,
-    SAMPLE_RATE_16K,
+    SAMPLE_RATE_8K=1,
+    SAMPLE_RATE_16K=2,
 };
 
 enum class PlaySpeed: uint8_t

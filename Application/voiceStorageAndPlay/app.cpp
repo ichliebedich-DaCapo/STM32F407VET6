@@ -76,6 +76,7 @@ public:
     static auto get_save_state()->bool{return save_state;}
     static auto set_save_state(bool state)->void{save_state = state;}
 
+    static auto load_info()->void;
 
 private:
     static uint8_t inline is_recorded = 0;// 是否录过音，如果录过，那么采样率不能再变了
@@ -155,11 +156,18 @@ auto Player::set_speed(PlaySpeed speed) -> void
 // 存储信息
 auto Player::saveInfo() -> void
 {
-    W25QXXFlashStorage::saveInfo(static_cast<uint8_t>(record_sample_rate));// 保存信息
+
     if (!save_state)
     {
         save_state = true;
         UI_Interface::saveInfo(save_state);
+        FlashInfo info{};
+        info.record_rate =static_cast<uint8_t>(record_sample_rate);
+        info.last_record_addr = W25QXXFlashStorage::get_addr();
+        info.last_play_addr = play_addr;
+        info.record_time = record_time;
+        info.play_time = play_time;
+        W25QXXFlashStorage::saveInfo(info);// 保存信息
     }
 }
 
@@ -170,6 +178,12 @@ auto Player::erase() -> void
 
     // 重置时间
     play_time =0;
+    record_time = 0;
+    is_recorded = 0;
+    // 重置保存状态
+    save_state = false;
+    UI_Interface::saveInfo(save_state);
+    UI_Interface::set_time(0);
 
     // 整片擦除，省得我闹心
     w25qxx_async_chip_erase();
@@ -224,6 +238,31 @@ auto Player::reset_play() -> void
     UI_Interface::reset_time();
 }
 
+auto Player::load_info() -> void
+{
+    FlashInfo info = W25QXXFlashStorage::readInfo();
+    if(info.last_play_addr == 0xFFFFFFFF)
+    {
+        save_state = false;
+        UI_Interface::saveInfo(save_state);
+    }
+    else
+    {
+        W25QXXFlashStorage::set_addr(info.last_record_addr);
+        play_addr = info.last_play_addr;
+        play_time = info.play_time;
+        record_time = info.record_time;
+        set_record_sample_rate(static_cast<RecordSampleRate>(info.record_rate));
+        is_recorded = 0xFF;// 已录音
+        UI_Interface::set_time(play_time);
+        set_player_state(PlayerState::Normal);
+        // 保存状态
+        save_state = true;
+        UI_Interface::saveInfo(save_state);
+    }
+
+}
+
 /*语音存储与回放初始化*/
 void app_init()
 {
@@ -234,7 +273,8 @@ void app_init()
     timer2_init(FREQ_84M_to_16K);// 分频为16KHz
     timer6_init(FREQ_84M_to_16K);
 }
-
+FlashInfo info;
+uint8_t buffer[20];
 /*语音存储与回放处理函数,用于处理各种按键响应*/
 void key_handler()
 {
@@ -335,6 +375,13 @@ void key_handler()
             Player::reset_play();
             break;
 
+            // 加载
+        case keykE:
+    Player::load_info();
+
+
+            break;
+
         case keykF:
             if(Player::get_player_state()==PlayerState::Erase) { return; }
             else if(Player::get_player_state()==PlayerState::Play) { Player::off(); }
@@ -343,6 +390,7 @@ void key_handler()
             // 重置按键状态
             Key::resetState(keyk0);
             Key::resetState(keyk1);
+
 
             Player::set_player_state(PlayerState::Erase);
             Player::erase();
@@ -354,7 +402,6 @@ void key_handler()
 
 }
 
-static uint32_t temp_addr;
 void background_handler()
 {
     W25QXXFlashStorage::background_processing();
