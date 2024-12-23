@@ -168,3 +168,73 @@ void clear_drawn_points(uint16_t backgroundColor,Point dirtyPoints[], size_t& di
     // 清空脏点列表
     dirtyPointsCount = 0;
 }
+// 辅助函数：绘制一条线段
+static void draw_line(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color) {
+    int32_t dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
+    int32_t dy = -abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
+    int32_t err = dx + dy, e2; /* error value e_xy */
+
+    for(;;){
+        LCD_Set_Pixel((uint16_t)x0, (uint16_t)y0, color);
+        if (x0 == x1 && y0 == y1) break;
+        e2 = 2 * err;
+        if (e2 >= dy) { /* e_xy+e_x > 0 */
+            err += dy; x0 += sx;
+        }
+        if (e2 <= dx) { /* e_xy+e_y < 0 */
+            err += dx; y0 += sy;
+        }
+    }
+}
+
+// 绘制分割线
+void draw_dividers(uint16_t x, uint16_t y, uint16_t width, uint16_t height, size_t h_divs, size_t v_divs, uint16_t color, uint16_t margin) {
+    // 计算每个分割线的间隔
+    uint16_t h_interval = width / h_divs;
+    uint16_t v_interval = height / v_divs;
+
+    // 绘制水平分割线
+    for (size_t i = 1; i < h_divs; ++i) {  // 从1开始，避免绘制最左边和最右边的线
+        uint16_t current_x = x + i * h_interval;
+        draw_line(current_x, y + margin, current_x, y + height - margin, color); // 水平分割线
+    }
+
+    // 绘制垂直分割线
+    for (size_t i = 1; i < v_divs; ++i) {  // 从1开始，避免绘制最顶部和最底部的线
+        uint16_t current_y = y + i * v_interval;
+        draw_line(x + margin, current_y, x + width - margin, current_y, color); // 垂直分割线
+    }
+}
+
+// 绘制分割线
+void draw_dividers_with_dirty_points(uint16_t x, uint16_t y, uint16_t width, uint16_t height, size_t h_divs, size_t v_divs, uint16_t color, uint16_t margin,
+                                     uint16_t* dirtyPoints, size_t& dirtyPointsCount, size_t maxDirtyPoints) {
+    // 计算每个分割线的间隔
+    uint16_t h_interval = width / h_divs;
+    uint16_t v_interval = height / v_divs;
+
+    // 绘制水平分割线
+    for (size_t i = 1; i < h_divs; ++i) {  // 从1开始，避免绘制最左边和最右边的线
+        uint16_t current_x = x + i * h_interval;
+        draw_line(current_x, y + margin, current_x, y + height - margin, color); // 水平分割线
+        if (dirtyPointsCount < maxDirtyPoints) {
+            dirtyPoints[dirtyPointsCount++] = current_x;
+            dirtyPoints[dirtyPointsCount++] = y + margin;
+            dirtyPoints[dirtyPointsCount++] = current_x;
+            dirtyPoints[dirtyPointsCount++] = y + height - margin;
+        }
+    }
+
+    // 绘制垂直分割线
+    for (size_t i = 1; i < v_divs; ++i) {  // 从1开始，避免绘制最顶部和最底部的线
+        uint16_t current_y = y + i * v_interval;
+        draw_line(x + margin, current_y, x + width - margin, current_y, color); // 垂直分割线
+        if (dirtyPointsCount < maxDirtyPoints) {
+            dirtyPoints[dirtyPointsCount++] = x + margin;
+            dirtyPoints[dirtyPointsCount++] = current_y;
+            dirtyPoints[dirtyPointsCount++] = x + width - margin;
+            dirtyPoints[dirtyPointsCount++] = current_y;
+        }
+    }
+}
+

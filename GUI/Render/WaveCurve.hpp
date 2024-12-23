@@ -415,5 +415,9 @@ static void draw_bresenham_segment_with_dirty_point(int32_t x0, int32_t y0, int3
                                                     size_t MAX_DIRTY_POINTS);
 static bool is_point_in_list(int32_t x, int32_t y, const Point dirtyPoints[], size_t dirtyPointsCount);
 void clear_drawn_points(uint16_t backgroundColor,Point dirtyPoints[], size_t& dirtyPointsCount);
+static void draw_line(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color);
+void draw_dividers(uint16_t x, uint16_t y, uint16_t width, uint16_t height, size_t h_divs, size_t v_divs, uint16_t color, uint16_t margin);
+void draw_dividers_with_dirty_points(uint16_t x, uint16_t y, uint16_t width, uint16_t height, size_t h_divs, size_t v_divs, uint16_t color,
+                                     uint16_t margin, uint16_t* dirtyPoints, size_t& dirtyPointsCount, size_t maxDirtyPoints);
 
 #endif //SIMULATOR_WAVECURVE_HPP
