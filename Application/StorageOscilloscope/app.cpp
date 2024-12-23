@@ -12,7 +12,7 @@
 #include "w25qxx.h"
 #include "timer.h"
 #include "spi.h"
-
+#include "GUI.hpp"
 // 宏定义
 // 读取数据基址
 #define  READ_DATA_BASE (((volatile unsigned short *)0x60000000))
@@ -86,11 +86,12 @@ void key_handler()
 switch (Key::getCode())
 {
     case keyk0://启闭后台读取任务
-        if (Key::stateHandler(KEY_STATE_NONE))
-        {
-            read_flag = !read_flag;
-        }
-
+//        if (Key::stateHandler(KEY_STATE_NONE))
+//        {
+//            read_flag = !read_flag;
+//        }
+//        ImageButton::press(GUI_Base::get_ui()->main.imgbtn_play);
+        UI_Interface::display();
         break;
 
     case keyk1://切换单次触发和连续触发模式
@@ -105,18 +106,29 @@ switch (Key::getCode())
         if (Key::stateHandler(KEY_STATE_NONE))
         {
             latch_data_flag=!latch_data_flag;
+
         }
         break;
 
     case keyk3://图像左移
         // 测试1：测试写入数据
-        w25qxx_buffer_write_uint16(test_data,0,400);
-        __BKPT(0);
+//        w25qxx_buffer_write_uint16(test_data,0,400);
+//        __BKPT(0);
+
+//        Button::click(GUI_Base::get_ui()->main.btn_left_shift);
+
+        UI_Interface::left_shift();
+//        __BKPT(0);
         break;
         // 测试2：测试读取数据
     case keyk4://图像右移
-        w25qxx_buffer_read_uint16(temp_data,0,400);
-        __BKPT(0);
+//        w25qxx_buffer_read_uint16(temp_data,0,400);
+//        __BKPT(0);
+
+//        Button::click(GUI_Base::get_ui()->main.btn_right_shift);
+
+        UI_Interface::right_shift();
+//        __BKPT(0);
         break;
         // 测试3：测试擦除扇区
     case keyk5://切换程控放大器放大倍数

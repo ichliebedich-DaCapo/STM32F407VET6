@@ -110,6 +110,7 @@ void lcd_init(void)
     HAL_Delay(5);
     LCD_WRITE_CMD(0x002C);
     TFTLED = 0x01;
+    HAL_Delay(20);
 //    LCD_Clear(BLACK);
 #endif
 

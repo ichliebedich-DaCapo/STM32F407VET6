@@ -26,8 +26,8 @@ constexpr uint16_t chart_height = 200;
 
 //Component::set_pos_size(78, 36, 324, 208);
 //Component::border_radius(5);
-constexpr uint16_t start_x = 80;
-constexpr uint16_t start_y = 242;
+constexpr uint16_t start_x = 82;
+constexpr uint16_t start_y = 240;
 
 constexpr uint16_t sine_count = 128;// 采样点数量
 constexpr uint16_t square_count = 200;
@@ -35,10 +35,17 @@ constexpr uint16_t max_value = 255;
 constexpr uint16_t bg_color = 0xFFFF;
 constexpr uint16_t line_color = 0x0000;
 
+constexpr uint16_t MAX_DIRTY_POINTS=1000; // 根据实际情况调整最大脏点数量
 // 变量
 LV_Timer tick_timer;
 uint8_t Buf[point_cnt];
 
+static Point dirtyPoints[MAX_DIRTY_POINTS];
+static size_t dirtyPointsCount = 0;
+
+//便利测试变量
+bool use_square=false;//测试方波
+bool use_sine=true;//测试正弦波
 
 // 播放
 class StorageOscilloscope
@@ -83,6 +90,7 @@ private:
 auto Screen::init() -> void
 {
     Component::set_parent(gui->main.screen);
+
     // 设置边框
     Component::init(gui->main.rect);
     Component::set_pos_size(78, 36, 324, 208);
@@ -94,6 +102,7 @@ auto Screen::init() -> void
 
     //按钮_触发模式：单次触发、多次触发
     customBtn.init(gui->main.btn_trigger_mode, gui->main.btn_trigger_mode_label, 40, 265, 40, 30, "单次触发");
+    Button::hidden(gui->main.btn_trigger_mode);
 
     //按钮_图像水平移动：左移、右移
     customBtn.init(gui->main.btn_left_shift, gui->main.btn_left_shift_label, 115, 265, 30, 30, "01");
@@ -101,14 +110,17 @@ auto Screen::init() -> void
 
     //按钮_切换扫描速度
     customBtn.init(gui->main.btn_scan_speed, gui->main.btn_scan_speed_label, 40, 265, 40, 30, "切换扫描速度");
+    Button::hidden(gui->main.btn_scan_speed);
 
     //按钮_锁存模式
     customBtn.init(gui->main.btn_latch, gui->main.btn_latch_label, 40, 265, 40, 30, "锁存");
+    Button::hidden(gui->main.btn_latch);
 
     // 标签：标题
     Text label;
     label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
     label.init(gui->main.label_title, 190, 13, 140, 30, "简易存储示波器");
+//    Text::hidden(gui->main.label_title);
 
     label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_13);
     label.init(gui->main.label_tick, 40, 265, 40, 30, "tick：\n0");
@@ -151,8 +163,8 @@ auto Events::init() -> void
 }
 auto StorageOscilloscope::handler() -> void
 {
-    draw_interpolated_line_simple(start_x,start_y,square_wave,length,wave_index,array_length,0);
-//    draw_interpolated_line_simple(start_x,start_y,sine_wave,length,wave_index,array_length,0);
+    if(use_square) draw_interpolated_line_simple(start_x,start_y,square_wave,length,wave_index,array_length,0);
+    if(use_sine) draw_interpolated_line_simple(start_x,start_y,sine_wave,length,wave_index,array_length,0);
 }
 auto StorageOscilloscope::print_tick() -> void
 {
@@ -204,8 +216,8 @@ void StorageOscilloscope::left_shift() {
 
     // 可选：重新绘制图像或更新UI以反映新的显示窗口
      LCD_Color_Clean(80, 38, 400, 242,0xFFFF);//修改这行要同时修改右移函数和画波形函数、start_x、start_y
-     draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_index, array_length,0);
-//    draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_index, array_length, 0);
+     if(use_square) draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_index, array_length,0);
+     if(use_sine)   draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_index, array_length, 0);
 }
 // 图像右移
 void StorageOscilloscope::right_shift() {
@@ -223,8 +235,8 @@ void StorageOscilloscope::right_shift() {
 
     // 可选：重新绘制图像或更新UI以反映新的显示窗口
     LCD_Color_Clean(80, 38, 400, 242,0xFFFF);//修改这行要同时修改左移函数和画波形函数、start_x、start_y
-    draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_index, array_length, 0);
-//    draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_index, array_length, 0);
+    if(use_square)  draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_index, array_length, 0);
+    if(use_sine)    draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_index, array_length, 0);
 }
 // 设置扫描速度
 auto StorageOscilloscope::switch_scan_speed() -> void
@@ -244,3 +256,19 @@ auto StorageOscilloscope::set_trigger_mode(bool &trigger_mode) -> void
     Text::set_text(_trigger_mode ? "单次触发" : "多次触发", GUI_Base::get_ui()->main.btn_trigger_mode_label);
 }
 
+
+/***********************对外接口***********************/
+void UI_Interface::display()
+{
+    StorageOscilloscope::handler();
+}
+
+void UI_Interface::left_shift()
+{
+    StorageOscilloscope::left_shift();
+}
+
+void UI_Interface::right_shift()
+{
+    StorageOscilloscope::right_shift();
+}

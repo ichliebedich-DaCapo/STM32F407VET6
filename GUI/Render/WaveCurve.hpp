@@ -34,6 +34,12 @@ enum class WaveCurveType
     CatmullRomSp_line,
 };
 
+//结构体
+typedef struct {
+    uint16_t x;
+    uint16_t y;
+} Point;
+
 /**
  * @brief 绘制波形曲线
  * @note 没有显式实例化，所以，请注意不要在多个地方使用同一个模板函数，不然会导致代码膨胀。不过就这个函数的性能而言，不大可能在多个地方调用这个函数
@@ -402,7 +408,12 @@ WaveCurve<Coord>::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Co
  * @param color
  */
 void draw_interpolated_line_simple(uint16_t start_x, uint16_t start_y, const uint8_t y[], size_t length,size_t start_index, size_t array_length,uint16_t color);
-
-
+void draw_interpolated_line_with_dirty_point(uint16_t start_x, uint16_t start_y, const uint8_t y[], size_t length, size_t start_index, size_t array_length,
+                                             uint16_t color, Point dirtyPoints[], size_t& dirtyPointsCount, size_t MAX_DIRTY_POINTS);
+static void draw_bresenham_segment(int32_t x0, int32_t y0, int32_t x1, int32_t y1, uint16_t color);
+static void draw_bresenham_segment_with_dirty_point(int32_t x0, int32_t y0, int32_t x1, int32_t y1, uint16_t color,Point dirtyPoints[], size_t& dirtyPointsCount,
+                                                    size_t MAX_DIRTY_POINTS);
+static bool is_point_in_list(int32_t x, int32_t y, const Point dirtyPoints[], size_t dirtyPointsCount);
+void clear_drawn_points(uint16_t backgroundColor,Point dirtyPoints[], size_t& dirtyPointsCount);
 
 #endif //SIMULATOR_WAVECURVE_HPP
