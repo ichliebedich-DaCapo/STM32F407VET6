@@ -418,6 +418,6 @@ void clear_drawn_points(uint16_t backgroundColor,Point dirtyPoints[], size_t& di
 static void draw_line(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color);
 void draw_dividers(uint16_t x, uint16_t y, uint16_t width, uint16_t height, size_t h_divs, size_t v_divs, uint16_t color, uint16_t margin);
 void draw_dividers_with_dirty_points(uint16_t x, uint16_t y, uint16_t width, uint16_t height, size_t h_divs, size_t v_divs, uint16_t color,
-                                     uint16_t margin, uint16_t* dirtyPoints, size_t& dirtyPointsCount, size_t maxDirtyPoints);
+                                     uint16_t margin, Point* dirtyPoints, size_t& dirtyPointsCount, size_t maxDirtyPoints);
 
 #endif //SIMULATOR_WAVECURVE_HPP

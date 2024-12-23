@@ -32,9 +32,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】UI框架好了">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】添加网格线完毕，尝试优化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/stm32f4xx_it.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/Render/WaveCurve.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Render/WaveCurve.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/Render/WaveCurve.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Render/WaveCurve.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" afterDir="false" />
@@ -1929,15 +1928,7 @@
       <workItem from="1734830802338" duration="1000" />
       <workItem from="1734861685065" duration="1200000" />
       <workItem from="1734934458354" duration="16000" />
-      <workItem from="1734934481034" duration="14270000" />
-    </task>
-    <task id="LOCAL-00022" summary="__【未配置好】测试2">
-      <option name="closed" value="true" />
-      <created>1728807451940</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1728807451940</updated>
+      <workItem from="1734934481034" duration="16830000" />
     </task>
     <task id="LOCAL-00023" summary="__【未配置好】测试3">
       <option name="closed" value="true" />
@@ -2323,7 +2314,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734251312633</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="【简易存储示波器】添加网格线完毕，尝试优化">
+      <option name="closed" value="true" />
+      <created>1734963313662</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1734963313663</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2358,7 +2357,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【双音频信号发生器】准备解决绘制漏墨问题" />
     <MESSAGE value="【双音频信号发生器】发现漏墨问题的一点端倪" />
     <MESSAGE value="【双音频信号发生器】先搁置样条算法的死机问题，先更改模板函数" />
     <MESSAGE value="【双音频信号发生器】贝塞尔二次曲线，些许漏墨，但速度下降了不少。线性插值也是，真奇怪" />
@@ -2383,7 +2381,8 @@
     <MESSAGE value="【直线位移传感器】计时器频率改成200hz" />
     <MESSAGE value="【简易存储示波器】按键处理任务和后台读取任务框架搭好了" />
     <MESSAGE value="【简易存储示波器】UI框架好了" />
-    <option name="LAST_COMMIT_MESSAGE" value="【简易存储示波器】UI框架好了" />
+    <MESSAGE value="【简易存储示波器】添加网格线完毕，尝试优化" />
+    <option name="LAST_COMMIT_MESSAGE" value="【简易存储示波器】添加网格线完毕，尝试优化" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

@@ -147,14 +147,14 @@ void draw_interpolated_line_with_dirty_point(uint16_t start_x, uint16_t start_y,
 // 辅助函数：检查点是否已经在脏点列表中
 static bool is_point_in_list(int32_t x, int32_t y, const Point dirtyPoints[], size_t dirtyPointsCount)
 {
-    for (size_t i = 0; i < dirtyPointsCount; ++i)
-    {
+    for (size_t i = 0; i < dirtyPointsCount; ++i) {
         if (dirtyPoints[i].x == (uint16_t)x && dirtyPoints[i].y == (uint16_t)y) {
             return true;
         }
     }
     return false;
 }
+
 // 清屏函数：清除所有曾经绘制过的点
 void clear_drawn_points(uint16_t backgroundColor,Point dirtyPoints[], size_t& dirtyPointsCount)
 {
@@ -208,7 +208,7 @@ void draw_dividers(uint16_t x, uint16_t y, uint16_t width, uint16_t height, size
 
 // 绘制分割线
 void draw_dividers_with_dirty_points(uint16_t x, uint16_t y, uint16_t width, uint16_t height, size_t h_divs, size_t v_divs, uint16_t color, uint16_t margin,
-                                     uint16_t* dirtyPoints, size_t& dirtyPointsCount, size_t maxDirtyPoints) {
+                                     Point * dirtyPoints, size_t& dirtyPointsCount, size_t maxDirtyPoints) {
     // 计算每个分割线的间隔
     uint16_t h_interval = width / h_divs;
     uint16_t v_interval = height / v_divs;
@@ -216,25 +216,13 @@ void draw_dividers_with_dirty_points(uint16_t x, uint16_t y, uint16_t width, uin
     // 绘制水平分割线
     for (size_t i = 1; i < h_divs; ++i) {  // 从1开始，避免绘制最左边和最右边的线
         uint16_t current_x = x + i * h_interval;
-        draw_line(current_x, y + margin, current_x, y + height - margin, color); // 水平分割线
-        if (dirtyPointsCount < maxDirtyPoints) {
-            dirtyPoints[dirtyPointsCount++] = current_x;
-            dirtyPoints[dirtyPointsCount++] = y + margin;
-            dirtyPoints[dirtyPointsCount++] = current_x;
-            dirtyPoints[dirtyPointsCount++] = y + height - margin;
-        }
+        draw_bresenham_segment_with_dirty_point(current_x, y + margin, current_x, y + height - margin, color, dirtyPoints, dirtyPointsCount, maxDirtyPoints); // 水平分割线
     }
 
     // 绘制垂直分割线
     for (size_t i = 1; i < v_divs; ++i) {  // 从1开始，避免绘制最顶部和最底部的线
         uint16_t current_y = y + i * v_interval;
-        draw_line(x + margin, current_y, x + width - margin, current_y, color); // 垂直分割线
-        if (dirtyPointsCount < maxDirtyPoints) {
-            dirtyPoints[dirtyPointsCount++] = x + margin;
-            dirtyPoints[dirtyPointsCount++] = current_y;
-            dirtyPoints[dirtyPointsCount++] = x + width - margin;
-            dirtyPoints[dirtyPointsCount++] = current_y;
-        }
+        draw_bresenham_segment_with_dirty_point(x + margin, current_y, x + width - margin, current_y, color, dirtyPoints, dirtyPointsCount, maxDirtyPoints); // 垂直分割线
     }
 }
 
