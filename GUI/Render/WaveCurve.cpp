@@ -80,7 +80,6 @@ void draw_interpolated_wave(uint16_t start_x, uint16_t start_y,
                             size_t length,size_t start_index, size_t array_length,
                             uint16_t color, uint16_t background_color)
 {
-    static bool first_time_flag=false;
     // 检查输入参数的有效性
     if (length == 0 || start_index >= array_length) return;
 
@@ -93,7 +92,7 @@ void draw_interpolated_wave(uint16_t start_x, uint16_t start_y,
 
     //初始化上一次数据的第一个点
     float last_prev_x = start_x;
-    float last_prev_y = start_y - p_DST_Buff[start_index] * 201.0f / 255;
+    float last_prev_y = start_y - p_DST_Buff[0] * 201.0f / 255;
 
     // 初始化第一个点
     float prev_x = start_x;
@@ -106,7 +105,7 @@ void draw_interpolated_wave(uint16_t start_x, uint16_t start_y,
 
         // 计算上一次数据的当前点的 x 和 y 坐标
         float last_current_x = start_x + ((float) i / (length - 1)) * 317.0f;
-        float last_current_y = start_y - p_DST_Buff[start_index + i] * 201.0f / 255;
+        float last_current_y = start_y - p_DST_Buff[i] * 201.0f / 255;
         // 清除旧线段
         draw_bresenham_segment((int32_t) round(last_prev_x), (int32_t) round(last_prev_y),
                                (int32_t) round(last_current_x), (int32_t) round(last_current_y), background_color);
@@ -122,9 +121,9 @@ void draw_interpolated_wave(uint16_t start_x, uint16_t start_y,
     }
 
     // 将当前帧的波形数据 p_DST_Buff 复制到 p_DST_Buff_B 中，准备用于下一帧的绘制。
-    for (size_t n = 0; n < length; n++)
+    for (size_t i = 0; i < length; i++)
     {
-        p_DST_Buff[start_index + n] = p_SOC_Buff[start_index + n];
+        p_DST_Buff[i] = p_SOC_Buff[start_index + i];
     }
 }
 
@@ -297,3 +296,59 @@ void draw_dividers_with_dirty_points(uint16_t x, uint16_t y, uint16_t width, uin
     }
 }
 
+// 绘制虚线
+void draw_dashed_line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color, uint16_t dash_length, uint16_t gap_length) {
+    int dx = abs(x2 - x1), sx = x1 < x2 ? 1 : -1;
+    int dy = -abs(y2 - y1), sy = y1 < y2 ? 1 : -1;
+    int err = dx + dy, e2;  // error value e_xy
+
+    bool is_drawing = true; // 控制是否绘制当前段
+    int current_length = 0; // 当前段的长度
+
+    while (true) {
+        LCD_Set_Pixel(x1, y1, is_drawing ? color : 0); // 0 表示不绘制（即背景色或透明）
+        if (x1 == x2 && y1 == y2) break;
+        e2 = 2 * err;
+        if (e2 >= dy) { // e_xy+e_x > 0
+            err += dy; x1 += sx;
+        }
+        if (e2 <= dx) { // e_xy+e_y < 0
+            err += dx; y1 += sy;
+        }
+
+        // 更新当前段的长度，并检查是否需要切换绘制状态
+        current_length++;
+        if ((is_drawing && current_length == dash_length) || (!is_drawing && current_length == gap_length)) {
+            is_drawing = !is_drawing; // 切换绘制状态
+            current_length = 0;       // 重置当前段长度
+        }
+    }
+}
+
+// 使用虚线绘制分割线
+/*
+ * @param x: 分割线起始点的 x 坐标
+ * @param y: 分割线起始点的 y 坐标
+ * @param width: 分割线的宽度
+ * @param height: 分割线的高度
+ * @param h_divs: 水平方向上的分割线数量
+ * @param v_divs: 垂直方向上的分割线数量
+ * @param color: 分割线的颜色
+ * @param margin: 分割线与边界的距离
+ * @param dash_length: 虚线段的长度
+ * @param gap_length: 虚线段之间的间隔长度
+ */
+void draw_dashed_dividers(uint16_t x, uint16_t y, uint16_t width, uint16_t height, size_t h_divs, size_t v_divs, uint16_t color, uint16_t margin, uint16_t dash_length, uint16_t gap_length) {
+    uint16_t h_interval = width / h_divs;
+    uint16_t v_interval = height / v_divs;
+
+    for (size_t i = 1; i < h_divs; ++i) {
+        uint16_t current_x = x + i * h_interval;
+        draw_dashed_line(current_x, y + margin, current_x, y + height - margin, color, dash_length, gap_length);
+    }
+
+    for (size_t i = 1; i < v_divs; ++i) {
+        uint16_t current_y = y + i * v_interval;
+        draw_dashed_line(x + margin, current_y, x + width - margin, current_y, color, dash_length, gap_length);
+    }
+}

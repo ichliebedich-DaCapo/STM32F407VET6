@@ -40,11 +40,11 @@ LV_Timer tick_timer;
 uint8_t Buf[point_cnt];
 
 uint8_t CH0_buff[200]={0};//波形数据存储
-uint16_t ADC_CH0_TAP[400];
+
 
 //便利测试变量
-bool use_square=false ;//测试方波
-bool use_sine=true;//测试正弦波
+bool use_square=true ;//测试方波
+bool use_sine=false;//测试正弦波
 
 // 播放
 class StorageOscilloscope
@@ -94,8 +94,9 @@ auto Screen::init() -> void
     Component::init(gui->main.rect);
     Component::set_pos_size(78, 36, 324, 208);
     Component::border_radius(5);
-
-
+    // 设置边框背景颜色和边框颜色
+    lv_obj_set_style_bg_color(gui->main.rect, lv_color_hex(0), LV_PART_MAIN);
+    lv_obj_set_style_border_color(gui->main.rect, lv_color_hex(0X6675), LV_PART_MAIN);
     // 初始化器
     Button customBtn;
     customBtn.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
@@ -163,13 +164,18 @@ auto Events::init() -> void
 }
 auto StorageOscilloscope::handler() -> void
 {
-// 调用绘制网格线的函数
-    draw_dividers(78, 36, 324, 208, 10, 8, 0x8410, 2); // 使用灰色绘制分割线，留出边距
+
+    // 调用绘制网格线的函数
+
+
 //不使用脏点数组
 //    if(use_square) draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_start_index, array_length, 0);
 //    if(use_sine) draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_start_index, array_length, 0);
-    if(use_square) draw_interpolated_wave(start_x, start_y, square_wave,CH0_buff, length, wave_start_index, array_length, 0,0XFFFF);
-    if(use_sine)   draw_interpolated_wave(start_x, start_y, sine_wave,CH0_buff, length, wave_start_index, array_length, 0,0xFFFF);
+//    draw_dividers(78, 36, 324, 208, 10, 8, 0X8410, 2); // 使用灰色绘制分割线，留出边距
+    draw_dashed_dividers(78, 36, 324, 208, 10, 8, 0X8410, 2,4,4);
+    if(use_square) draw_interpolated_wave(start_x, start_y, square_wave,CH0_buff, length, wave_start_index, array_length, 0XFCC0,0);
+    if(use_sine)   draw_interpolated_wave(start_x, start_y, sine_wave,CH0_buff, length, wave_start_index, array_length, 0XFCC0,0);
+//    __BKPT(0);
 }
 auto StorageOscilloscope::print_tick() -> void
 {
@@ -220,13 +226,14 @@ void StorageOscilloscope::left_shift() {
     }
 
 //不使用脏点数组(节省内存)
-     LCD_Color_Clean(80, 38, 400, 242,0xFFFF);//修改这行要同时修改右移函数和画波形函数、start_x、start_y
+//     LCD_Color_Clean(80, 38, 400, 242,0xFFFF);//修改这行要同时修改右移函数和画波形函数、start_x、start_y
     // 调用绘制网格线的函数
-    draw_dividers(78, 36, 324, 208, 10, 8, 0x8410, 2); // 使用灰色绘制分割线，留出边距
+//    draw_dividers(78, 36, 324, 208, 10, 8, 0X8410, 2); // 使用灰色绘制分割线，留出边距
+    draw_dashed_dividers(78, 36, 324, 208, 10, 8, 0X8410, 2,4,4);
 //     if(use_square) draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_start_index, array_length, 0);
 //     if(use_sine)   draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_start_index, array_length, 0);
-    if(use_square) draw_interpolated_wave(start_x, start_y, square_wave,CH0_buff, length, wave_start_index, array_length, 0,0XFFFF);
-    if(use_sine)   draw_interpolated_wave(start_x, start_y, sine_wave,CH0_buff, length, wave_start_index, array_length, 0,0xFFFF);
+    if(use_square) draw_interpolated_wave(start_x, start_y, square_wave,CH0_buff, length, wave_start_index, array_length, 0XFCC0,0);
+    if(use_sine)   draw_interpolated_wave(start_x, start_y, sine_wave,CH0_buff, length, wave_start_index, array_length, 0XFCC0,0);
 
 }
 // 图像右移
@@ -244,13 +251,14 @@ void StorageOscilloscope::right_shift() {
     }
 
 //不使用脏点数组(节省内存)
-    LCD_Color_Clean(80, 38, 400, 242,0xFFFF);//修改这行要同时修改左移函数和画波形函数、start_x、start_y
+//    LCD_Color_Clean(80, 38, 400, 242,0xFFFF);//修改这行要同时修改左移函数和画波形函数、start_x、start_y
     // 调用绘制网格线的函数
-    draw_dividers(78, 36, 324, 208, 10, 8, 0x8410, 2); // 使用灰色绘制分割线，留出边距
+//    draw_dividers(78, 36, 324, 208, 10, 8, 0X8410, 2); // 使用灰色绘制分割线，留出边距
+    draw_dashed_dividers(78, 36, 324, 208, 10, 8, 0X8410, 2,4,4);
     //     if(use_square) draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_start_index, array_length, 0);
 //     if(use_sine)   draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_start_index, array_length, 0);
-    if(use_square) draw_interpolated_wave(start_x, start_y, square_wave,CH0_buff, length, wave_start_index, array_length,  0,0XFFFF);
-    if(use_sine)   draw_interpolated_wave(start_x, start_y, sine_wave,CH0_buff, length, wave_start_index, array_length, 0,0xFFFF);
+    if(use_square) draw_interpolated_wave(start_x, start_y, square_wave,CH0_buff, length, wave_start_index, array_length,  0XFCC0,0);
+    if(use_sine)   draw_interpolated_wave(start_x, start_y, sine_wave,CH0_buff, length, wave_start_index, array_length, 0XFCC0,0);
 
 
 }
