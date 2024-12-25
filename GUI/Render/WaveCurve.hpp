@@ -38,6 +38,7 @@ enum class WaveCurveType
 typedef struct {
     uint16_t x;
     uint16_t y;
+//    bool latch_state;
 } Point;
 
 /**
@@ -419,5 +420,9 @@ static void draw_line(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16
 void draw_dividers(uint16_t x, uint16_t y, uint16_t width, uint16_t height, size_t h_divs, size_t v_divs, uint16_t color, uint16_t margin);
 void draw_dividers_with_dirty_points(uint16_t x, uint16_t y, uint16_t width, uint16_t height, size_t h_divs, size_t v_divs, uint16_t color,
                                      uint16_t margin, Point* dirtyPoints, size_t& dirtyPointsCount, size_t maxDirtyPoints);
+void draw_interpolated_wave(uint16_t start_x, uint16_t start_y,
+                            const uint8_t *p_SOC_Buff,uint8_t *p_DST_Buff,
+                            size_t length,size_t start_index, size_t array_length,
+                            uint16_t color, uint16_t background_color);
 
 #endif //SIMULATOR_WAVECURVE_HPP

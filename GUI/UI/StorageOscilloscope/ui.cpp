@@ -35,20 +35,15 @@ constexpr uint16_t max_value = 255;
 constexpr uint16_t bg_color = 0xFFFF;
 constexpr uint16_t line_color = 0x0000;
 
-constexpr uint16_t MAX_DIRTY_POINTS_GRID=1700; // 根据实际情况调整最大脏点数量
-constexpr uint16_t MAX_DIRTY_POINTS_CURVE=1700; // 根据实际情况调整最大脏点数量
 // 变量
 LV_Timer tick_timer;
 uint8_t Buf[point_cnt];
 
-static Point dirtyPointsGrid[MAX_DIRTY_POINTS_GRID];
-static size_t dirtyPointsGridCount  = 0;
-
-static Point dirtyPointsCurve[MAX_DIRTY_POINTS_CURVE];
-static size_t dirtyPointsCurveCount  = 0;
+uint8_t CH0_buff[200]={0};//波形数据存储
+uint16_t ADC_CH0_TAP[400];
 
 //便利测试变量
-bool use_square=false;//测试方波
+bool use_square=false ;//测试方波
 bool use_sine=true;//测试正弦波
 
 // 播放
@@ -84,7 +79,7 @@ private:
     static inline uint8_t wave_cnt = 100;//显示点数 -> keyk8、keyk9
     static inline uint8_t length = 200;
     static inline uint16_t array_length = 400;
-    static inline uint8_t wave_index = 100;
+    static inline uint8_t wave_start_index = 100;
     static inline uint8_t index_offset = 5;
     static inline bool _trigger_mode = false;// 默认模式为单次触发
 };
@@ -169,21 +164,12 @@ auto Events::init() -> void
 auto StorageOscilloscope::handler() -> void
 {
 // 调用绘制网格线的函数
-//    draw_dividers(78, 36, 324, 208, 10, 8, 0x1041, 2); // 使用灰色绘制分割线，留出边距
+    draw_dividers(78, 36, 324, 208, 10, 8, 0x8410, 2); // 使用灰色绘制分割线，留出边距
 //不使用脏点数组
-//    if(use_square) draw_interpolated_line_simple(start_x,start_y,square_wave,length,wave_index,array_length,0);
-//    if(use_sine) draw_interpolated_line_simple(start_x,start_y,sine_wave,length,wave_index,array_length,0);
-
-// 调用绘制网格线的函数
-//    draw_dividers(78, 36, 324, 208, 10, 8, 0x8410, 2); // 使用灰色绘制分割线，留出边距
-    draw_dividers_with_dirty_points(78, 36, 324, 208, 10, 8, 0x8410, 2, dirtyPointsGrid, dirtyPointsGridCount,MAX_DIRTY_POINTS_GRID);
-//使用脏点数组
-    if (use_square)
-        draw_interpolated_line_with_dirty_point(start_x, start_y, square_wave, length, wave_index, array_length, 0,
-                                                dirtyPointsCurve, dirtyPointsCurveCount, MAX_DIRTY_POINTS_CURVE);
-    if (use_sine)
-        draw_interpolated_line_with_dirty_point(start_x, start_y, sine_wave, length, wave_index, array_length, 0,
-                                                dirtyPointsCurve, dirtyPointsCurveCount, MAX_DIRTY_POINTS_CURVE);
+//    if(use_square) draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_start_index, array_length, 0);
+//    if(use_sine) draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_start_index, array_length, 0);
+    if(use_square) draw_interpolated_wave(start_x, start_y, square_wave,CH0_buff, length, wave_start_index, array_length, 0,0XFFFF);
+    if(use_sine)   draw_interpolated_wave(start_x, start_y, sine_wave,CH0_buff, length, wave_start_index, array_length, 0,0xFFFF);
 }
 auto StorageOscilloscope::print_tick() -> void
 {
@@ -226,63 +212,46 @@ auto StorageOscilloscope::switch_trigger_mode() -> void
 // 图像左移
 void StorageOscilloscope::left_shift() {
     // 确保新的wave_index不会超出array_length - length
-    if (wave_index + index_offset < array_length - length) {
-        wave_index += index_offset;
+    if (wave_start_index + index_offset < array_length - length) {
+        wave_start_index += index_offset;
     } else {
         // 如果wave_index + length接近或超过array_length，则设置为最大允许值
-        wave_index = array_length - length;
+        wave_start_index = array_length - length;
     }
 
 //不使用脏点数组(节省内存)
-//     LCD_Color_Clean(80, 38, 400, 242,0xFFFF);//修改这行要同时修改右移函数和画波形函数、start_x、start_y
-//     if(use_square) draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_index, array_length,0);
-//     if(use_sine)   draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_index, array_length, 0);
-
-//使用脏点数组
-    clear_drawn_points(0xFFFF,dirtyPointsCurve, dirtyPointsCurveCount);
-
+     LCD_Color_Clean(80, 38, 400, 242,0xFFFF);//修改这行要同时修改右移函数和画波形函数、start_x、start_y
     // 调用绘制网格线的函数
-//    draw_dividers(78, 36, 324, 208, 10, 8, 0x8410, 2); // 使用灰色绘制分割线，留出边距
-    draw_dividers_with_dirty_points(78, 36, 324, 208, 10, 8, 0x8410, 2, dirtyPointsGrid, dirtyPointsGridCount,MAX_DIRTY_POINTS_GRID);
-    if (use_square)
-        draw_interpolated_line_with_dirty_point(start_x, start_y, square_wave, length, wave_index, array_length, 0,
-                                                dirtyPointsCurve, dirtyPointsCurveCount, MAX_DIRTY_POINTS_CURVE);
-    if (use_sine)
-        draw_interpolated_line_with_dirty_point(start_x, start_y, sine_wave, length, wave_index, array_length, 0,
-                                                dirtyPointsCurve, dirtyPointsCurveCount, MAX_DIRTY_POINTS_CURVE);
+    draw_dividers(78, 36, 324, 208, 10, 8, 0x8410, 2); // 使用灰色绘制分割线，留出边距
+//     if(use_square) draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_start_index, array_length, 0);
+//     if(use_sine)   draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_start_index, array_length, 0);
+    if(use_square) draw_interpolated_wave(start_x, start_y, square_wave,CH0_buff, length, wave_start_index, array_length, 0,0XFFFF);
+    if(use_sine)   draw_interpolated_wave(start_x, start_y, sine_wave,CH0_buff, length, wave_start_index, array_length, 0,0xFFFF);
+
 }
 // 图像右移
 void StorageOscilloscope::right_shift() {
     // 确保新的wave_index不会小于0
-    if (wave_index >= index_offset) {
-        wave_index -= index_offset;
+    if (wave_start_index >= index_offset) {
+        wave_start_index -= index_offset;
     } else {
-        wave_index = 0; // 如果wave_index小于index_offset，则设置为0
+        wave_start_index = 0; // 如果wave_index小于index_offset，则设置为0
     }
 
     // 确保新的wave_index加上length不会超出array_length
-    if (wave_index + length > array_length) {
-        length = array_length - wave_index; // 调整显示长度以适应新的wave_index
+    if (wave_start_index + length > array_length) {
+        length = array_length - wave_start_index; // 调整显示长度以适应新的wave_index
     }
 
 //不使用脏点数组(节省内存)
-//    LCD_Color_Clean(80, 38, 400, 242,0xFFFF);//修改这行要同时修改左移函数和画波形函数、start_x、start_y
-//    if(use_square)  draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_index, array_length, 0);
-//    if(use_sine)    draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_index, array_length, 0);
-
-
-//使用脏点数组
-    clear_drawn_points(0xFFFF,dirtyPointsCurve, dirtyPointsCurveCount);
-
+    LCD_Color_Clean(80, 38, 400, 242,0xFFFF);//修改这行要同时修改左移函数和画波形函数、start_x、start_y
     // 调用绘制网格线的函数
-//    draw_dividers(78, 36, 324, 208, 10, 8, 0x8410, 2); // 使用灰色绘制分割线，留出边距
-    draw_dividers_with_dirty_points(78, 36, 324, 208, 10, 8, 0x8410, 2, dirtyPointsGrid, dirtyPointsGridCount,MAX_DIRTY_POINTS_GRID);
-    if (use_square)
-        draw_interpolated_line_with_dirty_point(start_x, start_y, square_wave, length, wave_index, array_length, 0,
-                                                dirtyPointsCurve, dirtyPointsCurveCount, MAX_DIRTY_POINTS_CURVE);
-    if (use_sine)
-        draw_interpolated_line_with_dirty_point(start_x, start_y, sine_wave, length, wave_index, array_length, 0,
-                                                dirtyPointsCurve, dirtyPointsCurveCount, MAX_DIRTY_POINTS_CURVE);
+    draw_dividers(78, 36, 324, 208, 10, 8, 0x8410, 2); // 使用灰色绘制分割线，留出边距
+    //     if(use_square) draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_start_index, array_length, 0);
+//     if(use_sine)   draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_start_index, array_length, 0);
+    if(use_square) draw_interpolated_wave(start_x, start_y, square_wave,CH0_buff, length, wave_start_index, array_length,  0,0XFFFF);
+    if(use_sine)   draw_interpolated_wave(start_x, start_y, sine_wave,CH0_buff, length, wave_start_index, array_length, 0,0xFFFF);
+
 
 }
 // 设置扫描速度

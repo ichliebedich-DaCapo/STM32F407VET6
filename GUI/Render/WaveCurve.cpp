@@ -7,7 +7,12 @@
 #include <stdint.h>
 #include <stddef.h>
 
-// 辅助函数：Bresenham算法绘制两点之间的线段
+/*
+ * 辅助函数：Bresenham算法绘制两点之间的线段
+ *  x0 和 y0 是线段的起点坐标
+ *  x1 和 y1 是线段的终点坐标
+ *  color 是要绘制的线的颜色
+ */
 static void draw_bresenham_segment(int32_t x0, int32_t y0, int32_t x1, int32_t y1, uint16_t color) {
     int32_t dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
     int32_t dy = -abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
@@ -57,6 +62,72 @@ static void draw_bresenham_segment_with_dirty_point(int32_t x0, int32_t y0, int3
         }
     }
 }
+
+/*
+ * 绘制插值曲线
+ * @param start_x 起始点的 x 坐标,左下角原点
+ * @param start_y 起始点的 y 坐标,左下角原点
+ * @param p_DST_Buff    当前帧目标数据缓存区
+ * @param p_DST_Buff_B  上一帧目标数据缓存区
+ * @param p_SOC_Buff    源数据缓存区
+ * @param length 显示长度（从start_index开始取length个数）
+ * @param start_index 数组起始索引
+ * @param array_length y数组的实际长度
+ * @param color 颜色
+ */
+void draw_interpolated_wave(uint16_t start_x, uint16_t start_y,
+                            const uint8_t *p_SOC_Buff,uint8_t *p_DST_Buff,
+                            size_t length,size_t start_index, size_t array_length,
+                            uint16_t color, uint16_t background_color)
+{
+    static bool first_time_flag=false;
+    // 检查输入参数的有效性
+    if (length == 0 || start_index >= array_length) return;
+
+    // 确保不会访问越界的数组元素
+    size_t end_index = start_index + length;
+    if (end_index > array_length) {
+        length = array_length - start_index;
+        if (length == 0) return;
+    }
+
+    //初始化上一次数据的第一个点
+    float last_prev_x = start_x;
+    float last_prev_y = start_y - p_DST_Buff[start_index] * 201.0f / 255;
+
+    // 初始化第一个点
+    float prev_x = start_x;
+    float prev_y = start_y - p_SOC_Buff[start_index] * 201.0f / 255;
+
+    for (size_t i = 1; i < length; ++i) {
+        // 计算当前点的 x 和 y 坐标
+        float current_x = start_x + ((float)i / (length - 1)) * 317.0f;
+        float current_y = start_y - p_SOC_Buff[start_index + i] * 201.0f / 255;
+
+        // 计算上一次数据的当前点的 x 和 y 坐标
+        float last_current_x = start_x + ((float) i / (length - 1)) * 317.0f;
+        float last_current_y = start_y - p_DST_Buff[start_index + i] * 201.0f / 255;
+        // 清除旧线段
+        draw_bresenham_segment((int32_t) round(last_prev_x), (int32_t) round(last_prev_y),
+                               (int32_t) round(last_current_x), (int32_t) round(last_current_y), background_color);
+        // 绘制新线段
+        draw_bresenham_segment((int32_t)round(prev_x), (int32_t)round(prev_y),
+                               (int32_t)round(current_x), (int32_t)round(current_y), color);
+
+        // 更新上一个点为当前点
+        last_prev_x= last_current_x;
+        last_prev_y= last_current_y;
+        prev_x = current_x;
+        prev_y = current_y;
+    }
+
+    // 将当前帧的波形数据 p_DST_Buff 复制到 p_DST_Buff_B 中，准备用于下一帧的绘制。
+    for (size_t n = 0; n < length; n++)
+    {
+        p_DST_Buff[start_index + n] = p_SOC_Buff[start_index + n];
+    }
+}
+
 
 
 /*
