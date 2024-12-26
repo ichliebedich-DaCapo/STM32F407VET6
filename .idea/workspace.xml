@@ -32,12 +32,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】波形界面设计基本完成,新增边框命名空间">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.hpp" afterDir="false" />
-    </list>
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】按键逻辑基本完成，噪音波形显示正常" />
     <list id="226a4da6-948d-4efd-966f-49a1ee475c55" name="34753 进行的更改" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1934,15 +1929,7 @@
       <workItem from="1735138883124" duration="30000" />
       <workItem from="1735191869103" duration="2836000" />
       <workItem from="1735208225528" duration="214000" />
-      <workItem from="1735218670722" duration="7827000" />
-    </task>
-    <task id="LOCAL-00028" summary="【初始】开始引入LVGL模拟器">
-      <option name="closed" value="true" />
-      <created>1729158151119</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1729158151119</updated>
+      <workItem from="1735218670722" duration="9025000" />
     </task>
     <task id="LOCAL-00029" summary="【初始】主项目——发生了一件奇怪的事情，即便没有使用GUI，ROM也会爆满。正在尝试解决……">
       <option name="closed" value="true" />
@@ -2328,7 +2315,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735192833928</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="【简易存储示波器】按键逻辑基本完成，噪音波形显示正常">
+      <option name="closed" value="true" />
+      <created>1735227706391</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1735227706391</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2363,7 +2358,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【双音频信号发生器】调整项目组织结构" />
     <MESSAGE value="【双音频信号发生器】完成了这次的项目优化，后面还有许多不妥之处，后续再慢慢改" />
     <MESSAGE value="【双音频信号发生器】完善了一下Readme" />
     <MESSAGE value="【双音频信号发生器】实测过程中，发现定时器的psc和arr有些古怪：比如我明明把psc与arr颠倒了却仍得到相同的结果，另外arr在1和0范围内有些古怪。128*8K有些高，卡在定时器中断里不出来，这并不应该" />
@@ -2388,7 +2382,8 @@
     <MESSAGE value="【简易存储示波器】新增画曲线函数,通过缓存区实现擦除（未知错误）" />
     <MESSAGE value="【简易存储示波器】波形界面设计基本完成，新增虚线分割线函数（无bug）" />
     <MESSAGE value="【简易存储示波器】波形界面设计基本完成,新增边框命名空间" />
-    <option name="LAST_COMMIT_MESSAGE" value="【简易存储示波器】波形界面设计基本完成,新增边框命名空间" />
+    <MESSAGE value="【简易存储示波器】按键逻辑基本完成，噪音波形显示正常" />
+    <option name="LAST_COMMIT_MESSAGE" value="【简易存储示波器】按键逻辑基本完成，噪音波形显示正常" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
