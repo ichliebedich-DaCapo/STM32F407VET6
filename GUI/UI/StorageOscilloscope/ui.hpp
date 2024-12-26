@@ -65,9 +65,10 @@ namespace border_info
 class UI_Interface
 {
 public:
-    static  void display();
-    static  void left_shift();
-    static  void right_shift();
+
+    static void display(uint8_t (&read_wave)[400]);
+    static void left_shift(uint8_t (&read_wave)[400]);
+    static void right_shift(uint8_t (&read_wave)[400]);
 };
 
 

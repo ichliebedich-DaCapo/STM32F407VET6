@@ -20,7 +20,6 @@ constexpr uint32_t Freq_16K = 12;
 
 constexpr uint8_t index_offset_8K = 2;// 8K下索引递增值
 constexpr uint8_t index_offset_16K = 4;// 16K下索引递增值
-constexpr uint16_t point_cnt = 256;// 点的数量
 constexpr uint16_t chart_width = 320;
 constexpr uint16_t chart_height = 200;
 
@@ -34,8 +33,8 @@ constexpr uint16_t max_value = 255;
 constexpr uint16_t bg_color = 0xFFFF;
 constexpr uint16_t line_color = 0x0000;
 
-constexpr uint16_t start_x = border_info::x+2*border_info::margin;                       //82
-constexpr uint16_t start_y = border_info::y+border_info::height-2*border_info::margin;   //240
+constexpr uint16_t start_x = border_info::x + 2 * border_info::margin;                       //82
+constexpr uint16_t start_y = border_info::y + border_info::height - 2 * border_info::margin;   //240
 //constexpr uint16_t x = 78;
 //constexpr uint16_t y = 36;
 //constexpr uint16_t width = 324;
@@ -44,43 +43,54 @@ constexpr uint16_t start_y = border_info::y+border_info::height-2*border_info::m
 
 // 变量
 LV_Timer tick_timer;
-uint8_t Buf[point_cnt];
 
-uint8_t CH0_buff[200]={0};//波形数据存储
+uint8_t CH0_buff[200] = {0};//波形数据存储
 
 
 //便利测试变量
-bool use_square=false ;//测试方波
-bool use_sine=true;//测试正弦波
+bool use_square = false;//测试方波
+bool use_sine = true;//测试正弦波
 
 // 播放
 class StorageOscilloscope
 {
 public:
     // 播放
-    static inline auto handler() -> void;
+    static inline auto handler(uint8_t (&read_wave)[400]) -> void;
+
     // 开始
     static inline auto start() -> void;
+
     // 停止
     static inline auto stop() -> void;
+
     // 切换触发模式
     static inline auto switch_trigger_mode() -> void;
+
     // 图像左移
-    static inline auto left_shift() -> void;
+    static inline auto left_shift(uint8_t (&read_wave)[400]) -> void;
+
     // 图像右移
-    static inline auto right_shift() -> void;
+    static inline auto right_shift(uint8_t (&read_wave)[400]) -> void;
+
     // 设置扫描速度
     static inline auto switch_scan_speed() -> void;
+
     // 锁存数据
     static inline auto switch_latch() -> void;
+
     // 打印时间
     static inline auto print_tick() -> void;
+
     // 更新时间
     static inline auto update_count() -> void;
+
     // 获取时间
     static inline auto get_tick() -> uint32_t;
+
 private:
     static inline auto set_trigger_mode(bool &trigger_mode) -> void;
+
 private:
     static inline uint32_t count = 0;// 用于计时
     static inline uint8_t wave_cnt = 100;//显示点数 -> keyk8、keyk9
@@ -127,13 +137,13 @@ auto Screen::init() -> void
     Button::hidden(gui->main.btn_latch);
 
     // 标签：标题
-    Text label;
-    label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
-    label.init(gui->main.label_title, 190, 13, 140, 30, "简易存储示波器");
+//    Text label;
+//    label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
+//    label.init(gui->main.label_title, 190, 13, 140, 30, "简易存储示波器");
 //    Text::hidden(gui->main.label_title);
 
-    label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_13);
-    label.init(gui->main.label_tick, 40, 265, 40, 30, "tick：\n0");
+//    label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_13);
+//    label.init(gui->main.label_tick, 40, 265, 40, 30, "tick：\n0");
 
     //     图片按钮：停止、播放
     ImageButton::init(gui->main.imgbtn_play, 216, 256, 48, 48, &_btn_list_play_alpha_48x48,
@@ -147,58 +157,47 @@ auto Events::init() -> void
 {
     /*  创建定时器*/
 
-    tick_timer.create(    timer_fun(
-                                  StorageOscilloscope::handler();
-                                  StorageOscilloscope::print_tick();
-                          ), Freq_16K);
-    // 绑定播放事件
-    bond(gui->main.imgbtn_play, imgbtn_fun2(
-            fun(StorageOscilloscope::start();),
-            fun(StorageOscilloscope::stop();)));
-    // 绑定切换触发模式事件
-    bond(gui->main.btn_trigger_mode, btn_fun(
-            fun(StorageOscilloscope::switch_trigger_mode();)));
-    // 绑定图像水平移动事件
-    bond(gui->main.btn_left_shift, btn_fun(
-            fun(StorageOscilloscope::left_shift();)));
-    bond(gui->main.btn_right_shift, btn_fun(
-            fun(StorageOscilloscope::right_shift();)));
-    // 绑定切换扫描速度事件
-    bond(gui->main.btn_scan_speed, btn_fun(
-            fun(StorageOscilloscope::switch_scan_speed();)));
-    // 绑定锁存模式事件
-    bond(gui->main.btn_latch, btn_fun(
-            fun(StorageOscilloscope::switch_latch();)));
+    tick_timer.create(timer_fun(
+//                                  StorageOscilloscope::handler();
+                              StorageOscilloscope::print_tick();
+                      ), Freq_16K);
 
 }
 
-auto StorageOscilloscope::handler() -> void
+auto StorageOscilloscope::handler(uint8_t (&read_wave)[400]) -> void
 {
 
     // 调用绘制网格线的函数
     //    draw_dividers(78, 36, 324, 208, 10, 8, 0X8410, 2); // 使用灰色绘制分割线，留出边距
-    draw_dashed_dividers(border_info::x, border_info::y, border_info::width, border_info::height, 10, 8, 0X8410, border_info::margin, 4, 4);
+    draw_dashed_dividers(border_info::x, border_info::y, border_info::width, border_info::height, 10, 8, 0X8410,
+                         border_info::margin, 4, 4);
 //不使用脏点数组
 //    if(use_square) draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_start_index, array_length, 0);
 //    if(use_sine) draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_start_index, array_length, 0);
 
-    if (use_square)
-        draw_interpolated_wave(start_x, start_y, square_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
-                               0);
-    if (use_sine)
-        draw_interpolated_wave(start_x, start_y, sine_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
-                               0);
+//    if (use_square)
+//        draw_interpolated_wave(start_x, start_y, square_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
+//                               0);
+//    if (use_sine)
+//        draw_interpolated_wave(start_x, start_y, sine_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
+//                               0);
+    draw_interpolated_wave(start_x, start_y, read_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
+                           0);
+
 //    __BKPT(0);
 }
+
 auto StorageOscilloscope::print_tick() -> void
 {
     Text::set_text(GUI_Base::get_ui()->main.label_tick, "tick：\n%lu", get_tick());
 }
+
 // 更新时间
 auto StorageOscilloscope::update_count() -> void
 {
     count = lv_tick_get();
 }
+
 // 获取时间
 auto StorageOscilloscope::get_tick() -> uint32_t
 {
@@ -211,11 +210,13 @@ auto StorageOscilloscope::get_tick() -> uint32_t
 
     return temp_count;
 }
+
 // 开始
 auto StorageOscilloscope::start() -> void
 {
     tick_timer.resume();
 }
+
 // 停止
 auto StorageOscilloscope::stop() -> void
 {
@@ -231,7 +232,7 @@ auto StorageOscilloscope::switch_trigger_mode() -> void
 }
 
 // 图像左移
-void StorageOscilloscope::left_shift()
+void StorageOscilloscope::left_shift(uint8_t (&read_wave)[400])
 {
     // 确保新的wave_index不会超出array_length - length
     if (wave_start_index + index_offset < array_length - length)
@@ -247,21 +248,25 @@ void StorageOscilloscope::left_shift()
 //     LCD_Color_Clean(80, 38, 400, 242,0xFFFF);//修改这行要同时修改右移函数和画波形函数、start_x、start_y
     // 调用绘制网格线的函数
 //    draw_dividers(78, 36, 324, 208, 10, 8, 0X8410, 2); // 使用灰色绘制分割线，留出边距
-    draw_dashed_dividers(border_info::x, border_info::y, border_info::width, border_info::height, 10, 8, 0X8410, border_info::margin, 4,
+    draw_dashed_dividers(border_info::x, border_info::y, border_info::width, border_info::height, 10, 8, 0X8410,
+                         border_info::margin, 4,
                          4);
 //     if(use_square) draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_start_index, array_length, 0);
 //     if(use_sine)   draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_start_index, array_length, 0);
-    if (use_square)
-        draw_interpolated_wave(start_x, start_y, square_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
-                               0);
-    if (use_sine)
-        draw_interpolated_wave(start_x, start_y, sine_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
-                               0);
+//    if (use_square)
+//        draw_interpolated_wave(start_x, start_y, square_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
+//                               0);
+//    if (use_sine)
+//        draw_interpolated_wave(start_x, start_y, sine_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
+//                               0);
+    draw_interpolated_wave(start_x, start_y, read_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
+                           0);
+
 
 }
 
 // 图像右移
-void StorageOscilloscope::right_shift()
+void StorageOscilloscope::right_shift(uint8_t (&read_wave)[400])
 {
     // 确保新的wave_index不会小于0
     if (wave_start_index >= index_offset)
@@ -282,24 +287,28 @@ void StorageOscilloscope::right_shift()
 //    LCD_Color_Clean(80, 38, 400, 242,0xFFFF);//修改这行要同时修改左移函数和画波形函数、start_x、start_y
     // 调用绘制网格线的函数
 //    draw_dividers(78, 36, 324, 208, 10, 8, 0X8410, 2); // 使用灰色绘制分割线，留出边距
-    draw_dashed_dividers(border_info::x, border_info::y, border_info::width, border_info::height, 10, 8, 0X8410, border_info::margin, 4,
+    draw_dashed_dividers(border_info::x, border_info::y, border_info::width, border_info::height, 10, 8, 0X8410,
+                         border_info::margin, 4,
                          4);
     //     if(use_square) draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_start_index, array_length, 0);
 //     if(use_sine)   draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_start_index, array_length, 0);
-    if (use_square)
-        draw_interpolated_wave(start_x, start_y, square_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
-                               0);
-    if (use_sine)
-        draw_interpolated_wave(start_x, start_y, sine_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
-                               0);
-
+//    if (use_square)
+//        draw_interpolated_wave(start_x, start_y, square_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
+//                               0);
+//    if (use_sine)
+//        draw_interpolated_wave(start_x, start_y, sine_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
+//                               0);
+    draw_interpolated_wave(start_x, start_y, read_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
+                           0);
 
 }
+
 // 设置扫描速度
 auto StorageOscilloscope::switch_scan_speed() -> void
 {
 
 }
+
 // 锁存数据
 auto StorageOscilloscope::switch_latch() -> void
 {
@@ -315,17 +324,17 @@ auto StorageOscilloscope::set_trigger_mode(bool &trigger_mode) -> void
 
 
 /***********************对外接口***********************/
-void UI_Interface::display()
+void UI_Interface::display(uint8_t (&read_wave)[400])
 {
-    StorageOscilloscope::handler();
+    StorageOscilloscope::handler(read_wave);
 }
 
-void UI_Interface::left_shift()
+void UI_Interface::left_shift(uint8_t (&read_wave)[400])
 {
-    StorageOscilloscope::left_shift();
+    StorageOscilloscope::left_shift(read_wave);
 }
 
-void UI_Interface::right_shift()
+void UI_Interface::right_shift(uint8_t (&read_wave)[400])
 {
-    StorageOscilloscope::right_shift();
+    StorageOscilloscope::right_shift(read_wave);
 }

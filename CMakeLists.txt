@@ -66,7 +66,6 @@ if (COMPILER_IS_GCC)
     add_compile_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
     # 硬件浮点和软件浮点，任选一个
     add_compile_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
-    #add_compile_options(-mfloat-abi=soft)
 
 elseif (COMPILER_IS_CLANG)
     add_compile_options(-target armv7em-none-eabi)
