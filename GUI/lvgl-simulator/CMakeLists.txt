@@ -90,6 +90,8 @@ add_library(libgui STATIC
         ${BASE_SRCS}
         ${EVENTS_SRCS}
         ${UI_SRCS}
+        ../UI/StorageOscilloscope/Draw_wave.cpp
+        ../UI/StorageOscilloscope/Draw_wave.hpp
 )
 target_include_directories(libgui PUBLIC
         ${UI_DIR}

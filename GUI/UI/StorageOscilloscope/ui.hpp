@@ -47,6 +47,21 @@ LV_FONT_DECLARE(lv_customer_font_SourceHanSerifSC_Regular_13)
 LV_IMG_DECLARE(_btn_list_play_alpha_48x48);
 LV_IMG_DECLARE(_btn_list_pause_alpha_48x48);
 
+// 边框信息
+namespace border_info
+{
+    constexpr uint16_t x = 10;
+    constexpr uint16_t y = 10;
+    constexpr uint16_t width = 400;
+    constexpr uint16_t height = 250;
+    constexpr uint16_t margin = 2;
+//    constexpr uint16_t x = 78;
+//    constexpr uint16_t y = 36;
+//    constexpr uint16_t width = 324;
+//    constexpr uint16_t height = 208;
+//    constexpr uint16_t margin = 2;
+}
+
 class UI_Interface
 {
 public:

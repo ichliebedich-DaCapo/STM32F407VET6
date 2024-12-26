@@ -7,7 +7,7 @@
 // 头文件
 #include "wave.h"
 #include <cstdio>
-#include "WaveCurve.hpp"
+#include "Draw_wave.hpp"
 
 // 宏定义
 #define Strong_Print 0 // 使用更强烈的显示（时间和索引都会加倍）
@@ -26,14 +26,21 @@ constexpr uint16_t chart_height = 200;
 
 //Component::set_pos_size(78, 36, 324, 208);
 //Component::border_radius(5);
-constexpr uint16_t start_x = 82;
-constexpr uint16_t start_y = 240;
+
 
 constexpr uint16_t sine_count = 128;// 采样点数量
 constexpr uint16_t square_count = 200;
 constexpr uint16_t max_value = 255;
 constexpr uint16_t bg_color = 0xFFFF;
 constexpr uint16_t line_color = 0x0000;
+
+constexpr uint16_t start_x = border_info::x+2*border_info::margin;                       //82
+constexpr uint16_t start_y = border_info::y+border_info::height-2*border_info::margin;   //240
+//constexpr uint16_t x = 78;
+//constexpr uint16_t y = 36;
+//constexpr uint16_t width = 324;
+//constexpr uint16_t height = 208;
+
 
 // 变量
 LV_Timer tick_timer;
@@ -43,8 +50,8 @@ uint8_t CH0_buff[200]={0};//波形数据存储
 
 
 //便利测试变量
-bool use_square=true ;//测试方波
-bool use_sine=false;//测试正弦波
+bool use_square=false ;//测试方波
+bool use_sine=true;//测试正弦波
 
 // 播放
 class StorageOscilloscope
@@ -92,8 +99,10 @@ auto Screen::init() -> void
 
     // 设置边框
     Component::init(gui->main.rect);
-    Component::set_pos_size(78, 36, 324, 208);
+    Component::set_pos_size(border_info::x, border_info::y, border_info::width, border_info::height);
     Component::border_radius(5);
+
+
     // 设置边框背景颜色和边框颜色
     lv_obj_set_style_bg_color(gui->main.rect, lv_color_hex(0), LV_PART_MAIN);
     lv_obj_set_style_border_color(gui->main.rect, lv_color_hex(0X6675), LV_PART_MAIN);
@@ -162,19 +171,23 @@ auto Events::init() -> void
             fun(StorageOscilloscope::switch_latch();)));
 
 }
+
 auto StorageOscilloscope::handler() -> void
 {
 
     // 调用绘制网格线的函数
-
-
+    //    draw_dividers(78, 36, 324, 208, 10, 8, 0X8410, 2); // 使用灰色绘制分割线，留出边距
+    draw_dashed_dividers(border_info::x, border_info::y, border_info::width, border_info::height, 10, 8, 0X8410, border_info::margin, 4, 4);
 //不使用脏点数组
 //    if(use_square) draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_start_index, array_length, 0);
 //    if(use_sine) draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_start_index, array_length, 0);
-//    draw_dividers(78, 36, 324, 208, 10, 8, 0X8410, 2); // 使用灰色绘制分割线，留出边距
-    draw_dashed_dividers(78, 36, 324, 208, 10, 8, 0X8410, 2,4,4);
-    if(use_square) draw_interpolated_wave(start_x, start_y, square_wave,CH0_buff, length, wave_start_index, array_length, 0XFCC0,0);
-    if(use_sine)   draw_interpolated_wave(start_x, start_y, sine_wave,CH0_buff, length, wave_start_index, array_length, 0XFCC0,0);
+
+    if (use_square)
+        draw_interpolated_wave(start_x, start_y, square_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
+                               0);
+    if (use_sine)
+        draw_interpolated_wave(start_x, start_y, sine_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
+                               0);
 //    __BKPT(0);
 }
 auto StorageOscilloscope::print_tick() -> void
@@ -208,6 +221,7 @@ auto StorageOscilloscope::stop() -> void
 {
     tick_timer.pause();
 }
+
 // 切换触发模式
 auto StorageOscilloscope::switch_trigger_mode() -> void
 {
@@ -215,12 +229,16 @@ auto StorageOscilloscope::switch_trigger_mode() -> void
     set_trigger_mode(_trigger_mode);
     update_count();
 }
+
 // 图像左移
-void StorageOscilloscope::left_shift() {
+void StorageOscilloscope::left_shift()
+{
     // 确保新的wave_index不会超出array_length - length
-    if (wave_start_index + index_offset < array_length - length) {
+    if (wave_start_index + index_offset < array_length - length)
+    {
         wave_start_index += index_offset;
-    } else {
+    } else
+    {
         // 如果wave_index + length接近或超过array_length，则设置为最大允许值
         wave_start_index = array_length - length;
     }
@@ -229,24 +247,34 @@ void StorageOscilloscope::left_shift() {
 //     LCD_Color_Clean(80, 38, 400, 242,0xFFFF);//修改这行要同时修改右移函数和画波形函数、start_x、start_y
     // 调用绘制网格线的函数
 //    draw_dividers(78, 36, 324, 208, 10, 8, 0X8410, 2); // 使用灰色绘制分割线，留出边距
-    draw_dashed_dividers(78, 36, 324, 208, 10, 8, 0X8410, 2,4,4);
+    draw_dashed_dividers(border_info::x, border_info::y, border_info::width, border_info::height, 10, 8, 0X8410, border_info::margin, 4,
+                         4);
 //     if(use_square) draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_start_index, array_length, 0);
 //     if(use_sine)   draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_start_index, array_length, 0);
-    if(use_square) draw_interpolated_wave(start_x, start_y, square_wave,CH0_buff, length, wave_start_index, array_length, 0XFCC0,0);
-    if(use_sine)   draw_interpolated_wave(start_x, start_y, sine_wave,CH0_buff, length, wave_start_index, array_length, 0XFCC0,0);
+    if (use_square)
+        draw_interpolated_wave(start_x, start_y, square_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
+                               0);
+    if (use_sine)
+        draw_interpolated_wave(start_x, start_y, sine_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
+                               0);
 
 }
+
 // 图像右移
-void StorageOscilloscope::right_shift() {
+void StorageOscilloscope::right_shift()
+{
     // 确保新的wave_index不会小于0
-    if (wave_start_index >= index_offset) {
+    if (wave_start_index >= index_offset)
+    {
         wave_start_index -= index_offset;
-    } else {
+    } else
+    {
         wave_start_index = 0; // 如果wave_index小于index_offset，则设置为0
     }
 
     // 确保新的wave_index加上length不会超出array_length
-    if (wave_start_index + length > array_length) {
+    if (wave_start_index + length > array_length)
+    {
         length = array_length - wave_start_index; // 调整显示长度以适应新的wave_index
     }
 
@@ -254,11 +282,16 @@ void StorageOscilloscope::right_shift() {
 //    LCD_Color_Clean(80, 38, 400, 242,0xFFFF);//修改这行要同时修改左移函数和画波形函数、start_x、start_y
     // 调用绘制网格线的函数
 //    draw_dividers(78, 36, 324, 208, 10, 8, 0X8410, 2); // 使用灰色绘制分割线，留出边距
-    draw_dashed_dividers(78, 36, 324, 208, 10, 8, 0X8410, 2,4,4);
+    draw_dashed_dividers(border_info::x, border_info::y, border_info::width, border_info::height, 10, 8, 0X8410, border_info::margin, 4,
+                         4);
     //     if(use_square) draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_start_index, array_length, 0);
 //     if(use_sine)   draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_start_index, array_length, 0);
-    if(use_square) draw_interpolated_wave(start_x, start_y, square_wave,CH0_buff, length, wave_start_index, array_length,  0XFCC0,0);
-    if(use_sine)   draw_interpolated_wave(start_x, start_y, sine_wave,CH0_buff, length, wave_start_index, array_length, 0XFCC0,0);
+    if (use_square)
+        draw_interpolated_wave(start_x, start_y, square_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
+                               0);
+    if (use_sine)
+        draw_interpolated_wave(start_x, start_y, sine_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
+                               0);
 
 
 }
