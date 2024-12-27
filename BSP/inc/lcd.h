@@ -17,8 +17,7 @@
 extern "C" {
 #endif
 
-/*预编译*/
-#define LCD_SORTS 9481
+
 
 
 /*LCD地址*/

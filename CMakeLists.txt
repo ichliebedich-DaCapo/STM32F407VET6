@@ -13,6 +13,7 @@ set(GUI_ENABLE True)
 #set (AI_ENABLE True)
 # 添加编译器选项，使得支持Module特性
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts")
+
 # --------------------------------------某些配置------------------------------
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_VERSION 1)
