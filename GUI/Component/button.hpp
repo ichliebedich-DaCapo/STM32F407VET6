@@ -21,6 +21,7 @@ public:
     // 使用前必须设置父对象
     static inline auto init(Obj component) -> void;
 
+    // 点击事件
     static inline auto click(Obj obj = _obj) -> void;
 
     // 自定义风格按钮

@@ -34,6 +34,7 @@ enum class WaveCurveType
     CatmullRomSp_line,
 };
 
+
 /**
  * @brief 绘制波形曲线
  * @note 没有显式实例化，所以，请注意不要在多个地方使用同一个模板函数，不然会导致代码膨胀。不过就这个函数的性能而言，不大可能在多个地方调用这个函数
@@ -221,6 +222,10 @@ struct WaveCurve<Coord>::DrawFunction<WaveCurveType::Interpolated_Line, Color>
     }
 };
 
+
+
+
+
 // 二次贝塞尔曲线
 template<typename Coord>
 template<typename Color>
@@ -384,5 +389,6 @@ WaveCurve<Coord>::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Co
 //    memmove(data, data + 1, (N - 1) * sizeof(data[0]));// 将数据左移一位
 //    data[N - 1] = value;// 一放在前面就会卡死，不知缘由 总不能是该死的优化导致的吧
 }
+
 
 #endif //SIMULATOR_WAVECURVE_HPP

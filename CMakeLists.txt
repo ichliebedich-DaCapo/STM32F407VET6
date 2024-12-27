@@ -42,6 +42,7 @@ set(SIZE arm-none-eabi-size)
 #set(SIZE llvm-size)
 
 # -----------------工程设置-----------------
+
 project(Furina C CXX ASM)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_C_STANDARD 11)
@@ -102,7 +103,7 @@ if (COMPILER_IS_GCC)
     #-Oz:极度优化大小,进一步优化生成的代码大小，比 -Os更激进,可能会牺牲一些性能。
     #-flto:在链接阶段进行优化,允许进行跨文件的优化，进一步提高性能，但耗时间（项目本来就小我不在乎），并且这个优化容易出问题（这个我很在乎）
     #-fprofile-generate（生成配置文件） 和 -fprofile-use（基于配置文件的优化）
-    add_compile_options(-O2 -g3)
+    add_compile_options(-Ofast -g)
     # 必须关闭静态库独立模块编译，才能够使用链接优化
     if (NOT STATIC_MODULE_LD)
 #仅使用 add_compile_options(-flto)：

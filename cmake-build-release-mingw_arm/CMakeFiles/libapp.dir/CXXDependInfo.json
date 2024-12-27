@@ -1,0 +1,64 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "GNU",
+	"compiler-simulate-id" : "",
+	"config" : "Release",
+	"cxx-modules" : 
+	{
+		"CMakeFiles/libapp.dir/Module/inc/flash_storage.ixx.obj" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "CXX_MODULES",
+			"relative-directory" : "Module/inc",
+			"source" : "D:/Program/stm32/STM32F407VET6/Module/inc/flash_storage.ixx",
+			"type" : "CXX_MODULES",
+			"visibility" : "PUBLIC"
+		},
+		"CMakeFiles/libapp.dir/Module/src/flash_storage.cppm.obj" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "CXX_MODULES",
+			"relative-directory" : "Module/src",
+			"source" : "D:/Program/stm32/STM32F407VET6/Module/src/flash_storage.cppm",
+			"type" : "CXX_MODULES",
+			"visibility" : "PUBLIC"
+		}
+	},
+	"dir-cur-bld" : "D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm",
+	"dir-cur-src" : "D:/Program/stm32/STM32F407VET6",
+	"dir-top-bld" : "D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm",
+	"dir-top-src" : "D:/Program/stm32/STM32F407VET6",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : 
+	[
+		"D:\\Program\\stm32\\STM32F407VET6\\Application\\Base",
+		"D:\\Program\\stm32\\STM32F407VET6\\Library\\ST\\AI\\Inc",
+		"D:\\Program\\stm32\\STM32F407VET6\\Application\\Conf",
+		"D:\\Program\\stm32\\STM32F407VET6\\Application\\voiceStorageAndPlay",
+		"D:\\Program\\stm32\\STM32F407VET6\\Library\\CMSIS\\DSP\\Include",
+		"D:\\Program\\stm32\\STM32F407VET6\\Library\\CMSIS\\DSP\\PrivateInclude",
+		"D:\\Program\\stm32\\STM32F407VET6\\Library\\Data",
+		"D:\\Program\\stm32\\STM32F407VET6\\BSP\\inc",
+		"D:\\Program\\stm32\\STM32F407VET6\\Drivers",
+		"D:\\Program\\stm32\\STM32F407VET6\\Drivers\\STM32F4xx_HAL_Driver\\Inc",
+		"D:\\Program\\stm32\\STM32F407VET6\\Drivers\\STM32F4xx_HAL_Driver\\Inc\\Legacy",
+		"D:\\Program\\stm32\\STM32F407VET6\\Drivers\\CMSIS\\Device\\ST\\STM32F4xx\\Include",
+		"D:\\Program\\stm32\\STM32F407VET6\\Drivers\\CMSIS\\Include",
+		"D:\\Program\\stm32\\STM32F407VET6\\Module\\inc",
+		"D:\\Program\\stm32\\STM32F407VET6\\GUI\\UI\\voiceStorageAndPlay",
+		"D:\\Program\\stm32\\STM32F407VET6\\GUI\\Base",
+		"D:\\Program\\stm32\\STM32F407VET6\\GUI\\Component",
+		"D:\\Program\\stm32\\STM32F407VET6\\GUI\\Events",
+		"D:\\Program\\stm32\\STM32F407VET6\\GUI\\Render",
+		"D:\\Program\\stm32\\STM32F407VET6\\Library\\Third_Party\\LVGL",
+		"D:\\Program\\stm32\\STM32F407VET6\\Library\\Third_Party\\LVGL\\lvgl\\src",
+		"D:\\Program\\stm32\\STM32F407VET6\\Library\\Third_Party\\LVGL\\lvgl\\examples\\porting"
+	],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/libapp.dir"
+}

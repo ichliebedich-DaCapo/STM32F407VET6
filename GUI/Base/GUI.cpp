@@ -52,6 +52,7 @@ auto GUI::resource_init() -> void
 
     gui->main.screen = lv_obj_create(nullptr);
     lv_obj_set_size(gui->main.screen, 480, 320);
+    lv_obj_set_style_bg_color(gui->main.screen, lv_color_hex(0x000000), LV_PART_MAIN); //设置屏幕背景色
     Screen::init();// 初始化屏幕
     lv_obj_update_layout(gui->main.screen);
     Events::init();
