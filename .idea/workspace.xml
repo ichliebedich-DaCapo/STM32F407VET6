@@ -32,12 +32,26 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】FPGA的时序正常可以正常读取数值">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】准备合并">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/lcd.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/lcd.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/lcd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CMakeASMCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CMakeSystem.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CompilerIdC/CMakeCCompilerId.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CompilerIdCXX/CMakeCXXCompilerId.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/clion-Release-MinGW_ARM-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/clion-Release-MinGW_ARM-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/libapp.dir/CXXDependInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/libapp.dir/CXXDependInfo.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/cmake_install.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1695,6 +1709,11 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release-MinGW_ARM" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="E:\Program\Embedded\MCU\STM32\final_homework\stlink.cfg" reset-type="RUN" download-type="UPDATED_ONLY">
         <debugger kind="GDB" isBundled="true" />
@@ -1898,15 +1917,7 @@
       <workItem from="1735198393536" duration="89000" />
       <workItem from="1735199719148" duration="2034000" />
       <workItem from="1735218767740" duration="4379000" />
-      <workItem from="1735294699751" duration="3374000" />
-    </task>
-    <task id="LOCAL-00027" summary="【初始】准备引入LVGL模拟器">
-      <option name="closed" value="true" />
-      <created>1729158055637</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1729158055638</updated>
+      <workItem from="1735294699751" duration="5463000" />
     </task>
     <task id="LOCAL-00028" summary="【初始】开始引入LVGL模拟器">
       <option name="closed" value="true" />
@@ -2292,7 +2303,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734847075458</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="【简易存储示波器】准备合并">
+      <option name="closed" value="true" />
+      <created>1735298176799</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1735298176799</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2314,7 +2333,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/no_dirty_point" />
+                        <option value="ZQ" />
                       </list>
                     </value>
                   </entry>
@@ -2327,7 +2346,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【双音频信号发生器】完善了一下Readme" />
     <MESSAGE value="【双音频信号发生器】实测过程中，发现定时器的psc和arr有些古怪：比如我明明把psc与arr颠倒了却仍得到相同的结果，另外arr在1和0范围内有些古怪。128*8K有些高，卡在定时器中断里不出来，这并不应该" />
     <MESSAGE value="【双音频信号发生器】硬件基本功能已正确，可整一些花活了" />
     <MESSAGE value="【双音频信号发生器】基本功能已全部完备，可以添加CPU温度显示了" />
@@ -2352,7 +2370,8 @@
     <MESSAGE value="【语音存储与回放】完善了播放速度等逻辑" />
     <MESSAGE value="【语音存储与回放】修复了已知问题(doge" />
     <MESSAGE value="【简易存储示波器】FPGA的时序正常可以正常读取数值" />
-    <option name="LAST_COMMIT_MESSAGE" value="【简易存储示波器】FPGA的时序正常可以正常读取数值" />
+    <MESSAGE value="【简易存储示波器】准备合并" />
+    <option name="LAST_COMMIT_MESSAGE" value="【简易存储示波器】准备合并" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
