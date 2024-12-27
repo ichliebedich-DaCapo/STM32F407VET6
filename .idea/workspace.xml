@@ -28,31 +28,23 @@
   </component>
   <component name="CMakeSettings">
     <configurations>
-      <configuration PROFILE_NAME="Release-MinGW_ARM" ENABLED="true" CONFIG_NAME="Release" TOOLCHAIN_NAME="MinGW_ARM" BUILD_OPTIONS="-j 16" />
+      <configuration PROFILE_NAME="Release" ENABLED="true" CONFIG_NAME="Release" BUILD_OPTIONS="-j 20" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】准备合并">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】按键逻辑基本完成，噪音波形显示正常">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CMakeASMCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CMakeCCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CMakeCXXCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CMakeSystem.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CompilerIdC/CMakeCCompilerId.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CompilerIdCXX/CMakeCXXCompilerId.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/clion-Release-MinGW_ARM-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/clion-Release-MinGW_ARM-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/clion-environment.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/libapp.dir/CXXDependInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/libapp.dir/CXXDependInfo.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/font.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/lv_customer_font_SourceHanSerifSC_Regular_13.c" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/lv_customer_font_SourceHanSerifSC_Regular_13.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/lv_customer_font_SourceHanSerifSC_Regular_15.c" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/lv_customer_font_SourceHanSerifSC_Regular_15.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/.idea/lvgl-simulator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/.idea/lvgl-simulator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
     </list>
+    <list id="226a4da6-948d-4efd-966f-49a1ee475c55" name="34753 进行的更改" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,7 +70,7 @@
     </option>
     <option name="loadedFiles">
       <list>
-        <option value="$PROJECT_DIR$/../../../../../Tools/Develop/Embedded/STM32Cube/Repository/STM32F4_svd/STM32F4_svd_V2.0/STM32F407.svd" />
+        <option value="$PROJECT_DIR$/Resource/STM32F4_svd/STM32F4_svd_V2.0/STM32F407.svd" />
       </list>
     </option>
     <option name="nodes">
@@ -92,7 +84,7 @@
         <entry key="STM32F407.svd|g:I2C" value="-C" />
         <entry key="STM32F407.svd|g:SPI" value="-C" />
         <entry key="STM32F407.svd|g:TIM" value="-C" />
-        <entry key="STM32F407.svd|g:USART" value="-C" />
+        <entry key="STM32F407.svd|g:USART" value="-E" />
         <entry key="STM32F407.svd|g:USB_OTG_FS" value="-C" />
         <entry key="STM32F407.svd|g:USB_OTG_HS" value="-C" />
         <entry key="STM32F407.svd|p:ADC1" value="-C" />
@@ -588,12 +580,12 @@
         <entry key="STM32F407.svd|p:Ethernet_PTP|PTPTSSR" value="HC" />
         <entry key="STM32F407.svd|p:Ethernet_PTP|PTPTTHR" value="HC" />
         <entry key="STM32F407.svd|p:Ethernet_PTP|PTPTTLR" value="HC" />
-        <entry key="STM32F407.svd|p:FLASH" value="-C" />
+        <entry key="STM32F407.svd|p:FLASH" value="-E" />
         <entry key="STM32F407.svd|p:FLASH|ACR" value="HC" />
         <entry key="STM32F407.svd|p:FLASH|CR" value="HC" />
         <entry key="STM32F407.svd|p:FLASH|KEYR" value="HC" />
         <entry key="STM32F407.svd|p:FLASH|OPTCR" value="HC" />
-        <entry key="STM32F407.svd|p:FLASH|OPTKEYR" value="HC" />
+        <entry key="STM32F407.svd|p:FLASH|OPTKEYR" value="HE" />
         <entry key="STM32F407.svd|p:FLASH|SR" value="HC" />
         <entry key="STM32F407.svd|p:FSMC" value="-C" />
         <entry key="STM32F407.svd|p:FSMC|BCR1" value="HC" />
@@ -1549,14 +1541,14 @@
         <entry key="STM32F407.svd|p:UART5|CR3" value="HC" />
         <entry key="STM32F407.svd|p:UART5|DR" value="HC" />
         <entry key="STM32F407.svd|p:UART5|SR" value="HC" />
-        <entry key="STM32F407.svd|p:USART1" value="-C" />
+        <entry key="STM32F407.svd|p:USART1" value="-E" />
         <entry key="STM32F407.svd|p:USART1|BRR" value="HC" />
-        <entry key="STM32F407.svd|p:USART1|CR1" value="HC" />
+        <entry key="STM32F407.svd|p:USART1|CR1" value="HE" />
         <entry key="STM32F407.svd|p:USART1|CR2" value="HC" />
         <entry key="STM32F407.svd|p:USART1|CR3" value="HC" />
-        <entry key="STM32F407.svd|p:USART1|DR" value="HC" />
+        <entry key="STM32F407.svd|p:USART1|DR" value="HE" />
         <entry key="STM32F407.svd|p:USART1|GTPR" value="HC" />
-        <entry key="STM32F407.svd|p:USART1|SR" value="HC" />
+        <entry key="STM32F407.svd|p:USART1|SR" value="HE" />
         <entry key="STM32F407.svd|p:USART2" value="-C" />
         <entry key="STM32F407.svd|p:USART2|BRR" value="HC" />
         <entry key="STM32F407.svd|p:USART2|CR1" value="HC" />
@@ -1588,7 +1580,7 @@
       </map>
     </option>
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release-MinGW_ARM" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
   <component name="Git.Settings">
     <option name="PUSH_TAGS">
       <GitPushTagMode>
@@ -1630,8 +1622,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6.git&quot;,
-    &quot;accountId&quot;: &quot;a679c97f-91ee-40eb-8ce5-af8a944aaf79&quot;
+    &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6&quot;,
+    &quot;accountId&quot;: &quot;a9ff9cce-f6cd-41c3-bd49-a806fb1abb79&quot;
   },
   &quot;recentNewPullRequestHead&quot;: {
     &quot;server&quot;: {
@@ -1646,6 +1638,7 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Core/startup_stm32f407vetx.s" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/syscalls.c" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/startup_stm32f407xx.s" root0="SKIP_INSPECTION" />
@@ -1673,63 +1666,115 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;OpenOCD 下载并运行.OCD Furina.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;cf.advertisement.text.has.clang-format&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ZQ&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Program/Embedded/MCU/STM32/Furina&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.C/C++&quot;,
-    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
-    &quot;two.files.diff.last.used.file&quot;: &quot;D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "OpenOCD 下载并运行.OCD Furina.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "no__dirty__point",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/David/CLionProjects/STM32F407VET6/Resource/STM32F4_svd/STM32F4_svd_V2.0/STM32F407.svd",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.cidr.embedded.config",
+    "structure.view.defaults.are.configured": "true",
+    "two.files.diff.last.used.file": "D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Embedded\MCU\STM32\Furina\AI\LinearDisplacementSensor\App" />
+      <recent name="C:\Users\David\CLionProjects\STM32F407VET6\BSP\src" />
+      <recent name="C:\Users\David\CLionProjects\STM32F407VET6\BSP\inc" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Base" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Module" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Conf" />
-      <recent name="D:\Embedded\MCU\STM32\Furina\BSP\Core" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release-MinGW_ARM" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
-      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="E:\Program\Embedded\MCU\STM32\final_homework\stlink.cfg" reset-type="RUN" download-type="UPDATED_ONLY">
-        <debugger kind="GDB" isBundled="true" />
-      </openocd>
+    <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <method v="2">
-        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libapp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libapp" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libbsp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libbsp" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libdata" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdata" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libdrivers" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdrivers" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libdsp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdsp" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libfreertos" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libfreertos" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libgui" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libgui" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="liblvgl" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="liblvgl" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libmodule" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libmodule" CONFIG_NAME="Release">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
-      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Embedded\MCU\STM32\Furina\stlink.cfg" reset-type="RUN" download-type="UPDATED_ONLY">
+      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Program\stm32\STM32F407VET6\stlink.cfg" reset-type="RUN" download-type="UPDATED_ONLY">
         <debugger kind="GDB" isBundled="true" />
       </openocd>
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="CMake 应用程序.Furina.elf" />
+      <item itemvalue="CMake 应用程序.libapp" />
+      <item itemvalue="CMake 应用程序.libbsp" />
+      <item itemvalue="CMake 应用程序.libdata" />
+      <item itemvalue="CMake 应用程序.libdrivers" />
+      <item itemvalue="CMake 应用程序.libdsp" />
+      <item itemvalue="CMake 应用程序.libfreertos" />
+      <item itemvalue="CMake 应用程序.libgui" />
+      <item itemvalue="CMake 应用程序.liblvgl" />
+      <item itemvalue="CMake 应用程序.libmodule" />
+      <item itemvalue="OpenOCD 下载并运行.OCD Furina" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -1862,78 +1907,48 @@
       <workItem from="1731126680338" duration="11017000" />
       <workItem from="1731138557520" duration="3000" />
       <workItem from="1731146753731" duration="2111000" />
-      <workItem from="1731804432575" duration="1000" />
-      <workItem from="1731804440550" duration="979000" />
-      <workItem from="1731805439362" duration="4437000" />
-      <workItem from="1731832462157" duration="36000" />
-      <workItem from="1731937309645" duration="21000" />
-      <workItem from="1732030432676" duration="5512000" />
-      <workItem from="1732035994900" duration="3928000" />
-      <workItem from="1732070356664" duration="11603000" />
-      <workItem from="1732092031903" duration="2999000" />
-      <workItem from="1732386998477" duration="4232000" />
-      <workItem from="1732428943434" duration="2412000" />
-      <workItem from="1733506190475" duration="319000" />
-      <workItem from="1733532159885" duration="358000" />
-      <workItem from="1733584671219" duration="2096000" />
-      <workItem from="1733628473886" duration="1999000" />
-      <workItem from="1733914853746" duration="34000" />
-      <workItem from="1734251679101" duration="6958000" />
-      <workItem from="1734265209046" duration="8918000" />
-      <workItem from="1734275410126" duration="270000" />
-      <workItem from="1734348601182" duration="4304000" />
-      <workItem from="1734355128333" duration="879000" />
-      <workItem from="1734360489520" duration="215000" />
-      <workItem from="1734413317047" duration="5420000" />
-      <workItem from="1734422338265" duration="212000" />
-      <workItem from="1734422595608" duration="192000" />
-      <workItem from="1734430758139" duration="472000" />
-      <workItem from="1734434237402" duration="460000" />
-      <workItem from="1734438722498" duration="73000" />
-      <workItem from="1734438864311" duration="672000" />
-      <workItem from="1734439793050" duration="82000" />
-      <workItem from="1734440090093" duration="544000" />
-      <workItem from="1734442165612" duration="116000" />
-      <workItem from="1734442401755" duration="1530000" />
-      <workItem from="1734508689897" duration="115000" />
-      <workItem from="1734602853664" duration="44000" />
-      <workItem from="1734679015314" duration="2771000" />
-      <workItem from="1734694068126" duration="626000" />
-      <workItem from="1734743034192" duration="1269000" />
-      <workItem from="1734751179404" duration="23877000" />
-      <workItem from="1734798003845" duration="138000" />
-      <workItem from="1734827827399" duration="3000" />
-      <workItem from="1734839898190" duration="3878000" />
-      <workItem from="1734868155154" duration="103000" />
-      <workItem from="1734928047675" duration="1028000" />
-      <workItem from="1734937647100" duration="1276000" />
-      <workItem from="1734952475359" duration="13706000" />
-      <workItem from="1735005118542" duration="263000" />
-      <workItem from="1735008118805" duration="37000" />
-      <workItem from="1735012998068" duration="7997000" />
-      <workItem from="1735059332454" duration="2128000" />
-      <workItem from="1735092385053" duration="7531000" />
-      <workItem from="1735106466709" duration="10370000" />
-      <workItem from="1735198393536" duration="89000" />
-      <workItem from="1735199719148" duration="2034000" />
-      <workItem from="1735218767740" duration="4379000" />
-      <workItem from="1735294699751" duration="5463000" />
-    </task>
-    <task id="LOCAL-00028" summary="【初始】开始引入LVGL模拟器">
-      <option name="closed" value="true" />
-      <created>1729158151119</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1729158151119</updated>
-    </task>
-    <task id="LOCAL-00029" summary="【初始】主项目——发生了一件奇怪的事情，即便没有使用GUI，ROM也会爆满。正在尝试解决……">
-      <option name="closed" value="true" />
-      <created>1729328155208</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1729328155208</updated>
+      <workItem from="1731819970455" duration="9683000" />
+      <workItem from="1731833480751" duration="1720000" />
+      <workItem from="1731835242420" duration="2896000" />
+      <workItem from="1731937742245" duration="10165000" />
+      <workItem from="1731988784042" duration="855000" />
+      <workItem from="1731994158433" duration="4061000" />
+      <workItem from="1732019218712" duration="9247000" />
+      <workItem from="1732445754873" duration="4070000" />
+      <workItem from="1732537736311" duration="351000" />
+      <workItem from="1732550079280" duration="624000" />
+      <workItem from="1732601582697" duration="2490000" />
+      <workItem from="1733583835153" duration="2939000" />
+      <workItem from="1733627883023" duration="2089000" />
+      <workItem from="1733740919035" duration="6276000" />
+      <workItem from="1733747218603" duration="10496000" />
+      <workItem from="1733817215669" duration="5616000" />
+      <workItem from="1733826178797" duration="660000" />
+      <workItem from="1733840910186" duration="2771000" />
+      <workItem from="1733885583420" duration="3022000" />
+      <workItem from="1734139004421" duration="1324000" />
+      <workItem from="1734141900784" duration="7023000" />
+      <workItem from="1734251275641" duration="100000" />
+      <workItem from="1734743539008" duration="1203000" />
+      <workItem from="1734764243874" duration="3853000" />
+      <workItem from="1734830802338" duration="1000" />
+      <workItem from="1734861685065" duration="1200000" />
+      <workItem from="1734934458354" duration="16000" />
+      <workItem from="1734934481034" duration="21476000" />
+      <workItem from="1735013513523" duration="3640000" />
+      <workItem from="1735048939442" duration="2678000" />
+      <workItem from="1735093009686" duration="7000" />
+      <workItem from="1735111241922" duration="155000" />
+      <workItem from="1735114767603" duration="64000" />
+      <workItem from="1735130318355" duration="5038000" />
+      <workItem from="1735135403000" duration="2222000" />
+      <workItem from="1735138883124" duration="30000" />
+      <workItem from="1735191869103" duration="2836000" />
+      <workItem from="1735208225528" duration="214000" />
+      <workItem from="1735218670722" duration="9204000" />
+      <workItem from="1735227932944" duration="2000" />
+      <workItem from="1735302109839" duration="2605000" />
+      <workItem from="1735306190440" duration="10399000" />
     </task>
     <task id="LOCAL-00030" summary="【初始】主项目——初步判断是ui.cpp导致ROM爆了，原因不明">
       <option name="closed" value="true" />
@@ -2167,151 +2182,167 @@
       <option name="project" value="LOCAL" />
       <updated>1731138259424</updated>
     </task>
-    <task id="LOCAL-00059" summary="【双音频信号发生器】准备合并">
+    <task id="LOCAL-00059" summary="【直线位移传感器】控制GUI是否编译">
       <option name="closed" value="true" />
-      <created>1732030518272</created>
+      <created>1731819829207</created>
       <option name="number" value="00059" />
       <option name="presentableId" value="LOCAL-00059" />
       <option name="project" value="LOCAL" />
-      <updated>1732030518272</updated>
+      <updated>1731819829208</updated>
     </task>
-    <task id="LOCAL-00060" summary="【跨越】已经把AI模型初步部署进工程里了">
+    <task id="LOCAL-00060" summary="【直线位移传感器】ADC配置完毕">
       <option name="closed" value="true" />
-      <created>1732033106432</created>
+      <created>1731824158483</created>
       <option name="number" value="00060" />
       <option name="presentableId" value="LOCAL-00060" />
       <option name="project" value="LOCAL" />
-      <updated>1732033106432</updated>
+      <updated>1731824158483</updated>
     </task>
-    <task id="LOCAL-00061" summary="【准备】什么辣鸡gitignore，草">
+    <task id="LOCAL-00061" summary="【直线位移传感器】ADC配置完毕">
       <option name="closed" value="true" />
-      <created>1732036112221</created>
+      <created>1731824197141</created>
       <option name="number" value="00061" />
       <option name="presentableId" value="LOCAL-00061" />
       <option name="project" value="LOCAL" />
-      <updated>1732036112221</updated>
+      <updated>1731824197141</updated>
     </task>
-    <task id="LOCAL-00062" summary="【准备】是我错了">
+    <task id="LOCAL-00062" summary="【直线位移传感器】usart重定向完成">
       <option name="closed" value="true" />
-      <created>1732036146573</created>
+      <created>1731830904758</created>
       <option name="number" value="00062" />
       <option name="presentableId" value="LOCAL-00062" />
       <option name="project" value="LOCAL" />
-      <updated>1732036146573</updated>
+      <updated>1731830904758</updated>
     </task>
-    <task id="LOCAL-00063" summary="【跨越】AI模型能跑，但我没有掌握如何处理输入与输出数据">
+    <task id="LOCAL-00063" summary="【直线位移传感器】添加SVD文件">
       <option name="closed" value="true" />
-      <created>1732036617441</created>
+      <created>1731832862693</created>
       <option name="number" value="00063" />
       <option name="presentableId" value="LOCAL-00063" />
       <option name="project" value="LOCAL" />
-      <updated>1732036617441</updated>
+      <updated>1731832862694</updated>
     </task>
-    <task id="LOCAL-00064" summary="【阻碍】无论输入什么都只输出1，得要先排除浮点数据造成的影响">
+    <task id="LOCAL-00064" summary="【直线位移传感器】解决print重定向问题，基本完成">
       <option name="closed" value="true" />
-      <created>1732039874063</created>
+      <created>1731835188255</created>
       <option name="number" value="00064" />
       <option name="presentableId" value="LOCAL-00064" />
       <option name="project" value="LOCAL" />
-      <updated>1732039874063</updated>
+      <updated>1731835188255</updated>
     </task>
-    <task id="LOCAL-00065" summary="【跨越】我的第一个AI模型">
+    <task id="LOCAL-00065" summary="【直线位移传感器】ADC采集公式修正">
       <option name="closed" value="true" />
-      <created>1732083609388</created>
+      <created>1731946489048</created>
       <option name="number" value="00065" />
       <option name="presentableId" value="LOCAL-00065" />
       <option name="project" value="LOCAL" />
-      <updated>1732083609389</updated>
+      <updated>1731946489048</updated>
     </task>
-    <task id="LOCAL-00066" summary="准备融合">
+    <task id="LOCAL-00066" summary="【直线位移传感器】计时器频率改成50hz">
       <option name="closed" value="true" />
-      <created>1734251699351</created>
+      <created>1732538076350</created>
       <option name="number" value="00066" />
       <option name="presentableId" value="LOCAL-00066" />
       <option name="project" value="LOCAL" />
-      <updated>1734251699352</updated>
+      <updated>1732538076351</updated>
     </task>
-    <task id="LOCAL-00067" summary="已经融合，可以正常编译">
+    <task id="LOCAL-00067" summary="【直线位移传感器】计时器频率改成200hz">
       <option name="closed" value="true" />
-      <created>1734254062073</created>
+      <created>1733740958453</created>
       <option name="number" value="00067" />
       <option name="presentableId" value="LOCAL-00067" />
       <option name="project" value="LOCAL" />
-      <updated>1734254062073</updated>
+      <updated>1733740958453</updated>
     </task>
-    <task id="LOCAL-00068" summary="测试了module特性，可以正常使用">
+    <task id="LOCAL-00068" summary="【简易存储示波器】按键处理任务和后台读取任务框架搭好了">
       <option name="closed" value="true" />
-      <created>1734270514223</created>
+      <created>1733821061176</created>
       <option name="number" value="00068" />
       <option name="presentableId" value="LOCAL-00068" />
       <option name="project" value="LOCAL" />
-      <updated>1734270514223</updated>
+      <updated>1733821061177</updated>
     </task>
-    <task id="LOCAL-00069" summary="终于可以把模块的声明和实现分开了">
+    <task id="LOCAL-00069" summary="【简易存储示波器】按键处理任务和后台读取任务框架搭好了">
       <option name="closed" value="true" />
-      <created>1734273951315</created>
+      <created>1733821324431</created>
       <option name="number" value="00069" />
       <option name="presentableId" value="LOCAL-00069" />
       <option name="project" value="LOCAL" />
-      <updated>1734273951315</updated>
+      <updated>1733821324431</updated>
     </task>
-    <task id="LOCAL-00070" summary="略微调整了flash_storage模块的编写">
+    <task id="LOCAL-00070" summary="【简易存储示波器】UI框架好了">
       <option name="closed" value="true" />
-      <created>1734680719286</created>
+      <created>1734251312633</created>
       <option name="number" value="00070" />
       <option name="presentableId" value="LOCAL-00070" />
       <option name="project" value="LOCAL" />
-      <updated>1734680719286</updated>
+      <updated>1734251312633</updated>
     </task>
-    <task id="LOCAL-00071" summary="略微完善了flash_storage模块，并编写了测试案例">
+    <task id="LOCAL-00071" summary="【简易存储示波器】添加网格线完毕，尝试优化">
       <option name="closed" value="true" />
-      <created>1734682045548</created>
+      <created>1734963313662</created>
       <option name="number" value="00071" />
       <option name="presentableId" value="LOCAL-00071" />
       <option name="project" value="LOCAL" />
-      <updated>1734682045548</updated>
+      <updated>1734963313663</updated>
     </task>
-    <task id="LOCAL-00072" summary="flash_storage模块测试完毕">
+    <task id="LOCAL-00072" summary="【简易存储示波器】显示屏基本搞定，新的网格线，使用脏点数组">
       <option name="closed" value="true" />
-      <created>1734755295553</created>
+      <created>1734965526152</created>
       <option name="number" value="00072" />
       <option name="presentableId" value="LOCAL-00072" />
       <option name="project" value="LOCAL" />
-      <updated>1734755295553</updated>
+      <updated>1734965526152</updated>
     </task>
-    <task id="LOCAL-00073" summary="语音存储与回放可以使用，接下来只要添加各种逻辑即可">
+    <task id="LOCAL-00073" summary="【简易存储示波器】显示屏基本搞定，新的网格线，使用脏点数组">
       <option name="closed" value="true" />
-      <created>1734774212737</created>
+      <created>1734965550570</created>
       <option name="number" value="00073" />
       <option name="presentableId" value="LOCAL-00073" />
       <option name="project" value="LOCAL" />
-      <updated>1734774212737</updated>
+      <updated>1734965550570</updated>
     </task>
-    <task id="LOCAL-00074" summary="【语音存储与回放】完善了播放速度等逻辑">
+    <task id="LOCAL-00074" summary="【简易存储示波器】新增画曲线函数,通过缓存区实现擦除（未知错误）">
       <option name="closed" value="true" />
-      <created>1734787622086</created>
+      <created>1735130692530</created>
       <option name="number" value="00074" />
       <option name="presentableId" value="LOCAL-00074" />
       <option name="project" value="LOCAL" />
-      <updated>1734787622086</updated>
+      <updated>1735130692531</updated>
     </task>
-    <task id="LOCAL-00075" summary="【简易存储示波器】FPGA的时序正常可以正常读取数值">
+    <task id="LOCAL-00075" summary="【简易存储示波器】波形界面设计基本完成，新增虚线分割线函数（无bug）">
       <option name="closed" value="true" />
-      <created>1734847075458</created>
+      <created>1735136179803</created>
       <option name="number" value="00075" />
       <option name="presentableId" value="LOCAL-00075" />
       <option name="project" value="LOCAL" />
-      <updated>1734847075458</updated>
+      <updated>1735136179803</updated>
     </task>
-    <task id="LOCAL-00076" summary="【简易存储示波器】准备合并">
+    <task id="LOCAL-00076" summary="【简易存储示波器】波形界面设计基本完成,新增边框命名空间">
       <option name="closed" value="true" />
-      <created>1735298176799</created>
+      <created>1735192833928</created>
       <option name="number" value="00076" />
       <option name="presentableId" value="LOCAL-00076" />
       <option name="project" value="LOCAL" />
-      <updated>1735298176799</updated>
+      <updated>1735192833928</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="【简易存储示波器】按键逻辑基本完成，噪音波形显示正常">
+      <option name="closed" value="true" />
+      <created>1735227706391</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1735227706391</updated>
+    </task>
+    <task id="LOCAL-00078" summary="【简易存储示波器】按键逻辑基本完成，噪音波形显示正常">
+      <option name="closed" value="true" />
+      <created>1735227737893</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1735227737893</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2333,7 +2364,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="ZQ" />
+                        <option value="origin/ZQ" />
                       </list>
                     </value>
                   </entry>
@@ -2346,38 +2377,42 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="【双音频信号发生器】完成了这次的项目优化，后面还有许多不妥之处，后续再慢慢改" />
+    <MESSAGE value="【双音频信号发生器】完善了一下Readme" />
     <MESSAGE value="【双音频信号发生器】实测过程中，发现定时器的psc和arr有些古怪：比如我明明把psc与arr颠倒了却仍得到相同的结果，另外arr在1和0范围内有些古怪。128*8K有些高，卡在定时器中断里不出来，这并不应该" />
     <MESSAGE value="【双音频信号发生器】硬件基本功能已正确，可整一些花活了" />
     <MESSAGE value="【双音频信号发生器】基本功能已全部完备，可以添加CPU温度显示了" />
     <MESSAGE value="【双音频信号发生器】成功降低程序的耦合" />
     <MESSAGE value="【双音频信号发生器】整合了链接优化选项" />
     <MESSAGE value="【双音频信号发生器】略微优化了CMakelists" />
-    <MESSAGE value="【双音频信号发生器】准备合并" />
-    <MESSAGE value="【跨越】已经把AI模型初步部署进工程里了" />
-    <MESSAGE value="【准备】什么辣鸡gitignore，草" />
-    <MESSAGE value="【准备】是我错了" />
-    <MESSAGE value="【跨越】AI模型能跑，但我没有掌握如何处理输入与输出数据" />
-    <MESSAGE value="【阻碍】无论输入什么都只输出1，得要先排除浮点数据造成的影响" />
-    <MESSAGE value="【跨越】我的第一个AI模型" />
-    <MESSAGE value="准备融合" />
-    <MESSAGE value="已经融合，可以正常编译" />
-    <MESSAGE value="测试了module特性，可以正常使用" />
-    <MESSAGE value="终于可以把模块的声明和实现分开了" />
-    <MESSAGE value="略微调整了flash_storage模块的编写" />
-    <MESSAGE value="略微完善了flash_storage模块，并编写了测试案例" />
-    <MESSAGE value="flash_storage模块测试完毕" />
-    <MESSAGE value="语音存储与回放可以使用，接下来只要添加各种逻辑即可" />
-    <MESSAGE value="【语音存储与回放】完善了播放速度等逻辑" />
-    <MESSAGE value="【语音存储与回放】修复了已知问题(doge" />
-    <MESSAGE value="【简易存储示波器】FPGA的时序正常可以正常读取数值" />
-    <MESSAGE value="【简易存储示波器】准备合并" />
-    <option name="LAST_COMMIT_MESSAGE" value="【简易存储示波器】准备合并" />
+    <MESSAGE value="【直线位移传感器】控制GUI是否编译" />
+    <MESSAGE value="【直线位移传感器】ADC配置完毕" />
+    <MESSAGE value="【直线位移传感器】usart重定向完成" />
+    <MESSAGE value="【直线位移传感器】添加SVD文件" />
+    <MESSAGE value="【直线位移传感器】解决print重定向问题，基本完成" />
+    <MESSAGE value="【直线位移传感器】ADC采集公式修正" />
+    <MESSAGE value="【直线位移传感器】计时器频率改成50hz" />
+    <MESSAGE value="【直线位移传感器】计时器频率改成200hz" />
+    <MESSAGE value="【简易存储示波器】按键处理任务和后台读取任务框架搭好了" />
+    <MESSAGE value="【简易存储示波器】UI框架好了" />
+    <MESSAGE value="【简易存储示波器】添加网格线完毕，尝试优化" />
+    <MESSAGE value="【简易存储示波器】显示屏基本搞定，新的网格线，使用脏点数组（无明显优化）" />
+    <MESSAGE value="【简易存储示波器】显示屏基本搞定，新的网格线，使用脏点数组" />
+    <MESSAGE value="【简易存储示波器】新增画曲线函数,通过缓存区实现擦除（未知错误）" />
+    <MESSAGE value="【简易存储示波器】波形界面设计基本完成，新增虚线分割线函数（无bug）" />
+    <MESSAGE value="【简易存储示波器】波形界面设计基本完成,新增边框命名空间" />
+    <MESSAGE value="【简易存储示波器】按键逻辑基本完成，噪音波形显示正常" />
+    <option name="LAST_COMMIT_MESSAGE" value="【简易存储示波器】按键逻辑基本完成，噪音波形显示正常" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
-        <watch expression="temp_data" />
-        <watch expression="temp" />
+        <watch expression="$control" language="ObjectiveC" />
+        <watch expression="rxBuffer" />
+        <watch expression="rxBuffer[1]" />
+        <watch expression="read_data" />
+        <watch expression="CH0_buff" />
+        <watch expression="read_flag" />
       </configuration>
     </watches-manager>
   </component>

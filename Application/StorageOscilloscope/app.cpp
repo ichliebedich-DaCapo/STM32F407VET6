@@ -12,7 +12,8 @@
 #include "w25qxx.h"
 #include "timer.h"
 #include "spi.h"
-#include "ui.hpp"
+#include "GUI.hpp"
+
 
 // -----------宏定义-----------
 // 读取数据基址000
@@ -28,14 +29,75 @@
 
 //全局变量
 uint16_t continuous_read_times = 0;//连续读取次数
-//标志
-bool read_flag = false;
-bool continuous_read_flag = true;
-bool latch_data_flag = false;
+
 //变量
 uint8_t read_wave[400];//读取到的临时数组
 uint16_t j = 0;//测试用
 uint8_t temp = 0;
+
+enum class Flags: uint8_t
+{
+    READ = 1<<0,// bit:0 读取数据 0表示不读，1表示读取
+    OSC_TRIGGER_MODE=1<<1,// bit:1 触发模式 0表示单次触发，1表示连续触发
+    LATCH_MODE=1<<2,// bit:2 锁存数据 0表示不锁存，1表示锁存
+};
+
+
+class OSC
+{
+public:
+
+    static void handler()
+    {
+        OSC::set_read_flag();
+    }
+private:
+    // 辅助函数：设置指定标志
+    static void set_flag(Flags flag)
+    {
+        flags |= static_cast<uint8_t>(flag);
+    }
+
+    // 辅助函数：清除指定标志
+    static void clear_flag(Flags flag)
+    {
+        flags &= ~static_cast<uint8_t>(flag);
+    }
+
+    // 辅助函数：获取指定标志
+    static uint8_t get_flag(Flags flag)
+    {
+        return flags & static_cast<uint8_t>(flag);
+    }
+
+    // 辅助函数：翻转指定标志
+    static void toggle_flag(Flags flag)
+    {
+        flags ^= static_cast<uint8_t>(flag);
+    }
+
+public:
+    //读取标志函数组
+    static void set_read_flag(){ set_flag(Flags::READ);}
+    static void clear_read_flag(){ clear_flag(Flags::READ);}
+    static uint8_t get_read_flag(){ return get_flag(Flags::READ);}
+    static void toggle_read_flag(){ toggle_flag(Flags::READ);}
+    //触发标志函数组
+    static void set_trigger_mode_flag(){ set_flag(Flags::OSC_TRIGGER_MODE);}
+    static void clear_trigger_mode_flag(){ clear_flag(Flags::OSC_TRIGGER_MODE);}
+    static uint8_t get_trigger_mode_flag(){ return get_flag(Flags::OSC_TRIGGER_MODE);}
+    static void toggle_trigger_mode_flag(){ toggle_flag(Flags::OSC_TRIGGER_MODE);}
+    //锁存标志函数组
+    static void set_latch_mode_flag(){ set_flag(Flags::LATCH_MODE);}
+    static void clear_latch_mode_flag(){ clear_flag(Flags::LATCH_MODE);}
+    static uint8_t get_latch_mode_flag(){ return get_flag(Flags::LATCH_MODE);}
+    static void toggle_latch_mode_flag(){ toggle_flag(Flags::LATCH_MODE);}
+
+
+private:
+
+    static inline uint8_t flags =0;
+};
 
 
 void app_init()
@@ -64,6 +126,7 @@ void app_init()
     HAL_Delay(60);
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
 
+
 }
 
 void key_handler()
@@ -73,7 +136,7 @@ void key_handler()
         case keyk0://启闭后台读取任务
             if (Key::stateHandler(KEY_STATE_NONE))
             {
-                read_flag = !read_flag;
+                OSC::toggle_read_flag();
             }
 
             break;
@@ -81,8 +144,8 @@ void key_handler()
         case keyk1://切换单次触发和连续触发模式
             if (Key::stateHandler(KEY_STATE_NONE))
             {
-                continuous_read_flag = !continuous_read_flag;
-
+                OSC::toggle_trigger_mode_flag();
+                UI_Interface::switch_trigger_mode(OSC::get_trigger_mode_flag());
             }
             break;
 
@@ -90,9 +153,7 @@ void key_handler()
         case keyk2://启闭锁存模式
             if (Key::stateHandler(KEY_STATE_NONE))
             {
-
-                latch_data_flag = !latch_data_flag;
-
+                OSC::toggle_latch_mode_flag();
             }
             break;
 
@@ -116,9 +177,8 @@ void key_handler()
             break;
             // 测试4：测试读取数据
         case keyk8://测试程序
-            read_flag = !read_flag;
+            OSC::toggle_read_flag();
             break;
-
 
         case keykB:
             // 测试读命令
@@ -133,8 +193,7 @@ void key_handler()
             break;
 
         case keykE://设置频率字
-            FREQ_N = temp;
-            FREQ_M_P = 0;
+            SWITCH_TRIGGER_MODE = 0x000;
             break;
 
         case keykF://重置FPGA
@@ -152,7 +211,7 @@ void key_handler()
 //最终测试记得取消注释
 void background_handler()
 {
-    if (read_flag)
+    if (OSC::get_read_flag())
     {
         // 发送读取数据命令
         READ_COMMAND = 0x000;// 传入参数0
@@ -169,18 +228,18 @@ void background_handler()
 //            }
 //            read_wave[i]=HAL_GetTick()&0xFF;
         }
-        if (latch_data_flag)
+        if (OSC::get_latch_mode_flag())
         {
 //        w25qxx_buffer_write_uint16(read_wave, continuous_read_times * 400, 400);//这里存储数据到flash
             continuous_read_times++;
         }
         //绘制波形
         UI_Interface::display(read_wave);
-//        if (!continuous_read_flag)
-//        {
-//            read_flag = false;
-//            continuous_read_times = 0;
-//        }
+        if (!OSC::get_trigger_mode_flag())
+        {
+            OSC::toggle_trigger_mode_flag();
+            continuous_read_times = 0;
+        }
     }
 }
 
