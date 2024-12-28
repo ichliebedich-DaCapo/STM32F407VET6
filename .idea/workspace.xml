@@ -32,33 +32,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】添加了新的选项">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】准备合并UI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/3.29.6/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/3.29.6/CompilerIdC/CMakeCCompilerId.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/3.29.6/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/3.29.6/CompilerIdCXX/CMakeCXXCompilerId.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CMakeASMCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CMakeCCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CMakeCXXCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CMakeSystem.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CompilerIdC/CMakeCCompilerId.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CompilerIdCXX/CMakeCXXCompilerId.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/clion-Release-MinGW_ARM-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/clion-Release-MinGW_ARM-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/clion-environment.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/libapp.dir/CXXDependInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/libapp.dir/CXXDependInfo.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/cmake_install.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1680,32 +1656,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;OpenOCD 下载并运行.OCD Furina.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;cf.advertisement.text.has.clang-format&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ZQ&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Program/Embedded/MCU/STM32/Furina&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.cidr.embedded.config&quot;,
-    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
-    &quot;two.files.diff.last.used.file&quot;: &quot;D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "OpenOCD 下载并运行.OCD Furina.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.west.config.association.type.startup.service": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.advertisement.text.has.clang-format": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "ZQ",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "E:/Program/Embedded/MCU/STM32/Furina",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.sourceCode.C/C++",
+    "structure.view.defaults.are.configured": "true",
+    "two.files.diff.last.used.file": "D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Embedded\MCU\STM32\Furina\AI\LinearDisplacementSensor\App" />
@@ -1925,15 +1901,7 @@
       <workItem from="1735199719148" duration="2034000" />
       <workItem from="1735218767740" duration="4379000" />
       <workItem from="1735294699751" duration="5463000" />
-      <workItem from="1735356713533" duration="4586000" />
-    </task>
-    <task id="LOCAL-00028" summary="【初始】开始引入LVGL模拟器">
-      <option name="closed" value="true" />
-      <created>1729158151119</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1729158151119</updated>
+      <workItem from="1735356713533" duration="8566000" />
     </task>
     <task id="LOCAL-00029" summary="【初始】主项目——发生了一件奇怪的事情，即便没有使用GUI，ROM也会爆满。正在尝试解决……">
       <option name="closed" value="true" />
@@ -2319,7 +2287,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735298176799</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="【简易存储示波器】准备合并UI">
+      <option name="closed" value="true" />
+      <created>1735362893253</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1735362893253</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2341,7 +2317,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/ZQ" />
+                        <option value="origin/no_dirty_point" />
                       </list>
                     </value>
                   </entry>
@@ -2354,7 +2330,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【双音频信号发生器】实测过程中，发现定时器的psc和arr有些古怪：比如我明明把psc与arr颠倒了却仍得到相同的结果，另外arr在1和0范围内有些古怪。128*8K有些高，卡在定时器中断里不出来，这并不应该" />
     <MESSAGE value="【双音频信号发生器】硬件基本功能已正确，可整一些花活了" />
     <MESSAGE value="【双音频信号发生器】基本功能已全部完备，可以添加CPU温度显示了" />
     <MESSAGE value="【双音频信号发生器】成功降低程序的耦合" />
@@ -2379,7 +2354,8 @@
     <MESSAGE value="【语音存储与回放】修复了已知问题(doge" />
     <MESSAGE value="【简易存储示波器】FPGA的时序正常可以正常读取数值" />
     <MESSAGE value="【简易存储示波器】准备合并" />
-    <option name="LAST_COMMIT_MESSAGE" value="【简易存储示波器】准备合并" />
+    <MESSAGE value="【简易存储示波器】准备合并UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="【简易存储示波器】准备合并UI" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

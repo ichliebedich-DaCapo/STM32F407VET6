@@ -39,12 +39,12 @@ uint8_t read_wave[400];//读取到的临时数组
 uint16_t j = 0;//测试用
 uint8_t temp = 0;
 
-enum class Flags: uint8_t
+enum class Flags : uint8_t
 {
-    READ = 1<<0,// bit:0 读取数据 0表示不读，1表示读取
-    OSC_TRIGGER_MODE=1<<1,// bit:1 触发模式 0表示连续触发，1表示单次触发
-    LATCH_MODE=1<<2,// bit:2 锁存数据 0表示不锁存，1表示锁存
-    READ_FLASH=1<<3,// bit:3 读取Flash 0表示不读，1表示读取Flash
+    READ = 1 << 0,// bit:0 读取数据 0表示不读，1表示读取
+    OSC_TRIGGER_MODE = 1 << 1,// bit:1 触发模式 0表示连续触发，1表示单次触发
+    LATCH_MODE = 1 << 2,// bit:2 锁存数据 0表示不锁存，1表示锁存
+    READ_FLASH = 1 << 3,// bit:3 读取Flash 0表示不读，1表示读取Flash
 };
 
 
@@ -56,6 +56,7 @@ public:
     {
         OSC::set_read_flag();
     }
+
 private:
     // 辅助函数：设置指定标志
     static void set_flag(Flags flag)
@@ -83,32 +84,98 @@ private:
 
 public:
     //读取标志函数组
-    static void set_read_flag(){ set_flag(Flags::READ);}
-    static void clear_read_flag(){ clear_flag(Flags::READ);}
-    static uint8_t get_read_flag(){ return get_flag(Flags::READ);}
-    static void toggle_read_flag(){ toggle_flag(Flags::READ);}
+    static void set_read_flag() { set_flag(Flags::READ); }
+
+    static void clear_read_flag() { clear_flag(Flags::READ); }
+
+    static uint8_t get_read_flag() { return get_flag(Flags::READ); }
+
+    static void toggle_read_flag() { toggle_flag(Flags::READ); }
+
     //触发标志函数组
-    static void set_trigger_mode_flag(){ set_flag(Flags::OSC_TRIGGER_MODE);}
-    static void clear_trigger_mode_flag(){ clear_flag(Flags::OSC_TRIGGER_MODE);}
-    static uint8_t get_trigger_mode_flag(){ return get_flag(Flags::OSC_TRIGGER_MODE);}
-    static void toggle_trigger_mode_flag(){ toggle_flag(Flags::OSC_TRIGGER_MODE);}
+    static void set_trigger_mode_flag() { set_flag(Flags::OSC_TRIGGER_MODE); }
+
+    static void clear_trigger_mode_flag() { clear_flag(Flags::OSC_TRIGGER_MODE); }
+
+    static uint8_t get_trigger_mode_flag() { return get_flag(Flags::OSC_TRIGGER_MODE); }
+
+    static void toggle_trigger_mode_flag() { toggle_flag(Flags::OSC_TRIGGER_MODE); }
+
     //锁存标志函数组
-    static void set_latch_mode_flag(){ set_flag(Flags::LATCH_MODE);}
-    static void clear_latch_mode_flag(){ clear_flag(Flags::LATCH_MODE);}
-    static uint8_t get_latch_mode_flag(){ return get_flag(Flags::LATCH_MODE);}
-    static void toggle_latch_mode_flag(){ toggle_flag(Flags::LATCH_MODE);}
+    static void set_latch_mode_flag() { set_flag(Flags::LATCH_MODE); }
+
+    static void clear_latch_mode_flag() { clear_flag(Flags::LATCH_MODE); }
+
+    static uint8_t get_latch_mode_flag() { return get_flag(Flags::LATCH_MODE); }
+
+    static void toggle_latch_mode_flag() { toggle_flag(Flags::LATCH_MODE); }
+
     //读取flash标志函数组
-    static void set_read_flash_mode_flag(){ set_flag(Flags::READ_FLASH);}
-    static void clear_read_flash_mode_flag(){ clear_flag(Flags::READ_FLASH);}
-    static uint8_t get_read_flash_mode_flag(){ return get_flag(Flags::READ_FLASH);}
-    static void toggle_read_flash_mode_flag(){ toggle_flag(Flags::READ_FLASH);}
+    static void set_read_flash_mode_flag() { set_flag(Flags::READ_FLASH); }
+
+    static void clear_read_flash_mode_flag() { clear_flag(Flags::READ_FLASH); }
+
+    static uint8_t get_read_flash_mode_flag() { return get_flag(Flags::READ_FLASH); }
+
+    static void toggle_read_flash_mode_flag() { toggle_flag(Flags::READ_FLASH); }
 
 
 private:
 
-    static inline uint8_t flags =0;
+    static inline uint8_t flags = 0;
 };
-uint16_t threshold=2000;
+
+uint16_t threshold = 2000;
+#define SAMPLE_RATE_12_5M 0
+#define SAMPLE_RATE_4_2M 2
+#define SAMPLE_RATE_1M 11
+#define SAMPLE_RATE_500K 24
+#define SAMPLE_RATE_100K 124
+#define SAMPLE_RATE_10K 1249
+#define SAMPLE_RATE_2K 6249
+#define SAMPLE_RATE_1K 12499
+#define SAMPLE_RATE_500HZ 24999
+#define SAMPLE_RATE_200HZ 62499
+uint8_t sample_rate = 0;
+
+void set_sample_rate(uint8_t &rate)
+{
+    switch (rate)
+    {
+        case 0:
+            FREQ_N = SAMPLE_RATE_12_5M;
+            break;
+        case 1:
+            FREQ_N = SAMPLE_RATE_4_2M;
+            break;
+        case 2:
+            FREQ_N = SAMPLE_RATE_1M;
+            break;
+        case 3:
+            FREQ_N = SAMPLE_RATE_500K;
+            break;
+        case 4:
+            FREQ_N = SAMPLE_RATE_100K;
+            break;
+        case 5:
+            FREQ_N = SAMPLE_RATE_10K;
+            break;
+        case 6:
+            FREQ_N = SAMPLE_RATE_2K;
+            break;
+        case 7:
+            FREQ_N = SAMPLE_RATE_1K;
+            break;
+        case 8:
+            FREQ_N = SAMPLE_RATE_500HZ;
+            break;
+        case 9:
+            FREQ_N = SAMPLE_RATE_200HZ;
+        default:
+            break;
+
+    }
+}
 
 void app_init()
 {
@@ -144,6 +211,7 @@ void app_init()
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
 
 }
+
 
 void key_handler()
 {
@@ -189,8 +257,8 @@ void key_handler()
 //            __BKPT(0);
             break;
         case keyk6://读取400数据
-        if(!OSC::get_read_flag())
-             OSC::toggle_read_flash_mode_flag();
+            if (!OSC::get_read_flag())
+                OSC::toggle_read_flash_mode_flag();
 //            __BKPT(0);
             break;
 
@@ -202,25 +270,26 @@ void key_handler()
 
         case keykB:
             // 测试读命令
-            temp += 1;
-            FREQ_N = temp;
-            FREQ_M_P = 0;
+            if(sample_rate<9)
+                sample_rate++;
+
+            set_sample_rate(sample_rate);
             //UI_Interface::print_scan_speed(scan_speed);
             break;
         case keykC:
-            temp--;
-            FREQ_N = temp;
-            FREQ_M_P = 0;
+            if (temp > 0)
+                temp --;
+            set_sample_rate(sample_rate);
             //UI_Interface::print_scan_speed(scan_speed);
             break;
 
         case keykD:
-            threshold -=500;
-            TRIGGER_THRESHOLD = threshold ;
+            threshold -= 100;
+            TRIGGER_THRESHOLD = threshold;
             break;
         case keykE:
-            threshold +=500;
-            TRIGGER_THRESHOLD = threshold ;
+            threshold += 100;
+            TRIGGER_THRESHOLD = threshold;
             break;
 
         case keykF://重置FPGA
@@ -244,42 +313,40 @@ void background_handler()
         READ_COMMAND = 0x000;// 传入参数0
         // 等待数据传输完成
         while (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_5));//PC5是等待引脚
-        if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1))
+
+//        if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1))
+//        {
+        // 读取数据
+        for (int i = 0; i < 400; i++)
         {
-            //读取数据
-            for (int i = 0; i < 400; i++)
-            {
-                read_wave[i] = READ_DATA_BASE[i] >> 4;
-//            read_wave[i] = test_data[j];
-//            j++;
-//            if (j == 1600) {
-//                j = 0; // 重置计数器
-//            }
-//            read_wave[i]=HAL_GetTick()&0xFF;
-            }
-            if (OSC::get_latch_mode_flag())
-            {
-//        w25qxx_buffer_write_uint16(read_wave, continuous_read_times * 400, 400);//这里存储数据到flash
-                continuous_read_times++;
-            }
-            //绘制波形
-            UI_Interface::display(read_wave);
-            if (OSC::get_trigger_mode_flag())
-            {
-                OSC::clear_read_flag();
-                continuous_read_times = 0;
-            }
+            read_wave[i] = READ_DATA_BASE[i] >> 4;
         }
-        else
+
+        // 锁存数据
+        if (OSC::get_latch_mode_flag())
         {
-            for (int i = 0; i < 400; i++)
-            {
-                read_wave[i] = 0;
-            }
-            UI_Interface::display(read_wave);
+            //这里存储数据到flash
+            // w25qxx_buffer_write_uint16(read_wave, continuous_read_times * 400, 400);
+            continuous_read_times++;
         }
+
+        //绘制波形
+        UI_Interface::display(read_wave);
+        if (OSC::get_trigger_mode_flag())
+        {
+            OSC::clear_read_flag();
+            continuous_read_times = 0;
+        }
+//        }
+//        else
+//        {
+//            memset(read_wave, 0, sizeof(read_wave));
+//            UI_Interface::display(read_wave);
+//        }
+
+
     }
-    else if(OSC::get_read_flash_mode_flag())
+    else if (OSC::get_read_flash_mode_flag())
     {
         OSC::toggle_read_flash_mode_flag();
     }
