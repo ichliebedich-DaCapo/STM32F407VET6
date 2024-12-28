@@ -32,7 +32,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】新增OSC类，已经存放标志，UI初步设计">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】UI界面变更，标签变更外部接口">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/font.txt" afterDir="false" />
@@ -1943,15 +1943,7 @@
       <workItem from="1735306190440" duration="10555000" />
       <workItem from="1735348635695" duration="6113000" />
       <workItem from="1735355973611" duration="1405000" />
-      <workItem from="1735357412410" duration="809000" />
-    </task>
-    <task id="LOCAL-00031" summary="【初始】主项目——已解决。吃个饭回来，发现原因是使用了cout，ROM直接增加了两百多KB">
-      <option name="closed" value="true" />
-      <created>1729331128662</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1729331128662</updated>
+      <workItem from="1735357412410" duration="1767000" />
     </task>
     <task id="LOCAL-00032" summary="【初始】主项目——CMakelists未修改前">
       <option name="closed" value="true" />
@@ -2337,7 +2329,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735318195945</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="【简易存储示波器】UI界面变更，标签变更外部接口">
+      <option name="closed" value="true" />
+      <created>1735358321579</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1735358321579</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2372,7 +2372,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【双音频信号发生器】完善了一下Readme" />
     <MESSAGE value="【双音频信号发生器】实测过程中，发现定时器的psc和arr有些古怪：比如我明明把psc与arr颠倒了却仍得到相同的结果，另外arr在1和0范围内有些古怪。128*8K有些高，卡在定时器中断里不出来，这并不应该" />
     <MESSAGE value="【双音频信号发生器】硬件基本功能已正确，可整一些花活了" />
     <MESSAGE value="【双音频信号发生器】基本功能已全部完备，可以添加CPU温度显示了" />
@@ -2397,7 +2396,8 @@
     <MESSAGE value="【简易存储示波器】波形界面设计基本完成,新增边框命名空间" />
     <MESSAGE value="【简易存储示波器】按键逻辑基本完成，噪音波形显示正常" />
     <MESSAGE value="【简易存储示波器】新增OSC类，已经存放标志，UI初步设计" />
-    <option name="LAST_COMMIT_MESSAGE" value="【简易存储示波器】新增OSC类，已经存放标志，UI初步设计" />
+    <MESSAGE value="【简易存储示波器】UI界面变更，标签变更外部接口" />
+    <option name="LAST_COMMIT_MESSAGE" value="【简易存储示波器】UI界面变更，标签变更外部接口" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
