@@ -77,7 +77,7 @@ public:
     static void switch_trigger_mode(uint8_t trigger_mode_flag);
     static void switch_latch_mode(uint8_t latch_mode_flag);
     static void print_magnification(uint32_t& magnification);
-    static void print_scan_speed(uint32_t& magnification);
+    static void print_scan_speed(uint8_t& magnification);
 };
 
 

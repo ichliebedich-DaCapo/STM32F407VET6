@@ -84,7 +84,7 @@ public:
     // 打印放大倍数
     static inline auto print_magnification(uint32_t& magnification) -> void;
     // 打印扫描速度
-    static inline auto print_scan_speed(uint32_t& scan_speed) -> void;
+    static inline auto print_scan_speed(auto& scan_speed) -> void;
     // 更新时间
     static inline auto update_count() -> void;
     // 获取时间
@@ -92,7 +92,7 @@ public:
     //获取放大倍数
     static inline auto get_magnification(uint32_t& magnification) -> uint32_t;
     // 获取扫描速度
-    static inline auto get_scan_speed(uint32_t& scan_speed) -> uint32_t;
+    static inline auto get_scan_speed(auto& scan_speed) -> uint8_t;
 
 
 private:
@@ -213,9 +213,45 @@ auto StorageOscilloscope::print_magnification(uint32_t& magnification) -> void
 {
     Text::set_text(GUI_Base::get_ui()->main.label_magnification, "%lu", get_magnification(magnification));
 }
-auto StorageOscilloscope::print_scan_speed(uint32_t& scan_speed) -> void
+auto StorageOscilloscope::print_scan_speed(auto& scan_speed) -> void
 {
-    Text::set_text(GUI_Base::get_ui()->main.label_scan_speed, "%luHz", get_scan_speed(scan_speed));
+    char buf[10];
+    switch (scan_speed)
+    {
+        case 0:
+            sprintf(buf, "%s", "12.5MHz");
+            break;
+        case 1:
+            sprintf(buf, "%s", "4.2MHz");
+            break;
+        case 2:
+            sprintf(buf, "%s", "1MHz");
+            break;
+        case 3:
+            sprintf(buf, "%s", "500KHz");
+            break;
+        case 4:
+            sprintf(buf, "%s", "100KHz");
+            break;
+        case 5:
+            sprintf(buf, "%s", "10KHz");
+            break;
+        case 6:
+            sprintf(buf, "%s", "2KHz");
+            break;
+        case 7:
+            sprintf(buf, "%s", "1KHz");
+            break;
+        case 8:
+            sprintf(buf, "%s", "500Hz");
+            break;
+        case 9:
+            sprintf(buf, "%s", "200Hz");
+        default:
+            break;
+
+    }
+    Text::set_text(GUI_Base::get_ui()->main.label_scan_speed, buf);
 }
 // 更新时间
 auto StorageOscilloscope::update_count() -> void
@@ -241,7 +277,7 @@ auto StorageOscilloscope::get_magnification(uint32_t& magnification) -> uint32_t
   return magnification;
 }
 //获取扫描速度
-auto StorageOscilloscope::get_scan_speed(uint32_t& scan_speed) -> uint32_t
+auto StorageOscilloscope::get_scan_speed(auto& scan_speed) -> uint8_t
 {
     return scan_speed;
 }
@@ -372,7 +408,7 @@ void UI_Interface::print_magnification(uint32_t& magnification)
 {
     StorageOscilloscope::print_magnification(magnification);
 }
-void UI_Interface::print_scan_speed(uint32_t &scan_speed)
+void UI_Interface::print_scan_speed(uint8_t &scan_speed)
 {
     StorageOscilloscope::print_scan_speed(scan_speed);
 }
