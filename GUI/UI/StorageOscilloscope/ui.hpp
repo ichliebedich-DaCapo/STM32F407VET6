@@ -34,7 +34,6 @@ struct lv_ui_t
         Obj btn_magnification_label;
         Obj label_title;// 标题
         Obj label_tick;// 时刻
-
         Obj label_scan_speed;     //扫描速度数据
         Obj label_magnification;  //放大倍数数据
     } main;// 主屏幕
@@ -75,6 +74,9 @@ public:
     static void left_shift(uint8_t (&read_wave)[400]);
     static void right_shift(uint8_t (&read_wave)[400]);
     static void switch_trigger_mode(uint8_t trigger_mode_flag);
+    static void switch_latch_mode(uint8_t latch_mode_flag);
+    static void print_magnification(uint32_t& magnification);
+    static void print_scan_speed(uint32_t& magnification);
 };
 
 

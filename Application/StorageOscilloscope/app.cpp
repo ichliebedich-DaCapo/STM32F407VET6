@@ -38,8 +38,9 @@ uint8_t temp = 0;
 enum class Flags: uint8_t
 {
     READ = 1<<0,// bit:0 读取数据 0表示不读，1表示读取
-    OSC_TRIGGER_MODE=1<<1,// bit:1 触发模式 0表示单次触发，1表示连续触发
+    OSC_TRIGGER_MODE=1<<1,// bit:1 触发模式 0表示连续触发，1表示单次触发
     LATCH_MODE=1<<2,// bit:2 锁存数据 0表示不锁存，1表示锁存
+    READ_FLASH=1<<3,// bit:3 读取Flash 0表示不读，1表示读取Flash
 };
 
 
@@ -92,6 +93,11 @@ public:
     static void clear_latch_mode_flag(){ clear_flag(Flags::LATCH_MODE);}
     static uint8_t get_latch_mode_flag(){ return get_flag(Flags::LATCH_MODE);}
     static void toggle_latch_mode_flag(){ toggle_flag(Flags::LATCH_MODE);}
+    //读取flash标志函数组
+    static void set_read_flash_mode_flag(){ set_flag(Flags::READ_FLASH);}
+    static void clear_read_flash_mode_flag(){ clear_flag(Flags::READ_FLASH);}
+    static uint8_t get_read_flash_mode_flag(){ return get_flag(Flags::READ_FLASH);}
+    static void toggle_read_flash_mode_flag(){ toggle_flag(Flags::READ_FLASH);}
 
 
 private:
@@ -154,27 +160,30 @@ void key_handler()
             if (Key::stateHandler(KEY_STATE_NONE))
             {
                 OSC::toggle_latch_mode_flag();
+                UI_Interface::switch_latch_mode(OSC::get_latch_mode_flag());
             }
             break;
 
         case keyk3://图像左移
-            // 测试1：测试写入数据
-//        w25qxx_buffer_write_uint16(test_data,0,400);
-
             UI_Interface::left_shift(read_wave);
             break;
-            // 测试2：测试读取数据
-        case keyk4://图像右移
-//        w25qxx_buffer_read_uint16(read_wave,0,400);
 
+        case keyk4://图像右移
             UI_Interface::right_shift(read_wave);
             break;
-            // 测试3：测试擦除扇区
+
 
         case keyk5://切换程控放大器放大倍数
-            w25qxx_sector_erase(0);
-            __BKPT(0);
+//            uint32_t  magnification;
+//            UI_Interface::print_magnification(magnification);
+//            __BKPT(0);
             break;
+        case keyk6://读取400数据
+        if(!OSC::get_read_flag())
+             OSC::toggle_read_flash_mode_flag();
+//            __BKPT(0);
+            break;
+
             // 测试4：测试读取数据
         case keyk8://测试程序
             OSC::toggle_read_flag();
@@ -185,15 +194,20 @@ void key_handler()
             temp += 1;
             FREQ_N = temp;
             FREQ_M_P = 0;
+            //UI_Interface::print_scan_speed(scan_speed);
             break;
         case keykC:
             temp--;
             FREQ_N = temp;
             FREQ_M_P = 0;
+            //UI_Interface::print_scan_speed(scan_speed);
             break;
 
-        case keykE://设置频率字
-            SWITCH_TRIGGER_MODE = 0x000;
+        case keykE://切换触发模式
+            //SWITCH_TRIGGER_MODE = 0x000;
+            //w25qxx_buffer_read_uint16(read_wave,0,400);
+            //w25qxx_sector_erase(0);
+            //w25qxx_buffer_write_uint16(test_data,0,400);
             break;
 
         case keykF://重置FPGA
@@ -235,11 +249,15 @@ void background_handler()
         }
         //绘制波形
         UI_Interface::display(read_wave);
-        if (!OSC::get_trigger_mode_flag())
+        if (OSC::get_trigger_mode_flag())
         {
-            OSC::toggle_trigger_mode_flag();
+            OSC::clear_read_flag();
             continuous_read_times = 0;
         }
+    }
+    else if(OSC::get_read_flash_mode_flag())
+    {
+        OSC::toggle_read_flash_mode_flag();
     }
 }
 
