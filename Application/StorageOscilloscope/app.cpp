@@ -30,10 +30,7 @@
 
 //全局变量
 uint16_t continuous_read_times = 0;//连续读取次数
-//标志
-bool read_flag = false;
-bool continuous_read_flag = true;
-bool latch_data_flag = false;
+
 //变量
 uint8_t read_wave[400];//读取到的临时数组
 uint16_t j = 0;//测试用
@@ -84,45 +81,30 @@ private:
 
 public:
     //读取标志函数组
-    static void set_read_flag() { set_flag(Flags::READ); }
-
-    static void clear_read_flag() { clear_flag(Flags::READ); }
-
-    static uint8_t get_read_flag() { return get_flag(Flags::READ); }
-
-    static void toggle_read_flag() { toggle_flag(Flags::READ); }
-
+    static void set_read_flag(){ set_flag(Flags::READ);}
+    static void clear_read_flag(){ clear_flag(Flags::READ);}
+    static uint8_t get_read_flag(){ return get_flag(Flags::READ);}
+    static void toggle_read_flag(){ toggle_flag(Flags::READ);}
     //触发标志函数组
-    static void set_trigger_mode_flag() { set_flag(Flags::OSC_TRIGGER_MODE); }
-
-    static void clear_trigger_mode_flag() { clear_flag(Flags::OSC_TRIGGER_MODE); }
-
-    static uint8_t get_trigger_mode_flag() { return get_flag(Flags::OSC_TRIGGER_MODE); }
-
-    static void toggle_trigger_mode_flag() { toggle_flag(Flags::OSC_TRIGGER_MODE); }
-
+    static void set_trigger_mode_flag(){ set_flag(Flags::OSC_TRIGGER_MODE);}
+    static void clear_trigger_mode_flag(){ clear_flag(Flags::OSC_TRIGGER_MODE);}
+    static uint8_t get_trigger_mode_flag(){ return get_flag(Flags::OSC_TRIGGER_MODE);}
+    static void toggle_trigger_mode_flag(){ toggle_flag(Flags::OSC_TRIGGER_MODE);}
     //锁存标志函数组
-    static void set_latch_mode_flag() { set_flag(Flags::LATCH_MODE); }
-
-    static void clear_latch_mode_flag() { clear_flag(Flags::LATCH_MODE); }
-
-    static uint8_t get_latch_mode_flag() { return get_flag(Flags::LATCH_MODE); }
-
-    static void toggle_latch_mode_flag() { toggle_flag(Flags::LATCH_MODE); }
-
+    static void set_latch_mode_flag(){ set_flag(Flags::LATCH_MODE);}
+    static void clear_latch_mode_flag(){ clear_flag(Flags::LATCH_MODE);}
+    static uint8_t get_latch_mode_flag(){ return get_flag(Flags::LATCH_MODE);}
+    static void toggle_latch_mode_flag(){ toggle_flag(Flags::LATCH_MODE);}
     //读取flash标志函数组
-    static void set_read_flash_mode_flag() { set_flag(Flags::READ_FLASH); }
-
-    static void clear_read_flash_mode_flag() { clear_flag(Flags::READ_FLASH); }
-
-    static uint8_t get_read_flash_mode_flag() { return get_flag(Flags::READ_FLASH); }
-
-    static void toggle_read_flash_mode_flag() { toggle_flag(Flags::READ_FLASH); }
+    static void set_read_flash_mode_flag(){ set_flag(Flags::READ_FLASH);}
+    static void clear_read_flash_mode_flag(){ clear_flag(Flags::READ_FLASH);}
+    static uint8_t get_read_flash_mode_flag(){ return get_flag(Flags::READ_FLASH);}
+    static void toggle_read_flash_mode_flag(){ toggle_flag(Flags::READ_FLASH);}
 
 
 private:
 
-    static inline uint8_t flags = 0;
+    static inline uint8_t flags =0;
 };
 
 uint16_t threshold = 2000;

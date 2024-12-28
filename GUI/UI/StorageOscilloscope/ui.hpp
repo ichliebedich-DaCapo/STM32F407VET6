@@ -71,6 +71,7 @@ class UI_Interface
 public:
 
     static void display(uint8_t (&read_wave)[400]);
+    static void clear_screen();
     static void left_shift(uint8_t (&read_wave)[400]);
     static void right_shift(uint8_t (&read_wave)[400]);
     static void switch_trigger_mode(uint8_t trigger_mode_flag);
