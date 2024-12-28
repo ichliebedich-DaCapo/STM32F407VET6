@@ -32,9 +32,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】UI界面变更，标签变更外部接口">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】中断INT1(PB1)改成超时检测线">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/Draw_wave.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/Draw_wave.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/Draw_wave.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/Draw_wave.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.hpp" afterDir="false" />
     </list>
     <list id="226a4da6-948d-4efd-966f-49a1ee475c55" name="34753 进行的更改" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -1938,15 +1942,7 @@
       <workItem from="1735306190440" duration="10555000" />
       <workItem from="1735348635695" duration="6113000" />
       <workItem from="1735355973611" duration="1405000" />
-      <workItem from="1735357412410" duration="3093000" />
-    </task>
-    <task id="LOCAL-00033" summary="【初始】主项目——CMakelists实在没有什么好修改的地方">
-      <option name="closed" value="true" />
-      <created>1729336775210</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1729336775210</updated>
+      <workItem from="1735357412410" duration="6536000" />
     </task>
     <task id="LOCAL-00034" summary="【初始】主项目——简单测试了一下驱动模块与UI事件的对接，可以初步完成一些基本操作，但还需要改进。添加一些对外接口">
       <option name="closed" value="true" />
@@ -2332,7 +2328,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735360845546</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="【简易存储示波器】中断INT1(PB1)改成超时检测线">
+      <option name="closed" value="true" />
+      <created>1735362736774</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1735362736774</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2367,7 +2371,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【双音频信号发生器】实测过程中，发现定时器的psc和arr有些古怪：比如我明明把psc与arr颠倒了却仍得到相同的结果，另外arr在1和0范围内有些古怪。128*8K有些高，卡在定时器中断里不出来，这并不应该" />
     <MESSAGE value="【双音频信号发生器】硬件基本功能已正确，可整一些花活了" />
     <MESSAGE value="【双音频信号发生器】基本功能已全部完备，可以添加CPU温度显示了" />
     <MESSAGE value="【双音频信号发生器】成功降低程序的耦合" />
@@ -2392,7 +2395,8 @@
     <MESSAGE value="【简易存储示波器】按键逻辑基本完成，噪音波形显示正常" />
     <MESSAGE value="【简易存储示波器】新增OSC类，已经存放标志，UI初步设计" />
     <MESSAGE value="【简易存储示波器】UI界面变更，标签变更外部接口" />
-    <option name="LAST_COMMIT_MESSAGE" value="【简易存储示波器】UI界面变更，标签变更外部接口" />
+    <MESSAGE value="【简易存储示波器】中断INT1(PB1)改成超时检测线" />
+    <option name="LAST_COMMIT_MESSAGE" value="【简易存储示波器】中断INT1(PB1)改成超时检测线" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

@@ -69,7 +69,6 @@ static void draw_bresenham_segment_with_dirty_point(int32_t x0, int32_t y0, int3
  * @param start_x 起始点的 x 坐标,左下角原点
  * @param start_y 起始点的 y 坐标,左下角原点
  * @param p_DST_Buff    当前帧目标数据缓存区
- * @param p_DST_Buff_B  上一帧目标数据缓存区
  * @param p_SOC_Buff    源数据缓存区
  * @param length 显示长度（从start_index开始取length个数）
  * @param start_index 数组起始索引
@@ -128,7 +127,46 @@ void draw_interpolated_wave(uint16_t start_x, uint16_t start_y,
     }
 }
 
+/*
+ * 清除波形
+ * @param start_x 起始点的 x 坐标,左下角原点
+ * @param start_y 起始点的 y 坐标,左下角原点
+ * @param p_DST_Buff    当前帧目标数据缓存区
+ * @param length 显示长度（从start_index开始取length个数）
+ * @param start_index 数组起始索引
+ * @param array_length y数组的实际长度
+ * @param background_color 背景颜色
+ */
+void clear_interpolated_wave(uint16_t start_x, uint16_t start_y,const uint8_t *p_DST_Buff,
+                            size_t length,size_t start_index, size_t array_length,
+                            uint16_t background_color)
+{
+    // 检查输入参数的有效性
+    if (length == 0 || start_index >= array_length) return;
 
+    // 确保不会访问越界的数组元素
+    size_t end_index = start_index + length;
+    if (end_index > array_length) {
+        length = array_length - start_index;
+        if (length == 0) return;
+    }
+
+    //初始化上一次数据的第一个点
+    float last_prev_x = start_x;
+    float last_prev_y = start_y - p_DST_Buff[0] * (border_info::height-4*border_info::margin+1) / 255;
+
+    for (size_t i = 1; i < length; ++i) {
+        // 计算上一次数据的当前点的 x 和 y 坐标
+        float last_current_x = start_x + ((float) i / (length - 1)) * (border_info::width-4*border_info::margin+1);
+        float last_current_y = start_y - p_DST_Buff[i] * (border_info::height-4*border_info::margin+1) / 255;
+        // 清除旧线段
+        draw_bresenham_segment((int32_t) round(last_prev_x), (int32_t) round(last_prev_y),
+                               (int32_t) round(last_current_x), (int32_t) round(last_current_y), background_color);
+        // 更新上一个点为当前点
+        last_prev_x= last_current_x;
+        last_prev_y= last_current_y;
+    }
+}
 
 /*
  * 绘制一个简单的插值线

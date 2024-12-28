@@ -268,11 +268,7 @@ void background_handler()
         }
         else
         {
-            for (int i = 0; i < 400; i++)
-            {
-                read_wave[i] = 0;
-            }
-            UI_Interface::display(read_wave);
+            UI_Interface::clear_screen();
         }
     }
     else if(OSC::get_read_flash_mode_flag())

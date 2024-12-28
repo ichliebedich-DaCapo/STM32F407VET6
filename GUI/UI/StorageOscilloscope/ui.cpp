@@ -58,6 +58,9 @@ public:
     // 播放
     static inline auto handler(uint8_t (&read_wave)[400]) -> void;
 
+    // 清除
+    static inline auto clear() -> void;
+
     // 开始
     static inline auto start() -> void;
 
@@ -188,6 +191,17 @@ auto StorageOscilloscope::handler(uint8_t (&read_wave)[400]) -> void
                            0);
 
 //    __BKPT(0);
+}
+
+auto StorageOscilloscope::clear() -> void
+{
+
+    // 调用绘制网格线的函数
+    draw_dashed_dividers(border_info::x, border_info::y, border_info::width, border_info::height, 10, 8, 0X8410,
+                         border_info::margin, 4, 4);
+
+    clear_interpolated_wave(start_x, start_y, CH0_buff, length, wave_start_index, array_length,0);
+
 }
 
 auto StorageOscilloscope::print_tick() -> void
@@ -333,7 +347,10 @@ void UI_Interface::display(uint8_t (&read_wave)[400])
 {
     StorageOscilloscope::handler(read_wave);
 }
-
+void UI_Interface::clear_screen()
+{
+    StorageOscilloscope::clear();
+}
 void UI_Interface::left_shift(uint8_t (&read_wave)[400])
 {
     StorageOscilloscope::left_shift(read_wave);
