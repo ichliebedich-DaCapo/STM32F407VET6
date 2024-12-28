@@ -7,9 +7,11 @@ set(APP_DIR Application/StorageOscilloscope)
 # 注释后，可以使用链接优化-flto，并且默认开启链接优化
 # ld链接器无法自动创建目录以存放map文件，所以注释下面时需要确保存在bin目录
 set(STATIC_MODULE_LD True)
-# 使用GUI
+# ---------使用GUI---------
 set(GUI_ENABLE True)
-# 使用AI
+# ---------仅使用GUI的初始化---------
+#set(GUI_ONLY_INIT True)
+# ---------使用AI---------
 #set (AI_ENABLE True)
 # 添加编译器选项，使得支持Module特性
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts")
@@ -65,6 +67,9 @@ add_compile_definitions(ARM_MATH_CM4;ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING)
 add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx)
 if(GUI_ENABLE)
     add_definitions(-DGUI_ENABLE)
+endif ()
+if(GUI_ONLY_INIT)
+    add_definitions(-DGUI_ONLY_INIT)
 endif ()
 
 #--------------------------编译选项----------------------------

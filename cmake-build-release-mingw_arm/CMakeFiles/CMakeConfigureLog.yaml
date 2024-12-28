@@ -4,37 +4,37 @@ events:
   -
     kind: "message-v1"
     backtrace:
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineSystem.cmake:200 (message)"
-      - "CMakeLists.txt:44 (project)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineSystem.cmake:200 (message)"
+      - "CMakeLists.txt:48 (project)"
     message: |
       The target system is: Generic - 1 - 
       The host system is: Windows - 10.0.22631 - AMD64
   -
     kind: "message-v1"
     backtrace:
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
-      - "CMakeLists.txt:44 (project)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:48 (project)"
     message: |
       Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
-      Compiler: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-gcc.exe 
+      Compiler: E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/arm-none-eabi-gcc.exe 
       Build flags: 
       Id flags:  
       
       The output was:
       1
-      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-exit.o): in function `exit':
+      E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/ld.exe: E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1\\libc.a(libc_a-exit.o): in function `exit':
       exit.c:(.text.exit+0x28): undefined reference to `_exit'
-      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-closer.o): in function `_close_r':
+      E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/ld.exe: E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1\\libc.a(libc_a-closer.o): in function `_close_r':
       closer.c:(.text._close_r+0x18): undefined reference to `_close'
-      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-lseekr.o): in function `_lseek_r':
+      E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/ld.exe: E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1\\libc.a(libc_a-lseekr.o): in function `_lseek_r':
       lseekr.c:(.text._lseek_r+0x24): undefined reference to `_lseek'
-      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-readr.o): in function `_read_r':
+      E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/ld.exe: E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1\\libc.a(libc_a-readr.o): in function `_read_r':
       readr.c:(.text._read_r+0x24): undefined reference to `_read'
-      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-writer.o): in function `_write_r':
+      E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/ld.exe: E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1\\libc.a(libc_a-writer.o): in function `_write_r':
       writer.c:(.text._write_r+0x24): undefined reference to `_write'
-      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-sbrkr.o): in function `_sbrk_r':
+      E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/ld.exe: E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1\\libc.a(libc_a-sbrkr.o): in function `_sbrk_r':
       sbrkr.c:(.text._sbrk_r+0x18): undefined reference to `_sbrk'
       collect2.exe: error: ld returned 1 exit status
       
@@ -42,13 +42,13 @@ events:
   -
     kind: "message-v1"
     backtrace:
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
-      - "CMakeLists.txt:44 (project)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:48 (project)"
     message: |
       Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-      Compiler: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-gcc.exe 
+      Compiler: E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/arm-none-eabi-gcc.exe 
       Build flags: 
       Id flags: -c 
       
@@ -59,34 +59,34 @@ events:
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
       
       The C compiler identification is GNU, found in:
-        D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CompilerIdC/CMakeCCompilerId.o
+        E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm/CMakeFiles/3.30.5/CompilerIdC/CMakeCCompilerId.o
       
   -
     kind: "message-v1"
     backtrace:
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
-      - "CMakeLists.txt:44 (project)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:48 (project)"
     message: |
       Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
-      Compiler: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-g++.exe 
+      Compiler: E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/arm-none-eabi-g++.exe 
       Build flags: -fmodules-ts
       Id flags:  
       
       The output was:
       1
-      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-exit.o): in function `exit':
+      E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/ld.exe: E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1\\libc.a(libc_a-exit.o): in function `exit':
       exit.c:(.text.exit+0x28): undefined reference to `_exit'
-      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-closer.o): in function `_close_r':
+      E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/ld.exe: E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1\\libc.a(libc_a-closer.o): in function `_close_r':
       closer.c:(.text._close_r+0x18): undefined reference to `_close'
-      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-lseekr.o): in function `_lseek_r':
+      E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/ld.exe: E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1\\libc.a(libc_a-lseekr.o): in function `_lseek_r':
       lseekr.c:(.text._lseek_r+0x24): undefined reference to `_lseek'
-      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-readr.o): in function `_read_r':
+      E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/ld.exe: E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1\\libc.a(libc_a-readr.o): in function `_read_r':
       readr.c:(.text._read_r+0x24): undefined reference to `_read'
-      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-writer.o): in function `_write_r':
+      E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/ld.exe: E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1\\libc.a(libc_a-writer.o): in function `_write_r':
       writer.c:(.text._write_r+0x24): undefined reference to `_write'
-      D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1\\libc.a(libc_a-sbrkr.o): in function `_sbrk_r':
+      E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/ld.exe: E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1\\libc.a(libc_a-sbrkr.o): in function `_sbrk_r':
       sbrkr.c:(.text._sbrk_r+0x18): undefined reference to `_sbrk'
       collect2.exe: error: ld returned 1 exit status
       
@@ -94,13 +94,13 @@ events:
   -
     kind: "message-v1"
     backtrace:
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
-      - "CMakeLists.txt:44 (project)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:48 (project)"
     message: |
       Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
-      Compiler: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-g++.exe 
+      Compiler: E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/arm-none-eabi-g++.exe 
       Build flags: -fmodules-ts
       Id flags: -c 
       
@@ -111,32 +111,32 @@ events:
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
       
       The CXX compiler identification is GNU, found in:
-        D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/3.29.6/CompilerIdCXX/CMakeCXXCompilerId.o
+        E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm/CMakeFiles/3.30.5/CompilerIdCXX/CMakeCXXCompilerId.o
       
   -
     kind: "message-v1"
     backtrace:
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:1165 (message)"
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineASMCompiler.cmake:135 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
-      - "CMakeLists.txt:44 (project)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:1192 (message)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineASMCompiler.cmake:135 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:48 (project)"
     message: |
       Checking whether the ASM compiler is GNU using "--version" matched "(GNU assembler)|(GCC)|(Free Software Foundation)":
-      arm-none-eabi-gcc.exe (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 13.3.1 20240614
-      Copyright (C) 2023 Free Software Foundation, Inc.
+      arm-none-eabi-gcc.exe (Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)) 14.2.1 20241119
+      Copyright (C) 2024 Free Software Foundation, Inc.
       This is free software; see the source for copying conditions.  There is NO
       warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
       
   -
     kind: "try_compile-v1"
     backtrace:
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:67 (try_compile)"
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:44 (project)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:48 (project)"
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/CMakeScratch/TryCompile-lozs2l"
-      binary: "D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/CMakeScratch/TryCompile-lozs2l"
+      source: "E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm/CMakeFiles/CMakeScratch/TryCompile-hc1kcv"
+      binary: "E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm/CMakeFiles/CMakeScratch/TryCompile-hc1kcv"
     cmakeVariables:
       CMAKE_C_FLAGS: ""
       CMAKE_C_FLAGS_DEBUG: "-g"
@@ -145,115 +145,115 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/CMakeScratch/TryCompile-lozs2l'
+        Change Dir: 'E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm/CMakeFiles/CMakeScratch/TryCompile-hc1kcv'
         
-        Run Build Command(s): D:/Tools/Working_tools/JetBrains/CLion/bin/ninja/win/x64/ninja.exe -v cmTC_0bfa8
-        [1/2] D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-gcc.exe   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_0bfa8.dir/CMakeCCompilerABI.c.obj -c D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCCompilerABI.c
+        Run Build Command(s): E:/Tools/Develop/JetBrains/CLion/bin/ninja/win/x64/ninja.exe -v cmTC_067c8
+        [1/2] E:\\Tools\\Develop\\ToolsKits\\ARM\\arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi\\bin\\arm-none-eabi-gcc.exe   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_067c8.dir/CMakeCCompilerABI.c.obj -c E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCCompilerABI.c
         Using built-in specs.
-        COLLECT_GCC=D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-gcc.exe
+        COLLECT_GCC=E:\\Tools\\Develop\\ToolsKits\\ARM\\arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi\\bin\\arm-none-eabi-gcc.exe
         Target: arm-none-eabi
-        Configured with: /data/jenkins/workspace/GNU-toolchain/arm-13/src/gcc/configure --target=arm-none-eabi --prefix=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install --with-gmp=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-mpfr=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-mpc=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-isl=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --disable-shared --disable-nls --disable-threads --disable-tls --enable-checking=release --enable-languages=c,c++,fortran --with-newlib --with-gnu-as --with-headers=yes --with-gnu-ld --with-native-system-header-dir=/include --with-sysroot=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install/arm-none-eabi --with-multilib-list=aprofile,rmprofile --with-libiconv-prefix=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --enable-mingw-wildcard --host=i686-w64-mingw32 --with-pkgversion='Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)' --with-bugurl=https://bugs.linaro.org/
+        Configured with: /data/jenkins/workspace/GNU-toolchain/arm-14/src/gcc/configure --target=arm-none-eabi --prefix=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/install --with-gmp=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --with-mpfr=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --with-mpc=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --with-isl=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --disable-shared --disable-nls --disable-threads --disable-tls --enable-checking=release --enable-languages=c,c++,fortran --with-newlib --with-gnu-as --with-headers=yes --with-gnu-ld --with-native-system-header-dir=/include --with-sysroot=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/install/arm-none-eabi --with-bugurl=https://bugs.linaro.org/ --with-multilib-list=aprofile,rmprofile --with-libiconv-prefix=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --with-libiconv-prefix=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --enable-mingw-wildcard --host=i686-w64-mingw32 --with-pkgversion='Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)'
         Thread model: single
         Supported LTO compression algorithms: zlib
-        gcc version 13.3.1 20240614 (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 
-        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_0bfa8.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_0bfa8.dir/'
-         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/cc1.exe -quiet -v -iprefix D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/ -isysroot D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi -D__USES_INITFINI__ D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_0bfa8.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -version -fdiagnostics-color=always -o C:\\Users\\David\\AppData\\Local\\Temp\\ccgDYBYL.s
-        GNU C17 (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) version 13.3.1 20240614 (arm-none-eabi)
+        gcc version 14.2.1 20241119 (Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)) 
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_067c8.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_067c8.dir/'
+         E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../libexec/gcc/arm-none-eabi/14.2.1/cc1.exe -quiet -v -iprefix E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/ -isysroot E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../arm-none-eabi -D__USES_INITFINI__ E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_067c8.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -version -fdiagnostics-color=always -o C:\\Users\\fairy\\AppData\\Local\\Temp\\ccYwWV6Q.s
+        GNU C17 (Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)) version 14.2.1 20241119 (arm-none-eabi)
         	compiled by GNU C version 9.3-win32 20200320, GMP version 6.2.1, MPFR version 3.1.6, MPC version 1.0.3, isl version isl-0.15-1-g835ea3a-GMP
         
         GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
-        ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/include"
-        ignoring nonexistent directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install/lib/gcc/arm-none-eabi/13.3.1/../../../../include"
-        ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/include-fixed"
-        ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include"
-        ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/include"
+        ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/14.2.1/include"
+        ignoring nonexistent directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../arm-none-eabi/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/install/lib/gcc/arm-none-eabi/14.2.1/../../../../include"
+        ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/14.2.1/include-fixed"
+        ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include"
+        ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../arm-none-eabi/include"
         #include "..." search starts here:
         #include <...> search starts here:
-         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include
-         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include-fixed
-         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include
+         E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/include
+         E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/include-fixed
+         E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include
         End of search list.
-        Compiler executable checksum: d51ba7f24bad5b83998bb941572c85c4
-        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_0bfa8.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_0bfa8.dir/'
-         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_0bfa8.dir/CMakeCCompilerABI.c.obj C:\\Users\\David\\AppData\\Local\\Temp\\ccgDYBYL.s
-        GNU assembler version 2.42.0 (arm-none-eabi) using BFD version (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 2.42.0.20240614
-        COMPILER_PATH=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/
-        LIBRARY_PATH=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/lib/\x0d
-        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_0bfa8.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_0bfa8.dir/CMakeCCompilerABI.c.'\x0d
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && D:\\Tools\\Working_tools\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\bin\\cmake.exe -E rm -f libcmTC_0bfa8.a && arm-none-eabi-ar qc libcmTC_0bfa8.a  CMakeFiles/cmTC_0bfa8.dir/CMakeCCompilerABI.c.obj && D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-ranlib.exe libcmTC_0bfa8.a && cd ."
+        Compiler executable checksum: 63ce4b303c7eb47a24bbf869f5c70b36
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_067c8.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_067c8.dir/'
+         E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_067c8.dir/CMakeCCompilerABI.c.obj C:\\Users\\fairy\\AppData\\Local\\Temp\\ccYwWV6Q.s
+        GNU assembler version 2.43.1 (arm-none-eabi) using BFD version (Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)) 2.43.1.20241119
+        COMPILER_PATH=E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../libexec/gcc/arm-none-eabi/14.2.1/;E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../libexec/gcc/;E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/
+        LIBRARY_PATH=E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/;E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/;E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/lib/;E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../arm-none-eabi/lib/
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_067c8.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_067c8.dir/CMakeCCompilerABI.c.'\x0d
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && E:\\Tools\\Develop\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\bin\\cmake.exe -E rm -f libcmTC_067c8.a && arm-none-eabi-ar qc libcmTC_067c8.a  CMakeFiles/cmTC_067c8.dir/CMakeCCompilerABI.c.obj && E:\\Tools\\Develop\\ToolsKits\\ARM\\arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi\\bin\\arm-none-eabi-ranlib.exe libcmTC_067c8.a && cd ."
         
       exitCode: 0
   -
     kind: "message-v1"
     backtrace:
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:137 (message)"
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:44 (project)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:48 (project)"
     message: |
       Parsed C implicit include dir info: rv=done
         found start of include info
         found start of implicit include info
-          add: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include]
-          add: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include-fixed]
-          add: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include]
+          add: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/include]
+          add: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/include-fixed]
+          add: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include]
         end of search list found
-        collapse include dir [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include] ==> [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/arm-none-eabi/13.3.1/include]
-        collapse include dir [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include-fixed] ==> [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/arm-none-eabi/13.3.1/include-fixed]
-        collapse include dir [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include] ==> [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/arm-none-eabi/include]
-        implicit include dirs: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/arm-none-eabi/13.3.1/include;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/arm-none-eabi/13.3.1/include-fixed;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/arm-none-eabi/include]
+        collapse include dir [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/include] ==> [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/arm-none-eabi/14.2.1/include]
+        collapse include dir [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/include-fixed] ==> [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/arm-none-eabi/14.2.1/include-fixed]
+        collapse include dir [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include] ==> [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/arm-none-eabi/include]
+        implicit include dirs: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/arm-none-eabi/14.2.1/include;E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/arm-none-eabi/14.2.1/include-fixed;E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/arm-none-eabi/include]
       
       
   -
     kind: "message-v1"
     backtrace:
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:173 (message)"
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:44 (project)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:48 (project)"
     message: |
       Parsed C implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
-        ignore line: [Change Dir: 'D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/CMakeScratch/TryCompile-lozs2l']
+        ignore line: [Change Dir: 'E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm/CMakeFiles/CMakeScratch/TryCompile-hc1kcv']
         ignore line: []
-        ignore line: [Run Build Command(s): D:/Tools/Working_tools/JetBrains/CLion/bin/ninja/win/x64/ninja.exe -v cmTC_0bfa8]
-        ignore line: [[1/2] D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-gcc.exe   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_0bfa8.dir/CMakeCCompilerABI.c.obj -c D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCCompilerABI.c]
+        ignore line: [Run Build Command(s): E:/Tools/Develop/JetBrains/CLion/bin/ninja/win/x64/ninja.exe -v cmTC_067c8]
+        ignore line: [[1/2] E:\\Tools\\Develop\\ToolsKits\\ARM\\arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi\\bin\\arm-none-eabi-gcc.exe   -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_067c8.dir/CMakeCCompilerABI.c.obj -c E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCCompilerABI.c]
         ignore line: [Using built-in specs.]
-        ignore line: [COLLECT_GCC=D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-gcc.exe]
+        ignore line: [COLLECT_GCC=E:\\Tools\\Develop\\ToolsKits\\ARM\\arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi\\bin\\arm-none-eabi-gcc.exe]
         ignore line: [Target: arm-none-eabi]
-        ignore line: [Configured with: /data/jenkins/workspace/GNU-toolchain/arm-13/src/gcc/configure --target=arm-none-eabi --prefix=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install --with-gmp=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-mpfr=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-mpc=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-isl=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --disable-shared --disable-nls --disable-threads --disable-tls --enable-checking=release --enable-languages=c,c++,fortran --with-newlib --with-gnu-as --with-headers=yes --with-gnu-ld --with-native-system-header-dir=/include --with-sysroot=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install/arm-none-eabi --with-multilib-list=aprofile,rmprofile --with-libiconv-prefix=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --enable-mingw-wildcard --host=i686-w64-mingw32 --with-pkgversion='Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)' --with-bugurl=https://bugs.linaro.org/]
+        ignore line: [Configured with: /data/jenkins/workspace/GNU-toolchain/arm-14/src/gcc/configure --target=arm-none-eabi --prefix=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/install --with-gmp=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --with-mpfr=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --with-mpc=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --with-isl=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --disable-shared --disable-nls --disable-threads --disable-tls --enable-checking=release --enable-languages=c,c++,fortran --with-newlib --with-gnu-as --with-headers=yes --with-gnu-ld --with-native-system-header-dir=/include --with-sysroot=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/install/arm-none-eabi --with-bugurl=https://bugs.linaro.org/ --with-multilib-list=aprofile,rmprofile --with-libiconv-prefix=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --with-libiconv-prefix=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --enable-mingw-wildcard --host=i686-w64-mingw32 --with-pkgversion='Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)']
         ignore line: [Thread model: single]
         ignore line: [Supported LTO compression algorithms: zlib]
-        ignore line: [gcc version 13.3.1 20240614 (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_0bfa8.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_0bfa8.dir/']
-        ignore line: [ D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/cc1.exe -quiet -v -iprefix D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/ -isysroot D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi -D__USES_INITFINI__ D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_0bfa8.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -version -fdiagnostics-color=always -o C:\\Users\\David\\AppData\\Local\\Temp\\ccgDYBYL.s]
-        ignore line: [GNU C17 (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) version 13.3.1 20240614 (arm-none-eabi)]
+        ignore line: [gcc version 14.2.1 20241119 (Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_067c8.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_067c8.dir/']
+        ignore line: [ E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../libexec/gcc/arm-none-eabi/14.2.1/cc1.exe -quiet -v -iprefix E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/ -isysroot E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../arm-none-eabi -D__USES_INITFINI__ E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_067c8.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -version -fdiagnostics-color=always -o C:\\Users\\fairy\\AppData\\Local\\Temp\\ccYwWV6Q.s]
+        ignore line: [GNU C17 (Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)) version 14.2.1 20241119 (arm-none-eabi)]
         ignore line: [	compiled by GNU C version 9.3-win32 20200320  GMP version 6.2.1  MPFR version 3.1.6  MPC version 1.0.3  isl version isl-0.15-1-g835ea3a-GMP]
         ignore line: []
         ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
-        ignore line: [ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/include"]
-        ignore line: [ignoring nonexistent directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install/lib/gcc/arm-none-eabi/13.3.1/../../../../include"]
-        ignore line: [ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/include-fixed"]
-        ignore line: [ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include"]
-        ignore line: [ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/include"]
+        ignore line: [ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/14.2.1/include"]
+        ignore line: [ignoring nonexistent directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../arm-none-eabi/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/install/lib/gcc/arm-none-eabi/14.2.1/../../../../include"]
+        ignore line: [ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/14.2.1/include-fixed"]
+        ignore line: [ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include"]
+        ignore line: [ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../arm-none-eabi/include"]
         ignore line: [#include "..." search starts here:]
         ignore line: [#include <...> search starts here:]
-        ignore line: [ D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include]
-        ignore line: [ D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include-fixed]
-        ignore line: [ D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include]
+        ignore line: [ E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/include]
+        ignore line: [ E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/include-fixed]
+        ignore line: [ E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include]
         ignore line: [End of search list.]
-        ignore line: [Compiler executable checksum: d51ba7f24bad5b83998bb941572c85c4]
-        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_0bfa8.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_0bfa8.dir/']
-        ignore line: [ D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_0bfa8.dir/CMakeCCompilerABI.c.obj C:\\Users\\David\\AppData\\Local\\Temp\\ccgDYBYL.s]
-        ignore line: [GNU assembler version 2.42.0 (arm-none-eabi) using BFD version (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 2.42.0.20240614]
-        ignore line: [COMPILER_PATH=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/]
-        ignore line: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/]
-        ignore line: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/]
-        ignore line: [LIBRARY_PATH=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/]
-        ignore line: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/]
-        ignore line: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/]
-        ignore line: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/lib/\x0d]
-        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_0bfa8.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_0bfa8.dir/CMakeCCompilerABI.c.'\x0d]
-        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && D:\\Tools\\Working_tools\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\bin\\cmake.exe -E rm -f libcmTC_0bfa8.a && arm-none-eabi-ar qc libcmTC_0bfa8.a  CMakeFiles/cmTC_0bfa8.dir/CMakeCCompilerABI.c.obj && D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-ranlib.exe libcmTC_0bfa8.a && cd ."]
+        ignore line: [Compiler executable checksum: 63ce4b303c7eb47a24bbf869f5c70b36]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_067c8.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_067c8.dir/']
+        ignore line: [ E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_067c8.dir/CMakeCCompilerABI.c.obj C:\\Users\\fairy\\AppData\\Local\\Temp\\ccYwWV6Q.s]
+        ignore line: [GNU assembler version 2.43.1 (arm-none-eabi) using BFD version (Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)) 2.43.1.20241119]
+        ignore line: [COMPILER_PATH=E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../libexec/gcc/arm-none-eabi/14.2.1/]
+        ignore line: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../libexec/gcc/]
+        ignore line: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/]
+        ignore line: [LIBRARY_PATH=E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/]
+        ignore line: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/]
+        ignore line: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/lib/]
+        ignore line: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../arm-none-eabi/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-v' '-o' 'CMakeFiles/cmTC_067c8.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_067c8.dir/CMakeCCompilerABI.c.'\x0d]
+        ignore line: [[2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && E:\\Tools\\Develop\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\bin\\cmake.exe -E rm -f libcmTC_067c8.a && arm-none-eabi-ar qc libcmTC_067c8.a  CMakeFiles/cmTC_067c8.dir/CMakeCCompilerABI.c.obj && E:\\Tools\\Develop\\ToolsKits\\ARM\\arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi\\bin\\arm-none-eabi-ranlib.exe libcmTC_067c8.a && cd ."]
         ignore line: []
         ignore line: []
         implicit libs: []
@@ -265,14 +265,14 @@ events:
   -
     kind: "try_compile-v1"
     backtrace:
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:67 (try_compile)"
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:44 (project)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:48 (project)"
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/CMakeScratch/TryCompile-c2t3jo"
-      binary: "D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/CMakeScratch/TryCompile-c2t3jo"
+      source: "E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm/CMakeFiles/CMakeScratch/TryCompile-fbugt2"
+      binary: "E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm/CMakeFiles/CMakeScratch/TryCompile-fbugt2"
     cmakeVariables:
       CMAKE_CXX_FLAGS: " -fmodules-ts"
       CMAKE_CXX_FLAGS_DEBUG: "-g"
@@ -282,133 +282,133 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/CMakeScratch/TryCompile-c2t3jo'
+        Change Dir: 'E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm/CMakeFiles/CMakeScratch/TryCompile-fbugt2'
         
-        Run Build Command(s): D:/Tools/Working_tools/JetBrains/CLion/bin/ninja/win/x64/ninja.exe -v cmTC_b8cbb
-        [1/2] D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-g++.exe   -fmodules-ts  -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_b8cbb.dir/CMakeCXXCompilerABI.cpp.obj -c D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCXXCompilerABI.cpp
+        Run Build Command(s): E:/Tools/Develop/JetBrains/CLion/bin/ninja/win/x64/ninja.exe -v cmTC_45878
+        [1/2] E:\\Tools\\Develop\\ToolsKits\\ARM\\arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi\\bin\\arm-none-eabi-g++.exe   -fmodules-ts  -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_45878.dir/CMakeCXXCompilerABI.cpp.obj -c E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp
         Using built-in specs.
-        COLLECT_GCC=D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-g++.exe
+        COLLECT_GCC=E:\\Tools\\Develop\\ToolsKits\\ARM\\arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi\\bin\\arm-none-eabi-g++.exe
         Target: arm-none-eabi
-        Configured with: /data/jenkins/workspace/GNU-toolchain/arm-13/src/gcc/configure --target=arm-none-eabi --prefix=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install --with-gmp=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-mpfr=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-mpc=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-isl=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --disable-shared --disable-nls --disable-threads --disable-tls --enable-checking=release --enable-languages=c,c++,fortran --with-newlib --with-gnu-as --with-headers=yes --with-gnu-ld --with-native-system-header-dir=/include --with-sysroot=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install/arm-none-eabi --with-multilib-list=aprofile,rmprofile --with-libiconv-prefix=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --enable-mingw-wildcard --host=i686-w64-mingw32 --with-pkgversion='Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)' --with-bugurl=https://bugs.linaro.org/
+        Configured with: /data/jenkins/workspace/GNU-toolchain/arm-14/src/gcc/configure --target=arm-none-eabi --prefix=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/install --with-gmp=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --with-mpfr=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --with-mpc=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --with-isl=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --disable-shared --disable-nls --disable-threads --disable-tls --enable-checking=release --enable-languages=c,c++,fortran --with-newlib --with-gnu-as --with-headers=yes --with-gnu-ld --with-native-system-header-dir=/include --with-sysroot=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/install/arm-none-eabi --with-bugurl=https://bugs.linaro.org/ --with-multilib-list=aprofile,rmprofile --with-libiconv-prefix=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --with-libiconv-prefix=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --enable-mingw-wildcard --host=i686-w64-mingw32 --with-pkgversion='Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)'
         Thread model: single
         Supported LTO compression algorithms: zlib
-        gcc version 13.3.1 20240614 (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 
-        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-fmodules-ts' '-v' '-o' 'CMakeFiles/cmTC_b8cbb.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_b8cbb.dir/'
-         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/cc1plus.exe -quiet -v -iprefix D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/ -isysroot D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi -D__USES_INITFINI__ D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_b8cbb.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -version -fdiagnostics-color=always -fmodules-ts -o C:\\Users\\David\\AppData\\Local\\Temp\\cchSCDf8.s
-        GNU C++17 (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) version 13.3.1 20240614 (arm-none-eabi)
+        gcc version 14.2.1 20241119 (Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)) 
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-fmodules-ts' '-v' '-o' 'CMakeFiles/cmTC_45878.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_45878.dir/'
+         E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../libexec/gcc/arm-none-eabi/14.2.1/cc1plus.exe -quiet -v -iprefix E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/ -isysroot E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../arm-none-eabi -D__USES_INITFINI__ E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_45878.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -version -fdiagnostics-color=always -fmodules-ts -o C:\\Users\\fairy\\AppData\\Local\\Temp\\cce3p4Sd.s
+        GNU C++17 (Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)) version 14.2.1 20241119 (arm-none-eabi)
         	compiled by GNU C version 9.3-win32 20200320, GMP version 6.2.1, MPFR version 3.1.6, MPC version 1.0.3, isl version isl-0.15-1-g835ea3a-GMP
         
         GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
-        ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1"
-        ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1/arm-none-eabi"
-        ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1/backward"
-        ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/include"
-        ignoring nonexistent directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install/lib/gcc/arm-none-eabi/13.3.1/../../../../include"
-        ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/include-fixed"
-        ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include"
-        ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/include"
+        ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include/c++/14.2.1"
+        ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include/c++/14.2.1/arm-none-eabi"
+        ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include/c++/14.2.1/backward"
+        ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/14.2.1/include"
+        ignoring nonexistent directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../arm-none-eabi/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/install/lib/gcc/arm-none-eabi/14.2.1/../../../../include"
+        ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/14.2.1/include-fixed"
+        ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include"
+        ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../arm-none-eabi/include"
         #include "..." search starts here:
         #include <...> search starts here:
-         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1
-         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1/arm-none-eabi
-         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1/backward
-         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include
-         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include-fixed
-         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include
+         E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include/c++/14.2.1
+         E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include/c++/14.2.1/arm-none-eabi
+         E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include/c++/14.2.1/backward
+         E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/include
+         E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/include-fixed
+         E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include
         End of search list.
-        Compiler executable checksum: 056642460f9d295d75af1469d5c76882
-        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-fmodules-ts' '-v' '-o' 'CMakeFiles/cmTC_b8cbb.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_b8cbb.dir/'
-         D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_b8cbb.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\David\\AppData\\Local\\Temp\\cchSCDf8.s
-        GNU assembler version 2.42.0 (arm-none-eabi) using BFD version (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 2.42.0.20240614
-        COMPILER_PATH=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/
-        LIBRARY_PATH=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/lib/\x0d
-        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-fmodules-ts' '-v' '-o' 'CMakeFiles/cmTC_b8cbb.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_b8cbb.dir/CMakeCXXCompilerABI.cpp.'\x0d
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && D:\\Tools\\Working_tools\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\bin\\cmake.exe -E rm -f libcmTC_b8cbb.a && arm-none-eabi-ar qc libcmTC_b8cbb.a  CMakeFiles/cmTC_b8cbb.dir/CMakeCXXCompilerABI.cpp.obj && D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-ranlib.exe libcmTC_b8cbb.a && cd ."
+        Compiler executable checksum: dad18755456eb98fd3f9411f1449dfa2
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-fmodules-ts' '-v' '-o' 'CMakeFiles/cmTC_45878.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_45878.dir/'
+         E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_45878.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\fairy\\AppData\\Local\\Temp\\cce3p4Sd.s
+        GNU assembler version 2.43.1 (arm-none-eabi) using BFD version (Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)) 2.43.1.20241119
+        COMPILER_PATH=E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../libexec/gcc/arm-none-eabi/14.2.1/;E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../libexec/gcc/;E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/
+        LIBRARY_PATH=E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/;E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/;E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/lib/;E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../arm-none-eabi/lib/\x0d
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-fmodules-ts' '-v' '-o' 'CMakeFiles/cmTC_45878.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_45878.dir/CMakeCXXCompilerABI.cpp.'\x0d
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && E:\\Tools\\Develop\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\bin\\cmake.exe -E rm -f libcmTC_45878.a && arm-none-eabi-ar qc libcmTC_45878.a  CMakeFiles/cmTC_45878.dir/CMakeCXXCompilerABI.cpp.obj && E:\\Tools\\Develop\\ToolsKits\\ARM\\arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi\\bin\\arm-none-eabi-ranlib.exe libcmTC_45878.a && cd ."
         
       exitCode: 0
   -
     kind: "message-v1"
     backtrace:
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:137 (message)"
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:44 (project)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:48 (project)"
     message: |
       Parsed CXX implicit include dir info: rv=done
         found start of include info
         found start of implicit include info
-          add: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1]
-          add: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1/arm-none-eabi]
-          add: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1/backward]
-          add: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include]
-          add: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include-fixed]
-          add: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include]
+          add: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include/c++/14.2.1]
+          add: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include/c++/14.2.1/arm-none-eabi]
+          add: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include/c++/14.2.1/backward]
+          add: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/include]
+          add: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/include-fixed]
+          add: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include]
         end of search list found
-        collapse include dir [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1] ==> [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/arm-none-eabi/include/c++/13.3.1]
-        collapse include dir [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1/arm-none-eabi] ==> [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/arm-none-eabi/include/c++/13.3.1/arm-none-eabi]
-        collapse include dir [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1/backward] ==> [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/arm-none-eabi/include/c++/13.3.1/backward]
-        collapse include dir [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include] ==> [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/arm-none-eabi/13.3.1/include]
-        collapse include dir [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include-fixed] ==> [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/arm-none-eabi/13.3.1/include-fixed]
-        collapse include dir [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include] ==> [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/arm-none-eabi/include]
-        implicit include dirs: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/arm-none-eabi/include/c++/13.3.1;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/arm-none-eabi/include/c++/13.3.1/arm-none-eabi;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/arm-none-eabi/include/c++/13.3.1/backward;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/arm-none-eabi/13.3.1/include;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/arm-none-eabi/13.3.1/include-fixed;D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/arm-none-eabi/include]
+        collapse include dir [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include/c++/14.2.1] ==> [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/arm-none-eabi/include/c++/14.2.1]
+        collapse include dir [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include/c++/14.2.1/arm-none-eabi] ==> [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/arm-none-eabi/include/c++/14.2.1/arm-none-eabi]
+        collapse include dir [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include/c++/14.2.1/backward] ==> [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/arm-none-eabi/include/c++/14.2.1/backward]
+        collapse include dir [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/include] ==> [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/arm-none-eabi/14.2.1/include]
+        collapse include dir [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/include-fixed] ==> [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/arm-none-eabi/14.2.1/include-fixed]
+        collapse include dir [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include] ==> [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/arm-none-eabi/include]
+        implicit include dirs: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/arm-none-eabi/include/c++/14.2.1;E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/arm-none-eabi/include/c++/14.2.1/arm-none-eabi;E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/arm-none-eabi/include/c++/14.2.1/backward;E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/arm-none-eabi/14.2.1/include;E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/arm-none-eabi/14.2.1/include-fixed;E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/arm-none-eabi/include]
       
       
   -
     kind: "message-v1"
     backtrace:
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:173 (message)"
-      - "D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:44 (project)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:48 (project)"
     message: |
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
-        ignore line: [Change Dir: 'D:/Program/stm32/STM32F407VET6/cmake-build-release-mingw_arm/CMakeFiles/CMakeScratch/TryCompile-c2t3jo']
+        ignore line: [Change Dir: 'E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm/CMakeFiles/CMakeScratch/TryCompile-fbugt2']
         ignore line: []
-        ignore line: [Run Build Command(s): D:/Tools/Working_tools/JetBrains/CLion/bin/ninja/win/x64/ninja.exe -v cmTC_b8cbb]
-        ignore line: [[1/2] D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-g++.exe   -fmodules-ts  -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_b8cbb.dir/CMakeCXXCompilerABI.cpp.obj -c D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Run Build Command(s): E:/Tools/Develop/JetBrains/CLion/bin/ninja/win/x64/ninja.exe -v cmTC_45878]
+        ignore line: [[1/2] E:\\Tools\\Develop\\ToolsKits\\ARM\\arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi\\bin\\arm-none-eabi-g++.exe   -fmodules-ts  -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_45878.dir/CMakeCXXCompilerABI.cpp.obj -c E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp]
         ignore line: [Using built-in specs.]
-        ignore line: [COLLECT_GCC=D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-g++.exe]
+        ignore line: [COLLECT_GCC=E:\\Tools\\Develop\\ToolsKits\\ARM\\arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi\\bin\\arm-none-eabi-g++.exe]
         ignore line: [Target: arm-none-eabi]
-        ignore line: [Configured with: /data/jenkins/workspace/GNU-toolchain/arm-13/src/gcc/configure --target=arm-none-eabi --prefix=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install --with-gmp=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-mpfr=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-mpc=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --with-isl=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --disable-shared --disable-nls --disable-threads --disable-tls --enable-checking=release --enable-languages=c,c++,fortran --with-newlib --with-gnu-as --with-headers=yes --with-gnu-ld --with-native-system-header-dir=/include --with-sysroot=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install/arm-none-eabi --with-multilib-list=aprofile,rmprofile --with-libiconv-prefix=/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/host-tools --enable-mingw-wildcard --host=i686-w64-mingw32 --with-pkgversion='Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)' --with-bugurl=https://bugs.linaro.org/]
+        ignore line: [Configured with: /data/jenkins/workspace/GNU-toolchain/arm-14/src/gcc/configure --target=arm-none-eabi --prefix=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/install --with-gmp=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --with-mpfr=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --with-mpc=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --with-isl=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --disable-shared --disable-nls --disable-threads --disable-tls --enable-checking=release --enable-languages=c,c++,fortran --with-newlib --with-gnu-as --with-headers=yes --with-gnu-ld --with-native-system-header-dir=/include --with-sysroot=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/install/arm-none-eabi --with-bugurl=https://bugs.linaro.org/ --with-multilib-list=aprofile,rmprofile --with-libiconv-prefix=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --with-libiconv-prefix=/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/host-tools --enable-mingw-wildcard --host=i686-w64-mingw32 --with-pkgversion='Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)']
         ignore line: [Thread model: single]
         ignore line: [Supported LTO compression algorithms: zlib]
-        ignore line: [gcc version 13.3.1 20240614 (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-fmodules-ts' '-v' '-o' 'CMakeFiles/cmTC_b8cbb.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_b8cbb.dir/']
-        ignore line: [ D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/cc1plus.exe -quiet -v -iprefix D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/ -isysroot D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi -D__USES_INITFINI__ D:/Tools/Working_tools/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.29/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_b8cbb.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -version -fdiagnostics-color=always -fmodules-ts -o C:\\Users\\David\\AppData\\Local\\Temp\\cchSCDf8.s]
-        ignore line: [GNU C++17 (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) version 13.3.1 20240614 (arm-none-eabi)]
+        ignore line: [gcc version 14.2.1 20241119 (Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-fmodules-ts' '-v' '-o' 'CMakeFiles/cmTC_45878.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_45878.dir/']
+        ignore line: [ E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../libexec/gcc/arm-none-eabi/14.2.1/cc1plus.exe -quiet -v -iprefix E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/ -isysroot E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../arm-none-eabi -D__USES_INITFINI__ E:/Tools/Develop/JetBrains/CLion/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_45878.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -version -fdiagnostics-color=always -fmodules-ts -o C:\\Users\\fairy\\AppData\\Local\\Temp\\cce3p4Sd.s]
+        ignore line: [GNU C++17 (Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)) version 14.2.1 20241119 (arm-none-eabi)]
         ignore line: [	compiled by GNU C version 9.3-win32 20200320  GMP version 6.2.1  MPFR version 3.1.6  MPC version 1.0.3  isl version isl-0.15-1-g835ea3a-GMP]
         ignore line: []
         ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
-        ignore line: [ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1"]
-        ignore line: [ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1/arm-none-eabi"]
-        ignore line: [ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1/backward"]
-        ignore line: [ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/include"]
-        ignore line: [ignoring nonexistent directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/data/jenkins/workspace/GNU-toolchain/arm-13/build-mingw-arm-none-eabi/install/lib/gcc/arm-none-eabi/13.3.1/../../../../include"]
-        ignore line: [ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/include-fixed"]
-        ignore line: [ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/lib/gcc/../../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include"]
-        ignore line: [ignoring duplicate directory "D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/include"]
+        ignore line: [ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include/c++/14.2.1"]
+        ignore line: [ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include/c++/14.2.1/arm-none-eabi"]
+        ignore line: [ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include/c++/14.2.1/backward"]
+        ignore line: [ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/14.2.1/include"]
+        ignore line: [ignoring nonexistent directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../arm-none-eabi/data/jenkins/workspace/GNU-toolchain/arm-14/build-mingw-arm-none-eabi/install/lib/gcc/arm-none-eabi/14.2.1/../../../../include"]
+        ignore line: [ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/14.2.1/include-fixed"]
+        ignore line: [ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/../../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include"]
+        ignore line: [ignoring duplicate directory "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../arm-none-eabi/include"]
         ignore line: [#include "..." search starts here:]
         ignore line: [#include <...> search starts here:]
-        ignore line: [ D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1]
-        ignore line: [ D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1/arm-none-eabi]
-        ignore line: [ D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1/backward]
-        ignore line: [ D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include]
-        ignore line: [ D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/include-fixed]
-        ignore line: [ D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include]
+        ignore line: [ E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include/c++/14.2.1]
+        ignore line: [ E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include/c++/14.2.1/arm-none-eabi]
+        ignore line: [ E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include/c++/14.2.1/backward]
+        ignore line: [ E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/include]
+        ignore line: [ E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/include-fixed]
+        ignore line: [ E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/include]
         ignore line: [End of search list.]
-        ignore line: [Compiler executable checksum: 056642460f9d295d75af1469d5c76882]
-        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-fmodules-ts' '-v' '-o' 'CMakeFiles/cmTC_b8cbb.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_b8cbb.dir/']
-        ignore line: [ D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_b8cbb.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\David\\AppData\\Local\\Temp\\cchSCDf8.s]
-        ignore line: [GNU assembler version 2.42.0 (arm-none-eabi) using BFD version (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 2.42.0.20240614]
-        ignore line: [COMPILER_PATH=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/arm-none-eabi/13.3.1/]
-        ignore line: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../libexec/gcc/]
-        ignore line: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/]
-        ignore line: [LIBRARY_PATH=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/]
-        ignore line: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/]
-        ignore line: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/]
-        ignore line: [D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/../arm-none-eabi/lib/\x0d]
-        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-fmodules-ts' '-v' '-o' 'CMakeFiles/cmTC_b8cbb.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_b8cbb.dir/CMakeCXXCompilerABI.cpp.'\x0d]
-        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && D:\\Tools\\Working_tools\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\bin\\cmake.exe -E rm -f libcmTC_b8cbb.a && arm-none-eabi-ar qc libcmTC_b8cbb.a  CMakeFiles/cmTC_b8cbb.dir/CMakeCXXCompilerABI.cpp.obj && D:\\Tools\\Other_tools\\ARM\\arm-gnu-toolchain_v13_3\\bin\\arm-none-eabi-ranlib.exe libcmTC_b8cbb.a && cd ."]
+        ignore line: [Compiler executable checksum: dad18755456eb98fd3f9411f1449dfa2]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-fmodules-ts' '-v' '-o' 'CMakeFiles/cmTC_45878.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_45878.dir/']
+        ignore line: [ E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_45878.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\fairy\\AppData\\Local\\Temp\\cce3p4Sd.s]
+        ignore line: [GNU assembler version 2.43.1 (arm-none-eabi) using BFD version (Arm GNU Toolchain 14.2.Rel1 (Build arm-14.52)) 2.43.1.20241119]
+        ignore line: [COMPILER_PATH=E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../libexec/gcc/arm-none-eabi/14.2.1/]
+        ignore line: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../libexec/gcc/]
+        ignore line: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/]
+        ignore line: [LIBRARY_PATH=E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/]
+        ignore line: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/]
+        ignore line: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/lib/]
+        ignore line: [E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/../arm-none-eabi/lib/\x0d]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-fmodules-ts' '-v' '-o' 'CMakeFiles/cmTC_45878.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t' '-dumpdir' 'CMakeFiles/cmTC_45878.dir/CMakeCXXCompilerABI.cpp.'\x0d]
+        ignore line: [[2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && E:\\Tools\\Develop\\JetBrains\\CLion\\bin\\cmake\\win\\x64\\bin\\cmake.exe -E rm -f libcmTC_45878.a && arm-none-eabi-ar qc libcmTC_45878.a  CMakeFiles/cmTC_45878.dir/CMakeCXXCompilerABI.cpp.obj && E:\\Tools\\Develop\\ToolsKits\\ARM\\arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi\\bin\\arm-none-eabi-ranlib.exe libcmTC_45878.a && cd ."]
         ignore line: []
         ignore line: []
         implicit libs: []

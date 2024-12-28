@@ -39,8 +39,11 @@ int main()
 #else
     for (;;)
     {
+        // 仅当启用了GUI并且没有启用GUI_ONLY_INIT时才调用GUI::handler()
 #ifdef GUI_ENABLE
+#ifndef GUI_ONLY_INIT
         GUI::handler();
+#endif
 #endif
         Key::handler();
         background_handler();

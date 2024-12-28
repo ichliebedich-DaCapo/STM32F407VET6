@@ -1,26 +1,26 @@
-D:\Tools\Working_tools\JetBrains\CLion\bin\cmake\win\x64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=D:/Tools/Working_tools/JetBrains/CLion/bin/ninja/win/x64/ninja.exe -DCMAKE_C_COMPILER=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-gcc-13.3.1.exe -DCMAKE_CXX_COMPILER=D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-g++.exe -G Ninja -S D:\Program\stm32\STM32F407VET6 -B D:\Program\stm32\STM32F407VET6\cmake-build-release-mingw_arm
--- The C compiler identification is GNU 13.3.1
--- The CXX compiler identification is GNU 13.3.1
+E:\Tools\Develop\JetBrains\CLion\bin\cmake\win\x64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=E:/Tools/Develop/JetBrains/CLion/bin/ninja/win/x64/ninja.exe -DCMAKE_C_COMPILER=E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/arm-none-eabi-gcc-14.2.1.exe -DCMAKE_CXX_COMPILER=E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/arm-none-eabi-g++.exe -G Ninja -S E:\Program\Embedded\MCU\STM32\Furina -B E:\Program\Embedded\MCU\STM32\Furina\cmake-build-release-mingw_arm
+-- Using GCC compiler
+-- Configuring done (0.1s)
+You have changed variables that require your cache to be deleted.
+Configure will be re-run and you may have to reset some variables.
+The following variables have changed:
+CMAKE_C_COMPILER= E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/arm-none-eabi-gcc-14.2.1.exe
+
+-- The C compiler identification is GNU 14.2.1
+-- The CXX compiler identification is GNU 14.2.1
 -- The ASM compiler identification is GNU
--- Found assembler: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-gcc.exe
+-- Found assembler: E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/arm-none-eabi-gcc.exe
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
--- Check for working C compiler: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-gcc.exe - skipped
+-- Check for working C compiler: E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/arm-none-eabi-gcc.exe - skipped
 -- Detecting C compile features
 -- Detecting C compile features - done
 -- Detecting CXX compiler ABI info
 -- Detecting CXX compiler ABI info - done
--- Check for working CXX compiler: D:/Tools/Other_tools/ARM/arm-gnu-toolchain_v13_3/bin/arm-none-eabi-g++.exe - skipped
+-- Check for working CXX compiler: E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin/arm-none-eabi-g++.exe - skipped
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
 -- Using GCC compiler
--- Configuring done (16.6s)
-CMake Error in CMakeLists.txt:
-  The target named "libapp" has C++ sources that may use modules, but the
-  compiler does not provide a way to discover the import graph dependencies.
-  See the cmake-cxxmodules(7) manual for details.  Use the
-  CMAKE_CXX_SCAN_FOR_MODULES variable to enable or disable scanning.
-
-
--- Generating done (0.0s)
-CMake Generate step failed.  Build files cannot be regenerated correctly.
+-- Configuring done (1.6s)
+-- Generating done (0.3s)
+-- Build files have been written to: E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm

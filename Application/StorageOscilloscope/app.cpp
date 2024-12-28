@@ -15,16 +15,17 @@
 #include "ui.hpp"
 
 // -----------宏定义-----------
-// 读取数据基址000
+// 读取数据基址0x0000
 #define  READ_DATA_BASE (((volatile unsigned short *)0x60000000))
-// 分数分频器的整数部分
-#define FREQ_N (*((volatile unsigned short *)0x60010000))
-// 分数分频器的小数部分的分子与分母
-#define FREQ_M_P (*((volatile unsigned short *)0x60010002))
-// 读取命令 010
-#define READ_COMMAND (*((volatile unsigned short *)0x60020000))
-// 切换触发模式命令011
-#define SWITCH_TRIGGER_MODE (*((volatile unsigned short *)0x60030000))
+// 读取命令 0x2000
+#define READ_COMMAND (*((volatile unsigned short *)0x60004000))
+// 分数分频器的整数部分0x4000
+#define FREQ_N (*((volatile unsigned short *)0x60008000))
+// 分数分频器的小数部分的分子与分母0x6000
+#define FREQ_M_P (*((volatile unsigned short *)0x6000C000))
+// 触发阈值电平(12位)0x8000
+#define TRIGGER_THRESHOLD (*((volatile unsigned short *)0x60010000))
+
 
 //全局变量
 uint16_t continuous_read_times = 0;//连续读取次数
@@ -36,7 +37,7 @@ bool latch_data_flag = false;
 uint8_t read_wave[400];//读取到的临时数组
 uint16_t j = 0;//测试用
 uint8_t temp = 0;
-
+uint16_t threshold=2000;
 
 void app_init()
 {
@@ -132,9 +133,13 @@ void key_handler()
             FREQ_M_P = 0;
             break;
 
-        case keykE://设置频率字
-            FREQ_N = temp;
-            FREQ_M_P = 0;
+        case keykD:
+            threshold -=500;
+            TRIGGER_THRESHOLD = threshold ;
+            break;
+        case keykE:
+            threshold +=500;
+            TRIGGER_THRESHOLD = threshold ;
             break;
 
         case keykF://重置FPGA
