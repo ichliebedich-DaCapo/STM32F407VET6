@@ -34,6 +34,7 @@ uint16_t continuous_read_times = 0;//连续读取次数
 uint8_t read_wave[400];//读取到的临时数组
 uint16_t j = 0;//测试用
 uint8_t temp = 0;
+uint32_t  scan_speed;
 
 enum class Flags: uint8_t
 {
@@ -139,9 +140,6 @@ void app_init()
     HAL_Delay(60);
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
 
-
-
-
 }
 
 void key_handler()
@@ -203,13 +201,15 @@ void key_handler()
             temp += 1;
             FREQ_N = temp;
             FREQ_M_P = 0;
-            //UI_Interface::print_scan_speed(scan_speed);
+            scan_speed=12500000/(FREQ_N+1);
+            UI_Interface::print_scan_speed(scan_speed);
             break;
         case keykC:
             temp--;
             FREQ_N = temp;
             FREQ_M_P = 0;
-            //UI_Interface::print_scan_speed(scan_speed);
+            scan_speed=12500000/(FREQ_N+1);
+            UI_Interface::print_scan_speed(scan_speed);
             break;
 
         case keykE://切换触发模式
