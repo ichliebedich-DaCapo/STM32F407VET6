@@ -65,7 +65,10 @@ public:
     static inline auto stop() -> void;
 
     // 切换触发模式
-    static inline auto switch_trigger_mode() -> void;
+    static inline auto set_trigger_mode(uint8_t &trigger_mode) -> void;
+
+    // 切换触发模式
+    static inline auto set_latch_mode(uint8_t &latch_mode) -> void;
 
     // 图像左移
     static inline auto left_shift(uint8_t (&read_wave)[400]) -> void;
@@ -73,23 +76,21 @@ public:
     // 图像右移
     static inline auto right_shift(uint8_t (&read_wave)[400]) -> void;
 
-    // 设置扫描速度
-    static inline auto switch_scan_speed() -> void;
-
-    // 锁存数据
-    static inline auto switch_latch() -> void;
-
     // 打印时间
     static inline auto print_tick() -> void;
-
+    // 打印放大倍数
+    static inline auto print_magnification(uint32_t& magnification) -> void;
+    // 打印扫描速度
+    static inline auto print_scan_speed(uint32_t& scan_speed) -> void;
     // 更新时间
     static inline auto update_count() -> void;
-
     // 获取时间
     static inline auto get_tick() -> uint32_t;
+    //获取放大倍数
+    static inline auto get_magnification(uint32_t& magnification) -> uint32_t;
+    // 获取扫描速度
+    static inline auto get_scan_speed(uint32_t& scan_speed) -> uint32_t;
 
-private:
-    static inline auto set_trigger_mode(bool &trigger_mode) -> void;
 
 private:
     static inline uint32_t count = 0;// 用于计时
@@ -98,7 +99,7 @@ private:
     static inline uint16_t array_length = 400;
     static inline uint8_t wave_start_index = 100;
     static inline uint8_t index_offset = 5;
-    static inline bool _trigger_mode = false;// 默认模式为单次触发
+
 };
 
 //
@@ -121,33 +122,35 @@ auto Screen::init() -> void
     customBtn.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
 
     //按钮_触发模式：单次触发、多次触发
-    customBtn.init(gui->main.btn_trigger_mode, gui->main.btn_trigger_mode_label, 40, 265, 40, 30, "单次触发");
-    Button::hidden(gui->main.btn_trigger_mode);
-
-    //按钮_图像水平移动：左移、右移
-    customBtn.init(gui->main.btn_left_shift, gui->main.btn_left_shift_label, 115, 265, 30, 30, "01");
-    customBtn.init(gui->main.btn_right_shift, gui->main.btn_right_shift_label, 155, 265, 30, 30, "68");
-
-    //按钮_切换扫描速度
-    customBtn.init(gui->main.btn_scan_speed, gui->main.btn_scan_speed_label, 40, 265, 40, 30, "切换扫描速度");
-    Button::hidden(gui->main.btn_scan_speed);
+    customBtn.init(gui->main.btn_trigger_mode, gui->main.btn_trigger_mode_label, 15, 270, 60, 40, "多次触发");
 
     //按钮_锁存模式
-    customBtn.init(gui->main.btn_latch, gui->main.btn_latch_label, 40, 265, 40, 30, "锁存");
-    Button::hidden(gui->main.btn_latch);
+    customBtn.init(gui->main.btn_latch, gui->main.btn_latch_label, 85, 270, 40, 40, "锁存关");
 
-    // 标签：标题
-//    Text label;
-//    label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
-//    label.init(gui->main.label_title, 190, 13, 140, 30, "简易存储示波器");
-//    Text::hidden(gui->main.label_title);
+    //按钮_图像水平移动：左移、右移
+    customBtn.init(gui->main.btn_left_shift, gui->main.btn_left_shift_label, 135, 270, 40, 40, "左移");
+    customBtn.init(gui->main.btn_right_shift, gui->main.btn_right_shift_label, 243, 270, 40, 40, "右移");
 
-//    label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_13);
-//    label.init(gui->main.label_tick, 40, 265, 40, 30, "tick：\n0");
+    //按钮_切换扫描速度
+    customBtn.init(gui->main.btn_scan_speed, gui->main.btn_scan_speed_label, 415, 10, 60, 40, "扫描速度");
+
+    //按钮_切换放大倍数
+    customBtn.init(gui->main.btn_magnification, gui->main.btn_magnification_label, 415, 110, 60, 40, "放大倍数");
 
     //     图片按钮：停止、播放
-    ImageButton::init(gui->main.imgbtn_play, 216, 256, 48, 48, &_btn_list_play_alpha_48x48,
+    ImageButton::init(gui->main.imgbtn_play, 185, 266, 48, 48, &_btn_list_play_alpha_48x48,
                       &_btn_list_pause_alpha_48x48);
+    // 标签：标题
+    Text label;
+//    label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
+//    label.init(gui->main.label_title, 190, 13, 140, 30, "简易存储示波器");
+//    label.init(gui->main.label_title, 190, 13, 140, 30, "简易存储示波器");
+    label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
+    lv_color_t label_color = lv_color_hex(0XFCC0); // 绿色
+    label.init(gui->main.label_scan_speed, 415, 60, 60, 40, "Hz",label_color);
+    label.init(gui->main.label_magnification, 415, 160, 60, 40, "1",label_color);
+
+//    label.init(gui->main.label_tick, 40, 265, 40, 30, "tick：\n0",label_color);
 
 }
 
@@ -192,6 +195,14 @@ auto StorageOscilloscope::print_tick() -> void
     Text::set_text(GUI_Base::get_ui()->main.label_tick, "tick：\n%lu", get_tick());
 }
 
+auto StorageOscilloscope::print_magnification(uint32_t& magnification) -> void
+{
+    Text::set_text(GUI_Base::get_ui()->main.label_magnification, "%lu", get_magnification(magnification));
+}
+auto StorageOscilloscope::print_scan_speed(uint32_t& scan_speed) -> void
+{
+    Text::set_text(GUI_Base::get_ui()->main.label_scan_speed, "%luHz", get_scan_speed(scan_speed));
+}
 // 更新时间
 auto StorageOscilloscope::update_count() -> void
 {
@@ -210,7 +221,16 @@ auto StorageOscilloscope::get_tick() -> uint32_t
 
     return temp_count;
 }
-
+//获取放大倍数
+auto StorageOscilloscope::get_magnification(uint32_t& magnification) -> uint32_t
+{
+  return magnification;
+}
+//获取扫描速度
+auto StorageOscilloscope::get_scan_speed(uint32_t& scan_speed) -> uint32_t
+{
+    return scan_speed;
+}
 // 开始
 auto StorageOscilloscope::start() -> void
 {
@@ -221,14 +241,6 @@ auto StorageOscilloscope::start() -> void
 auto StorageOscilloscope::stop() -> void
 {
     tick_timer.pause();
-}
-
-// 切换触发模式
-auto StorageOscilloscope::switch_trigger_mode() -> void
-{
-    _trigger_mode = !_trigger_mode;
-    set_trigger_mode(_trigger_mode);
-    update_count();
 }
 
 // 图像左移
@@ -303,23 +315,16 @@ void StorageOscilloscope::right_shift(uint8_t (&read_wave)[400])
 
 }
 
-// 设置扫描速度
-auto StorageOscilloscope::switch_scan_speed() -> void
-{
-
-}
-
-// 锁存数据
-auto StorageOscilloscope::switch_latch() -> void
-{
-
-}
-/***********************私有函数***********************/
 //设置触发模式
-auto StorageOscilloscope::set_trigger_mode(bool &trigger_mode) -> void
+auto StorageOscilloscope::set_trigger_mode(uint8_t &trigger_mode_flag) -> void
 {
-    _trigger_mode = trigger_mode;
-    Text::set_text(_trigger_mode ? "单次触发" : "多次触发", GUI_Base::get_ui()->main.btn_trigger_mode_label);
+    Text::set_text(trigger_mode_flag ? "单次触发" : "多次触发", GUI_Base::get_ui()->main.btn_trigger_mode_label);
+}
+
+//设置触发模式
+auto StorageOscilloscope::set_latch_mode(uint8_t &latch_mode_flag) -> void
+{
+    Text::set_text(latch_mode_flag ? "锁存开" : "锁存关", GUI_Base::get_ui()->main.btn_latch_label);
 }
 
 
@@ -337,4 +342,20 @@ void UI_Interface::left_shift(uint8_t (&read_wave)[400])
 void UI_Interface::right_shift(uint8_t (&read_wave)[400])
 {
     StorageOscilloscope::right_shift(read_wave);
+}
+void UI_Interface::switch_trigger_mode(uint8_t trigger_mode_flag)
+{
+    StorageOscilloscope::set_trigger_mode(trigger_mode_flag);
+}
+void UI_Interface::switch_latch_mode(uint8_t latch_mode_flag)
+{
+    StorageOscilloscope::set_latch_mode(latch_mode_flag);
+}
+void UI_Interface::print_magnification(uint32_t& magnification)
+{
+    StorageOscilloscope::print_magnification(magnification);
+}
+void UI_Interface::print_scan_speed(uint32_t &scan_speed)
+{
+    StorageOscilloscope::print_scan_speed(scan_speed);
 }

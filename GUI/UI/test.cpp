@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include "lvgl.h"
 #include "GUI.hpp"
+#include "ui.hpp"
 #include "GUI_Base.hpp"
 #include "lv_drivers/display/monitor.h"
 #include "WaveCurve.hpp"
@@ -61,32 +62,31 @@ int keyboard_thread(void *data)
             switch (keycode)
             {
                 case 'a':
-                   UI_Interface::saveInfo(true);
                     break;
                 case 's':
 //                    UI_Interface::set_record_state(RecordSampleRate::SAMPLE_RATE_16K);
-                    UI_Interface::saveInfo(false);
+//                    UI_Interface::saveInfo(false);
                     break;
                 case 'd':
 //                    UI_Interface::resume_record();
-                    UI_Interface::resume_record();
+//                    UI_Interface::resume_record();
                     break;
                 case 'f':
-                    UI_Interface::pause_record();
+//                    UI_Interface::pause_record();
 //                    uiInterface::add_period();
 //                    printf("下一个波形\n");
 //                    break;
 
 
                 case 'g':
-                    UI_Interface::erasing();
+//                    UI_Interface::erasing();
                     break;
 //                    uiInterface::switch_wave_type();
 //                    printf("E pressed\n");
 //                    break;
 
                 case 'h':
-                    UI_Interface::erase_done();
+//                    UI_Interface::erase_done();
                     break;
 //                    uiInterface::add_wave_cnt();
 //                    printf("F pressed\n");
