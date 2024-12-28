@@ -35,11 +35,6 @@
     <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】UI界面变更，标签变更外部接口">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/font.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/lv_customer_font_SourceHanSerifSC_Regular_15.c" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/lv_customer_font_SourceHanSerifSC_Regular_15.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/.idea/lvgl-simulator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/.idea/lvgl-simulator.iml" afterDir="false" />
     </list>
     <list id="226a4da6-948d-4efd-966f-49a1ee475c55" name="34753 进行的更改" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -1943,15 +1938,7 @@
       <workItem from="1735306190440" duration="10555000" />
       <workItem from="1735348635695" duration="6113000" />
       <workItem from="1735355973611" duration="1405000" />
-      <workItem from="1735357412410" duration="1767000" />
-    </task>
-    <task id="LOCAL-00032" summary="【初始】主项目——CMakelists未修改前">
-      <option name="closed" value="true" />
-      <created>1729335884890</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1729335884890</updated>
+      <workItem from="1735357412410" duration="3093000" />
     </task>
     <task id="LOCAL-00033" summary="【初始】主项目——CMakelists实在没有什么好修改的地方">
       <option name="closed" value="true" />
@@ -2337,7 +2324,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735358321579</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="【简易存储示波器】UI界面变更，标签变更外部接口">
+      <option name="closed" value="true" />
+      <created>1735360845546</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1735360845546</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

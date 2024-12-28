@@ -111,6 +111,8 @@ void app_init()
     spi2_init();
     w25qxx_init();
     timer6_init(FREQ_84M_to_100);// 分频为16KHz
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+    __HAL_RCC_GPIOC_CLK_ENABLE();
     //w25qxx_sector_erase(0);
 
     GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -118,6 +120,11 @@ void app_init()
     GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+    GPIO_InitStruct.Pin = GPIO_PIN_1;
+    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
     GPIO_InitStruct.Pin = GPIO_PIN_4;
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -131,6 +138,8 @@ void app_init()
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
     HAL_Delay(60);
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
+
+
 
 
 }
@@ -231,28 +240,39 @@ void background_handler()
         READ_COMMAND = 0x000;// 传入参数0
         // 等待数据传输完成
         while (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_5));//PC5是等待引脚
-        //读取数据
-        for (int i = 0; i < 400; i++)
+        if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1))
         {
-            read_wave[i] = READ_DATA_BASE[i]>>4;
+            //读取数据
+            for (int i = 0; i < 400; i++)
+            {
+                read_wave[i] = READ_DATA_BASE[i] >> 4;
 //            read_wave[i] = test_data[j];
 //            j++;
 //            if (j == 1600) {
 //                j = 0; // 重置计数器
 //            }
 //            read_wave[i]=HAL_GetTick()&0xFF;
-        }
-        if (OSC::get_latch_mode_flag())
-        {
+            }
+            if (OSC::get_latch_mode_flag())
+            {
 //        w25qxx_buffer_write_uint16(read_wave, continuous_read_times * 400, 400);//这里存储数据到flash
-            continuous_read_times++;
+                continuous_read_times++;
+            }
+            //绘制波形
+            UI_Interface::display(read_wave);
+            if (OSC::get_trigger_mode_flag())
+            {
+                OSC::clear_read_flag();
+                continuous_read_times = 0;
+            }
         }
-        //绘制波形
-        UI_Interface::display(read_wave);
-        if (OSC::get_trigger_mode_flag())
+        else
         {
-            OSC::clear_read_flag();
-            continuous_read_times = 0;
+            for (int i = 0; i < 400; i++)
+            {
+                read_wave[i] = 0;
+            }
+            UI_Interface::display(read_wave);
         }
     }
     else if(OSC::get_read_flash_mode_flag())
