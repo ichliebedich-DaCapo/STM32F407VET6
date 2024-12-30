@@ -367,13 +367,6 @@ static void monitor_sdl_init(void)
     SDL_SetEventFilter(quit_filter, NULL);
 
     window_create(&monitor);
-#if MONITOR_DUAL
-    window_create(&monitor2);
-    int x, y;
-    SDL_GetWindowPosition(monitor2.window, &x, &y);
-    SDL_SetWindowPosition(monitor.window, x + (MONITOR_HOR_RES * MONITOR_ZOOM_X) / 2 + 10, y);
-    SDL_SetWindowPosition(monitor2.window, x - (MONITOR_HOR_RES * MONITOR_ZOOM_X) / 2 - 10, y);
-#endif
 
     sdl_inited = true;
 }
@@ -381,33 +374,98 @@ static void monitor_sdl_init(void)
 
 static void window_create(monitor_t *m)
 {
-    SDL_Surface *iconSurface = NULL;
 
     // 创建一个 SDL 窗口，窗口位置由系统决定（SDL_WINDOWPOS_UNDEFINED）
-    // 窗口大小根据 MONITOR_HOR_RES 和 MONITOR_VER_RES 乘以缩放因子来确定
-//    m->window = SDL_CreateWindow("LVGL Simulator", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-//                                 MONITOR_HOR_RES * MONITOR_ZOOM_X, MONITOR_VER_RES * MONITOR_ZOOM_Y,
-//                                 0);  // 最后一个参数可以设置为 SDL_WINDOW_BORDERLESS 来隐藏窗口边框
-    m->window =SDL_CreateWindow("LVGL Simulator", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                     480, 320, 0);  // 最后一个参数可以设置为 SDL_WINDOW_BORDERLESS 来隐藏窗口边框
+    m->window = SDL_CreateWindow("LVGL Simulator", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                                 MONITOR_HOR_RES , MONITOR_VER_RES, 0);  // 最后一个参数可以设置为 SDL_WINDOW_BORDERLESS 来隐藏窗口边框
 
 
-    // 创建一个与窗口关联的软件渲染器
+/**
+ * @brief 创建一个与窗口关联的软件渲染器。
+ *
+ * @param m 指向 monitor_t 结构体的指针，包含窗口和其他相关资源。
+ *
+ * @details
+ * 该函数初始化一个 SDL 渲染器，用于将图形内容绘制到指定的窗口中。
+ * - 使用 CPU 进行所有绘图操作（软件渲染），适用于没有专用显卡的环境或简单的图形应用。
+ * - 保证跨平台兼容性，因为不依赖于特定的 GPU 硬件。
+ * - 允许直接访问和操作像素数据，适合需要特殊图像处理的应用场景。
+ *
+ * @param[in] window 指向 SDL_Window 对象的指针，表示渲染的目标窗口。
+ *                   所有通过此渲染器绘制的内容都将显示在这个窗口中。
+ * @param[in] index  渲染驱动程序索引。传递 -1 表示让 SDL 自动选择最佳的可用渲染驱动程序。
+ *                   如果应用程序需要特定的硬件加速或其他特性，可以通过枚举可用的渲染驱动程序并选择适当的索引来指定。
+ * @param[in] flags  渲染器标志，决定渲染器的工作模式：
+ *                   - SDL_RENDERER_SOFTWARE: 使用软件渲染器，所有的绘图操作都由 CPU 处理。
+ *                   - 优点包括跨平台兼容性和可以直接操作像素数据，适合某些特殊需求的应用场景。
+ *                   - 缺点是在复杂图形或高帧率应用中性能可能不如硬件加速的渲染器。
+ *                   - 适用于目标平台不支持硬件加速、需要在无专用显卡环境中运行或渲染内容相对简单的情况。
+ *
+ * @note 如果希望优先使用硬件加速但保持兼容性，可以考虑使用 SDL_RENDERER_ACCELERATED 标志，
+ *       并检查返回值是否为 NULL，在必要时手动回退到 SDL_RENDERER_SOFTWARE。
+ */
     m->renderer = SDL_CreateRenderer(m->window, -1, SDL_RENDERER_SOFTWARE);
 
-    // 创建一个静态纹理，用于显示模拟器的内容
-    m->texture = SDL_CreateTexture(m->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, MONITOR_HOR_RES,
-                                   MONITOR_VER_RES);
-
-    // 设置纹理混合模式为 SDL_BLENDMODE_BLEND，允许使用透明度
+/**
+ * @brief 创建一个静态纹理，并设置其混合模式。
+ *
+ * @param m 指向 monitor_t 结构体的指针，包含渲染器和其他相关资源。
+ *
+ * @details
+ * 该函数创建一个静态纹理，用于存储模拟器的帧缓冲区内容，并将其与渲染器关联。
+ * 设置混合模式为 SDL_BLENDMODE_BLEND，允许透明度效果。
+ *
+ * @param[in] renderer 指向 SDL_Renderer 对象的指针，表示要使用的渲染器。
+ * @param[in] format   纹理的像素格式，这里使用 SDL_PIXELFORMAT_ARGB8888 支持 alpha 通道。
+ * @param[in] access   纹理访问类型，SDL_TEXTUREACCESS_STATIC 表明纹理内容不会频繁更新。
+ * @param[in] width    纹理宽度，对应水平分辨率。
+ * @param[in] height   纹理高度，对应垂直分辨率。
+ */
+    m->texture = SDL_CreateTexture(m->renderer,
+                                   SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC,
+                                   MONITOR_HOR_RES, MONITOR_VER_RES);
     SDL_SetTextureBlendMode(m->texture, SDL_BLENDMODE_BLEND);
 
-    // 创建一个图标表面，并将其设置为窗口图标
-    iconSurface = SDL_CreateRGBSurfaceFrom(simulator_icon, 32, 32, 16, 32 * 2, 0xf000, 0x0f00, 0x00f0, 0x000f);
+
+
+/**
+ * @brief 创建并设置窗口图标。
+ *
+ * @param m 指向 monitor_t 结构体的指针，包含窗口和其他相关资源。
+ *
+ * @details
+ * 该函数从预定义的图标数据创建一个 SDL_Surface，并将其设置为窗口图标。
+ * 完成后释放表面资源以节省内存。
+ *
+ * @param[in] iconData 图标数据的指针，通常是一个全局数组或静态变量。
+ * @param[in] width    图标的宽度。
+ * @param[in] height   图标的高度。
+ * @param[in] depth    图像深度（位数）。
+ * @param[in] pitch    每一行像素占用的字节数。
+ * @param[in] Rmask    红色通道掩码。
+ * @param[in] Gmask    绿色通道掩码。
+ * @param[in] Bmask    蓝色通道掩码。
+ * @param[in] Amask    Alpha 通道掩码。
+ */
+    SDL_Surface *iconSurface = SDL_CreateRGBSurfaceFrom(simulator_icon, 32, 32, 16, 32 * 2,
+                                                        0xf000, 0x0f00, 0x00f0, 0x000f);
     SDL_SetWindowIcon(m->window, iconSurface);
     SDL_FreeSurface(iconSurface);  // 释放图标表面资源
 
-    // 初始化帧缓冲区为灰色（77 是经验值）
+/**
+ * @brief 初始化帧缓冲区为灰色。
+ *
+ * @param m 指向 monitor_t 结构体的指针，包含纹理和其他相关资源。
+ *
+ * @details
+ * 根据是否启用双缓冲 (MONITOR_DOUBLE_BUFFERED)，分别初始化帧缓冲区。
+ * 如果启用了双缓冲，则直接更新纹理；否则，分配一块新的内存并填充为浅灰色 (0x44)。
+ *
+ * @param[in] texture  指向 SDL_Texture 对象的指针，表示要更新的纹理。
+ * @param[in] fb      指向帧缓冲区的指针，用于存储像素数据。
+ * @param[in] width    帧缓冲区的宽度。
+ * @param[in] height   帧缓冲区的高度。
+ */
 #if MONITOR_DOUBLE_BUFFERED
     SDL_UpdateTexture(m->texture, NULL, m->tft_fb_act, MONITOR_HOR_RES * sizeof(uint32_t));
 #else
@@ -415,7 +473,15 @@ static void window_create(monitor_t *m)
     memset(m->tft_fb, 0x44, MONITOR_HOR_RES * MONITOR_VER_RES * sizeof(uint32_t));  // 使用 0x44 填充，对应于浅灰色
 #endif
 
-    // 设置刷新查询标志为 true，表示需要刷新显示器
+/**
+ * @brief 设置刷新查询标志为 true，表示需要刷新显示器。
+ *
+ * @param m 指向 monitor_t 结构体的指针，包含刷新查询标志。
+ *
+ * @details
+ * 将 sdl_refr_qry 成员设置为 true，表明在接下来的主循环中应该刷新显示器，
+ * 确保用户界面得到及时更新。
+ */
     m->sdl_refr_qry = true;
 }
 
