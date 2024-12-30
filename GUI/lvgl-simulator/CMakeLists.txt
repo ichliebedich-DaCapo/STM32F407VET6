@@ -160,9 +160,11 @@ endif ()
 
 # 链接外部库
 set(LIBRARIES   SDL2)
+set(SDL2_BIN_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/bin)
+set(SDL2_LIB_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib)
 set(LIBFILE_PATH resource/lib/native)
 # 全局设置应该链接的库的目录
-link_directories(${LIBFILE_PATH} ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib)
+link_directories(${LIBFILE_PATH} ${SDL2_LIB_DIR})
 
 
 # -----------------创建可执行文件-----------------
@@ -177,7 +179,7 @@ else ()
 endif ()
 
 # 使用 configure_file 只有当源文件发生变化时才会复制（在CMakelists阶段操作）
-configure_file(${SIMULATOR_DIR}/SDL2/lib/SDL2.dll ${BIN_DIR}/SDL2.dll COPYONLY)
+configure_file(${SDL2_BIN_DIR}/SDL2.dll ${BIN_DIR}/SDL2.dll COPYONLY)
 
 
 if(CMAKE_TOOLCHAIN_FILE)
