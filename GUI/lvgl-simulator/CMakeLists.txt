@@ -1,7 +1,9 @@
 # ----------------------------------设置你的UI路径（选择项目）------------------------------
 set(UI_DIR ../UI/StorageOscilloscope)
-# ----------------------------------设置你的UI路径（选择项目）------------------------------
+# ----------------------------------选项------------------------------
+set(USE_STATIC_LIBRARY True)
 
+# ----------------------------------选项------------------------------
 # 提取最后一个斜杠后的部分
 string(REGEX REPLACE ".*/" "" APP "${UI_DIR}")
 
@@ -110,8 +112,19 @@ set(LIBFILE_PATH resource/lib/native)
 # 全局设置应该链接的库的目录
 link_directories(${LIBFILE_PATH} ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib)
 
+# --------资源文件-------
+if(USE_STATIC_LIBRARY)
+    file(GLOB_RECURSE SOURCE ${SIMULATOR_DIR}/main.cpp )
+else ()
+    file(GLOB_RECURSE SOURCE
+
+    )
+
+endif ()
+
 # 创建可执行文件
-add_executable(${PROJECT_NAME} ${SIMULATOR_DIR}/main.cpp)
+add_executable(${PROJECT_NAME} ${SOURCE})
+
 target_link_libraries(${PROJECT_NAME} PRIVATE libdriver libgui ${LIBRARIES})
 # 动态库或者可执行文件的生成位置
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
