@@ -19,13 +19,16 @@ struct lv_ui_t
     {
         Obj screen;// 屏幕自身
         Obj rect;//示波器方框
+//        Obj label_v_max;// 电压最大值
+//        Obj label_v_min;// 电压最小值
+        Obj label_vpp;// 电压峰峰值
         Obj btn_trigger_mode;//触发方式
         Obj btn_trigger_mode_label;
         Obj btn_left_shift;//左移
         Obj btn_left_shift_label;
         Obj btn_right_shift;//右移
         Obj btn_right_shift_label;
-        Obj imgbtn_play;// 播放键
+//        Obj imgbtn_play;// 播放键
         Obj btn_scan_speed;//切换扫描速度
         Obj btn_scan_speed_label;
         Obj btn_latch;//锁存功能
@@ -69,14 +72,14 @@ namespace border_info
 class UI_Interface
 {
 public:
-
     static void display(uint8_t (&read_wave)[400]);
     static void clear_screen();
     static void left_shift(uint8_t (&read_wave)[400]);
     static void right_shift(uint8_t (&read_wave)[400]);
     static void switch_trigger_mode(uint8_t trigger_mode_flag);
     static void switch_latch_mode(uint8_t latch_mode_flag);
-    static void print_magnification(uint32_t& magnification);
+    static void print_magnification(uint8_t magnification);
+    static void print_vpp_max_min(float vpp, float v_max, float v_min);
     static void print_scan_speed(uint8_t& magnification);
 };
 

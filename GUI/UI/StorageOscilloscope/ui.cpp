@@ -81,18 +81,26 @@ public:
 
     // 打印时间
     static inline auto print_tick() -> void;
+
     // 打印放大倍数
-    static inline auto print_magnification(uint32_t& magnification) -> void;
+    static auto print_magnification(auto magnification) -> void;
+
     // 打印扫描速度
-    static inline auto print_scan_speed(auto& scan_speed) -> void;
+    static inline auto print_scan_speed(auto &scan_speed) -> void;
+
     // 更新时间
     static inline auto update_count() -> void;
+
     // 获取时间
     static inline auto get_tick() -> uint32_t;
+
     //获取放大倍数
-    static inline auto get_magnification(uint32_t& magnification) -> uint32_t;
+    static inline auto get_magnification(uint32_t &magnification) -> uint32_t;
+
     // 获取扫描速度
-    static inline auto get_scan_speed(auto& scan_speed) -> uint8_t;
+    static inline auto get_scan_speed(auto &scan_speed) -> uint8_t;
+
+    static inline auto print_vpp_max_min(float &vpp, float &max, float &min) -> void;
 
 
 private:
@@ -116,10 +124,22 @@ auto Screen::init() -> void
     Component::set_pos_size(border_info::x, border_info::y, border_info::width, border_info::height);
     Component::border_radius(5);
 
-
     // 设置边框背景颜色和边框颜色
     lv_obj_set_style_bg_color(gui->main.rect, lv_color_hex(0), LV_PART_MAIN);
     lv_obj_set_style_border_color(gui->main.rect, lv_color_hex(0X6675), LV_PART_MAIN);
+
+    // 标签：标题
+    Text label;
+    label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
+    lv_color_t label_color = lv_color_hex(0XFCC0); // 绿色
+    label.init(gui->main.label_scan_speed, 415, 60, 60, 40, "Hz", label_color);
+    label.init(gui->main.label_magnification, 420, 160, 60, 30, "1", label_color);
+    label.init(gui->main.label_vpp, 420, 200, 60, 160, "-", label_color);// 电压峰峰值
+//    label.init(gui->main.label_v_max, 420, 240, 60, 30, "-", label_color);// 电压最大值
+//    label.init(gui->main.label_v_min, 420, 280, 60, 30, "-", label_color);// 电压最小值
+
+
+
     // 初始化器
     Button customBtn;
     customBtn.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
@@ -141,17 +161,9 @@ auto Screen::init() -> void
     customBtn.init(gui->main.btn_magnification, gui->main.btn_magnification_label, 415, 110, 60, 40, "放大倍数");
 
     //     图片按钮：停止、播放
-    ImageButton::init(gui->main.imgbtn_play, 185, 266, 48, 48, &_btn_list_play_alpha_48x48,
-                      &_btn_list_pause_alpha_48x48);
-    // 标签：标题
-    Text label;
-//    label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
-//    label.init(gui->main.label_title, 190, 13, 140, 30, "简易存储示波器");
-//    label.init(gui->main.label_title, 190, 13, 140, 30, "简易存储示波器");
-    label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
-    lv_color_t label_color = lv_color_hex(0XFCC0); // 绿色
-    label.init(gui->main.label_scan_speed, 415, 60, 60, 40, "Hz",label_color);
-    label.init(gui->main.label_magnification, 415, 160, 60, 40, "1",label_color);
+//    ImageButton::init(gui->main.imgbtn_play, 185, 266, 48, 48, &_btn_list_play_alpha_48x48,
+//                      &_btn_list_pause_alpha_48x48);
+
 
 //    label.init(gui->main.label_tick, 40, 265, 40, 30, "tick：\n0",label_color);
 
@@ -200,7 +212,7 @@ auto StorageOscilloscope::clear() -> void
     draw_dashed_dividers(border_info::x, border_info::y, border_info::width, border_info::height, 10, 8, 0X8410,
                          border_info::margin, 4, 4);
 
-    clear_interpolated_wave(start_x, start_y, CH0_buff, length, wave_start_index, array_length,0);
+    clear_interpolated_wave(start_x, start_y, CH0_buff, length, wave_start_index, array_length, 0);
 
 }
 
@@ -209,11 +221,28 @@ auto StorageOscilloscope::print_tick() -> void
     Text::set_text(GUI_Base::get_ui()->main.label_tick, "tick：\n%lu", get_tick());
 }
 
-auto StorageOscilloscope::print_magnification(uint32_t& magnification) -> void
+auto StorageOscilloscope::print_magnification(auto magnification) -> void
 {
-    Text::set_text(GUI_Base::get_ui()->main.label_magnification, "%lu", get_magnification(magnification));
+    uint32_t temp;
+    switch (magnification)
+    {
+        case 1:
+            temp = 1;
+            break;
+        case 2:
+            temp = 10;
+            break;
+        case 3:
+            temp = 100;
+            break;
+        default:
+            temp = 1;
+            break;
+    }
+    Text::set_text(GUI_Base::get_ui()->main.label_magnification, "%d", temp);
 }
-auto StorageOscilloscope::print_scan_speed(auto& scan_speed) -> void
+
+auto StorageOscilloscope::print_scan_speed(auto &scan_speed) -> void
 {
     char buf[10];
     switch (scan_speed)
@@ -253,6 +282,7 @@ auto StorageOscilloscope::print_scan_speed(auto& scan_speed) -> void
     }
     Text::set_text(GUI_Base::get_ui()->main.label_scan_speed, buf);
 }
+
 // 更新时间
 auto StorageOscilloscope::update_count() -> void
 {
@@ -271,16 +301,19 @@ auto StorageOscilloscope::get_tick() -> uint32_t
 
     return temp_count;
 }
+
 //获取放大倍数
-auto StorageOscilloscope::get_magnification(uint32_t& magnification) -> uint32_t
+auto StorageOscilloscope::get_magnification(uint32_t &magnification) -> uint32_t
 {
-  return magnification;
+    return magnification;
 }
+
 //获取扫描速度
-auto StorageOscilloscope::get_scan_speed(auto& scan_speed) -> uint8_t
+auto StorageOscilloscope::get_scan_speed(auto &scan_speed) -> uint8_t
 {
     return scan_speed;
 }
+
 // 开始
 auto StorageOscilloscope::start() -> void
 {
@@ -300,7 +333,8 @@ void StorageOscilloscope::left_shift(uint8_t (&read_wave)[400])
     if (wave_start_index + index_offset < array_length - length)
     {
         wave_start_index += index_offset;
-    } else
+    }
+    else
     {
         // 如果wave_index + length接近或超过array_length，则设置为最大允许值
         wave_start_index = array_length - length;
@@ -334,7 +368,8 @@ void StorageOscilloscope::right_shift(uint8_t (&read_wave)[400])
     if (wave_start_index >= index_offset)
     {
         wave_start_index -= index_offset;
-    } else
+    }
+    else
     {
         wave_start_index = 0; // 如果wave_index小于index_offset，则设置为0
     }
@@ -377,16 +412,27 @@ auto StorageOscilloscope::set_latch_mode(uint8_t &latch_mode_flag) -> void
     Text::set_text(latch_mode_flag ? "锁存开" : "锁存关", GUI_Base::get_ui()->main.btn_latch_label);
 }
 
+auto StorageOscilloscope::print_vpp_max_min(float &vpp, float &max, float &min) -> void
+{
+    char buf[24];
+    sprintf(buf, "%.3f\n%.3f\n%.3f", vpp,max,min);
+    Text::set_text(GUI_Base::get_ui()->main.label_vpp, buf);
+//    Text::set_text(GUI_Base::get_ui()->main.label_v_max, buf2);
+//    Text::set_text(GUI_Base::get_ui()->main.label_v_min, "%.3f", min);
+}
+
 
 /***********************对外接口***********************/
 void UI_Interface::display(uint8_t (&read_wave)[400])
 {
     StorageOscilloscope::handler(read_wave);
 }
+
 void UI_Interface::clear_screen()
 {
     StorageOscilloscope::clear();
 }
+
 void UI_Interface::left_shift(uint8_t (&read_wave)[400])
 {
     StorageOscilloscope::left_shift(read_wave);
@@ -396,19 +442,38 @@ void UI_Interface::right_shift(uint8_t (&read_wave)[400])
 {
     StorageOscilloscope::right_shift(read_wave);
 }
+
 void UI_Interface::switch_trigger_mode(uint8_t trigger_mode_flag)
 {
     StorageOscilloscope::set_trigger_mode(trigger_mode_flag);
 }
+
 void UI_Interface::switch_latch_mode(uint8_t latch_mode_flag)
 {
     StorageOscilloscope::set_latch_mode(latch_mode_flag);
 }
-void UI_Interface::print_magnification(uint32_t& magnification)
+
+void UI_Interface::print_magnification(uint8_t magnification)
 {
     StorageOscilloscope::print_magnification(magnification);
 }
+
 void UI_Interface::print_scan_speed(uint8_t &scan_speed)
 {
     StorageOscilloscope::print_scan_speed(scan_speed);
 }
+
+
+/**
+ * @brief 显示峰峰值、最大值、最小值
+ * @param vpp
+ * @param v_max
+ * @param v_min
+ * @note 已经自行计算12位ADC数据对应的电压值，单位为V
+ */
+void UI_Interface::print_vpp_max_min(float vpp, float v_max, float v_min)
+{
+    StorageOscilloscope::print_vpp_max_min(vpp, v_max, v_min);
+}
+
+

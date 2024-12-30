@@ -35,6 +35,7 @@ uint16_t continuous_read_times = 0;//连续读取次数
 uint8_t read_wave[400];//读取到的临时数组
 uint16_t j = 0;//测试用
 uint8_t temp = 0;
+uint8_t magnification = 1;
 
 enum class Flags : uint8_t
 {
@@ -174,6 +175,100 @@ void set_sample_rate(uint8_t &rate)
     }
 }
 
+// 程控放大
+static void set_k1_high()
+{
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET);
+}
+
+static void set_k1_low()
+{
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET);
+}
+
+static void set_k2_high()
+{
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET);
+}
+
+static void set_k2_low()
+{
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET);
+}
+
+void set_magnification(auto magnification)
+{
+    switch (magnification)
+    {
+        case 1:
+            set_k1_low();
+            set_k2_low();
+            break;
+        case 2:
+            set_k1_high();
+            set_k2_low();
+            break;
+        case 3:
+            set_k1_high();
+            set_k2_high();
+            break;
+        default:
+            set_k1_low();
+            set_k2_low();
+            break;
+    }
+}
+
+// 找出峰峰值
+uint8_t vpp_count = 0;
+uint8_t vpp_flag = 0;
+int vpp, vpp_max, vpp_min;
+
+void find_peak_max_min()
+{
+    if (vpp_flag)
+    {
+        vpp_flag = 0;
+        auto max = (float) vpp_max * 2.0f / 4095;
+        auto min = (float) vpp_min * 2.0f / 4095;
+        auto temp_vpp = (float) ((max - min));
+        max += 1.5f;
+        min += 1.5f;
+        // 显示最值
+        switch (magnification)
+        {
+//            case 1:
+//                temp_vpp *=0.1;
+//                max *=0.1;
+//                min *=0.1;
+//                break;
+//            temp_vpp *= 1.1889;
+//            max *= 1.1889;
+//            min *= 1.1889;
+                break;
+            case 2:
+//                temp_vpp *= 0.0855;
+//                max *= 0.0855;
+//                min *= 0.0855;
+                temp_vpp *= 0.1;
+                max *= 0.1;
+                min *= 0.1;
+                break;
+            case 3:
+//                temp_vpp *= 0.009;
+//                max *= 0.009;
+//                min *= 0.009;
+                temp_vpp *= 0.01;
+                max *= 0.01;
+                min *= 0.01;
+                break;
+            default:
+                break;
+        }
+        UI_Interface::print_vpp_max_min(temp_vpp, max, min);
+    }
+}
+
 void app_init()
 {
     spi2_init();
@@ -181,6 +276,7 @@ void app_init()
     timer6_init(FREQ_84M_to_100);// 分频为16KHz
     __HAL_RCC_GPIOB_CLK_ENABLE();
     __HAL_RCC_GPIOC_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
     //w25qxx_sector_erase(0);
 
     GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -200,6 +296,12 @@ void app_init()
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
+
+    GPIO_InitStruct.Pin = GPIO_PIN_8 | GPIO_PIN_12;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 
     HAL_Delay(50);
@@ -248,15 +350,21 @@ void key_handler()
             break;
 
 
-        case keyk5://切换程控放大器放大倍数
-//            uint32_t  magnification;
-//            UI_Interface::print_magnification(magnification);
-//            __BKPT(0);
+        case keyk5:
+
+
             break;
-        case keyk6://读取400数据
-            if (!OSC::get_read_flag())
-                OSC::toggle_read_flash_mode_flag();
-//            __BKPT(0);
+        case keyk6://切换程控放大器放大倍数
+            if (magnification > 1)
+                magnification--;
+            set_magnification(magnification);
+            UI_Interface::print_magnification(magnification);
+            break;
+        case keyk7:
+            if (magnification < 3)
+                magnification++;
+            set_magnification(magnification);
+            UI_Interface::print_magnification(magnification);
             break;
 
             // 测试4：测试读取数据
@@ -314,10 +422,35 @@ void background_handler()
 //        if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1))
 //        {
         // 读取数据
+        ++vpp_count;
+        if (vpp_count > 15)
+        {
+            vpp_count = 0;
+            vpp_flag = 1;
+        }
+        vpp_max = 0;
+        vpp_min = 4095;
+        uint16_t temp_data;
         for (int i = 0; i < 400; i++)
         {
-            read_wave[i] = READ_DATA_BASE[i] >> 4;
+            temp_data = READ_DATA_BASE[i];
+            read_wave[i] = temp_data >> 4;
+            // 找到最值
+            if (vpp_flag)
+            {
+                if (temp_data > vpp_max)
+                {
+                    vpp_max = temp_data;
+                }
+                if (temp_data < vpp_min)
+                {
+                    vpp_min = temp_data;
+                }
+            }
         }
+        // 找出峰峰值、最大值、最小值
+        find_peak_max_min();
+        vpp_flag = 0;
 
         // 锁存数据
         if (OSC::get_latch_mode_flag())
@@ -329,6 +462,8 @@ void background_handler()
 
         //绘制波形
         UI_Interface::display(read_wave);
+
+
         if (OSC::get_trigger_mode_flag())
         {
             OSC::clear_read_flag();
