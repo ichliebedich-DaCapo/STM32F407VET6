@@ -166,8 +166,8 @@ else ()
     target_link_libraries(${PROJECT_NAME} PRIVATE   ${LIBRARIES})
 endif ()
 
-# 复制程序运行所必需的库文件
-add_custom_target(copy_libs
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SIMULATOR_DIR}/SDL2/lib/SDL2.dll ${BIN_DIR}/SDL2.dll
-)
-add_dependencies(${PROJECT_NAME} copy_libs)
+# 使用 configure_file 只有当源文件发生变化时才会复制（在CMakelists阶段操作）
+configure_file(${SIMULATOR_DIR}/SDL2/lib/SDL2.dll ${BIN_DIR}/SDL2.dll COPYONLY)
+
+
+
