@@ -21,6 +21,6 @@ CMAKE_C_COMPILER= E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-min
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
 -- Using GCC compiler
--- Configuring done (2.2s)
+-- Configuring done (1.7s)
 -- Generating done (0.3s)
 -- Build files have been written to: E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm

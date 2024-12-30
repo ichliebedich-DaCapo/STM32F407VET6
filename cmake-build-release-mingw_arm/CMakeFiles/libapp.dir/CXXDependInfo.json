@@ -6,6 +6,16 @@
 	"config" : "",
 	"cxx-modules" : 
 	{
+		"CMakeFiles/libapp.dir/Module/inc/AsyncDelay.ixx.obj" : 
+		{
+			"bmi-only" : false,
+			"destination" : null,
+			"name" : "CXX_MODULES",
+			"relative-directory" : "Module/inc",
+			"source" : "E:/Program/Embedded/MCU/STM32/Furina/Module/inc/AsyncDelay.ixx",
+			"type" : "CXX_MODULES",
+			"visibility" : "PUBLIC"
+		},
 		"CMakeFiles/libapp.dir/Module/inc/flash_storage.ixx.obj" : 
 		{
 			"bmi-only" : false,
