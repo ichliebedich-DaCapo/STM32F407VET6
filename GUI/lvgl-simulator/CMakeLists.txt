@@ -3,6 +3,14 @@ set(UI_DIR ../UI/StorageOscilloscope)
 # ----------------------------------选项------------------------------
 #set(USE_STATIC_LIBRARY True)
 
+# ----------------------------------自动根据选项来配置------------------------------
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+    message(STATUS "Building for 64-bit architecture")
+    set(PLATFORM_X64 True)
+else()
+    message(STATUS "Building for 32-bit architecture")
+    set(PLATFORM_X64 False)
+endif()
 # ----------------------------------选项------------------------------
 # 提取最后一个斜杠后的部分
 string(REGEX REPLACE ".*/" "" APP "${UI_DIR}")
@@ -106,11 +114,6 @@ target_link_libraries(libgui PUBLIC liblvgl librender)
 set_target_properties(libgui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
-# 链接外部库
-set(LIBRARIES   SDL2)
-set(LIBFILE_PATH resource/lib/native)
-# 全局设置应该链接的库的目录
-link_directories(${LIBFILE_PATH} ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib)
 
 # --------资源文件-------
 if(USE_STATIC_LIBRARY)
@@ -155,7 +158,14 @@ else ()
     )
 endif ()
 
-# 创建可执行文件
+# 链接外部库
+set(LIBRARIES   SDL2)
+set(LIBFILE_PATH resource/lib/native)
+# 全局设置应该链接的库的目录
+link_directories(${LIBFILE_PATH} ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib)
+
+
+# -----------------创建可执行文件-----------------
 add_executable(${PROJECT_NAME} ${SOURCE})
 # 动态库或者可执行文件的生成位置
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
@@ -170,4 +180,7 @@ endif ()
 configure_file(${SIMULATOR_DIR}/SDL2/lib/SDL2.dll ${BIN_DIR}/SDL2.dll COPYONLY)
 
 
+if(CMAKE_TOOLCHAIN_FILE)
+    message(STATUS "Using toolchain file: ${CMAKE_TOOLCHAIN_FILE}")
+endif()
 
