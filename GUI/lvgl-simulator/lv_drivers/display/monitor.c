@@ -311,22 +311,35 @@ static void monitor_sdl_refr(lv_timer_t *t)
 #endif
 }
 
+/**
+ * 退出过滤器
+ * @param userdata
+ * @param event
+ * @return
+ * @note 这种设计模式允许你集中管理退出条件，并且可以在多个地方响应退出请求，
+ * 同时保持代码的整洁和可维护性。此外，通过这种方式，你可以很容易地扩展功能，
+ * 比如添加更多的退出条件或者改变退出行为。
+ */
 int quit_filter(void *userdata, SDL_Event *event)
 {
-    (void) userdata;
+    (void) userdata; // 忽略未使用的参数以避免编译警告
 
     if (event->type == SDL_WINDOWEVENT)
     {
+        // 如果是窗口事件，则进一步检查具体是什么类型的窗口事件
         if (event->window.event == SDL_WINDOWEVENT_CLOSE)
         {
+            // 如果窗口关闭事件（例如用户点击了窗口的关闭按钮），则设置 sdl_quit_qry 为 true
             sdl_quit_qry = true;
         }
-    } else if (event->type == SDL_QUIT)
+    }
+    else if (event->type == SDL_QUIT)
     {
+        // 如果是 SDL_QUIT 事件（例如用户选择了退出菜单项或者系统请求程序退出），也设置 sdl_quit_qry 为 true
         sdl_quit_qry = true;
     }
 
-    return 1;
+    return 1; // 返回非零值表示事件被允许通过过滤器继续处理
 }
 
 static void monitor_sdl_clean_up(void)
@@ -350,6 +363,7 @@ static void monitor_sdl_init(void)
     /*Initialize the SDL*/
     SDL_Init(SDL_INIT_VIDEO);
 
+    // 所谓事件过滤器就是对传入的事件进行判断处理
     SDL_SetEventFilter(quit_filter, NULL);
 
     window_create(&monitor);
@@ -368,31 +382,40 @@ static void monitor_sdl_init(void)
 static void window_create(monitor_t *m)
 {
     SDL_Surface *iconSurface = NULL;
+
+    // 创建一个 SDL 窗口，窗口位置由系统决定（SDL_WINDOWPOS_UNDEFINED）
+    // 窗口大小根据 MONITOR_HOR_RES 和 MONITOR_VER_RES 乘以缩放因子来确定
     m->window = SDL_CreateWindow(PRJ_NAME,
                                  SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                  MONITOR_HOR_RES * MONITOR_ZOOM_X, MONITOR_VER_RES * MONITOR_ZOOM_Y,
-                                 0);       /*last param. SDL_WINDOW_BORDERLESS to hide borders*/
+                                 0);  // 最后一个参数可以设置为 SDL_WINDOW_BORDERLESS 来隐藏窗口边框
 
+    // 创建一个与窗口关联的软件渲染器
     m->renderer = SDL_CreateRenderer(m->window, -1, SDL_RENDERER_SOFTWARE);
+
+    // 创建一个静态纹理，用于显示模拟器的内容
     m->texture = SDL_CreateTexture(m->renderer,
                                    SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, MONITOR_HOR_RES,
                                    MONITOR_VER_RES);
+
+    // 设置纹理混合模式为 SDL_BLENDMODE_BLEND，允许使用透明度
     SDL_SetTextureBlendMode(m->texture, SDL_BLENDMODE_BLEND);
 
+    // 创建一个图标表面，并将其设置为窗口图标
     iconSurface = SDL_CreateRGBSurfaceFrom(simulator_icon, 32, 32, 16, 32 * 2, 0xf000, 0x0f00, 0x00f0, 0x000f);
     SDL_SetWindowIcon(m->window, iconSurface);
-    SDL_FreeSurface(iconSurface);
+    SDL_FreeSurface(iconSurface);  // 释放图标表面资源
 
-    /*Initialize the frame buffer to gray (77 is an empirical value) */
+    // 初始化帧缓冲区为灰色（77 是经验值）
 #if MONITOR_DOUBLE_BUFFERED
     SDL_UpdateTexture(m->texture, NULL, m->tft_fb_act, MONITOR_HOR_RES * sizeof(uint32_t));
 #else
     m->tft_fb = (uint32_t *) malloc(sizeof(uint32_t) * MONITOR_HOR_RES * MONITOR_VER_RES);
-    memset(m->tft_fb, 0x44, MONITOR_HOR_RES * MONITOR_VER_RES * sizeof(uint32_t));
+    memset(m->tft_fb, 0x44, MONITOR_HOR_RES * MONITOR_VER_RES * sizeof(uint32_t));  // 使用 0x44 填充，对应于浅灰色
 #endif
 
+    // 设置刷新查询标志为 true，表示需要刷新显示器
     m->sdl_refr_qry = true;
-
 }
 
 static void window_update(monitor_t *m)
@@ -419,25 +442,27 @@ static void window_update(monitor_t *m)
 
 void LCD_Set_Pixel(uint16_t x, uint16_t y, uint32_t color)
 {
-    monitor.tft_fb[y * 480 + x]= lv_color_to32(lv_color_hex(color));
+    monitor.tft_fb[y * 480 + x] = lv_color_to32(lv_color_hex(color));
 }
-void LCD_Color_Fill(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend,  uint32_t *color)
+
+void LCD_Color_Fill(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend, uint32_t *color)
 {
-    for(int i=ysta;i<=yend;i++)
+    for (int i = ysta; i <= yend; i++)
     {
-        for(int j=xsta;j<=xend;j++)
+        for (int j = xsta; j <= xend; j++)
         {
-            LCD_Set_Pixel(j,i,color[j+i*xend]);
+            LCD_Set_Pixel(j, i, color[j + i * xend]);
         }
     }
 }
-void LCD_Color_Clean(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend,  uint32_t color)
+
+void LCD_Color_Clean(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend, uint32_t color)
 {
-    for(int i=ysta;i<=yend;i++)
+    for (int i = ysta; i <= yend; i++)
     {
-        for(int j=xsta;j<=xend;j++)
+        for (int j = xsta; j <= xend; j++)
         {
-            LCD_Set_Pixel(j,i,color);
+            LCD_Set_Pixel(j, i, color);
         }
     }
 }

@@ -18,8 +18,6 @@
 // lvgl显示和输入驱动
 #include "lv_drivers/display/monitor.h"
 #include "lv_drivers/indev/mouse.h"
-#include "lv_drivers/indev/mousewheel.h"
-#include "lv_drivers/indev/keyboard.h"
 
 #if LV_USE_FREEMASTER
 #include "external_data_init.h"
@@ -134,25 +132,18 @@ static void hal_init()
      * 需要定期调用 'lv_tick_inc()' 以告知 LittlevGL 自上次调用以来经过了多少时间
      * 创建一个名为 "tick" 的 SDL 线程，该线程将定期调用 'lv_tick_inc()'
      */
-    SDL_CreateThread(tick_thread, "tick", nullptr);
+    SDL_CreateThread([](void *data)
+                     {
+                         (void) data;  /* 忽略传递的参数，因为在这个函数中不需要使用它 */
+
+                         while (keep_running)
+                         {
+                             SDL_Delay(5);   /* 休眠 5 毫秒 */
+                             lv_tick_inc(5); /* 告诉 LittlevGL 已经过去了 5 毫秒 */
+                         }
+
+                         return keep_running;
+                     }, "tick", nullptr);
 }
 
-
-/**
- * 一个用于测量 LittlevGL 经过时间的任务
- * @param data 未使用
- * @return 从不返回
- */
-static int tick_thread(void *data)
-{
-    (void) data;  /* 忽略传递的参数，因为在这个函数中不需要使用它 */
-
-    while (keep_running)
-    {
-        SDL_Delay(5);   /* 休眠 5 毫秒 */
-        lv_tick_inc(5); /* 告诉 LittlevGL 已经过去了 5 毫秒 */
-    }
-
-    return 0;  /* 这个函数实际上永远不会返回，因为它一直在循环中运行 */
-}
 
