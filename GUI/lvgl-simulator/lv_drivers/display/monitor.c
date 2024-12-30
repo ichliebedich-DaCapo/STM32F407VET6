@@ -385,17 +385,18 @@ static void window_create(monitor_t *m)
 
     // 创建一个 SDL 窗口，窗口位置由系统决定（SDL_WINDOWPOS_UNDEFINED）
     // 窗口大小根据 MONITOR_HOR_RES 和 MONITOR_VER_RES 乘以缩放因子来确定
-    m->window = SDL_CreateWindow(PRJ_NAME,
-                                 SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                                 MONITOR_HOR_RES * MONITOR_ZOOM_X, MONITOR_VER_RES * MONITOR_ZOOM_Y,
-                                 0);  // 最后一个参数可以设置为 SDL_WINDOW_BORDERLESS 来隐藏窗口边框
+//    m->window = SDL_CreateWindow("LVGL Simulator", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+//                                 MONITOR_HOR_RES * MONITOR_ZOOM_X, MONITOR_VER_RES * MONITOR_ZOOM_Y,
+//                                 0);  // 最后一个参数可以设置为 SDL_WINDOW_BORDERLESS 来隐藏窗口边框
+    m->window =SDL_CreateWindow("LVGL Simulator", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                     480, 320, 0);  // 最后一个参数可以设置为 SDL_WINDOW_BORDERLESS 来隐藏窗口边框
+
 
     // 创建一个与窗口关联的软件渲染器
     m->renderer = SDL_CreateRenderer(m->window, -1, SDL_RENDERER_SOFTWARE);
 
     // 创建一个静态纹理，用于显示模拟器的内容
-    m->texture = SDL_CreateTexture(m->renderer,
-                                   SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, MONITOR_HOR_RES,
+    m->texture = SDL_CreateTexture(m->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, MONITOR_HOR_RES,
                                    MONITOR_VER_RES);
 
     // 设置纹理混合模式为 SDL_BLENDMODE_BLEND，允许使用透明度
