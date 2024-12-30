@@ -50,8 +50,17 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fconcepts")
 
 
 #------------------------------------------库-------------------------------------------
-# 添加公共目录
-#include_directories(${APP_DIR}/Conf ${APP_DIR}/${APP})
+
+# 64位会卡死，暂时不可用
+if (PLATFORM_X64)
+    set(SDL2_INCLUDE_DIR ${SIMULATOR_DIR}/SDL2/x86_64-w64-mingw32/include)
+    set(SDL2_BIN_DIR ${SIMULATOR_DIR}/SDL2/x86_64-w64-mingw32/bin)
+    set(SDL2_LIB_DIR ${SIMULATOR_DIR}/SDL2/x86_64-w64-mingw32/lib)
+else ()
+    set(SDL2_INCLUDE_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/include)
+    set(SDL2_BIN_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/bin)
+    set(SDL2_LIB_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib)
+endif ()
 
 #---------------lvgl库---------------
 file(GLOB_RECURSE LVGL_SRCS "resource/lvgl/*.c")
@@ -72,7 +81,8 @@ target_include_directories(libdriver PUBLIC
         ${SIMULATOR_DIR}/lv_drivers
         ${SIMULATOR_DIR}
         ${LVGL_DIR}
-        ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/include
+
+        ${SDL2_INCLUDE_DIR}
 )
 # 设置静态库的输出目录
 set_target_properties(libdriver PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
@@ -101,7 +111,6 @@ add_library(libgui STATIC
         ${EVENTS_SRCS}
         ${UI_SRCS}
         ../UI/StorageOscilloscope/Draw_wave.cpp
-        ../UI/StorageOscilloscope/Draw_wave.hpp
 )
 target_include_directories(libgui PUBLIC
         ${UI_DIR}
@@ -114,17 +123,7 @@ target_link_libraries(libgui PUBLIC liblvgl librender)
 set_target_properties(libgui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
-# 链接外部库
-set(LIBRARIES SDL2)
-if (PLATFORM_X64)
-    set(SDL2_INCLUDE_DIR ${SIMULATOR_DIR}/SDL2/x86_64-w64-mingw32/include)
-    set(SDL2_BIN_DIR ${SIMULATOR_DIR}/SDL2/x86_64-w64-mingw32/bin)
-    set(SDL2_LIB_DIR ${SIMULATOR_DIR}/SDL2/x86_64-w64-mingw32/lib)
-else ()
-    set(SDL2_INCLUDE_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/include)
-    set(SDL2_BIN_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/bin)
-    set(SDL2_LIB_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib)
-endif ()
+
 
 # --------资源文件-------
 if (USE_STATIC_LIBRARY)
@@ -172,6 +171,7 @@ endif ()
 
 
 # 全局设置应该链接的库的目录
+set(LIBRARIES SDL2)
 link_directories(${SDL2_LIB_DIR})
 
 # -----------------创建可执行文件-----------------
