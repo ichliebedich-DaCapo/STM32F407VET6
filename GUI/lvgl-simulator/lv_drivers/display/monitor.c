@@ -282,7 +282,7 @@ static void sdl_event_handler(lv_timer_t *t)
     /*Run until quit event not arrives*/
     if (sdl_quit_qry)
     {
-        monitor_sdl_clean_up();
+        monitor_sdl_clean_up();// 销毁纹理、渲染器、窗口，然后退出SDL
         exit(0);
     }
 }
@@ -377,7 +377,7 @@ static void window_create(monitor_t *m)
 
     // 创建一个 SDL 窗口，窗口位置由系统决定（SDL_WINDOWPOS_UNDEFINED）
     m->window = SDL_CreateWindow("LVGL Simulator", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                                 MONITOR_HOR_RES , MONITOR_VER_RES, 0);  // 最后一个参数可以设置为 SDL_WINDOW_BORDERLESS 来隐藏窗口边框
+                                 MONITOR_HOR_RES*MONITOR_ZOOM_X , MONITOR_VER_RES*, 0);  // 最后一个参数可以设置为 SDL_WINDOW_BORDERLESS 来隐藏窗口边框
 
 
 /**
