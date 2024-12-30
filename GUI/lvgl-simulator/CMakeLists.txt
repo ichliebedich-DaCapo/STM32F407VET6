@@ -116,10 +116,15 @@ set_target_properties(libgui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 # 链接外部库
 set(LIBRARIES SDL2)
-set(SDL2_INCLUDE_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/include)
-set(SDL2_BIN_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/bin)
-set(SDL2_LIB_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib)
-
+if (PLATFORM_X64)
+    set(SDL2_INCLUDE_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/include)
+    set(SDL2_BIN_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/bin)
+    set(SDL2_LIB_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib)
+else ()
+    set(SDL2_INCLUDE_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/include)
+    set(SDL2_BIN_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/bin)
+    set(SDL2_LIB_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib)
+endif ()
 
 # --------资源文件-------
 if (USE_STATIC_LIBRARY)
