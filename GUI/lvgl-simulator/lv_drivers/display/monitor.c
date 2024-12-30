@@ -123,8 +123,6 @@ void monitor_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_t *c
     lv_coord_t hres = disp_drv->hor_res;
     lv_coord_t vres = disp_drv->ver_res;
 
-//    printf("x1:%3d  y1:%3d  x2:%3d  y2:%3d\n", area->x1, area->y1, area->x2, area->y2);
-
     /*Return if the area is out the screen*/
     if (area->x2 < 0 || area->y2 < 0 || area->x1 > hres - 1 || area->y1 > vres - 1)
     {

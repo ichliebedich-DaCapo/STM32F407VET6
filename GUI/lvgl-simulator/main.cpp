@@ -51,6 +51,7 @@ int main(int argc, char **argv)
 {
     lv_init();
     hal_init();
+
     GUI::resource_init();
 
     // 自定义线程
@@ -59,9 +60,9 @@ int main(int argc, char **argv)
     while (keep_running)
     {
         lv_task_handler();
-        video_handler();
         SDL_Delay(5);// 5ms休眠一次
     }
+
     SDL_Quit();
     return 0;
 }
@@ -95,7 +96,7 @@ static void hal_init()
     static lv_disp_drv_t disp_drv;
     lv_disp_drv_init(&disp_drv);            /* 基本初始化 */
     disp_drv.draw_buf = &disp_buf1;         /* 设置显示缓冲区 */
-    disp_drv.flush_cb = monitor_flush;      /* 设置刷新回调函数，用于将缓冲区内容刷新到显示设备 */
+    disp_drv.flush_cb = monitor_flush;     // monitor_flush就是你应该提供的驱动，其实就是lv_disp_flush，里面自己来定义
     disp_drv.hor_res = MONITOR_HOR_RES;     /* 设置水平分辨率 */
     disp_drv.ver_res = MONITOR_VER_RES;     /* 设置垂直分辨率 */
     lv_disp_drv_register(&disp_drv);        /* 注册显示驱动程序 */
@@ -106,7 +107,7 @@ static void hal_init()
     static lv_indev_drv_t mouse_indev_drv;
     lv_indev_drv_init(&mouse_indev_drv);    /* 基本初始化 */
     mouse_indev_drv.type = LV_INDEV_TYPE_POINTER;  /* 设置输入设备类型为指针（鼠标） */
-    mouse_indev_drv.read_cb = mouse_read;   /* 设置读取回调函数，该函数将定期被库调用以获取鼠标位置和状态 */
+    mouse_indev_drv.read_cb = mouse_read; // mouse_read就是你应该提供的驱动
     lv_indev_drv_register(&mouse_indev_drv);/* 注册鼠标输入设备驱动程序 */
 
     /*我之所以把下面注释掉，是因为我不使用lvgl的键盘事件，我仅仅只是想要使用键盘事件触发而已
@@ -127,6 +128,8 @@ static void hal_init()
     lv_indev_t *kb_indev = lv_indev_drv_register(&keyboard_indev_drv);  /* 注册键盘输入设备驱动程序 */
     lv_indev_set_group(kb_indev, lv_group_get_default());  /* 将键盘输入设备添加到默认的输入设备组 */
 #endif
+
+
 
     /* 初始化时间滴答
      * 需要定期调用 'lv_tick_inc()' 以告知 LittlevGL 自上次调用以来经过了多少时间
