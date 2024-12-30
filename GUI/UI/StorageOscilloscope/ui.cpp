@@ -165,7 +165,7 @@ auto Screen::init() -> void
 //                      &_btn_list_pause_alpha_48x48);
 
 
-//    label.init(gui->main.label_tick, 40, 265, 40, 30, "tick：\n0",label_color);
+    label.init(gui->main.label_tick, 40, 265, 40, 30, "tick：\n0",label_color);
 
 }
 

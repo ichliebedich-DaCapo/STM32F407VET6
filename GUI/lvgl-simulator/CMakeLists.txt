@@ -1,7 +1,7 @@
 # ----------------------------------设置你的UI路径（选择项目）------------------------------
 set(UI_DIR ../UI/StorageOscilloscope)
 # ----------------------------------选项------------------------------
-set(USE_STATIC_LIBRARY True)
+#set(USE_STATIC_LIBRARY True)
 
 # ----------------------------------选项------------------------------
 # 提取最后一个斜杠后的部分
@@ -117,36 +117,57 @@ if(USE_STATIC_LIBRARY)
     file(GLOB_RECURSE SOURCE ${SIMULATOR_DIR}/main.cpp )
 else ()
     file(GLOB_RECURSE SOURCE
+            ${SIMULATOR_DIR}/main.cpp
 
+            # lvgl
+            ${LVGL_SRCS}
+
+            # Drivers
+            ${DRIVER_SRCS}
+
+            # GUI
+            ${COMPONENT_SRCS}
+            ${BASE_SRCS}
+            ${EVENTS_SRCS}
+            ${UI_SRCS}
+            ../UI/StorageOscilloscope/Draw_wave.cpp
+            ../UI/StorageOscilloscope/Draw_wave.hpp
     )
+    include_directories(
+            #lvgl
+            ${LVGL_DIR}
+            ${LVGL_DIR}/lvgl
+            ${SIMULATOR_DIR}
 
+            # Driver
+            ${SIMULATOR_DIR}/lv_drivers
+            ${SIMULATOR_DIR}
+            ${LVGL_DIR}
+            ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/include
+
+            # GUI
+            ${RENDER_DIR}
+
+            ${UI_DIR}
+            ${BASE_DIR}
+            ${COMPONENT_DIR}
+            ${EVENTS_DIR}
+    )
 endif ()
 
 # 创建可执行文件
 add_executable(${PROJECT_NAME} ${SOURCE})
-
-target_link_libraries(${PROJECT_NAME} PRIVATE libdriver libgui ${LIBRARIES})
 # 动态库或者可执行文件的生成位置
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
+
+if(USE_STATIC_LIBRARY)
+target_link_libraries(${PROJECT_NAME} PRIVATE libdriver libgui ${LIBRARIES})
+else ()
+    target_link_libraries(${PROJECT_NAME} PRIVATE   ${LIBRARIES})
+endif ()
 
 # 复制程序运行所必需的库文件
 add_custom_target(copy_libs
         COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SIMULATOR_DIR}/SDL2/lib/SDL2.dll ${BIN_DIR}/SDL2.dll
 )
 add_dependencies(${PROJECT_NAME} copy_libs)
-
-# 自定义命令，构建后执行
-#
-### 获取当前日期和时间
-#string(TIMESTAMP CURRENT_DATE_TIME "%Y-%m-%d %H:%M:%S")
-#set(SIZE_OUTPUT_FILE "size_history.txt")
-#
-## 显示exe文件
-#add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-#        COMMAND echo.
-#        COMMAND echo ${CURRENT_DATE_TIME} >> ${SIZE_OUTPUT_FILE}
-#        COMMAND ${CMAKE_SIZE_UTIL} ${BIN_DIR}/${PROJECT_NAME}.exe
-#        COMMAND ${CMAKE_SIZE_UTIL} ${BIN_DIR}/${PROJECT_NAME}.exe >> ${SIZE_OUTPUT_FILE}
-#        COMMAND echo "--------------------------------------------------------------------------------------------" >> ${SIZE_OUTPUT_FILE}
-#        COMMENT "Displaying size of the executable"
-#)
