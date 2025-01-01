@@ -18,7 +18,7 @@ static uint16_t VER;// 屏幕高度
 static uint16_t *TFT_GRAM;
 
 // 触摸屏相关变量
-static bool left_button_down = false;
+static bool press_state = false;
 static int32_t last_x = 0;
 static int32_t last_y = 0;
 
@@ -191,7 +191,7 @@ int32_t touchpad_read_xy(int32_t *x, int32_t *y)
     *y = last_y;
 
     // 返回是否触摸
-    return left_button_down;
+    return press_state;
 }
 
 void mouse_handler(SDL_Event *event)
@@ -200,12 +200,12 @@ void mouse_handler(SDL_Event *event)
     {
         case SDL_MOUSEBUTTONUP:
             if (event->button.button == SDL_BUTTON_LEFT)
-                left_button_down = false;
+                press_state = false;
             break;
         case SDL_MOUSEBUTTONDOWN:
             if (event->button.button == SDL_BUTTON_LEFT)
             {
-                left_button_down = true;
+                press_state = true;
                 last_x = event->motion.x;
                 last_y = event->motion.y;
             }
@@ -216,12 +216,12 @@ void mouse_handler(SDL_Event *event)
             break;
 
         case SDL_FINGERUP:
-            left_button_down = false;
+            press_state = false;
             last_x = (int) ((float) HOR * event->tfinger.x);
             last_y = (int) ((float) VER * event->tfinger.y);
             break;
         case SDL_FINGERDOWN:
-            left_button_down = true;
+            press_state = true;
             last_x = (int) ((float) HOR * event->tfinger.x);
             last_y = (int) ((float) VER * event->tfinger.y);
             break;
@@ -230,5 +230,5 @@ void mouse_handler(SDL_Event *event)
             last_y = (int) ((float) VER * event->tfinger.y);
             break;
     }
-
 }
+
