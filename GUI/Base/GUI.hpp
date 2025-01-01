@@ -38,27 +38,28 @@ namespace
 class GUI : public GUI_Base
 {
 public:
-    template<void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)>
+    template<void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p),
+            int32_t (*touchpad_read_xy)(int32_t* last_x, int32_t* last_y)= nullptr>
     static auto init() -> void;
 
-    static inline auto handler() -> void;
+    // GUI处理函数
+    static inline auto handler() -> void{lv_task_handler();}
 
     // 刷新回调
-    static inline auto display_flush_ready() -> void;
+    static inline auto display_flush_ready() -> void { lv_display_flush_ready(disp); }
 
-#ifdef  GUI_ENABLE
-    private:
-#else
-public:
-#endif
-
+private:
     static auto resource_init() -> void;// 初始化界面
 
     template<void (*flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)>
     static inline auto disp_drv_init() -> void;
 
+    template<int32_t (*touchpad_read_xy)(int32_t* last_x, int32_t* last_y)>
+    static inline auto touchpad_init() -> void;
+
 private:
     static inline lv_display_t *disp;
+    static inline lv_indev_t *indev_touchpad;
 };
 
 static inline auto LVGL_LCD_FSMC_DMA_pCallback() -> void
@@ -66,24 +67,28 @@ static inline auto LVGL_LCD_FSMC_DMA_pCallback() -> void
     GUI::display_flush_ready();
 }
 
-/**
- * @brief GUI事件循环
- */
-auto GUI::handler() -> void
+
+template<void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p),
+        int32_t (*touchpad_read_xy)(int32_t* last_x, int32_t* last_y)>
+auto GUI::init() -> void
 {
-    lv_task_handler();
+    /********初始化LVGL*******/
+    lv_init();
+
+    /******初始化显示设备******/
+    disp_drv_init<disp_flush>();
+
+
+    /*****初始化触摸屏******/
+    if constexpr (touchpad_read_xy != nullptr)
+    {
+        touchpad_init<touchpad_read_xy>();
+    }
+
+
+    /*****初始化GUI组件*****/
+    GUI::resource_init();
 }
-
-
-/**
- * @brief 回调函数
- * @note 用于DMA等刷新完成后通知LVGL
- */
-auto GUI::display_flush_ready() -> void
-{
-    lv_display_flush_ready(disp);
-}
-
 
 /**
  * @brief 初始化显示驱动
@@ -111,19 +116,24 @@ auto GUI::disp_drv_init() -> void
 }
 
 
-template<void (*disp_flush)(uint16_t, uint16_t, uint16_t, uint16_t, const uint16_t *)>
-auto GUI::init() -> void
+/**
+ * @brief 初始化触摸屏驱动
+ * @tparam touchpad_read_xy
+ */
+template<int32_t (*touchpad_read_xy)(int32_t *, int32_t *)>
+auto GUI::touchpad_init() -> void
 {
-    /********初始化LVGL*******/
-    lv_init();
-
-    /******初始化显示设备******/
-    disp_drv_init<disp_flush>();
-
-    /*****初始化GUI组件*****/
-    GUI::resource_init();
+    indev_touchpad = lv_indev_create();
+    lv_indev_set_type(indev_touchpad, LV_INDEV_TYPE_POINTER);
+    lv_indev_set_read_cb(indev_touchpad, [](lv_indev_t * indev_drv, lv_indev_data_t * data){
+        /*Save the pressed coordinates and the state*/
+        if(touchpad_read_xy(&(data->point.x), &data->point.x)) {
+            data->state = LV_INDEV_STATE_PRESSED;
+        }
+        else {
+            data->state = LV_INDEV_STATE_RELEASED;
+        }
+    });
 }
-
-
 #endif
 #endif //FURINA_GUI_HPP

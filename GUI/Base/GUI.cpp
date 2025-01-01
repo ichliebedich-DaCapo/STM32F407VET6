@@ -58,3 +58,5 @@ auto GUI::resource_init() -> void
     lv_scr_load(gui->main.screen);
 }
 
+
+
