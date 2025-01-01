@@ -32,13 +32,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】可以显示采样频率">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【添加】&#10;异步延迟类：单位为ms，依赖于计时器&#10;标志类：可自行定义各种标志枚举体，可作为其他类的的基类使用">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/clion-Release-MinGW_ARM-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/clion-Release-MinGW_ARM-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1680,7 +1676,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.C/C++&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
     &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
     &quot;two.files.diff.last.used.file&quot;: &quot;D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -1696,11 +1692,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release-MinGW_ARM" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="E:\Program\Embedded\MCU\STM32\final_homework\stlink.cfg" reset-type="RUN" download-type="ALWAYS">
         <debugger kind="GDB" isBundled="true" />
@@ -1913,22 +1904,10 @@
       <workItem from="1735463893885" duration="18000" />
       <workItem from="1735470508026" duration="26000" />
       <workItem from="1735494447668" duration="636000" />
-    </task>
-    <task id="LOCAL-00031" summary="【初始】主项目——已解决。吃个饭回来，发现原因是使用了cout，ROM直接增加了两百多KB">
-      <option name="closed" value="true" />
-      <created>1729331128662</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1729331128662</updated>
-    </task>
-    <task id="LOCAL-00032" summary="【初始】主项目——CMakelists未修改前">
-      <option name="closed" value="true" />
-      <created>1729335884890</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1729335884890</updated>
+      <workItem from="1735573107317" duration="2222000" />
+      <workItem from="1735664386238" duration="1443000" />
+      <workItem from="1735719767911" duration="1334000" />
+      <workItem from="1735740419702" duration="25000" />
     </task>
     <task id="LOCAL-00033" summary="【初始】主项目——CMakelists实在没有什么好修改的地方">
       <option name="closed" value="true" />
@@ -2306,7 +2285,23 @@
       <option name="project" value="LOCAL" />
       <updated>1735368455793</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="【添加】异步延迟类：单位位ms，依赖于计时器">
+      <option name="closed" value="true" />
+      <created>1735573352391</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1735573352391</updated>
+    </task>
+    <task id="LOCAL-00081" summary="【添加】&#10;异步延迟类：单位为ms，依赖于计时器&#10;标志类：可自行定义各种标志枚举体，可作为其他类的的基类使用">
+      <option name="closed" value="true" />
+      <created>1735573970602</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1735573970602</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2328,7 +2323,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/ZQ" />
+                        <option value="ZQ" />
                       </list>
                     </value>
                   </entry>
@@ -2341,9 +2336,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【双音频信号发生器】成功降低程序的耦合" />
-    <MESSAGE value="【双音频信号发生器】整合了链接优化选项" />
-    <MESSAGE value="【双音频信号发生器】略微优化了CMakelists" />
     <MESSAGE value="【双音频信号发生器】准备合并" />
     <MESSAGE value="【跨越】已经把AI模型初步部署进工程里了" />
     <MESSAGE value="【准备】什么辣鸡gitignore，草" />
@@ -2366,7 +2358,10 @@
     <MESSAGE value="【简易存储示波器】准备合并UI" />
     <MESSAGE value="【简易存储示波器】可以设置采样频率" />
     <MESSAGE value="【简易存储示波器】可以显示采样频率" />
-    <option name="LAST_COMMIT_MESSAGE" value="【简易存储示波器】可以显示采样频率" />
+    <MESSAGE value="【添加】异步延迟类：单位位ms，依赖于计时器" />
+    <MESSAGE value="【添加】&#10;标志类：可自行定义各种标志枚举体，可作为其他类的的基类使用" />
+    <MESSAGE value="【添加】&#10;标志类：可自行定义各种标志枚举体，可作为其他类的的基类使用" />
+    <option name="LAST_COMMIT_MESSAGE" value="【添加】&#10;标志类：可自行定义各种标志枚举体，可作为其他类的的基类使用" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

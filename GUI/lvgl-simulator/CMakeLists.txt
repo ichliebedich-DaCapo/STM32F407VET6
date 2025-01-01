@@ -61,7 +61,7 @@ else ()
     set(SDL2_BIN_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/bin)
     set(SDL2_LIB_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib)
 endif ()
-
+#set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -m32")
 #---------------lvgl库---------------
 file(GLOB_RECURSE LVGL_SRCS "resource/lvgl/*.c")
 add_library(liblvgl STATIC ${LVGL_SRCS})
