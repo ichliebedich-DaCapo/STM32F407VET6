@@ -27,10 +27,8 @@ namespace
     constexpr uint16_t DISP_HOR_RES = 480;
     constexpr uint16_t DISP_VER_RES = 320;
     constexpr uint16_t DISP_BUF_SIZE = 20;
-    constexpr uint8_t BYTE_PER_PIXEL = (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_ARGB8565));
+    constexpr uint8_t BYTE_PER_PIXEL = (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565));
 
-
-    volatile bool disp_flush_enabled = true;
 }
 
 
@@ -48,7 +46,7 @@ public:
     // 刷新回调
     static inline auto display_flush_ready() -> void;
 
-#ifdef  ARM_MATH_CM4
+#ifdef  GUI_ENABLE
     private:
 #else
 public:
@@ -100,11 +98,8 @@ auto GUI::disp_drv_init() -> void
     // 刷新回调
     lv_display_set_flush_cb(disp, [](lv_display_t *disp_drv, const lv_area_t *area, uint8_t *px_map)
     {
-        if (disp_flush_enabled)
-        {
-            flush(area->x1, area->y1, area->x2, area->y2, (const uint16_t *) px_map);
-            lv_display_flush_ready(disp_drv);
-        }
+        flush(area->x1, area->y1, area->x2, area->y2, (const uint16_t *) px_map);
+        lv_display_flush_ready(disp_drv);
     });
 
     // 缓冲区  双缓冲明显优于单缓冲
@@ -119,6 +114,9 @@ auto GUI::disp_drv_init() -> void
 template<void (*disp_flush)(uint16_t, uint16_t, uint16_t, uint16_t, const uint16_t *)>
 auto GUI::init() -> void
 {
+    /********初始化LVGL*******/
+    lv_init();
+
     /******初始化显示设备******/
     disp_drv_init<disp_flush>();
 
