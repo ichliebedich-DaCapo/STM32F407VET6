@@ -39,11 +39,11 @@ class GUI : public GUI_Base
 {
 public:
     template<void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p),
-            int32_t (*touchpad_read_xy)(int32_t* last_x, int32_t* last_y)= nullptr>
+            int32_t (*touchpad_read_xy)(int32_t *last_x, int32_t *last_y) = nullptr>
     static auto init() -> void;
 
     // GUI处理函数
-    static inline auto handler() -> void{lv_task_handler();}
+    static inline auto handler() -> void { lv_task_handler(); }
 
     // 刷新回调
     static inline auto display_flush_ready() -> void { lv_display_flush_ready(disp); }
@@ -54,12 +54,12 @@ private:
     template<void (*flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)>
     static inline auto disp_drv_init() -> void;
 
-    template<int32_t (*touchpad_read_xy)(int32_t* last_x, int32_t* last_y)>
+    template<int32_t (*touchpad_read_xy)(int32_t *last_x, int32_t *last_y)>
     static inline auto touchpad_init() -> void;
 
 private:
     static inline lv_display_t *disp;
-    static inline lv_indev_t *indev_touchpad;
+//    static inline lv_indev_t *indev_touchpad;
 };
 
 static inline auto LVGL_LCD_FSMC_DMA_pCallback() -> void
@@ -69,7 +69,7 @@ static inline auto LVGL_LCD_FSMC_DMA_pCallback() -> void
 
 
 template<void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p),
-        int32_t (*touchpad_read_xy)(int32_t* last_x, int32_t* last_y)>
+        int32_t (*touchpad_read_xy)(int32_t *last_x, int32_t *last_y)>
 auto GUI::init() -> void
 {
     /********初始化LVGL*******/
@@ -123,17 +123,20 @@ auto GUI::disp_drv_init() -> void
 template<int32_t (*touchpad_read_xy)(int32_t *, int32_t *)>
 auto GUI::touchpad_init() -> void
 {
-    indev_touchpad = lv_indev_create();
+    lv_indev_t *indev_touchpad = lv_indev_create();
     lv_indev_set_type(indev_touchpad, LV_INDEV_TYPE_POINTER);
-    lv_indev_set_read_cb(indev_touchpad, [](lv_indev_t * indev_drv, lv_indev_data_t * data){
-        /*Save the pressed coordinates and the state*/
-        if(touchpad_read_xy(&(data->point.x), &data->point.x)) {
+    lv_indev_set_read_cb(indev_touchpad, [](lv_indev_t *indev_drv, lv_indev_data_t *data)
+    {
+        if (touchpad_read_xy(&(data->point.x), &(data->point.y)))
+        {
             data->state = LV_INDEV_STATE_PRESSED;
         }
-        else {
+        else
+        {
             data->state = LV_INDEV_STATE_RELEASED;
         }
     });
 }
+
 #endif
 #endif //FURINA_GUI_HPP

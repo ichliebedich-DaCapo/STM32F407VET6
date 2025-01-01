@@ -11,10 +11,22 @@ static volatile bool keep_running = true;
 static SDL_Window *window;
 static SDL_Renderer *renderer;
 static SDL_Texture *texture;
-static uint16_t *TFT_GRAM;
-static int32_t HOR;// 屏幕宽度
-static int32_t VER;// 屏幕高度
+static uint16_t HOR;// 屏幕宽度
+static uint16_t VER;// 屏幕高度
 
+// 屏幕显存
+static uint16_t *TFT_GRAM;
+
+// 触摸屏相关变量
+static bool left_button_down = false;
+static int32_t last_x = 0;
+static int32_t last_y = 0;
+
+/***********************************内部函数**************************************/
+void mouse_handler(SDL_Event *event);
+
+
+/*******************************模拟器接口************************************/
 bool simulator_is_running() { return keep_running; }
 
 
@@ -22,7 +34,7 @@ bool simulator_is_running() { return keep_running; }
  * @brief 初始化 SDL
  * @note 初始化了 SDL 窗口、渲染器、纹理，并创建了一个更新纹理的线程.默认颜色编码为 RGB565
  */
-void simulator_init(int32_t hor,int32_t ver)
+void simulator_init(int32_t hor, int32_t ver)
 {
     HOR = hor;
     VER = ver;
@@ -92,8 +104,14 @@ void simulator_quit()
 void simulator_event_Handler()
 {
     static SDL_Event event;
+
+    // 处理SDL事件
     while (SDL_PollEvent(&event))
     {
+        // 处理鼠标事件
+        mouse_handler(&event);
+
+        // 处理其他事件
         switch (event.type)
         {
             case SDL_QUIT:
@@ -114,13 +132,11 @@ void simulator_event_Handler()
         }
     }
 
-    // 短暂休眠
-    SDL_Delay(10);
 }
 
 
-/*****************************************************************************/
-uint32_t rgb565_to_rgb8888(uint16_t &color)
+/***********************************LCD驱动接口******************************************/
+[[maybe_unused]] uint32_t rgb565_to_rgb8888(uint16_t &color)
 {
     uint8_t r = ((color >> 11) & 0x1F) * 8;
     uint8_t g = ((color >> 5) & 0x3F) * 4;
@@ -140,11 +156,11 @@ void LCD_Color_Fill(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend, 
     uint16_t width = xend - xsta + 1;
     uint16_t height = yend - ysta + 1;
     uint32_t row_bytes = width * sizeof(uint16_t);
-    auto *tft_ptr = (TFT_GRAM+xsta+ysta * HOR);
+    auto *tft_ptr = (TFT_GRAM + xsta + ysta * HOR);
     auto *color_ptr = color;
     for (int y = 0; y < height; ++y)
     {
-        memcpy(tft_ptr + y * width, color_ptr+y * width,row_bytes);
+        memcpy(tft_ptr + y * width, color_ptr + y * width, row_bytes);
     }
 }
 
@@ -154,14 +170,65 @@ void LCD_Color_Clean(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend,
     uint16_t width = xend - xsta + 1;
     uint16_t height = yend - ysta + 1;
     uint32_t row_bytes = width * sizeof(uint16_t);
-    auto *tft_ptr = (TFT_GRAM+xsta+ysta * HOR);
+    auto *tft_ptr = (TFT_GRAM + xsta + ysta * HOR);
     for (int y = 0; y < height; ++y)
     {
         memset(tft_ptr + y * width, color, row_bytes);
     }
 }
 
-void LCD_Clear(uint16_t color)
+[[maybe_unused]] void LCD_Clear(uint16_t color)
 {
     LCD_Color_Clean(0, 0, HOR - 1, VER - 1, color);
+}
+
+
+/***********************************触摸屏驱动接口******************************************/
+int32_t touchpad_read_xy(int32_t *x, int32_t *y)
+{
+    // 读取触摸屏数据
+    *x = last_x;
+    *y = last_y;
+
+    // 返回是否触摸
+    return left_button_down;
+}
+
+void mouse_handler(SDL_Event *event)
+{
+    switch (event->type)
+    {
+        case SDL_MOUSEBUTTONUP:
+            if (event->button.button == SDL_BUTTON_LEFT)
+                left_button_down = false;
+            break;
+        case SDL_MOUSEBUTTONDOWN:
+            if (event->button.button == SDL_BUTTON_LEFT)
+            {
+                left_button_down = true;
+                last_x = event->motion.x;
+                last_y = event->motion.y;
+            }
+            break;
+        case SDL_MOUSEMOTION:
+            last_x = event->motion.x;
+            last_y = event->motion.y;
+            break;
+
+        case SDL_FINGERUP:
+            left_button_down = false;
+            last_x = (int) ((float) HOR * event->tfinger.x);
+            last_y = (int) ((float) VER * event->tfinger.y);
+            break;
+        case SDL_FINGERDOWN:
+            left_button_down = true;
+            last_x = (int) ((float) HOR * event->tfinger.x);
+            last_y = (int) ((float) VER * event->tfinger.y);
+            break;
+        case SDL_FINGERMOTION:
+            last_x = (int) ((float) HOR * event->tfinger.x);
+            last_y = (int) ((float) VER * event->tfinger.y);
+            break;
+    }
+
 }

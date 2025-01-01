@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     simulator_init(DISP_HOR_RES,DISP_VER_RES);
 
     // GUI初始化
-    GUI::init<LCD_Color_Fill>();
+    GUI::init<LCD_Color_Fill,touchpad_read_xy>();
 
     // lv_tick线程
     SDL_CreateThread(lv_tick_thread, "lv_tick", nullptr);
@@ -27,6 +27,9 @@ int main(int argc, char *argv[])
 
         // lvgl事件处理
         GUI::handler();
+
+        // 短暂休眠
+        SDL_Delay(10);
 
     }
 
