@@ -24,18 +24,14 @@
 /*匿名命名空间，专治各种函数变量暴露狂*/
 namespace
 {
-    constexpr uint16_t MY_DISP_HOR_RES = 480;
-    constexpr uint16_t MY_DISP_VER_RES = 320;
-    constexpr uint16_t MY_DISP_BUF_SIZE = 20;
+    constexpr uint16_t DISP_HOR_RES = 480;
+    constexpr uint16_t DISP_VER_RES = 320;
+    constexpr uint16_t DISP_BUF_SIZE = 20;
+    constexpr uint8_t BYTE_PER_PIXEL = (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_ARGB8565));
 
-//    lv_disp_drv_t disp_drv{};
-}
-static inline auto LVGL_LCD_FSMC_DMA_pCallback() -> void
-{
-//    disp_drv.draw_buf->flushing = 0;
-//    disp_drv.draw_buf->flushing_last = 0;
-}
 
+    volatile bool disp_flush_enabled = true;
+}
 
 
 /**
@@ -47,24 +43,30 @@ public:
     template<void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)>
     static auto init() -> void;
 
-    static inline auto handler()->void ;
+    static inline auto handler() -> void;
 
     // 刷新回调
-    static inline auto LVGL_LCD_FSMC_DMA_pCallback()->void;
+    static inline auto display_flush_ready() -> void;
 
 #ifdef  ARM_MATH_CM4
-private:
+    private:
 #else
 public:
 #endif
+
     static auto resource_init() -> void;// 初始化界面
 
     template<void (*flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)>
     static inline auto disp_drv_init() -> void;
+
 private:
-//   static inline lv_disp_drv_t disp_drv{};
+    static inline lv_display_t *disp;
 };
 
+static inline auto LVGL_LCD_FSMC_DMA_pCallback() -> void
+{
+    GUI::display_flush_ready();
+}
 
 /**
  * @brief GUI事件循环
@@ -79,10 +81,9 @@ auto GUI::handler() -> void
  * @brief 回调函数
  * @note 用于DMA等刷新完成后通知LVGL
  */
-auto GUI::LVGL_LCD_FSMC_DMA_pCallback() -> void
+auto GUI::display_flush_ready() -> void
 {
-//    disp_drv.draw_buf->flushing = 0;
-//    disp_drv.draw_buf->flushing_last = 0;
+    lv_display_flush_ready(disp);
 }
 
 
@@ -94,40 +95,36 @@ auto GUI::LVGL_LCD_FSMC_DMA_pCallback() -> void
 template<void (*flush)(uint16_t, uint16_t, uint16_t, uint16_t, const uint16_t *)>
 auto GUI::disp_drv_init() -> void
 {
-//    // 在缓冲数组总大小同等的情况下，双缓冲明显优于单缓冲
-//    static lv_disp_draw_buf_t draw_buf_dsc;
-//    static lv_color_t buf_2_1[MY_DISP_HOR_RES * MY_DISP_BUF_SIZE];
-//    static lv_color_t buf_2_2[MY_DISP_HOR_RES * MY_DISP_BUF_SIZE];
-//    lv_disp_draw_buf_init(&draw_buf_dsc, buf_2_1, buf_2_2,
-//                          MY_DISP_HOR_RES * MY_DISP_BUF_SIZE);   /*Initialize the display buffer*/
-//
-//    lv_disp_drv_init(&disp_drv);                    /*Basic initialization*/
-//
-//    disp_drv.hor_res = MY_DISP_HOR_RES;
-//    disp_drv.ver_res = MY_DISP_VER_RES;
-//    disp_drv.flush_cb = [](lv_disp_drv_t *, const lv_area_t *area, lv_color_t *color_p)
-//    {
-//        flush(area->x1, area->y1, area->x2, area->y2, (const uint16_t *) color_p);
-//    };
-//    disp_drv.draw_buf = &draw_buf_dsc;
-//
-//    lv_disp_drv_register(&disp_drv);
+    disp = lv_display_create(DISP_HOR_RES, DISP_VER_RES);
+
+    // 刷新回调
+    lv_display_set_flush_cb(disp, [](lv_display_t *disp_drv, const lv_area_t *area, uint8_t *px_map)
+    {
+        if (disp_flush_enabled)
+        {
+            flush(area->x1, area->y1, area->x2, area->y2, (const uint16_t *) px_map);
+            lv_display_flush_ready(disp_drv);
+        }
+    });
+
+    // 缓冲区  双缓冲明显优于单缓冲
+    LV_ATTRIBUTE_MEM_ALIGN
+    static uint8_t buf_2_1[DISP_HOR_RES * DISP_BUF_SIZE * BYTE_PER_PIXEL];
+    LV_ATTRIBUTE_MEM_ALIGN
+    static uint8_t buf_2_2[DISP_HOR_RES * DISP_BUF_SIZE * BYTE_PER_PIXEL];
+    lv_display_set_buffers(disp, buf_2_1, buf_2_2, sizeof(buf_2_1), LV_DISPLAY_RENDER_MODE_PARTIAL);
 }
 
 
 template<void (*disp_flush)(uint16_t, uint16_t, uint16_t, uint16_t, const uint16_t *)>
 auto GUI::init() -> void
 {
-    /*****初始化设备*****/
-#ifdef ARM_MATH_CM4
+    /******初始化显示设备******/
     disp_drv_init<disp_flush>();
-#endif
 
     /*****初始化GUI组件*****/
     GUI::resource_init();
 }
-
-
 
 
 #endif
