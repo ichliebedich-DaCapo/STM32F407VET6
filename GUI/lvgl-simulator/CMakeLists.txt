@@ -4,13 +4,7 @@ set(UI_DIR ../UI/StorageOscilloscope)
 #set(USE_STATIC_LIBRARY True)
 
 # ----------------------------------自动根据选项来配置------------------------------
-if (CMAKE_SIZEOF_VOID_P EQUAL 8)
-    message(STATUS "Building for 64-bit architecture")
-    set(PLATFORM_X64 True)
-else ()
-    message(STATUS "Building for 32-bit architecture")
-    set(PLATFORM_X64 False)
-endif ()
+
 # ----------------------------------选项------------------------------
 # 提取最后一个斜杠后的部分
 string(REGEX REPLACE ".*/" "" APP "${UI_DIR}")
@@ -18,31 +12,30 @@ string(REGEX REPLACE ".*/" "" APP "${UI_DIR}")
 cmake_minimum_required(VERSION 3.10)
 project(Simulator C CXX)
 
-# 设置编译器
-set(CMAKE_C_COMPILER gcc)
-set(CMAKE_CXX_COMPILER g++)
 #set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=gnu++2a")
 # 定义路径
 set(PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
 set(APP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../Application)
-set(BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../Base)
-set(LVGL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/resource)
 set(SIMULATOR_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../Base)
 set(COMPONENT_DIR ${PROJECT_SOURCE_DIR}/Component)
 set(EVENTS_DIR ${PROJECT_SOURCE_DIR}/Events)
 set(RENDER_DIR ${PROJECT_SOURCE_DIR}/Render)
+set(DRIVERS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Drivers)
+set(LVGL_DIR lvgl/../ lvgl/src lvgl/examples/porting)
 # 生成的目标文件目录
 set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
 set(BIN_DIR ${BUILD_DIR}/bin)
 set(LIB_DIR ${BUILD_DIR}/lib)
+# SDL2库
+set(SDL2_INCLUDE_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/include)
+set(SDL2_BIN_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/bin)
+set(SDL2_LIB_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib)
 
-# 编译选项
-# 开-O2和-O3有时候会卡死，但相同情况下真机没有问题
 
-add_compile_options(-O2 -g -DLV_CONF_INCLUDE_SIMPLE=1)
-
-# 设置 C++ 编译器的特定选项
+# 编译选项 开-O2和-O3有时候会卡死，但相同情况下真机没有问题
+add_compile_options(-O2 -g)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fconcepts")
 
 # 添加链接选项,显示内存分布，但现在不能使用
@@ -50,42 +43,21 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fconcepts")
 
 
 #------------------------------------------库-------------------------------------------
-
-# 64位会卡死，暂时不可用
-if (PLATFORM_X64)
-    set(SDL2_INCLUDE_DIR ${SIMULATOR_DIR}/SDL2/x86_64-w64-mingw32/include)
-    set(SDL2_BIN_DIR ${SIMULATOR_DIR}/SDL2/x86_64-w64-mingw32/bin)
-    set(SDL2_LIB_DIR ${SIMULATOR_DIR}/SDL2/x86_64-w64-mingw32/lib)
-else ()
-    set(SDL2_INCLUDE_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/include)
-    set(SDL2_BIN_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/bin)
-    set(SDL2_LIB_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib)
-endif ()
-#set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -m32")
 #---------------lvgl库---------------
-file(GLOB_RECURSE LVGL_SRCS "resource/lvgl/*.c")
+file(GLOB_RECURSE LVGL_SRCS "lvgl/src/*.c" "lvgl/examples/porting/*.c")
 add_library(liblvgl STATIC ${LVGL_SRCS})
-target_include_directories(liblvgl PUBLIC
-        ${LVGL_DIR}
-        ${LVGL_DIR}/lvgl
-
-        ${SIMULATOR_DIR}
-)
-# 设置静态库的输出目录
+target_include_directories(liblvgl PUBLIC ${LVGL_DIR})
 set_target_properties(liblvgl PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
-#---------------Driver库---------------
-file(GLOB_RECURSE DRIVER_SRCS "${SIMULATOR_DIR}/lv_drivers/*.c")
-add_library(libdriver STATIC ${DRIVER_SRCS})
-target_include_directories(libdriver PUBLIC
-        ${SIMULATOR_DIR}/lv_drivers
-        ${SIMULATOR_DIR}
+#---------------Drivers库---------------
+file(GLOB_RECURSE DRIVERS_SRCS "${DRIVERS_DIR}/*.cpp")
+add_library(libdrivers STATIC ${DRIVERS_SRCS})
+target_include_directories(libdrivers PUBLIC
+        ${DRIVERS_DIR}
         ${LVGL_DIR}
-
         ${SDL2_INCLUDE_DIR}
 )
-# 设置静态库的输出目录
-set_target_properties(libdriver PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+set_target_properties(libdrivers PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 #---------------Render库---------------
 # 渲染，即实现底层绘制算法
@@ -95,8 +67,7 @@ add_library(librender STATIC ${RENDER_SRCS}
 target_include_directories(librender PUBLIC
         ${RENDER_DIR}
 )
-target_link_libraries(librender PUBLIC libdriver)
-# 设置静态库的输出目录
+target_link_libraries(librender PUBLIC libsimulator)
 set_target_properties(librender PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
@@ -123,8 +94,6 @@ target_link_libraries(libgui PUBLIC liblvgl librender)
 set_target_properties(libgui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
-
-
 # --------资源文件-------
 if (USE_STATIC_LIBRARY)
     file(GLOB_RECURSE SOURCE ${SIMULATOR_DIR}/main.cpp)
@@ -135,8 +104,8 @@ else ()
             # lvgl
             ${LVGL_SRCS}
 
-            # Drivers
-            ${DRIVER_SRCS}
+            # drivers
+            ${DRIVERS_SRCS}
 
             # GUI
             ${COMPONENT_SRCS}
@@ -148,13 +117,9 @@ else ()
     include_directories(
             #lvgl
             ${LVGL_DIR}
-            ${LVGL_DIR}/lvgl
-            ${SIMULATOR_DIR}
 
-            # Driver
-            ${SIMULATOR_DIR}/lv_drivers
-            ${SIMULATOR_DIR}
-            ${LVGL_DIR}
+            # DRIVERS
+            ${DRIVERS_DIR}
 
             #SDL2
             ${SDL2_INCLUDE_DIR}
@@ -180,7 +145,7 @@ add_executable(${PROJECT_NAME} ${SOURCE})
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
 
 if (USE_STATIC_LIBRARY)
-    target_link_libraries(${PROJECT_NAME} PRIVATE libdriver libgui ${LIBRARIES})
+    target_link_libraries(${PROJECT_NAME} PRIVATE libdrivers libgui ${LIBRARIES})
 else ()
     target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBRARIES})
 endif ()
