@@ -11,7 +11,7 @@ int lv_tick_thread(void *data);
 int main(int argc, char *argv[])
 {
     // 模拟器初始化
-    simulator_init(argc, argv);
+    simulator_init(DISP_HOR_RES,DISP_VER_RES);
 
     // GUI初始化
     GUI::init<LCD_Color_Fill>();

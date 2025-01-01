@@ -6,25 +6,27 @@
 #include <iostream>
 #include <cstring>
 
-static volatile int keep_running = 1;
+static volatile bool keep_running = true;
 
 static SDL_Window *window;
 static SDL_Renderer *renderer;
 static SDL_Texture *texture;
-static uint16_t tft_fb[480 * 320];
-
+static uint16_t *TFT_GRAM;
+static int32_t HOR;// 屏幕宽度
+static int32_t VER;// 屏幕高度
 
 bool simulator_is_running() { return keep_running; }
 
 
 /**
  * @brief 初始化 SDL
- * @note 初始化了 SDL 窗口、渲染器、纹理，并创建了一个更新纹理的线程
+ * @note 初始化了 SDL 窗口、渲染器、纹理，并创建了一个更新纹理的线程.默认颜色编码为 RGB565
  */
-void simulator_init(int argc, char *argv[])
+void simulator_init(int32_t hor,int32_t ver)
 {
-    // 忽略参数
-    (void) argc, (void) argv;
+    HOR = hor;
+    VER = ver;
+    TFT_GRAM = new uint16_t[hor * ver];
 
     // 初始化 SDL
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
@@ -36,7 +38,7 @@ void simulator_init(int argc, char *argv[])
 
     // 创建窗口
     window = SDL_CreateWindow("LVGL Simulator", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                              480, 320, 0);
+                              hor, ver, 0);
 
     // 创建渲染器（此处使用硬件加速，可以使用软件加速SDL_RENDERER_SOFTWARE）
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
@@ -44,7 +46,7 @@ void simulator_init(int argc, char *argv[])
     // 创建纹理
     texture = SDL_CreateTexture(renderer,
                                 SDL_PIXELFORMAT_RGB565, SDL_TEXTUREACCESS_STREAMING,
-                                480, 320);
+                                hor, ver);
 
 
     if (!window || !renderer || !texture)
@@ -60,7 +62,7 @@ void simulator_init(int argc, char *argv[])
                      {
                          while (keep_running)
                          {
-                             SDL_UpdateTexture(texture, nullptr, tft_fb, 480 * sizeof(uint16_t));
+                             SDL_UpdateTexture(texture, nullptr, TFT_GRAM, HOR * sizeof(uint16_t));
                              SDL_RenderClear(renderer);
                              SDL_RenderCopy(renderer, texture, nullptr, nullptr);
                              SDL_RenderPresent(renderer);
@@ -80,6 +82,7 @@ void simulator_quit()
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
+    delete[] TFT_GRAM;
 }
 
 
@@ -128,7 +131,7 @@ uint32_t rgb565_to_rgb8888(uint16_t &color)
 
 void LCD_Set_Pixel(uint16_t x, uint16_t y, uint16_t color)
 {
-    tft_fb[x + y * 480] = color;
+    TFT_GRAM[x + y * HOR] = color;
 }
 
 
@@ -137,7 +140,7 @@ void LCD_Color_Fill(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend, 
     uint16_t width = xend - xsta + 1;
     uint16_t height = yend - ysta + 1;
     uint32_t row_bytes = width * sizeof(uint16_t);
-    auto *tft_ptr = (tft_fb+xsta+ysta * 480);
+    auto *tft_ptr = (TFT_GRAM+xsta+ysta * HOR);
     auto *color_ptr = color;
     for (int y = 0; y < height; ++y)
     {
@@ -151,7 +154,7 @@ void LCD_Color_Clean(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend,
     uint16_t width = xend - xsta + 1;
     uint16_t height = yend - ysta + 1;
     uint32_t row_bytes = width * sizeof(uint16_t);
-    auto *tft_ptr = (tft_fb+xsta+ysta * 480);
+    auto *tft_ptr = (TFT_GRAM+xsta+ysta * HOR);
     for (int y = 0; y < height; ++y)
     {
         memset(tft_ptr + y * width, color, row_bytes);
@@ -160,5 +163,5 @@ void LCD_Color_Clean(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend,
 
 void LCD_Clear(uint16_t color)
 {
-    LCD_Color_Clean(0, 0, 480 - 1, 320 - 1, color);
+    LCD_Color_Clean(0, 0, HOR - 1, VER - 1, color);
 }

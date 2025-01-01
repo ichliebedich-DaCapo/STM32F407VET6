@@ -7,7 +7,7 @@
 #include <cstdint>
 #endif
 
-void simulator_init(int argc, char *argv[]);
+void simulator_init(int32_t hor,int32_t ver);
 void simulator_quit();
 void simulator_event_Handler();
 bool simulator_is_running();
