@@ -121,6 +121,7 @@ auto FPS::restart() -> void
 
 auto FPS::set_right() -> void
 {
+
     Text::set_text_align(LV_TEXT_ALIGN_RIGHT, label_fps);
 }
 

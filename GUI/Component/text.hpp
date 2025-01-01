@@ -94,7 +94,7 @@ auto Text::set_text_color(lv_color_t color,Obj obj) -> void
     lv_obj_set_style_text_color(obj, color, selector_default);
 }
 
-[[maybe_unused]] auto Text::set_text_align(lv_text_align_t align,Obj obj) -> void
+[[maybe_unused]] auto Text::set_text_align(Align align,Obj obj) -> void
 {
     lv_obj_set_style_text_align(obj, align, selector_default);
 }

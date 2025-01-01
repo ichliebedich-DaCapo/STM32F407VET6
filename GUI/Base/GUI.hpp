@@ -28,12 +28,12 @@ namespace
     constexpr uint16_t MY_DISP_VER_RES = 320;
     constexpr uint16_t MY_DISP_BUF_SIZE = 20;
 
-    lv_disp_drv_t disp_drv{};
+//    lv_disp_drv_t disp_drv{};
 }
 static inline auto LVGL_LCD_FSMC_DMA_pCallback() -> void
 {
-    disp_drv.draw_buf->flushing = 0;
-    disp_drv.draw_buf->flushing_last = 0;
+//    disp_drv.draw_buf->flushing = 0;
+//    disp_drv.draw_buf->flushing_last = 0;
 }
 
 
@@ -62,7 +62,7 @@ public:
     template<void (*flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)>
     static inline auto disp_drv_init() -> void;
 private:
-   static inline lv_disp_drv_t disp_drv{};
+//   static inline lv_disp_drv_t disp_drv{};
 };
 
 
@@ -81,8 +81,8 @@ auto GUI::handler() -> void
  */
 auto GUI::LVGL_LCD_FSMC_DMA_pCallback() -> void
 {
-    disp_drv.draw_buf->flushing = 0;
-    disp_drv.draw_buf->flushing_last = 0;
+//    disp_drv.draw_buf->flushing = 0;
+//    disp_drv.draw_buf->flushing_last = 0;
 }
 
 
@@ -94,24 +94,24 @@ auto GUI::LVGL_LCD_FSMC_DMA_pCallback() -> void
 template<void (*flush)(uint16_t, uint16_t, uint16_t, uint16_t, const uint16_t *)>
 auto GUI::disp_drv_init() -> void
 {
-    // 在缓冲数组总大小同等的情况下，双缓冲明显优于单缓冲
-    static lv_disp_draw_buf_t draw_buf_dsc;
-    static lv_color_t buf_2_1[MY_DISP_HOR_RES * MY_DISP_BUF_SIZE];
-    static lv_color_t buf_2_2[MY_DISP_HOR_RES * MY_DISP_BUF_SIZE];
-    lv_disp_draw_buf_init(&draw_buf_dsc, buf_2_1, buf_2_2,
-                          MY_DISP_HOR_RES * MY_DISP_BUF_SIZE);   /*Initialize the display buffer*/
-
-    lv_disp_drv_init(&disp_drv);                    /*Basic initialization*/
-
-    disp_drv.hor_res = MY_DISP_HOR_RES;
-    disp_drv.ver_res = MY_DISP_VER_RES;
-    disp_drv.flush_cb = [](lv_disp_drv_t *, const lv_area_t *area, lv_color_t *color_p)
-    {
-        flush(area->x1, area->y1, area->x2, area->y2, (const uint16_t *) color_p);
-    };
-    disp_drv.draw_buf = &draw_buf_dsc;
-
-    lv_disp_drv_register(&disp_drv);
+//    // 在缓冲数组总大小同等的情况下，双缓冲明显优于单缓冲
+//    static lv_disp_draw_buf_t draw_buf_dsc;
+//    static lv_color_t buf_2_1[MY_DISP_HOR_RES * MY_DISP_BUF_SIZE];
+//    static lv_color_t buf_2_2[MY_DISP_HOR_RES * MY_DISP_BUF_SIZE];
+//    lv_disp_draw_buf_init(&draw_buf_dsc, buf_2_1, buf_2_2,
+//                          MY_DISP_HOR_RES * MY_DISP_BUF_SIZE);   /*Initialize the display buffer*/
+//
+//    lv_disp_drv_init(&disp_drv);                    /*Basic initialization*/
+//
+//    disp_drv.hor_res = MY_DISP_HOR_RES;
+//    disp_drv.ver_res = MY_DISP_VER_RES;
+//    disp_drv.flush_cb = [](lv_disp_drv_t *, const lv_area_t *area, lv_color_t *color_p)
+//    {
+//        flush(area->x1, area->y1, area->x2, area->y2, (const uint16_t *) color_p);
+//    };
+//    disp_drv.draw_buf = &draw_buf_dsc;
+//
+//    lv_disp_drv_register(&disp_drv);
 }
 
 

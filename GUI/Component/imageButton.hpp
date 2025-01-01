@@ -17,7 +17,8 @@ public:
     static inline auto init(Obj imgbtn) -> void;
 
     // 默认居中，大部分情况下都用不到旁边两个参数，需要时再补充
-    static inline auto set_src(lv_imgbtn_state_t state, ImageSrc src) -> void;
+
+    static inline auto set_src(lv_imagebutton_state_t  state, ImageSrc src) -> void;
 
     // 默认发送的事件为LV_EVENT_CLICKED,因为平时用得最多就是这个。后面可自行添加
     static inline auto press(Obj obj = _obj) -> void;
@@ -37,7 +38,7 @@ auto ImageButton::init(Obj imgbtn) -> void
 }
 
 // 设置图片源
-auto ImageButton::set_src(lv_imgbtn_state_t state, ImageSrc src) -> void
+auto ImageButton::set_src(lv_imagebutton_state_t state, ImageSrc src) -> void
 {
     lv_imgbtn_set_src(_obj, state, nullptr, src, nullptr);
 }
@@ -47,7 +48,7 @@ auto ImageButton::press(Obj obj) -> void
 {
     lv_imgbtn_set_state(obj, LV_IMGBTN_STATE_CHECKED_RELEASED);
     lv_obj_add_state(obj, LV_STATE_CHECKED); // 选中
-    lv_event_send(obj, LV_EVENT_CLICKED, nullptr);
+    lv_obj_send_event(obj, LV_EVENT_CLICKED, nullptr);
 }
 
 // 释放按钮
@@ -59,7 +60,7 @@ auto ImageButton::release(Obj obj) -> void
     }
     lv_imgbtn_set_state(obj, LV_IMGBTN_STATE_RELEASED);
     lv_obj_clear_state(obj, LV_STATE_CHECKED); // 取消选中
-    lv_event_send(obj, LV_EVENT_CLICKED, nullptr);
+    lv_obj_send_event(obj, LV_EVENT_CLICKED, nullptr);
 }
 
 auto ImageButton::init(Obj imgbtn, Coord x, Coord y, Coord w, Coord h, ImageSrc release_src, ImageSrc press_src) -> void

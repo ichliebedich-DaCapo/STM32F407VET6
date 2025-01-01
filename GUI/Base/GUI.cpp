@@ -59,17 +59,17 @@ auto GUI::resource_init() -> void
     lv_scr_load(gui->main.screen);
 }
 
-volatile bool disp_flush_enabled = true;
+//volatile bool disp_flush_enabled = true;
 /* Enable updating the screen (the flushing process) when disp_flush() is called by lvgl
  */
 void disp_enable_update()
 {
-    disp_flush_enabled = true;
+//    disp_flush_enabled = true;
 }
 
 /* Disable updating the screen (the flushing process) when disp_flush() is called by lvgl
  */
 void disp_disable_update()
 {
-    disp_flush_enabled = false;
+//    disp_flush_enabled = false;
 }

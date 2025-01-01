@@ -119,7 +119,7 @@ auto Button::init(Obj btn, Obj text, Coord x, Coord y, Coord w, Coord h, Strings
 
 auto Button::click(Obj obj) -> void
 {
-    lv_event_send(obj, LV_EVENT_CLICKED, nullptr);
+//    lv_event_send(obj, LV_EVENT_CLICKED, nullptr);
 }
 
 

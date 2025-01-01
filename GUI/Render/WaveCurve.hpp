@@ -13,7 +13,7 @@
 
 #else
 
-#include "lv_drivers/display/monitor.h"
+#include "simulator.hpp"
 
 #endif
 

@@ -4,6 +4,7 @@
 #include "simulator.hpp"
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <cstring>
 
 static volatile int keep_running = 1;
 

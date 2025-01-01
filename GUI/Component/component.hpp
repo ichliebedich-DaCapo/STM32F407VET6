@@ -11,8 +11,7 @@
 // 定义常量
 constexpr const Selector selector_default = (static_cast<uint32_t >(LV_PART_MAIN) |
                                              static_cast<uint32_t >(LV_STATE_DEFAULT));
-constexpr const Selector selector_ticks = (static_cast<uint32_t >(LV_PART_TICKS) |
-                                           static_cast<uint32_t >(LV_STATE_DEFAULT));
+constexpr const Selector selector_ticks = (static_cast<uint32_t >(LV_STATE_DEFAULT));
 
 
 /**
@@ -237,7 +236,8 @@ auto Component::set_align(lv_align_t align, Coord x_offset, Coord y_offset, Obj 
 // 设置样式大小
 auto Component::set_style_size(Coord size, Selector selector) -> void
 {
-    lv_obj_set_style_size(_obj, size, selector);
+//    lv_obj_set_style_size(_obj, size, selector);
+
 }
 
 // 设置背景颜色
