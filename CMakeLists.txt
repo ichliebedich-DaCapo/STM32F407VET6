@@ -244,15 +244,13 @@ if (GUI_ENABLE)
 file(GLOB_RECURSE GUI_SRC
         "${UI_DIR}/*.*"
         "GUI/Base/*.cpp"
-        "GUI/Component/*.cpp"
-        "GUI/Events/*.cpp"
+        "GUI/Component/src/*.cpp"
         "GUI/Render/*.cpp"
 )
 set(GUI_DIR
         ${UI_DIR}
         GUI/Base
-        GUI/Component
-        GUI/Events
+        GUI/Component/inc
         GUI/Render
 )
 add_library(libgui STATIC ${GUI_SRC})

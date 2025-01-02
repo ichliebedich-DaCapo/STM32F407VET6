@@ -12,7 +12,7 @@
 #include "w25qxx.h"
 #include "timer.h"
 #include "spi.h"
-#include "GUI.hpp"
+#include "ui.hpp"
 
 
 // -----------宏定义-----------

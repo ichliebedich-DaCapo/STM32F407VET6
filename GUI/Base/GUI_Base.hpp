@@ -7,6 +7,7 @@
 #include <cstdio>
 
 // 头文件
+#include "lvgl.h"
 #include "timer.hpp"
 #include "chart.hpp"
 #include "slider.hpp"
