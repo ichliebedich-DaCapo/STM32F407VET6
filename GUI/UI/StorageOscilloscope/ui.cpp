@@ -117,26 +117,26 @@ private:
 ///***********************界面布置***********************/
 auto GUI_Base::screen_init() -> void
 {
-    Component::set_parent(gui->main.screen);
+    Component::set_parent(gui->main.screen.get_object());
+    gui->main.screen.bg_color(lv_color_black());
+
 
     // 设置边框
     gui->main.rect.init(border_info::x, border_info::y, border_info::width, border_info::height);
     gui->main.rect.border_radius(5);
-
     // 设置边框背景颜色和边框颜色
-    lv_obj_set_style_bg_color(gui->main.rect.get_object(), lv_color_hex(0), LV_PART_MAIN);
-    lv_obj_set_style_border_color(gui->main.rect.get_object(), lv_color_hex(0X6675), LV_PART_MAIN);
-
+    gui->main.rect.bg_color(lv_color_black());
+    gui->main.rect.border_color(lv_color_hex(0X6675));
 
     //按钮_触发模式：单次触发、多次触发
     gui->main.trigger_mode.init(15, 270, 60, 40, "单次触发", &lv_customer_font_SourceHanSerifSC_Regular_15);
 
     //按钮_锁存模式
-    gui->main.latch.init(15, 320, 60, 40, "锁存关", &lv_customer_font_SourceHanSerifSC_Regular_15);
+    gui->main.latch.init(280, 270, 60, 40, "锁存关", &lv_customer_font_SourceHanSerifSC_Regular_15);
 
     //按钮_图像水平移动：左移、右移
     gui->main.left_shift.init(135, 270, 40, 40, "左移", &lv_customer_font_SourceHanSerifSC_Regular_15);
-    gui->main.right_shift.init(243, 270, 40, 40, "右移", &lv_customer_font_SourceHanSerifSC_Regular_15);
+    gui->main.right_shift.init(200, 270, 40, 40, "右移", &lv_customer_font_SourceHanSerifSC_Regular_15);
 
     //按钮_切换扫描速度
     gui->main.scan_speed.init(415, 10, 60, 40, "扫描速度", &lv_customer_font_SourceHanSerifSC_Regular_15);
@@ -144,10 +144,9 @@ auto GUI_Base::screen_init() -> void
     //按钮_切换放大倍数
     gui->main.magnification.init(415, 110, 60, 40, "放大倍数", &lv_customer_font_SourceHanSerifSC_Regular_15);
 
+    /********************标签******************/
     gui->main.magnification_value.init(415, 60, 60, 40, "1", &lv_customer_font_SourceHanSerifSC_Regular_15);
     gui->main.scan_speed_value.init(415, 160, 60, 40, "1", &lv_customer_font_SourceHanSerifSC_Regular_15);
-
-
 }
 
 ///***********************函数实现***********************/
@@ -157,11 +156,13 @@ auto GUI_Base::screen_init() -> void
 auto GUI_Base::events_init() -> void
 {
     /*  创建定时器*/
-
     tick_timer.create(timer_fun(
-//                                  StorageOscilloscope::handler();
                               StorageOscilloscope::print_tick();
                       ), Freq_16K);
+    gui->main.magnification.add_event(btn_fun(
+                                              printf("press button\n");
+
+            ));
 
 }
 

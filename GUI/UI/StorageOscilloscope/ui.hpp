@@ -14,7 +14,7 @@ struct lv_ui_t
     // 主屏幕
     struct
     {
-        Obj_t screen{};// 屏幕自身
+        Component screen{};// 屏幕自身
         Component rect{};//示波器方框
         Label vpp{};// 电压峰峰值
         Button trigger_mode{};//触发方式

@@ -47,12 +47,12 @@ auto GUI::resource_init() -> void
 #endif
 #endif
 
-    gui->main.screen = lv_obj_create(nullptr);
-    lv_obj_set_size(gui->main.screen, DISP_HOR_RES, DISP_VER_RES);
+    gui->main.screen.get_object() = lv_obj_create(nullptr);
+    lv_obj_set_size(gui->main.screen.get_object(), DISP_HOR_RES, DISP_VER_RES);
     GUI_Base::screen_init();// 初始化屏幕
-    lv_obj_update_layout(gui->main.screen);
+    lv_obj_update_layout(gui->main.screen.get_object());
     GUI_Base::events_init();
-    lv_scr_load(gui->main.screen);
+    lv_scr_load(gui->main.screen.get_object());
 }
 
 

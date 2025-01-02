@@ -154,7 +154,7 @@ public:
     // 把自身添加到父对象中，供其它组件使用，不过记得更改回去
     auto set_self_to_parent() -> void { set_parent(_obj); }
 
-    auto get_object() -> Obj_t { return _obj; }
+    auto get_object() -> Obj { return _obj; }
 
     // 设置位置和尺寸
     auto set_pos_size(Coord x, Coord y, Coord w, Coord h) -> void;// 设置位置和尺寸
