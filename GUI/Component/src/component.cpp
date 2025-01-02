@@ -237,4 +237,9 @@ auto Component::send_event(lv_event_code_t event, void *param) -> void
     lv_obj_send_event(_obj, event, param);
 }
 
+auto Component::add_event(lv_event_cb_t event_cb, void *user_data, lv_event_code_t filter) -> void
+{
+     lv_obj_add_event_cb(_obj, event_cb, filter, user_data);
+}
+
 

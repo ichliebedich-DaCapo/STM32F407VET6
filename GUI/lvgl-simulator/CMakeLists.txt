@@ -20,7 +20,6 @@ set(APP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../Application)
 set(SIMULATOR_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../Base)
 set(COMPONENT_DIR ${PROJECT_SOURCE_DIR}/Component)
-set(EVENTS_DIR ${PROJECT_SOURCE_DIR}/Events)
 set(RENDER_DIR ${PROJECT_SOURCE_DIR}/Render)
 set(DRIVERS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Drivers)
 set(LVGL_DIR lvgl/../ lvgl/src lvgl/examples/porting)
@@ -73,13 +72,11 @@ set_target_properties(librender PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 #---------------GUI库---------------
 file(GLOB_RECURSE COMPONENT_SRCS "${COMPONENT_DIR}/src/*.cpp" "${COMPONENT_DIR}/empty.cpp")
-file(GLOB_RECURSE EVENTS_SRCS "${EVENTS_DIR}/*.*")
-file(GLOB_RECURSE BASE_SRCS "${BASE_DIR}/*.*")
-file(GLOB_RECURSE UI_SRCS "${UI_DIR}/*.*" "../UI/test.cpp")
+file(GLOB_RECURSE BASE_SRCS "${BASE_DIR}/*.cpp")
+file(GLOB_RECURSE UI_SRCS "${UI_DIR}/*.cpp" "${UI_DIR}/*.c" "../UI/test.cpp")
 add_library(libgui STATIC
         ${COMPONENT_SRCS}
         ${BASE_SRCS}
-        ${EVENTS_SRCS}
         ${UI_SRCS}
         ../UI/StorageOscilloscope/Draw_wave.cpp
 )
@@ -87,7 +84,6 @@ target_include_directories(libgui PUBLIC
         ${UI_DIR}
         ${BASE_DIR}
         ${COMPONENT_DIR}
-        ${EVENTS_DIR}
 )
 target_link_libraries(libgui PUBLIC liblvgl librender)
 # 设置静态库的输出目录
@@ -108,11 +104,10 @@ else ()
             ${DRIVERS_SRCS}
 
             # GUI
+            ${RENDER_SRCS}
             ${COMPONENT_SRCS}
             ${BASE_SRCS}
-            ${EVENTS_SRCS}
             ${UI_SRCS}
-            ../UI/StorageOscilloscope/Draw_wave.cpp
     )
     include_directories(
             #lvgl
@@ -130,7 +125,6 @@ else ()
             ${UI_DIR}
             ${BASE_DIR}
             ${COMPONENT_DIR}/inc
-            ${EVENTS_DIR}
     )
 endif ()
 

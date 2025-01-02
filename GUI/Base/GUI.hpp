@@ -4,18 +4,8 @@
 #ifndef FURINA_GUI_HPP
 #define FURINA_GUI_HPP
 
-#include <cstdio>
+#include "GUI_Base.hpp"
 
-// 头文件
-#include "timer.hpp"
-#include "events.hpp"
-#include "chart.hpp"
-#include "slider.hpp"
-#include "image.hpp"
-#include "label.hpp"
-#include "button.hpp"
-#include "imageButton.hpp"
-#include "FPS.hpp"
 
 
 // 宏定义
@@ -28,17 +18,10 @@ namespace
     constexpr uint16_t DISP_VER_RES = 320;
     constexpr uint16_t DISP_BUF_SIZE = 20;
     constexpr uint8_t BYTE_PER_PIXEL = (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565));
-
 }
 
-/**
- * @brief 屏幕类
- */
-class Screen
-{
-public:
-    static auto init() -> void;// 初始化屏幕
-};
+
+
 
 /**
  * @brief GUI类

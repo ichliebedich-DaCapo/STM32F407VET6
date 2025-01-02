@@ -4,7 +4,7 @@
 #ifndef SIMULATOR_UI_HPP
 #define SIMULATOR_UI_HPP
 
-#include "GUI.hpp"
+#include "GUI_Base.hpp"
 
 
 
@@ -24,14 +24,12 @@ struct lv_ui_t
         Button latch{};//锁存功能
         Button magnification{};//放大倍数
         Label title{};// 标题
-        Label tick{};// 时刻
         Label magnification_value{};// 放大倍数
         Label scan_speed_value{};// 扫描速度
     } main;// 主屏幕
 
 };
 
-extern struct lv_ui_t lv_ui;
 extern struct lv_ui_t* gui;
 
 

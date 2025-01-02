@@ -1,9 +1,8 @@
 //
 // Created by fairy on 2024/10/17 18:53.
 //
+
 #include "GUI.hpp"
-// 头文件
-#include "events.hpp"
 #include "ui.hpp"
 
 
@@ -32,10 +31,10 @@
 auto GUI::resource_init() -> void
 {
 #ifdef GUI_ENABLE
-//    __disable_irq();
-//    lv_init();// 混账，搞了半天是因为漏加你才死机
-//    lv_port_disp_init();// 进入临界保护区
-//    __enable_irq();
+    //    __disable_irq();
+    //    lv_init();// 混账，搞了半天是因为漏加你才死机
+    //    lv_port_disp_init();// 进入临界保护区
+    //    __enable_irq();
 
 #endif
 #ifdef GUI_ENABLE
@@ -50,9 +49,9 @@ auto GUI::resource_init() -> void
 
     gui->main.screen = lv_obj_create(nullptr);
     lv_obj_set_size(gui->main.screen, DISP_HOR_RES, DISP_VER_RES);
-    Screen::init();// 初始化屏幕
+    GUI_Base::screen_init();// 初始化屏幕
     lv_obj_update_layout(gui->main.screen);
-    Events::init();
+    GUI_Base::events_init();
     lv_scr_load(gui->main.screen);
 }
 

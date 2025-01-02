@@ -115,7 +115,7 @@ private:
 
 //
 ///***********************界面布置***********************/
-auto Screen::init() -> void
+auto GUI_Base::screen_init() -> void
 {
     Component::set_parent(gui->main.screen);
 
@@ -138,15 +138,12 @@ auto Screen::init() -> void
     gui->main.left_shift.init(135, 270, 40, 40, "左移", &lv_customer_font_SourceHanSerifSC_Regular_15);
     gui->main.right_shift.init(243, 270, 40, 40, "右移", &lv_customer_font_SourceHanSerifSC_Regular_15);
 
-
     //按钮_切换扫描速度
     gui->main.scan_speed.init(415, 10, 60, 40, "扫描速度", &lv_customer_font_SourceHanSerifSC_Regular_15);
 
     //按钮_切换放大倍数
     gui->main.magnification.init(415, 110, 60, 40, "放大倍数", &lv_customer_font_SourceHanSerifSC_Regular_15);
 
-    // 显示tick
-    gui->main.tick.init(40, 265, 40, 30, "tick：\n0", &lv_customer_font_SourceHanSerifSC_Regular_15);
     gui->main.magnification_value.init(415, 60, 60, 40, "1", &lv_customer_font_SourceHanSerifSC_Regular_15);
     gui->main.scan_speed_value.init(415, 160, 60, 40, "1", &lv_customer_font_SourceHanSerifSC_Regular_15);
 
@@ -155,7 +152,9 @@ auto Screen::init() -> void
 
 ///***********************函数实现***********************/
 
-auto Events::init() -> void
+
+
+auto GUI_Base::events_init() -> void
 {
     /*  创建定时器*/
 
@@ -173,20 +172,9 @@ auto StorageOscilloscope::handler(uint8_t (&read_wave)[400]) -> void
     //    draw_dividers(78, 36, 324, 208, 10, 8, 0X8410, 2); // 使用灰色绘制分割线，留出边距
     draw_dashed_dividers(border_info::x, border_info::y, border_info::width, border_info::height, 10, 8, 0X8410,
                          border_info::margin, 4, 4);
-//不使用脏点数组
-//    if(use_square) draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_start_index, array_length, 0);
-//    if(use_sine) draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_start_index, array_length, 0);
-
-//    if (use_square)
-//        draw_interpolated_wave(start_x, start_y, square_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
-//                               0);
-//    if (use_sine)
-//        draw_interpolated_wave(start_x, start_y, sine_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
-//                               0);
     draw_interpolated_wave(start_x, start_y, read_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
                            0);
 
-//    __BKPT(0);
 }
 
 auto StorageOscilloscope::clear() -> void
@@ -202,7 +190,6 @@ auto StorageOscilloscope::clear() -> void
 
 auto StorageOscilloscope::print_tick() -> void
 {
-    gui->main.tick.set_text( "tick：\n%lu", get_tick());
 }
 
 auto StorageOscilloscope::print_magnification(auto magnification) -> void

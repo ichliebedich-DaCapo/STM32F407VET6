@@ -8,7 +8,7 @@
 // 默认为关闭状态
 auto Timer::create(lv_timer_cb_t timer_cb, uint32_t period, void *user_data) -> void
 {
-    if(_timer== nullptr)
+    if(!_timer)
     {
         _timer = lv_timer_create(timer_cb, period, user_data);
         pause();

@@ -9,8 +9,8 @@
 
 
 // 定义别名
-using Obj = _lv_obj_t *&;// 组件对象(用于给函数传参）
-using Obj_t = _lv_obj_t *;// 组件对象（用于定义组件）
+using Obj = lv_obj_t *&;// 组件对象(用于给函数传参）
+using Obj_t = lv_obj_t *;// 组件对象（用于定义组件）
 using Coord = lv_coord_t;// 坐标
 using Color = lv_color_t;// 颜色
 using Selector = lv_style_selector_t;
@@ -19,8 +19,8 @@ using Font = const lv_font_t *;// 字体类型
 using Strings = const char *;// 字符串
 using ImageSrc = const lv_img_dsc_t *;// 图片资源
 using ChartAxis = lv_chart_axis_t;// 图表坐标
-using ChartSeries = lv_chart_series_t*&;
-using ChartSeries_t = lv_chart_series_t*;
+using ChartSeries = lv_chart_series_t *&;
+using ChartSeries_t = lv_chart_series_t *;
 using ChartType = lv_chart_type_t;
 
 
@@ -33,6 +33,104 @@ using ChartType = lv_chart_type_t;
 constexpr const Selector selector_default = (static_cast<uint32_t >(LV_PART_MAIN) |
                                              static_cast<uint32_t >(LV_STATE_DEFAULT));
 constexpr const Selector selector_ticks = (static_cast<uint32_t >(LV_STATE_DEFAULT));
+
+
+
+using Event = lv_event_t *;
+using EventCode = lv_event_code_t;
+using Timer_t = lv_timer_t*;
+
+
+//******************出于某种简化的目的，我使用了非常邪恶的宏定义*******************//
+/**
+ * @brief void*类型的"语法糖"，用于生成匿名函数，简化函数定义过程.如果你要调用这个函数那么还需要在后面加上();
+ * @param ... 函数体
+ * @note 仿Koltin的lambda表达式，只能说宏定义是真滴强大
+ * @example 假设现在有一个函数void bond(void*); 需要传一个void*的函数，那么
+ *          正常调用：
+ *              bond([]()
+ *              {
+ *              int a=0;
+ *              a=a+2;
+ *              })
+ *
+ *          使用宏：
+ *           bond(fun(
+ *           int a=0;
+ *           a=a+2;
+ *           ))
+ *
+ *           调用宏所代表的函数：
+ *           fun(
+ *           int a=0;
+ *           a=a+2;
+ *           )();
+ *
+ */
+
+// 用于调用
+#define FUN(...) [](){ __VA_ARGS__}()
+
+
+// 用于定时器的状态事件回调
+#define timer_fun(...) [](Timer_t){__VA_ARGS__}
+
+
+
+/**
+ * @brief 用于图片按钮的状态事件回调
+ * @param handler stateHandler类型的函数形参
+ * @details 你需要定义一个stateHandler类型的函数
+ * @example 可以使用lambda表达式：
+            state_fun([](bool check)
+            {
+                if(check)
+                {
+                 int a = 0;
+                 a=a+2;
+                }
+                else
+                {
+                int a = 0;
+                }
+           });
+ */
+#define imgbtn_fun(handler) [](Event e){ \
+if(lv_event_get_code(e)==LV_EVENT_CLICKED)\
+{\
+handler(lv_obj_has_state(lv_event_get_target_obj(e), LV_STATE_CHECKED));\
+}\
+}
+
+
+// 按钮函数
+#define btn_fun(...) [](Event e) \
+{                                \
+    if(lv_event_get_code(e)==LV_EVENT_CLICKED) \
+    {                            \
+        __VA_ARGS__                 \
+    }                                \
+}
+
+
+
+#define imgbtn_fun2(press_fun, release_fun)     [](Event e){\
+if(lv_event_get_code(e)==LV_EVENT_CLICKED)\
+{\
+if(lv_obj_has_state(lv_event_get_target_obj(e), LV_STATE_CHECKED))\
+{\
+press_fun\
+}\
+else\
+{\
+release_fun\
+}\
+}\
+}
+
+
+
+
 
 
 /**
@@ -54,8 +152,9 @@ public:
     auto init(Coord x, Coord y, Coord w, Coord h) -> void;
 
     // 把自身添加到父对象中，供其它组件使用，不过记得更改回去
-    auto set_self_to_parent()->void{ set_parent(_obj);}
-    auto get_object()->Obj_t {return _obj;}
+    auto set_self_to_parent() -> void { set_parent(_obj); }
+
+    auto get_object() -> Obj_t { return _obj; }
 
     // 设置位置和尺寸
     auto set_pos_size(Coord x, Coord y, Coord w, Coord h) -> void;// 设置位置和尺寸
@@ -153,9 +252,13 @@ public:
     auto
     border(Color color, Coord radius = 5, Coord width = 1, uint8_t opa = 255) -> void;
 
+    /****************事件相关********************/
 
     // 发送事件
-    auto send_event(lv_event_code_t event,void *param = nullptr) -> void;
+    auto send_event(lv_event_code_t event, void *param = nullptr) -> void;
+
+    // 添加事件
+    auto add_event(lv_event_cb_t event_cb, void *user_data= nullptr, lv_event_code_t filter=LV_EVENT_ALL)->void;
 
 
 protected:
