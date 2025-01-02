@@ -23,6 +23,11 @@ using Align = lv_text_align_t;// 对齐类型
 using Font = const lv_font_t *;// 字体类型
 using Strings = const char *;// 字符串
 using ImageSrc = const lv_img_dsc_t *;// 图片资源
+using ChartAxis = lv_chart_axis_t;// 图表坐标
+using ChartSeries = lv_chart_series_t*&;
+using ChartSeries_t = lv_chart_series_t*;
+using ChartType = lv_chart_type_t;
+
 
 // 色彩
 #define Color_Firefly_Green  lv_color_make(133, 238, 223)// 流萤绿

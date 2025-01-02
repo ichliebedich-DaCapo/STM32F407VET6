@@ -14,35 +14,36 @@ class Chart : public Component
 public:
     // 初始化图表
     static inline auto init(Obj component) -> void;
+    static inline auto init(Obj chart, Coord x_offset, Coord y_offset, Coord w, Coord h,uint16_t point_cnt=128, bool is_grad = true) -> void;
 
     // 设置图表类型
-    static inline auto set_type(lv_chart_type_t type) -> void;
+    static inline auto set_type(ChartType type) -> void;
 
     // 设置图表范围，默认设置y轴的显示范围
     static inline auto
-    set_range(Coord min, Coord max, lv_chart_axis_t axis = LV_CHART_AXIS_PRIMARY_Y) -> void;
+    set_range(Coord min, Coord max, ChartAxis axis = LV_CHART_AXIS_PRIMARY_Y,Obj obj=_obj) -> void;
 
     // 设置数据点个数
-    static inline auto set_point_count(uint16_t point_cnt) -> void;
+    static inline auto set_point_count(uint16_t point_cnt,Obj obj=_obj) -> void;
 
     // 设置更新模式
     static inline auto set_update_mode(lv_chart_update_mode_t mode) -> void;
 
     // 设置下一个值
-    static inline auto set_next_value(lv_chart_series_t *&series, Coord value, Obj obj = _obj) -> void;
+    static inline auto set_next_value(ChartSeries series, Coord value, Obj obj = _obj) -> void;
 
     // 移除折线上点的样式
     static inline auto remove_dot() -> void;
 
     // 设置图表的网格线数量
-    static inline auto set_div_count(uint8_t hor_div, uint8_t ver_div) -> void;
+    static inline auto set_div_count(uint8_t hor_div, uint8_t ver_div,Obj obj=_obj) -> void;
 
     // 添加系列
     static inline auto
-    add_series(lv_chart_series_t *&series, Color color, lv_chart_axis_t axis = LV_CHART_AXIS_PRIMARY_Y) -> void;
+    add_series(ChartSeries series, Color color, ChartAxis axis = LV_CHART_AXIS_PRIMARY_Y) -> void;
 
     /*初始化器*/
-    static inline auto init(Obj chart, Coord x_offset, Coord y_offset, Coord w, Coord h,uint16_t point_cnt=128, bool is_grad = true) -> void;
+
 
 
 };
@@ -55,21 +56,21 @@ auto Chart::init(Obj component) -> void
 }
 
 // 设置图表类型
-auto Chart::set_type(lv_chart_type_t type) -> void
+auto Chart::set_type(ChartType type) -> void
 {
     lv_chart_set_type(_obj, type);
 }
 
 // 设置图表范围，默认设置y轴的显示范围
-auto Chart::set_range(Coord min, Coord max, lv_chart_axis_t axis) -> void
+auto Chart::set_range(Coord min, Coord max, ChartAxis axis,Obj obj) -> void
 {
-    lv_chart_set_range(_obj, axis, min, max);
+    lv_chart_set_range(obj, axis, min, max);
 }
 
 // 设置数据点个数
-auto Chart::set_point_count(uint16_t point_cnt) -> void
+auto Chart::set_point_count(uint16_t point_cnt,Obj obj) -> void
 {
-    lv_chart_set_point_count(_obj, point_cnt);
+    lv_chart_set_point_count(obj, point_cnt);
 }
 
 // 设置更新模式
@@ -79,7 +80,7 @@ auto Chart::set_update_mode(lv_chart_update_mode_t mode) -> void
 }
 
 // 设置下一个值
-auto Chart::set_next_value(lv_chart_series_t *&series, Coord value, Obj obj) -> void
+auto Chart::set_next_value(ChartSeries series, Coord value, Obj obj) -> void
 {
     if (obj == nullptr)
     {
@@ -91,7 +92,7 @@ auto Chart::set_next_value(lv_chart_series_t *&series, Coord value, Obj obj) -> 
 // 移除折线上点的样式
 auto Chart::remove_dot() -> void
 {
-    set_style_size(0, LV_PART_INDICATOR);
+    set_style_size(0,0, LV_PART_INDICATOR);
 }
 
 
@@ -100,9 +101,9 @@ auto Chart::remove_dot() -> void
  * @param hor_div 横向网格线数量
  * @param ver_div  纵向网格线数量
  */
-auto Chart::set_div_count(uint8_t hor_div, uint8_t ver_div) -> void
+auto Chart::set_div_count(uint8_t hor_div, uint8_t ver_div,Obj obj) -> void
 {
-    lv_chart_set_div_line_count(_obj, hor_div, ver_div);
+    lv_chart_set_div_line_count(obj, hor_div, ver_div);
 }
 
 /**
@@ -112,7 +113,7 @@ auto Chart::set_div_count(uint8_t hor_div, uint8_t ver_div) -> void
  * @param color
  * @param axis
  */
-auto Chart::add_series(lv_chart_series_t *&series, Color color, lv_chart_axis_t axis) -> void
+auto Chart::add_series(ChartSeries series, Color color, ChartAxis axis) -> void
 {
     series = lv_chart_add_series(_obj, color, axis);
 }

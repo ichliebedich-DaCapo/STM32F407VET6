@@ -5,8 +5,6 @@
 #define SIMULATOR_SLIDER_HPP
 
 #include "component.hpp"
-/* 预编译命令 */
-#if 1
 
 class Slider : public Component
 {
@@ -66,5 +64,5 @@ auto Slider::init(Obj component, Coord x, Coord y, Coord w, Coord h, Coord min, 
         set_bg_src(src);
 }
 
-#endif
+
 #endif //SIMULATOR_SLIDER_HPP
