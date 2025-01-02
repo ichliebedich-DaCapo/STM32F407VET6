@@ -6,15 +6,13 @@
 
 #include <cstdio>
 
-/* 预编译命令 */
-#if 1
 // 头文件
-#include "LV_Timer.hpp"
+#include "timer.hpp"
 #include "events.hpp"
 #include "chart.hpp"
 #include "slider.hpp"
 #include "image.hpp"
-#include "text.hpp"
+#include "label.hpp"
 #include "button.hpp"
 #include "imageButton.hpp"
 #include "FPS.hpp"
@@ -33,11 +31,19 @@ namespace
 
 }
 
+/**
+ * @brief 屏幕类
+ */
+class Screen
+{
+public:
+    static auto init() -> void;// 初始化屏幕
+};
 
 /**
  * @brief GUI类
  */
-class GUI : public GUI_Base
+class GUI
 {
 public:
     template<void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p),
@@ -64,7 +70,7 @@ private:
 //    static inline lv_indev_t *indev_touchpad;
 };
 
-static inline auto LVGL_LCD_FSMC_DMA_pCallback() -> void
+[[maybe_unused]] static inline auto LVGL_LCD_FSMC_DMA_pCallback() -> void
 {
     GUI::display_flush_ready();
 }
@@ -140,5 +146,4 @@ auto GUI::touchpad_init() -> void
     });
 }
 
-#endif
 #endif //FURINA_GUI_HPP

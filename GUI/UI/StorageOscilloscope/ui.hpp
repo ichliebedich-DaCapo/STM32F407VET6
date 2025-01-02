@@ -4,47 +4,35 @@
 #ifndef SIMULATOR_UI_HPP
 #define SIMULATOR_UI_HPP
 
-#include "lvgl.h"
+#include "GUI.hpp"
 
-/* 预编译命令 */
-#if 1
 
 
 /*********************组件*******************/
 struct lv_ui_t
 {
-    using Obj = lv_obj_t *;
     // 主屏幕
     struct
     {
-        Obj screen;// 屏幕自身
-        Obj rect;//示波器方框
-//        Obj label_v_max;// 电压最大值
-//        Obj label_v_min;// 电压最小值
-        Obj label_vpp;// 电压峰峰值
-        Obj btn_trigger_mode;//触发方式
-        Obj btn_trigger_mode_label;
-        Obj btn_left_shift;//左移
-        Obj btn_left_shift_label;
-        Obj btn_right_shift;//右移
-        Obj btn_right_shift_label;
-//        Obj imgbtn_play;// 播放键
-        Obj btn_scan_speed;//切换扫描速度
-        Obj btn_scan_speed_label;
-        Obj btn_latch;//锁存功能
-        Obj btn_latch_label;
-        Obj btn_magnification;//放大倍数
-        Obj btn_magnification_label;
-        Obj label_title;// 标题
-        Obj label_tick;// 时刻
-        Obj label_scan_speed;     //扫描速度数据
-        Obj label_magnification;  //放大倍数数据
+        Obj_t screen{};// 屏幕自身
+        Component rect{};//示波器方框
+        Label vpp{};// 电压峰峰值
+        Button trigger_mode{};//触发方式
+        Button left_shift{};//左移
+        Button right_shift{};//右移
+        Button scan_speed{};//切换扫描速度
+        Button latch{};//锁存功能
+        Button magnification{};//放大倍数
+        Label title{};// 标题
+        Label tick{};// 时刻
+        Label magnification_value{};// 放大倍数
+        Label scan_speed_value{};// 扫描速度
     } main;// 主屏幕
 
 };
 
-// 取别名
-using lv_ui_t = struct lv_ui_t;
+extern struct lv_ui_t lv_ui;
+extern struct lv_ui_t* gui;
 
 
 // 加载资源文件
@@ -86,6 +74,4 @@ public:
 
 
 
-
-#endif
 #endif //SIMULATOR_UI_HPP

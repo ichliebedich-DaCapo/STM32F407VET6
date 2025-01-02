@@ -2,12 +2,12 @@
 // Created by fairy on 2024/10/22 16:34.
 //
 #include "ui.hpp"
-#include "GUI.hpp"
-
-// 头文件
 #include "wave.h"
 #include <cstdio>
 #include "Draw_wave.hpp"
+
+struct lv_ui_t lv_ui;
+struct lv_ui_t *gui = &lv_ui;
 
 // 宏定义
 #define Strong_Print 0 // 使用更强烈的显示（时间和索引都会加倍）
@@ -42,7 +42,7 @@ constexpr uint16_t start_y = border_info::y + border_info::height - 2 * border_i
 
 
 // 变量
-LV_Timer tick_timer;
+Timer tick_timer;
 
 uint8_t CH0_buff[200] = {0};//波形数据存储
 
@@ -120,52 +120,36 @@ auto Screen::init() -> void
     Component::set_parent(gui->main.screen);
 
     // 设置边框
-    Component::init(gui->main.rect);
-    Component::set_pos_size(border_info::x, border_info::y, border_info::width, border_info::height);
-    Component::border_radius(5);
+    gui->main.rect.init(border_info::x, border_info::y, border_info::width, border_info::height);
+    gui->main.rect.border_radius(5);
 
     // 设置边框背景颜色和边框颜色
-    lv_obj_set_style_bg_color(gui->main.rect, lv_color_hex(0), LV_PART_MAIN);
-    lv_obj_set_style_border_color(gui->main.rect, lv_color_hex(0X6675), LV_PART_MAIN);
+    lv_obj_set_style_bg_color(gui->main.rect.get_object(), lv_color_hex(0), LV_PART_MAIN);
+    lv_obj_set_style_border_color(gui->main.rect.get_object(), lv_color_hex(0X6675), LV_PART_MAIN);
 
-    // 标签：标题
-    Text label;
-    label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
-    lv_color_t label_color = lv_color_hex(0XFCC0); // 绿色
-    label.init(gui->main.label_scan_speed, 415, 60, 60, 40, "Hz", label_color);
-    label.init(gui->main.label_magnification, 420, 160, 60, 30, "1", label_color);
-    label.init(gui->main.label_vpp, 420, 200, 60, 160, "-", label_color);// 电压峰峰值
-//    label.init(gui->main.label_v_max, 420, 240, 60, 30, "-", label_color);// 电压最大值
-//    label.init(gui->main.label_v_min, 420, 280, 60, 30, "-", label_color);// 电压最小值
-
-
-
-    // 初始化器
-    Button customBtn;
-    customBtn.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
 
     //按钮_触发模式：单次触发、多次触发
-    customBtn.init(gui->main.btn_trigger_mode, gui->main.btn_trigger_mode_label, 15, 270, 60, 40, "多次触发");
+    gui->main.trigger_mode.init(15, 270, 60, 40, "单次触发", &lv_customer_font_SourceHanSerifSC_Regular_15);
 
     //按钮_锁存模式
-    customBtn.init(gui->main.btn_latch, gui->main.btn_latch_label, 85, 270, 40, 40, "锁存关");
+    gui->main.latch.init(15, 320, 60, 40, "锁存关", &lv_customer_font_SourceHanSerifSC_Regular_15);
 
     //按钮_图像水平移动：左移、右移
-    customBtn.init(gui->main.btn_left_shift, gui->main.btn_left_shift_label, 135, 270, 40, 40, "左移");
-    customBtn.init(gui->main.btn_right_shift, gui->main.btn_right_shift_label, 243, 270, 40, 40, "右移");
+    gui->main.left_shift.init(135, 270, 40, 40, "左移", &lv_customer_font_SourceHanSerifSC_Regular_15);
+    gui->main.right_shift.init(243, 270, 40, 40, "右移", &lv_customer_font_SourceHanSerifSC_Regular_15);
+
 
     //按钮_切换扫描速度
-    customBtn.init(gui->main.btn_scan_speed, gui->main.btn_scan_speed_label, 415, 10, 60, 40, "扫描速度");
+    gui->main.scan_speed.init(415, 10, 60, 40, "扫描速度", &lv_customer_font_SourceHanSerifSC_Regular_15);
 
     //按钮_切换放大倍数
-    customBtn.init(gui->main.btn_magnification, gui->main.btn_magnification_label, 415, 110, 60, 40, "放大倍数");
+    gui->main.magnification.init(415, 110, 60, 40, "放大倍数", &lv_customer_font_SourceHanSerifSC_Regular_15);
 
-    //     图片按钮：停止、播放
-//    ImageButton::init(gui->main.imgbtn_play, 185, 266, 48, 48, &_btn_list_play_alpha_48x48,
-//                      &_btn_list_pause_alpha_48x48);
+    // 显示tick
+    gui->main.tick.init(40, 265, 40, 30, "tick：\n0", &lv_customer_font_SourceHanSerifSC_Regular_15);
+    gui->main.magnification_value.init(415, 60, 60, 40, "1", &lv_customer_font_SourceHanSerifSC_Regular_15);
+    gui->main.scan_speed_value.init(415, 160, 60, 40, "1", &lv_customer_font_SourceHanSerifSC_Regular_15);
 
-
-    label.init(gui->main.label_tick, 40, 265, 40, 30, "tick：\n0",label_color);
 
 }
 
@@ -218,7 +202,7 @@ auto StorageOscilloscope::clear() -> void
 
 auto StorageOscilloscope::print_tick() -> void
 {
-    Text::set_text(GUI_Base::get_ui()->main.label_tick, "tick：\n%lu", get_tick());
+    gui->main.tick.set_text( "tick：\n%lu", get_tick());
 }
 
 auto StorageOscilloscope::print_magnification(auto magnification) -> void
@@ -239,7 +223,7 @@ auto StorageOscilloscope::print_magnification(auto magnification) -> void
             temp = 1;
             break;
     }
-    Text::set_text(GUI_Base::get_ui()->main.label_magnification, "%d", temp);
+    gui->main.magnification_value.set_text("%d", temp);
 }
 
 auto StorageOscilloscope::print_scan_speed(auto &scan_speed) -> void
@@ -280,7 +264,7 @@ auto StorageOscilloscope::print_scan_speed(auto &scan_speed) -> void
             break;
 
     }
-    Text::set_text(GUI_Base::get_ui()->main.label_scan_speed, buf);
+    gui->main.scan_speed_value.set_text(buf);
 }
 
 // 更新时间
@@ -403,22 +387,21 @@ void StorageOscilloscope::right_shift(uint8_t (&read_wave)[400])
 //设置触发模式
 auto StorageOscilloscope::set_trigger_mode(uint8_t &trigger_mode_flag) -> void
 {
-    Text::set_text(trigger_mode_flag ? "单次触发" : "多次触发", GUI_Base::get_ui()->main.btn_trigger_mode_label);
+    gui->main.trigger_mode.set_text(trigger_mode_flag ? "单次触发" : "多次触发");
 }
 
 //设置触发模式
 auto StorageOscilloscope::set_latch_mode(uint8_t &latch_mode_flag) -> void
 {
-    Text::set_text(latch_mode_flag ? "锁存开" : "锁存关", GUI_Base::get_ui()->main.btn_latch_label);
+    gui->main.latch.set_text(latch_mode_flag ? "锁存开" : "锁存关");
 }
 
 auto StorageOscilloscope::print_vpp_max_min(float &vpp, float &max, float &min) -> void
 {
     char buf[24];
-    sprintf(buf, "%.3f\n%.3f\n%.3f", vpp,max,min);
-    Text::set_text(GUI_Base::get_ui()->main.label_vpp, buf);
-//    Text::set_text(GUI_Base::get_ui()->main.label_v_max, buf2);
-//    Text::set_text(GUI_Base::get_ui()->main.label_v_min, "%.3f", min);
+    sprintf(buf, "%.3f\n%.3f\n%.3f", vpp, max, min);
+//    Text::set_text(GUI_Base::get_ui()->main.label_vpp, buf);
+
 }
 
 

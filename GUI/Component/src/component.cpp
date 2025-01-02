@@ -12,28 +12,22 @@ auto Component::set_parent(Obj parent) -> void
     _parent = parent;
 }
 
-// 设置组件
-[[maybe_unused]] auto Component::set_object(Obj object) -> void
-{
-    _obj = object;
-}
 
 // 初始化自定义组件
-auto Component::init(Obj component) -> void
+auto Component::init() -> void
 {
-    component = lv_obj_create(_parent);
-    _obj = component;
+    _obj = lv_obj_create(_parent);
 }
 
-auto Component::init(Obj component, Coord x, Coord y) -> void
+auto Component::init(Coord x, Coord y) -> void
 {
-    init(component);
+    init();
     set_pos(x, y);
 }
 
-auto Component::init(Obj component, Coord x, Coord y, Coord w, Coord h) -> void
+auto Component::init(Coord x, Coord y, Coord w, Coord h) -> void
 {
-    init(component);
+    init();
     set_pos(x, y);
     set_size(w, h);
 }
@@ -62,16 +56,27 @@ auto Component::set_size(Coord w, Coord h) -> void
     lv_obj_set_size(_obj, w, h);
 }
 
-// 添加标志
-[[maybe_unused]] auto Component::add_flag(lv_obj_flag_t flag, Obj obj) -> void
+auto Component::hidden() -> void
 {
-    lv_obj_add_flag(obj, flag);
+    add_flag(LV_OBJ_FLAG_HIDDEN);
+}
+
+auto Component::appear() -> void
+{
+    clear_flag(LV_OBJ_FLAG_HIDDEN);
+}
+
+
+// 添加标志
+[[maybe_unused]] auto Component::add_flag(lv_obj_flag_t flag) -> void
+{
+    lv_obj_add_flag(_obj, flag);
 }
 
 // 清除标志
-auto Component::clear_flag(lv_obj_flag_t flag, Obj obj) -> void
+auto Component::clear_flag(lv_obj_flag_t flag) -> void
 {
-    lv_obj_clear_flag(obj, flag);
+    lv_obj_clear_flag(_obj, flag);
 }
 
 // 设置为裁剪属性
@@ -81,33 +86,33 @@ auto Component::clear_flag(lv_obj_flag_t flag, Obj obj) -> void
 }
 
 // 移除所有样式
-[[maybe_unused]] auto Component::remove_all_style(Obj obj) -> void
+[[maybe_unused]] auto Component::remove_all_style() -> void
 {
-    lv_obj_remove_style_all(obj);
+    lv_obj_remove_style_all(_obj);
 }
 
 // 移动到图层底部
-[[maybe_unused]] auto Component::move_to_background(Obj obj) -> void
+[[maybe_unused]] auto Component::move_to_background() -> void
 {
-    lv_obj_move_background(obj);
+    lv_obj_move_background(_obj);
 }
 
 // 重绘
-auto Component::invalidate(Obj obj) -> void
+auto Component::invalidate() -> void
 {
-    lv_obj_invalidate(obj);  // 使频谱区域无效，触发重绘
+    lv_obj_invalidate(_obj);  // 使频谱区域无效，触发重绘
 }
 
 // 设置对齐
-auto Component::set_align(lv_align_t align, Coord x_offset, Coord y_offset, Obj obj) -> void
+auto Component::set_align(lv_align_t align, Coord x_offset, Coord y_offset) -> void
 {
-    lv_obj_align(obj, align, x_offset, y_offset);
+    lv_obj_align(_obj, align, x_offset, y_offset);
 }
 
 // 设置样式大小
-auto Component::set_style_size(Coord w, Coord h, Selector selector, Obj obj) -> void
+auto Component::set_style_size(Coord w, Coord h, Selector selector) -> void
 {
-    lv_obj_set_style_size(obj, w, h, selector);
+    lv_obj_set_style_size(_obj, w, h, selector);
 
 }
 
@@ -226,12 +231,10 @@ auto Component::border(Color color, Coord radius, Coord width, uint8_t opa) -> v
     border_width(width);
 }
 
-auto Component::hidden(Obj obj) -> void
+// 发送事件
+auto Component::send_event(lv_event_code_t event, void *param) -> void
 {
-    add_flag(LV_OBJ_FLAG_HIDDEN, obj);
+    lv_obj_send_event(_obj, event, param);
 }
 
-auto Component::appear(Obj obj) -> void
-{
-    clear_flag(LV_OBJ_FLAG_HIDDEN, obj);
-}
+

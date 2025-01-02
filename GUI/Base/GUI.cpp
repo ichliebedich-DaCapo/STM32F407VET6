@@ -2,11 +2,9 @@
 // Created by fairy on 2024/10/17 18:53.
 //
 #include "GUI.hpp"
-#include "component.hpp"
-
-
 // 头文件
 #include "events.hpp"
+#include "ui.hpp"
 
 
 #ifdef GUI_ENABLE

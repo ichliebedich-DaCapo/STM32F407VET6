@@ -9,7 +9,6 @@
 #include "lvgl.h"
 #include "GUI.hpp"
 #include "ui.hpp"
-#include "GUI_Base.hpp"
 #include "simulator.hpp"
 #include "WaveCurve.hpp"
 

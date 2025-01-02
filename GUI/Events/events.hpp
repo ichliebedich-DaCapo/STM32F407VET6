@@ -5,7 +5,7 @@
  * @note
  *  有时候出于某种简化写法的目的，会使用宏定义做一些很邪恶的事情。当然这种代码风格挺糟糕的，但真的很爽
 */
-#include "GUI_Base.hpp"
+#include "component.hpp"
 
 
 /*************别名***************/
@@ -134,7 +134,7 @@ break;\
 /**
  * @brief 初始化事件
  */
-class Events : public GUI_Base
+class Events
 {
 public:
     static auto init() -> void;

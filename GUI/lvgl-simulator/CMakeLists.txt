@@ -72,7 +72,7 @@ set_target_properties(librender PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
 #---------------GUI库---------------
-file(GLOB_RECURSE COMPONENT_SRCS "${COMPONENT_DIR}/*.*")
+file(GLOB_RECURSE COMPONENT_SRCS "${COMPONENT_DIR}/src/*.cpp" "${COMPONENT_DIR}/empty.cpp")
 file(GLOB_RECURSE EVENTS_SRCS "${EVENTS_DIR}/*.*")
 file(GLOB_RECURSE BASE_SRCS "${BASE_DIR}/*.*")
 file(GLOB_RECURSE UI_SRCS "${UI_DIR}/*.*" "../UI/test.cpp")
@@ -129,7 +129,7 @@ else ()
 
             ${UI_DIR}
             ${BASE_DIR}
-            ${COMPONENT_DIR}
+            ${COMPONENT_DIR}/inc
             ${EVENTS_DIR}
     )
 endif ()

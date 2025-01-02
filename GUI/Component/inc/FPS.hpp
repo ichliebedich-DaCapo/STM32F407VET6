@@ -4,7 +4,7 @@
 #ifndef SIMULATOR_FPS_HPP
 #define SIMULATOR_FPS_HPP
 
-#include "text.hpp"
+#include "label.hpp"
 
 #define SIMPLE_FPS 1// 使用简单模式
 
@@ -51,10 +51,10 @@ private:
  */
 auto FPS::init(Font font, Coord x, Coord y, Coord width, Coord height) -> void
 {
-    Text label;
-    label.init_font(font);
+    Label label;
+//    label.init_font(font);
 #if SIMPLE_FPS
-    label.init(label_fps, x, y, width, height, "");
+//    label.init(label_fps, x, y, width, height, "");
 #else
     label.init(label_fps, x, y, 60, 80, "print\n0");
 #endif
@@ -82,7 +82,7 @@ auto FPS::print(bool time) -> void
         // 显示帧率
         sprintf(buf, "%.2f", 1000.0 * (count++) / get_tick());
     }
-    Text::set_text(buf, label_fps);
+//    Text::set_text(buf, label_fps);
 #else
     char buf[9];
     // 显示一帧的时间
@@ -122,22 +122,22 @@ auto FPS::restart() -> void
 auto FPS::set_right() -> void
 {
 
-    Text::set_text_align(LV_TEXT_ALIGN_RIGHT, label_fps);
+//    Text::set_text_align(LV_TEXT_ALIGN_RIGHT, label_fps);
 }
 
 auto FPS::set_center() -> void
 {
-    Text::set_text_align(LV_TEXT_ALIGN_CENTER, label_fps);
+//    Text::set_text_align(LV_TEXT_ALIGN_CENTER, label_fps);
 }
 
 auto FPS::set_left() -> void
 {
-    Text::set_text_align(LV_TEXT_ALIGN_LEFT, label_fps);
+//    Text::set_text_align(LV_TEXT_ALIGN_LEFT, label_fps);
 }
 
 auto FPS::clear() -> void
 {
-    Text::set_text("", label_fps);
+//    Text::set_text("", label_fps);
 
 }
 #endif //SIMULATOR_FPS_HPP
