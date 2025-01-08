@@ -1,10 +1,14 @@
 #include "baseInit.hpp"
+
 #ifndef APP_NO_RTOS // 是否启用RTOS
 #include "cmsis_os2.h"
 #endif// APP_NO_RTOS
 #ifdef GUI_ENABLE
+
 #include "GUI.hpp"
+
 #endif
+
 #include "key.hpp"
 #include "lcd.h"
 
@@ -21,7 +25,7 @@ __attribute__((weak)) void background_handler() {}
 
 int main()
 {
-/*基础初始化*/
+    /*基础初始化*/
     BaseInit(); // 基础驱动初始化
 
 #ifndef APP_NO_RTOS
@@ -33,17 +37,14 @@ int main()
 #endif
     app_init();
 
-/*主事件循环或调度器*/
+    /*主事件循环或调度器*/
 #ifndef APP_NO_RTOS
     osKernelStart();
 #else
     for (;;)
     {
-        // 仅当启用了GUI并且没有启用GUI_ONLY_INIT时才调用GUI::handler()
 #ifdef GUI_ENABLE
-#ifndef GUI_ONLY_INIT
         GUI::handler();
-#endif
 #endif
         Key::handler();
         background_handler();

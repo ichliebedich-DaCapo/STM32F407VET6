@@ -2,6 +2,7 @@
 // Created by fairy on 2024/9/22.
 //
 
+#include <string.h>
 #include "lcd.h"
 
 #ifdef USE_LCD
@@ -10,6 +11,17 @@
 #include "stm32f4xx_hal.h"
 
 extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
+
+
+/*LCD地址*/
+#define TFT_CMD (*((volatile unsigned short *) 0x60060000)) // TFT命令寄存器片选地址
+#define TFT_DATA (*((volatile unsigned short *) 0x60060002))// TFT数据寄存器片选地址
+#define TFT_RST (*((volatile unsigned short *) 0x60060004)) // TFT复位寄存器地址
+#define TFTLED (*((volatile unsigned short *) 0x60060008))  // TFT背光寄存器地址
+#define TFT_DATA_ADDR 0x60060002U
+#define LCD_WRITE_CMD(Command) (TFT_CMD = Command)
+#define LCD_WRITE_DATA(Data) (TFT_DATA = Data)
+
 
 
 /*预编译*/
@@ -218,11 +230,103 @@ void lcd_init(void)
 #endif
 }
 
+/**********************************绘制接口*********************************************/
+/**
+ * 设置LCD显示窗口
+ * 该函数用于配置LCD的显示区域，通过指定窗口的起始和结束坐标
+ *
+ * @param sx 窗口起始点的X坐标
+ * @param sy 窗口起始点的Y坐标
+ * @param ex 窗口结束点的X坐标
+ * @param ey 窗口结束点的Y坐标
+ */
+void LCD_Set_Window(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey)
+{
+    // 设置列地址范围
+    LCD_WRITE_CMD(0x002A);
+    LCD_WRITE_DATA(sx >> 8);
+    LCD_WRITE_DATA(0x00FF & sx);
+    LCD_WRITE_DATA((ex) >> 8);
+    LCD_WRITE_DATA(0x00FF & (ex));
+
+    // 设置行地址范围
+    LCD_WRITE_CMD(0x002B);
+    LCD_WRITE_DATA(sy >> 8);
+    LCD_WRITE_DATA(0x00FF & sy);
+    LCD_WRITE_DATA(ey >> 8);
+    LCD_WRITE_DATA(0x00FF & ey);
+
+    // 开始传输数据到LCD
+    LCD_WRITE_CMD(0x002C);
+}
+
+
+void LCD_Clear(uint16_t color)
+{
+    LCD_Set_Window(0, 0, 479, 319);
+    for (uint32_t i = 0; i < 0x25800; i++)
+        LCD_WRITE_DATA(color);
+}
+
+/**
+ * @brief 填充矩形区域
+ * @param sx
+ * @param sy
+ * @param ex
+ * @param ey
+ * @param color
+ * @note
+ */
+void LCD_Color_Fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, const uint16_t *color)
+{
+    uint16_t length, width;
+    length = ex - sx + 1;// 矩形区域的长度
+    width = ey - sy + 1; // 矩形区域的宽度
+    LCD_Set_Window(sx, sy, ex, ey);
+    // 遍历矩形区域的每一行
+    for (int j = 0; j < width; ++j)
+    {
+        for (int i = 0; i < length; ++i)
+        {
+            LCD_WRITE_DATA(color[i + length * j]);// 一次性写入整行的颜色数据
+        }
+    }
+}
+
+/**
+ * @brief 清除矩形区域
+ * @param sx
+ * @param sy
+ * @param ex
+ * @param ey
+ * @param color
+ */
+void LCD_Color_Clean(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t color)
+{
+    uint16_t length, width;
+    length = ex - sx + 1;// 矩形区域的长度
+    width = ey - sy + 1; // 矩形区域的宽度
+    LCD_Set_Window(sx, sy, ex, ey);
+    // 遍历矩形区域的每一行
+    int total = length * width;
+    for (int j = 0; j < total; ++j)
+    {
+        LCD_WRITE_DATA(color);// 一次性写入整行的颜色数据
+    }
+}
+
+/// 设置一个像素
+void LCD_Set_Pixel(uint16_t x, uint16_t y, uint16_t color)
+{
+    LCD_Set_Window(x, y, x, y);
+    LCD_WRITE_DATA(color);
+}
+
 void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)
 {
 #ifdef USE_FSMC_DMA
     LCD_Set_Window(x1, y1, x2, y2);//设置LCD屏幕的扫描区域
-    HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream6, (uint32_t) color_p, (uint32_t) TFT_DATA_ADDR,
+    HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream6, (uint32_t) color_p, TFT_DATA_ADDR,
                      ((x2 + 1) - x1) * ((y2 + 1) - y1));
 #else
     LCD_Color_Fill(area->x1, area->y1, area->x2, area->y2, (const uint16_t *)color_p);

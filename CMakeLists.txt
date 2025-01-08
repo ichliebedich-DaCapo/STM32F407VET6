@@ -9,10 +9,9 @@ set(APP_DIR Application/StorageOscilloscope)
 set(STATIC_MODULE_LD True)
 # ---------使用GUI---------
 set(GUI_ENABLE True)
-# ---------仅使用GUI的初始化---------
-#set(GUI_ONLY_INIT True)
 # ---------使用AI---------
 #set (AI_ENABLE True)
+
 # 添加编译器选项，使得支持Module特性
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts")
 
