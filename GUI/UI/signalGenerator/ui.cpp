@@ -216,7 +216,10 @@ constexpr uint16_t bg_color = 0xFFFF;
 constexpr uint16_t line_color = 0x0000;
 
 // 变量
-LV_Timer tick_timer;
+struct lv_ui_t lv_ui;
+struct lv_ui_t *gui = &lv_ui;
+
+Timer tick_timer;
 uint8_t Buf[point_cnt];
 
 
@@ -291,7 +294,7 @@ public:
     static inline auto get_period() -> uint32_t;
 
     // 获取波形模式
-    static inline auto get_mode() -> bool ;
+    static inline auto get_mode() -> bool;
 
     // 获取频率
     static inline auto get_freq() -> bool;
@@ -328,69 +331,64 @@ private:
 
 
 /***********************函数实现***********************/
-auto Screen::init() -> void
+auto GUI_Base::screen_init() -> void
 {
-    Component::set_parent(gui->main.screen);
+    Component::set_parent(gui->main.screen.get_object());
 
     // 设置边框
-    Component::init(gui->main.rect);
-    Component::set_pos_size(78, 36, 324, 208);
-    Component::border_radius(5);
+    gui->main.rect.init(78, 36, 324, 208);
+    gui->main.rect.border_radius(5);
 
-    // 初始化器
-    Button customBtn;
-    customBtn.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
-    Text label;
-    label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_13);
-    Component::set_parent(gui->main.screen);// 设置父对象
+    //  按钮_模式：单频、混频
+    gui->main.btn_mode.init(40, 265, 40, 30, "单频", &lv_customer_font_SourceHanSerifSC_Regular_15);
+    gui->main.label_mode.init(45, 300, 40, 20, "模式", &lv_customer_font_SourceHanSerifSC_Regular_13);
 
-//     按钮_模式：单频、混频
-    customBtn.init(gui->main.btn_mode, gui->main.btn_mode_label, 40, 265, 40, 30, "单频");
-    label.init(gui->main.label_mode, 45, 300, 40, 20, "模式");
+    // 按钮_偏置：+、-
+    gui->main.btn_bias_sub.init(115, 265, 30, 30, "-", &lv_customer_font_SourceHanSerifSC_Regular_15);
+    gui->main.btn_bias_add.init(155, 265, 30, 30, "+", &lv_customer_font_SourceHanSerifSC_Regular_15);
+    gui->main.label_bias.init(118, 300, 80, 20, "偏置：0", &lv_customer_font_SourceHanSerifSC_Regular_13);
 
-//     按钮_偏置：+、-
-    customBtn.init(gui->main.btn_bias_sub, gui->main.btn_bias_sub_label, 115, 265, 30, 30, "-");
-    customBtn.init(gui->main.btn_bias_add, gui->main.btn_bias_add_label, 155, 265, 30, 30, "+");
-    label.init(gui->main.label_bias, 118, 300, 80, 20, "偏置：0");
 
-//     按钮_频率：8K、16K
-    customBtn.init(gui->main.btn_freq, gui->main.btn_freq_label, 400, 265, 40, 30, "800");// 根据对称性，x：480-40-40
-    label.init(gui->main.label_freq, 405, 300, 40, 20, "频率");
+    // 按钮_频率：8K、16K
+    gui->main.btn_freq.init(400, 265, 40, 30, "800", &lv_customer_font_SourceHanSerifSC_Regular_15);// 根据对称性，x：480-40-40
+    gui->main.label_freq.init(405, 300, 40, 20, "频率", &lv_customer_font_SourceHanSerifSC_Regular_13);
 
-//     按钮_占比：+、-
-    customBtn.init(gui->main.btn_ratio_sub, gui->main.btn_ratio_sub_label, 295, 265, 30, 30, "-");
-    customBtn.init(gui->main.btn_ratio_add, gui->main.btn_ratio_add_label, 335, 265, 30, 30, "+");
-    label.init(gui->main.label_ratio, 298, 300, 80, 20, "占比：50%");
+    // 按钮_占比：+、-
+    gui->main.btn_ratio_sub.init(295, 265, 30, 30, "-", &lv_customer_font_SourceHanSerifSC_Regular_15);
+    gui->main.btn_ratio_add.init(335, 265, 30, 30, "+", &lv_customer_font_SourceHanSerifSC_Regular_15);
+    gui->main.label_ratio.init(298, 300, 80, 20, "占比：50%", &lv_customer_font_SourceHanSerifSC_Regular_13);
 
-//     图片按钮：停止、播放
-    ImageButton::init(gui->main.imgbtn_play, 216, 256, 48, 48, &_btn_list_play_alpha_48x48,
-                      &_btn_list_pause_alpha_48x48);
+
+    // 图片按钮：停止、播放
+    gui->main.imgbtn_play.init(216, 256, 48, 48, &_btn_list_play_alpha_48x48, &_btn_list_pause_alpha_48x48);
+
 
     // 标签：信息
-    label.init(gui->main.label_info, 420, 60, 60, 80, "  队伍：\n\n王正翔\n吴俊颐\n谢智晴\n何乃滔");
+    gui->main.label_info.init(420, 60, 60, 80, "  队伍：\n\n王正翔\n吴俊颐\n谢智晴\n何乃滔",
+                              &lv_customer_font_SourceHanSerifSC_Regular_13);
 
     // 标签：CPU温度
-    label.init(gui->main.label_cpu, 0, 0, 80, 30, "CPU:35℃\n");
+    gui->main.label_cpu.init(0, 0, 80, 30, "CPU:35℃\n", &lv_customer_font_SourceHanSerifSC_Regular_13);
 
     // 标签：时刻
-    label.init(gui->main.label_tick, 5, 50, 50, 80, "tick：\n0");
+    gui->main.label_tick.init(5, 50, 50, 80, "tick：\n0", &lv_customer_font_SourceHanSerifSC_Regular_13);
 
     // 标签：显示点数
-    label.init(gui->main.label_wave_cnt, 5, 110, 60, 80, "点数：128");
+    gui->main.label_wave_cnt.init(5, 80, 60, 80, "点数：128", &lv_customer_font_SourceHanSerifSC_Regular_13);
 
     // 标签：波形周期
-    label.init(gui->main.label_wave_period, 5, 160, 70, 80, "周期：1.5s");
+    gui->main.label_wave_period.init(5, 160, 70, 80, "周期：1.5s", &lv_customer_font_SourceHanSerifSC_Regular_13);
 
     // 标签：算法
-    label.init(gui->main.label_wave_type, 5, 210, 60, 80, "线性插值");
+    gui->main.label_wave_type.init(5, 210, 60, 80, "线性插值", &lv_customer_font_SourceHanSerifSC_Regular_13);
+
 
     // 标签：波形生成
-    label.init(gui->main.label_wave_generate, 430, 200, 50, 80, "波形已产生");
-    Text::hidden(gui->main.label_wave_generate);
+    gui->main.label_wave_generate.init(430, 200, 50, 80, "波形未产生", &lv_customer_font_SourceHanSerifSC_Regular_13);
+    gui->main.label_wave_generate.hidden();
 
     // 标签：标题
-    label.init_font(&lv_customer_font_SourceHanSerifSC_Regular_15);
-    label.init(gui->main.label_title, 190, 13, 140, 30, "双音频信号发生器");
+    gui->main.label_title.init(190, 13, 140, 30, "双音频信号发生器", &lv_customer_font_SourceHanSerifSC_Regular_15);
 
     // print
     FPS::init(&lv_customer_font_SourceHanSerifSC_Regular_13, 415, 0);
@@ -401,7 +399,7 @@ auto Screen::init() -> void
 /***********************函数实现***********************/
 
 //uint16_t color[320*200];
-auto Events::init() -> void
+void GUI_Base::events_init()
 {
     /*  创建定时器*/
     tick_timer.create([](lv_timer_t *)
@@ -410,29 +408,23 @@ auto Events::init() -> void
                           SignalGenerator::print_tick();
                       }, Freq_8K);
     // 绑定播放事件
-    bond(gui->main.imgbtn_play, imgbtn_fun2(
-            fun(SignalGenerator::start();),
-            fun(SignalGenerator::stop();)));
+    gui->main.imgbtn_play.add_event(imgbtn_fun2({ SignalGenerator::start(); }, { SignalGenerator::stop(); }));
 
     // 绑定频率事件
-    bond(gui->main.btn_freq, btn_fun(
-            fun(SignalGenerator::switch_freq();)));
+    gui->main.btn_freq.add_event(btn_fun(SignalGenerator::switch_freq();));
+
 
     // 绑定偏置事件
-    bond(gui->main.btn_bias_add, btn_fun(
-            fun(SignalGenerator::add_bias();)));
-    bond(gui->main.btn_bias_sub, btn_fun(
-            fun(SignalGenerator::sub_bias();)));
+    gui->main.btn_bias_add.add_event(btn_fun(SignalGenerator::add_bias();));
+    gui->main.btn_bias_sub.add_event(btn_fun(SignalGenerator::sub_bias();));
+
 
     // 绑定模式事件
-    bond(gui->main.btn_mode, btn_fun(
-            fun(SignalGenerator::switch_mode();)));
+    gui->main.btn_mode.add_event(btn_fun(SignalGenerator::switch_mode();));
 
     // 绑定占比事件
-    bond(gui->main.btn_ratio_add, btn_fun(
-            fun(SignalGenerator::add_ratio();)));
-    bond(gui->main.btn_ratio_sub, btn_fun(
-            fun(SignalGenerator::sub_ratio();)));
+    gui->main.btn_ratio_add.add_event(btn_fun(SignalGenerator::add_ratio();));
+    gui->main.btn_ratio_sub.add_event(btn_fun(SignalGenerator::sub_ratio();));
 }
 
 
@@ -454,7 +446,8 @@ auto SignalGenerator::handler() -> void
 
                 }
             }
-        } else// 8K -> 16K
+        }
+        else// 8K -> 16K
         {
             // 极端情况：
             // ① _ratio为100，那么会直接跳过
@@ -555,7 +548,7 @@ auto SignalGenerator::add_bias() -> void
         bias += 10;
     char buf[12];
     sprintf(buf, "偏置：%d", bias);
-    Text::set_text(buf, GUI_Base::get_ui()->main.label_bias);
+    gui->main.label_bias.set_text(buf);
 }
 
 // 减偏置
@@ -565,7 +558,7 @@ auto SignalGenerator::sub_bias() -> void
         bias -= 10;
     char buf[12];
     sprintf(buf, "偏置：%d", bias);
-    Text::set_text(buf, GUI_Base::get_ui()->main.label_bias);
+    gui->main.label_bias.set_text(buf);
 }
 
 auto SignalGenerator::add_ratio() -> void
@@ -584,7 +577,7 @@ auto SignalGenerator::sub_ratio() -> void
 
 auto SignalGenerator::print_tick() -> void
 {
-    Text::set_text(GUI_Base::get_ui()->main.label_tick, "tick：\n%lu", get_tick());
+    gui->main.label_tick.set_text("tick：\n%lu", get_tick());
 }
 
 
@@ -594,7 +587,7 @@ auto SignalGenerator::set_freq(bool freq) -> void
 {
     _freq = freq;
     index_offset = _freq ? index_offset_16K : index_offset_8K;
-    Text::set_text(_freq ? "1K" : "800", GUI_Base::get_ui()->main.btn_freq_label);
+    gui->main.btn_freq.set_text(_freq ? "16K" : "8K");
 
 #if Strong_Print
     timer.set_period(_freq ? Freq_16K : Freq_8K);
@@ -604,7 +597,7 @@ auto SignalGenerator::set_freq(bool freq) -> void
 auto SignalGenerator::set_mode(bool &mode) -> void
 {
     _mode = mode;
-    Text::set_text(_mode ? "双频" : "单频", GUI_Base::get_ui()->main.btn_mode_label);
+    gui->main.btn_mode.set_text(_mode ? "双频" : "单频");
 }
 
 auto SignalGenerator::set_ratio(uint8_t ratio) -> void
@@ -612,7 +605,7 @@ auto SignalGenerator::set_ratio(uint8_t ratio) -> void
     _ratio = ratio;
     char buf[12];
     sprintf(buf, "占比：%d%%", _ratio);
-    Text::set_text(buf, GUI_Base::get_ui()->main.label_ratio);
+    gui->main.label_ratio.set_text(buf);
 }
 
 // 更新时间
@@ -663,7 +656,7 @@ auto SignalGenerator::add_wave_cnt() -> void
 
     LCD_Color_Clean(start_x, start_y, start_x + chart_width, start_y + chart_height, bg_color);// 清除显示
     sprintf(buf, "点数：%3d", wave_cnt);
-    Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_cnt);
+    gui->main.label_wave_cnt.set_text(buf);
 }
 
 auto SignalGenerator::sub_wave_cnt() -> void
@@ -679,7 +672,7 @@ auto SignalGenerator::sub_wave_cnt() -> void
 
     LCD_Color_Clean(start_x, start_y, start_x + chart_width, start_y + chart_height, bg_color);// 清除显示
     sprintf(buf, "点数：%3d", wave_cnt);
-    Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_cnt);
+    gui->main.label_wave_cnt.set_text(buf);
 }
 
 auto SignalGenerator::switch_wave_type() -> void
@@ -712,18 +705,18 @@ auto SignalGenerator::switch_wave_type() -> void
             break;
     }
 //    LCD_Color_Clean(80, 40, 400, 240, 0xFFFF);
-    Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_type);
+gui->main.label_wave_type.set_text(buf);
 }
 
 
 auto SignalGenerator::wave_is_generate() -> void
 {
-    Text::appear(GUI_Base::get_ui()->main.label_wave_generate);
+    gui->main.label_wave_generate.appear();
 }
 
 auto SignalGenerator::wave_is_not_generate() -> void
 {
-    Text::hidden(GUI_Base::get_ui()->main.label_wave_generate);
+    gui->main.label_wave_generate.hidden();
 }
 
 auto SignalGenerator::add_period() -> void
@@ -731,8 +724,8 @@ auto SignalGenerator::add_period() -> void
     char buf[14];
     if (period < 9000)
         period += 100;
-    sprintf(buf, "周期：%lu.%lus", period/1000,period%1000/100);
-    Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_period);
+    sprintf(buf, "周期：%lu.%lus", period / 1000, period % 1000 / 100);
+    gui->main.label_wave_period.set_text(buf);
 }
 
 auto SignalGenerator::sub_period() -> void
@@ -740,8 +733,8 @@ auto SignalGenerator::sub_period() -> void
     char buf[14];
     if (period > 100)
         period -= 100;
-    sprintf(buf, "周期：%lu.%lus", period/1000,period%1000/100);
-    Text::set_text(buf, GUI_Base::get_ui()->main.label_wave_period);
+    sprintf(buf, "周期：%lu.%lus", period / 1000, period % 1000 / 100);
+    gui->main.label_wave_period.set_text(buf);
 }
 
 auto SignalGenerator::get_period() -> uint32_t

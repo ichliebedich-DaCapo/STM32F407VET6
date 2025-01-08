@@ -1,5 +1,5 @@
 # ----------------------------------设置你的UI路径（选择项目）------------------------------
-set(UI_DIR ../UI/StorageOscilloscope)
+set(UI_DIR ../UI/signalGenerator)
 # ----------------------------------选项------------------------------
 #set(USE_STATIC_LIBRARY True)
 
