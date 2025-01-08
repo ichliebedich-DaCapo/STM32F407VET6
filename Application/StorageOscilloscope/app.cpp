@@ -329,6 +329,7 @@ void key_handler()
             {
                 OSC::toggle_trigger_mode_flag();
                 UI_Interface::switch_trigger_mode(OSC::get_trigger_mode_flag());
+                gui->main.trigger_mode.click();
             }
             break;
 

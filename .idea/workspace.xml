@@ -32,761 +32,14 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【添加】&#10;异步延迟类：单位为ms，依赖于计时器&#10;标志类：可自行定义各种标志枚举体，可作为其他类的的基类使用">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="更新了lvgl库">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/ISR.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/StorageOscilloscope/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI_Base.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI_Base.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/anim/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/anim/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/anim/lv_example_anim_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/anim/lv_example_anim_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/anim/lv_example_anim_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/anim/lv_example_anim_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/anim/lv_example_anim_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/anim/lv_example_anim_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/anim/lv_example_anim_3.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/anim/lv_example_anim_3.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/anim/lv_example_anim_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/anim/lv_example_anim_timeline_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/anim/lv_example_anim_timeline_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/anim/lv_example_anim_timeline_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/arduino/LVGL_Arduino/LVGL_Arduino.ino" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/arduino/LVGL_Arduino/LVGL_Arduino.ino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/animimg001.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/animimg001.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/animimg002.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/animimg002.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/animimg003.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/animimg003.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/emoji/img_emoji_F617.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/emoji/img_emoji_F617.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/img_caret_down.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/img_caret_down.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/img_cogwheel_alpha16.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/img_cogwheel_argb.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/img_cogwheel_argb.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/img_cogwheel_chroma_keyed.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/img_cogwheel_indexed16.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/img_cogwheel_indexed16.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/img_cogwheel_rgb.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/img_cogwheel_rgb.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/img_hand.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/img_hand.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/img_skew_strip.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/img_skew_strip.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/img_star.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/img_star.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/imgbtn_left.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/imgbtn_left.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/imgbtn_mid.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/imgbtn_mid.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/imgbtn_right.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/assets/imgbtn_right.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/event/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/event/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/event/lv_example_event_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/event/lv_example_event_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/event/lv_example_event_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/event/lv_example_event_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/event/lv_example_event_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/event/lv_example_event_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/event/lv_example_event_3.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/event/lv_example_event_3.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/event/lv_example_event_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/event/lv_example_event_4.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/event/lv_example_event_4.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/get_started/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/get_started/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/get_started/lv_example_get_started.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/get_started/lv_example_get_started.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/get_started/lv_example_get_started_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/get_started/lv_example_get_started_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/get_started/lv_example_get_started_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/get_started/lv_example_get_started_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/get_started/lv_example_get_started_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/get_started/lv_example_get_started_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/get_started/lv_example_get_started_3.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/get_started/lv_example_get_started_3.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/get_started/lv_example_get_started_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/header.py" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/header.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/lv_example_flex_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/lv_example_flex_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/lv_example_flex_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/lv_example_flex_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/lv_example_flex_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/lv_example_flex_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/lv_example_flex_3.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/lv_example_flex_3.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/lv_example_flex_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/lv_example_flex_4.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/lv_example_flex_4.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/lv_example_flex_4.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/lv_example_flex_5.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/lv_example_flex_5.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/lv_example_flex_5.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/lv_example_flex_6.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/lv_example_flex_6.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/flex/lv_example_flex_6.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/lv_example_grid_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/lv_example_grid_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/lv_example_grid_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/lv_example_grid_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/lv_example_grid_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/lv_example_grid_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/lv_example_grid_3.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/lv_example_grid_3.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/lv_example_grid_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/lv_example_grid_4.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/lv_example_grid_4.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/lv_example_grid_4.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/lv_example_grid_5.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/lv_example_grid_5.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/lv_example_grid_5.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/lv_example_grid_6.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/lv_example_grid_6.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/layouts/grid/lv_example_grid_6.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/bmp/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/bmp/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/bmp/lv_example_bmp_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/bmp/lv_example_bmp_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/bmp/lv_example_bmp_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/ffmpeg/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/ffmpeg/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/ffmpeg/lv_example_ffmpeg_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/ffmpeg/lv_example_ffmpeg_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/ffmpeg/lv_example_ffmpeg_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/ffmpeg/lv_example_ffmpeg_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/freetype/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/freetype/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/freetype/lv_example_freetype_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/freetype/lv_example_freetype_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/freetype/lv_example_freetype_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/gif/img_bulb_gif.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/gif/img_bulb_gif.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/gif/img_bulb_gif.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/gif/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/gif/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/gif/lv_example_gif_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/gif/lv_example_gif_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/gif/lv_example_gif_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/lv_example_libs.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/lv_example_libs.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/png/img_wink_png.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/png/img_wink_png.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/png/index.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/png/lv_example_png.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/png/lv_example_png_1.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/png/lv_example_png_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/png/wink.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/qrcode/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/qrcode/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/qrcode/lv_example_qrcode_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/qrcode/lv_example_qrcode_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/qrcode/lv_example_qrcode_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/rlottie/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/rlottie/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/rlottie/lv_example_rlottie.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/rlottie/lv_example_rlottie.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/rlottie/lv_example_rlottie_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/rlottie/lv_example_rlottie_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/rlottie/lv_example_rlottie_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/rlottie/lv_example_rlottie_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/rlottie/lv_example_rlottie_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/rlottie/lv_example_rlottie_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/rlottie/lv_example_rlottie_approve.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/sjpg/index.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/sjpg/lv_example_sjpg.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/sjpg/lv_example_sjpg_1.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/sjpg/lv_example_sjpg_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/libs/sjpg/small_image.sjpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/lv_examples.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/lv_examples.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/fragment/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/fragment/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/fragment/lv_example_fragment.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/fragment/lv_example_fragment.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/fragment/lv_example_fragment_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/fragment/lv_example_fragment_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/fragment/lv_example_fragment_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/fragment/lv_example_fragment_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/gridnav/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/gridnav/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/gridnav/lv_example_gridnav.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/gridnav/lv_example_gridnav.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/gridnav/lv_example_gridnav_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/gridnav/lv_example_gridnav_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/gridnav/lv_example_gridnav_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/gridnav/lv_example_gridnav_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/gridnav/lv_example_gridnav_3.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/gridnav/lv_example_gridnav_3.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/gridnav/lv_example_gridnav_4.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/gridnav/lv_example_gridnav_4.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/ime/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/ime/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/ime/lv_example_ime_pinyin_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/ime/lv_example_ime_pinyin_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/ime/lv_example_ime_pinyin_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/ime/lv_example_ime_pinyin_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/imgfont/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/imgfont/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/imgfont/lv_example_imgfont_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/imgfont/lv_example_imgfont_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/lv_example_others.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/lv_example_others.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/monkey/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/monkey/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/monkey/lv_example_monkey_3.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/monkey/lv_example_monkey_3.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/msg/index.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/msg/lv_example_msg.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/msg/lv_example_msg_1.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/msg/lv_example_msg_2.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/msg/lv_example_msg_3.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/snapshot/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/snapshot/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/snapshot/lv_example_snapshot_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/snapshot/lv_example_snapshot_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/others/snapshot/lv_example_snapshot_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/porting/lv_port_disp.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/porting/lv_port_disp.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/porting/lv_port_disp.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/porting/lv_port_disp.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/porting/lv_port_fs_template.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/porting/lv_port_fs_template.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/porting/lv_port_indev_template.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/porting/lv_port_indev_template.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/porting/lv_port_indev_template.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/porting/lv_port_indev_template.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/lv_example_scroll_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/lv_example_scroll_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/lv_example_scroll_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/lv_example_scroll_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/lv_example_scroll_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/lv_example_scroll_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/lv_example_scroll_3.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/lv_example_scroll_3.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/lv_example_scroll_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/lv_example_scroll_4.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/lv_example_scroll_4.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/lv_example_scroll_4.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/lv_example_scroll_5.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/lv_example_scroll_5.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/lv_example_scroll_5.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/lv_example_scroll_6.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/lv_example_scroll_6.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/scroll/lv_example_scroll_6.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_10.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_10.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_10.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_11.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_11.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_11.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_12.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_12.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_12.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_13.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_13.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_13.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_14.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_14.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_14.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_15.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_15.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_3.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_3.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_4.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_4.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_4.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_5.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_5.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_5.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_6.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_6.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_6.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_7.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_7.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_7.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_8.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_8.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_8.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_9.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_9.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/styles/lv_example_style_9.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/animimg/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/animimg/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/animimg/lv_example_animimg_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/animimg/lv_example_animimg_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/animimg/lv_example_animimg_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/arc/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/arc/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/arc/lv_example_arc_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/arc/lv_example_arc_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/arc/lv_example_arc_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/arc/lv_example_arc_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/arc/lv_example_arc_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/arc/lv_example_arc_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/lv_example_bar_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/lv_example_bar_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/lv_example_bar_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/lv_example_bar_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/lv_example_bar_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/lv_example_bar_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/lv_example_bar_3.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/lv_example_bar_3.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/lv_example_bar_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/lv_example_bar_4.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/lv_example_bar_4.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/lv_example_bar_4.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/lv_example_bar_5.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/lv_example_bar_5.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/lv_example_bar_5.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/lv_example_bar_6.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/lv_example_bar_6.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/lv_example_bar_6.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/bar/test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/btn/index.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/btn/lv_example_btn_1.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/btn/lv_example_btn_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/btn/lv_example_btn_2.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/btn/lv_example_btn_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/btn/lv_example_btn_3.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/btn/lv_example_btn_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/btnmatrix/index.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/btnmatrix/lv_example_btnmatrix_1.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/btnmatrix/lv_example_btnmatrix_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/btnmatrix/lv_example_btnmatrix_2.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/btnmatrix/lv_example_btnmatrix_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/btnmatrix/lv_example_btnmatrix_3.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/btnmatrix/lv_example_btnmatrix_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/calendar/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/calendar/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/calendar/lv_example_calendar_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/calendar/lv_example_calendar_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/calendar/lv_example_calendar_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/canvas/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/canvas/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/canvas/lv_example_canvas_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/canvas/lv_example_canvas_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/canvas/lv_example_canvas_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/canvas/lv_example_canvas_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/canvas/lv_example_canvas_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/canvas/lv_example_canvas_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_3.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_3.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_4.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_4.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_4.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_5.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_5.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_5.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_6.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_6.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_6.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_7.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_7.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_7.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_8.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_8.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_8.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_9.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/chart/lv_example_chart_9.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/checkbox/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/checkbox/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/checkbox/lv_example_checkbox_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/checkbox/lv_example_checkbox_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/checkbox/lv_example_checkbox_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/checkbox/lv_example_checkbox_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/checkbox/lv_example_checkbox_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/colorwheel/index.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/colorwheel/lv_example_colorwheel_1.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/colorwheel/lv_example_colorwheel_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/dropdown/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/dropdown/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/dropdown/lv_example_dropdown_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/dropdown/lv_example_dropdown_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/dropdown/lv_example_dropdown_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/dropdown/lv_example_dropdown_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/dropdown/lv_example_dropdown_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/dropdown/lv_example_dropdown_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/dropdown/lv_example_dropdown_3.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/dropdown/lv_example_dropdown_3.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/dropdown/lv_example_dropdown_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/img/index.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/img/lv_example_img_1.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/img/lv_example_img_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/img/lv_example_img_2.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/img/lv_example_img_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/img/lv_example_img_3.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/img/lv_example_img_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/img/lv_example_img_4.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/img/lv_example_img_4.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/imgbtn/index.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/imgbtn/lv_example_imgbtn_1.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/imgbtn/lv_example_imgbtn_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/keyboard/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/keyboard/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/keyboard/lv_example_keyboard_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/keyboard/lv_example_keyboard_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/keyboard/lv_example_keyboard_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/label/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/label/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/label/lv_example_label_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/label/lv_example_label_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/label/lv_example_label_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/label/lv_example_label_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/label/lv_example_label_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/label/lv_example_label_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/label/lv_example_label_3.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/label/lv_example_label_3.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/label/lv_example_label_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/label/lv_example_label_4.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/label/lv_example_label_4.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/label/lv_example_label_5.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/label/lv_example_label_5.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/label/lv_example_label_5.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/led/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/led/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/led/lv_example_led_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/led/lv_example_led_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/led/lv_example_led_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/line/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/line/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/line/lv_example_line_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/line/lv_example_line_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/line/lv_example_line_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/list/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/list/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/list/lv_example_list_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/list/lv_example_list_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/list/lv_example_list_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/list/lv_example_list_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/list/lv_example_list_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/list/lv_example_list_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/list/test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/lv_example_widgets.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/lv_example_widgets.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/menu/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/menu/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/menu/lv_example_menu_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/menu/lv_example_menu_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/menu/lv_example_menu_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/menu/lv_example_menu_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/menu/lv_example_menu_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/menu/lv_example_menu_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/menu/lv_example_menu_3.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/menu/lv_example_menu_3.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/menu/lv_example_menu_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/menu/lv_example_menu_4.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/menu/lv_example_menu_4.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/menu/lv_example_menu_4.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/menu/lv_example_menu_5.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/menu/lv_example_menu_5.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/meter/index.rst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/meter/lv_example_meter_1.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/meter/lv_example_meter_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/meter/lv_example_meter_2.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/meter/lv_example_meter_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/meter/lv_example_meter_3.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/meter/lv_example_meter_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/meter/lv_example_meter_4.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/meter/lv_example_meter_4.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/msgbox/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/msgbox/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/msgbox/lv_example_msgbox_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/msgbox/lv_example_msgbox_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/msgbox/lv_example_msgbox_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/obj/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/obj/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/obj/lv_example_obj_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/obj/lv_example_obj_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/obj/lv_example_obj_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/obj/lv_example_obj_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/obj/lv_example_obj_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/obj/lv_example_obj_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/roller/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/roller/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/roller/lv_example_roller_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/roller/lv_example_roller_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/roller/lv_example_roller_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/roller/lv_example_roller_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/roller/lv_example_roller_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/roller/lv_example_roller_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/roller/lv_example_roller_3.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/roller/lv_example_roller_3.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/roller/lv_example_roller_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/slider/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/slider/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/slider/lv_example_slider_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/slider/lv_example_slider_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/slider/lv_example_slider_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/slider/lv_example_slider_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/slider/lv_example_slider_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/slider/lv_example_slider_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/slider/lv_example_slider_3.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/slider/lv_example_slider_3.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/slider/lv_example_slider_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/span/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/span/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/span/lv_example_span_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/span/lv_example_span_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/span/lv_example_span_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/spinbox/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/spinbox/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/spinbox/lv_example_spinbox_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/spinbox/lv_example_spinbox_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/spinbox/lv_example_spinbox_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/spinner/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/spinner/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/spinner/lv_example_spinner_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/spinner/lv_example_spinner_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/spinner/lv_example_spinner_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/switch/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/switch/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/switch/lv_example_switch_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/switch/lv_example_switch_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/switch/lv_example_switch_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/table/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/table/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/table/lv_example_table_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/table/lv_example_table_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/table/lv_example_table_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/table/lv_example_table_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/table/lv_example_table_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/table/lv_example_table_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/tabview/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/tabview/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/tabview/lv_example_tabview_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/tabview/lv_example_tabview_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/tabview/lv_example_tabview_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/tabview/lv_example_tabview_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/tabview/lv_example_tabview_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/tabview/lv_example_tabview_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/textarea/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/textarea/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/textarea/lv_example_textarea_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/textarea/lv_example_textarea_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/textarea/lv_example_textarea_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/textarea/lv_example_textarea_2.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/textarea/lv_example_textarea_2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/textarea/lv_example_textarea_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/textarea/lv_example_textarea_3.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/textarea/lv_example_textarea_3.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/textarea/lv_example_textarea_3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/tileview/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/tileview/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/tileview/lv_example_tileview_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/tileview/lv_example_tileview_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/tileview/lv_example_tileview_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/win/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/win/index.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/win/lv_example_win_1.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/win/lv_example_win_1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/examples/widgets/win/lv_example_win_1.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/Drivers/simulator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/Drivers/simulator.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/lv_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/lv_conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/lvgl.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/lvgl.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_core.mk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_disp.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_disp.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_event.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_event.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_group.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_group.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_group.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_group.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_indev.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_indev.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_indev_scroll.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_indev_scroll.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_class.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_class.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_class.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_class.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_draw.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_draw.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_draw.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_draw.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_pos.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_pos.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_pos.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_pos.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_scroll.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_scroll.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_scroll.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_scroll.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_style.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_style.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_style.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_style.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_style_gen.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_style_gen.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_style_gen.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_style_gen.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_tree.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_tree.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_tree.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_obj_tree.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_refr.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_refr.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_refr.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_refr.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_theme.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/core/lv_theme.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/arm2d/lv_draw_arm2d.mk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/arm2d/lv_gpu_arm2d.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/arm2d/lv_gpu_arm2d.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw.mk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_arc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_arc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_arc.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_arc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_img.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_img.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_label.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_label.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_label.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_label.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_layer.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_layer.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_line.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_line.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_line.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_line.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_mask.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_mask.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_mask.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_mask.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_rect.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_rect.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_rect.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_rect.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_transform.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_transform.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_triangle.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_triangle.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_triangle.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_draw_triangle.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_img_buf.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_img_buf.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_img_cache.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_img_cache.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_img_decoder.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/lv_img_decoder.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/lv_draw_nxp.mk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/pxp/lv_draw_nxp_pxp.mk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/pxp/lv_draw_pxp.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/pxp/lv_draw_pxp.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/pxp/lv_draw_pxp.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/pxp/lv_draw_pxp.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/pxp/lv_draw_pxp_blend.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/pxp/lv_draw_pxp_blend.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/pxp/lv_gpu_nxp_pxp.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/pxp/lv_gpu_nxp_pxp.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/pxp/lv_gpu_nxp_pxp_osa.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/pxp/lv_gpu_nxp_pxp_osa.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_draw_nxp_vglite.mk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_draw_vglite.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_draw_vglite.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_draw_vglite.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_draw_vglite.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_draw_vglite_arc.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_draw_vglite_blend.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_draw_vglite_blend.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_draw_vglite_line.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_draw_vglite_rect.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_draw_vglite_rect.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_vglite_buf.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_vglite_buf.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_vglite_buf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_vglite_buf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_vglite_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_vglite_utils.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_vglite_utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/nxp/vglite/lv_vglite_utils.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/renesas/lv_draw_renesas.mk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/renesas/lv_gpu_d2_draw_label.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/renesas/lv_gpu_d2_ra6m3.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/renesas/lv_gpu_d2_ra6m3.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl.mk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_arc.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_bg.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_composite.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_composite.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_img.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_img.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_label.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_layer.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_layer.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_line.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_mask.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_mask.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_polygon.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_priv.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_rect.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_rect.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_stack_blur.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_stack_blur.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_texture_cache.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_texture_cache.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_utils.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sdl/lv_draw_sdl_utils.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/stm32_dma2d/lv_draw_stm32_dma2d.mk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/stm32_dma2d/lv_gpu_stm32_dma2d.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/stm32_dma2d/lv_gpu_stm32_dma2d.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw.mk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_arc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_arc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_blend.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_blend.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_dither.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_dither.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_gradient.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_gradient.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_gradient.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_gradient.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_img.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_img.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_layer.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_letter.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_letter.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_line.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_line.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_polygon.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_rect.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_transform.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/sw/lv_draw_sw_transform.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/swm341_dma2d/lv_draw_swm341_dma2d.mk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/swm341_dma2d/lv_gpu_swm341_dma2d.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/draw/swm341_dma2d/lv_gpu_swm341_dma2d.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/layouts/flex/lv_flex.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/layouts/flex/lv_flex.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/layouts/grid/lv_grid.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/layouts/grid/lv_grid.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/layouts/lv_layouts.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/bmp/lv_bmp.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/bmp/lv_bmp.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/ffmpeg/lv_ffmpeg.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/ffmpeg/lv_ffmpeg.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/freetype/arial.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/freetype/lv_freetype.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/freetype/lv_freetype.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/fsdrv/lv_fs_fatfs.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/fsdrv/lv_fs_littlefs.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/fsdrv/lv_fs_posix.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/fsdrv/lv_fs_stdio.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/fsdrv/lv_fs_win32.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/fsdrv/lv_fsdrv.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/gif/gifdec.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/gif/gifdec.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/gif/lv_gif.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/gif/lv_gif.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/lv_libs.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/png/lodepng.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/png/lodepng.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/png/lv_png.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/png/lv_png.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/qrcode/lv_qrcode.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/qrcode/lv_qrcode.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/qrcode/qrcodegen.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/qrcode/qrcodegen.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/rlottie/lv_rlottie.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/rlottie/lv_rlottie.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/sjpg/lv_sjpg.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/sjpg/lv_sjpg.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/sjpg/tjpgd.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/sjpg/tjpgd.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/sjpg/tjpgdcnf.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/tiny_ttf/lv_tiny_ttf.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/tiny_ttf/lv_tiny_ttf.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/tiny_ttf/stb_rect_pack.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/libs/tiny_ttf/stb_truetype_htcw.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/lv_extra.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/lv_extra.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/lv_extra.mk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/others/fragment/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/others/fragment/lv_fragment.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/others/fragment/lv_fragment.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/others/fragment/lv_fragment_manager.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/others/gridnav/lv_gridnav.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/others/gridnav/lv_gridnav.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/others/ime/lv_ime_pinyin.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/others/ime/lv_ime_pinyin.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/others/imgfont/lv_imgfont.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/others/imgfont/lv_imgfont.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/others/lv_others.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/others/monkey/lv_monkey.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/others/monkey/lv_monkey.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/others/msg/lv_msg.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/others/msg/lv_msg.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/others/snapshot/lv_snapshot.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/others/snapshot/lv_snapshot.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/themes/basic/lv_theme_basic.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/themes/basic/lv_theme_basic.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/themes/default/lv_theme_default.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/themes/default/lv_theme_default.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/themes/lv_themes.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/themes/mono/lv_theme_mono.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/themes/mono/lv_theme_mono.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/animimg/lv_animimg.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/animimg/lv_animimg.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/calendar/lv_calendar.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/calendar/lv_calendar.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/calendar/lv_calendar_header_arrow.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/calendar/lv_calendar_header_arrow.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/calendar/lv_calendar_header_dropdown.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/calendar/lv_calendar_header_dropdown.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/chart/lv_chart.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/chart/lv_chart.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/colorwheel/lv_colorwheel.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/colorwheel/lv_colorwheel.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/imgbtn/lv_imgbtn.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/keyboard/lv_keyboard.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/keyboard/lv_keyboard.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/led/lv_led.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/led/lv_led.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/list/lv_list.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/list/lv_list.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/lv_widgets.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/menu/lv_menu.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/menu/lv_menu.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/meter/lv_meter.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/meter/lv_meter.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/msgbox/lv_msgbox.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/msgbox/lv_msgbox.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/span/lv_span.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/span/lv_span.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/spinbox/lv_spinbox.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/spinbox/lv_spinbox.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/spinner/lv_spinner.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/spinner/lv_spinner.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/tabview/lv_tabview.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/tabview/lv_tabview.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/tileview/lv_tileview.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/tileview/lv_tileview.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/win/lv_win.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/extra/widgets/win/lv_win.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/korean.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font.mk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_fmt_txt.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_fmt_txt.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_fmt_txt.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_fmt_txt.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_loader.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_loader.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_10.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_10.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_12.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_12.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_12_subpx.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_14.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_14.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_16.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_16.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_18.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_18.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_20.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_20.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_22.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_22.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_24.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_24.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_26.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_26.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_28.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_28.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_28_compressed.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_28_compressed.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_30.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_30.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_32.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_32.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_34.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_34.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_36.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_36.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_38.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_38.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_40.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_40.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_42.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_42.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_44.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_44.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_46.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_46.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_48.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_48.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_8.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_montserrat_8.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_simsun_16_cjk.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_simsun_16_cjk.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_unscii_16.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_unscii_16.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_unscii_8.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_font_unscii_8.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_symbol_def.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/font/lv_symbol_def.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/hal/lv_hal.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/hal/lv_hal.mk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/hal/lv_hal_disp.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/hal/lv_hal_disp.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/hal/lv_hal_indev.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/hal/lv_hal_indev.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/hal/lv_hal_tick.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/hal/lv_hal_tick.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/lv_api_map.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/lv_conf_internal.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/lv_conf_internal.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/lv_conf_kconfig.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/lv_conf_kconfig.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/lvgl.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/lvgl.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_anim.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_anim.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_anim.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_anim.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_anim_timeline.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_anim_timeline.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_anim_timeline.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_anim_timeline.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_area.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_area.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_area.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_area.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_assert.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_assert.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_async.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_async.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_async.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_async.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_bidi.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_bidi.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_bidi.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_bidi.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_color.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_color.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_color.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_color.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_fs.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_fs.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_fs.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_fs.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_gc.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_gc.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_ll.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_ll.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_ll.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_ll.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_log.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_log.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_log.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_log.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_lru.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_lru.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_lru.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_lru.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_math.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_math.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_math.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_math.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_mem.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_mem.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_misc.mk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_printf.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_printf.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_style.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_style.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_style.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_style.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_style_gen.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_style_gen.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_style_gen.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_style_gen.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_timer.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_timer.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_timer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_timer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_tlsf.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_tlsf.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_txt.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_txt.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_txt_ap.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_txt_ap.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_types.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_types.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_utils.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/misc/lv_utils.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_arc.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_arc.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_bar.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_bar.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_btn.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_btn.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_btnmatrix.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_btnmatrix.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_canvas.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_canvas.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_checkbox.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_checkbox.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_dropdown.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_dropdown.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_img.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_img.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_label.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_label.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_line.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_line.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_objx_templ.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_objx_templ.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_roller.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_roller.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_slider.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_slider.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_switch.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_switch.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_table.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_table.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_textarea.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_textarea.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/widgets/lv_widgets.mk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/clion-Release-MinGW_ARM-log.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/libapp.dir/CXXDependInfo.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -2408,32 +1661,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;OpenOCD 下载并运行.OCD Furina.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;cf.advertisement.text.has.clang-format&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ZQ&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Program/Embedded/MCU/STM32/Furina&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
-    &quot;two.files.diff.last.used.file&quot;: &quot;D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "OpenOCD 下载并运行.OCD Furina.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.west.config.association.type.startup.service": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.advertisement.text.has.clang-format": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "ZQ",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "E:/Program/Embedded/MCU/STM32/Furina",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "structure.view.defaults.are.configured": "true",
+    "two.files.diff.last.used.file": "D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Embedded\MCU\STM32\Furina\AI\LinearDisplacementSensor\App" />
@@ -2444,9 +1697,9 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release-MinGW_ARM" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
@@ -2665,15 +1918,8 @@
       <workItem from="1735664386238" duration="1443000" />
       <workItem from="1735719767911" duration="1334000" />
       <workItem from="1735740419702" duration="25000" />
-      <workItem from="1735819138753" duration="347000" />
-    </task>
-    <task id="LOCAL-00033" summary="【初始】主项目——CMakelists实在没有什么好修改的地方">
-      <option name="closed" value="true" />
-      <created>1729336775210</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1729336775210</updated>
+      <workItem from="1735819138753" duration="524000" />
+      <workItem from="1736340874181" duration="814000" />
     </task>
     <task id="LOCAL-00034" summary="【初始】主项目——简单测试了一下驱动模块与UI事件的对接，可以初步完成一些基本操作，但还需要改进。添加一些对外接口">
       <option name="closed" value="true" />
@@ -3059,7 +2305,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735573970602</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="更新了lvgl库">
+      <option name="closed" value="true" />
+      <created>1735819534989</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1735819534989</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -3094,7 +2348,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【双音频信号发生器】准备合并" />
     <MESSAGE value="【跨越】已经把AI模型初步部署进工程里了" />
     <MESSAGE value="【准备】什么辣鸡gitignore，草" />
     <MESSAGE value="【准备】是我错了" />
@@ -3119,7 +2372,8 @@
     <MESSAGE value="【添加】异步延迟类：单位位ms，依赖于计时器" />
     <MESSAGE value="【添加】&#10;标志类：可自行定义各种标志枚举体，可作为其他类的的基类使用" />
     <MESSAGE value="【添加】&#10;标志类：可自行定义各种标志枚举体，可作为其他类的的基类使用" />
-    <option name="LAST_COMMIT_MESSAGE" value="【添加】&#10;标志类：可自行定义各种标志枚举体，可作为其他类的的基类使用" />
+    <MESSAGE value="更新了lvgl库" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新了lvgl库" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

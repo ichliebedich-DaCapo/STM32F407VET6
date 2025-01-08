@@ -70,18 +70,15 @@ void simulator_init(int32_t hor, int32_t ver)
     }
 
     // 创建更新纹理的线程
-    SDL_CreateThread([](void *)
-                     {
-                         while (keep_running)
-                         {
-                             SDL_UpdateTexture(texture, nullptr, TFT_GRAM, HOR * sizeof(uint16_t));
-                             SDL_RenderClear(renderer);
-                             SDL_RenderCopy(renderer, texture, nullptr, nullptr);
-                             SDL_RenderPresent(renderer);
-                             SDL_Delay(10);
-                         }
-                         return 1;
-                     }, "updateSDLGram", nullptr);
+//    SDL_CreateThread([](void *)
+//                     {
+//                         while (keep_running)
+//                         {
+//
+//                             SDL_Delay(10);
+//                         }
+//                         return 1;
+//                     }, "updateSDLGram", nullptr);
 }
 
 
@@ -131,7 +128,11 @@ void simulator_event_Handler()
                 break;
         }
     }
-
+    // 更新纹理
+    SDL_UpdateTexture(texture, nullptr, TFT_GRAM, HOR * sizeof(uint16_t));
+    SDL_RenderClear(renderer);
+    SDL_RenderCopy(renderer, texture, nullptr, nullptr);
+    SDL_RenderPresent(renderer);
 }
 
 
