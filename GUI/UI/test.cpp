@@ -8,10 +8,9 @@
 #include <unistd.h>
 #include "lvgl.h"
 #include "GUI.hpp"
-#include "GUI_Base.hpp"
-#include "lv_drivers/display/monitor.h"
+#include "ui.hpp"
+#include "simulator.hpp"
 #include "WaveCurve.hpp"
-#include "lv_drivers/indev/keyboard.h"
 
 // 真它宝贝的阴险，一个该死的宏从SDL_main里泄露到这里，fxxk
 #undef main
@@ -52,59 +51,58 @@ int keyboard_thread(void *data)
     static bool is_fps_mode = false;
     bool is_fps = false;
     bool is_generate = false;
-    while (keep_running)
-    {
-        uint32_t keycode;
-        if (keyboard_get_input(&keycode))
-        {
-            while (keyboard_get_state());//等待按键释放
-            switch (keycode)
-            {
-                case 'a':
-                   UI_Interface::saveInfo(true);
-                    break;
-                case 's':
-//                    UI_Interface::set_record_state(RecordSampleRate::SAMPLE_RATE_16K);
-                    UI_Interface::saveInfo(false);
-                    break;
-                case 'd':
-//                    UI_Interface::resume_record();
-                    UI_Interface::resume_record();
-                    break;
-                case 'f':
-                    UI_Interface::pause_record();
-//                    uiInterface::add_period();
-//                    printf("下一个波形\n");
+//    while (keep_running)
+//    {
+//        uint32_t keycode;
+//        if (keyboard_get_input(&keycode))
+//        {
+//            while (keyboard_get_state());//等待按键释放
+//            switch (keycode)
+//            {
+//                case 'a':
 //                    break;
-
-
-                case 'g':
-                    UI_Interface::erasing();
-                    break;
-//                    uiInterface::switch_wave_type();
-//                    printf("E pressed\n");
+//                case 's':
+////                    UI_Interface::set_record_state(RecordSampleRate::SAMPLE_RATE_16K);
+////                    UI_Interface::saveInfo(false);
 //                    break;
-
-                case 'h':
-                    UI_Interface::erase_done();
-                    break;
-//                    uiInterface::add_wave_cnt();
-//                    printf("F pressed\n");
+//                case 'd':
+////                    UI_Interface::resume_record();
+////                    UI_Interface::resume_record();
 //                    break;
+//                case 'f':
+////                    UI_Interface::pause_record();
+////                    uiInterface::add_period();
+////                    printf("下一个波形\n");
+////                    break;
+//
+//
+//                case 'g':
+////                    UI_Interface::erasing();
+//                    break;
+////                    uiInterface::switch_wave_type();
+////                    printf("E pressed\n");
+////                    break;
+//
+//                case 'h':
+////                    UI_Interface::erase_done();
+//                    break;
+////                    uiInterface::add_wave_cnt();
+////                    printf("F pressed\n");
+////                    break;
+//
+//                case 'j':
+////                    is_generate = !is_generate;
+////                    if (is_generate)
+////                        uiInterface::wave_is_generate();
+////                    else
+////                        uiInterface::wave_is_not_generate();
+//
+//                default:
+//                    break;
+//            }
+//        }
+//    }
 
-                case 'j':
-//                    is_generate = !is_generate;
-//                    if (is_generate)
-//                        uiInterface::wave_is_generate();
-//                    else
-//                        uiInterface::wave_is_not_generate();
-
-                default:
-                    break;
-            }
-        }
-    }
-
-    return keep_running;  /* 这个函数实际上永远不会返回，因为它一直在循环中运行 */
+    return 1;  /* 这个函数实际上永远不会返回，因为它一直在循环中运行 */
 }
 

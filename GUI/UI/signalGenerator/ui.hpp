@@ -4,52 +4,40 @@
 #ifndef SIMULATOR_UI_HPP
 #define SIMULATOR_UI_HPP
 
-#include "lvgl.h"
-
-/* 预编译命令 */
-#if 1
-
+#include "GUI_Base.hpp"
 
 /*********************组件*******************/
 struct lv_ui_t
 {
-    using Obj = lv_obj_t *;
     // 主屏幕
     struct
     {
-        Obj screen;// 屏幕自身
-        Obj rect;//示波器方框
-        Obj btn_mode;// 模式
-        Obj btn_mode_label;
-        Obj label_mode;
-        Obj btn_freq;// 频率
-        Obj btn_freq_label;
-        Obj label_freq;
-        Obj btn_ratio_add;// 比例
-        Obj btn_ratio_add_label;
-        Obj btn_ratio_sub;
-        Obj btn_ratio_sub_label;
-        Obj label_ratio;
-        Obj btn_bias_add;// 偏置
-        Obj btn_bias_add_label;
-        Obj btn_bias_sub;
-        Obj btn_bias_sub_label;
-        Obj label_bias;
-        Obj label_tick;// 时刻
-        Obj label_info;// 信息
-        Obj label_title;// 标题
-        Obj imgbtn_play;// 播放键
-        Obj label_cpu;
-        Obj label_wave_cnt;// 波形点数
-        Obj label_wave_type;// 波形类型
-        Obj label_wave_generate;// 波形生成
-        Obj label_wave_period;// 波形周期
+        Component screen{};// 屏幕自身
+        Component rect;//示波器方框
+        Button btn_mode;// 模式
+        Label label_mode;
+        Button btn_freq;// 频率
+        Label label_freq;
+        Button btn_ratio_add;// 比例
+        Button btn_ratio_sub;
+        Label label_ratio;
+        Button btn_bias_add;// 偏置
+        Button btn_bias_sub;
+        Label label_bias;
+        Label label_tick;// 时刻
+        Label label_info;// 信息
+        Label label_title;// 标题
+        ImageButton imgbtn_play;// 播放键
+        Label label_cpu;
+        Label label_wave_cnt;// 波形点数
+        Label label_wave_type;// 波形类型
+        Label label_wave_generate;// 波形生成
+        Label label_wave_period;// 波形周期
     } main;// 主屏幕
 
 };
 
-// 取别名
-using lv_ui_t = struct lv_ui_t;
+extern struct lv_ui_t* gui;
 
 
 // 对外接口
@@ -109,7 +97,8 @@ public:
 LV_FONT_DECLARE(lv_customer_font_SourceHanSerifSC_Regular_15)
 LV_FONT_DECLARE(lv_customer_font_SourceHanSerifSC_Regular_13)
 
-LV_IMG_DECLARE(_btn_list_play_alpha_48x48);
-LV_IMG_DECLARE(_btn_list_pause_alpha_48x48);
-#endif
+LV_IMG_DECLARE(btn_list_pause);
+LV_IMG_DECLARE(btn_list_play);
+
+
 #endif //SIMULATOR_UI_HPP

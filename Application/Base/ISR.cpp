@@ -29,10 +29,6 @@
 #define KEY_RAM (*((volatile unsigned short *)0x6006000C)) // 键盘接口地址
 extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
 
-
-// 由用户自行实现的中断处理函数
-//extern void timer6_isr();
-
 extern void adc1_isr();
 
 // 弱定义，避免找不到
@@ -96,7 +92,7 @@ void DMA2_Stream6_IRQHandler(void)
             __HAL_UNLOCK(&hdma_memtomem_dma2_stream6);// 不能少
         }
 #ifdef GUI_ENABLE
-        GUI::LVGL_LCD_FSMC_DMA_pCallback();
+      GUI::display_flush_ready();
 #endif
     }
 }

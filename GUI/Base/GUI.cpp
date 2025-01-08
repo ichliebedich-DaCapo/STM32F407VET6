@@ -1,15 +1,12 @@
 //
 // Created by fairy on 2024/10/17 18:53.
 //
+
 #include "GUI.hpp"
-#include "component.hpp"
+#include "ui.hpp"
 
 
-// 头文件
-#include "events.hpp"
-
-
-#ifdef ARM_MATH_CM4
+#ifdef GUI_ENABLE
 
 #include "JYZQ_Conf.h"
 
@@ -33,14 +30,14 @@
 // 函数
 auto GUI::resource_init() -> void
 {
-#ifdef ARM_MATH_CM4
-//    __disable_irq();
-//    lv_init();// 混账，搞了半天是因为漏加你才死机
-//    lv_port_disp_init();// 进入临界保护区
-//    __enable_irq();
+#ifdef GUI_ENABLE
+    //    __disable_irq();
+    //    lv_init();// 混账，搞了半天是因为漏加你才死机
+    //    lv_port_disp_init();// 进入临界保护区
+    //    __enable_irq();
 
 #endif
-#ifdef ARM_MATH_CM4
+#ifdef GUI_ENABLE
 #ifndef APP_NO_RTOS
     //    osThreadNew([](void *argument) -> void
     //                {
@@ -50,25 +47,13 @@ auto GUI::resource_init() -> void
 #endif
 #endif
 
-    gui->main.screen = lv_obj_create(nullptr);
-    lv_obj_set_size(gui->main.screen, 480, 320);
-    Screen::init();// 初始化屏幕
-    lv_obj_update_layout(gui->main.screen);
-    Events::init();
-    lv_scr_load(gui->main.screen);
+    gui->main.screen.get_object() = lv_obj_create(nullptr);
+    lv_obj_set_size(gui->main.screen.get_object(), DISP_HOR_RES, DISP_VER_RES);
+    GUI_Base::screen_init();// 初始化屏幕
+    lv_obj_update_layout(gui->main.screen.get_object());
+    GUI_Base::events_init();
+    lv_scr_load(gui->main.screen.get_object());
 }
 
-volatile bool disp_flush_enabled = true;
-/* Enable updating the screen (the flushing process) when disp_flush() is called by lvgl
- */
-void disp_enable_update()
-{
-    disp_flush_enabled = true;
-}
 
-/* Disable updating the screen (the flushing process) when disp_flush() is called by lvgl
- */
-void disp_disable_update()
-{
-    disp_flush_enabled = false;
-}
+

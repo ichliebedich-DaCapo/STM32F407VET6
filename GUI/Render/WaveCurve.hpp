@@ -13,7 +13,7 @@
 
 #else
 
-#include "lv_drivers/display/monitor.h"
+#include "simulator.hpp"
 
 #endif
 
@@ -33,6 +33,7 @@ enum class WaveCurveType
     // 开-Og优化可以使用，-O2以上会直接卡死，我也不明白
     CatmullRomSp_line,
 };
+
 
 /**
  * @brief 绘制波形曲线
@@ -221,6 +222,10 @@ struct WaveCurve<Coord>::DrawFunction<WaveCurveType::Interpolated_Line, Color>
     }
 };
 
+
+
+
+
 // 二次贝塞尔曲线
 template<typename Coord>
 template<typename Color>
@@ -384,5 +389,6 @@ WaveCurve<Coord>::draw_curve(Data data[], Coord N, Data value, Coord Start_x, Co
 //    memmove(data, data + 1, (N - 1) * sizeof(data[0]));// 将数据左移一位
 //    data[N - 1] = value;// 一放在前面就会卡死，不知缘由 总不能是该死的优化导致的吧
 }
+
 
 #endif //SIMULATOR_WAVECURVE_HPP

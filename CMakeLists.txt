@@ -1,18 +1,20 @@
 # --------------------------------------选择你的项目--------------------------------
 # 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
-set(APP_DIR Application/voiceStorageAndPlay)
+set(APP_DIR Application/signalGenerator)
 
 # --------------------------------------某些可选选项------------------------------
 # 是否使用独立静态库链接
 # 注释后，可以使用链接优化-flto，并且默认开启链接优化
 # ld链接器无法自动创建目录以存放map文件，所以注释下面时需要确保存在bin目录
 set(STATIC_MODULE_LD True)
-# 使用GUI
+# ---------使用GUI---------
 set(GUI_ENABLE True)
-# 使用AI
+# ---------使用AI---------
 #set (AI_ENABLE True)
+
 # 添加编译器选项，使得支持Module特性
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts")
+
 # --------------------------------------某些配置------------------------------
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_VERSION 1)
@@ -41,6 +43,7 @@ set(SIZE arm-none-eabi-size)
 #set(SIZE llvm-size)
 
 # -----------------工程设置-----------------
+
 project(Furina C CXX ASM)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_C_STANDARD 11)
@@ -63,6 +66,9 @@ add_compile_definitions(ARM_MATH_CM4;ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING)
 add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx)
 if(GUI_ENABLE)
     add_definitions(-DGUI_ENABLE)
+endif ()
+if(GUI_ONLY_INIT)
+    add_definitions(-DGUI_ONLY_INIT)
 endif ()
 
 #--------------------------编译选项----------------------------
@@ -101,7 +107,7 @@ if (COMPILER_IS_GCC)
     #-Oz:极度优化大小,进一步优化生成的代码大小，比 -Os更激进,可能会牺牲一些性能。
     #-flto:在链接阶段进行优化,允许进行跨文件的优化，进一步提高性能，但耗时间（项目本来就小我不在乎），并且这个优化容易出问题（这个我很在乎）
     #-fprofile-generate（生成配置文件） 和 -fprofile-use（基于配置文件的优化）
-    add_compile_options(-O2 -g3)
+    add_compile_options(-Ofast -g)
     # 必须关闭静态库独立模块编译，才能够使用链接优化
     if (NOT STATIC_MODULE_LD)
 #仅使用 add_compile_options(-flto)：
@@ -237,15 +243,13 @@ if (GUI_ENABLE)
 file(GLOB_RECURSE GUI_SRC
         "${UI_DIR}/*.*"
         "GUI/Base/*.cpp"
-        "GUI/Component/*.cpp"
-        "GUI/Events/*.cpp"
+        "GUI/Component/src/*.cpp"
         "GUI/Render/*.cpp"
 )
 set(GUI_DIR
         ${UI_DIR}
         GUI/Base
-        GUI/Component
-        GUI/Events
+        GUI/Component/inc
         GUI/Render
 )
 add_library(libgui STATIC ${GUI_SRC})
