@@ -11,7 +11,7 @@
 // 宏定义
 #define SIMPLE_FPS 1 // 启用简单FPS，减少一点点FPS显示对实际帧率的影响。不严谨地对于某个简单的测试来说，从30ms减少到了21ms
 
-/*匿名命名空间，专治各种函数变量暴露狂*/
+/*匿名命名空间，治不了各种函数变量暴露狂*/
 namespace
 {
     constexpr uint16_t DISP_HOR_RES = 480;
