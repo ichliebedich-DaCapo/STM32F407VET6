@@ -32,13 +32,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="原因：把绘制完毕通知函数放在DMA中断回调，但忘记在lvgl绘制函数中注释了">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/lcd.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/lcd.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/lcd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-    </list>
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="略微调整了app中的细节" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -1917,23 +1911,7 @@
       <workItem from="1735719767911" duration="1334000" />
       <workItem from="1735740419702" duration="25000" />
       <workItem from="1735819138753" duration="524000" />
-      <workItem from="1736340874181" duration="4744000" />
-    </task>
-    <task id="LOCAL-00038" summary="【语音存储与回放】更新了Readme">
-      <option name="closed" value="true" />
-      <created>1729579144137</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1729579144137</updated>
-    </task>
-    <task id="LOCAL-00039" summary="【双音频信号发生器】发现绘制图表时会有很严重的性能问题。现准备尝试双缓冲">
-      <option name="closed" value="true" />
-      <created>1730528798409</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1730528798409</updated>
+      <workItem from="1736340874181" duration="5828000" />
     </task>
     <task id="LOCAL-00040" summary="【双音频信号发生器】尝试用基本LCD函数来实现波形绘制">
       <option name="closed" value="true" />
@@ -2311,7 +2289,23 @@
       <option name="project" value="LOCAL" />
       <updated>1736344573779</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="调整了lcd驱动的书写格式">
+      <option name="closed" value="true" />
+      <created>1736345671247</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1736345671247</updated>
+    </task>
+    <task id="LOCAL-00088" summary="略微调整了app中的细节">
+      <option name="closed" value="true" />
+      <created>1736346633018</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1736346633019</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2333,7 +2327,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="ZQ" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -2346,8 +2340,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【阻碍】无论输入什么都只输出1，得要先排除浮点数据造成的影响" />
-    <MESSAGE value="【跨越】我的第一个AI模型" />
     <MESSAGE value="准备融合" />
     <MESSAGE value="已经融合，可以正常编译" />
     <MESSAGE value="测试了module特性，可以正常使用" />
@@ -2371,7 +2363,9 @@
     <MESSAGE value="把主工程的LVGL库给模拟器使用，但模拟器依旧正常" />
     <MESSAGE value="现象：在lcd_flush函数里加一个软件断点，此函数会被多次调用，程序正常执行。反之，不加，那么该函数之后被调用一次" />
     <MESSAGE value="原因：把绘制完毕通知函数放在DMA中断回调，但忘记在lvgl绘制函数中注释了" />
-    <option name="LAST_COMMIT_MESSAGE" value="原因：把绘制完毕通知函数放在DMA中断回调，但忘记在lvgl绘制函数中注释了" />
+    <MESSAGE value="调整了lcd驱动的书写格式" />
+    <MESSAGE value="略微调整了app中的细节" />
+    <option name="LAST_COMMIT_MESSAGE" value="略微调整了app中的细节" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

@@ -19,7 +19,8 @@
 #include "key.hpp"
 #include "GUI.hpp"
 #include "WaveCurve.hpp"
-
+#include "GUI.hpp"
+#include "ui.hpp"
 
 static inline auto set_freq(bool freq) -> void
 {
@@ -44,11 +45,12 @@ void key_handler()
         case keyk0:// 播放
             if (Key::stateHandler(KEY_STATE_TWO))
             {
-                ImageButton::press(GUI_Base::get_ui()->main.imgbtn_play);
+                gui->main.imgbtn_play.press();
 
-            } else
+            }
+            else
             {
-                ImageButton::release(GUI_Base::get_ui()->main.imgbtn_play);
+                gui->main.imgbtn_play.release();
             }
             break;
 
@@ -57,30 +59,31 @@ void key_handler()
             {// 单频模式
                 set_freq(uiInterface::get_freq());
             }
-            Button::click(GUI_Base::get_ui()->main.btn_mode);
+            gui->main.btn_mode.click();
             break;
 
         case keyk2:// 偏置-
-            Button::click(GUI_Base::get_ui()->main.btn_bias_sub);
+            gui->main.btn_bias_sub.click();
             break;
 
         case keyk3:// 偏置+
-            Button::click(GUI_Base::get_ui()->main.btn_bias_add);
+            gui->main.btn_bias_add.click();
             break;
 
         case keyk4:// 比例-
-            Button::click(GUI_Base::get_ui()->main.btn_ratio_sub);
+            gui->main.btn_ratio_sub.click();
             break;
 
         case keyk5:// 比例+
-            Button::click(GUI_Base::get_ui()->main.btn_ratio_add);
+            gui->main.btn_ratio_add.click();
             break;
 
         case keyk6:// 频率
             if (Key::stateHandler(KEY_STATE_TWO))
             {
                 timer6_set_freq(FREQ_84M_to_256x1k);// 256*1k
-            } else
+            }
+            else
             {
                 timer6_set_freq(FREQ_84M_to_256x800);// 256*800
             }
@@ -88,7 +91,7 @@ void key_handler()
             {
                 set_freq(uiInterface::get_freq());
             }
-            Button::click(GUI_Base::get_ui()->main.btn_freq);
+            gui->main.btn_freq.click();
             break;
 
 
@@ -98,7 +101,8 @@ void key_handler()
                 uiInterface::wave_is_generate();
                 timer6_start_it();
                 dac_start();
-            } else
+            }
+            else
             {
                 uiInterface::wave_is_not_generate();
                 timer6_stop_it();
@@ -129,7 +133,8 @@ void key_handler()
             if (Key::stateHandler(KEY_STATE_TWO))
             {
                 uiInterface::set_fps_mode(true);
-            } else
+            }
+            else
             {
                 uiInterface::set_fps_mode(false);
             }
@@ -138,7 +143,8 @@ void key_handler()
             if (Key::stateHandler(KEY_STATE_TWO))
             {
                 uiInterface::show_fps(true);
-            } else
+            }
+            else
             {
                 uiInterface::show_fps(false);
             }
@@ -183,7 +189,8 @@ void timer6_isr()
         if (temp_count >= count)
         {
             temp_count -= count;
-        } else
+        }
+        else
         {
             temp_count += (0xFFFFFFFF - count);// 溢出处理
         }
@@ -200,11 +207,12 @@ void timer6_isr()
                 {
                     flag = true;
                     set_freq(false);
-                    freq= false;
+                    freq = false;
                     count = HAL_GetTick();// 重置计数值
                 }
             }
-        } else// 800 -> 1K
+        }
+        else// 800 -> 1K
         {
             // 极端情况：
             // ① _ratio为100，那么会直接跳过
