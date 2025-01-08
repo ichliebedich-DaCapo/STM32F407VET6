@@ -360,7 +360,7 @@ auto GUI_Base::screen_init() -> void
 
 
     // 图片按钮：停止、播放
-    gui->main.imgbtn_play.init(216, 256, 48, 48, &_btn_list_play_alpha_48x48, &_btn_list_pause_alpha_48x48);
+    gui->main.imgbtn_play.init(216, 256, 58, 60, &btn_list_play, &btn_list_pause);
 
 
     // 标签：信息

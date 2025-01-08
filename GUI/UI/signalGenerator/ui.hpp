@@ -97,7 +97,8 @@ public:
 LV_FONT_DECLARE(lv_customer_font_SourceHanSerifSC_Regular_15)
 LV_FONT_DECLARE(lv_customer_font_SourceHanSerifSC_Regular_13)
 
-LV_IMG_DECLARE(_btn_list_play_alpha_48x48);
-LV_IMG_DECLARE(_btn_list_pause_alpha_48x48);
+LV_IMG_DECLARE(btn_list_pause);
+LV_IMG_DECLARE(btn_list_play);
+
 
 #endif //SIMULATOR_UI_HPP
