@@ -221,7 +221,6 @@ void lcd_init(void)
 void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)
 {
 #ifdef USE_FSMC_DMA
-    __BKPT(0);
     LCD_Set_Window(x1, y1, x2, y2);//设置LCD屏幕的扫描区域
     HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream6, (uint32_t) color_p, (uint32_t) TFT_DATA_ADDR,
                      ((x2 + 1) - x1) * ((y2 + 1) - y1));

@@ -90,7 +90,11 @@ auto GUI::disp_drv_init() -> void
     lv_display_set_flush_cb(disp, [](lv_display_t *disp_drv, const lv_area_t *area, uint8_t *px_map)
     {
         flush(area->x1, area->y1, area->x2, area->y2, (const uint16_t *) px_map);
+
+        // 由于使用DMA中断，下面这个函数在DMA中断回调里
+#ifndef GUI_ENABLE
         lv_display_flush_ready(disp_drv);
+#endif
     });
 
     // 缓冲区  双缓冲明显优于单缓冲

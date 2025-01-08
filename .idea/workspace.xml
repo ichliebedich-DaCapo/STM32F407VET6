@@ -32,8 +32,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="把主工程的LVGL库给模拟器使用，但模拟器依旧正常">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="现象：在lcd_flush函数里加一个软件断点，此函数会被多次调用，程序正常执行。反之，不加，那么该函数之后被调用一次">
+      <change beforePath="$PROJECT_DIR$/BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/lcd.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1913,15 +1914,7 @@
       <workItem from="1735719767911" duration="1334000" />
       <workItem from="1735740419702" duration="25000" />
       <workItem from="1735819138753" duration="524000" />
-      <workItem from="1736340874181" duration="1267000" />
-    </task>
-    <task id="LOCAL-00036" summary="【语音存储与回放】稍微优化了Flash读写函数">
-      <option name="closed" value="true" />
-      <created>1729473023590</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1729473023590</updated>
+      <workItem from="1736340874181" duration="3530000" />
     </task>
     <task id="LOCAL-00037" summary="【语音存储与回放】启用了DMA用于FSMC传输数据，准备测试分支的读取内部温度传感器">
       <option name="closed" value="true" />
@@ -2307,7 +2300,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736342051943</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="现象：在lcd_flush函数里加一个软件断点，此函数会被多次调用，程序正常执行。反之，不加，那么该函数之后被调用一次">
+      <option name="closed" value="true" />
+      <created>1736344237504</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1736344237504</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2342,7 +2343,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【准备】是我错了" />
     <MESSAGE value="【跨越】AI模型能跑，但我没有掌握如何处理输入与输出数据" />
     <MESSAGE value="【阻碍】无论输入什么都只输出1，得要先排除浮点数据造成的影响" />
     <MESSAGE value="【跨越】我的第一个AI模型" />
@@ -2367,7 +2367,8 @@
     <MESSAGE value="更新了lvgl库" />
     <MESSAGE value="模拟器可以显示，但实机不行" />
     <MESSAGE value="把主工程的LVGL库给模拟器使用，但模拟器依旧正常" />
-    <option name="LAST_COMMIT_MESSAGE" value="把主工程的LVGL库给模拟器使用，但模拟器依旧正常" />
+    <MESSAGE value="现象：在lcd_flush函数里加一个软件断点，此函数会被多次调用，程序正常执行。反之，不加，那么该函数之后被调用一次" />
+    <option name="LAST_COMMIT_MESSAGE" value="现象：在lcd_flush函数里加一个软件断点，此函数会被多次调用，程序正常执行。反之，不加，那么该函数之后被调用一次" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
