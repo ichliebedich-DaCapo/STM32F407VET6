@@ -22,7 +22,7 @@ set(BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../Base)
 set(COMPONENT_DIR ${PROJECT_SOURCE_DIR}/Component)
 set(RENDER_DIR ${PROJECT_SOURCE_DIR}/Render)
 set(DRIVERS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Drivers)
-set(LVGL_DIR lvgl/../ lvgl/src lvgl/examples/porting)
+set(LVGL_DIR ./../../Library/Third_Party/lvgl/ ./../../Library/Third_Party/lvgl/lvgl/src ./../../Library/Third_Party/lvgl/lvgl/examples/porting)
 # 生成的目标文件目录
 set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
 set(BIN_DIR ${BUILD_DIR}/bin)
@@ -43,7 +43,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fconcepts")
 
 #------------------------------------------库-------------------------------------------
 #---------------lvgl库---------------
-file(GLOB_RECURSE LVGL_SRCS "lvgl/src/*.c" "lvgl/examples/porting/*.c")
+file(GLOB_RECURSE LVGL_SRCS "./../../Library/Third_Party/lvgl/lvgl/src/*.c" "./../../Library/Third_Party/lvgl/lvgl/examples/porting/*.c")
 add_library(liblvgl STATIC ${LVGL_SRCS})
 target_include_directories(liblvgl PUBLIC ${LVGL_DIR})
 set_target_properties(liblvgl PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
