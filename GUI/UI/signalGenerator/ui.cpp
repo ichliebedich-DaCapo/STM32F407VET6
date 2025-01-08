@@ -425,6 +425,7 @@ void GUI_Base::events_init()
     // 绑定占比事件
     gui->main.btn_ratio_add.add_event(btn_fun(SignalGenerator::add_ratio();));
     gui->main.btn_ratio_sub.add_event(btn_fun(SignalGenerator::sub_ratio();));
+
 }
 
 

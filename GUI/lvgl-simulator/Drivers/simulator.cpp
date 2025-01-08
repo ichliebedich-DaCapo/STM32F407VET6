@@ -11,11 +11,12 @@ static volatile bool keep_running = true;
 static SDL_Window *window;
 static SDL_Renderer *renderer;
 static SDL_Texture *texture;
-static uint16_t HOR;// 屏幕宽度
-static uint16_t VER;// 屏幕高度
+static int HOR;// 屏幕宽度
+static int VER;// 屏幕高度
 
 // 屏幕显存
-static uint16_t *TFT_GRAM;
+static uint16_t TFT_GRAM[320][480];
+static uint16_t *GRAM = &TFT_GRAM[0][0];
 
 // 触摸屏相关变量
 static bool press_state = false;
@@ -38,7 +39,6 @@ void simulator_init(int32_t hor, int32_t ver)
 {
     HOR = hor;
     VER = ver;
-    TFT_GRAM = new uint16_t[hor * ver];
 
     // 初始化 SDL
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
@@ -91,7 +91,6 @@ void simulator_quit()
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
-    delete[] TFT_GRAM;
 }
 
 
@@ -100,9 +99,8 @@ void simulator_quit()
  */
 void simulator_event_Handler()
 {
-    static SDL_Event event;
-
     // 处理SDL事件
+    static SDL_Event event;
     while (SDL_PollEvent(&event))
     {
         // 处理鼠标事件
@@ -128,8 +126,9 @@ void simulator_event_Handler()
                 break;
         }
     }
+
     // 更新纹理
-    SDL_UpdateTexture(texture, nullptr, TFT_GRAM, HOR * sizeof(uint16_t));
+    SDL_UpdateTexture(texture, nullptr, GRAM, HOR * sizeof(uint16_t));
     SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, texture, nullptr, nullptr);
     SDL_RenderPresent(renderer);
@@ -148,21 +147,37 @@ void simulator_event_Handler()
 
 void LCD_Set_Pixel(uint16_t x, uint16_t y, uint16_t color)
 {
-    TFT_GRAM[x + y * HOR] = color;
+    GRAM[x + y * HOR] = color;
 }
 
 
 void LCD_Color_Fill(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend, const uint16_t *color)
 {
     uint16_t width = xend - xsta + 1;
-    uint16_t height = yend - ysta + 1;
-    uint32_t row_bytes = width * sizeof(uint16_t);
-    auto *tft_ptr = (TFT_GRAM + xsta + ysta * HOR);
-    auto *color_ptr = color;
-    for (int y = 0; y < height; ++y)
+
+    // 遍历指定区域的行
+    for (uint16_t y = ysta; y <= yend; y++)
     {
-        memcpy(tft_ptr + y * width, color_ptr + y * width, row_bytes);
+        uint16_t *gram_row = TFT_GRAM[y] + xsta;
+        const uint16_t *color_row = color + (y - ysta) * width;// 计算起始位置
+
+        memcpy(gram_row, color_row, width * sizeof(uint16_t));
     }
+
+//    uint16_t width = xend - xsta + 1;
+//    // 遍历指定区域的行
+//    for (uint16_t y = ysta; y <= yend; y++)
+//    {
+//        // 遍历指定区域的列
+//        for (uint16_t x = xsta; x <= xend; x++)
+//        {
+//            // 计算当前像素在 color 数组中的索引
+//            uint16_t index = (y - ysta) * width + (x - xsta);
+//            // 将颜色数据写入显存数组
+//            TFT_GRAM[y][x] = color[index];
+//        }
+//    }
+
 }
 
 
@@ -171,7 +186,7 @@ void LCD_Color_Clean(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend,
     uint16_t width = xend - xsta + 1;
     uint16_t height = yend - ysta + 1;
     uint32_t row_bytes = width * sizeof(uint16_t);
-    auto *tft_ptr = (TFT_GRAM + xsta + ysta * HOR);
+    auto *tft_ptr = (GRAM + xsta + ysta * HOR);
     for (int y = 0; y < height; ++y)
     {
         memset(tft_ptr + y * width, color, row_bytes);

@@ -22,14 +22,10 @@ int main(int argc, char *argv[])
     // 主循环
     while (simulator_is_running())
     {
-        // 模拟器事件处理
-        simulator_event_Handler();
+        simulator_event_Handler();// 模拟器事件处理
+        GUI::handler();// lvgl事件处理
 
-        // lvgl事件处理
-        GUI::handler();
-
-        // 短暂休眠
-        SDL_Delay(10);
+        SDL_Delay(10);// 短暂休眠
 
     }
 
@@ -49,8 +45,8 @@ int lv_tick_thread(void *data)
 
     while (simulator_is_running())
     {
-        SDL_Delay(5);
-        lv_tick_inc(5);
+        SDL_Delay(3);
+        lv_tick_inc(3);
     }
     return 0;
 }
