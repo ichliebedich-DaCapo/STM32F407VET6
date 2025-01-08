@@ -11,7 +11,7 @@ export
      * @brief 标志类
      * @tparam enum_type 枚举类型
      * @tparam variable_type 存储标志位的变量类型
-     * @note
+     * @note 该模板类由于使用的是静态变量来存储标志，所以目前对于同一个标志类型只能实例化一次
      */
     template <typename enum_type,typename variable_type=uint8_t>
     class Flags

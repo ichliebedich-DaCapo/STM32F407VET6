@@ -13,7 +13,7 @@
 #include "timer.h"
 #include "spi.h"
 #include "ui.hpp"
-
+import Flags;
 
 // -----------宏定义-----------
 // 读取数据基址0x0000
@@ -28,102 +28,7 @@
 #define TRIGGER_THRESHOLD (*((volatile unsigned short *)0x60010000))
 
 
-//全局变量
-uint16_t continuous_read_times = 0;//连续读取次数
-
-//变量
-uint8_t read_wave[400];//读取到的临时数组
-uint16_t j = 0;//测试用
-uint8_t temp = 0;
-uint8_t magnification = 1;
-
-enum class Flags : uint8_t
-{
-    READ = 1 << 0,// bit:0 读取数据 0表示不读，1表示读取
-    OSC_TRIGGER_MODE = 1 << 1,// bit:1 触发模式 0表示连续触发，1表示单次触发
-    LATCH_MODE = 1 << 2,// bit:2 锁存数据 0表示不锁存，1表示锁存
-    READ_FLASH = 1 << 3,// bit:3 读取Flash 0表示不读，1表示读取Flash
-};
-
-
-class OSC
-{
-public:
-
-    static void handler()
-    {
-        OSC::set_read_flag();
-    }
-
-private:
-    // 辅助函数：设置指定标志
-    static void set_flag(Flags flag)
-    {
-        flags |= static_cast<uint8_t>(flag);
-    }
-
-    // 辅助函数：清除指定标志
-    static void clear_flag(Flags flag)
-    {
-        flags &= ~static_cast<uint8_t>(flag);
-    }
-
-    // 辅助函数：获取指定标志
-    static uint8_t get_flag(Flags flag)
-    {
-        return flags & static_cast<uint8_t>(flag);
-    }
-
-    // 辅助函数：翻转指定标志
-    static void toggle_flag(Flags flag)
-    {
-        flags ^= static_cast<uint8_t>(flag);
-    }
-
-public:
-    //读取标志函数组
-    static void set_read_flag() { set_flag(Flags::READ); }
-
-    static void clear_read_flag() { clear_flag(Flags::READ); }
-
-    static uint8_t get_read_flag() { return get_flag(Flags::READ); }
-
-    static void toggle_read_flag() { toggle_flag(Flags::READ); }
-
-    //触发标志函数组
-    static void set_trigger_mode_flag() { set_flag(Flags::OSC_TRIGGER_MODE); }
-
-    static void clear_trigger_mode_flag() { clear_flag(Flags::OSC_TRIGGER_MODE); }
-
-    static uint8_t get_trigger_mode_flag() { return get_flag(Flags::OSC_TRIGGER_MODE); }
-
-    static void toggle_trigger_mode_flag() { toggle_flag(Flags::OSC_TRIGGER_MODE); }
-
-    //锁存标志函数组
-    static void set_latch_mode_flag() { set_flag(Flags::LATCH_MODE); }
-
-    static void clear_latch_mode_flag() { clear_flag(Flags::LATCH_MODE); }
-
-    static uint8_t get_latch_mode_flag() { return get_flag(Flags::LATCH_MODE); }
-
-    static void toggle_latch_mode_flag() { toggle_flag(Flags::LATCH_MODE); }
-
-    //读取flash标志函数组
-    static void set_read_flash_mode_flag() { set_flag(Flags::READ_FLASH); }
-
-    static void clear_read_flash_mode_flag() { clear_flag(Flags::READ_FLASH); }
-
-    static uint8_t get_read_flash_mode_flag() { return get_flag(Flags::READ_FLASH); }
-
-    static void toggle_read_flash_mode_flag() { toggle_flag(Flags::READ_FLASH); }
-
-
-private:
-
-    static inline uint8_t flags = 0;
-};
-
-uint16_t threshold = 2000;
+// 定义不同的采样频率
 #define SAMPLE_RATE_12_5M 0
 #define SAMPLE_RATE_4_2M 2
 #define SAMPLE_RATE_1M 11
@@ -134,6 +39,28 @@ uint16_t threshold = 2000;
 #define SAMPLE_RATE_1K 12499
 #define SAMPLE_RATE_500HZ 24999
 #define SAMPLE_RATE_200HZ 62499
+
+/*********类型声明**********/
+enum class OSC_Flags : uint8_t
+{
+    READ = 1 << 0,// bit:0 读取数据 0表示不读，1表示读取
+    OSC_TRIGGER_MODE = 1 << 1,// bit:1 触发模式 0表示连续触发，1表示单次触发
+    LATCH_MODE = 1 << 2,// bit:2 锁存数据 0表示不锁存，1表示锁存
+    READ_FLASH = 1 << 3,// bit:3 读取Flash 0表示不读，1表示读取Flash
+};
+
+/*********取别名**********/
+using OSCFlags = Flags<OSC_Flags>;
+
+/*********全局变量**********/
+uint16_t continuous_read_times = 0;//连续读取次数
+
+uint8_t read_wave[400];//读取到的临时数组
+uint16_t j = 0;//测试用
+uint8_t temp = 0;
+uint8_t magnification = 1;
+
+uint16_t threshold = 2000;
 uint8_t sample_rate = 0;
 
 void set_sample_rate(uint8_t &rate)
@@ -245,7 +172,7 @@ void find_peak_max_min()
 //            temp_vpp *= 1.1889;
 //            max *= 1.1889;
 //            min *= 1.1889;
-                break;
+            break;
             case 2:
 //                temp_vpp *= 0.0855;
 //                max *= 0.0855;
@@ -319,7 +246,7 @@ void key_handler()
         case keyk0://启闭后台读取任务
             if (Key::stateHandler(KEY_STATE_NONE))
             {
-                OSC::toggle_read_flag();
+                OSCFlags ::toggle_flag(OSC_Flags::READ);
             }
 
             break;
@@ -327,8 +254,8 @@ void key_handler()
         case keyk1://切换单次触发和连续触发模式
             if (Key::stateHandler(KEY_STATE_NONE))
             {
-                OSC::toggle_trigger_mode_flag();
-                UI_Interface::switch_trigger_mode(OSC::get_trigger_mode_flag());
+                OSCFlags ::toggle_flag(OSC_Flags::OSC_TRIGGER_MODE);
+                UI_Interface::switch_trigger_mode(OSCFlags::get_flag(OSC_Flags::OSC_TRIGGER_MODE));
                 gui->main.trigger_mode.click();
             }
             break;
@@ -337,8 +264,8 @@ void key_handler()
         case keyk2://启闭锁存模式
             if (Key::stateHandler(KEY_STATE_NONE))
             {
-                OSC::toggle_latch_mode_flag();
-                UI_Interface::switch_latch_mode(OSC::get_latch_mode_flag());
+                OSCFlags ::toggle_flag(OSC_Flags::LATCH_MODE);
+                UI_Interface::switch_latch_mode(OSCFlags ::get_flag(OSC_Flags::LATCH_MODE));
             }
             break;
 
@@ -370,7 +297,7 @@ void key_handler()
 
             // 测试4：测试读取数据
         case keyk8://测试程序
-            OSC::toggle_read_flag();
+            OSCFlags ::toggle_flag(OSC_Flags::READ);
             break;
 
 
@@ -413,7 +340,7 @@ void key_handler()
 //最终测试记得取消注释
 void background_handler()
 {
-    if (OSC::get_read_flag())
+    if (OSCFlags::get_flag(OSC_Flags::READ))
     {
         // 发送读取数据命令
         READ_COMMAND = 0x000;// 传入参数0
@@ -454,7 +381,7 @@ void background_handler()
         vpp_flag = 0;
 
         // 锁存数据
-        if (OSC::get_latch_mode_flag())
+        if (OSCFlags ::get_flag(OSC_Flags::LATCH_MODE))
         {
             //这里存储数据到flash
             // w25qxx_buffer_write_uint16(read_wave, continuous_read_times * 400, 400);
@@ -465,9 +392,8 @@ void background_handler()
         UI_Interface::display(read_wave);
 
 
-        if (OSC::get_trigger_mode_flag())
+        if (OSCFlags::check_flag(OSC_Flags::OSC_TRIGGER_MODE))
         {
-            OSC::clear_read_flag();
             continuous_read_times = 0;
         }
 //        }
@@ -479,9 +405,9 @@ void background_handler()
 
 
     }
-    else if (OSC::get_read_flash_mode_flag())
+    else if (OSCFlags ::check_flag(OSC_Flags::READ_FLASH))
     {
-        OSC::toggle_read_flash_mode_flag();
+       // 存储数据到flash
     }
 }
 

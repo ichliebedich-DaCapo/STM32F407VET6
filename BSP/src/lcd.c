@@ -224,7 +224,7 @@ void lcd_init(void)
     TFTLED = 0x01;      // 背光寄存器初始化
 
     /*我觉得没必要清屏函数*/
-    HAL_Delay(120);
+    HAL_Delay(20);
 
 //     LCD_Clear(0xFFFF);  // 清除屏幕，设置为白色
 #endif
