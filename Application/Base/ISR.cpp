@@ -96,7 +96,7 @@ void DMA2_Stream6_IRQHandler(void)
             __HAL_UNLOCK(&hdma_memtomem_dma2_stream6);// 不能少
         }
 #ifdef GUI_ENABLE
-       LVGL_LCD_FSMC_DMA_pCallback();
+      GUI::display_flush_ready();
 #endif
     }
 }

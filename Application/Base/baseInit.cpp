@@ -40,9 +40,6 @@ void BaseInit()
 #ifdef USE_FSMC_DMA
     fsmc_dma_init();// 初始化FSMC+DMA
 #endif
-#ifdef GUI_ENABLE
-    lv_init();// 混账，搞了半天是因为漏加你才死机
-#endif
 }
 
 

@@ -32,8 +32,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="模拟器可以显示，但实机不行">
-      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="把主工程的LVGL库给模拟器使用，但模拟器依旧正常">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1913,15 +1913,7 @@
       <workItem from="1735719767911" duration="1334000" />
       <workItem from="1735740419702" duration="25000" />
       <workItem from="1735819138753" duration="524000" />
-      <workItem from="1736340874181" duration="1141000" />
-    </task>
-    <task id="LOCAL-00035" summary="【初始】主项目——SPI_Flash已经调通，可以进行上层应用的开发了">
-      <option name="closed" value="true" />
-      <created>1729442762010</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1729442762010</updated>
+      <workItem from="1736340874181" duration="1267000" />
     </task>
     <task id="LOCAL-00036" summary="【语音存储与回放】稍微优化了Flash读写函数">
       <option name="closed" value="true" />
@@ -2307,7 +2299,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736341792955</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="把主工程的LVGL库给模拟器使用，但模拟器依旧正常">
+      <option name="closed" value="true" />
+      <created>1736342051943</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1736342051943</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2342,7 +2342,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【准备】什么辣鸡gitignore，草" />
     <MESSAGE value="【准备】是我错了" />
     <MESSAGE value="【跨越】AI模型能跑，但我没有掌握如何处理输入与输出数据" />
     <MESSAGE value="【阻碍】无论输入什么都只输出1，得要先排除浮点数据造成的影响" />
@@ -2367,7 +2366,8 @@
     <MESSAGE value="【添加】&#10;标志类：可自行定义各种标志枚举体，可作为其他类的的基类使用" />
     <MESSAGE value="更新了lvgl库" />
     <MESSAGE value="模拟器可以显示，但实机不行" />
-    <option name="LAST_COMMIT_MESSAGE" value="模拟器可以显示，但实机不行" />
+    <MESSAGE value="把主工程的LVGL库给模拟器使用，但模拟器依旧正常" />
+    <option name="LAST_COMMIT_MESSAGE" value="把主工程的LVGL库给模拟器使用，但模拟器依旧正常" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

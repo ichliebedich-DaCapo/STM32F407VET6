@@ -5,6 +5,7 @@
 #include "lcd.h"
 
 #ifdef USE_LCD
+
 #include "fsmc.h"
 #include "stm32f4xx_hal.h"
 
@@ -211,14 +212,16 @@ void lcd_init(void)
     TFTLED = 0x01;      // 背光寄存器初始化
 
     /*我觉得没必要清屏函数*/
-    HAL_Delay(20);
+    HAL_Delay(120);
+
 //     LCD_Clear(0xFFFF);  // 清除屏幕，设置为白色
 #endif
 }
 
-void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t * color_p)
+void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)
 {
 #ifdef USE_FSMC_DMA
+    __BKPT(0);
     LCD_Set_Window(x1, y1, x2, y2);//设置LCD屏幕的扫描区域
     HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream6, (uint32_t) color_p, (uint32_t) TFT_DATA_ADDR,
                      ((x2 + 1) - x1) * ((y2 + 1) - y1));
@@ -226,9 +229,6 @@ void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_
     LCD_Color_Fill(area->x1, area->y1, area->x2, area->y2, (const uint16_t *)color_p);
 #endif
 }
-
-
-
 
 
 #endif

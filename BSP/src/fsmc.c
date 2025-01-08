@@ -106,7 +106,6 @@ void fsmc_init()
 
 /*启用FSMC+DMA向LCD传输数据*/
 #ifdef USE_FSMC_DMA
-
 void fsmc_dma_init()
 {
     __HAL_RCC_DMA2_CLK_ENABLE();
@@ -131,9 +130,13 @@ void fsmc_dma_init()
     /*不受FreeRTOS调度*/
     HAL_NVIC_SetPriority(DMA2_Stream6_IRQn, 2, 0);
     HAL_NVIC_EnableIRQ(DMA2_Stream6_IRQn);
+
     /*注册回调函数
-    * 流程：开启DMA中断后，DMA开始传输数据，传输完之后回到【pCallback】，需要注意的是中断处理函数得要定义*/
-//    HAL_DMA_RegisterCallback(&hdma_memtomem_dma2_stream6, HAL_DMA_XFER_CPLT_CB_ID, (void(*)(DMA_HandleTypeDef *))pCallback);
+     * 流程：开启DMA中断后，DMA开始传输数据，传输完之后回到【pCallback】，需要注意的是中断处理函数得要定义
+     * 形参：void (* pCallback)(DMA_HandleTypeDef *)
+     * 为了简便，这里不使用这个注册函数
+     * */
+//    HAL_DMA_RegisterCallback(&hdma_memtomem_dma2_stream6, HAL_DMA_XFER_CPLT_CB_ID, pCallback);
 }
 
 ///**

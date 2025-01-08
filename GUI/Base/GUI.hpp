@@ -53,11 +53,6 @@ private:
 //    static inline lv_indev_t *indev_touchpad;
 };
 
-[[maybe_unused]] static inline auto LVGL_LCD_FSMC_DMA_pCallback() -> void
-{
-    GUI::display_flush_ready();
-}
-
 
 template<void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p),
         int32_t (*touchpad_read_xy)(int32_t *last_x, int32_t *last_y)>
