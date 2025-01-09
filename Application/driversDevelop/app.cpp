@@ -6,12 +6,17 @@
 // 头文件
 #include "adc.h"
 #include "key.hpp"
+#include "timer.h"
+import async_delay;
+
+using AsyncDelay_HAL = AsyncDelay<HAL_GetTick>;
+AsyncDelay_HAL temperature_delay(1000);
 
 // 函数
 void app_init()
 {
-    adc1_init();
-    timer2_init(FREQ_84M_to_200);
+    adc1_temperature_sensor_init();
+
 
 }
 
@@ -52,6 +57,17 @@ void key_handler()
 void adc1_isr()
 {
     // 获取ADC值
-    uint16_t adcValue = HAL_ADC_GetValue(&hadc1);
 
+
+}
+
+float temp;
+
+void background_handler()
+{
+
+    if (temperature_delay.is_timeout())
+    {
+        temp = get_adc1_temperature();
+    }
 }

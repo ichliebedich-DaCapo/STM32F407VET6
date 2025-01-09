@@ -266,10 +266,10 @@ add_library(libapp STATIC ${APPLICATION_SRC})
 target_include_directories(libapp PUBLIC ${APPLICATION_DIR})
 # 需要链接 libdsp libdata libgui libbsp libmodule等，根据需要选
 target_link_libraries(libapp PUBLIC libdsp libdata libbsp libmodule)
-if (AI_ENABLE)
+if (${AI_ENABLE})
     target_link_libraries(libapp PUBLIC libai)
 endif ()
-if (GUI_ENABLE)
+if (${GUI_ENABLE})
     target_link_libraries(libapp PUBLIC libgui)
 endif ()
 # 设置静态库的输出目录
@@ -306,11 +306,11 @@ set(ALL_SOURCES
         ${APPLICATION_SRC}
 )
 
-if (STATIC_MODULE_LD)
+if (${STATIC_MODULE_LD})
     # 这里面不能直接添加到静态库里 否则链接时会出现找不到定义的现象
     file(GLOB_RECURSE SOURCES "Core/*.*" "Application/Base/ISR.cpp")
 else ()
-    if (GUI_ENABLE)
+    if (${GUI_ENABLE})
         list(APPEND ALL_INCLUDE_DIRS
                 ${LVGL_DIR}
                 ${GUI_DIR}
@@ -352,19 +352,28 @@ add_link_options(-Wl,-gc-sections,--relax,--as-needed,--print-memory-usage,-Map=
 add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
 
 # 导入模块
-target_sources(libapp PUBLIC
-        FILE_SET CXX_MODULES FILES
-        ${cxx_modules})
+if (${STATIC_MODULE_LD})
+    target_sources(libapp PUBLIC
+            FILE_SET CXX_MODULES FILES
+            ${cxx_modules})
+else ()
+    target_sources(${PROJECT_NAME}.elf PUBLIC
+            FILE_SET CXX_MODULES FILES
+            ${cxx_modules})
+endif ()
 
 
 # 是否链接静态库
-if (STATIC_MODULE_LD)
+if (${STATIC_MODULE_LD})
     target_link_libraries(${PROJECT_NAME}.elf PRIVATE libapp)
     # 设置可执行文件的输出目录
     set_target_properties(${PROJECT_NAME}.elf PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
 endif ()
+
+if(${AI_ENABLE})
 target_link_libraries(${PROJECT_NAME}.elf INTERFACE :NetworkRuntime910_CM4_GCC.a)
 target_link_directories(${PROJECT_NAME}.elf INTERFACE Library/ST/AI/Lib)
+endif ()
 
 # 定义hex和bin文件
 set(HEX_FILE ${BIN_DIR}/${PROJECT_NAME}.hex)
