@@ -5,7 +5,9 @@
 #define SIMULATOR_GUI_BASE_HPP
 
 #include <cstdio>
-
+#ifdef ARM_MATH_CM4
+#include "JYZQ_Conf.h"
+#endif
 // 头文件
 #include "lvgl.h"
 #include "timer.hpp"

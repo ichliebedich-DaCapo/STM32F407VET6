@@ -66,7 +66,7 @@ private:
 #endif// FreeRTOS_ENABLE
 };
 
-#ifndef FreeRTOS_ENABLE
+#ifdef FreeRTOS_ENABLE
 void keyTaskHandler_init();
 #else
 

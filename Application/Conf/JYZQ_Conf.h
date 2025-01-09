@@ -15,19 +15,20 @@
 /**************************常用应用级*****************************/
 #define ENABLE_KEY_TASK_HANDLE 1
 
-/**************************编译控制宏，在此处一般都是注释状态，你需要开启时，请在app.hpp中定义这些宏*************************/
+/***********编译控制宏，在此处一般都是注释状态，请在app.hpp中定义这些宏***********/
 
 #define USE_FSMC_DMA // 一般启用DMA
 
 /****需要在app.hpp中添加宏*****/
 
-/**是否开启FreeRTOS调试模式。调试时，开了之后在负荷不大的情况下，也并不怎么影响实时性。发行时记得关闭*/
-//#define FreeRTOS_DEBUG
+//#define FreeRTOS_DEBUG    // 是否开启FreeRTOS调试模式。调试时，开了之后在负荷不大的情况下，也并不怎么影响实时性。发行时记得关闭
 
-/**是否开启FreeRTOS,由项目头文件的宏来控制。因为一些项目比较简单且对实时性要求很高，使用FreeRTOS会增加开销*/
-//#define FreeRTOS_ENABLE // 【默认关闭FreeRTOS】
+//#define FreeRTOS_ENABLE // 【默认关闭FreeRTOS】 因为一些项目比较简单且对实时性要求很高，使用FreeRTOS会增加开销
 
 //#define GUI_DISABLE   // 【默认开启GUI】
+
+/// 板级驱动
+
 
 
 
@@ -73,6 +74,18 @@
 // 针对于音频的频率（默认采样点为256个）
 #define FREQ_168M_to_256x8K  2,19  // 168MHz -> 256*8KHz
 #define FREQ_168M_to_256x16K  4,19  // 168MHz -> 256*16KHz
+
+#define SECTION(name) __attribute__((section(name)))
+
+/**
+ * @brief  使用CCMRAM处的内存
+ * @note   注意，CCMRAM定义的全局变量或静态局部变量不会在定义时初始化，其值随机。并且无法使用DMA
+ *      使用示例：
+ *      ①定义变量： CCMRAM int a;
+ *                  a = 1234;
+ *      ②定义函数(暂时没打算使用，因为没有修改链接脚本和启动文件，而且它也不适合保存函数代码)： CCMRAM void func(void);
+ */
+#define CCMRAM __attribute__((section(".ccmram")))
 
 
 #endif //FURINA_JYZQ_CONF_H

@@ -32,41 +32,20 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】准备重构编译宏">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】内部温度传感器没有问题">
+      <change afterPath="$PROJECT_DIR$/BSP/inc/pwr.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BSP/src/pwr.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/Base/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/ISR.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/baseInit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/baseInit.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/baseInit.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/baseInit.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/LinearDisplacementSensor/app.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/StorageOscilloscope/app.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/StorageOscilloscope/app.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/signalGenerator/app.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/signalGenerator/app.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/voiceStorageAndPlay/app.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/voiceStorageAndPlay/app.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/CPU_RunTime.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/CPU_RunTime.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/adc.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/adc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/dac.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/dac.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/fsmc.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/fsmc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/key_exit.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/key_exit.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/lcd.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/lcd.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/spi.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/spi.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/timer.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/timer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/usart.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/usart.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/w25qxx.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/w25qxx.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/CPU_RunTime.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/CPU_RunTime.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/adc.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/adc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/dac.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/dac.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/fsmc.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/fsmc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/key_exit.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/key_exit.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/lcd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/spi.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/spi.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/timer.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/timer.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/usart.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/w25qxx.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/w25qxx.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/signalGenerator/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/signalGenerator/app.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/Base/GUI.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI_Base.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI_Base.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Component/inc/FPS.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/inc/FPS.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/lv_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/lv_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Module/inc/key.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/key.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Module/src/key.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/src/key.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" afterDir="false" />
@@ -1693,7 +1672,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "OpenOCD 下载并运行.OCD Furina.executor": "Debug",
+    "OpenOCD 下载并运行.OCD Furina.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -1711,7 +1690,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.C/C++",
+    "settings.editor.selected.configurable": "com.jetbrains.cidr.rtos.config",
     "structure.view.defaults.are.configured": "true",
     "two.files.diff.last.used.file": "D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c",
     "vue.rearranger.settings.migration": "true"
@@ -1719,11 +1698,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Program\Embedded\MCU\STM32\Furina\BSP\src" />
       <recent name="D:\Embedded\MCU\STM32\Furina\AI\LinearDisplacementSensor\App" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Base" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Module" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Conf" />
-      <recent name="D:\Embedded\MCU\STM32\Furina\BSP\Core" />
     </key>
   </component>
   <component name="RunManager">
@@ -1954,47 +1933,8 @@
       <workItem from="1736398371736" duration="535000" />
       <workItem from="1736400455489" duration="1390000" />
       <workItem from="1736402010229" duration="2000" />
-      <workItem from="1736407159424" duration="2820000" />
-    </task>
-    <task id="LOCAL-00042" summary="【双音频信号发生器】已解决紊乱问题，现在尝试解决优化速率">
-      <option name="closed" value="true" />
-      <created>1730606427778</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1730606427778</updated>
-    </task>
-    <task id="LOCAL-00043" summary="【双音频信号发生器】准备解决绘制漏墨问题">
-      <option name="closed" value="true" />
-      <created>1730610629824</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1730610629824</updated>
-    </task>
-    <task id="LOCAL-00044" summary="【双音频信号发生器】发现漏墨问题的一点端倪">
-      <option name="closed" value="true" />
-      <created>1730619162562</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1730619162562</updated>
-    </task>
-    <task id="LOCAL-00045" summary="【双音频信号发生器】先搁置样条算法的死机问题，先更改模板函数">
-      <option name="closed" value="true" />
-      <created>1730622190728</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1730622190728</updated>
-    </task>
-    <task id="LOCAL-00046" summary="【双音频信号发生器】贝塞尔二次曲线，些许漏墨，但速度下降了不少。线性插值也是，真奇怪">
-      <option name="closed" value="true" />
-      <created>1730651874179</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1730651874179</updated>
+      <workItem from="1736418569174" duration="3942000" />
+      <workItem from="1736431208992" duration="10374000" />
     </task>
     <task id="LOCAL-00047" summary="【双音频信号发生器】贝塞尔二次曲线_又见漏墨端倪，真机上右一小块没有正常显示，模拟器上可以">
       <option name="closed" value="true" />
@@ -2348,7 +2288,47 @@
       <option name="project" value="LOCAL" />
       <updated>1736401721199</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="【驱动开发】根据编译情况，看来还是需要相应的宏">
+      <option name="closed" value="true" />
+      <created>1736410409068</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1736410409068</updated>
+    </task>
+    <task id="LOCAL-00092" summary="【驱动开发】去除了CMakelists中的clang">
+      <option name="closed" value="true" />
+      <created>1736420098428</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1736420098428</updated>
+    </task>
+    <task id="LOCAL-00093" summary="【驱动开发】CMakelists暂时不需要优化">
+      <option name="closed" value="true" />
+      <created>1736421888453</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1736421888453</updated>
+    </task>
+    <task id="LOCAL-00094" summary="【驱动开发】CMakelists暂时不需要优化+1">
+      <option name="closed" value="true" />
+      <created>1736422520182</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1736422520182</updated>
+    </task>
+    <task id="LOCAL-00095" summary="【驱动开发】内部温度传感器没有问题">
+      <option name="closed" value="true" />
+      <created>1736434425793</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1736434425793</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2370,7 +2350,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -2383,12 +2363,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="测试了module特性，可以正常使用" />
-    <MESSAGE value="终于可以把模块的声明和实现分开了" />
-    <MESSAGE value="略微调整了flash_storage模块的编写" />
-    <MESSAGE value="略微完善了flash_storage模块，并编写了测试案例" />
-    <MESSAGE value="flash_storage模块测试完毕" />
-    <MESSAGE value="语音存储与回放可以使用，接下来只要添加各种逻辑即可" />
     <MESSAGE value="【语音存储与回放】完善了播放速度等逻辑" />
     <MESSAGE value="【语音存储与回放】修复了已知问题(doge" />
     <MESSAGE value="【简易存储示波器】FPGA的时序正常可以正常读取数值" />
@@ -2408,15 +2382,13 @@
     <MESSAGE value="略微调整了app中的细节" />
     <MESSAGE value="【驱动开发】可以尝试优化驱动组织关系，以及GUI控制启闭了" />
     <MESSAGE value="【驱动开发】在自动化编译情况下，无关文件并不会编译，那么驱动编译宏就失去了作用" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】在自动化编译情况下，无关文件并不会编译，那么驱动编译宏就失去了作用" />
-  </component>
-  <component name="XDebuggerManager">
-    <watches-manager>
-      <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
-        <watch expression="vpp_max" />
-        <watch expression="vpp_min" />
-      </configuration>
-    </watches-manager>
+    <MESSAGE value="【驱动开发】重新优化了GUI及驱动的组织关系，由于暂时未使用到FreeRTOS，故FreeRTOS的编译控制宏并未优化" />
+    <MESSAGE value="【驱动开发】根据编译情况，看来还是需要相应的宏" />
+    <MESSAGE value="【驱动开发】去除了CMakelists中的clang" />
+    <MESSAGE value="【驱动开发】CMakelists暂时不需要优化" />
+    <MESSAGE value="【驱动开发】CMakelists暂时不需要优化+1" />
+    <MESSAGE value="【驱动开发】内部温度传感器没有问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】内部温度传感器没有问题" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
