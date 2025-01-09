@@ -85,7 +85,7 @@
  *                  a = 1234;
  *      ②定义函数(暂时没打算使用，因为没有修改链接脚本和启动文件，而且它也不适合保存函数代码)： CCMRAM void func(void);
  */
-#define CCMRAM __attribute__((section(".ccmram")))
+#define CCMRAM_VAR __attribute__((section(".ccmram")))
 
 
 #endif //FURINA_JYZQ_CONF_H

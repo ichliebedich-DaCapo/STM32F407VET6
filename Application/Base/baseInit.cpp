@@ -8,7 +8,7 @@
 #include "key_exit.h"
 #include "JYZQ_Conf.h"
 #include "CPU_RunTime.h"
-
+#include "key.hpp"
 #ifndef GUI_DISABLE
 #include "lvgl.h"
 #include "lv_port_disp.h"
@@ -36,6 +36,7 @@ void BaseInit()
     fsmc_init();
     lcd_init();// 初始化LCD
     key_exti_init();
+    Key::reset();
 
 #ifdef USE_FSMC_DMA
     fsmc_dma_init();// 初始化FSMC+DMA

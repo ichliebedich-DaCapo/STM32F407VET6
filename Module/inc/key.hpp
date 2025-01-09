@@ -50,19 +50,20 @@ public:
     [[nodiscard]] static auto getState(uint8_t keycode) { return state & (0x3 << keycode * 2); }// 获取键位状态
 
 #ifndef FreeRTOS_ENABLE
-    static auto setSign()->void {  sign = 0xFF; }// 设置标志，表明已读取
+    static auto setSign()->void { sign = 0xFF; }// 设置标志，表明已读取
     static auto handler()->  void;// 反正都是阻塞式等待，也就无所谓多一步取反
 #endif// FreeRTOS_ENABLE
     static auto resetState(uint8_t keycode) { state &= ~(0x3 << (keycode * 2));  /*清除指定键位的状态*/}
 
     static uint8_t stateHandler(uint8_t maxKeyStates);
+    static auto reset()->void{code =0;sign =0;}// 手动初始化，因为CCMRAM不会在定义时初始化变量
 
     // 私有成员变量
 private:
-    static inline uint32_t state=0;// 按键状态,使用掩码操作，给每个按键分配两个位，用于存储最多4个状态
-    static inline uint8_t code=0;// 当前键值
+    static inline uint32_t state=0;// 按键状态,使用掩码操作，给每个按键分配两个位，用于存储最多4个状态.不知道什么原因，不能放入CCMRAM中，否则无法正常使用
+    CCMRAM_VAR static inline uint8_t code;// 当前键值
 #ifndef FreeRTOS_ENABLE
-    static inline uint8_t sign=0;// 标志
+    CCMRAM_VAR static inline uint8_t sign;// 标志
 #endif// FreeRTOS_ENABLE
 };
 

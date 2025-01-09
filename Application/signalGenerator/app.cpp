@@ -31,12 +31,6 @@ static inline auto set_freq(bool freq) -> void
         timer6_set_freq(FREQ_84M_to_256x800);// 256*800
     else
         timer6_set_freq(FREQ_84M_to_256x1k);// 256*1k
-
-//    CCMRAM static uint32_t tempArray[6800];
-//    for (auto &item: tempArray)
-//    {
-//        item = 0;
-//    }
 }
 
 /**************************************************/
