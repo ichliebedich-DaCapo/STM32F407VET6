@@ -32,11 +32,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】根据编译情况，看来还是需要相应的宏">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】去除了CMakelists中的clang">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/usart.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/usart.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/usart.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/CPU_RunTime.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/CPU_RunTime.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -1922,15 +1920,7 @@
       <workItem from="1736398371736" duration="535000" />
       <workItem from="1736400455489" duration="1390000" />
       <workItem from="1736402010229" duration="2000" />
-      <workItem from="1736418569174" duration="1473000" />
-    </task>
-    <task id="LOCAL-00043" summary="【双音频信号发生器】准备解决绘制漏墨问题">
-      <option name="closed" value="true" />
-      <created>1730610629824</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1730610629824</updated>
+      <workItem from="1736418569174" duration="3117000" />
     </task>
     <task id="LOCAL-00044" summary="【双音频信号发生器】发现漏墨问题的一点端倪">
       <option name="closed" value="true" />
@@ -2316,7 +2306,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736410409068</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="【驱动开发】去除了CMakelists中的clang">
+      <option name="closed" value="true" />
+      <created>1736420098428</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1736420098428</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2351,7 +2349,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="略微调整了flash_storage模块的编写" />
     <MESSAGE value="略微完善了flash_storage模块，并编写了测试案例" />
     <MESSAGE value="flash_storage模块测试完毕" />
     <MESSAGE value="语音存储与回放可以使用，接下来只要添加各种逻辑即可" />
@@ -2376,7 +2373,8 @@
     <MESSAGE value="【驱动开发】在自动化编译情况下，无关文件并不会编译，那么驱动编译宏就失去了作用" />
     <MESSAGE value="【驱动开发】重新优化了GUI及驱动的组织关系，由于暂时未使用到FreeRTOS，故FreeRTOS的编译控制宏并未优化" />
     <MESSAGE value="【驱动开发】根据编译情况，看来还是需要相应的宏" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】根据编译情况，看来还是需要相应的宏" />
+    <MESSAGE value="【驱动开发】去除了CMakelists中的clang" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】去除了CMakelists中的clang" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

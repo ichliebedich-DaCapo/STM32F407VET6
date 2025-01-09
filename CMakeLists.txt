@@ -4,7 +4,7 @@ set(APP_DIR Application/driversDevelop)
 
 # --------------------------------------某些可选选项------------------------------
 # 是否使用独立静态库链接,使用后会额外编译一些不需要的文件
-# 注释后，可以使用链接优化-flto，并且默认开启链接优化
+# 注释后，可以使用链接优化-flto
 # ld链接器无法自动创建目录以存放map文件，所以注释下面时需要确保存在bin目录
 #set(STATIC_MODULE_LD True)
 # ---------使用AI---------
@@ -64,7 +64,6 @@ add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-le
 add_compile_options($<$<COMPILE_LANGUAGE:ASM>:-x$<SEMICOLON>assembler-with-cpp>)
 
 # 如果不开优化，使用LVGL时有可能因为栈爆而导致数组越界，进而进入硬件错误中断。至少需要开-Og
-
 # 选择优化级别（真是见鬼！在CMake配置文件改了构建选项，结果没反应，干脆手动操作）
 #-O0：无优化，适合调试。
 #-O1：基本优化，适合快速迭代开发。
@@ -98,17 +97,13 @@ string(REGEX REPLACE "^.*/(.+)$" "\\1" APP_DIR_LAST_PART "${APP_DIR}")
 set(UI_DIR "GUI/UI/${APP_DIR_LAST_PART}")
 
 # -------读取对应GUI_DISABLE宏----------
-# 读取头文件内容
+# 获取文件中的宏
 file(READ "${APP_DIR}/app.hpp" macro_content)
-# 查找宏定义
-string(FIND "${macro_content}" "GUI_DISABLE" macro_pos)
-# 设置对应配置
-if (macro_pos EQUAL -1)
+string(FIND "${macro_content}" "GUI_DISABLE" GUI_DISABLE_POS)
+# ------设置对应配置------
+if (GUI_DISABLE_POS EQUAL -1)
     set(GUI_ENABLE True)
     message(STATUS ">>>>>> GUI_DISABLE not found.")
-else ()
-    # 找到了GUI_DISABLE这个宏
-    message(STATUS ">>>>>> GUI_DISABLE found.")
 endif ()
 
 # ----设置编译目录----
@@ -338,11 +333,7 @@ set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld)
 
 # 链接标志
 add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
-if (COMPILER_IS_GCC)
-    add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
-elseif (COMPILER_IS_CLANG)
-    add_link_options(-mcpu=cortex-m4)
-endif ()
+add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
 add_link_options(-T ${LINKER_SCRIPT})
 
 # 设置链接选项
@@ -354,7 +345,7 @@ add_link_options(-T ${LINKER_SCRIPT})
 #特别适用于某些架构，如 ARM。
 #-Wl,--strip-all：删除所有符号表和调试信息。可以显著减小二进制文件的大小，但会影响调试体验。
 #-Wl,--strip-debug：仅删除调试信息。
-add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${BIN_DIR}/${PROJECT_NAME}.map)
+add_link_options(-Wl,-gc-sections,--relax,--as-needed,--print-memory-usage,-Map=${BIN_DIR}/${PROJECT_NAME}.map)
 #add_link_options(-Wl,--strip-all)# 好像没有作用
 
 # 设置链接目标
