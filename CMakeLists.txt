@@ -1,6 +1,6 @@
 # --------------------------------------选择你的项目--------------------------------
 # 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
-set(APP_DIR Application/signalGenerator)
+set(APP_DIR Application/driversDevelop)
 
 # --------------------------------------某些可选选项------------------------------
 # 是否使用独立静态库链接
@@ -8,7 +8,7 @@ set(APP_DIR Application/signalGenerator)
 # ld链接器无法自动创建目录以存放map文件，所以注释下面时需要确保存在bin目录
 set(STATIC_MODULE_LD True)
 # ---------使用GUI---------
-set(GUI_ENABLE True)
+#set(GUI_ENABLE True)
 # ---------使用AI---------
 #set (AI_ENABLE True)
 

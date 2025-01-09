@@ -4,7 +4,6 @@ E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm/CMakeFiles/li
 E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm/CMakeFiles/libdsp.dir
 E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm/CMakeFiles/libbsp.dir
 E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm/CMakeFiles/libdata.dir
-E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm/CMakeFiles/libgui.dir
 E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm/CMakeFiles/libmodule.dir
 E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm/CMakeFiles/libapp.dir
 E:/Program/Embedded/MCU/STM32/Furina/cmake-build-release-mingw_arm/CMakeFiles/Furina.elf.dir
