@@ -286,7 +286,7 @@ include_directories(Library/ST/AI/Inc)
 include_directories(Application/Conf ${APP_DIR})
 
 # 定义公共的头文件目录和源文件
-set(COMMON_INCLUDE_DIRS
+set(ALL_INCLUDE_DIRS
         ${DRIVERS_DIR}
         ${BSP_DIR}
         ${DATA_DIR}
@@ -295,7 +295,7 @@ set(COMMON_INCLUDE_DIRS
         ${APPLICATION_DIR}
 )
 
-set(COMMON_SOURCES
+set(ALL_SOURCES
         "Core/*.*"
         "Application/Base/ISR.cpp"
         ${DRIVERS_SRC}
@@ -311,19 +311,19 @@ if (STATIC_MODULE_LD)
     file(GLOB_RECURSE SOURCES "Core/*.*" "Application/Base/ISR.cpp")
 else ()
     if (GUI_ENABLE)
-        list(APPEND COMMON_INCLUDE_DIRS
+        list(APPEND ALL_INCLUDE_DIRS
                 ${LVGL_DIR}
                 ${GUI_DIR}
         )
-        list(APPEND COMMON_SOURCES
+        list(APPEND ALL_SOURCES
                 ${LVGL_SRC}
                 ${GUI_SRC}
         )
     endif ()
 
     # 添加公共的头文件目录、源文件
-    include_directories(${COMMON_INCLUDE_DIRS})
-    file(GLOB_RECURSE SOURCES ${COMMON_SOURCES})
+    include_directories(${ALL_INCLUDE_DIRS})
+    file(GLOB_RECURSE SOURCES ${ALL_SOURCES})
 endif ()
 
 
@@ -369,10 +369,12 @@ target_link_directories(${PROJECT_NAME}.elf INTERFACE Library/ST/AI/Lib)
 # 定义hex和bin文件
 set(HEX_FILE ${BIN_DIR}/${PROJECT_NAME}.hex)
 set(BIN_FILE ${BIN_DIR}/${PROJECT_NAME}.bin)
-
+set(SYMBOL_TABLE ${BIN_DIR}/${PROJECT_NAME}.sym)    # 生成符号表
 # 添加自定义命令：
 # 生成十六进制和二进制文件
 add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
         COMMAND ${CMAKE_OBJCOPY} -Oihex $<TARGET_FILE:${PROJECT_NAME}.elf> ${HEX_FILE}
         COMMAND ${CMAKE_OBJCOPY} -Obinary $<TARGET_FILE:${PROJECT_NAME}.elf> ${BIN_FILE}
+        COMMAND ${CMAKE_NM} -n $<TARGET_FILE:${PROJECT_NAME}.elf> > ${SYMBOL_TABLE}
+        COMMAND ${SIZE} $<TARGET_FILE:${PROJECT_NAME}.elf>
         COMMENT "Building ${HEX_FILE}   Building ${BIN_FILE}")
