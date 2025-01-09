@@ -167,7 +167,8 @@ SECTIONS
 
     . = ALIGN(4);
     _eccmram = .;       /* create a global symbol at ccmram end */
-  } >CCMRAM AT> FLASH
+  } >CCMRAM
+  /*原为“AT> FLASH”，由于暂时只用于定义变量（不能定义的时候初始化），所以就不用放在FLASH*/
 
   /* Uninitialized data section into "RAM" Ram type memory */
   . = ALIGN(4);

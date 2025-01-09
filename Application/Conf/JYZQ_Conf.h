@@ -75,5 +75,17 @@
 #define FREQ_168M_to_256x8K  2,19  // 168MHz -> 256*8KHz
 #define FREQ_168M_to_256x16K  4,19  // 168MHz -> 256*16KHz
 
+#define SECTION(name) __attribute__((section(name)))
+
+/**
+ * @brief  使用CCMRAM处的内存
+ * @note   注意，CCMRAM定义的全局变量或静态局部变量不会在定义时初始化，其值随机。并且无法使用DMA
+ *      使用示例：
+ *      ①定义变量： CCMRAM int a;
+ *                  a = 1234;
+ *      ②定义函数(暂时没打算使用，因为没有修改链接脚本和启动文件，而且它也不适合保存函数代码)： CCMRAM void func(void);
+ */
+#define CCMRAM __attribute__((section(".ccmram")))
+
 
 #endif //FURINA_JYZQ_CONF_H
