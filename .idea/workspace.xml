@@ -32,15 +32,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【重制：双音频信号发生器】真机没有问题，可以确定是模拟器发生了问题，原因未知">
-      <change afterPath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】可以尝试优化驱动组织关系，以及GUI控制启闭了">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/signalGenerator/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/signalGenerator/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/adc.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/adc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/adc.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/adc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/.idea/lvgl-simulator.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1923,15 +1918,7 @@
       <workItem from="1736340874181" duration="5828000" />
       <workItem from="1736353441167" duration="634000" />
       <workItem from="1736398371736" duration="535000" />
-      <workItem from="1736400455489" duration="851000" />
-    </task>
-    <task id="LOCAL-00040" summary="【双音频信号发生器】尝试用基本LCD函数来实现波形绘制">
-      <option name="closed" value="true" />
-      <created>1730559155335</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1730559155335</updated>
+      <workItem from="1736400455489" duration="1210000" />
     </task>
     <task id="LOCAL-00041" summary="【双音频信号发生器】示波器绘制算法勉强可以使用，只不过在真机上运行会导致图形紊乱，猜测可能是数据类型导致的">
       <option name="closed" value="true" />
@@ -2317,7 +2304,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736346633019</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="【驱动开发】可以尝试优化驱动组织关系，以及GUI控制启闭了">
+      <option name="closed" value="true" />
+      <created>1736401405891</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1736401405891</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2352,7 +2347,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="准备融合" />
     <MESSAGE value="已经融合，可以正常编译" />
     <MESSAGE value="测试了module特性，可以正常使用" />
     <MESSAGE value="终于可以把模块的声明和实现分开了" />
@@ -2377,7 +2371,8 @@
     <MESSAGE value="原因：把绘制完毕通知函数放在DMA中断回调，但忘记在lvgl绘制函数中注释了" />
     <MESSAGE value="调整了lcd驱动的书写格式" />
     <MESSAGE value="略微调整了app中的细节" />
-    <option name="LAST_COMMIT_MESSAGE" value="略微调整了app中的细节" />
+    <MESSAGE value="【驱动开发】可以尝试优化驱动组织关系，以及GUI控制启闭了" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】可以尝试优化驱动组织关系，以及GUI控制启闭了" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
