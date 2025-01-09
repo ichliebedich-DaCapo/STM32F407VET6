@@ -92,7 +92,7 @@ auto GUI::disp_drv_init() -> void
         flush(area->x1, area->y1, area->x2, area->y2, (const uint16_t *) px_map);
 
         // 由于使用DMA中断，下面这个函数在DMA中断回调里
-#ifdef GUI_DISABLE
+#ifndef ARM_MATH_CM4
         lv_display_flush_ready(disp_drv);
 #endif
     });

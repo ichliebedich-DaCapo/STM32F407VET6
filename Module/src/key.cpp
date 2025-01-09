@@ -26,7 +26,7 @@ uint8_t Key::stateHandler(uint8_t maxKeyStates)
 
 
 
-#ifdef APP_NO_RTOS
+#ifndef FreeRTOS_ENABLE
 auto Key::handler() -> void
 {
     if(sign)

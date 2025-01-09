@@ -56,6 +56,27 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
     }
 }
 
+void HAL_PWR_PVDCallback(void)
+{
+    if (__HAL_PWR_GET_FLAG(PWR_FLAG_PVDO)) // 检查是否是电压下降
+    {
+        // 断电时执行的代码
+//        Execute_Shutdown_Code();
+
+//        // 保存关键数据到后备寄存器
+//        HAL_PWR_EnableBkUpAccess(); // 允许访问后备寄存器
+//        __HAL_RCC_BKP_CLK_ENABLE(); // 启用后备寄存器时钟
+//        HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, 0x12345678); // 示例：保存数据
+    }
+    else
+    {
+        // 电压恢复时执行的代码（可选）
+
+    }
+    __HAL_PWR_CLEAR_FLAG(PWR_FLAG_PVDO); // 清除 PVD 标志
+}
+
+/*******************************中断服务例程**************************************/
 
 extern "C" {
 void EXTI0_IRQHandler()
@@ -91,7 +112,7 @@ void DMA2_Stream6_IRQHandler(void)
             /* Process Unlocked */
             __HAL_UNLOCK(&hdma_memtomem_dma2_stream6);// 不能少
         }
-#ifdef GUI_ENABLE
+#ifndef GUI_DISABLE
       GUI::display_flush_ready();
 #endif
     }

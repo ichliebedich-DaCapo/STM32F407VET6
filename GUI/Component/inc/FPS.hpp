@@ -37,7 +37,7 @@ private:
     static inline auto update_tick() -> void;
 
 private:
-    static inline Obj_t label_fps{};
+    static inline Label label_fps{};
     static inline uint32_t count = 0;
     static inline uint32_t tick = 0;
 };
@@ -51,12 +51,10 @@ private:
  */
 auto FPS::init(Font font, Coord x, Coord y, Coord width, Coord height) -> void
 {
-    Label label;
-//    label.init_font(font);
 #if SIMPLE_FPS
-//    label.init(label_fps, x, y, width, height, "");
+    label_fps.init(x, y, width, height, "0", font);
 #else
-    label.init(label_fps, x, y, 60, 80, "print\n0");
+    label_fps.init(x, y, width, height, "print\n0", font);
 #endif
 
 
@@ -77,19 +75,20 @@ auto FPS::print(bool time) -> void
     {
         // 显示一帧的时间
         sprintf(buf, "%.2fms", 1.0 * get_tick() / (count++));
-    } else
+    }
+    else
     {
         // 显示帧率
         sprintf(buf, "%.2f", 1000.0 * (count++) / get_tick());
     }
-//    Text::set_text(buf, label_fps);
+    label_fps.set_text(buf);
 #else
     char buf[9];
     // 显示一帧的时间
     sprintf(buf, "print\n%.2f", 1.0*get_tick() / (count++));
     // 显示帧率
 //    sprintf(buf, "print\n%.2f", 1000.0*(count++))/get_tick();
-    Text::set_text(buf, label_fps);
+     label_fps.set_text(buf);
 #endif
 }
 
@@ -122,22 +121,22 @@ auto FPS::restart() -> void
 auto FPS::set_right() -> void
 {
 
-//    Text::set_text_align(LV_TEXT_ALIGN_RIGHT, label_fps);
+    label_fps.set_text_align(LV_TEXT_ALIGN_RIGHT);
 }
 
 auto FPS::set_center() -> void
 {
-//    Text::set_text_align(LV_TEXT_ALIGN_CENTER, label_fps);
+    label_fps.set_text_align(LV_TEXT_ALIGN_CENTER);
 }
 
 auto FPS::set_left() -> void
 {
-//    Text::set_text_align(LV_TEXT_ALIGN_LEFT, label_fps);
+    label_fps.set_text_align(LV_TEXT_ALIGN_LEFT);
 }
 
 auto FPS::clear() -> void
 {
-//    Text::set_text("", label_fps);
-
+    label_fps.set_text("");
 }
+
 #endif //SIMULATOR_FPS_HPP
