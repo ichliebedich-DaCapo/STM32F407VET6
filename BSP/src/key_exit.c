@@ -3,7 +3,7 @@
 //
 
 #include "key_exit.h"
-#ifdef USE_KEY_EXTI
+
 #include "stm32f4xx_hal.h"
 
 /*外部中断初始化*/
@@ -30,4 +30,3 @@ void key_exti_init()
 //    HAL_NVIC_EnableIRQ(EXTI1_IRQn);
 //#endif
 }
-#endif

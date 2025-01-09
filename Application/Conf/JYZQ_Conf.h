@@ -15,32 +15,20 @@
 /**************************常用应用级*****************************/
 #define ENABLE_KEY_TASK_HANDLE 1
 
-/**************************调试/其他*************************/
-// 是否开启FreeRTOS调试模式。调试时，开了之后在负荷不大的情况下，也并不怎么影响实时性。发行时记得关闭
-#define FreeRTOS_DEBUG  1
+/**************************编译控制宏，在此处一般都是注释状态，你需要开启时，请在app.hpp中定义这些宏*************************/
 
+#define USE_FSMC_DMA // 一般启用DMA
 
-// 是否开启FreeRTOS,由项目头文件的宏来控制。因为一些项目比较简单且对实时性要求很高，使用FreeRTOS会增加开销
-/*#define APP_NO_RTOS*/ // 【这个宏默认是注释的】
+/****需要在app.hpp中添加宏*****/
 
-/************************基本上都使用的驱动*************************/
-#define USE_FSMC   // 使用FSMC
-#define USE_FSMC_DMA
-#define USE_LCD    // 使用LCD
-#define USE_KEY_EXTI  // 使用按键的外部中断
+/**是否开启FreeRTOS调试模式。调试时，开了之后在负荷不大的情况下，也并不怎么影响实时性。发行时记得关闭*/
+//#define FreeRTOS_DEBUG
 
-/*************************模块级**************************/
-#define USE_PLAYER__  // 使用播放器
-#define USE_FLASH_STORAGE__ // 使用Flash存储
-#define USE_WAVE_SIGNAL__ // 使用波形信号
+/**是否开启FreeRTOS,由项目头文件的宏来控制。因为一些项目比较简单且对实时性要求很高，使用FreeRTOS会增加开销*/
+//#define FreeRTOS_ENABLE // 【默认关闭FreeRTOS】
 
-/**************************板级**************************/
-#define USE_SPI__  // 使用SPI
-#define USE_SPI_FLASH__  // 使用SPI Flash
-#define USE_TIMER__ // 使用定时器
-#define USE_ADC__  // 使用ADC
-#define USE_DAC__ // 使用DAC
-#define USE_USART__  // 使用UART
+//#define GUI_DISABLE   // 【默认开启GUI】
+
 
 
 /****************************宏定义的频率****************************/

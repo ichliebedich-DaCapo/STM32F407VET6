@@ -1,20 +1,20 @@
+#include "JYZQ_Conf.h"
 #include "baseInit.hpp"
-
-#ifndef APP_NO_RTOS // 是否启用RTOS
+#ifdef FreeRTOS_ENABLE // 是否启用RTOS
 #include "cmsis_os2.h"
-#endif// APP_NO_RTOS
-#ifdef GUI_ENABLE
+#endif// FreeRTOS_ENABLE
 
+#ifndef GUI_DISABLE
+#include "lcd.h"
 #include "GUI.hpp"
-
 #endif
 
 #include "key.hpp"
-#include "lcd.h"
+
 
 extern void app_init();// 应用程序初始化函数,强制定义
 
-#ifdef APP_NO_RTOS
+#ifndef FreeRTOS_ENABLE
 
 extern void background_handler();// 后台处理函数
 __attribute__((weak)) void background_handler() {}
@@ -28,22 +28,22 @@ int main()
     /*基础初始化*/
     BaseInit(); // 基础驱动初始化
 
-#ifndef APP_NO_RTOS
+#ifdef FreeRTOS_ENABLE
     osKernelInitialize();// FreeRTOS内核初始化
-#endif// APP_NO_RTOS
+#endif// FreeRTOS_ENABLE
 
-#ifdef GUI_ENABLE
+#ifndef GUI_DISABLE
     GUI::init<lcd_flush>();
 #endif
     app_init();
 
     /*主事件循环或调度器*/
-#ifndef APP_NO_RTOS
+#ifdef FreeRTOS_ENABLE
     osKernelStart();
 #else
     for (;;)
     {
-#ifdef GUI_ENABLE
+#ifndef GUI_DISABLE
         GUI::handler();
 #endif
         Key::handler();

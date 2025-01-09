@@ -50,7 +50,7 @@ auto Key::handler()-> void{}
 
 
 
-#ifndef APP_NO_RTOS
+#ifdef FreeRTOS_ENABLE
 #include "cmsis_os2.h"
 
 osSemaphoreId_t keySemHandle;

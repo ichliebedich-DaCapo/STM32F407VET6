@@ -5,7 +5,7 @@
 #ifndef FURINA_SPI_H
 #define FURINA_SPI_H
 #include "JYZQ_Conf.h"
-#ifdef USE_SPI
+
 #include "stm32f4xx_hal.h"
 
 #ifdef __cplusplus
@@ -22,5 +22,5 @@ extern  SPI_HandleTypeDef hspi2;
 #ifdef __cplusplus
 }
 #endif
-#endif
+
 #endif //FURINA_SPI_H

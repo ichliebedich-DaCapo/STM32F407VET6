@@ -5,7 +5,6 @@
 #include <string.h>
 #include "lcd.h"
 
-#ifdef USE_LCD
 
 #include "fsmc.h"
 #include "stm32f4xx_hal.h"
@@ -333,5 +332,3 @@ void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_
 #endif
 }
 
-
-#endif

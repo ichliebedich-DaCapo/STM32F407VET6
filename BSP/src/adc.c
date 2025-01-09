@@ -3,7 +3,7 @@
 //
 
 #include "adc.h"
-#ifdef USE_ADC
+
 ADC_HandleTypeDef hadc1;
 
 #define ADC1_PIN GPIO_PIN_0
@@ -117,5 +117,3 @@ void ADC_IRQHandler(void)
 {
     HAL_ADC_IRQHandler(&hadc1);
 }
-
-#endif

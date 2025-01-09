@@ -6,9 +6,7 @@
 #define FURINA_USART_H
 
 #include "JYZQ_Conf.h"
-/* 预编译命令 */
-#ifdef USE_USART
-// 头文件
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -22,5 +20,5 @@ void usart1_init() ;
 }
 #endif
 /* 预编译命令 */
-#endif
+
 #endif //FURINA_USART_H

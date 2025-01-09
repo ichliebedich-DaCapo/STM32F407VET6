@@ -3,17 +3,17 @@
 set(APP_DIR Application/driversDevelop)
 
 # --------------------------------------某些可选选项------------------------------
-# 是否使用独立静态库链接
+# 是否使用独立静态库链接,使用后会额外编译一些不需要的文件
 # 注释后，可以使用链接优化-flto，并且默认开启链接优化
 # ld链接器无法自动创建目录以存放map文件，所以注释下面时需要确保存在bin目录
-set(STATIC_MODULE_LD True)
-# ---------使用GUI---------
-#set(GUI_ENABLE True)
+#set(STATIC_MODULE_LD True)
+
 # ---------使用AI---------
 #set (AI_ENABLE True)
 
 # 添加编译器选项，使得支持Module特性
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts")
+
 
 # --------------------------------------某些配置------------------------------
 set(CMAKE_SYSTEM_NAME Generic)
@@ -126,17 +126,34 @@ elseif (COMPILER_IS_CLANG)
     #    set(CMAKE_CXX_DEPENDS_GENERATOR "")
 endif ()
 
-# ----------------对选择的项目进行字符串处理，以匹配对应的UI文件--------------
 
+# --------------------------------------自动化更新配置------------------------------
+# --------对选择的项目进行字符串处理，以匹配对应的UI文件---------
 # 提取 APP_DIR 的末尾部分
 string(REGEX REPLACE "^.*/(.+)$" "\\1" APP_DIR_LAST_PART "${APP_DIR}")
 # 拼接新的 UI_DIR
 set(UI_DIR "GUI/UI/${APP_DIR_LAST_PART}")
 
+# -------读取对应GUI_DISABLE宏----------
+# 读取头文件内容
+file(READ "${APP_DIR}/app.hpp" file_content)
+# 查找宏定义
+string(FIND "${file_content}" "GUI_DISABLE" macro_pos)
+# 设置对应配置
+if (macro_pos EQUAL -1)
+    set(GUI_ENABLE True)
+    message(STATUS ">>>>>> GUI_DISABLE not found.")
+else()
+    # 找到了GUI_DISABLE这个宏
+    set(GUI_ENABLE False)
+    message(STATUS ">>>>>> GUI_DISABLE found.")
+endif()
+
 # ----设置编译目录----
 set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
 set(LIB_DIR ${BUILD_DIR}/lib)
 set(BIN_DIR ${BUILD_DIR}/bin)
+
 
 #-------------------------------------------库-------------------------------------------
 # 官方驱动库

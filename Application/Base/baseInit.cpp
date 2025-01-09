@@ -6,16 +6,16 @@
 #include "lcd.h"
 #include "fsmc.h"
 #include "key_exit.h"
-
-#if FreeRTOS_DEBUG
+#include "JYZQ_Conf.h"
 #include "CPU_RunTime.h"
-#ifdef GUI_ENABLE
+
+#ifndef GUI_DISABLE
 #include "lvgl.h"
 #include "lv_port_disp.h"
 #include "GUI.hpp"
 #endif
 
-#endif
+
 
 TIM_HandleTypeDef htim7;
 extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
@@ -199,7 +199,8 @@ void TIM7_IRQHandler()
     // 我把TIM7当做系统时钟，只用到了基础定时器的更新计时功能，所以并不需要判断中断源
     __HAL_TIM_CLEAR_FLAG(&htim7, TIM_FLAG_UPDATE);
     HAL_IncTick();
-#ifdef GUI_ENABLE
+
+#ifndef GUI_DISABLE
     lv_tick_inc(1);
 #endif
 }
