@@ -49,10 +49,10 @@ public:
 
     [[nodiscard]] static auto getState(uint8_t keycode) { return state & (0x3 << keycode * 2); }// 获取键位状态
 
-#ifdef APP_NO_RTOS
+#ifndef FreeRTOS_ENABLE
     static auto setSign()->void {  sign = 0xFF; }// 设置标志，表明已读取
     static auto handler()->  void;// 反正都是阻塞式等待，也就无所谓多一步取反
-#endif// APP_NO_RTOS
+#endif// FreeRTOS_ENABLE
     static auto resetState(uint8_t keycode) { state &= ~(0x3 << (keycode * 2));  /*清除指定键位的状态*/}
 
     static uint8_t stateHandler(uint8_t maxKeyStates);
@@ -61,12 +61,12 @@ public:
 private:
     static inline uint32_t state=0;// 按键状态,使用掩码操作，给每个按键分配两个位，用于存储最多4个状态
     static inline uint8_t code=0;// 当前键值
-#ifdef APP_NO_RTOS
+#ifndef FreeRTOS_ENABLE
     static inline uint8_t sign=0;// 标志
-#endif// APP_NO_RTOS
+#endif// FreeRTOS_ENABLE
 };
 
-#ifndef APP_NO_RTOS
+#ifndef FreeRTOS_ENABLE
 void keyTaskHandler_init();
 #else
 

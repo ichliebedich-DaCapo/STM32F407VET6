@@ -6,7 +6,6 @@
 #define FURINA_W25QXX_H
 
 #include "JYZQ_Conf.h"
-#ifdef USE_SPI_FLASH
 #include "spi.h"
 #ifdef __cplusplus
 extern "C" {
@@ -32,5 +31,5 @@ uint8_t w25qxx_async_is_busy();// 判断是否正在忙（用于前面擦除）
 }
 #endif
 
-#endif
+
 #endif //FURINA_W25QXX_H

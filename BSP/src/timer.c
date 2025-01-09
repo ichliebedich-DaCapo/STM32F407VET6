@@ -3,7 +3,7 @@
 //
 
 #include "timer.h"
-#ifdef USE_TIMER
+
 
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim6;
@@ -110,5 +110,3 @@ void timer2_set_freq(uint32_t psc,uint32_t arr )
     // arr不能为0，否则CNT寄存器不变
     __HAL_TIM_SET_AUTORELOAD(&htim2, arr);
 }
-
-#endif

@@ -8,7 +8,7 @@
 #include "JYZQ_Conf.h"
 #include "stm32f4xx_hal.h"
 
-#ifdef USE_DAC
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -42,5 +42,5 @@ static inline void dac_set_value(uint16_t value)
 #ifdef __cplusplus
 }
 #endif
-#endif
+
 #endif //FURINA_DAC_H

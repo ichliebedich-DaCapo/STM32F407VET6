@@ -3,7 +3,6 @@
 //
 #include "w25qxx.h"
 
-#ifdef USE_SPI_FLASH
 
 /*FLASH_SPI*/
 #define FLASH_SPI SPI2
@@ -500,6 +499,3 @@ uint8_t w25qxx_async_is_busy()
 
 
 
-
-
-#endif

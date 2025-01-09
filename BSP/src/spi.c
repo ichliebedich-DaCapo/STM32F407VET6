@@ -4,7 +4,7 @@
 
 #include "spi.h"
 
-#ifdef USE_SPI
+
 
 SPI_HandleTypeDef hspi2;
 
@@ -108,6 +108,3 @@ void spi2_init()
         Error_Handler();
     }
 }
-
-
-#endif

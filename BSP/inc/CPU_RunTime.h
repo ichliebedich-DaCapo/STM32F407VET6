@@ -10,9 +10,9 @@
 extern "C" {
 #endif
 
-#if FreeRTOS_DEBUG
+
 void ConfigureTimerForRunTimeStats();
-#endif
+
 
 #ifdef __cplusplus
 }

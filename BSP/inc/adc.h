@@ -9,7 +9,6 @@
 #include "stm32f4xx_hal.h"
 #include "timer.h"
 
-#ifdef USE_ADC
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -31,5 +30,5 @@ uint16_t Get_Adc_Average(ADC_HandleTypeDef *hadc, uint32_t channel, uint8_t time
 #ifdef __cplusplus
 }
 #endif
-#endif
+
 #endif //FURINA_ADC_H

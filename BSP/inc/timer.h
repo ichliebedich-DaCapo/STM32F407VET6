@@ -7,7 +7,7 @@
 
 #include "JYZQ_Conf.h"
 #include "stm32f4xx_hal.h"
-#ifdef USE_TIMER
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -38,6 +38,6 @@ void timer2_set_freq(uint32_t psc,uint32_t arr );
 #ifdef __cplusplus
 }
 #endif
-#endif
+
 
 #endif //FURINA_TIMER_H

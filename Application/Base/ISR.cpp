@@ -18,7 +18,7 @@
 #include "key.hpp"
 #include "usart.h"
 
-#ifdef GUI_ENABLE
+#ifndef GUI_DISABLE
 
 #include "GUI.hpp"
 
@@ -62,7 +62,7 @@ void EXTI0_IRQHandler()
 {
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_0);
     Key::setCode(KEY_RAM & 0xF);//获取键值
-#ifndef APP_NO_RTOS
+#ifdef FreeRTOS_ENABLE
     /*释放信号量*/
     osSemaphoreRelease(keySemHandle);
 #else

@@ -4,11 +4,10 @@
 
 #ifndef FURINA_LCD_H
 #define FURINA_LCD_H
-#ifndef LCD_H_
-#define LCD_H_
+
 
 #include "JYZQ_Conf.h"
-#ifdef USE_LCD
+
 #include <stdint.h>
 
 #ifdef __cplusplus
@@ -33,7 +32,6 @@ void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_
 #ifdef __cplusplus
 }
 #endif
-#endif
 
-#endif
+
 #endif //FURINA_LCD_H

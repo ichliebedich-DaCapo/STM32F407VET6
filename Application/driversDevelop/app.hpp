@@ -4,8 +4,7 @@
 #ifndef FURINA_APP_HPP
 #define FURINA_APP_HPP
 
-
-// 该宏还是有着自己的作用，比如控制FreeRTOS和GUI的使用
-
+// 不使用GUI
+#define GUI_DISABLE
 
 #endif //FURINA_APP_HPP
