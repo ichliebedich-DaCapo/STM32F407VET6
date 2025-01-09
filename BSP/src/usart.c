@@ -1,9 +1,9 @@
 //
 // Created by DV on 2024/11/17.
 //
-
-
 #include "usart.h"
+
+
 
 // 头文件
 #include "stm32f4xx_hal.h"
@@ -77,4 +77,7 @@ int _write(int fd, char *ptr, int len)
   HAL_UART_Transmit(&huart1, (uint8_t*)ptr, len, 0xFFFF);
   return len;
 }
+
+
+
 #endif

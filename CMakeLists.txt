@@ -7,7 +7,6 @@ set(APP_DIR Application/driversDevelop)
 # 注释后，可以使用链接优化-flto，并且默认开启链接优化
 # ld链接器无法自动创建目录以存放map文件，所以注释下面时需要确保存在bin目录
 #set(STATIC_MODULE_LD True)
-
 # ---------使用AI---------
 #set (AI_ENABLE True)
 
@@ -34,59 +33,29 @@ set(SIZE arm-none-eabi-size)
 # -------Clang------
 # 我的评价是：缺少各种库。查看了STM32提供的固件包，压根没有clang的启动文件，这一点与TI相比弗如远甚。
 # 继续搞下去，只会是浪费时间，并且从目前编译的情况来看，编译速度很慢很慢
-#set(CMAKE_C_COMPILER clang)
-#set(CMAKE_CXX_COMPILER clang++)
-#set(CMAKE_ASM_COMPILER clang)
-#set(CMAKE_AR llvm-ar)
-#set(CMAKE_OBJCOPY llvm-objcopy)
-#set(CMAKE_OBJDUMP llvm-objdump)
-#set(SIZE llvm-size)
+
 
 # -----------------工程设置-----------------
-
 project(Furina C CXX ASM)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_C_STANDARD 11)
 
 # ----------------------判断编译器类别--------------------
-if (${CMAKE_C_COMPILER_ID} STREQUAL "GNU")
-    message(STATUS "Using GCC compiler")
-    set(COMPILER_IS_GCC TRUE)
-elseif (${CMAKE_C_COMPILER_ID} STREQUAL "Clang")
-    message(STATUS "Using Clang compiler")
-    set(COMPILER_IS_CLANG TRUE)
-else ()
-    message(WARNING "Unsupported compiler: ${CMAKE_C_COMPILER_ID}")
-endif ()
+set(COMPILER_IS_GCC TRUE)
 
 
 # ------------------------添加宏定义--------------------------
 add_compile_definitions(ARM_MATH_CM4;ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING)
 # 使用Debug，使用HAL库。    -DUSE_FULL_LL_DRIVER 使用LL库
 add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx)
-if(GUI_ENABLE)
-    add_definitions(-DGUI_ENABLE)
-endif ()
-if(GUI_ONLY_INIT)
-    add_definitions(-DGUI_ONLY_INIT)
-endif ()
+
 
 #--------------------------编译选项----------------------------
 # 根据编译器类型设置特定编译选项
-if (COMPILER_IS_GCC)
-    add_compile_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
-    # 硬件浮点和软件浮点，任选一个
-    add_compile_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
-    #add_compile_options(-mfloat-abi=soft)
 
-elseif (COMPILER_IS_CLANG)
-    add_compile_options(-target armv7em-none-eabi)
-    #    add_compile_options(-mcpu=cortex-m4 -mthumb )
-    # 硬件浮点和软件浮点，任选一个
-    add_compile_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
-    link_directories("E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain_v13_3/lib/gcc/arm-none-eabi/13.3.1")
-    link_directories("E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain_v13_3/lib/gcc/arm-none-eabi/13.3.1")
-endif ()
+add_compile_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
+# 硬件浮点和软件浮点(-mfloat-abi=soft)，任选一个
+add_compile_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
 
 
 #---------------------------优化选项--------------------------
@@ -95,35 +64,29 @@ add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-le
 add_compile_options($<$<COMPILE_LANGUAGE:ASM>:-x$<SEMICOLON>assembler-with-cpp>)
 
 # 如果不开优化，使用LVGL时有可能因为栈爆而导致数组越界，进而进入硬件错误中断。至少需要开-Og
-if (COMPILER_IS_GCC)
-    # 选择优化级别（真是见鬼！在CMake配置文件改了构建选项，结果没反应，干脆手动操作）
-    #-O0：无优化，适合调试。
-    #-O1：基本优化，适合快速迭代开发。
-    #-O2：中级优化，适合大多数生产环境。
-    #-O3：高级优化，适合对性能要求较高的应用。
-    #-Ofast：极端优化，适合对性能要求极高且对标准合规性要求不高的应用。
-    #-Og：调试优化，适合开发和调试阶段。
-    #-Os:优化生成的代码大小，而不是性能。
-    #-Oz:极度优化大小,进一步优化生成的代码大小，比 -Os更激进,可能会牺牲一些性能。
-    #-flto:在链接阶段进行优化,允许进行跨文件的优化，进一步提高性能，但耗时间（项目本来就小我不在乎），并且这个优化容易出问题（这个我很在乎）
-    #-fprofile-generate（生成配置文件） 和 -fprofile-use（基于配置文件的优化）
-    add_compile_options(-Ofast -g)
-    # 必须关闭静态库独立模块编译，才能够使用链接优化
-    if (NOT STATIC_MODULE_LD)
-#仅使用 add_compile_options(-flto)：
-#   结果：编译器生成的中间表示（IR）包含优化所需的信息，但链接器不会进行优化。
-#   问题：LTO 的效果不完整，性能提升有限。
-#仅使用 add_link_options(-flto)：
-#   结果：链接器尝试进行优化，但编译器生成的对象文件可能不包含足够的信息。
-#   问题：链接器无法进行有效的优化，可能导致编译错误或优化失败。
-#        add_compile_options(-flto )
-#        add_link_options(-flto)
-    endif ()
-elseif (COMPILER_IS_CLANG)
-    add_compile_options(-O3 -ffast-math -g3 -Wextra)
-    # 禁用依赖扫描
-    #    set(CMAKE_CXX_DEPFILE_FORMAT none)
-    #    set(CMAKE_CXX_DEPENDS_GENERATOR "")
+
+# 选择优化级别（真是见鬼！在CMake配置文件改了构建选项，结果没反应，干脆手动操作）
+#-O0：无优化，适合调试。
+#-O1：基本优化，适合快速迭代开发。
+#-O2：中级优化，适合大多数生产环境。
+#-O3：高级优化，适合对性能要求较高的应用。
+#-Ofast：极端优化，适合对性能要求极高且对标准合规性要求不高的应用。
+#-Og：调试优化，适合开发和调试阶段。
+#-Os:优化生成的代码大小，而不是性能。
+#-Oz:极度优化大小,进一步优化生成的代码大小，比 -Os更激进,可能会牺牲一些性能。
+#-flto:在链接阶段进行优化,允许进行跨文件的优化，进一步提高性能，但耗时间（项目本来就小我不在乎），并且这个优化容易出问题（这个我很在乎）
+#-fprofile-generate（生成配置文件） 和 -fprofile-use（基于配置文件的优化）
+add_compile_options(-Ofast -g)
+# 必须关闭静态库独立模块编译，才能够使用链接优化
+if (NOT STATIC_MODULE_LD)
+    #仅使用 add_compile_options(-flto)：
+    #   结果：编译器生成的中间表示（IR）包含优化所需的信息，但链接器不会进行优化。
+    #   问题：LTO 的效果不完整，性能提升有限。
+    #仅使用 add_link_options(-flto)：
+    #   结果：链接器尝试进行优化，但编译器生成的对象文件可能不包含足够的信息。
+    #   问题：链接器无法进行有效的优化，可能导致编译错误或优化失败。
+    #        add_compile_options(-flto )
+    #        add_link_options(-flto)
 endif ()
 
 
@@ -136,18 +99,17 @@ set(UI_DIR "GUI/UI/${APP_DIR_LAST_PART}")
 
 # -------读取对应GUI_DISABLE宏----------
 # 读取头文件内容
-file(READ "${APP_DIR}/app.hpp" file_content)
+file(READ "${APP_DIR}/app.hpp" macro_content)
 # 查找宏定义
-string(FIND "${file_content}" "GUI_DISABLE" macro_pos)
+string(FIND "${macro_content}" "GUI_DISABLE" macro_pos)
 # 设置对应配置
 if (macro_pos EQUAL -1)
     set(GUI_ENABLE True)
     message(STATUS ">>>>>> GUI_DISABLE not found.")
-else()
+else ()
     # 找到了GUI_DISABLE这个宏
-    set(GUI_ENABLE False)
     message(STATUS ">>>>>> GUI_DISABLE found.")
-endif()
+endif ()
 
 # ----设置编译目录----
 set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
@@ -257,24 +219,24 @@ set_target_properties(libdata PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 # ------GUI库------
 if (GUI_ENABLE)
-file(GLOB_RECURSE GUI_SRC
-        "${UI_DIR}/*.*"
-        "GUI/Base/*.cpp"
-        "GUI/Component/src/*.cpp"
-        "GUI/Render/*.cpp"
-)
-set(GUI_DIR
-        ${UI_DIR}
-        GUI/Base
-        GUI/Component/inc
-        GUI/Render
-)
-add_library(libgui STATIC ${GUI_SRC})
-target_include_directories(libgui PUBLIC ${GUI_DIR})
-# 依赖lvgl库
-target_link_libraries(libgui PUBLIC liblvgl libbsp)
-# 设置静态库的输出目录
-set_target_properties(libgui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+    file(GLOB_RECURSE GUI_SRC
+            "${UI_DIR}/*.*"
+            "GUI/Base/*.cpp"
+            "GUI/Component/src/*.cpp"
+            "GUI/Render/*.cpp"
+    )
+    set(GUI_DIR
+            ${UI_DIR}
+            GUI/Base
+            GUI/Component/inc
+            GUI/Render
+    )
+    add_library(libgui STATIC ${GUI_SRC})
+    target_include_directories(libgui PUBLIC ${GUI_DIR})
+    # 依赖lvgl库
+    target_link_libraries(libgui PUBLIC liblvgl libbsp)
+    # 设置静态库的输出目录
+    set_target_properties(libgui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 endif ()
 
 # ------Module库------
@@ -308,11 +270,11 @@ set(APPLICATION_DIR Application/Base)
 add_library(libapp STATIC ${APPLICATION_SRC})
 target_include_directories(libapp PUBLIC ${APPLICATION_DIR})
 # 需要链接 libdsp libdata libgui libbsp libmodule等，根据需要选
-target_link_libraries(libapp PUBLIC libdsp libdata libbsp libmodule )
-if(AI_ENABLE)
+target_link_libraries(libapp PUBLIC libdsp libdata libbsp libmodule)
+if (AI_ENABLE)
     target_link_libraries(libapp PUBLIC libai)
 endif ()
-if(GUI_ENABLE)
+if (GUI_ENABLE)
     target_link_libraries(libapp PUBLIC libgui)
 endif ()
 # 设置静态库的输出目录
@@ -320,7 +282,7 @@ set_target_properties(libapp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 # -------------------module特性测试-----------------------
 file(GLOB_RECURSE cxx_modules
-    "Module/inc/*.ixx" "Module/src/*.cppm"
+        "Module/inc/*.ixx" "Module/src/*.cppm"
 )
 
 # ----------------包含公共目录---------------
@@ -330,23 +292,23 @@ include_directories(Application/Conf ${APP_DIR})
 
 # 定义公共的头文件目录和源文件
 set(COMMON_INCLUDE_DIRS
-    ${DRIVERS_DIR}
-    ${BSP_DIR}
-    ${DATA_DIR}
-    ${MODULE_DIR}
-    ${AI_DIR}
-    ${APPLICATION_DIR}
+        ${DRIVERS_DIR}
+        ${BSP_DIR}
+        ${DATA_DIR}
+        ${MODULE_DIR}
+        ${AI_DIR}
+        ${APPLICATION_DIR}
 )
 
 set(COMMON_SOURCES
-    "Core/*.*"
-    "Application/Base/ISR.cpp"
-    ${DRIVERS_SRC}
-    ${BSP_SRC}
-    ${DATA_SRC}
-    ${MODULE_SRC}
-    ${AI_SRC}
-    ${APPLICATION_SRC}
+        "Core/*.*"
+        "Application/Base/ISR.cpp"
+        ${DRIVERS_SRC}
+        ${BSP_SRC}
+        ${DATA_SRC}
+        ${MODULE_SRC}
+        ${AI_SRC}
+        ${APPLICATION_SRC}
 )
 
 if (STATIC_MODULE_LD)
@@ -355,12 +317,12 @@ if (STATIC_MODULE_LD)
 else ()
     if (GUI_ENABLE)
         list(APPEND COMMON_INCLUDE_DIRS
-            ${LVGL_DIR}
-            ${GUI_DIR}
+                ${LVGL_DIR}
+                ${GUI_DIR}
         )
         list(APPEND COMMON_SOURCES
-            ${LVGL_SRC}
-            ${GUI_SRC}
+                ${LVGL_SRC}
+                ${GUI_SRC}
         )
     endif ()
 
@@ -372,7 +334,7 @@ endif ()
 
 # -------------------编译链接-------------------
 # 设置链接脚本
-set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld )
+set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld)
 
 # 链接标志
 add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
