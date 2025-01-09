@@ -18,6 +18,7 @@
 #include "wave_signal.hpp"
 #include "key.hpp"
 #include "GUI.hpp"
+
 #include "WaveCurve.hpp"
 #include "GUI.hpp"
 #include "ui.hpp"
