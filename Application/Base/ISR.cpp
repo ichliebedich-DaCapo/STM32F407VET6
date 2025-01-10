@@ -59,6 +59,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 
 void HAL_PWR_PVDCallback(void)
 {
+    __HAL_PWR_CLEAR_FLAG(PWR_FLAG_PVDO); // 清除 PVD 标志
     if (__HAL_PWR_GET_FLAG(PWR_FLAG_PVDO)) // 检查是否是电压下降
     {
         // 断电时执行的代码
@@ -74,7 +75,7 @@ void HAL_PWR_PVDCallback(void)
         // 电压恢复时执行的代码（可选）
 
     }
-    __HAL_PWR_CLEAR_FLAG(PWR_FLAG_PVDO); // 清除 PVD 标志
+
 }
 
 /*******************************中断服务例程**************************************/

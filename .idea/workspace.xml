@@ -32,14 +32,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】添加了FreeRTOS控制宏，同时修复了按键中断中信号量卡死的问题">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/CPU_RunTime.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/CPU_RunTime.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/FreeRTOS/FreeRTOSConfig.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/FreeRTOS/FreeRTOSConfig.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/FreeRTOS/Source/tasks.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/FreeRTOS/Source/tasks.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/ISR.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1930,15 +1925,7 @@
       <workItem from="1736402010229" duration="2000" />
       <workItem from="1736407159424" duration="2820000" />
       <workItem from="1736482116580" duration="1813000" />
-      <workItem from="1736496588069" duration="6880000" />
-    </task>
-    <task id="LOCAL-00044" summary="【双音频信号发生器】发现漏墨问题的一点端倪">
-      <option name="closed" value="true" />
-      <created>1730619162562</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1730619162562</updated>
+      <workItem from="1736496588069" duration="7612000" />
     </task>
     <task id="LOCAL-00045" summary="【双音频信号发生器】先搁置样条算法的死机问题，先更改模板函数">
       <option name="closed" value="true" />
@@ -2324,7 +2311,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736499012193</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="【驱动开发】成功使用CLion的RTOS集成功能，并且把FreeRTOS的堆栈都放到了CCMRAM中">
+      <option name="closed" value="true" />
+      <created>1736504418976</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1736504418976</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2346,7 +2341,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="ZQ" />
                       </list>
                     </value>
                   </entry>
@@ -2359,7 +2354,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="略微调整了flash_storage模块的编写" />
     <MESSAGE value="略微完善了flash_storage模块，并编写了测试案例" />
     <MESSAGE value="flash_storage模块测试完毕" />
     <MESSAGE value="语音存储与回放可以使用，接下来只要添加各种逻辑即可" />
@@ -2384,7 +2378,8 @@
     <MESSAGE value="【驱动开发】在自动化编译情况下，无关文件并不会编译，那么驱动编译宏就失去了作用" />
     <MESSAGE value="【驱动开发】把堆栈段放在了CCMRAM中，并设为4字节对齐。只是在Key中定义state变量并放入CCMRAM，会导致奇怪的问题" />
     <MESSAGE value="【驱动开发】添加了FreeRTOS控制宏，同时修复了按键中断中信号量卡死的问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】添加了FreeRTOS控制宏，同时修复了按键中断中信号量卡死的问题" />
+    <MESSAGE value="【驱动开发】成功使用CLion的RTOS集成功能，并且把FreeRTOS的堆栈都放到了CCMRAM中" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】成功使用CLion的RTOS集成功能，并且把FreeRTOS的堆栈都放到了CCMRAM中" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
