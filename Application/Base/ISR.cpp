@@ -25,15 +25,14 @@
 #endif
 
 #include "fsmc.h"
+#include "cmsis_os2.h"
 
 #define KEY_RAM (*((volatile unsigned short *)0x6006000C)) // 键盘接口地址
 extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
+extern osSemaphoreId_t keySemHandle;
 
-extern void adc1_isr();
 
-// 弱定义，避免找不到
 
-__weak void adc1_isr() {}
 
 /** TIM中断回调函数
  * @note 关于TIM6已经转移至timer.c里了
@@ -48,6 +47,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 
 /*ADC中断回调函数*/
+extern void adc1_isr();
+__weak void adc1_isr() {}
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
     if (hadc->Instance == ADC1)
@@ -90,6 +91,7 @@ void EXTI0_IRQHandler()
     Key::setSign();
 #endif
 }
+
 
 /**
  * @brief DMA中断

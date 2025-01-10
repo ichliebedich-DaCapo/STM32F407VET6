@@ -36,7 +36,7 @@ void BaseInit()
     fsmc_init();
     lcd_init();// 初始化LCD
     key_exti_init();
-    Key::reset();
+
 
 #ifdef USE_FSMC_DMA
     fsmc_dma_init();// 初始化FSMC+DMA

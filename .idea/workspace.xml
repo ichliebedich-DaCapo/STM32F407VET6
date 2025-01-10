@@ -32,13 +32,18 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】准备重构编译宏">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/ISR.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/Base/baseInit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/baseInit.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/signalGenerator/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/signalGenerator/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Module/inc/key.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/key.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/STM32F407VETX_FLASH.ld" beforeDir="false" afterPath="$PROJECT_DIR$/STM32F407VETX_FLASH.ld" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Module/src/key.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/src/key.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stlink.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/stlink.cfg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1924,14 +1929,8 @@
       <workItem from="1736400455489" duration="1390000" />
       <workItem from="1736402010229" duration="2000" />
       <workItem from="1736407159424" duration="2820000" />
-    </task>
-    <task id="LOCAL-00042" summary="【双音频信号发生器】已解决紊乱问题，现在尝试解决优化速率">
-      <option name="closed" value="true" />
-      <created>1730606427778</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1730606427778</updated>
+      <workItem from="1736482116580" duration="1813000" />
+      <workItem from="1736496588069" duration="1615000" />
     </task>
     <task id="LOCAL-00043" summary="【双音频信号发生器】准备解决绘制漏墨问题">
       <option name="closed" value="true" />
@@ -2317,7 +2316,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736401721199</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="【驱动开发】把堆栈段放在了CCMRAM中，并设为4字节对齐。只是在Key中定义state变量并放入CCMRAM，会导致奇怪的问题">
+      <option name="closed" value="true" />
+      <created>1736445021950</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1736445021950</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2352,7 +2359,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="测试了module特性，可以正常使用" />
     <MESSAGE value="终于可以把模块的声明和实现分开了" />
     <MESSAGE value="略微调整了flash_storage模块的编写" />
     <MESSAGE value="略微完善了flash_storage模块，并编写了测试案例" />
@@ -2377,9 +2383,19 @@
     <MESSAGE value="略微调整了app中的细节" />
     <MESSAGE value="【驱动开发】可以尝试优化驱动组织关系，以及GUI控制启闭了" />
     <MESSAGE value="【驱动开发】在自动化编译情况下，无关文件并不会编译，那么驱动编译宏就失去了作用" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】在自动化编译情况下，无关文件并不会编译，那么驱动编译宏就失去了作用" />
+    <MESSAGE value="【驱动开发】把堆栈段放在了CCMRAM中，并设为4字节对齐。只是在Key中定义state变量并放入CCMRAM，会导致奇怪的问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】把堆栈段放在了CCMRAM中，并设为4字节对齐。只是在Key中定义state变量并放入CCMRAM，会导致奇怪的问题" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Module/src/key.cpp</url>
+          <line>29</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
         <watch expression="sign" />

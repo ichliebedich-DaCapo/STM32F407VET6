@@ -56,7 +56,7 @@ public:
     static auto resetState(uint8_t keycode) { state &= ~(0x3 << (keycode * 2));  /*清除指定键位的状态*/}
 
     static uint8_t stateHandler(uint8_t maxKeyStates);
-    static auto reset()->void{code =0;sign =0;}// 手动初始化，因为CCMRAM不会在定义时初始化变量
+    static auto init()->void;// 手动初始化，因为CCMRAM不会在定义时初始化变量
 
     // 私有成员变量
 private:
@@ -67,10 +67,6 @@ private:
 #endif// FreeRTOS_ENABLE
 };
 
-#ifdef FreeRTOS_ENABLE
-void keyTaskHandler_init();
-#else
 
-#endif
 
 #endif //FURINA_KEY_HPP
