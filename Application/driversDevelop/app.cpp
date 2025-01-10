@@ -2,7 +2,7 @@
 // Created by fairy on 2025/1/9 13:31.
 //
 #include "app.hpp"
-
+#include "cmsis_os2.h"
 // 头文件
 #include "adc.h"
 #include "key.hpp"
@@ -66,10 +66,11 @@ float temp;
 void background_handler()
 {
 
-    if (temperature_delay.is_timeout())
-    {
-        temp = get_adc1_temperature();
-    }
+    osDelay(1000);
+    temp = get_adc1_temperature();
+
+
+
 }
 
 
