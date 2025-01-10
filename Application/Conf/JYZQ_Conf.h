@@ -13,15 +13,11 @@
 #include "app.hpp"
 
 /**************************常用应用级*****************************/
-#define ENABLE_KEY_TASK_HANDLE 1
-
-/***********编译控制宏，在此处一般都是注释状态，请在app.hpp中定义这些宏***********/
 
 #define USE_FSMC_DMA // 一般启用DMA
+#define FreeRTOS_DEBUG  1  // 是否开启FreeRTOS调试模式。调试时，开了之后在负荷不大的情况下，也并不怎么影响实时性。发行时记得关闭
 
 /****需要在app.hpp中添加宏*****/
-
-#define FreeRTOS_DEBUG  1  // 是否开启FreeRTOS调试模式。调试时，开了之后在负荷不大的情况下，也并不怎么影响实时性。发行时记得关闭
 
 //#define FreeRTOS_ENABLE // 【默认关闭FreeRTOS】 因为一些项目比较简单且对实时性要求很高，使用FreeRTOS会增加开销
 

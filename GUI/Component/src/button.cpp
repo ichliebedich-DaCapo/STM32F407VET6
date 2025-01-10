@@ -13,7 +13,6 @@
 auto Button::init() -> void
 {
     _obj = lv_btn_create(_parent);
-
 }
 
 /**
@@ -28,6 +27,7 @@ auto Button::init() -> void
  * @param h
  * @param string 文本
  */
+
 auto Button::init(Coord x, Coord y, Coord w, Coord h, Strings text, Font font) -> void
 {
     Button::init();
@@ -36,9 +36,11 @@ auto Button::init(Coord x, Coord y, Coord w, Coord h, Strings text, Font font) -
     Button::bg_color(Color_Firefly_Green);
     Button::bg_opa(125);
 
-
-    label.init(text, font, _obj);
-    label.set_align(LV_ALIGN_CENTER);
+//    if (font)
+//    {
+        label.init(text, font, _obj);
+        label.set_align(LV_ALIGN_CENTER);
+//    }
 }
 
 
@@ -56,3 +58,5 @@ auto Button::set_text(Strings text) -> void
 {
     label.set_text(text);
 }
+
+

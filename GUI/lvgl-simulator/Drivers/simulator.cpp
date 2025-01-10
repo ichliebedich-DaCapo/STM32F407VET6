@@ -50,7 +50,7 @@ void simulator_init(int32_t hor, int32_t ver)
 
     // 创建窗口
     window = SDL_CreateWindow("LVGL Simulator", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                              hor, ver, 0);
+                              hor, ver, SDL_WINDOW_SHOWN | SDL_WINDOW_INPUT_FOCUS);
 
     // 创建渲染器（此处使用硬件加速，可以使用软件加速SDL_RENDERER_SOFTWARE）
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
@@ -103,6 +103,18 @@ void simulator_event_Handler()
     static SDL_Event event;
     while (SDL_PollEvent(&event))
     {
+
+
+        if (event.type == SDL_KEYDOWN)
+        {
+            printf("Key Press\n");
+        }
+
+        if (event.type == SDL_KEYUP)
+        {
+            printf("Key Up\n");
+        }
+
         // 处理鼠标事件
         mouse_handler(&event);
 
@@ -111,6 +123,10 @@ void simulator_event_Handler()
         {
             case SDL_QUIT:
                 keep_running = false;
+                break;
+
+            case SDL_KEYDOWN:
+        // 失效了，没有任何用
                 break;
 
             case SDL_WINDOWEVENT:
@@ -163,21 +179,6 @@ void LCD_Color_Fill(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend, 
 
         memcpy(gram_row, color_row, width * sizeof(uint16_t));
     }
-
-//    uint16_t width = xend - xsta + 1;
-//    // 遍历指定区域的行
-//    for (uint16_t y = ysta; y <= yend; y++)
-//    {
-//        // 遍历指定区域的列
-//        for (uint16_t x = xsta; x <= xend; x++)
-//        {
-//            // 计算当前像素在 color 数组中的索引
-//            uint16_t index = (y - ysta) * width + (x - xsta);
-//            // 将颜色数据写入显存数组
-//            TFT_GRAM[y][x] = color[index];
-//        }
-//    }
-
 }
 
 
@@ -247,4 +248,7 @@ void mouse_handler(SDL_Event *event)
             break;
     }
 }
+
+
+/**************************键盘*****************************/
 
