@@ -18,6 +18,7 @@
 #include "button.hpp"
 #include "imageButton.hpp"
 #include "FPS.hpp"
+#include "anim.hpp"
 
 class GUI_Base
 {
