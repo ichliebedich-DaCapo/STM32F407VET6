@@ -64,6 +64,7 @@ int main()
     osThreadNew(backgroundTask, nullptr, &backgroundTask_attributes);
 
     // 创建GUI线程
+#ifndef GUI_DISABLE
     const osThreadAttr_t GUITask_attributes = {
             .name = "GUITask",
             .stack_size = 512 * 4,
@@ -77,7 +78,7 @@ int main()
                         GUI::handler();
                     }
                 }, nullptr, &GUITask_attributes);
-
+#endif
     // 启动调度器
     osKernelStart();
 #else

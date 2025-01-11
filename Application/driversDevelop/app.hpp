@@ -5,7 +5,7 @@
 #define FURINA_APP_HPP
 
 // 不使用GUI
-
-#define FreeRTOS_ENABLE
+#define GUI_DISABLE
+#define FreeRTOS_DISABLE
 
 #endif //FURINA_APP_HPP

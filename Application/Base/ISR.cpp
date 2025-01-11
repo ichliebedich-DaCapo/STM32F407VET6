@@ -25,11 +25,14 @@
 #endif
 
 #include "fsmc.h"
+#ifdef FreeRTOS_ENABLE
 #include "cmsis_os2.h"
+extern osSemaphoreId_t keySemHandle;
+#endif
 
 #define KEY_RAM (*((volatile unsigned short *)0x6006000C)) // 键盘接口地址
 extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
-extern osSemaphoreId_t keySemHandle;
+
 
 
 

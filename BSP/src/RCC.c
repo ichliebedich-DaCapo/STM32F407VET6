@@ -79,7 +79,6 @@ void SystemClock_SetFrequency(uint32_t plln)
 
     if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
     {
-
         Error_Handler();
     }
 

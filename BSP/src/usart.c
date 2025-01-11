@@ -14,7 +14,8 @@ UART_HandleTypeDef huart1;
 
 
 // 函数
-void usart1_init() {
+void usart1_init()
+{
     GPIO_InitTypeDef GPIO_InitStruct = {0};
     __HAL_RCC_USART1_CLK_ENABLE();
     __HAL_RCC_GPIOA_CLK_ENABLE();
@@ -53,7 +54,7 @@ void usart1_init() {
 void USART1_IRQHandler(void)
 {
 
-  HAL_UART_IRQHandler(&huart1);
+    HAL_UART_IRQHandler(&huart1);
 
 }
 
@@ -71,13 +72,12 @@ void USART1_IRQHandler(void)
 //}
 
 // gcc专用重定向
-#ifdef __GNUC__
-int _write(int fd, char *ptr, int len)
-{
-  HAL_UART_Transmit(&huart1, (uint8_t*)ptr, len, 0xFFFF);
-  return len;
-}
-
-
-
-#endif
+//#ifdef __GNUC__
+//
+//int _write(int fd, char *ptr, int len)
+//{
+//  HAL_UART_Transmit(&huart1, (uint8_t*)ptr, len, 0xFFFF);
+//    return len;
+//}
+//
+//#endif
