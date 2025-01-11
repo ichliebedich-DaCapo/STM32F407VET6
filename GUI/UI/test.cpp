@@ -11,32 +11,53 @@
 #include "ui.hpp"
 #include "simulator.hpp"
 #include "WaveCurve.hpp"
+#include <SDL2/SDL.h>
+#include <windows.h>
+#include <iostream>
+#include <unordered_map>
+#include <functional>
+#include <utility>
 
-// 真它宝贝的阴险，一个该死的宏从SDL_main里泄露到这里，fxxk
 #undef main
 
 
-extern volatile int keep_running;
-/*******************************自定义代码**********************************/
-constexpr uint16_t Sample_Size = 128;
-constexpr uint16_t chart_width = 320;
-constexpr uint16_t chart_height = 200;
-constexpr uint32_t COLOR_BLACK = 0x0000;
-constexpr uint32_t COLOR_WHITE = 0xFFFFFF;
-constexpr uint16_t start_x = 80;
-constexpr uint16_t start_y = 60;
-constexpr uint16_t max_value = 255;
+class KeyboardInput
+{
+public:
+    // 构造函数
+    KeyboardInput() = default;
 
-uint8_t TestBuf[Sample_Size];
-const uint8_t sine_wave[128] = {
-        128, 134, 140, 146, 152, 158, 165, 170, 176, 182, 188, 193, 198, 203, 208, 213, 218, 222, 226, 230, 234, 237,
-        240, 243, 245, 248, 250, 251, 253, 254, 254, 255, 255, 255, 254, 254, 253, 251, 250, 248, 245, 243, 240, 237,
-        234, 230, 226, 222, 218, 213, 208, 203, 198, 193, 188, 182, 176, 170, 165, 158, 152, 146, 140, 134, 127, 121,
-        115, 109, 103, 97, 90, 85, 79, 73, 67, 62, 57, 52, 47, 42, 37, 33, 29, 25, 21, 18, 15, 12, 10, 7, 5, 4, 2, 1, 1,
-        0, 0, 0, 1, 1, 2, 4, 5, 7, 10, 12, 15, 18, 21, 25, 29, 33, 37, 42, 47, 52, 57, 62, 67, 73, 79, 85, 90, 97, 103,
-        109, 115, 121
+    // 添加按键检测
+    void addKeyCheck(char key, std::function<void()> callback)
+    {
+        keyStates[key] = false; // 初始化按键状态
+        keyCallbacks[key] = std::move(callback);
+    }
+
+    // 更新按键状态
+    void update()
+    {
+        for (auto &[key, state]: keyStates)
+        {
+            bool currentState = (GetKeyState(key) & 0x8000) != 0;
+
+            // 检测按键按下事件
+            if (currentState && !state)
+            {
+                if (keyCallbacks.find(key) != keyCallbacks.end())
+                {
+                    keyCallbacks[key](); // 调用回调函数
+                }
+            }
+
+            state = currentState; // 更新状态
+        }
+    }
+
+private:
+    std::unordered_map<char, bool> keyStates; // 按键状态
+    std::unordered_map<char, std::function<void()>> keyCallbacks; // 按键回调函数
 };
-
 
 /**
  * 键盘线程
@@ -47,62 +68,54 @@ const uint8_t sine_wave[128] = {
  */
 int keyboard_thread(void *data)
 {
-    (void) data;  /* 忽略传递的参数，因为在这个函数中不需要使用它 */
-    static bool is_fps_mode = false;
-    bool is_fps = false;
-    bool is_generate = false;
-//    while (keep_running)
-//    {
-//        uint32_t keycode;
-//        if (keyboard_get_input(&keycode))
-//        {
-//            while (keyboard_get_state());//等待按键释放
-//            switch (keycode)
-//            {
-//                case 'a':
-//                    break;
-//                case 's':
-////                    UI_Interface::set_record_state(RecordSampleRate::SAMPLE_RATE_16K);
-////                    UI_Interface::saveInfo(false);
-//                    break;
-//                case 'd':
-////                    UI_Interface::resume_record();
-////                    UI_Interface::resume_record();
-//                    break;
-//                case 'f':
-////                    UI_Interface::pause_record();
-////                    uiInterface::add_period();
-////                    printf("下一个波形\n");
-////                    break;
-//
-//
-//                case 'g':
-////                    UI_Interface::erasing();
-//                    break;
-////                    uiInterface::switch_wave_type();
-////                    printf("E pressed\n");
-////                    break;
-//
-//                case 'h':
-////                    UI_Interface::erase_done();
-//                    break;
-////                    uiInterface::add_wave_cnt();
-////                    printf("F pressed\n");
-////                    break;
-//
-//                case 'j':
-////                    is_generate = !is_generate;
-////                    if (is_generate)
-////                        uiInterface::wave_is_generate();
-////                    else
-////                        uiInterface::wave_is_not_generate();
-//
-//                default:
-//                    break;
-//            }
-//        }
-//    }
+    // 创建 KeyboardInput 对象
+    KeyboardInput keyboard;
 
-    return 1;  /* 这个函数实际上永远不会返回，因为它一直在循环中运行 */
+    // 添加按键检测
+    keyboard.addKeyCheck('A', []()
+    {
+        std::cout << "A pressed" << std::endl;
+        UI::pressA();
+    });
+
+    keyboard.addKeyCheck('S', []()
+    {
+        std::cout << "S pressed" << std::endl;
+        UI::pressS();
+    });
+
+    keyboard.addKeyCheck('D', []()
+    {
+
+    });
+
+    keyboard.addKeyCheck('F', []()
+    {
+
+    });
+
+    keyboard.addKeyCheck('G', []()
+    {
+
+    });
+
+    keyboard.addKeyCheck('H', []()
+    {
+
+    });
+
+    keyboard.addKeyCheck('J', []()
+    {
+
+    });
+
+
+
+    // 主循环
+    while (simulator_is_running())
+    {
+        keyboard.update(); // 更新按键状态
+        SDL_Delay(30); // 避免 CPU 占用过高
+    }
+    return 0;
 }
-

@@ -403,7 +403,6 @@ auto GUI_Base::screen_init() -> void
 
 /***********************函数实现***********************/
 
-//uint16_t color[320*200];
 void GUI_Base::events_init()
 {
     /*  创建定时器*/

@@ -5,6 +5,7 @@
 #include "GUI.hpp"
 
 int lv_tick_thread(void *data);
+extern int keyboard_thread(void *data);
 
 // 为了解决错误：undefined reference to `WinMain'
 #undef main
@@ -16,8 +17,8 @@ int main(int argc, char *argv[])
     // GUI初始化
     GUI::init<LCD_Color_Fill,touchpad_read_xy>();
 
-    // lv_tick线程
-    SDL_CreateThread(lv_tick_thread, "lv_tick", nullptr);
+    SDL_CreateThread(lv_tick_thread, "lv_tick", nullptr);// lv_tick线程
+    SDL_CreateThread(keyboard_thread, "keyboard", nullptr);// 键盘线程
 
     // 主循环
     while (simulator_is_running())

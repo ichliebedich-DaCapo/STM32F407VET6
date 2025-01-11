@@ -10,8 +10,9 @@
 
 #ifndef GUI_DISABLE
 
+#ifdef ARM_MATH_CM4
 #include "JYZQ_Conf.h"
-
+#endif
 
 
 
@@ -47,12 +48,13 @@ auto GUI::resource_init() -> void
 #endif
 #endif
 
-    gui->main.screen.get_object() = lv_obj_create(nullptr);
-    lv_obj_set_size(gui->main.screen.get_object(), DISP_HOR_RES, DISP_VER_RES);
+    gui->main.screen.get_obj() = lv_obj_create(nullptr);
+    lv_obj_set_size(gui->main.screen.get_obj(), DISP_HOR_RES, DISP_VER_RES);
+    Component::set_parent(gui->main.screen.get_obj());// 默认主屏幕为父对象
     GUI_Base::screen_init();// 初始化屏幕
-    lv_obj_update_layout(gui->main.screen.get_object());
+    lv_obj_update_layout(gui->main.screen.get_obj());
     GUI_Base::events_init();
-    lv_scr_load(gui->main.screen.get_object());
+    lv_scr_load(gui->main.screen.get_obj());
 }
 
 

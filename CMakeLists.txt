@@ -1,6 +1,6 @@
 # --------------------------------------选择你的项目--------------------------------
 # 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
-set(APP_DIR Application/signalGenerator)
+set(APP_DIR Application/driversDevelop)
 
 # --------------------------------------某些可选选项------------------------------
 # 是否使用独立静态库链接,使用后会额外编译一些不需要的文件
@@ -100,11 +100,17 @@ set(UI_DIR "GUI/UI/${APP_DIR_LAST_PART}")
 # 获取文件中的宏
 file(READ "${APP_DIR}/app.hpp" macro_content)
 string(FIND "${macro_content}" "GUI_DISABLE" GUI_DISABLE_POS)
+string(FIND "${macro_content}" "FreeRTOS_ENABLE" FreeRTOS_ENABLE_POS)
 # ------设置对应配置------
 if (GUI_DISABLE_POS EQUAL -1)
     set(GUI_ENABLE True)
     message(STATUS ">>>>>> GUI_DISABLE not found.")
 endif ()
+if (FreeRTOS_ENABLE_POS GREATER -1)
+    set(FreeRTOS_ENABLE True)
+    message(STATUS ">>>>>> FreeRTOS_ENABLE found.")
+endif ()
+
 
 # ----设置编译目录----
 set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
@@ -310,6 +316,7 @@ if (${STATIC_MODULE_LD})
     # 这里面不能直接添加到静态库里 否则链接时会出现找不到定义的现象
     file(GLOB_RECURSE SOURCES "Core/*.*" "Application/Base/ISR.cpp")
 else ()
+    # 控制GUI的编译
     if (${GUI_ENABLE})
         list(APPEND ALL_INCLUDE_DIRS
                 ${LVGL_DIR}
@@ -319,6 +326,12 @@ else ()
                 ${LVGL_SRC}
                 ${GUI_SRC}
         )
+    endif ()
+
+    # 控制FreeRTOS的编译
+    if (${FreeRTOS_ENABLE})
+        list(APPEND ALL_INCLUDE_DIRS ${FREERTOS_DIR})
+        list(APPEND ALL_SOURCES ${FREERTOS_SRC})
     endif ()
 
     # 添加公共的头文件目录、源文件
@@ -370,9 +383,9 @@ if (${STATIC_MODULE_LD})
     set_target_properties(${PROJECT_NAME}.elf PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
 endif ()
 
-if(${AI_ENABLE})
-target_link_libraries(${PROJECT_NAME}.elf INTERFACE :NetworkRuntime910_CM4_GCC.a)
-target_link_directories(${PROJECT_NAME}.elf INTERFACE Library/ST/AI/Lib)
+if (${AI_ENABLE})
+    target_link_libraries(${PROJECT_NAME}.elf INTERFACE :NetworkRuntime910_CM4_GCC.a)
+    target_link_directories(${PROJECT_NAME}.elf INTERFACE Library/ST/AI/Lib)
 endif ()
 
 # 定义hex和bin文件

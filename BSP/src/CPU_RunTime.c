@@ -2,11 +2,11 @@
 // Created by fairy on 2024/10/7.
 //
 #include "CPU_RunTime.h"
-
+#include "JYZQ_Conf.h"
 #include "stm32f4xx_hal.h"
 
 /* 用于统计运行时间 */
-volatile uint32_t CPU_RunTime = 0UL;
+CCMRAM_VAR volatile uint32_t CPU_RunTime = 0UL;
 
 TIM_HandleTypeDef htim13;
 
@@ -35,9 +35,9 @@ void ConfigureTimerForRunTimeStats()
 
 void TIM8_UP_TIM13_IRQHandler(void)
 {
-    if (__HAL_TIM_GET_IT_SOURCE(&htim13, TIM_IT_UPDATE) != RESET)
-    {
+//    if (__HAL_TIM_GET_IT_SOURCE(&htim13, TIM_IT_UPDATE) != RESET)
+//    {
         __HAL_TIM_CLEAR_IT(&htim13, TIM_IT_UPDATE);
         ++CPU_RunTime;
-    }
+//    }
 }

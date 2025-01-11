@@ -32,24 +32,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】内部温度传感器没有问题">
-      <change afterPath="$PROJECT_DIR$/BSP/inc/pwr.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BSP/src/pwr.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/ISR.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/signalGenerator/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/signalGenerator/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI_Base.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI_Base.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Component/inc/FPS.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/inc/FPS.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/lv_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/lv_conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/inc/key.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/inc/key.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Module/src/key.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Module/src/key.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" afterDir="false" />
-    </list>
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】添加了ITM串口打印功能" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -1647,6 +1630,9 @@
     <setting file="file://$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/startup_stm32f407xx.s" root0="SKIP_INSPECTION" />
   </component>
+  <component name="OCResolveContextSettings">
+    <option name="configuration" value="0-Default-libmodule" />
+  </component>
   <component name="PerforceDirect.Settings">
     <option name="CHARSET" value="none" />
   </component>
@@ -1672,7 +1658,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "OpenOCD 下载并运行.OCD Furina.executor": "Run",
+    "OpenOCD 下载并运行.OCD Furina.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -1690,7 +1676,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.cidr.rtos.config",
+    "settings.editor.selected.configurable": "de.platon42.intellij.plugins.m68k.settings.M68kProjectSettingsConfigurable",
     "structure.view.defaults.are.configured": "true",
     "two.files.diff.last.used.file": "D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c",
     "vue.rearranger.settings.migration": "true"
@@ -1699,11 +1685,15 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\BSP\src" />
+      <recent name="E:\Program\Embedded\MCU\STM32\Furina\GUI\Component\src" />
       <recent name="D:\Embedded\MCU\STM32\Furina\AI\LinearDisplacementSensor\App" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Base" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Module" />
-      <recent name="D:\Embedded\MCU\STM32\Furina\Application\Conf" />
     </key>
+  </component>
+  <component name="RtosSettings">
+    <option name="rtosEnabled" value="true" />
+    <option name="rtosType" value="FreeRTOS" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
@@ -1712,7 +1702,7 @@
       </method>
     </configuration>
     <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release-MinGW_ARM" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
-      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="E:\Program\Embedded\MCU\STM32\final_homework\stlink.cfg" reset-type="RUN" download-type="ALWAYS">
+      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="E:\Program\Embedded\MCU\STM32\final_homework\stlink.cfg" reset-type="RUN" download-type="UPDATED_ONLY">
         <debugger kind="GDB" isBundled="true" />
       </openocd>
       <method v="2">
@@ -1933,48 +1923,13 @@
       <workItem from="1736398371736" duration="535000" />
       <workItem from="1736400455489" duration="1390000" />
       <workItem from="1736402010229" duration="2000" />
-      <workItem from="1736418569174" duration="3942000" />
-      <workItem from="1736431208992" duration="10374000" />
-    </task>
-    <task id="LOCAL-00047" summary="【双音频信号发生器】贝塞尔二次曲线_又见漏墨端倪，真机上右一小块没有正常显示，模拟器上可以">
-      <option name="closed" value="true" />
-      <created>1730694564105</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1730694564105</updated>
-    </task>
-    <task id="LOCAL-00048" summary="【双音频信号发生器】算法基本OK">
-      <option name="closed" value="true" />
-      <created>1730717047441</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1730717047441</updated>
-    </task>
-    <task id="LOCAL-00049" summary="【双音频信号发生器】调整项目组织结构">
-      <option name="closed" value="true" />
-      <created>1730732283409</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1730732283409</updated>
-    </task>
-    <task id="LOCAL-00050" summary="【双音频信号发生器】完成了这次的项目优化，后面还有许多不妥之处，后续再慢慢改">
-      <option name="closed" value="true" />
-      <created>1730732916020</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1730732916020</updated>
-    </task>
-    <task id="LOCAL-00051" summary="【双音频信号发生器】完善了一下Readme">
-      <option name="closed" value="true" />
-      <created>1730736973300</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1730736973300</updated>
+      <workItem from="1736407159424" duration="2820000" />
+      <workItem from="1736482116580" duration="1813000" />
+      <workItem from="1736496588069" duration="7612000" />
+      <workItem from="1736505032355" duration="227000" />
+      <workItem from="1736576228934" duration="13219000" />
+      <workItem from="1736590748612" duration="851000" />
+      <workItem from="1736592009049" duration="20792000" />
     </task>
     <task id="LOCAL-00052" summary="【双音频信号发生器】略微优化了CMakelists">
       <option name="closed" value="true" />
@@ -2288,47 +2243,87 @@
       <option name="project" value="LOCAL" />
       <updated>1736401721199</updated>
     </task>
-    <task id="LOCAL-00091" summary="【驱动开发】根据编译情况，看来还是需要相应的宏">
+    <task id="LOCAL-00091" summary="【驱动开发】把堆栈段放在了CCMRAM中，并设为4字节对齐。只是在Key中定义state变量并放入CCMRAM，会导致奇怪的问题">
       <option name="closed" value="true" />
-      <created>1736410409068</created>
+      <created>1736445021950</created>
       <option name="number" value="00091" />
       <option name="presentableId" value="LOCAL-00091" />
       <option name="project" value="LOCAL" />
-      <updated>1736410409068</updated>
+      <updated>1736445021950</updated>
     </task>
-    <task id="LOCAL-00092" summary="【驱动开发】去除了CMakelists中的clang">
+    <task id="LOCAL-00092" summary="【驱动开发】添加了FreeRTOS控制宏，同时修复了按键中断中信号量卡死的问题">
       <option name="closed" value="true" />
-      <created>1736420098428</created>
+      <created>1736499012193</created>
       <option name="number" value="00092" />
       <option name="presentableId" value="LOCAL-00092" />
       <option name="project" value="LOCAL" />
-      <updated>1736420098428</updated>
+      <updated>1736499012193</updated>
     </task>
-    <task id="LOCAL-00093" summary="【驱动开发】CMakelists暂时不需要优化">
+    <task id="LOCAL-00093" summary="【驱动开发】成功使用CLion的RTOS集成功能，并且把FreeRTOS的堆栈都放到了CCMRAM中">
       <option name="closed" value="true" />
-      <created>1736421888453</created>
+      <created>1736504418976</created>
       <option name="number" value="00093" />
       <option name="presentableId" value="LOCAL-00093" />
       <option name="project" value="LOCAL" />
-      <updated>1736421888453</updated>
+      <updated>1736504418976</updated>
     </task>
-    <task id="LOCAL-00094" summary="【驱动开发】CMakelists暂时不需要优化+1">
+    <task id="LOCAL-00094" summary="【驱动开发】准备在模拟器里设置一些常用的组件">
       <option name="closed" value="true" />
-      <created>1736422520182</created>
+      <created>1736505155707</created>
       <option name="number" value="00094" />
       <option name="presentableId" value="LOCAL-00094" />
       <option name="project" value="LOCAL" />
-      <updated>1736422520182</updated>
+      <updated>1736505155707</updated>
     </task>
-    <task id="LOCAL-00095" summary="【驱动开发】内部温度传感器没有问题">
+    <task id="LOCAL-00095" summary="【驱动开发】添加了电源管理模式，但并未验证">
       <option name="closed" value="true" />
-      <created>1736434425793</created>
+      <created>1736577327678</created>
       <option name="number" value="00095" />
       <option name="presentableId" value="LOCAL-00095" />
       <option name="project" value="LOCAL" />
-      <updated>1736434425793</updated>
+      <updated>1736577327678</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="【驱动开发】补充了GUI线程">
+      <option name="closed" value="true" />
+      <created>1736578806571</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1736578806571</updated>
+    </task>
+    <task id="LOCAL-00097" summary="【驱动开发】添加了硬件随机数生成驱动">
+      <option name="closed" value="true" />
+      <created>1736579547197</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1736579547197</updated>
+    </task>
+    <task id="LOCAL-00098" summary="【驱动开发】添加显示CPU温度模块，同时找到了Label显示含浮点数的格式字符串只显示f的原因">
+      <option name="closed" value="true" />
+      <created>1736582959574</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1736582959574</updated>
+    </task>
+    <task id="LOCAL-00099" summary="【驱动开发】添加了超频的接口">
+      <option name="closed" value="true" />
+      <created>1736590415056</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1736590415056</updated>
+    </task>
+    <task id="LOCAL-00100" summary="【驱动开发】添加了ITM串口打印功能">
+      <option name="closed" value="true" />
+      <created>1736613282630</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1736613282630</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2350,7 +2345,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/main" />
+                        <option value="ZQ" />
                       </list>
                     </value>
                   </entry>
@@ -2363,10 +2358,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【语音存储与回放】完善了播放速度等逻辑" />
-    <MESSAGE value="【语音存储与回放】修复了已知问题(doge" />
-    <MESSAGE value="【简易存储示波器】FPGA的时序正常可以正常读取数值" />
-    <MESSAGE value="【简易存储示波器】准备合并" />
     <MESSAGE value="【简易存储示波器】准备合并UI" />
     <MESSAGE value="【简易存储示波器】可以设置采样频率" />
     <MESSAGE value="【简易存储示波器】可以显示采样频率" />
@@ -2382,13 +2373,17 @@
     <MESSAGE value="略微调整了app中的细节" />
     <MESSAGE value="【驱动开发】可以尝试优化驱动组织关系，以及GUI控制启闭了" />
     <MESSAGE value="【驱动开发】在自动化编译情况下，无关文件并不会编译，那么驱动编译宏就失去了作用" />
-    <MESSAGE value="【驱动开发】重新优化了GUI及驱动的组织关系，由于暂时未使用到FreeRTOS，故FreeRTOS的编译控制宏并未优化" />
-    <MESSAGE value="【驱动开发】根据编译情况，看来还是需要相应的宏" />
-    <MESSAGE value="【驱动开发】去除了CMakelists中的clang" />
-    <MESSAGE value="【驱动开发】CMakelists暂时不需要优化" />
-    <MESSAGE value="【驱动开发】CMakelists暂时不需要优化+1" />
-    <MESSAGE value="【驱动开发】内部温度传感器没有问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】内部温度传感器没有问题" />
+    <MESSAGE value="【驱动开发】把堆栈段放在了CCMRAM中，并设为4字节对齐。只是在Key中定义state变量并放入CCMRAM，会导致奇怪的问题" />
+    <MESSAGE value="【驱动开发】添加了FreeRTOS控制宏，同时修复了按键中断中信号量卡死的问题" />
+    <MESSAGE value="【驱动开发】成功使用CLion的RTOS集成功能，并且把FreeRTOS的堆栈都放到了CCMRAM中" />
+    <MESSAGE value="【驱动开发】准备在模拟器里设置一些常用的组件" />
+    <MESSAGE value="【驱动开发】添加了电源管理模式，但并未验证" />
+    <MESSAGE value="【驱动开发】补充了GUI线程" />
+    <MESSAGE value="【驱动开发】添加了硬件随机数生成驱动" />
+    <MESSAGE value="【驱动开发】添加显示CPU温度模块，同时找到了Label显示含浮点数的格式字符串只显示f的原因" />
+    <MESSAGE value="【驱动开发】添加了超频的接口" />
+    <MESSAGE value="【驱动开发】添加了ITM串口打印功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】添加了ITM串口打印功能" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

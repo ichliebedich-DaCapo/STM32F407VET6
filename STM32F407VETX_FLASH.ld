@@ -189,13 +189,14 @@ SECTIONS
   /* User_heap_stack section, used to check that there is enough "RAM" Ram  type memory left */
   ._user_heap_stack :
   {
-    . = ALIGN(8);
+    . = ALIGN(4);
     PROVIDE ( end = . );
     PROVIDE ( _end = . );
     . = . + _Min_Heap_Size;
     . = . + _Min_Stack_Size;
-    . = ALIGN(8);
-  } >RAM
+    . = ALIGN(4);
+  } >CCMRAM
+  /*原本在RAM中，并且是8字节对齐*/
 
   /* Remove information from the compiler libraries */
   /DISCARD/ :

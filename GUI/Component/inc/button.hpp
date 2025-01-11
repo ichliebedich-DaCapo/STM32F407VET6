@@ -15,7 +15,7 @@ public:
     auto init() -> void;
 
     // 自定义风格按钮
-    auto init(Coord x, Coord y, Coord w, Coord h, Strings text ,Font font) -> void;
+    auto init(Coord x, Coord y, Coord w, Coord h, Strings text= nullptr ,Font font= nullptr) -> void;
 
     // 点击事件
     auto click() -> void;

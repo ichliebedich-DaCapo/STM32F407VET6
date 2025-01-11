@@ -22,6 +22,11 @@ using ChartAxis = lv_chart_axis_t;// 图表坐标
 using ChartSeries = lv_chart_series_t *&;
 using ChartSeries_t = lv_chart_series_t *;
 using ChartType = lv_chart_type_t;
+using AnimExecCallback = lv_anim_exec_xcb_t;// 动画执行事件回调
+using AnimCompletedCallback = lv_anim_completed_cb_t;// 动画执行完毕事件回调
+using Anim = lv_anim_t &;
+using Anim_t = lv_anim_t;
+using AnimPath = lv_anim_path_cb_t;
 
 
 // 色彩
@@ -154,7 +159,7 @@ public:
     // 把自身添加到父对象中，供其它组件使用，不过记得更改回去
     auto set_self_to_parent() -> void { set_parent(_obj); }
 
-    auto get_object() -> Obj { return _obj; }
+    auto get_obj() -> Obj { return _obj; }
 
     // 设置位置和尺寸
     auto set_pos_size(Coord x, Coord y, Coord w, Coord h) -> void;// 设置位置和尺寸

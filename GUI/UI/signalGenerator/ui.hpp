@@ -36,7 +36,6 @@ struct lv_ui_t
     } main;// 主屏幕
 
 };
-
 extern struct lv_ui_t* gui;
 
 
