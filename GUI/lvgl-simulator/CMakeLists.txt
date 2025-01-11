@@ -71,7 +71,7 @@ set_target_properties(librender PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
 #---------------GUI库---------------
-file(GLOB_RECURSE COMPONENT_SRCS "${COMPONENT_DIR}/src/*.cpp" "${COMPONENT_DIR}/empty.cpp")
+file(GLOB_RECURSE COMPONENT_SRCS "${COMPONENT_DIR}/src/*.cpp" "${COMPONENT_DIR}/inspiration.cpp")
 file(GLOB_RECURSE BASE_SRCS "${BASE_DIR}/*.cpp")
 file(GLOB_RECURSE UI_SRCS "${UI_DIR}/*.cpp" "${UI_DIR}/*.c" "../UI/test.cpp")
 add_library(libgui STATIC

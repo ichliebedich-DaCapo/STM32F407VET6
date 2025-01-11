@@ -26,6 +26,7 @@ using AnimExecCallback = lv_anim_exec_xcb_t;// 动画执行事件回调
 using AnimCompletedCallback = lv_anim_completed_cb_t;// 动画执行完毕事件回调
 using Anim = lv_anim_t &;
 using Anim_t = lv_anim_t;
+using AnimPath = lv_anim_path_cb_t;
 
 
 // 色彩
