@@ -32,14 +32,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】添加了电源管理模式，但并未验证">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】补充了GUI线程">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/driversDevelop/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/driversDevelop/ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1689,11 +1683,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Program\Embedded\MCU\STM32\Furina\BSP\src" />
       <recent name="D:\Embedded\MCU\STM32\Furina\AI\LinearDisplacementSensor\App" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Base" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Module" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Conf" />
-      <recent name="D:\Embedded\MCU\STM32\Furina\BSP\Core" />
     </key>
   </component>
   <component name="RtosSettings">
@@ -1932,15 +1926,7 @@
       <workItem from="1736482116580" duration="1813000" />
       <workItem from="1736496588069" duration="7612000" />
       <workItem from="1736505032355" duration="227000" />
-      <workItem from="1736576228934" duration="2185000" />
-    </task>
-    <task id="LOCAL-00047" summary="【双音频信号发生器】贝塞尔二次曲线_又见漏墨端倪，真机上右一小块没有正常显示，模拟器上可以">
-      <option name="closed" value="true" />
-      <created>1730694564105</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1730694564105</updated>
+      <workItem from="1736576228934" duration="3137000" />
     </task>
     <task id="LOCAL-00048" summary="【双音频信号发生器】算法基本OK">
       <option name="closed" value="true" />
@@ -2326,7 +2312,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736577327678</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="【驱动开发】补充了GUI线程">
+      <option name="closed" value="true" />
+      <created>1736578806571</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1736578806571</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2361,7 +2355,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="语音存储与回放可以使用，接下来只要添加各种逻辑即可" />
     <MESSAGE value="【语音存储与回放】完善了播放速度等逻辑" />
     <MESSAGE value="【语音存储与回放】修复了已知问题(doge" />
     <MESSAGE value="【简易存储示波器】FPGA的时序正常可以正常读取数值" />
@@ -2386,7 +2379,8 @@
     <MESSAGE value="【驱动开发】成功使用CLion的RTOS集成功能，并且把FreeRTOS的堆栈都放到了CCMRAM中" />
     <MESSAGE value="【驱动开发】准备在模拟器里设置一些常用的组件" />
     <MESSAGE value="【驱动开发】添加了电源管理模式，但并未验证" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】添加了电源管理模式，但并未验证" />
+    <MESSAGE value="【驱动开发】补充了GUI线程" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】补充了GUI线程" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

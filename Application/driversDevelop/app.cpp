@@ -7,6 +7,8 @@
 #include "adc.h"
 #include "key.hpp"
 #include "timer.h"
+#include "RNG.h"
+
 import async_delay;
 
 using AsyncDelay_HAL = AsyncDelay<HAL_GetTick>;
@@ -16,7 +18,7 @@ AsyncDelay_HAL temperature_delay(1000);
 void app_init()
 {
     adc1_temperature_sensor_init();
-
+    RNG_Init();
 
 }
 
@@ -62,6 +64,7 @@ void adc1_isr()
 }
 
 float temp;
+uint32_t rand;
 
 void background_handler()
 {
