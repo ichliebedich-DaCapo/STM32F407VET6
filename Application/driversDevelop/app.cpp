@@ -70,6 +70,7 @@ void background_handler()
     temp = get_adc1_temperature();
 
 
+    __WFI();  // Wait for interrupt
 
 }
 
