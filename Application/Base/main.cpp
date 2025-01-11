@@ -2,12 +2,16 @@
 #include "baseInit.hpp"
 
 #ifdef FreeRTOS_ENABLE // 是否启用RTOS
+
 #include "cmsis_os2.h"
+
 #endif// FreeRTOS_ENABLE
 
 #ifndef GUI_DISABLE
+
 #include "lcd.h"
 #include "GUI.hpp"
+
 #endif
 
 #include "key.hpp"
@@ -20,13 +24,15 @@ extern void background_handler();// 后台处理函数
 __attribute__((weak)) void background_handler() {}
 
 #ifdef FreeRTOS_ENABLE
+
 void backgroundTask(void *argument)// 后台线程
 {
-    for(;;)
+    for (;;)
     {
         background_handler();
     }
 }
+
 #endif
 
 
@@ -56,6 +62,21 @@ int main()
             .priority = (osPriority_t) osPriorityLow,
     };
     osThreadNew(backgroundTask, nullptr, &backgroundTask_attributes);
+
+    // 创建GUI线程
+    const osThreadAttr_t GUITask_attributes = {
+            .name = "GUITask",
+            .stack_size = 512 * 4,
+            .priority = (osPriority_t) osPriorityNormal,
+    };
+    osThreadNew([](void *)
+                {
+                    for (;;)
+                    {
+                        osDelay(5);
+                        GUI::handler();
+                    }
+                }, nullptr, &GUITask_attributes);
 
     // 启动调度器
     osKernelStart();
