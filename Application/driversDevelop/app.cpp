@@ -9,6 +9,8 @@
 #include "timer.h"
 #include "RNG.h"
 #include "GUI.hpp"
+#include "RCC.h"
+
 import async_delay;
 
 using AsyncDelay_HAL = AsyncDelay<HAL_GetTick>;
@@ -29,18 +31,18 @@ void key_handler()
         case keyk0://开始采集数据
             if (Key::stateHandler(KEY_STATE_NONE))
             {
-                adc1_start_it();
+               SystemClock_Overclock();
+
+
             }
-
-
             break;
+
+
         case keyk1://开始采集数据
             if (Key::stateHandler(KEY_STATE_NONE))
             {
-                adc1_stop_it();
-
+                SystemClock_DefaultConfig();
             }
-
             break;
 
 

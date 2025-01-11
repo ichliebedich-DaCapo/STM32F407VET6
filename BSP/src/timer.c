@@ -70,7 +70,9 @@ void timer6_init(uint32_t arr, uint32_t psc)
 }
 
 extern void timer6_isr();
+
 __weak void timer6_isr() {}
+
 void TIM6_DAC_IRQHandler()
 {
     // 我把TIM7当做系统时钟，所以并不需要判断中断源
@@ -83,7 +85,7 @@ void TIM6_DAC_IRQHandler()
  * @param psc 预分频
  * @param arr 自动重载值，不能为0
  */
-void timer6_set_freq(uint32_t psc,uint32_t arr )
+void timer6_set_freq(uint32_t psc, uint32_t arr)
 {
     __HAL_TIM_SET_PRESCALER(&htim6, psc);
     // arr不能为0，否则CNT寄存器不变
@@ -94,6 +96,7 @@ void timer6_set_arr(uint32_t arr)
 {
     __HAL_TIM_SET_AUTORELOAD(&htim6, arr);
 }
+
 uint32_t timer6_get_arr()
 {
     return __HAL_TIM_GET_AUTORELOAD(&htim6);
@@ -104,9 +107,65 @@ uint32_t timer6_get_arr()
  * @param psc 预分频
  * @param arr 自动重载值，不能为0
  */
-void timer2_set_freq(uint32_t psc,uint32_t arr )
+void timer2_set_freq(uint32_t psc, uint32_t arr)
 {
     __HAL_TIM_SET_PRESCALER(&htim2, psc);
     // arr不能为0，否则CNT寄存器不变
     __HAL_TIM_SET_AUTORELOAD(&htim2, arr);
+}
+
+
+#include "stm32f4xx_hal.h"
+
+/**
+  * @brief  设置定时器频率
+  * @param  htim: 定时器句柄（如 &htim2）
+  * @param  target_freq: 目标频率（单位：Hz）
+  * @retval HAL_StatusTypeDef: 成功返回 HAL_OK，失败返回 HAL_ERROR
+  */
+HAL_StatusTypeDef Timer_SetFrequency(TIM_HandleTypeDef *htim, uint32_t target_freq)
+{
+    uint32_t timer_clock_freq; // 定时器时钟源频率
+    uint32_t psc_value;        // 预分频器值
+
+    // 获取 APB 总线时钟频率
+    if (htim->Instance == TIM2 || htim->Instance == TIM3 || htim->Instance == TIM4 || htim->Instance == TIM5 ||
+        htim->Instance == TIM9 || htim->Instance == TIM10 || htim->Instance == TIM11)
+    {
+        // APB1 定时器
+        timer_clock_freq = HAL_RCC_GetPCLK1Freq();
+        if (RCC->CFGR & RCC_CFGR_PPRE1_2) // 检查 APB1 预分频器
+        {
+            timer_clock_freq *= 2; // 如果预分频器不为 1，时钟频率乘以 2
+        }
+    }
+    else
+    {
+        // APB2 定时器
+        timer_clock_freq = HAL_RCC_GetPCLK2Freq();
+        if (RCC->CFGR & RCC_CFGR_PPRE2_2) // 检查 APB2 预分频器
+        {
+            timer_clock_freq *= 2; // 如果预分频器不为 1，时钟频率乘以 2
+        }
+    }
+
+    // 检查目标频率是否有效
+    if (target_freq == 0 || target_freq > timer_clock_freq)
+    {
+        return HAL_ERROR; // 目标频率无效
+    }
+
+    // 计算预分频器值
+    psc_value = (timer_clock_freq / target_freq) - 1;
+
+    // 检查预分频器值是否超出范围
+    if (psc_value > 0xFFFF)
+    {
+        return HAL_ERROR; // 预分频器值超出 16 位范围
+    }
+
+    // 设置定时器预分频器
+    __HAL_TIM_SET_PRESCALER(htim, psc_value);
+
+    return HAL_OK;
 }

@@ -32,17 +32,14 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】添加了硬件随机数生成驱动">
-      <change afterPath="$PROJECT_DIR$/BSP/inc/RNG.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/Component/inc/CPU.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GUI/Component/src/CPU.cpp" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】添加显示CPU温度模块，同时找到了Label显示含浮点数的格式字符串只显示f的原因">
+      <change afterPath="$PROJECT_DIR$/BSP/inc/RCC.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BSP/src/RCC.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/baseInit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/baseInit.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI_Base.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI_Base.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Component/inc/label.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/inc/label.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Component/src/label.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/src/label.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/driversDevelop/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/driversDevelop/ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/lv_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/lv_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/timer.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/timer.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1695,8 +1692,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\Program\Embedded\MCU\STM32\Furina\GUI\Component\src" />
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\BSP\src" />
+      <recent name="E:\Program\Embedded\MCU\STM32\Furina\GUI\Component\src" />
       <recent name="D:\Embedded\MCU\STM32\Furina\AI\LinearDisplacementSensor\App" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Base" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Module" />
@@ -1938,15 +1935,7 @@
       <workItem from="1736482116580" duration="1813000" />
       <workItem from="1736496588069" duration="7612000" />
       <workItem from="1736505032355" duration="227000" />
-      <workItem from="1736576228934" duration="5801000" />
-    </task>
-    <task id="LOCAL-00049" summary="【双音频信号发生器】调整项目组织结构">
-      <option name="closed" value="true" />
-      <created>1730732283409</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1730732283409</updated>
+      <workItem from="1736576228934" duration="12507000" />
     </task>
     <task id="LOCAL-00050" summary="【双音频信号发生器】完成了这次的项目优化，后面还有许多不妥之处，后续再慢慢改">
       <option name="closed" value="true" />
@@ -2332,7 +2321,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736579547197</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="【驱动开发】添加显示CPU温度模块，同时找到了Label显示含浮点数的格式字符串只显示f的原因">
+      <option name="closed" value="true" />
+      <created>1736582959574</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1736582959574</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2367,7 +2364,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【语音存储与回放】修复了已知问题(doge" />
     <MESSAGE value="【简易存储示波器】FPGA的时序正常可以正常读取数值" />
     <MESSAGE value="【简易存储示波器】准备合并" />
     <MESSAGE value="【简易存储示波器】准备合并UI" />
@@ -2392,7 +2388,8 @@
     <MESSAGE value="【驱动开发】添加了电源管理模式，但并未验证" />
     <MESSAGE value="【驱动开发】补充了GUI线程" />
     <MESSAGE value="【驱动开发】添加了硬件随机数生成驱动" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】添加了硬件随机数生成驱动" />
+    <MESSAGE value="【驱动开发】添加显示CPU温度模块，同时找到了Label显示含浮点数的格式字符串只显示f的原因" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】添加显示CPU温度模块，同时找到了Label显示含浮点数的格式字符串只显示f的原因" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
