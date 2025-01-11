@@ -32,8 +32,17 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】补充了GUI线程">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】添加了硬件随机数生成驱动">
+      <change afterPath="$PROJECT_DIR$/BSP/inc/RNG.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/Component/inc/CPU.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/Component/src/CPU.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI_Base.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI_Base.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Component/inc/label.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/inc/label.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Component/src/label.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Component/src/label.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/driversDevelop/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/driversDevelop/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/lv_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/lvgl/lvgl/lv_conf.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1632,6 +1641,9 @@
     <setting file="file://$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/startup_stm32f407xx.s" root0="SKIP_INSPECTION" />
   </component>
+  <component name="OCResolveContextSettings">
+    <option name="configuration" value="0-Default-libmodule" />
+  </component>
   <component name="PerforceDirect.Settings">
     <option name="CHARSET" value="none" />
   </component>
@@ -1683,11 +1695,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Program\Embedded\MCU\STM32\Furina\GUI\Component\src" />
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\BSP\src" />
       <recent name="D:\Embedded\MCU\STM32\Furina\AI\LinearDisplacementSensor\App" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Base" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Module" />
-      <recent name="D:\Embedded\MCU\STM32\Furina\Application\Conf" />
     </key>
   </component>
   <component name="RtosSettings">
@@ -1926,15 +1938,7 @@
       <workItem from="1736482116580" duration="1813000" />
       <workItem from="1736496588069" duration="7612000" />
       <workItem from="1736505032355" duration="227000" />
-      <workItem from="1736576228934" duration="3137000" />
-    </task>
-    <task id="LOCAL-00048" summary="【双音频信号发生器】算法基本OK">
-      <option name="closed" value="true" />
-      <created>1730717047441</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1730717047441</updated>
+      <workItem from="1736576228934" duration="5801000" />
     </task>
     <task id="LOCAL-00049" summary="【双音频信号发生器】调整项目组织结构">
       <option name="closed" value="true" />
@@ -2320,7 +2324,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736578806571</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="【驱动开发】添加了硬件随机数生成驱动">
+      <option name="closed" value="true" />
+      <created>1736579547197</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1736579547197</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2355,7 +2367,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【语音存储与回放】完善了播放速度等逻辑" />
     <MESSAGE value="【语音存储与回放】修复了已知问题(doge" />
     <MESSAGE value="【简易存储示波器】FPGA的时序正常可以正常读取数值" />
     <MESSAGE value="【简易存储示波器】准备合并" />
@@ -2380,14 +2391,14 @@
     <MESSAGE value="【驱动开发】准备在模拟器里设置一些常用的组件" />
     <MESSAGE value="【驱动开发】添加了电源管理模式，但并未验证" />
     <MESSAGE value="【驱动开发】补充了GUI线程" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】补充了GUI线程" />
+    <MESSAGE value="【驱动开发】添加了硬件随机数生成驱动" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】添加了硬件随机数生成驱动" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
         <watch expression="temp" />
-        <watch expression="CPU_RunTime" />
-        <watch expression="ulTotalRunTime" />
+        <watch expression="rand" />
       </configuration>
     </watches-manager>
   </component>

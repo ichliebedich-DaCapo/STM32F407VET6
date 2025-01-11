@@ -19,11 +19,12 @@
 #include "imageButton.hpp"
 #include "FPS.hpp"
 #include "anim.hpp"
+#include "CPU.hpp"
 
 class GUI_Base
 {
 public:
-    static void screen_init();
+    static void screen_init();// 默认父对象为gui.main.screen
     static void events_init();
 };
 

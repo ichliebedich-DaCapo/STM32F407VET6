@@ -8,7 +8,7 @@
 #include "key.hpp"
 #include "timer.h"
 #include "RNG.h"
-
+#include "GUI.hpp"
 import async_delay;
 
 using AsyncDelay_HAL = AsyncDelay<HAL_GetTick>;
@@ -69,10 +69,8 @@ uint32_t rand;
 void background_handler()
 {
 
-    osDelay(1000);
-    temp = get_adc1_temperature();
-
-
+    osDelay(500);
+    CPU::print<get_adc1_temperature>();
 }
 
 
