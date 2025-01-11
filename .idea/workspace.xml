@@ -32,20 +32,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】添加了超频的接口">
-      <change afterPath="$PROJECT_DIR$/BSP/inc/debug.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BSP/src/debug.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tpiu_itm_commands.gdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/ISR.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/RCC.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/RCC.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/usart.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stlink.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/stlink.cfg" afterDir="false" />
-    </list>
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】添加了ITM串口打印功能" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -1942,15 +1929,7 @@
       <workItem from="1736505032355" duration="227000" />
       <workItem from="1736576228934" duration="13219000" />
       <workItem from="1736590748612" duration="851000" />
-      <workItem from="1736592009049" duration="20098000" />
-    </task>
-    <task id="LOCAL-00051" summary="【双音频信号发生器】完善了一下Readme">
-      <option name="closed" value="true" />
-      <created>1730736973300</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1730736973300</updated>
+      <workItem from="1736592009049" duration="20792000" />
     </task>
     <task id="LOCAL-00052" summary="【双音频信号发生器】略微优化了CMakelists">
       <option name="closed" value="true" />
@@ -2336,7 +2315,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736590415056</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="【驱动开发】添加了ITM串口打印功能">
+      <option name="closed" value="true" />
+      <created>1736613282630</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1736613282630</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2371,7 +2358,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【简易存储示波器】准备合并" />
     <MESSAGE value="【简易存储示波器】准备合并UI" />
     <MESSAGE value="【简易存储示波器】可以设置采样频率" />
     <MESSAGE value="【简易存储示波器】可以显示采样频率" />
@@ -2396,7 +2382,8 @@
     <MESSAGE value="【驱动开发】添加了硬件随机数生成驱动" />
     <MESSAGE value="【驱动开发】添加显示CPU温度模块，同时找到了Label显示含浮点数的格式字符串只显示f的原因" />
     <MESSAGE value="【驱动开发】添加了超频的接口" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】添加了超频的接口" />
+    <MESSAGE value="【驱动开发】添加了ITM串口打印功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】添加了ITM串口打印功能" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
