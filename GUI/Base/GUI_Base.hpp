@@ -6,7 +6,7 @@
 
 #include <cstdio>
 #ifdef ARM_MATH_CM4
-#include "JYZQ_Conf.h"
+#include "App_Conf.h"
 #endif
 // 头文件
 #include "lvgl.h"

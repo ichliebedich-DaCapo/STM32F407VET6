@@ -6,7 +6,7 @@
 #include "lcd.h"
 #include "fsmc.h"
 #include "key_exit.h"
-#include "JYZQ_Conf.h"
+#include "App_Conf.h"
 #include "CPU_RunTime.h"
 #include "key.hpp"
 #include "RCC.h"
@@ -29,7 +29,7 @@ void BaseInit()
     SystemClock_DefaultConfig();// 系统时钟初始化
 
     // 开启FreeRTOS的运行时统计信息
-#if FreeRTOS_DEBUG
+#if FreeRTOS_DEBUG && defined(FreeRTOS_ENABLE)
     ConfigureTimerForRunTimeStats();
 #endif
 

@@ -171,14 +171,14 @@ standard names. */
 /* USER CODE BEGIN Defines */
 /* Section where parameter definitions can be added (for instance, to override default ones in FreeRTOS.h) */
 
-#include "JYZQ_Conf.h"
+#include "App_Conf.h"
 
 #if FreeRTOS_DEBUG
 #define configRECORD_STACK_HIGH_ADDRESS 1   // 用于显示任务堆栈信息
 #define configGENERATE_RUN_TIME_STATS 1 // 任务表的运行时列
 extern CCMRAM_VAR volatile uint32_t CPU_RunTime;// 定义一个变量存储CPU运行时间
-#define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() (CPU_RunTime = 0ul)    // 于初始化一个高精度定时器
-#define portGET_RUN_TIME_COUNTER_VALUE() CPU_RunTime    // 用于获取当前定时器的计数值
+#define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() (CPU_RunTime = 0ul)    // 用于初始化一个高精度定时器
+#define portGET_RUN_TIME_COUNTER_VALUE() CPU_RunTime    // 用于获取当前定时器的计数值，这个宏被FreeRTOS调用，被赋予给两个变量
 #endif
 
 /* USER CODE END Defines */

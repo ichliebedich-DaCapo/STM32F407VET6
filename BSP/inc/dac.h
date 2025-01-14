@@ -5,7 +5,7 @@
 #ifndef FURINA_DAC_H
 #define FURINA_DAC_H
 
-#include "JYZQ_Conf.h"
+#include "App_Conf.h"
 #include "stm32f4xx_hal.h"
 
 

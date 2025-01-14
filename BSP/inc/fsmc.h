@@ -4,7 +4,7 @@
 
 #ifndef FURINA_FSMC_H
 #define FURINA_FSMC_H
-#include "JYZQ_Conf.h"
+#include "App_Conf.h"
 
 
 #ifdef __cplusplus

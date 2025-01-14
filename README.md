@@ -85,14 +85,14 @@ ___
 ## 项目
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 > 本工程由于融合了多个简单实验项目，采用选择性编译的方法来避免冲突，原理在上文中提到。
-在Application目录下的Conf目录里，有一个名为JYZQ_Conf.h，该文件的主要作用是传递应用级头文件的宏，
+在Application目录下的Conf目录里，有一个名为App_Conf.h，该文件的主要作用是传递应用级头文件的宏，
 以此来控制不同模块的编译。
 
 ### _说明_：
 - 应用级文件一般由app.hpp/cpp组成，每个实验项目都在Application有一个独立的目录，比如signalGenerator、voiceStorage等。
 其中头文件app.hpp里没有任何接口变量什么的，只有一堆宏声明，用于控制不同模块的编译。
 <br><br>
--  正如前文所述，app.hpp里有一堆宏来控制不同模块的编译，在不同模块里会通过引用JYZQ_Conf.h间接引用app.hpp，进而
+-  正如前文所述，app.hpp里有一堆宏来控制不同模块的编译，在不同模块里会通过引用App_Conf.h间接引用app.hpp，进而
 通过预编译指令 **#ifdef** 来控制改编译单元是否编译。
 <br><br>
 - 补充了是否启用FreeRTOS的宏，如果不需要使用RTOS，可在应用级文件定义一个宏APP_NO_RTOS,同时在CMakeLists里把FreeRTOS资源文件注释掉
@@ -105,7 +105,7 @@ ___
 先从顶层Application开始看，里面主要实现了两个函数app_init和key_handler，见名知义，
 同时main函数不再是我们编写代码的主场地。
 <br><br>
-- **宏**：在JYZQ_Conf.h里可以看到一些奇怪的宏，这里被注释的宏只是为了记忆，方便编写app.hpp/cpp时知道定义哪个宏
+- **宏**：在App_Conf.h里可以看到一些奇怪的宏，这里被注释的宏只是为了记忆，方便编写app.hpp/cpp时知道定义哪个宏
 <br><br>
 - **模块层的静态类**：模块层基本上都是用静态类来实现的，这是为了更好地封装同时不至于二进制文件膨胀。其中，
   变量和一些简单函数基本上都是私有成员，这么做主要是不让其他函数随意访问这里的变量，只能通过给定的接口实现（代码逻辑更清晰），
@@ -245,5 +245,5 @@ extern "C" {
 
 ___
 <!-- 相戏耳 -->
-**人员**：WJY、WZX、XZQ +HNT &nbsp;&nbsp;&nbsp; 软：JY、ZQ &nbsp;&nbsp; 硬：ZX +NT <br>
+**人员**：WJY、WZX、XZQ +HNT &nbsp;&nbsp;&nbsp; 软：JY、ZQ &nbsp;&nbsp; 硬：ZX <br>
 <!-- ZQ发起&开发&维护  JY开发  ZX硬件支持-->

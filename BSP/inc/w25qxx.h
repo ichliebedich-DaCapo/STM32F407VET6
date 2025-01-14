@@ -5,7 +5,7 @@
 #ifndef FURINA_W25QXX_H
 #define FURINA_W25QXX_H
 
-#include "JYZQ_Conf.h"
+#include "App_Conf.h"
 #include "spi.h"
 #ifdef __cplusplus
 extern "C" {

@@ -5,7 +5,7 @@
 #ifndef FURINA_DSP_HPP
 #define FURINA_DSP_HPP
 
-#include "JYZQ_Conf.h"
+#include "App_Conf.h"
 
 /* 预编译命令 */
 #ifdef USE_FFT

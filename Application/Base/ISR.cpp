@@ -11,7 +11,7 @@
  * @解决不详 好吧EXTI0也不可以，原因很简单，不能直接把该文件编译成静态库再取链接启动文件(除非该文件有头文件)。
  *      而是和启动文件一样，作为资源文件一起链接其他静态库
 */
-#include "JYZQ_Conf.h"
+#include "App_Conf.h"
 #include "stm32f4xx_hal.h"
 #include "timer.h"
 #include "adc.h"

@@ -6,7 +6,7 @@
 #define FURINA_LCD_H
 
 
-#include "JYZQ_Conf.h"
+#include "App_Conf.h"
 
 #include <stdint.h>
 

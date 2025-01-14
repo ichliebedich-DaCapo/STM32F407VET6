@@ -2,7 +2,7 @@
 // Created by fairy on 2024/10/7.
 //
 #include "CPU_RunTime.h"
-#include "JYZQ_Conf.h"
+#include "App_Conf.h"
 #include "stm32f4xx_hal.h"
 
 /* 用于统计运行时间 */
