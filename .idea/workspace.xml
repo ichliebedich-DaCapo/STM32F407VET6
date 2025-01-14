@@ -32,14 +32,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】准备添加SDIO和FATFS文件系统">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="它是我的逆鳞，曾陪我熬过狼狈、被孤立的高三">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Base/baseInit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/baseInit.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Conf/JYZQ_Conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/adc.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/adc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/sdio.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/sdio.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Third_Party/FreeRTOS/FreeRTOSConfig.h" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Third_Party/FreeRTOS/FreeRTOSConfig.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Conf/App_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Conf/App_Conf.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1704,6 +1699,11 @@
     <option name="rtosType" value="FreeRTOS" />
   </component>
   <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release-MinGW_ARM" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="E:\Program\Embedded\MCU\STM32\final_homework\stlink.cfg" reset-type="RUN" download-type="UPDATED_ONLY">
         <debugger kind="GDB" isBundled="true" />
@@ -1938,23 +1938,7 @@
       <workItem from="1736782481334" duration="162000" />
       <workItem from="1736782929862" duration="151000" />
       <workItem from="1736786980451" duration="903000" />
-      <workItem from="1736849257495" duration="3000" />
-    </task>
-    <task id="LOCAL-00052" summary="【双音频信号发生器】略微优化了CMakelists">
-      <option name="closed" value="true" />
-      <created>1730782464123</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1730782464123</updated>
-    </task>
-    <task id="LOCAL-00053" summary="【双音频信号发生器】实测过程中，发现定时器的psc和arr有些古怪：比如我明明把psc与arr颠倒了却仍得到相同的结果，另外arr在1和0范围内有些古怪。128*8K有些高，卡在定时器中断里不出来，这并不应该">
-      <option name="closed" value="true" />
-      <created>1730827807973</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1730827807974</updated>
+      <workItem from="1736849257495" duration="1531000" />
     </task>
     <task id="LOCAL-00054" summary="【双音频信号发生器】硬件基本功能已正确，可整一些花活了">
       <option name="closed" value="true" />
@@ -2332,7 +2316,23 @@
       <option name="project" value="LOCAL" />
       <updated>1736613282630</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="每个人都有自己钟爱的事物，它不应被取笑,也不应被不合时宜、不分轻重地开玩笑。除非你们是陌生人">
+      <option name="closed" value="true" />
+      <created>1736849537517</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1736849537517</updated>
+    </task>
+    <task id="LOCAL-00102" summary="它是我的逆鳞，曾陪我熬过狼狈、被孤立的高三">
+      <option name="closed" value="true" />
+      <created>1736849719142</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1736849719142</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2367,8 +2367,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【简易存储示波器】准备合并UI" />
-    <MESSAGE value="【简易存储示波器】可以设置采样频率" />
     <MESSAGE value="【简易存储示波器】可以显示采样频率" />
     <MESSAGE value="【添加】异步延迟类：单位位ms，依赖于计时器" />
     <MESSAGE value="【添加】&#10;标志类：可自行定义各种标志枚举体，可作为其他类的的基类使用" />
@@ -2392,7 +2390,9 @@
     <MESSAGE value="【驱动开发】添加显示CPU温度模块，同时找到了Label显示含浮点数的格式字符串只显示f的原因" />
     <MESSAGE value="【驱动开发】添加了超频的接口" />
     <MESSAGE value="【驱动开发】添加了ITM串口打印功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】添加了ITM串口打印功能" />
+    <MESSAGE value="每个人都有自己钟爱的事物，它不应被取笑,也不应被不合时宜、不分轻重地开玩笑。除非你们是陌生人" />
+    <MESSAGE value="它是我的逆鳞，曾陪我熬过狼狈、被孤立的高三" />
+    <option name="LAST_COMMIT_MESSAGE" value="它是我的逆鳞，曾陪我熬过狼狈、被孤立的高三" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
