@@ -4,7 +4,7 @@
 
 #ifndef FURINA_SPI_H
 #define FURINA_SPI_H
-#include "JYZQ_Conf.h"
+#include "App_Conf.h"
 
 #include "stm32f4xx_hal.h"
 

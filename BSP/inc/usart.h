@@ -5,7 +5,7 @@
 #ifndef FURINA_USART_H
 #define FURINA_USART_H
 
-#include "JYZQ_Conf.h"
+#include "App_Conf.h"
 
 
 

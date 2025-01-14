@@ -162,7 +162,7 @@ uint16_t get_ADC1_average(uint32_t channel, uint8_t times)
  */
 float get_adc1_temperature()
 {
-    float temperature=0;
+    float temperature = 0;
     HAL_ADC_Start(&hadc1);
     if (HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY) == HAL_OK)
     {

@@ -1,8 +1,8 @@
 //
 // Created by fairy on 2024/9/22.
 //
-#ifndef FURINA_JYZQ_CONF_H
-#define FURINA_JYZQ_CONF_H
+#ifndef FURINA_APP_CONF_H
+#define FURINA_APP_CONF_H
 /**
  *  @brief JYZQの配置文件
  *  @note  主要是用于控制调试相关的宏，同时展现模块和驱动有哪些。这里的宏后缀都有"__"，而应用层宏后缀没有"__"
@@ -13,14 +13,11 @@
 #include "app.hpp"
 
 /**************************常用应用级*****************************/
-
 #define USE_FSMC_DMA // 一般启用DMA
 #define FreeRTOS_DEBUG  1  // 是否开启FreeRTOS调试模式。调试时，开了之后在负荷不大的情况下，也并不怎么影响实时性。发行时记得关闭
 
-/****需要在app.hpp中添加宏，不过由于CMakelists检测功能限制，如果不开启该功能需要直接把宏删除而不是注释，然后再Cmake一下*****/
-
+/****需要在app.hpp中定义宏，不过由于CMakelists检测功能限制，如果不开启该功能需要直接把宏删除而不是注释，然后再Cmake一下*****/
 //#define FreeRTOS_ENABLE // 【默认关闭FreeRTOS】 因为一些项目比较简单且对实时性要求很高，使用FreeRTOS会增加开销
-
 //#define GUI_DISABLE   // 【默认开启GUI】
 
 /// 板级驱动
@@ -29,7 +26,7 @@
 
 
 /****************************宏定义的频率****************************/
-// 用于填入形参表为(uint32_t arr, uint32_t psc)的函数中，以方便修改频率
+// 用于填入形参表为(uint32_t arr, uint32_t psc)的函数中，以方便修改频率。也可直接用设置频率的那个函数
 #define FREQ_84M_to_50   1679,999     // 84MHz -> 50Hz
 #define FREQ_84M_to_100  839,999    // 84MHz -> 100Hz
 #define FREQ_84M_to_200  419,999    // 84MHz -> 200Hz
@@ -84,4 +81,4 @@
 #define CCMRAM_VAR __attribute__((section(".ccmram")))
 
 
-#endif //FURINA_JYZQ_CONF_H
+#endif //FURINA_APP_CONF_H

@@ -4,7 +4,7 @@
 
 #ifndef FURINA_CPU_TEMPERATURE_HPP
 #define FURINA_CPU_TEMPERATURE_HPP
-#include "JYZQ_Conf.h"
+#include "App_Conf.h"
 #if USE_CPU_TEMPERATURE
 
 /**

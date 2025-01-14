@@ -2,7 +2,7 @@
 // Created by fairy on 2025/1/9 23:06.
 //
 #include "pwr.h"
-#include "JYZQ_Conf.h"
+#include "App_Conf.h"
 // 头文件
 #include "stm32f4xx_hal.h"
 

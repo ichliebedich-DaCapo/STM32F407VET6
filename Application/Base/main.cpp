@@ -1,4 +1,4 @@
-#include "JYZQ_Conf.h"
+#include "App_Conf.h"
 #include "baseInit.hpp"
 
 #ifdef FreeRTOS_ENABLE // 是否启用RTOS
