@@ -27,6 +27,8 @@ void LCD_Set_Pixel(uint16_t x, uint16_t y, uint16_t color);// 设置一个像素
 
 void lcd_init(void);// 液晶初始化
 
+void LCD_direction(uint8_t direction);// 设置显示方向
+
 void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p);// 填充矩形区域
 
 #ifdef __cplusplus

@@ -9,6 +9,4 @@
 #define GUI_DISABLE   // 【默认开启GUI】
 
 
-
-
 #endif //FURINA_APP_HPP

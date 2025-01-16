@@ -6,19 +6,20 @@
 #define FURINA_SPI_H
 #include "App_Conf.h"
 
-#include "stm32f4xx_hal.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 
-
 void spi3_init();// 初始化SPI3
 void spi2_init();// 初始化SPI2
+void spi2_cs_low();// 拉低SPI2的片选
+void spi2_cs_high();// 拉高SPI2的片选
+void spi2_sendByte(unsigned char data);// 发送一个字节数据
+void spi2_sendByteArray(unsigned char *data, unsigned int len);// 发送一个字节数组
 
-extern  SPI_HandleTypeDef hspi3;
-extern  SPI_HandleTypeDef hspi2;
+
 #ifdef __cplusplus
 }
 #endif

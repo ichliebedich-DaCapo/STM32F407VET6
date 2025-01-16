@@ -5,7 +5,7 @@
 #include <string.h>
 #include "lcd.h"
 
-
+#include "spi.h"
 #include "fsmc.h"
 #include "stm32f4xx_hal.h"
 
@@ -25,6 +25,43 @@ extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
 
 /*预编译*/
 #define LCD_SORTS 9488
+#define LCD_INTERFACE_TYPE 1 // 0:8080接口 1:SPI接口
+#define delay_ms(ms)   HAL_Delay(ms)
+
+// 使用SPI时
+#if LCD_INTERFACE_TYPE == 1
+// GPIO引脚定义
+#define LCD_RST_PIN GPIO_PIN_15
+#define LCD_RST_PORT GPIOB
+#define LCD_RS_PIN GPIO_PIN_13
+#define LCD_RS_PORT GPIOB
+#define LCD_RST_LOW()  HAL_GPIO_WritePin(LCD_RST_PORT, LCD_RST_PIN, GPIO_PIN_RESET)
+#define LCD_RST_HIGH()  HAL_GPIO_WritePin(LCD_RST_PORT, LCD_RST_PIN, GPIO_PIN_SET)
+#define LCD_RS_LOW()  HAL_GPIO_WritePin(LCD_RS_PORT, LCD_RS_PIN, GPIO_PIN_RESET)    // 低电平发送命令
+#define LCD_RS_HIGH()  HAL_GPIO_WritePin(LCD_RS_PORT, LCD_RS_PIN, GPIO_PIN_SET)     // 高电平发送数据
+#define LCD_CS_LOW()  spi2_cs_low()
+#define LCD_CS_HIGH()  spi2_cs_high()
+
+// 函数
+void LCD_WR_REG(uint8_t data)
+{
+    LCD_CS_LOW();
+    LCD_RS_LOW();// 低电平发送命令
+    spi2_sendByte(data);
+    LCD_CS_HIGH();
+}
+
+void LCD_WR_DATA(uint8_t data)
+{
+    LCD_CS_LOW();
+    LCD_RS_HIGH();// 高电平发送数据
+    spi2_sendByte(data);
+    LCD_CS_HIGH();
+}
+
+
+#endif
+
 
 /********************************************************************
  * 名称 : LCD_Init9481
@@ -34,6 +71,8 @@ extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
  ***********************************************************************/
 void lcd_init(void)
 {
+#if LCD_INTERFACE_TYPE == 0
+
 #if LCD_SORTS == 9481
     TFT_RST = 0;
     HAL_Delay(5);
@@ -227,7 +266,131 @@ void lcd_init(void)
 
 //     LCD_Clear(0xFFFF);  // 清除屏幕，设置为白色
 #endif
+
+#elif LCD_INTERFACE_TYPE == 1
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+    GPIO_InitStruct.Pin = LCD_RST_PIN;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    HAL_GPIO_Init(LCD_RST_PORT, &GPIO_InitStruct);
+    LCD_RST_HIGH();
+
+    GPIO_InitStruct.Pin = LCD_RS_PIN;
+    HAL_GPIO_Init(LCD_RS_PORT, &GPIO_InitStruct);
+
+
+    spi2_init(); //硬件SPI初始化
+
+    //LCD 复位
+    delay_ms(30);
+    LCD_RST_LOW();
+    delay_ms(100);
+    LCD_RST_HIGH();
+    delay_ms(50);
+
+//*************3.5 ST7796S IPS初始化**********//
+    LCD_WR_REG(0x11);
+
+    delay_ms(120);                //Delay 120ms
+
+    LCD_WR_REG(0x36);     // Memory Data Access Control MY,MX~~
+    LCD_WR_DATA(0x48);// (1<<6|1<<3)
+
+    LCD_WR_REG(0x3A);
+    LCD_WR_DATA(0x55);   //LCD_WR_DATA(0x66);
+
+    LCD_WR_REG(0xF0);     // Command Set Control
+    LCD_WR_DATA(0xC3);
+
+    LCD_WR_REG(0xF0);
+    LCD_WR_DATA(0x96);
+
+    LCD_WR_REG(0xB4);
+    LCD_WR_DATA(0x01);
+
+    LCD_WR_REG(0xB7);
+    LCD_WR_DATA(0xC6);
+
+    //LCD_WR_REG(0xB9);
+    //LCD_WR_DATA(0x02);
+    //LCD_WR_DATA(0xE0);
+
+    LCD_WR_REG(0xC0);
+    LCD_WR_DATA(0x80);
+    LCD_WR_DATA(0x45);
+
+    LCD_WR_REG(0xC1);
+    LCD_WR_DATA(0x13);   //18  //00
+
+    LCD_WR_REG(0xC2);
+    LCD_WR_DATA(0xA7);
+
+    LCD_WR_REG(0xC5);
+    LCD_WR_DATA(0x0A);
+
+    LCD_WR_REG(0xE8);
+    LCD_WR_DATA(0x40);
+    LCD_WR_DATA(0x8A);
+    LCD_WR_DATA(0x00);
+    LCD_WR_DATA(0x00);
+    LCD_WR_DATA(0x29);
+    LCD_WR_DATA(0x19);
+    LCD_WR_DATA(0xA5);
+    LCD_WR_DATA(0x33);
+
+    LCD_WR_REG(0xE0);
+    LCD_WR_DATA(0xD0);
+    LCD_WR_DATA(0x08);
+    LCD_WR_DATA(0x0F);
+    LCD_WR_DATA(0x06);
+    LCD_WR_DATA(0x06);
+    LCD_WR_DATA(0x33);
+    LCD_WR_DATA(0x30);
+    LCD_WR_DATA(0x33);
+    LCD_WR_DATA(0x47);
+    LCD_WR_DATA(0x17);
+    LCD_WR_DATA(0x13);
+    LCD_WR_DATA(0x13);
+    LCD_WR_DATA(0x2B);
+    LCD_WR_DATA(0x31);
+
+    LCD_WR_REG(0xE1);
+    LCD_WR_DATA(0xD0);
+    LCD_WR_DATA(0x0A);
+    LCD_WR_DATA(0x11);
+    LCD_WR_DATA(0x0B);
+    LCD_WR_DATA(0x09);
+    LCD_WR_DATA(0x07);
+    LCD_WR_DATA(0x2F);
+    LCD_WR_DATA(0x33);
+    LCD_WR_DATA(0x47);
+    LCD_WR_DATA(0x38);
+    LCD_WR_DATA(0x15);
+    LCD_WR_DATA(0x16);
+    LCD_WR_DATA(0x2C);
+    LCD_WR_DATA(0x32);
+
+    LCD_WR_REG(0xF0);
+    LCD_WR_DATA(0x3C);
+
+    LCD_WR_REG(0xF0);
+    LCD_WR_DATA(0x69);
+
+    delay_ms(120);
+    LCD_WR_REG(0x21);
+    LCD_WR_REG(0x29);
+
+    LCD_WR_REG(0x36);//设置LCD显示方向
+    LCD_WR_DATA(0x60);//   0x28
+
+    LCD_Clear(0x36ff);
+#else
+#endif
 }
+
+
 
 /**********************************绘制接口*********************************************/
 /**
@@ -241,6 +404,7 @@ void lcd_init(void)
  */
 void LCD_Set_Window(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey)
 {
+#if LCD_INTERFACE_TYPE == 0
     // 设置列地址范围
     LCD_WRITE_CMD(0x002A);
     LCD_WRITE_DATA(sx >> 8);
@@ -257,14 +421,80 @@ void LCD_Set_Window(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey)
 
     // 开始传输数据到LCD
     LCD_WRITE_CMD(0x002C);
+#elif LCD_INTERFACE_TYPE == 1
+    LCD_WR_REG(0x2A);
+    LCD_WR_DATA(sx >> 8);
+    LCD_WR_DATA(0x00FF & sx);
+    LCD_WR_DATA(ey >> 8);
+    LCD_WR_DATA(0x00FF & ey);
+
+    LCD_WR_REG(0x2B);
+    LCD_WR_DATA(sy >> 8);
+    LCD_WR_DATA(0x00FF & sy);
+    LCD_WR_DATA(ey >> 8);
+    LCD_WR_DATA(0x00FF & ey);
+
+    LCD_WR_REG(0x2C);//开始写入GRAM
+#endif
+}
+
+void LCD_direction(uint8_t direction)
+{
+#if LCD_INTERFACE_TYPE == 0
+#elif LCD_INTERFACE_TYPE == 1
+    // 初始为竖屏
+    // 定义液晶屏顺时针旋转方向 	0-0度旋转，1-90度旋转，2-180度旋转，3-270度旋转
+    LCD_WR_REG(0x36);
+    switch (direction)
+    {
+        case 0:
+//            lcddev.width=LCD_W;
+//            lcddev.height=LCD_H;
+            LCD_WR_DATA((1 << 3) | (1 << 6));// 0x48;
+            break;
+        case 1:
+//            lcddev.width=LCD_H;
+//            lcddev.height=LCD_W;
+//            LCD_WR_DATA((1 << 3) | (1 << 5));// 0x28;
+            LCD_WR_DATA(0x60);// 这才是横屏
+            break;
+        case 2:
+//            lcddev.width=LCD_W;
+//            lcddev.height=LCD_H;
+            LCD_WR_DATA((1 << 3) | (1 << 7));// 0x88;
+            break;
+        case 3:
+//            lcddev.width=LCD_H;
+//            lcddev.height=LCD_W;
+            LCD_WR_DATA((1 << 3) | (1 << 7) | (1 << 6) | (1 << 5));// 0xE8;
+            break;
+        default:
+            break;
+    }
+#endif
 }
 
 
 void LCD_Clear(uint16_t color)
 {
+
+#if LCD_INTERFACE_TYPE == 0
     LCD_Set_Window(0, 0, 479, 319);
-    for (uint32_t i = 0; i < 0x25800; i++)
+    for (uint32_t i = 0; i < 0x25800; ++i)
+    {
         LCD_WRITE_DATA(color);
+    }
+#elif LCD_INTERFACE_TYPE == 1
+    LCD_Set_Window(0, 0, 479, 319);
+    LCD_CS_LOW();
+    LCD_RS_HIGH();
+    for (uint32_t i = 0; i < 480 * 320; ++i)
+    {
+        spi2_sendByte(color >> 8);
+        spi2_sendByte(color & 0xFF);
+    }
+    LCD_CS_HIGH();
+#endif
 }
 
 /**
