@@ -11,7 +11,7 @@
 #include "key.hpp"
 #include "timer.h"
 #include "RNG.h"
-
+#include "lcd.h"
 #ifndef GUI_DISABLE
 #include "GUI.hpp"
 #endif
@@ -35,6 +35,7 @@ void app_init()
     RNG_Init();
     ITM_Init();
 
+
 }
 
 void key_handler()
@@ -44,7 +45,8 @@ void key_handler()
         case keyk0://开始采集数据
             if (Key::stateHandler(KEY_STATE_NONE))
             {
-                ITM_SendChar('A');
+                LCD_direction(0);
+                LCD_Clear(0x36ff);
             }
             break;
 
@@ -52,15 +54,26 @@ void key_handler()
         case keyk1://开始采集数据
             if (Key::stateHandler(KEY_STATE_NONE))
             {
-                ITM_SendChar('C');
+                LCD_direction(1);
+                LCD_Clear(0xffff);
             }
             break;
 
 
         case keyk2://开始采集数据
 
-            ITM_SendChar('E');
+            LCD_direction(1);
+            LCD_Clear(0xff36);
 
+            break;
+
+        case keyk3:
+            LCD_direction(1);
+            LCD_Clear(0x4242);
+            break;
+
+        case keyk4:
+            LCD_Clear(0x304f);
             break;
 
         default:

@@ -6,7 +6,7 @@
 #define FURINA_W25QXX_H
 
 #include "App_Conf.h"
-#include "spi.h"
+#include "stm32f4xx_hal.h"
 #ifdef __cplusplus
 extern "C" {
 #endif

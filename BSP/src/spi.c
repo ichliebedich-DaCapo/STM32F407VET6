@@ -1,10 +1,9 @@
 //
-// Created by 34753 on 2024/10/8.
+// Created by fairy on 2024/10/8.
 //
 
 #include "spi.h"
-
-
+#include "stm32f4xx_hal.h"
 
 SPI_HandleTypeDef hspi2;
 
@@ -22,6 +21,18 @@ void spi3_init()
 
     GPIO_InitTypeDef GPIO_InitStruct = {0};
 
+    /**SPI3 GPIO Configuration
+    PC10     ------> SPI3_SCK
+    PC11     ------> SPI3_MISO
+    PC12     ------> SPI3_MOSI
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_InitStruct.Alternate = GPIO_AF6_SPI3;
+    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
     hspi3.Instance = SPI3;
     hspi3.Init.Mode = SPI_MODE_MASTER;
     hspi3.Init.Direction = SPI_DIRECTION_2LINES;
@@ -36,18 +47,6 @@ void spi3_init()
     hspi3.Init.CRCPolynomial = 10;
 
 
-    /**SPI3 GPIO Configuration
-    PC10     ------> SPI3_SCK
-    PC11     ------> SPI3_MISO
-    PC12     ------> SPI3_MOSI
-    */
-    GPIO_InitStruct.Pin = GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_InitStruct.Alternate = GPIO_AF6_SPI3;
-    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
     if (HAL_SPI_Init(&hspi3) != HAL_OK)
     {
         Error_Handler();
@@ -56,7 +55,7 @@ void spi3_init()
 
 /**
  * @brief SPI2初始化
- * @details 硬件SPI
+ * @details 硬件SPI,使用的是软件片选，片选引脚依然是PB12
  */
 void spi2_init()
 {
@@ -72,7 +71,6 @@ void spi2_init()
     PB10     ------> SPI2_SCK
     PB12     ------> SPI2_NSS
     */
-
     GPIO_InitStruct.Pin = GPIO_PIN_2 | GPIO_PIN_3;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -88,7 +86,7 @@ void spi2_init()
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
     GPIO_InitStruct.Pin = GPIO_PIN_12;
-    GPIO_InitStruct.Mode =GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
     hspi2.Instance = SPI2;
@@ -97,7 +95,7 @@ void spi2_init()
     hspi2.Init.DataSize = SPI_DATASIZE_8BIT;
     hspi2.Init.CLKPolarity = SPI_POLARITY_LOW;
     hspi2.Init.CLKPhase = SPI_PHASE_1EDGE;
-    hspi2.Init.NSS = SPI_NSS_SOFT;// 硬件片选
+    hspi2.Init.NSS = SPI_NSS_SOFT;// 软硬件片选
     hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
     hspi2.Init.FirstBit = SPI_FIRSTBIT_MSB;
     hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
@@ -107,4 +105,22 @@ void spi2_init()
     {
         Error_Handler();
     }
+}
+void spi2_cs_low()
+{
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
+}
+void spi2_cs_high()
+{
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET);
+}
+
+void spi2_sendByte(unsigned char data)
+{
+    HAL_SPI_Transmit(&hspi2, &data, 1, HAL_MAX_DELAY);
+}
+
+void spi2_sendByteArray(unsigned char *data, unsigned int len)
+{
+    HAL_SPI_Transmit(&hspi2, data, len, HAL_MAX_DELAY);
 }

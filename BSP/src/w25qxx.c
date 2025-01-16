@@ -2,7 +2,9 @@
 // Created by fairy on 2024/10/8.
 //
 #include "w25qxx.h"
+#include "spi.h"
 
+extern SPI_HandleTypeDef hspi2;
 
 /*FLASH_SPI*/
 #define FLASH_SPI SPI2
