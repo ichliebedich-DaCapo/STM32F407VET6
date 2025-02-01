@@ -338,7 +338,7 @@ private:
 /***********************函数实现***********************/
 auto GUI_Base::screen_init() -> void
 {
-    Component::set_parent(gui->main.screen.get_object());
+    Component::set_parent(gui->main.screen.get_obj());
 
     // 设置边框
     gui->main.rect.init(78, 36, 324, 208);

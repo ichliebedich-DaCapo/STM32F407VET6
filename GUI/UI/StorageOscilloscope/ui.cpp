@@ -117,7 +117,7 @@ private:
 ///***********************界面布置***********************/
 auto GUI_Base::screen_init() -> void
 {
-    Component::set_parent(gui->main.screen.get_object());
+    Component::set_parent(gui->main.screen.get_obj());
     gui->main.screen.bg_color(lv_color_black());
 
 
@@ -162,7 +162,7 @@ auto GUI_Base::events_init() -> void
     gui->main.magnification.add_event(btn_fun(
                                               printf("press button\n");
 
-            ));
+                                      ));
 
 }
 

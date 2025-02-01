@@ -35,51 +35,88 @@ void app_init()
     RNG_Init();
     ITM_Init();
 
-
 }
 
 void key_handler()
 {
     switch (Key::getCode())
     {
-        case keyk0://开始采集数据
+
+        case keyk0:
             if (Key::stateHandler(KEY_STATE_NONE))
             {
-                LCD_direction(0);
                 LCD_Clear(0x36ff);
             }
             break;
 
 
-        case keyk1://开始采集数据
+        case keyk1:
             if (Key::stateHandler(KEY_STATE_NONE))
             {
-                LCD_direction(1);
                 LCD_Clear(0xffff);
             }
             break;
-
-
-        case keyk2://开始采集数据
-
-            LCD_direction(1);
-            LCD_Clear(0xff36);
-
+        case keyk2:
+            LCD_Clear(0xFF36); // 填充颜色 0xFF36
             break;
 
         case keyk3:
-            LCD_direction(1);
-            LCD_Clear(0x4242);
+            LCD_Clear(0x4242); // 填充颜色 0x4242
             break;
 
         case keyk4:
-            LCD_Clear(0x304f);
+            LCD_Clear(0x1234); // 填充颜色 0x1234
+            break;
+
+        case keyk5:
+            LCD_Clear(0x5678); // 填充颜色 0x5678
+            break;
+
+        case keyk6:
+            LCD_Clear(0x9ABC); // 填充颜色 0x9ABC
+            break;
+
+        case keyk7:
+
+            LCD_Clear(0xDEF0); // 填充颜色 0xDEF0
+            break;
+
+        case keyk8:
+            LCD_Clear(0x304F); // 填充颜色 0x304F
+            break;
+
+        case keyk9:
+            LCD_Clear(0x1A2B); // 填充颜色 0x1A2B
+            break;
+
+        case keykA:
+            LCD_Clear(0x3C4D); // 填充颜色 0x3C4D
+            break;
+
+        case keykB:
+            LCD_Clear(0x5E6F); // 填充颜色 0x5E6F
+            break;
+
+        case keykC:
+            LCD_Clear(0x7A8B); // 填充颜色 0x7A8B
+            break;
+
+        case keykD:
+            LCD_Clear(0x9CAD); // 填充颜色 0x9CAD
+            break;
+
+        case keykE:
+            LCD_Clear(0xBCDE); // 填充颜色 0xBCDE
+            break;
+
+        case keykF:
+            LCD_Clear(0xFEDC); // 填充颜色 0xFEDC
             break;
 
         default:
             break;
 
-    }
+}
 }
 /**实现中断服务例程*/
 // 用于采集ADC数据

@@ -36,7 +36,7 @@ set(SIZE arm-none-eabi-size)
 
 
 # -----------------工程设置-----------------
-project(Furina C CXX ASM)
+project(Furina LANGUAGES C CXX ASM)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_C_STANDARD 11)
 
@@ -46,19 +46,25 @@ set(COMPILER_IS_GCC TRUE)
 
 # ------------------------添加宏定义--------------------------
 add_compile_definitions(ARM_MATH_CM4;ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING)
-# 使用Debug，使用HAL库。    -DUSE_FULL_LL_DRIVER 使用LL库
+# 使用Debug，使用HAL库,指定目标芯片的型号。    -DUSE_FULL_LL_DRIVER 使用LL库
 add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx)
 
 
 #--------------------------编译选项----------------------------
 # 根据编译器类型设置特定编译选项
-
+# -m 选项通常用于控制目标架构、指令集和硬件特性。
+# 指定目标处理器为Cortex-M4  生成Thumb指令集的代码  允许Thumb和ARM指令集之间的互操作
 add_compile_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
+# 使用硬件浮点单元（FPU）进行浮点运算  指定浮点单元的类型为 FPv4-SP（单精度浮点单元），并限制寄存器数量为 16 个
 # 硬件浮点和软件浮点(-mfloat-abi=soft)，任选一个
 add_compile_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
 
 
 #---------------------------优化选项--------------------------
+# 将每个函数放在单独的段中，便于链接器优化   将每个全局变量放在单独的段中，便于链接器优化
+# 将每个函数放在独立的节区中:允许链接器删除未使用的函数，减少代码大小;将每个全局变量放在独立的节区中:允许链接器删除未使用的变量，减少数据大小。
+# 禁止将未初始化的全局变量放在COMMON节区中:确保未初始化的全局变量被正确分配到.bss 节区;设置编译器错误消息的最大长度为无限制:确保编译器错误消息完整显示
+
 add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-length=0)
 # 允许预处理器处理汇编文件
 add_compile_options($<$<COMPILE_LANGUAGE:ASM>:-x$<SEMICOLON>assembler-with-cpp>)
@@ -96,21 +102,32 @@ string(REGEX REPLACE "^.*/(.+)$" "\\1" APP_DIR_LAST_PART "${APP_DIR}")
 # 拼接新的 UI_DIR
 set(UI_DIR "GUI/UI/${APP_DIR_LAST_PART}")
 
-# -------读取对应GUI_DISABLE宏----------
+# -------读取对应GUI_DISABLE和FreeRTOS_ENABLE宏----------
 # 获取文件中的宏
+# 在app.hpp里打注释没用的原因找到了
 file(READ "${APP_DIR}/app.hpp" macro_content)
-string(FIND "${macro_content}" "GUI_DISABLE" GUI_DISABLE_POS)
-string(FIND "${macro_content}" "FreeRTOS_ENABLE" FreeRTOS_ENABLE_POS)
-# ------设置对应配置------
-if (GUI_DISABLE_POS EQUAL -1)
+# 使用正则表达式检查 GUI_DISABLE 是否被注释掉
+if (macro_content MATCHES "//.*GUI_DISABLE")
+    message(STATUS ">>>>>> GUI_DISABLE is commented out.")
     set(GUI_ENABLE True)
+elseif (macro_content MATCHES "#define GUI_DISABLE")
+    message(STATUS ">>>>>> GUI_DISABLE is defined.")
+    set(GUI_ENABLE False)
+else ()
     message(STATUS ">>>>>> GUI_DISABLE not found.")
+    set(GUI_ENABLE True)
 endif ()
-if (FreeRTOS_ENABLE_POS GREATER -1)
-    set(FreeRTOS_ENABLE True)
+# 使用正则表达式检查 FreeRTOS_ENABLE 是否被定义
+if (macro_content MATCHES "//.*FreeRTOS_ENABLE")
+    message(STATUS ">>>>>> FreeRTOS_ENABLE is commented out.")
+    set(FreeRTOS_ENABLE False)
+elseif (macro_content MATCHES "#define FreeRTOS_ENABLE")
     message(STATUS ">>>>>> FreeRTOS_ENABLE found.")
+    set(FreeRTOS_ENABLE True)
+else ()
+    message(STATUS ">>>>>> FreeRTOS_ENABLE not found.")
+    set(FreeRTOS_ENABLE False)
 endif ()
-
 
 # ----设置编译目录----
 set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
@@ -120,7 +137,9 @@ set(BIN_DIR ${BUILD_DIR}/bin)
 
 #-------------------------------------------库-------------------------------------------
 # 官方驱动库
+# 收集官方驱动库的源代码文件
 file(GLOB_RECURSE DRIVERS_SRC "Drivers/STM32F4xx_HAL_Driver/Src/*.c")
+# 定义驱动库的头文件目录
 set(DRIVERS_DIR
         Drivers
         Drivers/STM32F4xx_HAL_Driver/Inc
@@ -128,25 +147,31 @@ set(DRIVERS_DIR
         Drivers/CMSIS/Device/ST/STM32F4xx/Include
         Drivers/CMSIS/Include
 )
+# 创建静态的官方驱动库
 add_library(libdrivers STATIC ${DRIVERS_SRC})
+# 设置官方驱动库的头文件路径
 target_include_directories(libdrivers PUBLIC ${DRIVERS_DIR})
-# 设置静态库的输出目录
+# 设置官方驱动库的输出目录
 set_target_properties(libdrivers PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
 #---------------------第三方库-----------------------
 # -----lvgl库-----
+# 收集lvgl库的源代码文件
 file(GLOB_RECURSE LVGL_SRC
         # LVGL库
         "Library/Third_Party/LVGL/lvgl/src/*.c"
         "Library/Third_Party/LVGL/lvgl/examples/porting/*.c"
 )
+# 定义lvgl库的头文件目录
 set(LVGL_DIR
         Library/Third_Party/LVGL
         Library/Third_Party/LVGL/lvgl/src
         Library/Third_Party/LVGL/lvgl/examples/porting
 )
+# 创建静态的官方驱动库
 add_library(liblvgl STATIC ${LVGL_SRC})
+# 设置官方驱动库的头文件路径
 target_include_directories(liblvgl PRIVATE BSP/inc)
 target_include_directories(liblvgl PUBLIC ${LVGL_DIR})
 # 依赖BSP中的lcd库 耦合有些严重，后面慢慢改
@@ -341,10 +366,10 @@ endif ()
 
 
 # -------------------编译链接-------------------
-# 设置链接脚本
+# 设置链接脚本（用于指定内存布局）
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld)
 
-# 链接标志
+# 链接标志：指在编译和链接过程中，传递给链接器（Linker）的选项或参数，和链接选项是一个东西
 add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
 add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
 add_link_options(-T ${LINKER_SCRIPT})
@@ -361,7 +386,7 @@ add_link_options(-T ${LINKER_SCRIPT})
 add_link_options(-Wl,-gc-sections,--relax,--as-needed,--print-memory-usage,-Map=${BIN_DIR}/${PROJECT_NAME}.map)
 #add_link_options(-Wl,--strip-all)# 好像没有作用
 
-# 设置链接目标
+# 定义一个可执行文件目标，生成了 ELF 文件
 add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
 
 # 导入模块

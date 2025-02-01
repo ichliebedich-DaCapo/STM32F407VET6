@@ -381,11 +381,10 @@ void lcd_init(void)
     delay_ms(120);
     LCD_WR_REG(0x21);
     LCD_WR_REG(0x29);
-
-    LCD_WR_REG(0x36);//设置LCD显示方向
-    LCD_WR_DATA(0x60);//   0x28
-
-    LCD_Clear(0x36ff);
+    LCD_direction(0);//下两句被封装为此句，默认显示方向为横屏
+//    LCD_WR_REG(0x36);
+//    LCD_WR_DATA(0x60);
+    LCD_Clear(0xffff);
 #else
 #endif
 }
@@ -437,7 +436,11 @@ void LCD_Set_Window(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey)
     LCD_WR_REG(0x2C);//开始写入GRAM
 #endif
 }
-
+/**
+ * 设置LCD显示方向
+ * 该函数用于设置LCD的显示方向，通过指定显示方向参数来确定LCD的显示方式
+ * @param direction 显示方向参数，取值范围为0~3，分别表示0度、90度、180度、270度
+ */
 void LCD_direction(uint8_t direction)
 {
 #if LCD_INTERFACE_TYPE == 0
@@ -445,29 +448,70 @@ void LCD_direction(uint8_t direction)
     // 初始为竖屏
     // 定义液晶屏顺时针旋转方向 	0-0度旋转，1-90度旋转，2-180度旋转，3-270度旋转
     LCD_WR_REG(0x36);
+//注意：原始方向为竖屏
+//    位	名称	描述
+//    7	    MY	垂直方向镜像（1：镜像，0：正常）
+//    6	    MX	水平方向镜像（1：镜像，0：正常）
+//    5	    MV	行列交换（1：交换，0：不交换）
+//    4   	ML	垂直刷新顺序（1：反向，0：正常）
+//    3 	BGR	RGB/BGR 顺序（1：BGR，0：RGB）
+//    2 	MH	水平刷新顺序（1：反向，0：正常）
+//    1 	-	保留位
+//    0 	-	保留位
     switch (direction)
     {
         case 0:
 //            lcddev.width=LCD_W;
 //            lcddev.height=LCD_H;
-            LCD_WR_DATA((1 << 3) | (1 << 6));// 0x48;
+//            LCD_WR_DATA((1 << 3) | (1 << 6));// 0x48;
+            LCD_WR_DATA((1<<5)|(1<<6));// 行列交换 水平方向镜像 横屏2;
             break;
         case 1:
 //            lcddev.width=LCD_H;
 //            lcddev.height=LCD_W;
 //            LCD_WR_DATA((1 << 3) | (1 << 5));// 0x28;
-            LCD_WR_DATA(0x60);// 这才是横屏
+//            LCD_WR_DATA((1 << 5) | (1 << 6));// 0x60;
+//            LCD_WR_DATA((1 << 3)|(1 << 5) | (1 << 6));// 0x68;
+//            LCD_WR_DATA(0x60);// 这才是横屏
+            LCD_WR_DATA(0);// 原始方向 竖屏1;
+
             break;
         case 2:
 //            lcddev.width=LCD_W;
 //            lcddev.height=LCD_H;
-            LCD_WR_DATA((1 << 3) | (1 << 7));// 0x88;
+//            LCD_WR_DATA((1 << 3) | (1 << 7));// 0x88;
+            LCD_WR_DATA((1<<5)|(1<<7));// 行列交换 垂直方向镜像 横屏1;
             break;
         case 3:
 //            lcddev.width=LCD_H;
 //            lcddev.height=LCD_W;
-            LCD_WR_DATA((1 << 3) | (1 << 7) | (1 << 6) | (1 << 5));// 0xE8;
+//            LCD_WR_DATA((1 << 3) | (1 << 7) | (1 << 6) | (1 << 5));// 0xE8;
+            LCD_WR_DATA((1<<6)|(1<<7));// 垂直方向镜像 水平方向镜像 竖屏2;
             break;
+//        case 8:
+//            LCD_WR_DATA(0);// 原始方向 竖屏1;
+//            break;
+//        case 9:
+//            LCD_WR_DATA(1<<7);// 垂直方向镜像 ;
+//            break;
+//        case 10:
+//            LCD_WR_DATA(1<<6);// 水平方向镜像;
+//            break;
+//        case 11:
+//            LCD_WR_DATA((1<<6)|(1<<7));// 垂直方向镜像 水平方向镜像 竖屏2;
+//            break;
+//        case 12:
+//            LCD_WR_DATA(1<<5);// 行列交换;
+//            break;
+//        case 13:
+//            LCD_WR_DATA((1<<5)|(1<<7));// 行列交换 垂直方向镜像 横屏1;
+//            break;
+//        case 14:
+//            LCD_WR_DATA((1<<5)|(1<<6));// 行列交换 水平方向镜像 横屏2;
+//            break;
+//        case 15:
+//            LCD_WR_DATA((1 << 5) | (1 << 6) | (1 << 7));// 行列交换 水平方向镜像 垂直方向镜像;
+//            break;
         default:
             break;
     }
@@ -485,7 +529,9 @@ void LCD_Clear(uint16_t color)
         LCD_WRITE_DATA(color);
     }
 #elif LCD_INTERFACE_TYPE == 1
-    LCD_Set_Window(0, 0, 479, 319);
+//    LCD_Set_Window(0, 0, 479, 319);
+    LCD_Set_Window(0, 0, 319, 479);
+//    LCD_Set_Window(50, 50, 529, 369);
     LCD_CS_LOW();
     LCD_RS_HIGH();
     for (uint32_t i = 0; i < 480 * 320; ++i)

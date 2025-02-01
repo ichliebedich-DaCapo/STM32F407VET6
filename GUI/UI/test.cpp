@@ -68,54 +68,54 @@ private:
  */
 int keyboard_thread(void *data)
 {
-    // 创建 KeyboardInput 对象
-    KeyboardInput keyboard;
-
-    // 添加按键检测
-    keyboard.addKeyCheck('A', []()
-    {
-        std::cout << "A pressed" << std::endl;
-        UI::pressA();
-    });
-
-    keyboard.addKeyCheck('S', []()
-    {
-        std::cout << "S pressed" << std::endl;
-        UI::pressS();
-    });
-
-    keyboard.addKeyCheck('D', []()
-    {
-
-    });
-
-    keyboard.addKeyCheck('F', []()
-    {
-
-    });
-
-    keyboard.addKeyCheck('G', []()
-    {
-
-    });
-
-    keyboard.addKeyCheck('H', []()
-    {
-
-    });
-
-    keyboard.addKeyCheck('J', []()
-    {
-
-    });
-
-
-
-    // 主循环
-    while (simulator_is_running())
-    {
-        keyboard.update(); // 更新按键状态
-        SDL_Delay(30); // 避免 CPU 占用过高
-    }
+//    // 创建 KeyboardInput 对象
+//    KeyboardInput keyboard;
+//
+//    // 添加按键检测
+//    keyboard.addKeyCheck('A', []()
+//    {
+//        std::cout << "A pressed" << std::endl;
+//        UI::pressA();
+//    });
+//
+//    keyboard.addKeyCheck('S', []()
+//    {
+//        std::cout << "S pressed" << std::endl;
+//        UI::pressS();
+//    });
+//
+//    keyboard.addKeyCheck('D', []()
+//    {
+//
+//    });
+//
+//    keyboard.addKeyCheck('F', []()
+//    {
+//
+//    });
+//
+//    keyboard.addKeyCheck('G', []()
+//    {
+//
+//    });
+//
+//    keyboard.addKeyCheck('H', []()
+//    {
+//
+//    });
+//
+//    keyboard.addKeyCheck('J', []()
+//    {
+//
+//    });
+//
+//
+//
+//    // 主循环
+//    while (simulator_is_running())
+//    {
+//        keyboard.update(); // 更新按键状态
+//        SDL_Delay(30); // 避免 CPU 占用过高
+//    }
     return 0;
 }

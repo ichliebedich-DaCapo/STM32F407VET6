@@ -28,20 +28,37 @@
   </component>
   <component name="CMakeSettings">
     <configurations>
-      <configuration PROFILE_NAME="Release-MinGW_ARM" ENABLED="true" CONFIG_NAME="Release" TOOLCHAIN_NAME="MinGW_ARM" BUILD_OPTIONS="-j 16" />
+      <configuration PROFILE_NAME="Release-MinGW_ARM" ENABLED="true" CONFIG_NAME="Release" TOOLCHAIN_NAME="MinGW_ARM" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】添加了ESP2886的官方示例，但是还开始修改。准备先调整工程的架构再移植驱动">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】显示扫描频率">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2025_1_10_01_07____.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2025_1_9_13_55____.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2025_1_9_16_08____.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行合并之前于_2025_1_10_01_07_取消提交了更改_[更改]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行合并之前于_2025_1_9_13_55_取消提交了更改_[更改]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行合并之前于_2025_1_9_16_08_取消提交了更改_[更改]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/lcd.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/lcd.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/spi.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/spi.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/w25qxx.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/w25qxx.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/lcd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/spi.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/spi.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/w25qxx.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/w25qxx.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/.idea/lvgl-simulator.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/.cmake/api/v1/query/cache-v2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/.cmake/api/v1/query/cmakeFiles-v1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/.cmake/api/v1/query/codemodel-v2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/.cmake/api/v1/query/toolchains-v1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeCache.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/cmake.check_cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/cmake_install.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stlink.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/stlink.cfg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1588,7 +1605,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="ZQ" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -1620,8 +1637,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6.git&quot;,
-    &quot;accountId&quot;: &quot;a679c97f-91ee-40eb-8ce5-af8a944aaf79&quot;
+    &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6&quot;,
+    &quot;accountId&quot;: &quot;a9ff9cce-f6cd-41c3-bd49-a806fb1abb79&quot;
   },
   &quot;recentNewPullRequestHead&quot;: {
     &quot;server&quot;: {
@@ -1639,9 +1656,6 @@
     <setting file="file://$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/startup_stm32f407xx.s" root0="SKIP_INSPECTION" />
-  </component>
-  <component name="OCResolveContextSettings">
-    <option name="configuration" value="0-Default-libmodule" />
   </component>
   <component name="PerforceDirect.Settings">
     <option name="CHARSET" value="none" />
@@ -1678,9 +1692,9 @@
     "cf.advertisement.text.has.clang-format": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "ZQ",
+    "git-widget-placeholder": "no__dirty__point",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "E:/Program/Embedded/MCU/STM32/Furina",
+    "last_opened_file_path": "D:/Program/stm32/STM32F407VET6",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -1694,20 +1708,16 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\Program\Embedded\MCU\STM32\Furina\BSP\src" />
-      <recent name="E:\Program\Embedded\MCU\STM32\Furina\GUI\Component\src" />
       <recent name="D:\Embedded\MCU\STM32\Furina\AI\LinearDisplacementSensor\App" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Base" />
       <recent name="D:\Embedded\MCU\STM32\Furina\Module" />
+      <recent name="D:\Embedded\MCU\STM32\Furina\Application\Conf" />
+      <recent name="D:\Embedded\MCU\STM32\Furina\BSP\Core" />
     </key>
-  </component>
-  <component name="RtosSettings">
-    <option name="rtosEnabled" value="true" />
-    <option name="rtosType" value="FreeRTOS" />
   </component>
   <component name="RunManager">
     <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release-MinGW_ARM" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
-      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="E:\Program\Embedded\MCU\STM32\final_homework\stlink.cfg" reset-type="RUN" download-type="UPDATED_ONLY">
+      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Program\stm32\STM32F407VET6\stlink.cfg" reset-type="RUN" download-type="ALWAYS">
         <debugger kind="GDB" isBundled="true" />
       </openocd>
       <method v="2">
@@ -1910,39 +1920,213 @@
       <workItem from="1735199719148" duration="2034000" />
       <workItem from="1735218767740" duration="4379000" />
       <workItem from="1735294699751" duration="5463000" />
-      <workItem from="1735356713533" duration="12401000" />
-      <workItem from="1735394806728" duration="1205000" />
-      <workItem from="1735450269095" duration="1814000" />
-      <workItem from="1735453101341" duration="6351000" />
-      <workItem from="1735460060161" duration="331000" />
-      <workItem from="1735463893885" duration="18000" />
-      <workItem from="1735470508026" duration="26000" />
-      <workItem from="1735494447668" duration="636000" />
-      <workItem from="1735573107317" duration="2222000" />
-      <workItem from="1735664386238" duration="1443000" />
-      <workItem from="1735719767911" duration="1334000" />
-      <workItem from="1735740419702" duration="25000" />
-      <workItem from="1735819138753" duration="524000" />
-      <workItem from="1736340874181" duration="5828000" />
-      <workItem from="1736353441167" duration="634000" />
-      <workItem from="1736398371736" duration="535000" />
-      <workItem from="1736400455489" duration="1390000" />
-      <workItem from="1736402010229" duration="2000" />
-      <workItem from="1736407159424" duration="2820000" />
-      <workItem from="1736482116580" duration="1813000" />
-      <workItem from="1736496588069" duration="7612000" />
-      <workItem from="1736505032355" duration="227000" />
-      <workItem from="1736576228934" duration="13219000" />
-      <workItem from="1736590748612" duration="851000" />
-      <workItem from="1736592009049" duration="20792000" />
-      <workItem from="1736654670687" duration="2335000" />
-      <workItem from="1736775907709" duration="188000" />
-      <workItem from="1736782481334" duration="162000" />
-      <workItem from="1736782929862" duration="151000" />
-      <workItem from="1736786980451" duration="903000" />
-      <workItem from="1736849257495" duration="1531000" />
-      <workItem from="1736866528422" duration="804000" />
-      <workItem from="1736997746376" duration="9272000" />
+      <workItem from="1735356713533" duration="9646000" />
+      <workItem from="1735372326963" duration="375000" />
+      <workItem from="1737092601248" duration="6484000" />
+      <workItem from="1737108593506" duration="5000" />
+      <workItem from="1737108610148" duration="12794000" />
+      <workItem from="1737261382653" duration="1000" />
+      <workItem from="1737610574431" duration="1769000" />
+      <workItem from="1737612362424" duration="2828000" />
+      <workItem from="1737907612677" duration="320000" />
+      <workItem from="1737948247451" duration="20366000" />
+      <workItem from="1738038410953" duration="15928000" />
+      <workItem from="1738125150733" duration="3949000" />
+      <workItem from="1738380212721" duration="7811000" />
+      <workItem from="1738388917624" duration="714000" />
+      <workItem from="1738403997124" duration="3379000" />
+    </task>
+    <task id="LOCAL-00030" summary="【初始】主项目——初步判断是ui.cpp导致ROM爆了，原因不明">
+      <option name="closed" value="true" />
+      <created>1729328450716</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1729328450716</updated>
+    </task>
+    <task id="LOCAL-00031" summary="【初始】主项目——已解决。吃个饭回来，发现原因是使用了cout，ROM直接增加了两百多KB">
+      <option name="closed" value="true" />
+      <created>1729331128662</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1729331128662</updated>
+    </task>
+    <task id="LOCAL-00032" summary="【初始】主项目——CMakelists未修改前">
+      <option name="closed" value="true" />
+      <created>1729335884890</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1729335884890</updated>
+    </task>
+    <task id="LOCAL-00033" summary="【初始】主项目——CMakelists实在没有什么好修改的地方">
+      <option name="closed" value="true" />
+      <created>1729336775210</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1729336775210</updated>
+    </task>
+    <task id="LOCAL-00034" summary="【初始】主项目——简单测试了一下驱动模块与UI事件的对接，可以初步完成一些基本操作，但还需要改进。添加一些对外接口">
+      <option name="closed" value="true" />
+      <created>1729400519694</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1729400519694</updated>
+    </task>
+    <task id="LOCAL-00035" summary="【初始】主项目——SPI_Flash已经调通，可以进行上层应用的开发了">
+      <option name="closed" value="true" />
+      <created>1729442762010</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1729442762010</updated>
+    </task>
+    <task id="LOCAL-00036" summary="【语音存储与回放】稍微优化了Flash读写函数">
+      <option name="closed" value="true" />
+      <created>1729473023590</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1729473023590</updated>
+    </task>
+    <task id="LOCAL-00037" summary="【语音存储与回放】启用了DMA用于FSMC传输数据，准备测试分支的读取内部温度传感器">
+      <option name="closed" value="true" />
+      <created>1729576787308</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1729576787308</updated>
+    </task>
+    <task id="LOCAL-00038" summary="【语音存储与回放】更新了Readme">
+      <option name="closed" value="true" />
+      <created>1729579144137</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1729579144137</updated>
+    </task>
+    <task id="LOCAL-00039" summary="【双音频信号发生器】发现绘制图表时会有很严重的性能问题。现准备尝试双缓冲">
+      <option name="closed" value="true" />
+      <created>1730528798409</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1730528798409</updated>
+    </task>
+    <task id="LOCAL-00040" summary="【双音频信号发生器】尝试用基本LCD函数来实现波形绘制">
+      <option name="closed" value="true" />
+      <created>1730559155335</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1730559155335</updated>
+    </task>
+    <task id="LOCAL-00041" summary="【双音频信号发生器】示波器绘制算法勉强可以使用，只不过在真机上运行会导致图形紊乱，猜测可能是数据类型导致的">
+      <option name="closed" value="true" />
+      <created>1730586115061</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1730586115061</updated>
+    </task>
+    <task id="LOCAL-00042" summary="【双音频信号发生器】已解决紊乱问题，现在尝试解决优化速率">
+      <option name="closed" value="true" />
+      <created>1730606427778</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1730606427778</updated>
+    </task>
+    <task id="LOCAL-00043" summary="【双音频信号发生器】准备解决绘制漏墨问题">
+      <option name="closed" value="true" />
+      <created>1730610629824</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1730610629824</updated>
+    </task>
+    <task id="LOCAL-00044" summary="【双音频信号发生器】发现漏墨问题的一点端倪">
+      <option name="closed" value="true" />
+      <created>1730619162562</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1730619162562</updated>
+    </task>
+    <task id="LOCAL-00045" summary="【双音频信号发生器】先搁置样条算法的死机问题，先更改模板函数">
+      <option name="closed" value="true" />
+      <created>1730622190728</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1730622190728</updated>
+    </task>
+    <task id="LOCAL-00046" summary="【双音频信号发生器】贝塞尔二次曲线，些许漏墨，但速度下降了不少。线性插值也是，真奇怪">
+      <option name="closed" value="true" />
+      <created>1730651874179</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1730651874179</updated>
+    </task>
+    <task id="LOCAL-00047" summary="【双音频信号发生器】贝塞尔二次曲线_又见漏墨端倪，真机上右一小块没有正常显示，模拟器上可以">
+      <option name="closed" value="true" />
+      <created>1730694564105</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1730694564105</updated>
+    </task>
+    <task id="LOCAL-00048" summary="【双音频信号发生器】算法基本OK">
+      <option name="closed" value="true" />
+      <created>1730717047441</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1730717047441</updated>
+    </task>
+    <task id="LOCAL-00049" summary="【双音频信号发生器】调整项目组织结构">
+      <option name="closed" value="true" />
+      <created>1730732283409</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1730732283409</updated>
+    </task>
+    <task id="LOCAL-00050" summary="【双音频信号发生器】完成了这次的项目优化，后面还有许多不妥之处，后续再慢慢改">
+      <option name="closed" value="true" />
+      <created>1730732916020</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1730732916020</updated>
+    </task>
+    <task id="LOCAL-00051" summary="【双音频信号发生器】完善了一下Readme">
+      <option name="closed" value="true" />
+      <created>1730736973300</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1730736973300</updated>
+    </task>
+    <task id="LOCAL-00052" summary="【双音频信号发生器】略微优化了CMakelists">
+      <option name="closed" value="true" />
+      <created>1730782464123</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1730782464123</updated>
+    </task>
+    <task id="LOCAL-00053" summary="【双音频信号发生器】实测过程中，发现定时器的psc和arr有些古怪：比如我明明把psc与arr颠倒了却仍得到相同的结果，另外arr在1和0范围内有些古怪。128*8K有些高，卡在定时器中断里不出来，这并不应该">
+      <option name="closed" value="true" />
+      <created>1730827807973</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1730827807974</updated>
     </task>
     <task id="LOCAL-00054" summary="【双音频信号发生器】硬件基本功能已正确，可整一些花活了">
       <option name="closed" value="true" />
@@ -2144,199 +2328,7 @@
       <option name="project" value="LOCAL" />
       <updated>1735367357110</updated>
     </task>
-    <task id="LOCAL-00079" summary="【简易存储示波器】可以显示采样频率">
-      <option name="closed" value="true" />
-      <created>1735368455793</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1735368455793</updated>
-    </task>
-    <task id="LOCAL-00080" summary="【添加】异步延迟类：单位位ms，依赖于计时器">
-      <option name="closed" value="true" />
-      <created>1735573352391</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1735573352391</updated>
-    </task>
-    <task id="LOCAL-00081" summary="【添加】&#10;异步延迟类：单位为ms，依赖于计时器&#10;标志类：可自行定义各种标志枚举体，可作为其他类的的基类使用">
-      <option name="closed" value="true" />
-      <created>1735573970602</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1735573970602</updated>
-    </task>
-    <task id="LOCAL-00082" summary="更新了lvgl库">
-      <option name="closed" value="true" />
-      <created>1735819534989</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1735819534989</updated>
-    </task>
-    <task id="LOCAL-00083" summary="模拟器可以显示，但实机不行">
-      <option name="closed" value="true" />
-      <created>1736341792954</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1736341792955</updated>
-    </task>
-    <task id="LOCAL-00084" summary="把主工程的LVGL库给模拟器使用，但模拟器依旧正常">
-      <option name="closed" value="true" />
-      <created>1736342051943</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1736342051943</updated>
-    </task>
-    <task id="LOCAL-00085" summary="现象：在lcd_flush函数里加一个软件断点，此函数会被多次调用，程序正常执行。反之，不加，那么该函数之后被调用一次">
-      <option name="closed" value="true" />
-      <created>1736344237504</created>
-      <option name="number" value="00085" />
-      <option name="presentableId" value="LOCAL-00085" />
-      <option name="project" value="LOCAL" />
-      <updated>1736344237504</updated>
-    </task>
-    <task id="LOCAL-00086" summary="原因：把绘制完毕通知函数放在DMA中断回调，但忘记在lvgl绘制函数中注释了">
-      <option name="closed" value="true" />
-      <created>1736344573779</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL-00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1736344573779</updated>
-    </task>
-    <task id="LOCAL-00087" summary="调整了lcd驱动的书写格式">
-      <option name="closed" value="true" />
-      <created>1736345671247</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1736345671247</updated>
-    </task>
-    <task id="LOCAL-00088" summary="略微调整了app中的细节">
-      <option name="closed" value="true" />
-      <created>1736346633018</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1736346633019</updated>
-    </task>
-    <task id="LOCAL-00089" summary="【驱动开发】可以尝试优化驱动组织关系，以及GUI控制启闭了">
-      <option name="closed" value="true" />
-      <created>1736401405891</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1736401405891</updated>
-    </task>
-    <task id="LOCAL-00090" summary="【驱动开发】在自动化编译情况下，无关文件并不会编译，那么驱动编译宏就失去了作用">
-      <option name="closed" value="true" />
-      <created>1736401721199</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1736401721199</updated>
-    </task>
-    <task id="LOCAL-00091" summary="【驱动开发】把堆栈段放在了CCMRAM中，并设为4字节对齐。只是在Key中定义state变量并放入CCMRAM，会导致奇怪的问题">
-      <option name="closed" value="true" />
-      <created>1736445021950</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1736445021950</updated>
-    </task>
-    <task id="LOCAL-00092" summary="【驱动开发】添加了FreeRTOS控制宏，同时修复了按键中断中信号量卡死的问题">
-      <option name="closed" value="true" />
-      <created>1736499012193</created>
-      <option name="number" value="00092" />
-      <option name="presentableId" value="LOCAL-00092" />
-      <option name="project" value="LOCAL" />
-      <updated>1736499012193</updated>
-    </task>
-    <task id="LOCAL-00093" summary="【驱动开发】成功使用CLion的RTOS集成功能，并且把FreeRTOS的堆栈都放到了CCMRAM中">
-      <option name="closed" value="true" />
-      <created>1736504418976</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1736504418976</updated>
-    </task>
-    <task id="LOCAL-00094" summary="【驱动开发】准备在模拟器里设置一些常用的组件">
-      <option name="closed" value="true" />
-      <created>1736505155707</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1736505155707</updated>
-    </task>
-    <task id="LOCAL-00095" summary="【驱动开发】添加了电源管理模式，但并未验证">
-      <option name="closed" value="true" />
-      <created>1736577327678</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1736577327678</updated>
-    </task>
-    <task id="LOCAL-00096" summary="【驱动开发】补充了GUI线程">
-      <option name="closed" value="true" />
-      <created>1736578806571</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1736578806571</updated>
-    </task>
-    <task id="LOCAL-00097" summary="【驱动开发】添加了硬件随机数生成驱动">
-      <option name="closed" value="true" />
-      <created>1736579547197</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1736579547197</updated>
-    </task>
-    <task id="LOCAL-00098" summary="【驱动开发】添加显示CPU温度模块，同时找到了Label显示含浮点数的格式字符串只显示f的原因">
-      <option name="closed" value="true" />
-      <created>1736582959574</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1736582959574</updated>
-    </task>
-    <task id="LOCAL-00099" summary="【驱动开发】添加了超频的接口">
-      <option name="closed" value="true" />
-      <created>1736590415056</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1736590415056</updated>
-    </task>
-    <task id="LOCAL-00100" summary="【驱动开发】添加了ITM串口打印功能">
-      <option name="closed" value="true" />
-      <created>1736613282630</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1736613282630</updated>
-    </task>
-    <task id="LOCAL-00101" summary="每个人都有自己钟爱的事物，它不应被取笑,也不应被不合时宜、不分轻重地开玩笑。除非你们是陌生人">
-      <option name="closed" value="true" />
-      <created>1736849537517</created>
-      <option name="number" value="00101" />
-      <option name="presentableId" value="LOCAL-00101" />
-      <option name="project" value="LOCAL" />
-      <updated>1736849537517</updated>
-    </task>
-    <task id="LOCAL-00102" summary="它是我的逆鳞，曾陪我熬过狼狈、被孤立的高三">
-      <option name="closed" value="true" />
-      <created>1736849719142</created>
-      <option name="number" value="00102" />
-      <option name="presentableId" value="LOCAL-00102" />
-      <option name="project" value="LOCAL" />
-      <updated>1736849719142</updated>
-    </task>
-    <option name="localTasksCounter" value="103" />
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2358,7 +2350,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="ZQ" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>
@@ -2371,32 +2363,42 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【简易存储示波器】可以显示采样频率" />
-    <MESSAGE value="【添加】异步延迟类：单位位ms，依赖于计时器" />
-    <MESSAGE value="【添加】&#10;标志类：可自行定义各种标志枚举体，可作为其他类的的基类使用" />
-    <MESSAGE value="【添加】&#10;标志类：可自行定义各种标志枚举体，可作为其他类的的基类使用" />
-    <MESSAGE value="更新了lvgl库" />
-    <MESSAGE value="模拟器可以显示，但实机不行" />
-    <MESSAGE value="把主工程的LVGL库给模拟器使用，但模拟器依旧正常" />
-    <MESSAGE value="现象：在lcd_flush函数里加一个软件断点，此函数会被多次调用，程序正常执行。反之，不加，那么该函数之后被调用一次" />
-    <MESSAGE value="原因：把绘制完毕通知函数放在DMA中断回调，但忘记在lvgl绘制函数中注释了" />
-    <MESSAGE value="调整了lcd驱动的书写格式" />
-    <MESSAGE value="略微调整了app中的细节" />
-    <MESSAGE value="【驱动开发】可以尝试优化驱动组织关系，以及GUI控制启闭了" />
-    <MESSAGE value="【驱动开发】在自动化编译情况下，无关文件并不会编译，那么驱动编译宏就失去了作用" />
-    <MESSAGE value="【驱动开发】把堆栈段放在了CCMRAM中，并设为4字节对齐。只是在Key中定义state变量并放入CCMRAM，会导致奇怪的问题" />
-    <MESSAGE value="【驱动开发】添加了FreeRTOS控制宏，同时修复了按键中断中信号量卡死的问题" />
-    <MESSAGE value="【驱动开发】成功使用CLion的RTOS集成功能，并且把FreeRTOS的堆栈都放到了CCMRAM中" />
-    <MESSAGE value="【驱动开发】准备在模拟器里设置一些常用的组件" />
-    <MESSAGE value="【驱动开发】添加了电源管理模式，但并未验证" />
-    <MESSAGE value="【驱动开发】补充了GUI线程" />
-    <MESSAGE value="【驱动开发】添加了硬件随机数生成驱动" />
-    <MESSAGE value="【驱动开发】添加显示CPU温度模块，同时找到了Label显示含浮点数的格式字符串只显示f的原因" />
-    <MESSAGE value="【驱动开发】添加了超频的接口" />
-    <MESSAGE value="【驱动开发】添加了ITM串口打印功能" />
-    <MESSAGE value="每个人都有自己钟爱的事物，它不应被取笑,也不应被不合时宜、不分轻重地开玩笑。除非你们是陌生人" />
-    <MESSAGE value="它是我的逆鳞，曾陪我熬过狼狈、被孤立的高三" />
-    <option name="LAST_COMMIT_MESSAGE" value="它是我的逆鳞，曾陪我熬过狼狈、被孤立的高三" />
+    <MESSAGE value="【双音频信号发生器】基本功能已全部完备，可以添加CPU温度显示了" />
+    <MESSAGE value="【双音频信号发生器】成功降低程序的耦合" />
+    <MESSAGE value="【双音频信号发生器】整合了链接优化选项" />
+    <MESSAGE value="【双音频信号发生器】略微优化了CMakelists" />
+    <MESSAGE value="【双音频信号发生器】准备合并" />
+    <MESSAGE value="【跨越】已经把AI模型初步部署进工程里了" />
+    <MESSAGE value="【准备】什么辣鸡gitignore，草" />
+    <MESSAGE value="【准备】是我错了" />
+    <MESSAGE value="【跨越】AI模型能跑，但我没有掌握如何处理输入与输出数据" />
+    <MESSAGE value="【阻碍】无论输入什么都只输出1，得要先排除浮点数据造成的影响" />
+    <MESSAGE value="【跨越】我的第一个AI模型" />
+    <MESSAGE value="准备融合" />
+    <MESSAGE value="已经融合，可以正常编译" />
+    <MESSAGE value="测试了module特性，可以正常使用" />
+    <MESSAGE value="终于可以把模块的声明和实现分开了" />
+    <MESSAGE value="略微调整了flash_storage模块的编写" />
+    <MESSAGE value="略微完善了flash_storage模块，并编写了测试案例" />
+    <MESSAGE value="flash_storage模块测试完毕" />
+    <MESSAGE value="语音存储与回放可以使用，接下来只要添加各种逻辑即可" />
+    <MESSAGE value="【语音存储与回放】完善了播放速度等逻辑" />
+    <MESSAGE value="【语音存储与回放】修复了已知问题(doge" />
+    <MESSAGE value="【简易存储示波器】FPGA的时序正常可以正常读取数值" />
+    <MESSAGE value="【简易存储示波器】准备合并" />
+    <MESSAGE value="【简易存储示波器】准备合并UI" />
+    <MESSAGE value="【简易存储示波器】可以设置采样频率" />
+    <option name="LAST_COMMIT_MESSAGE" value="【简易存储示波器】可以设置采样频率" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
+        <watch expression="temp" />
+        <watch expression="read_wave[i]" />
+        <watch expression="read_wave" />
+        <watch expression="threshold" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
