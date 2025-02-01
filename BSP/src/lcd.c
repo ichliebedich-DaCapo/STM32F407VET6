@@ -463,33 +463,30 @@ void LCD_direction(uint8_t direction)
         case 0:
 //            lcddev.width=LCD_W;
 //            lcddev.height=LCD_H;
-//            LCD_WR_DATA((1 << 3) | (1 << 6));// 0x48;
-            LCD_WR_DATA((1<<5)|(1<<6));// 行列交换 水平方向镜像 横屏2;
+
+            LCD_WR_DATA((1<<5)|(1<<6)|(1<<7));// 横屏1; 0度
+
             break;
         case 1:
 //            lcddev.width=LCD_H;
 //            lcddev.height=LCD_W;
-//            LCD_WR_DATA((1 << 3) | (1 << 5));// 0x28;
-//            LCD_WR_DATA((1 << 5) | (1 << 6));// 0x60;
-//            LCD_WR_DATA((1 << 3)|(1 << 5) | (1 << 6));// 0x68;
-//            LCD_WR_DATA(0x60);// 这才是横屏
-            LCD_WR_DATA(0);// 原始方向 竖屏1;
+            LCD_WR_DATA(1<<6);// 竖屏1; 90度
+
 
             break;
         case 2:
 //            lcddev.width=LCD_W;
 //            lcddev.height=LCD_H;
-//            LCD_WR_DATA((1 << 3) | (1 << 7));// 0x88;
-            LCD_WR_DATA((1<<5)|(1<<7));// 行列交换 垂直方向镜像 横屏1;
+            LCD_WR_DATA(1<<5);// 横屏2; 180度
             break;
         case 3:
 //            lcddev.width=LCD_H;
 //            lcddev.height=LCD_W;
-//            LCD_WR_DATA((1 << 3) | (1 << 7) | (1 << 6) | (1 << 5));// 0xE8;
-            LCD_WR_DATA((1<<6)|(1<<7));// 垂直方向镜像 水平方向镜像 竖屏2;
+            LCD_WR_DATA(1<<7);// 竖屏2; 270度
             break;
+
 //        case 8:
-//            LCD_WR_DATA(0);// 原始方向 竖屏1;
+//            LCD_WR_DATA(0);// 原始方向;
 //            break;
 //        case 9:
 //            LCD_WR_DATA(1<<7);// 垂直方向镜像 ;
@@ -498,16 +495,16 @@ void LCD_direction(uint8_t direction)
 //            LCD_WR_DATA(1<<6);// 水平方向镜像;
 //            break;
 //        case 11:
-//            LCD_WR_DATA((1<<6)|(1<<7));// 垂直方向镜像 水平方向镜像 竖屏2;
+//            LCD_WR_DATA((1<<6)|(1<<7));// 垂直方向镜像 水平方向镜像;
 //            break;
 //        case 12:
 //            LCD_WR_DATA(1<<5);// 行列交换;
 //            break;
 //        case 13:
-//            LCD_WR_DATA((1<<5)|(1<<7));// 行列交换 垂直方向镜像 横屏1;
+//            LCD_WR_DATA((1<<5)|(1<<7));// 行列交换 垂直方向镜像;
 //            break;
 //        case 14:
-//            LCD_WR_DATA((1<<5)|(1<<6));// 行列交换 水平方向镜像 横屏2;
+//            LCD_WR_DATA((1<<5)|(1<<6));// 行列交换 水平方向镜像;
 //            break;
 //        case 15:
 //            LCD_WR_DATA((1 << 5) | (1 << 6) | (1 << 7));// 行列交换 水平方向镜像 垂直方向镜像;
@@ -593,10 +590,20 @@ void LCD_Color_Clean(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_
 /// 设置一个像素
 void LCD_Set_Pixel(uint16_t x, uint16_t y, uint16_t color)
 {
+
+#if LCD_INTERFACE_TYPE == 0
     LCD_Set_Window(x, y, x, y);
     LCD_WRITE_DATA(color);
-}
+#elif LCD_INTERFACE_TYPE == 1
+    LCD_Set_Window(x, y, x, y);
+    LCD_CS_LOW();
+    LCD_RS_HIGH();
+    spi2_sendByte(color >> 8);
+    spi2_sendByte(color & 0xFF);
+    LCD_CS_HIGH();
+#endif
 
+}
 void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)
 {
 #ifdef USE_FSMC_DMA

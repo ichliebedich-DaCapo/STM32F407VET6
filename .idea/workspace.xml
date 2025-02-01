@@ -32,33 +32,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【简易存储示波器】显示扫描频率">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2025_1_10_01_07____.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2025_1_9_13_55____.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2025_1_9_16_08____.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行合并之前于_2025_1_10_01_07_取消提交了更改_[更改]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行合并之前于_2025_1_9_13_55_取消提交了更改_[更改]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行合并之前于_2025_1_9_16_08_取消提交了更改_[更改]/shelved.patch" beforeDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】解决了横屏显示问题，完善了lcd.c中显示方向函数，初始化方向设置为横屏">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/lcd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/Base/GUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/Base/GUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/StorageOscilloscope/ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/signalGenerator/ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/test.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/.idea/lvgl-simulator.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/.cmake/api/v1/query/cache-v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/.cmake/api/v1/query/cmakeFiles-v1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/.cmake/api/v1/query/codemodel-v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/.cmake/api/v1/query/toolchains-v1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeCache.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/CMakeFiles/cmake.check_cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release-mingw_arm/cmake_install.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stlink.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/stlink.cfg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1682,7 +1659,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "OpenOCD 下载并运行.OCD Furina.executor": "Run",
+    "OpenOCD 下载并运行.OCD Furina.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -1934,15 +1911,7 @@
       <workItem from="1738125150733" duration="3949000" />
       <workItem from="1738380212721" duration="7811000" />
       <workItem from="1738388917624" duration="714000" />
-      <workItem from="1738403997124" duration="3379000" />
-    </task>
-    <task id="LOCAL-00030" summary="【初始】主项目——初步判断是ui.cpp导致ROM爆了，原因不明">
-      <option name="closed" value="true" />
-      <created>1729328450716</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1729328450716</updated>
+      <workItem from="1738403997124" duration="6652000" />
     </task>
     <task id="LOCAL-00031" summary="【初始】主项目——已解决。吃个饭回来，发现原因是使用了cout，ROM直接增加了两百多KB">
       <option name="closed" value="true" />
@@ -2328,7 +2297,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735367357110</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="【驱动开发】解决了横屏显示问题，完善了lcd.c中显示方向函数，初始化方向设置为横屏">
+      <option name="closed" value="true" />
+      <created>1738408005104</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1738408005104</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2350,7 +2327,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="no_dirty_point" />
                       </list>
                     </value>
                   </entry>
@@ -2363,7 +2340,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【双音频信号发生器】基本功能已全部完备，可以添加CPU温度显示了" />
     <MESSAGE value="【双音频信号发生器】成功降低程序的耦合" />
     <MESSAGE value="【双音频信号发生器】整合了链接优化选项" />
     <MESSAGE value="【双音频信号发生器】略微优化了CMakelists" />
@@ -2388,7 +2364,8 @@
     <MESSAGE value="【简易存储示波器】准备合并" />
     <MESSAGE value="【简易存储示波器】准备合并UI" />
     <MESSAGE value="【简易存储示波器】可以设置采样频率" />
-    <option name="LAST_COMMIT_MESSAGE" value="【简易存储示波器】可以设置采样频率" />
+    <MESSAGE value="【驱动开发】解决了横屏显示问题，完善了lcd.c中显示方向函数，初始化方向设置为横屏" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】解决了横屏显示问题，完善了lcd.c中显示方向函数，初始化方向设置为横屏" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
