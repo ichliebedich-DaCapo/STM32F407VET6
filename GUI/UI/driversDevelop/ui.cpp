@@ -16,7 +16,7 @@ void GUI_Base::screen_init()
     gui->main.btn_test.text_color(lv_color_black());
 
 
-    CPU::init();
+//    CPU::init();
 
 }
 

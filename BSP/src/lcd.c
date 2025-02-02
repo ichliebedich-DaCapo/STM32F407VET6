@@ -25,7 +25,7 @@ extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
 
 /*预编译*/
 #define LCD_SORTS 9488
-#define LCD_INTERFACE_TYPE 1 // 0:8080接口 1:SPI接口
+#define LCD_INTERFACE_TYPE 1 // 0:8080接口 1:SPI接口 GUI.c中的同时修改
 #define delay_ms(ms)   HAL_Delay(ms)
 
 // 使用SPI时
@@ -381,7 +381,7 @@ void lcd_init(void)
     delay_ms(120);
     LCD_WR_REG(0x21);
     LCD_WR_REG(0x29);
-    LCD_direction(0);//下两句被封装为此句，默认显示方向为横屏
+    LCD_direction(0);//下两句被封装为此句，默认显示方向为横屏 切记：切换屏幕方向，LCD_Clear函数内要交互x,y
 //    LCD_WR_REG(0x36);
 //    LCD_WR_DATA(0x60);
     LCD_Clear(0xffff);
@@ -424,8 +424,8 @@ void LCD_Set_Window(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey)
     LCD_WR_REG(0x2A);
     LCD_WR_DATA(sx >> 8);
     LCD_WR_DATA(0x00FF & sx);
-    LCD_WR_DATA(ey >> 8);
-    LCD_WR_DATA(0x00FF & ey);
+    LCD_WR_DATA(ex >> 8);
+    LCD_WR_DATA(0x00FF & ex);
 
     LCD_WR_REG(0x2B);
     LCD_WR_DATA(sy >> 8);
@@ -465,12 +465,14 @@ void LCD_direction(uint8_t direction)
 //            lcddev.height=LCD_H;
 
             LCD_WR_DATA((1<<5)|(1<<6)|(1<<7));// 横屏1; 0度
-
+//            LCD_WR_DATA((1<<5)|(1<<6));// 横屏1; 0度
             break;
         case 1:
+
 //            lcddev.width=LCD_H;
 //            lcddev.height=LCD_W;
-            LCD_WR_DATA(1<<6);// 竖屏1; 90度
+            LCD_WR_DATA((1<<6));// 竖屏1; 90度
+//            LCD_WR_DATA(0);// 竖屏1; 90度
 
 
             break;
@@ -478,11 +480,13 @@ void LCD_direction(uint8_t direction)
 //            lcddev.width=LCD_W;
 //            lcddev.height=LCD_H;
             LCD_WR_DATA(1<<5);// 横屏2; 180度
+//            LCD_WR_DATA((1<<5)|(1<<7));// 横屏2; 180度
             break;
         case 3:
 //            lcddev.width=LCD_H;
 //            lcddev.height=LCD_W;
             LCD_WR_DATA(1<<7);// 竖屏2; 270度
+//            LCD_WR_DATA((1<<6)|(1<<7));// 竖屏2; 270度
             break;
 
 //        case 8:
@@ -515,7 +519,7 @@ void LCD_direction(uint8_t direction)
 #endif
 }
 
-
+//切记：切换屏幕方向，LCD_Clear函数内要交互x,y
 void LCD_Clear(uint16_t color)
 {
 
@@ -526,9 +530,8 @@ void LCD_Clear(uint16_t color)
         LCD_WRITE_DATA(color);
     }
 #elif LCD_INTERFACE_TYPE == 1
-//    LCD_Set_Window(0, 0, 479, 319);
-    LCD_Set_Window(0, 0, 319, 479);
-//    LCD_Set_Window(50, 50, 529, 369);
+    LCD_Set_Window(0, 0, 479, 319);//横屏
+//    LCD_Set_Window(0, 0, 319, 479);//竖屏
     LCD_CS_LOW();
     LCD_RS_HIGH();
     for (uint32_t i = 0; i < 480 * 320; ++i)
@@ -606,12 +609,28 @@ void LCD_Set_Pixel(uint16_t x, uint16_t y, uint16_t color)
 }
 void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)
 {
+#if LCD_INTERFACE_TYPE == 0//使用8088
 #ifdef USE_FSMC_DMA
     LCD_Set_Window(x1, y1, x2, y2);//设置LCD屏幕的扫描区域
     HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream6, (uint32_t) color_p, TFT_DATA_ADDR,
                      ((x2 + 1) - x1) * ((y2 + 1) - y1));
 #else
     LCD_Color_Fill(area->x1, area->y1, area->x2, area->y2, (const uint16_t *)color_p);
+#endif
+#elif LCD_INTERFACE_TYPE == 1//使用SPI
+    LCD_Set_Window(x1, y1, x2, y2); // 设置LCD屏幕的扫描区域
+    LCD_CS_LOW(); // 使能LCD片选
+    LCD_RS_HIGH(); // 设置为数据模式
+
+    uint32_t pixel_count = (x2 - x1 + 1) * (y2 - y1 + 1); // 计算像素数量
+    for (uint32_t i = 0; i < pixel_count; ++i)
+    {
+        spi2_sendByte(color_p[i] >> 8); // 发送高字节
+        spi2_sendByte(color_p[i] & 0xFF); // 发送低字节
+    }
+
+    LCD_CS_HIGH(); // 禁用LCD片选
+
 #endif
 }
 

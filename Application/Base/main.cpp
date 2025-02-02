@@ -49,6 +49,7 @@ int main()
 
 #ifndef GUI_DISABLE
     GUI::init<lcd_flush>();
+
 #endif
 
     app_init();

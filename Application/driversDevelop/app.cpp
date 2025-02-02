@@ -27,7 +27,8 @@ AsyncDelay_HAL async_delay(500);
 
 // 函数
 
-
+// 数组
+const uint16_t color[200*200]={0};
 
 void app_init()
 {
@@ -46,10 +47,10 @@ void key_handler()
             if (Key::stateHandler(KEY_STATE_NONE))
             {
 //                LCD_Clear(0x36ff);
-                for(uint16_t i=10;i<300;i++)LCD_Set_Pixel(i,20,0x0000);
-                for(uint16_t i=20;i<200;i++)LCD_Set_Pixel(i,100,0x0000);
-                for(uint16_t i=30;i<100;i++)LCD_Set_Pixel(i,200,0x0000);
-                for(uint16_t i=40;i<50;i++)LCD_Set_Pixel(i,250,0x0000);
+                for(uint16_t i=10;i<200;i++)LCD_Set_Pixel(i,20,0x0000);
+//                for(uint16_t i=20;i<200;i++)LCD_Set_Pixel(i,100,0x0000);
+//                for(uint16_t i=30;i<100;i++)LCD_Set_Pixel(i,200,0x0000);
+//                for(uint16_t i=40;i<50;i++)LCD_Set_Pixel(i,250,0x0000);
             }
             break;
 
@@ -62,6 +63,8 @@ void key_handler()
             break;
         case keyk2:
             LCD_Clear(0xFF36); // 填充颜色 0xFF36
+            lcd_flush(0,0,479,319,color);
+
             break;
 
         case keyk3:

@@ -5,11 +5,13 @@
 #define FURINA_GUI_HPP
 
 #include "GUI_Base.hpp"
+#include "lcd.h"
 
 
 
 // 宏定义
 #define SIMPLE_FPS 1 // 启用简单FPS，减少一点点FPS显示对实际帧率的影响。不严谨地对于某个简单的测试来说，从30ms减少到了21ms
+#define LCD_INTERFACE_TYPE 1 // 0:8080接口 1:SPI接口  lcd.c中的同时修改
 
 /*匿名命名空间，治不了各种函数变量暴露狂*/
 namespace
@@ -64,7 +66,6 @@ auto GUI::init() -> void
     /******初始化显示设备******/
     disp_drv_init<disp_flush>();
 
-
     /*****初始化触摸屏******/
     if constexpr (touchpad_read_xy != nullptr)
     {
@@ -92,10 +93,15 @@ auto GUI::disp_drv_init() -> void
         flush(area->x1, area->y1, area->x2, area->y2, (const uint16_t *) px_map);
 
         // 由于使用DMA中断，下面这个函数在DMA中断回调里
+        // ARM_MATH_CM4只在单片机的cmakelist中有定义，在模拟器的cmake中没有定义
+        // 8088屏幕使用了DMA不需要lv_display_flush_ready，SPI屏幕未使用DMA需要lv_display_flush_ready
 #ifndef ARM_MATH_CM4
         lv_display_flush_ready(disp_drv);
 #endif
-    });
+#if LCD_INTERFACE_TYPE
+        lv_display_flush_ready(disp_drv);
+#endif
+});
 
     // 缓冲区  双缓冲明显优于单缓冲
     LV_ATTRIBUTE_MEM_ALIGN
