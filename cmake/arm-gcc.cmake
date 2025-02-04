@@ -1,31 +1,35 @@
+# 设置编译工具集
 set(CMAKE_C_COMPILER arm-none-eabi-gcc)
 set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
 set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
 set(CMAKE_AR arm-none-eabi-ar)
 set(CMAKE_OBJCOPY arm-none-eabi-objcopy)
 set(CMAKE_OBJDUMP arm-none-eabi-objdump)
-set(SIZE arm-none-eabi-size)
+
+# 设置编译标准
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_C_STANDARD 11)
+
+# 添加编译器选项，使得支持Module特性
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts")
 
 #--------------------------编译选项----------------------------
-# 根据编译器类型设置特定编译选项
 # -m 选项通常用于控制目标架构、指令集和硬件特性。
 # 指定目标处理器为Cortex-M4  生成Thumb指令集的代码  允许Thumb和ARM指令集之间的互操作
 add_compile_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
 # 使用硬件浮点单元（FPU）进行浮点运算  指定浮点单元的类型为 FPv4-SP（单精度浮点单元），并限制寄存器数量为 16 个
-# 硬件浮点和软件浮点(-mfloat-abi=soft)，任选一个
 add_compile_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
 
 
-
-#---------------------------优化选项--------------------------
 # 将每个函数放在单独的段中，便于链接器优化   将每个全局变量放在单独的段中，便于链接器优化
 # 将每个函数放在独立的节区中:允许链接器删除未使用的函数，减少代码大小;将每个全局变量放在独立的节区中:允许链接器删除未使用的变量，减少数据大小。
 # 禁止将未初始化的全局变量放在COMMON节区中:确保未初始化的全局变量被正确分配到.bss 节区;设置编译器错误消息的最大长度为无限制:确保编译器错误消息完整显示
-
 add_compile_options(-ffunction-sections -fdata-sections -fno-common -fmessage-length=0)
 # 允许预处理器处理汇编文件
 add_compile_options($<$<COMPILE_LANGUAGE:ASM>:-x$<SEMICOLON>assembler-with-cpp>)
 
+
+#--------------------------编译优化----------------------------
 # 如果不开优化，使用LVGL时有可能因为栈爆而导致数组越界，进而进入硬件错误中断。至少需要开-Og
 # 选择优化级别（真是见鬼！在CMake配置文件改了构建选项，结果没反应，干脆手动操作）
 #-O0：无优化，适合调试。
@@ -51,12 +55,10 @@ if (NOT STATIC_MODULE_LD)
     #        add_link_options(-flto)
 endif ()
 
-
-
+#---------------------------链接选项--------------------------
 # 链接标志：指在编译和链接过程中，传递给链接器（Linker）的选项或参数，和链接选项是一个东西
 add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
 add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
-
 
 # 设置链接选项
 #-Wl,--gc-sections：删除未使用的节区。链接器会删除未使用的代码和数据节区，减小二进制文件的大小。

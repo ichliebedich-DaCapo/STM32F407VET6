@@ -1,310 +1,43 @@
+cmake_minimum_required(VERSION 3.29)
+project(Furina LANGUAGES C CXX ASM)
+include(cmake/common_function.cmake)
+include(cmake/project_configure.cmake)
 # --------------------------------------选择你的项目--------------------------------
 # 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
-set(APP_DIR Application/driversDevelop)
+set(PROJECT_DIR Projects/driversDevelop)
 
-# --------------------------------------某些可选选项------------------------------
-# 是否使用独立静态库链接,使用后会额外编译一些不需要的文件
-# 注释后，可以使用链接优化-flto
-# ld链接器无法自动创建目录以存放map文件，所以注释下面时需要确保存在bin目录
-#set(STATIC_MODULE_LD True)
+# 是否使用独立静态库链接,使用后会额外编译一些不需要的文件,可以使用链接优化-flto
+option(STATIC_LIB_LD "Independently compiled into various static libraries" OFF)
 # ---------使用AI---------
-#set (AI_ENABLE True)
-
-# 添加编译器选项，使得支持Module特性
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts")
+option(AI_ENABLE "Enable AI" OFF)
 
 
-# --------------------------------------某些配置------------------------------
-set(CMAKE_SYSTEM_NAME Generic)
-set(CMAKE_SYSTEM_VERSION 1)
-cmake_minimum_required(VERSION 3.29)
-#设置编译目标类型为静态，必须放在project语句前面
-set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
-
-# ----------------------------------设置编译工具-------------------------------
-# -----------------工程设置-----------------
-project(Furina LANGUAGES C CXX ASM)
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_C_STANDARD 11)
-
-
-
-# --------------------------------------自动化更新配置------------------------------
-# --------对选择的项目进行字符串处理，以匹配对应的UI文件---------
-# 提取 APP_DIR 的末尾部分
-string(REGEX REPLACE "^.*/(.+)$" "\\1" APP_DIR_LAST_PART "${APP_DIR}")
-# 拼接新的 UI_DIR
-set(UI_DIR "GUI/UI/${APP_DIR_LAST_PART}")
-
-# -------读取对应GUI_DISABLE和FreeRTOS_ENABLE宏----------
-# 获取文件中的宏
-# 在app.hpp里打注释没用的原因找到了
-file(READ "${APP_DIR}/app.hpp" macro_content)
-# 使用正则表达式检查 GUI_DISABLE 是否被注释掉
-if (macro_content MATCHES "//.*GUI_DISABLE")
-    message(STATUS ">>>>>> GUI_DISABLE is commented out.")
-    set(GUI_ENABLE True)
-elseif (macro_content MATCHES "#define GUI_DISABLE")
-    message(STATUS ">>>>>> GUI_DISABLE is defined.")
-    set(GUI_ENABLE False)
-else ()
-    message(STATUS ">>>>>> GUI_DISABLE not found.")
-    set(GUI_ENABLE True)
-endif ()
-# 使用正则表达式检查 FreeRTOS_ENABLE 是否被定义
-if (macro_content MATCHES "//.*FreeRTOS_ENABLE")
-    message(STATUS ">>>>>> FreeRTOS_ENABLE is commented out.")
-    set(FreeRTOS_ENABLE False)
-elseif (macro_content MATCHES "#define FreeRTOS_ENABLE")
-    message(STATUS ">>>>>> FreeRTOS_ENABLE found.")
-    set(FreeRTOS_ENABLE True)
-else ()
-    message(STATUS ">>>>>> FreeRTOS_ENABLE not found.")
-    set(FreeRTOS_ENABLE False)
-endif ()
-
-# ----设置编译目录----
-set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
-set(LIB_DIR ${BUILD_DIR}/lib)
-set(BIN_DIR ${BUILD_DIR}/bin)
-
-
-#-------------------------------------------库-------------------------------------------
-# 官方驱动库
-# 收集官方驱动库的源代码文件
-file(GLOB_RECURSE DRIVERS_SRC "Drivers/STM32F4xx_HAL_Driver/Src/*.c")
-# 定义驱动库的头文件目录
-set(DRIVERS_DIR
-        Drivers
-        Drivers/STM32F4xx_HAL_Driver/Inc
-        Drivers/STM32F4xx_HAL_Driver/Inc/Legacy
-        Drivers/CMSIS/Device/ST/STM32F4xx/Include
-        Drivers/CMSIS/Include
-)
-# 创建静态的官方驱动库
-add_library(libdrivers STATIC ${DRIVERS_SRC})
-# 设置官方驱动库的头文件路径
-target_include_directories(libdrivers PUBLIC ${DRIVERS_DIR})
-# 设置官方驱动库的输出目录
-set_target_properties(libdrivers PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
-
-
-#---------------------第三方库-----------------------
-# -----lvgl库-----
-# 收集lvgl库的源代码文件
-file(GLOB_RECURSE LVGL_SRC
-        # LVGL库
-        "Library/Third_Party/LVGL/lvgl/src/*.c"
-        "Library/Third_Party/LVGL/lvgl/examples/porting/*.c"
-)
-# 定义lvgl库的头文件目录
-set(LVGL_DIR
-        Library/Third_Party/LVGL
-        Library/Third_Party/LVGL/lvgl/src
-        Library/Third_Party/LVGL/lvgl/examples/porting
-)
-# 创建静态的官方驱动库
-add_library(liblvgl STATIC ${LVGL_SRC})
-# 设置官方驱动库的头文件路径
-target_include_directories(liblvgl PRIVATE BSP/inc)
-target_include_directories(liblvgl PUBLIC ${LVGL_DIR})
-# 依赖BSP中的lcd库 耦合有些严重，后面慢慢改
-target_link_libraries(liblvgl PUBLIC libdrivers)
-# 设置静态库的输出目录
-set_target_properties(liblvgl PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
-
-
-# ------FreeRTOS库------
-# 不愧是CubeMX生成的库，和HAL耦合得太严重了
-file(GLOB_RECURSE FREERTOS_SRC
-        "Library/Third_Party/FreeRTOS/Source/*.c"
-        "Library/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c"
-        "Library/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c"
-)
-set(FREERTOS_DIR
-        Library/Third_Party/FreeRTOS
-        Library/Third_Party/FreeRTOS/Source/include
-        Library/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
-        Library/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
-)
-add_library(libfreertos STATIC ${FREERTOS_SRC})
-target_include_directories(libfreertos PRIVATE
-        Drivers
-        Drivers/STM32F4xx_HAL_Driver/Inc
-        Drivers/CMSIS/Include
-        Drivers/CMSIS/Device/ST/STM32F4xx/Include)
-target_include_directories(libfreertos PUBLIC ${FREERTOS_DIR})
-# 设置静态库的输出目录
-set_target_properties(libfreertos PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
-
-
-# ------DSP库------
-file(GLOB_RECURSE DSP_SRC
-        "Library/CMSIS/DSP/Source/TransformFunctions/arm_cfft_f32.c"
-        "Library/CMSIS/DSP/Source/TransformFunctions/arm_cfft_init_f32.c"
-        "Library/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_f32.c"
-)
-set(DSP_DIR
-        Library/CMSIS/DSP/Include
-        Library/CMSIS/DSP/PrivateInclude
-)
-add_library(libdsp STATIC ${DSP_SRC})
-target_include_directories(libdsp PRIVATE Drivers/CMSIS/Include)
-target_include_directories(libdsp PUBLIC ${DSP_DIR})
-# 设置静态库的输出目录
-set_target_properties(libdsp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
-
-
-#---------------------用户库-----------------------
-# ------BSP库------
-file(GLOB_RECURSE BSP_SRC "BSP/src/*.c")
-set(BSP_DIR BSP/inc)
-add_library(libbsp STATIC ${BSP_SRC})
-target_include_directories(libbsp PUBLIC ${BSP_DIR})
-target_link_libraries(libbsp PUBLIC libdrivers)
-# 设置静态库的输出目录
-set_target_properties(libbsp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
-
-
-# ------Data库------
-file(GLOB_RECURSE DATA_SRC "Library/Data/*.c")
-set(DATA_DIR
-        Library/Data
-)
-add_library(libdata STATIC ${DATA_SRC})
-target_include_directories(libdata INTERFACE ${DATA_DIR})
-# 设置静态库的输出目录
-set_target_properties(libdata PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
-
-
-# ------GUI库------
-if (GUI_ENABLE)
-    file(GLOB_RECURSE GUI_SRC
-            "${UI_DIR}/*.*"
-            "GUI/Base/*.cpp"
-            "GUI/Component/src/*.cpp"
-            "GUI/Render/*.cpp"
-    )
-    set(GUI_DIR
-            ${UI_DIR}
-            GUI/Base
-            GUI/Component/inc
-            GUI/Render
-    )
-    add_library(libgui STATIC ${GUI_SRC})
-    target_include_directories(libgui PUBLIC ${GUI_DIR})
-    # 依赖lvgl库
-    target_link_libraries(libgui PUBLIC liblvgl libbsp)
-    # 设置静态库的输出目录
-    set_target_properties(libgui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
-endif ()
-
-# ------Module库------
-file(GLOB_RECURSE MODULE_SRC "Module/src/*.cpp")
-set(MODULE_DIR
-        Module/inc
-)
-add_library(libmodule STATIC ${MODULE_SRC})
-target_include_directories(libmodule PUBLIC ${MODULE_DIR})
-target_link_libraries(libmodule PRIVATE libdsp libdata)
-# 设置静态库的输出目录
-set_target_properties(libmodule PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
-
-# -------AI库-------
-if (AI_ENABLE)
-    file(GLOB_RECURSE AI_SRC "AI/${APP_DIR_LAST_PART}/App/*.c")
-    set(AI_DIR AI/${APP_DIR_LAST_PART}/App AI/${APP_DIR_LAST_PART})
-    add_library(libai STATIC ${AI_SRC})
-    target_include_directories(libai PUBLIC ${AI_DIR})
-    target_link_libraries(libai INTERFACE :NetworkRuntime910_CM4_GCC.a)
-    target_link_libraries(libai PRIVATE libdrivers)
-    target_link_directories(libai INTERFACE Library/ST/AI/Lib)
-
-    # 设置静态库的输出目录
-    set_target_properties(libai PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
-endif ()
-
-# ------Application库------
-file(GLOB_RECURSE APPLICATION_SRC "${APP_DIR}/app.cpp" "Application/Base/main.cpp" "Application/Base/baseInit.cpp")
-set(APPLICATION_DIR Application/Base)
-add_library(libapp STATIC ${APPLICATION_SRC})
-target_include_directories(libapp PUBLIC ${APPLICATION_DIR})
-# 需要链接 libdsp libdata libgui libbsp libmodule等，根据需要选
-target_link_libraries(libapp PUBLIC libdsp libdata libbsp libmodule)
-if (${AI_ENABLE})
-    target_link_libraries(libapp PUBLIC libai)
-endif ()
-if (${GUI_ENABLE})
-    target_link_libraries(libapp PUBLIC libgui)
-endif ()
-# 设置静态库的输出目录
-set_target_properties(libapp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
-
-# -------------------module特性测试-----------------------
-file(GLOB_RECURSE cxx_modules
-        "Module/inc/*.ixx" "Module/src/*.cppm"
-)
-
-# ----------------包含公共目录---------------
-# 公共目录
-include_directories(Library/ST/AI/Inc)
-include_directories(Application/Conf ${APP_DIR})
-
-# 定义公共的头文件目录和源文件
-set(ALL_INCLUDE_DIRS
-        ${DRIVERS_DIR}
-        ${BSP_DIR}
-        ${DATA_DIR}
-        ${MODULE_DIR}
-        ${AI_DIR}
-        ${APPLICATION_DIR}
-)
-
-set(ALL_SOURCES
-        "Core/*.*"
-        "Application/Base/ISR.cpp"
-        ${DRIVERS_SRC}
-        ${BSP_SRC}
-        ${DATA_SRC}
-        ${MODULE_SRC}
-        ${AI_SRC}
-        ${APPLICATION_SRC}
-)
-
-if (${STATIC_MODULE_LD})
-    # 这里面不能直接添加到静态库里 否则链接时会出现找不到定义的现象
-    file(GLOB_RECURSE SOURCES "Core/*.*" "Application/Base/ISR.cpp")
-else ()
-    # 控制GUI的编译
-    if (${GUI_ENABLE})
-        list(APPEND ALL_INCLUDE_DIRS
-                ${LVGL_DIR}
-                ${GUI_DIR}
-        )
-        list(APPEND ALL_SOURCES
-                ${LVGL_SRC}
-                ${GUI_SRC}
-        )
-    endif ()
-
-    # 控制FreeRTOS的编译
-    if (${FreeRTOS_ENABLE})
-        list(APPEND ALL_INCLUDE_DIRS ${FREERTOS_DIR})
-        list(APPEND ALL_SOURCES ${FREERTOS_SRC})
-    endif ()
-
-    # 添加公共的头文件目录、源文件
-    include_directories(${ALL_INCLUDE_DIRS})
-    file(GLOB_RECURSE SOURCES ${ALL_SOURCES})
-endif ()
-
+# --------------------------------------包含子cmake--------------------------------
+# 对配置项变量进行处理
+include(cmake/project_handler.cmake)
+# 包含编译器的设置及相关标志的传递
+include(cmake/arm-gcc.cmake)
+# 与stm32相关的一些宏，同时指定链接脚本
+include(cmake/stm32f4xx.cmake)
+# 包含HAL驱动库
+include(cmake/bsp.cmake)
+# 包含算法
+include(cmake/algorithm.cmake)
+# 包含BSP
+include(cmake/core.cmake)
+# 包含中间件
+include(cmake/middleware.cmake)
+# 包含适配层
+include(cmake/adapter.cmake)
+# 项目库
+include(cmake/projects.cmake)
 
 
 # 定义一个可执行文件目标，生成了 ELF 文件
 add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
 
 # 导入模块
-if (${STATIC_MODULE_LD})
+if (${STATIC_LIB_LD})
     target_sources(libapp PUBLIC
             FILE_SET CXX_MODULES FILES
             ${cxx_modules})
@@ -316,7 +49,7 @@ endif ()
 
 
 # 是否链接静态库
-if (${STATIC_MODULE_LD})
+if (${STATIC_LIB_LD})
     target_link_libraries(${PROJECT_NAME}.elf PRIVATE libapp)
     # 设置可执行文件的输出目录
     set_target_properties(${PROJECT_NAME}.elf PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})

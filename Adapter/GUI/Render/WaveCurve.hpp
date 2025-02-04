@@ -9,7 +9,7 @@
 // 用于区分模拟器和真机
 #ifdef ARM_MATH_CM4
 
-#include "lcd.h"
+#include "stdint.h"
 
 #else
 

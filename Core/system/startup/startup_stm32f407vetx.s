@@ -242,7 +242,7 @@ g_pfnVectors:
 * 函数名或者下面的注释来定位到那个函数，从而知道是哪里没有定义。
 *当然这也有些隐患，比如你没有使用stm32f4xx_it.c或者有些在我这是定义了的中断，但你不需要用到等
 */
-/*
+
    .weak      NMI_Handler
    .thumb_set NMI_Handler,Default_Handler
   
@@ -512,4 +512,3 @@ g_pfnVectors:
 
    .weak      FPU_IRQHandler                  
    .thumb_set FPU_IRQHandler,Default_Handler  
-*/
