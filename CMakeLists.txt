@@ -225,7 +225,8 @@ set_target_properties(libdsp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 # ------BSP库------
 file(GLOB_RECURSE BSP_SRC "BSP/src/*.c")
 set(BSP_DIR BSP/inc)
-add_library(libbsp STATIC ${BSP_SRC})
+add_library(libbsp STATIC ${BSP_SRC}
+        BSP/src/i2c.c)
 target_include_directories(libbsp PUBLIC ${BSP_DIR})
 target_link_libraries(libbsp PUBLIC libdrivers)
 # 设置静态库的输出目录
