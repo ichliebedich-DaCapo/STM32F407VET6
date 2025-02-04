@@ -1,0 +1,71 @@
+我是开发单片机的，由于参加电赛，我会开发许多项目，为了方便管理，我想通过下面这种方法来把多个不同项目合并在一个工程里。
+各个项目的不同只有驱动初始化和逻辑实现的不同，我把这些都写在app.cpp里，驱动初始化放在app_init()里，逻辑放在handler()里。
+通过CMakeLists设置变量决定包含哪个项目目录下的app.cpp文件，来决定main.cpp里的外部声明改链接哪个app.cpp里的那两个函数。
+你看这种方法还有什么改进的地方吗？
+我注重零成本抽象（比如模板相关的），下面是我的项目组织。
+Furina/
+├── cmake/                  # CMake构建系统
+│   ├── arm-gcc.cmake       # 工具链配置
+│   ├── stm32f4xx.cmake     # 芯片特性配置
+│   └── project_utils.cmake # 项目管理函数
+├── adapter/                # 适配层
+│   ├── RTOS/               # 实时操作系统适配
+│   ├── GUI/                # 图形驱动适配及各种组件
+│   └── FS/                 # 文件系统适配
+├── core/                   # 核心不可变层
+│   ├── drivers/            # 硬件驱动
+│   │   └── hal/            # ST HAL库（Git子模块）
+│   └── system/             # 系统级代码
+│       ├── startup/        # 启动文件
+│       │   └── startup_stm32f407.s
+│       ├── syscall         # 系统调用
+│       │   ├── sysmem.c
+│       │   ├── system_stm32f4xx.c
+│       │   └── syscalls.c
+│       └── linker/         # 链接脚本
+│           └── stm32f407vg_flash.ld
+├── bsp/                    # 板级支持包,纯C实现
+│   ├── inc/
+│   │   ├── led.h
+│   │   └── adc.h
+│   └── src/
+│       ├── led.c
+│       └── adc.c
+├── projects/               # 应用项目层
+│   ├── oscilloscope/       # 示波器项目
+│   │   ├── app/            # 应用逻辑
+│   │   │   ├── app.c       # 实现app_init/app_handler
+│   │   │   └── app.h       # 项目专用配置
+│   │   ├── gui/            # 图形界面
+│   │   │   ├── ui.c        # LVGL/EMWIN实现
+│   │   │   └── resources/  # 图片字体等
+│   │   └── config/         # 项目特有配置,包含各种约定和宏定义
+│   │       ├── app_defines.h
+│   │       └── app_config.h
+│   ├── voice_recorder/     # 录音项目
+│   └── shared/             # 跨项目共享组件
+│       ├── main.cpp        # 函数入口
+│       └── isr.cpp         # 中断实现
+├── tools/                  # 开发工具
+│   ├── flash.sh            # 烧录脚本
+│   ├── project_gen.py      # 项目生成器
+│   └── mem_analyzer.py     # 内存分析
+├── tests/                  # 单元测试
+│   ├── test_hal/           # 驱动测试
+│   └── test_middleware/    # 中间件测试
+├── middleware/         # 中间件
+│   ├── third_party/    # 第三方库
+│   │   ├── freertos/   # FreeRTOS配置
+│   │   ├── lvgl/       # lvgl图形库
+│   │   └── fatfs/      # 文件系统
+│   ├── ST/
+│   └── CMSIS/
+├── third_party/            # 第三方库
+│   ├── lvgl/               # 轻量GUI库
+│   └── arm_math/           # CMSIS-DSP库
+├── build/                  # 构建目录
+├── algorithm/              # 算法
+├── docs/                   # 项目文档
+│   ├── hardware_guide.md   # 硬件接口文档
+│   └── module_api.md    # 模块API文档
+└── CMakeLists.txt          # 根构建配置
