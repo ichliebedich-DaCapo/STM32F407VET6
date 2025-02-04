@@ -380,6 +380,7 @@ lv_color_t lv_color_white(void);
  */
 lv_color_t lv_color_black(void);
 
+
 void lv_color_premultiply(lv_color32_t * c);
 
 void lv_color16_premultiply(lv_color16_t * c, lv_opa_t a);

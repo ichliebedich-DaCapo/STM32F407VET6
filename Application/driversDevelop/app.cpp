@@ -28,8 +28,7 @@ AsyncDelay_HAL async_delay(500);
 // 函数
 
 // 数组
-const uint16_t color[200*200]={0};
-
+const uint16_t color[120 * 120]={};
 void app_init()
 {
     adc1_temperature_sensor_init();
@@ -63,7 +62,7 @@ void key_handler()
             break;
         case keyk2:
             LCD_Clear(0xFF36); // 填充颜色 0xFF36
-            lcd_flush(0,0,479,319,color);
+            lcd_flush(20,20,100,100,color);
 
             break;
 
