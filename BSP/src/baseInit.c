@@ -1,19 +1,17 @@
 //
 // Created by fairy on 2024/9/22.
 //
-#include "baseInit.hpp"
+#include "baseInit.h"
 #include "stm32f4xx_hal.h"
 #include "lcd.h"
 #include "fsmc.h"
 #include "key_exit.h"
 #include "App_Conf.h"
 #include "CPU_RunTime.h"
-#include "key.hpp"
 #include "RCC.h"
 #ifndef GUI_DISABLE
 #include "lvgl.h"
 #include "lv_port_disp.h"
-#include "GUI.hpp"
 #endif
 
 
@@ -146,8 +144,7 @@ inline void HAL_ResumeTick(void)
 }
 
 // TIM7中断处理函数
-extern "C"
-{
+
 void TIM7_IRQHandler()
 {
 //    if (__HAL_TIM_GET_IT_SOURCE(&htim7, TIM_IT_UPDATE) != RESET)
@@ -165,7 +162,7 @@ void TIM7_IRQHandler()
     lv_tick_inc(1);
 #endif
 }
-}
+
 
 
 #undef DMA2_S6CR

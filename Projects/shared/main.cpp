@@ -1,5 +1,5 @@
 #include "App_Conf.h"
-#include "baseInit.hpp"
+#include "baseInit.h"
 
 #ifdef FreeRTOS_ENABLE // 是否启用RTOS
 

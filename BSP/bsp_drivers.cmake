@@ -2,29 +2,34 @@
 # 默认包含 gpio
 # 驱动注册表（名称:依赖项）
 set(BSP_DRIVERS
-        "default:hal_gpio,hal_rcc"
-        "adc:hal_adc,timer"
+        "default:hal,hal_cortex,hal_gpio,baseinit"
+        # BSP驱动
+        "adc:timer,hal_adc,hal_adc_ex"
+        "baseinit:rcc,lcd,hal_tim,key_exit"
         "cpu_runtime:"
-        "dac:"
+        "dac:hal_dac"
         "debug:"
         "esp8266:"
-        "fsmc:"
+        "fsmc:hal_sram,hal_dma"
         "key_exit:"
-        "lcd:"
+        "lcd:fsmc,spi"
         "mqtt:"
         "pwr:"
-        "rcc:"
-        "rng:"
+        "rcc:hal_rcc"
+        "rng:hal_rng"
         "sdio:"
-        "spi:"
+        "spi:hal_spi"
         "tcp:"
         "timer:"
         "usart:"
         "w25qxx:"
+        # HAL库
+        "hal_sram:ll_fsmc"
 )
 
 # 驱动源文件映射
 set(adc_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/src/adc.c)
+set(baseinit_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/src/baseInit.c)
 set(cpu_runtime_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/src/CPU_RunTime.c)
 set(dac_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/src/dac.c)
 set(debug_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/src/debug.c)
@@ -46,6 +51,7 @@ set(w25qxx_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/src/w25qxx.c)
 
 # 依赖项文件映射
 include(core.cmake)
+set(hal_SRCS ${HAL_SRC_DIR}/stm32f4xx_hal.c)
 # ADC
 set(hal_adc_SRCS ${HAL_SRC_DIR}/stm32f4xx_hal_adc.c)
 set(hal_adc_ex_SRCS ${HAL_SRC_DIR}/stm32f4xx_hal_adc_ex.c)

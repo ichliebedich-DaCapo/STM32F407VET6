@@ -39,5 +39,5 @@ file(GLOB_RECURSE STARTUP_SRC "${STARTUP_DIR}/startup_stm32f407vetx.s")
 
 # --------------------------Core层--------------------------
 set(CORE_INC_DIRS ${DRIVERS_INC_DIRS})
-set(CORE_SRCS ${DRIVERS_SRCS} ${SYSCALL_SRCS} ${STARTUP_SRC})
+set(CORE_SRCS ${SYSCALL_SRCS} ${STARTUP_SRC})
 

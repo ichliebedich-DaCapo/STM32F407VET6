@@ -174,6 +174,8 @@ extern "C" {
 #error "Please select first the target STM32F4xx device used in your application (in stm32f4xx.h file)"
 #endif
 
+
+
 /**
   * @}
   */

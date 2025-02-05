@@ -31,7 +31,7 @@ extern osSemaphoreId_t keySemHandle;
 #endif
 
 #define KEY_RAM (*((volatile unsigned short *)0x6006000C)) // 键盘接口地址
-extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
+//extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
 
 
 
@@ -105,23 +105,23 @@ void EXTI0_IRQHandler()
 // DMA中断,里面他宝贝的真啰嗦
 void DMA2_Stream6_IRQHandler(void)
 {
-    /*  检查传输完成标志（TCIF）是否被设置，即是否传输完成标志位*/
-    if (DMA2->HISR & 0x1 << 21)
-    {
-        DMA2->HISR &= ~(0x1 << 21);// 清除标志位
-        // 检查中断使能标志位
-        if (DMA2_S6CR & (DMA_IT_TC))
-        {
-            DMA2_S6CR &= ~(DMA_IT_TC);// 清除标志位
-            /* Change the DMA state */
-            hdma_memtomem_dma2_stream6.State = HAL_DMA_STATE_READY;// 不能少,因为Start_IT里需要靠它来开启
-            /* Process Unlocked */
-            __HAL_UNLOCK(&hdma_memtomem_dma2_stream6);// 不能少
-        }
-#ifndef GUI_DISABLE
-      GUI::display_flush_ready();
-#endif
-    }
+//    /*  检查传输完成标志（TCIF）是否被设置，即是否传输完成标志位*/
+//    if (DMA2->HISR & 0x1 << 21)
+//    {
+//        DMA2->HISR &= ~(0x1 << 21);// 清除标志位
+//        // 检查中断使能标志位
+//        if (DMA2_S6CR & (DMA_IT_TC))
+//        {
+//            DMA2_S6CR &= ~(DMA_IT_TC);// 清除标志位
+//            /* Change the DMA state */
+//            hdma_memtomem_dma2_stream6.State = HAL_DMA_STATE_READY;// 不能少,因为Start_IT里需要靠它来开启
+//            /* Process Unlocked */
+//            __HAL_UNLOCK(&hdma_memtomem_dma2_stream6);// 不能少
+//        }
+//#ifndef GUI_DISABLE
+//      GUI::display_flush_ready();
+//#endif
+//    }
 }
 
 

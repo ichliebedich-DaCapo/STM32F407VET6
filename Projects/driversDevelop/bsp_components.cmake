@@ -1,4 +1,6 @@
 set(BSP_COMPONENTS
         adc
-        lcd
+        rng
+        key
+        debug
 )

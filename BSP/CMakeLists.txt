@@ -15,7 +15,7 @@ endif ()
 
 # 初始化已添加组件列表和源文件列表
 set(ADDED_COMPONENTS "" CACHE INTERNAL "List of added components")
-set(BSP_SRCS "" CACHE INTERNAL "List of BSP source files")
+set(BSP_SRCS "${CORE_SRCS}" CACHE INTERNAL "List of BSP source files")
 set(BSP_INC_DIRS "${CMAKE_CURRENT_BINARY_DIR}" "${CORE_INC_DIRS}" CACHE INTERNAL "List of BSP header dirs")
 
 
@@ -78,4 +78,6 @@ configure_file(
         ${CMAKE_CURRENT_BINARY_DIR}/bsp_config.h
 )
 
+#ensure_directory(${CMAKE_BINARY_DIR})
+message(STATUS ${CMAKE_BINARY_DIR})
 message(STATUS "BSP_SRCS--:${BSP_SRCS}")
