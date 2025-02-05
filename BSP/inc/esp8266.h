@@ -2,9 +2,7 @@
 #define __ESP8266_H 			   
 
 
-#include <string.h>
-#include <stdbool.h>
-#include "stdint.h"
+#include <bsp_config.h>
 
 #if defined ( __CC_ARM)
 #pragma anon_unions

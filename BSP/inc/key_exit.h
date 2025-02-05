@@ -1,10 +1,9 @@
 //
-// Created by 34753 on 2024/10/7.
+// Created by fairy on 2024/10/7.
 //
 
 #ifndef FURINA_KEY_EXIT_H
 #define FURINA_KEY_EXIT_H
-
 #include <bsp_config.h>
 
 #ifdef __cplusplus

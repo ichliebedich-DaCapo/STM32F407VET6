@@ -3,7 +3,7 @@
 //
 #ifndef FURINA_RNG_H
 #define FURINA_RNG_H
-
+#include <bsp_config.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -4,10 +4,7 @@
 
 #ifndef FURINA_LCD_H
 #define FURINA_LCD_H
-
-
 #include <bsp_config.h>
-
 
 #ifdef __cplusplus
 extern "C" {

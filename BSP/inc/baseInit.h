@@ -4,14 +4,11 @@
 
 #ifndef FURINA_BASEINIT_H
 #define FURINA_BASEINIT_H
-
+#include <bsp_config.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <bsp_config.h>
-
-#ifdef BSP_USE_BASEINIT
 
 void BaseInit();
 
@@ -19,5 +16,4 @@ void BaseInit();
 }
 #endif
 
-#endif
 #endif //FURINA_BASEINIT_H

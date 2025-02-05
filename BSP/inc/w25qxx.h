@@ -4,9 +4,8 @@
 
 #ifndef FURINA_W25QXX_H
 #define FURINA_W25QXX_H
+#include <bsp_config.h>
 
-#include "App_Conf.h"
-#include "stm32f4xx_hal.h"
 #ifdef __cplusplus
 extern "C" {
 #endif

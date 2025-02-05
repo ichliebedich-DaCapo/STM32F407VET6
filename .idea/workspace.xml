@@ -34,43 +34,33 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】最简单的驱动开发项目已经整理完毕，驱动依赖注册可行。">
-      <change afterPath="$PROJECT_DIR$/Projects/shared/project_config.h.in" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmake/target_project.cmake" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】准备用自动产生的stm32f4xx_hal_conf.h来代替原先的">
+      <change afterPath="$PROJECT_DIR$/BSP/stm32f4xx_hal_conf.h.in" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/inc/cpu_temperature.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/inc/cpu_temperature.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/inc/fft.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/inc/fft.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/inc/key.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/inc/key.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/inc/player.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/inc/player.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/inc/wave_signal.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/inc/wave_signal.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/src/key.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/src/key.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/bsp_config.h.in" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/bsp_config.h.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/bsp_drivers.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/bsp_drivers.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/CPU_RunTime.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/CPU_RunTime.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/RCC.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/RCC.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/RNG.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/RNG.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/inc/adc.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/adc.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/inc/baseInit.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/baseInit.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/bsp_config.h.in" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/bsp_config.h.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/dac.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/dac.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/debug.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/debug.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/esp8266.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/esp8266.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/inc/fsmc.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/fsmc.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/inc/key_exit.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/key_exit.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/inc/lcd.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/lcd.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/spi.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/spi.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/mqtt.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/mqtt.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/pwr.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/pwr.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/sdio.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/sdio.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/tcp.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/tcp.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/inc/timer.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/timer.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/inc/usart.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/usart.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/RCC.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/RCC.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/RNG.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/RNG.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/w25qxx.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/w25qxx.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/src/adc.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/adc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/baseInit.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/baseInit.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/debug.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/debug.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/bsp_components.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/bsp_components.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/App_Conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/common_config.h.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/ISR.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/adapter.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/adapter.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/common_function.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/common_function.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/configure_project.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/configure_project.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/middleware.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/middleware.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/pre_handler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/projects.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/projects.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Drivers/stm32f4xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Drivers/stm32f4xx_hal_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/thinking/ZQ/Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/thinking/ZQ/Log.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -2016,15 +2006,7 @@
       <workItem from="1738596604206" duration="607000" />
       <workItem from="1738646545452" duration="14948000" />
       <workItem from="1738671960184" duration="13674000" />
-      <workItem from="1738727453857" duration="24867000" />
-    </task>
-    <task id="LOCAL-00059" summary="【双音频信号发生器】准备合并">
-      <option name="closed" value="true" />
-      <created>1732030518272</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1732030518272</updated>
+      <workItem from="1738727453857" duration="26995000" />
     </task>
     <task id="LOCAL-00060" summary="【跨越】已经把AI模型初步部署进工程里了">
       <option name="closed" value="true" />
@@ -2410,7 +2392,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738748277649</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="【工程重构】自动配置宏可行。目前已经实现了PROJECTS相关配置项">
+      <option name="closed" value="true" />
+      <created>1738756242321</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1738756242322</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2445,8 +2435,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="现象：在lcd_flush函数里加一个软件断点，此函数会被多次调用，程序正常执行。反之，不加，那么该函数之后被调用一次" />
-    <MESSAGE value="原因：把绘制完毕通知函数放在DMA中断回调，但忘记在lvgl绘制函数中注释了" />
     <MESSAGE value="调整了lcd驱动的书写格式" />
     <MESSAGE value="略微调整了app中的细节" />
     <MESSAGE value="【驱动开发】可以尝试优化驱动组织关系，以及GUI控制启闭了" />
@@ -2470,7 +2458,9 @@
     <MESSAGE value="【工程重构】初步重构了cmake" />
     <MESSAGE value="【工程重构】BSP层基本思路已经确定。BSP层包含了CMSIS和HAL，并且除了CMSIS外，不对外开放" />
     <MESSAGE value="【工程重构】最简单的驱动开发项目已经整理完毕，驱动依赖注册可行。" />
-    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】最简单的驱动开发项目已经整理完毕，驱动依赖注册可行。" />
+    <MESSAGE value="【工程重构】自动配置宏可行。目前已经实现了PROJECTS相关配置项" />
+    <MESSAGE value="【工程重构】准备用自动产生的stm32f4xx_hal_conf.h来代替原先的" />
+    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】准备用自动产生的stm32f4xx_hal_conf.h来代替原先的" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

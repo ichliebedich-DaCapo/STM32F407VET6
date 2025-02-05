@@ -5,8 +5,7 @@
 #ifndef FURINA_DAC_H
 #define FURINA_DAC_H
 
-#include "App_Conf.h"
-#include "stm32f4xx_hal.h"
+#include <bsp_config.h>
 
 
 #ifdef __cplusplus

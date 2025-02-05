@@ -1,7 +1,6 @@
 #ifndef __TCP_H
 #define __TCP_H 			   
-
-#include "stm32f4xx_hal.h"
+#include <bsp_config.h>
 
 /*
 *以下参数需要用户自行修改才能测试用过

@@ -3,26 +3,4 @@
 #include<common_config.h>
 #include<stm32f4xx_hal.h>
 
-// 自动生成的驱动开关
-#cmakedefine BSP_USE_ADC
-#cmakedefine BSP_USE_BASEINIT
-#cmakedefine BSP_USE_CPU_RUNTIME
-#cmakedefine BSP_USE_DAC
-#cmakedefine BSP_USE_DEBUG
-#cmakedefine BSP_USE_ESP8266
-#cmakedefine BSP_USE_FSMC
-#cmakedefine BSP_USE_KEY_EXIT
-#cmakedefine BSP_USE_LCD
-#cmakedefine BSP_USE_MQTT
-#cmakedefine BSP_USE_PWR
-#cmakedefine BSP_USE_RCC
-#cmakedefine BSP_USE_RNG
-#cmakedefine BSP_USE_SDIO
-#cmakedefine BSP_USE_SPI
-#cmakedefine BSP_USE_TCP
-#cmakedefine BSP_USE_TIMER
-#cmakedefine BSP_USE_USART
-#cmakedefine BSP_USE_W25QXX
-
-
 #endif

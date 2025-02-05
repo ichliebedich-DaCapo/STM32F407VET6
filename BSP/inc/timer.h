@@ -4,7 +4,6 @@
 
 #ifndef FURINA_TIMER_H
 #define FURINA_TIMER_H
-
 #include <bsp_config.h>
 
 #ifdef __cplusplus

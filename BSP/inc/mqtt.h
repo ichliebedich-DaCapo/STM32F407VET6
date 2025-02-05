@@ -1,6 +1,6 @@
 #ifndef __MQTT_H
 #define __MQTT_H 			   
-
+#include <bsp_config.h>
 
 
 /*

@@ -3,7 +3,7 @@
 //
 #ifndef FURINA_RCC_H
 #define FURINA_RCC_H
-
+#include <bsp_config.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

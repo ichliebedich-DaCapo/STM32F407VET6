@@ -36,8 +36,9 @@ function(add_driver_component comp)
         if (comp MATCHES "^hal_")
             # HAL组件：去掉前缀"hal_"，设置HAL_USE_<COMPONENT>
             string(REGEX REPLACE "^hal_" "" HAL_COMP ${comp})
+            string(REGEX REPLACE "_ex$" "" HAL_COMP ${HAL_COMP})  # 去除可能的"_ex"后缀
             string(TOUPPER ${HAL_COMP} HAL_COMP_UPPER)
-            set(HAL_USE_${HAL_COMP_UPPER} ON CACHE INTERNAL "Enable HAL component ${HAL_COMP}")
+            set(HAL_${HAL_COMP_UPPER}_MODULE_ENABLED ON CACHE INTERNAL "Enable HAL component ${HAL_COMP}")
         elseif (comp MATCHES "^ll_")
             # LL组件（可选）：设置LL_USE_<COMPONENT>
             string(REGEX REPLACE "^ll_" "" LL_COMP ${comp})
@@ -45,7 +46,7 @@ function(add_driver_component comp)
             set(LL_USE_${LL_COMP_UPPER} ON CACHE INTERNAL "Enable LL component ${LL_COMP}")
         else()
             # BSP组件：设置BSP_USE_<COMPONENT>
-            set(BSP_USE_${COMP_UPPER} ON CACHE INTERNAL "Enable BSP component ${comp}")
+#            set(BSP_USE_${COMP_UPPER} ON CACHE INTERNAL "Enable BSP component ${comp}")
         endif()
 
         # 查找依赖项
@@ -89,6 +90,12 @@ endforeach ()
 configure_file(
         ${CMAKE_CURRENT_SOURCE_DIR}/bsp_config.h.in
         ${INC_DIR}/bsp_config.h
+)
+
+# 生成hal配置头文件
+configure_file(
+        ${CMAKE_CURRENT_SOURCE_DIR}/stm32f4xx_hal_conf.h.in
+        ${INC_DIR}/stm32f4xx_hal_conf.h
 )
 
 #message(STATUS "BSP_SRCS--:${BSP_SRCS}")

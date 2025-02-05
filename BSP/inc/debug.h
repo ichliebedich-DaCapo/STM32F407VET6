@@ -3,7 +3,7 @@
 //
 #ifndef FURINA_DEBUG_H
 #define FURINA_DEBUG_H
-
+#include <bsp_config.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

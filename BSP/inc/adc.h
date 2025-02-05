@@ -4,9 +4,7 @@
 
 #ifndef FURINA_ADC_H
 #define FURINA_ADC_H
-
 #include <bsp_config.h>
-#ifdef BSP_USE_ADC
 
 #ifdef __cplusplus
 extern "C" {
@@ -32,5 +30,5 @@ float get_adc1_temperature();// 获取温度
 }
 #endif
 
-#endif
+
 #endif //FURINA_ADC_H

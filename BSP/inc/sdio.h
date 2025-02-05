@@ -3,7 +3,7 @@
 //
 #ifndef FURINA_SDIO_H
 #define FURINA_SDIO_H
-
+#include <bsp_config.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

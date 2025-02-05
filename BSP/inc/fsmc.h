@@ -6,7 +6,6 @@
 #define FURINA_FSMC_H
 #include <bsp_config.h>
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif

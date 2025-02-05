@@ -4,11 +4,7 @@
 
 #ifndef FURINA_USART_H
 #define FURINA_USART_H
-
 #include <bsp_config.h>
-
-
-
 #ifdef __cplusplus
 extern "C" {
 #endif
