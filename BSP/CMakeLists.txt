@@ -46,7 +46,7 @@ function(add_driver_component comp)
             set(LL_USE_${LL_COMP_UPPER} ON CACHE INTERNAL "Enable LL component ${LL_COMP}")
         else()
             # BSP组件：设置BSP_USE_<COMPONENT>
-#            set(BSP_USE_${COMP_UPPER} ON CACHE INTERNAL "Enable BSP component ${comp}")
+            set(BSP_USE_${COMP_UPPER} ON CACHE INTERNAL "Enable BSP component ${comp}")
         endif()
 
         # 查找依赖项
@@ -95,7 +95,7 @@ configure_file(
 # 生成hal配置头文件
 configure_file(
         ${CMAKE_CURRENT_SOURCE_DIR}/stm32f4xx_hal_conf.h.in
-        ${INC_DIR}/stm32f4xx_hal_conf.h
+        ${DRIVERS_DIR}/stm32f4xx_hal_conf.h
 )
 
 #message(STATUS "BSP_SRCS--:${BSP_SRCS}")

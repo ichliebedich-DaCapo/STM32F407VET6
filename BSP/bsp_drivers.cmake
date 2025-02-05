@@ -14,7 +14,7 @@ set(BSP_DRIVERS
         "key_exit:"
         "lcd:fsmc,spi"
         "mqtt:"
-        "pwr:"
+        "pwr:hal_pwr"
         "rcc:hal_rcc,hal_flash_ex"
         "rng:hal_rng"
         "sdio:"

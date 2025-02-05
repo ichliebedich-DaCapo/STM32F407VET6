@@ -12,7 +12,7 @@
  *      而是和启动文件一样，作为资源文件一起链接其他静态库
 */
 #include <project_config.h>
-#include "stm32f4xx_hal.h"
+#include <bsp_config.h>
 #include "timer.h"
 #include "adc.h"
 #include "key.hpp"
@@ -58,6 +58,8 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
     }
 }
 
+
+#ifdef BSP_USE_PWR
 void HAL_PWR_PVDCallback(void)
 {
     __HAL_PWR_CLEAR_FLAG(PWR_FLAG_PVDO); // 清除 PVD 标志
@@ -78,6 +80,7 @@ void HAL_PWR_PVDCallback(void)
     }
 
 }
+#endif
 
 /*******************************中断服务例程**************************************/
 
