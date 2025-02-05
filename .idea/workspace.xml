@@ -33,12 +33,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】i2c.c 完成了I2C1_Init">
-      <change afterPath="$PROJECT_DIR$/BSP/inc/touch.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BSP/src/touch.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/i2c.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/i2c.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/i2c.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/i2c.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/baseInit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/baseInit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/lcd.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/lcd.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/touch.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/touch.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/lcd.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/touch.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/touch.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/driversDevelop/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/driversDevelop/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/UI/driversDevelop/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/driversDevelop/ui.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1928,6 +1933,7 @@
       <workItem from="1738685232812" duration="141000" />
       <workItem from="1738723713201" duration="6978000" />
       <workItem from="1738733828371" duration="1481000" />
+      <workItem from="1738757696835" duration="1064000" />
     </task>
     <task id="LOCAL-00036" summary="【语音存储与回放】稍微优化了Flash读写函数">
       <option name="closed" value="true" />

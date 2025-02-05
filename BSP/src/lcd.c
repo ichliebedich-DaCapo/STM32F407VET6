@@ -42,6 +42,7 @@ extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
 #define LCD_CS_LOW()  spi2_cs_low()
 #define LCD_CS_HIGH()  spi2_cs_high()
 
+
 // 函数
 void LCD_WR_REG(uint8_t data)
 {

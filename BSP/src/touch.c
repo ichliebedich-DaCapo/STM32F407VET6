@@ -5,33 +5,7 @@
 #include "i2c.h"
 #include "stm32f4xx_hal.h"
 
-/**************宏定义******************/
-#define FT6336_OK                 1
-#define FT6336_ERROR              0
 
-#define FT_TRUE                  1
-#define FT_FALSE                 0
-
-#define FT6336_ADDR              0X71
-
-//FT5426 部分寄存器定义
-#define FT_DEVIDE_MODE           0x00         //FT6336模式控制寄存器
-#define FT_REG_NUM_FINGER        0x02         //触摸状态寄存器
-
-#define FT_TP1_REG               0X03         //第一个触摸点数据地址
-#define FT_TP2_REG               0X09         //第二个触摸点数据地址
-
-#define FT_ID_G_CIPHER_MID       0x9F         //芯片代号（中字节） 默认值0x26
-#define FT_ID_G_CIPHER_LOW       0xA0         //芯片代号（低字节） 0x01: Ft6336G  0x02: Ft6336U
-#define FT_ID_G_LIB_VERSION      0xA1         //版本
-#define FT_ID_G_CIPHER_HIGH      0xA3         //芯片代号（高字节） 默认0x64
-#define FT_ID_G_MODE             0xA4         //FT6636中断模式控制寄存器
-#define FT_ID_G_FOCALTECH_ID     0xA8         //VENDOR ID 默认值为0x11
-#define FT_ID_G_THGROUP          0x80         //触摸有效值设置寄存器
-#define FT_ID_G_PERIODACTIVE     0x88         //激活状态周期设置寄存器
-
-// MATCH VALUE LIST
-#define PANNEL_ID                0x11
 
 /**GPIO引脚定义
 PB5     ------> CTP_RST
@@ -47,9 +21,9 @@ PB6     ------> CTP_INT
 #define FT_RST_H     HAL_GPIO_WritePin(TOUCH_RST_GPIO_Port, TOUCH_RST_Pin, GPIO_PIN_SET)
 
 
-
+//
 //触摸初始化函数（驱动芯片FT6336U）（返回1成功返回0失败）
-uint8_t TOUCH_Init( void )
+uint8_t touch_init( void )
 {
 
     uint8_t id;
@@ -59,14 +33,14 @@ uint8_t TOUCH_Init( void )
     //配置GPIO
     GPIO_InitTypeDef GPIO_InitStruct = {0};
     __HAL_RCC_GPIOB_CLK_ENABLE();
-    HAL_GPIO_WritePin(TOUCH_RST_GPIO_Port, TOUCH_RST_Pin,GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(TOUCH_RST_GPIO_Port, TOUCH_RST_Pin,GPIO_PIN_SET);
     GPIO_InitStruct.Pin = TOUCH_RST_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStruct.Pull = GPIO_PULLUP;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     HAL_GPIO_Init(TOUCH_RST_GPIO_Port, &GPIO_InitStruct);
 
-    //配置外部中断
+    //配置外部中断 可以放在BSP\src\key_exit中
     GPIO_InitStruct.Pin = TOUCH_INT_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
     GPIO_InitStruct.Pull = GPIO_PULLUP;

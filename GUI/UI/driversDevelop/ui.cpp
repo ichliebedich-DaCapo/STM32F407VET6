@@ -25,7 +25,11 @@ public:
     static inline auto get_value() -> int;
 
     // 设置计数器值
-    static inline auto set_value(int value) -> void;
+    static inline auto set_value_label(int value) -> void;
+    // 设置计数器值
+    static inline auto set_value_button1(int value) -> void;
+    // 设置计数器值
+    static inline auto set_value_button2(int value) -> void;
 
 private:
     static inline int counter_value = 0; // 计数器值
@@ -110,12 +114,24 @@ auto CounterLogic::get_value() -> int
     return counter_value;
 }
 
-auto CounterLogic::set_value(int value) -> void
+auto CounterLogic::set_value_label(int value) -> void
 {
     counter_value = value;
     char buf[12];
     sprintf(buf, "%d", counter_value);
     gui->main.label_counter.set_text(buf);
+}
+auto CounterLogic::set_value_button1(int value) -> void
+{
+    char buf[12];
+    sprintf(buf, "%d", value);
+    gui->main.btn_plus.set_text(buf);
+}
+auto CounterLogic::set_value_button2(int value) -> void
+{
+    char buf[12];
+    sprintf(buf, "%d", value);
+    gui->main.btn_minus.set_text(buf);
 }
 /***************************UI接口*********************************/
 void UI::pressA()
@@ -131,7 +147,15 @@ void UI::pressS()
 /*****************************对外接口**************************/
 auto UI::set_counter_value(int value) -> void
 {
-    CounterLogic::set_value(value);
+    CounterLogic::set_value_label(value);
+}
+auto UI::set_button1_value(int value) -> void
+{
+    CounterLogic::set_value_button1(value);
+}
+auto UI::set_button2_value(int value) -> void
+{
+    CounterLogic::set_value_button2(value);
 }
 auto UI::get_counter_value() -> int
 {

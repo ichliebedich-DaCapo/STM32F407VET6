@@ -44,6 +44,9 @@ public:
     // 设置计数器值
     static auto set_counter_value(int value) -> void;
 
+    static auto set_button1_value(int value) -> void;
+    static auto set_button2_value(int value) -> void;
+
     // 获取计数器值
     static auto get_counter_value() -> int;
 

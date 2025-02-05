@@ -369,8 +369,7 @@ endif ()
 
 # -------------------编译链接-------------------
 # 设置链接脚本（用于指定内存布局）
-set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld
-        BSP/inc/touch.h)
+set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld)
 
 # 链接标志：指在编译和链接过程中，传递给链接器（Linker）的选项或参数，和链接选项是一个东西
 add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
