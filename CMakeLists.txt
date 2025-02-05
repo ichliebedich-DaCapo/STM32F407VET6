@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.29)
 project(Furina LANGUAGES C CXX ASM)
 include(cmake/common_function.cmake)
-include(cmake/project_configure.cmake)
+include(cmake/configure_project.cmake)
 # --------------------------------------选择你的项目--------------------------------
 # 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
 set(PROJECT_DIR Projects/driversDevelop)
@@ -14,7 +14,8 @@ option(AI_ENABLE "Enable AI" OFF)
 
 # --------------------------------------包含子cmake--------------------------------
 # 对配置项变量进行处理
-include(cmake/project_handler.cmake)
+include(cmake/pre_handler.cmake)
+add_subdirectory(BSP)
 # 包含编译器的设置及相关标志的传递
 include(cmake/arm-gcc.cmake)
 # 与stm32相关的一些宏，同时指定链接脚本
@@ -23,8 +24,6 @@ include(cmake/stm32f4xx.cmake)
 include(cmake/bsp.cmake)
 # 包含算法
 include(cmake/algorithm.cmake)
-# 包含BSP
-include(cmake/core.cmake)
 # 包含中间件
 include(cmake/middleware.cmake)
 # 包含适配层
@@ -35,6 +34,8 @@ include(cmake/projects.cmake)
 
 # 定义一个可执行文件目标，生成了 ELF 文件
 add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
+# 将 bsp 对象库中的对象文件链接到 xxx.elf
+#target_link_libraries(${PROJECT_NAME}.elf PRIVATE $<TARGET_OBJECTS:bsp>)
 
 # 导入模块
 if (${STATIC_LIB_LD})

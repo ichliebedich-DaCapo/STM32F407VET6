@@ -1,3 +1,4 @@
+set(CORE_DIR ${CMAKE_SOURCE_DIR}/Core)
 # 设置Core子目录
 set(DRIVERS_DIR ${CORE_DIR}/Drivers)
 set(SYSCALL_DIR ${CORE_DIR}/syscall)
@@ -7,6 +8,7 @@ set(LINKER_DIR ${SYSTEM_DIR}/linker)
 set(STARTUP_DIR ${SYSTEM_DIR}/startup)
 # 设置Drivers子目录
 set(CMSIS_DIR ${DRIVERS_DIR}/CMSIS)
+set(HAL_SRC_DIR ${DRIVERS_DIR}/STM32F4xx_HAL_Driver/Src)
 
 # -----------------------CMSIS头目录-----------------------
 set(CMSIS_INC_DIRS
@@ -38,3 +40,4 @@ file(GLOB_RECURSE STARTUP_SRC "${STARTUP_DIR}/startup_stm32f407vetx.s")
 # --------------------------Core层--------------------------
 set(CORE_INC_DIRS ${DRIVERS_INC_DIRS})
 set(CORE_SRCS ${DRIVERS_SRCS} ${SYSCALL_SRCS} ${STARTUP_SRC})
+

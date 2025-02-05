@@ -1,8 +1,10 @@
 
 
 # ------------------------BSP库-----------------------------
-file(GLOB_RECURSE BSP_SRCS "${BSP_DIR}/src/*.c")
-set(BSP_INC_DIRS ${BSP_DIR}/inc)
+# BSP_SRCS有BSP下的CMakeLists传递进来
+#file(GLOB_RECURSE BSP_SRCS "${BSP_DIR}/src/*.c")
+#set(BSP_INC_DIRS ${BSP_DIR}/inc)
+list(APPEND BSP_INC_DIRS "${BSP_DIR}/inc")
 add_library(libbsp STATIC ${BSP_SRCS})
 target_include_directories(libbsp PUBLIC ${BSP_INC_DIRS})
 target_link_libraries(libbsp PUBLIC libdrivers)
