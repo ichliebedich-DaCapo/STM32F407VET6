@@ -8,7 +8,7 @@ target_include_directories(libui PUBLIC ${UI_INC_DIRS})
 target_link_libraries(libui PUBLIC libgui)
 
 # -----------------------App---------------------
-file(GLOB_RECURSE APP_SRCS "${APP_DIR}/app.cpp" "${PROJECTS_DIR}/shared/*.cpp")
+file(GLOB_RECURSE APP_SRCS "${APP_DIR}/*.cpp" "${PROJECTS_DIR}/shared/*.cpp")
 set(APP_INC_DIRS ${APP_DIR} ${PROJECTS_DIR}/shared)
 add_library(libapp STATIC ${APP_SRCS})
 target_include_directories(libapp PUBLIC ${APP_INC_DIRS})

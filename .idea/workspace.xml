@@ -30,16 +30,26 @@
   </component>
   <component name="CMakeSettings">
     <configurations>
-      <configuration PROFILE_NAME="Release-w64-i686-arm-none-eabi" ENABLED="true" CONFIG_NAME="Release" TOOLCHAIN_NAME="w64-i686-arm-none-eabi" BUILD_OPTIONS="-j 16" />
+      <configuration PROFILE_NAME="Release-w64-i686-arm-none-eabi" ENABLED="true" CONFIG_NAME="Release" TOOLCHAIN_NAME="w64-i686-arm-none-eabi" BUILD_OPTIONS="-j16" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】准备用自动产生的stm32f4xx_hal_conf.h来代替原先的">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】BSP及HAL自动查找依赖已经基本完成">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/bsp_config.h.in" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/bsp_config.h.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/bsp_drivers.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/bsp_drivers.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Drivers/stm32f4xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Drivers/stm32f4xx_hal_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Base/GUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Base/GUI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Base/GUI_Base.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Base/GUI_Base.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/thinking/ZQ/Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/thinking/ZQ/Log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/thinking/ZQ/工程组织.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/thinking/ZQ/工程组织.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/app/app.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/StorageOscilloscope/app/app.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/bsp_components.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/bsp_components.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/signalGenerator/app/app.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/voiceStorageAndPlay/app/app.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/bsp.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/bsp.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/common_function.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/common_function.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/projects.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/projects.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1985,15 +1995,7 @@
       <workItem from="1738596604206" duration="607000" />
       <workItem from="1738646545452" duration="14948000" />
       <workItem from="1738671960184" duration="13674000" />
-      <workItem from="1738727453857" duration="27209000" />
-    </task>
-    <task id="LOCAL-00061" summary="【准备】什么辣鸡gitignore，草">
-      <option name="closed" value="true" />
-      <created>1732036112221</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1732036112221</updated>
+      <workItem from="1738727453857" duration="30815000" />
     </task>
     <task id="LOCAL-00062" summary="【准备】是我错了">
       <option name="closed" value="true" />
@@ -2379,7 +2381,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738758294209</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="【工程重构】BSP及HAL自动查找依赖已经基本完成">
+      <option name="closed" value="true" />
+      <created>1738758699038</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1738758699038</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2414,7 +2424,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="调整了lcd驱动的书写格式" />
     <MESSAGE value="略微调整了app中的细节" />
     <MESSAGE value="【驱动开发】可以尝试优化驱动组织关系，以及GUI控制启闭了" />
     <MESSAGE value="【驱动开发】在自动化编译情况下，无关文件并不会编译，那么驱动编译宏就失去了作用" />
@@ -2439,7 +2448,8 @@
     <MESSAGE value="【工程重构】最简单的驱动开发项目已经整理完毕，驱动依赖注册可行。" />
     <MESSAGE value="【工程重构】自动配置宏可行。目前已经实现了PROJECTS相关配置项" />
     <MESSAGE value="【工程重构】准备用自动产生的stm32f4xx_hal_conf.h来代替原先的" />
-    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】准备用自动产生的stm32f4xx_hal_conf.h来代替原先的" />
+    <MESSAGE value="【工程重构】BSP及HAL自动查找依赖已经基本完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】BSP及HAL自动查找依赖已经基本完成" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

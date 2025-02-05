@@ -1,6 +1,9 @@
+<br>
+<img src="Resource/pictures/logo.png" alt="Logo" class="rounded-corners" width="60" height="60">
 &nbsp;&nbsp;This is a project based on stm32f407vet6. <br>
+
 ___
-## 环境
+## 环境   
 `IDE`: CLion
 <br>
 `辅助工具`： GUI Guider &nbsp;&nbsp; STM32CubeMX
@@ -15,17 +18,14 @@ ___
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [arm-toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
-&nbsp;arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi
+&nbsp;arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi
 <br>
 `分支说明`:main分支是已经测试稳定通过的，ZQ和DV分支是两条测试用的分支  &nbsp;&nbsp;&nbsp;&nbsp; JY快更新你的DV
 <br>
-`其他`：工程里嵌套了一个来自GUI Guider的lvgl模拟器，目录为GUI/lvgl_simulator，使用的是GUI Guider的工具链，编译出的是32位程序。
-<!-- 鉴于原工具链有些慢，后面有空换一下工具链。-->
+`其他`：工程里嵌套了一个模仿GUI Guider的lvgl模拟器，使用的是SDL2，
+目录为GUI/lvgl_simulator，编译的是32位程序（比64位编译要快）。
 
 
-<!-- 
-- [x] xxx:显示任务完成图标,方括号里放空格就是未完成
--->
 ___
 ## 简介
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

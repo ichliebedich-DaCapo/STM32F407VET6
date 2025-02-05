@@ -11,8 +11,7 @@
 #ifndef GUI_DISABLE
 
 #ifdef ARM_MATH_CM4
-//#include "JYZQ_Conf.h"
-#include "APP_Conf.h"
+
 #endif
 
 

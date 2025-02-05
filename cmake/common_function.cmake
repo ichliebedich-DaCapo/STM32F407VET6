@@ -1,3 +1,4 @@
+# 确定目录是否存在
 function(ensure_directory dir_path)
     if(NOT EXISTS ${dir_path})
         # 如果目录不存在，则创建它
@@ -6,6 +7,14 @@ function(ensure_directory dir_path)
     endif()
 endfunction()
 
+
+# 定义一个宏来设置BSP组件
+macro(set_bsp_components)
+    # 遍历所有传入的参数并添加到BSP_COMPONENTS列表中
+    foreach(comp ${ARGN})
+        list(APPEND BSP_COMPONENTS ${comp})
+    endforeach()
+endmacro()
 
 # -----------------------------项目宏----------------------------------
 # 在项目下的bsp_components.cmake中使用
