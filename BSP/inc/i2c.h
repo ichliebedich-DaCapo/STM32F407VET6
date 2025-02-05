@@ -12,20 +12,12 @@
 extern "C" {
 #endif
 
-void I2C1_Init(); // I2C1初始化
-void i2c_init(void);                // 初始化I2C硬件（GPIO、时钟、速率等）
-void i2c_start(void);               // 发送起始条件（START）
-void i2c_stop(void);                // 发送停止条件（STOP）
-
-//这里AI原来给的是uint_8
-void i2c_send_byte(int data);   // 发送一个字节数据
-int i2c_read_byte(void);        // 读取一个字节数据
-
-void i2c_wait_ack(void);            // 等待从机应答（ACK）
-void i2c_send_ack(void);            // 主机发送ACK
-void i2c_send_nack(void);           // 主机发送NACK
-
-
+void i2c1_Init(); // I2C1初始化
+void I2C_Write(unsigned char DevAddress, unsigned char *pData, unsigned int Size); // 写数据到I2C设备
+void I2C_Read(unsigned char DevAddress, unsigned char *pData, unsigned int Size);  // 从I2C设备读取数据
+void I2C_ReadRegister(unsigned char DevAddress, unsigned char RegAddress, unsigned char *pData, unsigned int Size);  // 从I2C设备读取特定寄存器的数据
+void I2C_WriteRegister(unsigned char DevAddress, unsigned char RegAddress, unsigned char *pData, unsigned int Size); // 写数据到I2C设备的特定寄存器
+unsigned int i2c_CheckDevice(unsigned char DevAddress);
 #ifdef __cplusplus
 }
 #endif

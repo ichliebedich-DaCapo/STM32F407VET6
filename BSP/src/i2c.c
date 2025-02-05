@@ -7,7 +7,7 @@
 
 I2C_HandleTypeDef hi2c1;
 /* I2C1 init function */
-void I2C1_Init(void)
+void i2c1_Init(void)
 {
     GPIO_InitTypeDef GPIO_InitStruct = {0};
     /* I2C1 clock enable */
@@ -37,11 +37,47 @@ void I2C1_Init(void)
     {
         Error_Handler();
     }
-
-    /* I2C1 interrupt Init */
-    HAL_NVIC_SetPriority(I2C1_EV_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(I2C1_EV_IRQn);
+    //I2C的中断事件主要是表示传输过程中和错误的一些事件，由于I2C通信时一种应答式通信，与其他外设的轮询式操作类似，本示例不开启I2C1的中断。
+//    /* I2C1 interrupt Init */
+//    HAL_NVIC_SetPriority(I2C1_EV_IRQn, 0, 0);
+//    HAL_NVIC_EnableIRQ(I2C1_EV_IRQn);
 
 }
+// 写数据到I2C设备
+void I2C_Write(unsigned char DevAddress, unsigned char *pData, unsigned int Size) {
+    HAL_I2C_Master_Transmit(&hi2c1, DevAddress, pData, Size, HAL_MAX_DELAY);
+}
 
+// 从I2C设备读取数据
+void I2C_Read(unsigned char DevAddress, unsigned char *pData, unsigned int Size) {
+     HAL_I2C_Master_Receive(&hi2c1, DevAddress, pData, Size, HAL_MAX_DELAY);
+}
+// 从I2C设备读取特定寄存器的数据
+/*
+ * @brief  读取I2C设备寄存器数据
+ * @param  DevAddress: 设备地址
+ * @param  RegAddress: 寄存器地址
+ * @param  pData: 读取的数据
+ * @param  Size: 读取的数据长度
+ */
+void I2C_ReadRegister(unsigned char DevAddress, unsigned char RegAddress, unsigned char *pData, unsigned int Size) {
+    HAL_I2C_Mem_Read(&hi2c1, DevAddress, RegAddress, I2C_MEMADD_SIZE_8BIT, pData, Size, HAL_MAX_DELAY);
+}
 
+// 写数据到I2C设备的特定寄存器
+/*
+ * @brief  写入I2C设备寄存器数据
+ * @param  DevAddress: 设备地址
+ * @param  RegAddress: 寄存器地址
+ * @param  pData: 写入的数据
+ * @param  Size: 写入的数据长度
+ */
+void I2C_WriteRegister(unsigned char DevAddress, unsigned char RegAddress, unsigned char *pData, unsigned int Size) {
+    HAL_I2C_Mem_Write(&hi2c1, DevAddress, RegAddress, I2C_MEMADD_SIZE_8BIT, pData, Size, HAL_MAX_DELAY);
+}
+
+unsigned int i2c_CheckDevice(unsigned char DevAddress)
+{
+    HAL_StatusTypeDef status = HAL_I2C_IsDeviceReady(&hi2c1, DevAddress, 3, HAL_MAX_DELAY);
+    return (status == HAL_OK) ? I2C_OK : I2C_FAIL;
+}

@@ -226,7 +226,8 @@ set_target_properties(libdsp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 file(GLOB_RECURSE BSP_SRC "BSP/src/*.c")
 set(BSP_DIR BSP/inc)
 add_library(libbsp STATIC ${BSP_SRC}
-        BSP/src/i2c.c)
+        BSP/src/i2c.c
+        BSP/src/touch.c)
 target_include_directories(libbsp PUBLIC ${BSP_DIR})
 target_link_libraries(libbsp PUBLIC libdrivers)
 # 设置静态库的输出目录
@@ -368,7 +369,8 @@ endif ()
 
 # -------------------编译链接-------------------
 # 设置链接脚本（用于指定内存布局）
-set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld)
+set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F407VETX_FLASH.ld
+        BSP/inc/touch.h)
 
 # 链接标志：指在编译和链接过程中，传递给链接器（Linker）的选项或参数，和链接选项是一个东西
 add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
