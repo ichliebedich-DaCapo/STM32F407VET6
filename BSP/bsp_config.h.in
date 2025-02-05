@@ -1,5 +1,11 @@
+#ifndef BSP_CONFIG_H
+#define BSP_CONFIG_H
+#include<common_config.h>
+#include<stm32f4xx_hal.h>
+
 // 自动生成的驱动开关
 #cmakedefine BSP_USE_ADC
+#cmakedefine BSP_USE_BASEINIT
 #cmakedefine BSP_USE_CPU_RUNTIME
 #cmakedefine BSP_USE_DAC
 #cmakedefine BSP_USE_DEBUG
@@ -17,3 +23,6 @@
 #cmakedefine BSP_USE_TIMER
 #cmakedefine BSP_USE_USART
 #cmakedefine BSP_USE_W25QXX
+
+
+#endif

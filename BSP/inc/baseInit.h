@@ -9,10 +9,15 @@
 extern "C" {
 #endif
 
+#include <bsp_config.h>
+
+#ifdef BSP_USE_BASEINIT
+
 void BaseInit();
 
 #ifdef __cplusplus
 }
 #endif
 
+#endif
 #endif //FURINA_BASEINIT_H

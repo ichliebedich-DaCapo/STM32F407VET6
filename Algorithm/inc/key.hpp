@@ -6,7 +6,8 @@
 #define FURINA_KEY_HPP
 
 #include <cstdint>
-#include "App_Conf.h"
+#include <project_config.h>
+
 
 #define KEY_STATE_NONE 0x0  // 无状态,无需使用
 #define KEY_STATE_TWO 0x2   // 存储两个状态

@@ -6,10 +6,10 @@
 #include "lcd.h"
 #include "fsmc.h"
 #include "key_exit.h"
-#include "App_Conf.h"
+
 #include "CPU_RunTime.h"
 #include "RCC.h"
-#ifndef GUI_DISABLE
+#ifdef GUI_ENABLE
 #include "lvgl.h"
 #include "lv_port_disp.h"
 #endif
@@ -158,7 +158,7 @@ void TIM7_IRQHandler()
     __HAL_TIM_CLEAR_FLAG(&htim7, TIM_FLAG_UPDATE);
     HAL_IncTick();
 
-#ifndef GUI_DISABLE
+#ifdef GUI_ENABLE
     lv_tick_inc(1);
 #endif
 }

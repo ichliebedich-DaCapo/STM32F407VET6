@@ -17,6 +17,17 @@ target_link_libraries(libapp PUBLIC  libdata libbsp libalgorithm)
 
 
 # -------------------------------Projects层--------------------------------
+# 生成公共宏定义配置头文件
+configure_file(
+        ${PROJECTS_DIR}/shared/common_config.h.in
+        ${INC_DIR}/common_config.h
+)
+# 生成PROJECT配置头文件
+configure_file(
+        ${PROJECTS_DIR}/shared/project_config.h.in
+        ${INC_DIR}/project_config.h
+)
+
 set(PROJECTS_INC_DIRS
         ${APP_INC_DIRS}
 
@@ -28,7 +39,7 @@ set(PROJECTS_SRCS
 
 
 # 控制是否添加UI
-if (${GUI_ENABLE})
+if (GUI_ENABLE)
     list(APPEND PROJECTS_INC_DIRS
             ${UI_INC_DIRS}
     )
@@ -38,25 +49,16 @@ if (${GUI_ENABLE})
 endif ()
 
 
-
-
-if (${AI_ENABLE})
-    target_link_libraries(libapp PUBLIC libai)
-endif ()
-if (${GUI_ENABLE})
-    target_link_libraries(libapp PUBLIC libgui)
-endif ()
-# 设置静态库的输出目录
-set_target_properties(libapp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
-
 # ----------------------------包含所有目录和资源文件--------------------------
+# Core层包含HAL层和CMSIS层，均合并到BSP层
+
 set(ALL_INC_DIRS
+        # 公共配置层
+        ${INC_DIR}
         # Algorithm层
         ${ALGORITHM_INC_DIRS}
         # Adapter层
         ${ADAPTER_INC_DIRS}
-        # Core层
-        ${CORE_INC_DIRS}
         # BSP层
         ${BSP_INC_DIRS}
         # Middleware层
@@ -70,8 +72,6 @@ set(ALL_SRCS
         ${ALGORITHM_SRCS}
         # Adapter层
         ${ADAPTER_SRCS}
-        # Core层
-        ${CORE_SRCS}
         # BSP层
         ${BSP_SRCS}
         # Middleware层
@@ -80,7 +80,7 @@ set(ALL_SRCS
         ${PROJECTS_SRCS}
 )
 
-if (${STATIC_MODULE_LD})
+if (STATIC_LIB_LD)
     # 这里面不能直接添加到静态库里 否则链接时会出现找不到定义的现象
     file(GLOB_RECURSE SOURCES "Core/*.*" "Application/Base/ISR.cpp")
 else ()
@@ -90,3 +90,5 @@ else ()
     include_directories(${ALL_INC_DIRS})
     file(GLOB_RECURSE SOURCES ${ALL_SRCS})
 endif ()
+
+

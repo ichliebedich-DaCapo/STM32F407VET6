@@ -13,10 +13,11 @@ else ()
     set(BSP_COMPONENTS lcd adc) # 默认组件
 endif ()
 
+
 # 初始化已添加组件列表和源文件列表
 set(ADDED_COMPONENTS "" CACHE INTERNAL "List of added components")
 set(BSP_SRCS "${CORE_SRCS}" CACHE INTERNAL "List of BSP source files")
-set(BSP_INC_DIRS "${CMAKE_CURRENT_BINARY_DIR}" "${CORE_INC_DIRS}" CACHE INTERNAL "List of BSP header dirs")
+set(BSP_INC_DIRS "${CORE_INC_DIRS}" CACHE INTERNAL "List of BSP header dirs")
 
 
 # 递归解析依赖
@@ -28,7 +29,24 @@ function(add_driver_component comp)
         list(APPEND ADDED_COMPONENTS ${comp})
         set(ADDED_COMPONENTS "${ADDED_COMPONENTS}" CACHE INTERNAL "List of added components")
 
-                message(STATUS "ADDED_COMPONENTS:${ADDED_COMPONENTS}")
+        # message(STATUS "ADDED_COMPONENTS:${ADDED_COMPONENTS}")
+
+        # 根据组件名称设置对应的变量（HAL或BSP）
+        string(TOUPPER ${comp} COMP_UPPER)
+        if (comp MATCHES "^hal_")
+            # HAL组件：去掉前缀"hal_"，设置HAL_USE_<COMPONENT>
+            string(REGEX REPLACE "^hal_" "" HAL_COMP ${comp})
+            string(TOUPPER ${HAL_COMP} HAL_COMP_UPPER)
+            set(HAL_USE_${HAL_COMP_UPPER} ON CACHE INTERNAL "Enable HAL component ${HAL_COMP}")
+        elseif (comp MATCHES "^ll_")
+            # LL组件（可选）：设置LL_USE_<COMPONENT>
+            string(REGEX REPLACE "^ll_" "" LL_COMP ${comp})
+            string(TOUPPER ${LL_COMP} LL_COMP_UPPER)
+            set(LL_USE_${LL_COMP_UPPER} ON CACHE INTERNAL "Enable LL component ${LL_COMP}")
+        else()
+            # BSP组件：设置BSP_USE_<COMPONENT>
+            set(BSP_USE_${COMP_UPPER} ON CACHE INTERNAL "Enable BSP component ${comp}")
+        endif()
 
         # 查找依赖项
         foreach (driver ${BSP_DRIVERS})
@@ -57,15 +75,10 @@ function(add_driver_component comp)
 endfunction()
 
 
-
 # ------------------------解析BSP依赖-------------------------------
 # 添加默认组件
 list(APPEND BSP_COMPONENTS "default")
 foreach (comp ${BSP_COMPONENTS})
-    # 将组件名称转换为大写
-    string(TOUPPER ${comp} COMP_UPPER)
-    # 设置对应的宏定义为ON
-    set(BSP_USE_${COMP_UPPER} ON CACHE INTERNAL "Enable ${comp} driver")
     add_driver_component(${comp})
 endforeach ()
 
@@ -74,10 +87,8 @@ endforeach ()
 
 # 生成BSP配置头文件
 configure_file(
-        ${CMAKE_CURRENT_SOURCE_DIR}/inc/bsp_config.h.in
-        ${CMAKE_CURRENT_BINARY_DIR}/bsp_config.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/bsp_config.h.in
+        ${INC_DIR}/bsp_config.h
 )
 
-#ensure_directory(${CMAKE_BINARY_DIR})
-message(STATUS ${CMAKE_BINARY_DIR})
-message(STATUS "BSP_SRCS--:${BSP_SRCS}")
+#message(STATUS "BSP_SRCS--:${BSP_SRCS}")

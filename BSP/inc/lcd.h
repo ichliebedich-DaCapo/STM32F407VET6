@@ -6,9 +6,8 @@
 #define FURINA_LCD_H
 
 
-#include "App_Conf.h"
+#include <bsp_config.h>
 
-#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {

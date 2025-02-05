@@ -1,12 +1,12 @@
 //
-// Created by 34753 on 2024/10/10.
+// Created by fairy on 2024/10/10.
 //
 
 #ifndef FURINA_ADC_H
 #define FURINA_ADC_H
 
-#include "App_Conf.h"
-#include "stm32f4xx_hal.h"
+#include <bsp_config.h>
+#ifdef BSP_USE_ADC
 
 #ifdef __cplusplus
 extern "C" {
@@ -32,4 +32,5 @@ float get_adc1_temperature();// 获取温度
 }
 #endif
 
+#endif
 #endif //FURINA_ADC_H

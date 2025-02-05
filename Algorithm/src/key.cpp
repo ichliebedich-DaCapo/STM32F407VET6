@@ -8,7 +8,7 @@ extern void key_handler();
 __attribute__((weak)) void key_handler(){/*由用户自己实现*/}
 
 
-#ifdef FreeRTOS_ENABLE
+#ifdef FREERTOS_ENABLE
 #include "cmsis_os2.h"
 
 osSemaphoreId_t keySemHandle;
@@ -35,7 +35,7 @@ void keyTask(void *argument)
 auto Key::init() -> void
 {
     code =0;
-#ifdef FreeRTOS_ENABLE
+#ifdef FREERTOS_ENABLE
     keyTaskHandler = osThreadNew(keyTask, nullptr, &keyTask_attributes);
     // 创建二值信号量，初始值为0
     keySemHandle = osSemaphoreNew(1, 0, nullptr);

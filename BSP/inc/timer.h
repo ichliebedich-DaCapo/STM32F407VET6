@@ -5,8 +5,7 @@
 #ifndef FURINA_TIMER_H
 #define FURINA_TIMER_H
 
-#include "App_Conf.h"
-#include "stm32f4xx_hal.h"
+#include <bsp_config.h>
 
 #ifdef __cplusplus
 extern "C" {

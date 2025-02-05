@@ -1,0 +1,11 @@
+#ifndef PROJECT_CONFIG_H
+#define PROJECT_CONFIG_H
+#include<common_config.h>
+
+
+// 配置项
+#cmakedefine GUI_ENABLE
+#cmakedefine FREERTOS_ENABLE
+
+
+#endif

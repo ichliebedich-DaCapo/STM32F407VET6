@@ -1,8 +1,8 @@
 //
 // Created by fairy on 2024/10/10.
 //
-
 #include "adc.h"
+#ifdef BSP_USE_ADC
 #include "timer.h"
 
 ADC_HandleTypeDef hadc1;
@@ -177,3 +177,5 @@ void ADC_IRQHandler(void)
 {
     HAL_ADC_IRQHandler(&hadc1);
 }
+
+#endif

@@ -4,7 +4,7 @@
 
 #ifndef FURINA_FSMC_H
 #define FURINA_FSMC_H
-#include "App_Conf.h"
+#include <bsp_config.h>
 
 
 #ifdef __cplusplus

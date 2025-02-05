@@ -32,7 +32,7 @@ set(ADAPTER_SRCS
 )
 
 # 控制GUI的编译
-if (${GUI_ENABLE})
+if (GUI_ENABLE)
     list(APPEND ADAPTER_INC_DIRS
             ${GUI_INC_DIRS}
     )

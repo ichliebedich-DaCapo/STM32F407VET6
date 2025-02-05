@@ -5,7 +5,7 @@
 #ifndef FURINA_KEY_EXIT_H
 #define FURINA_KEY_EXIT_H
 
-#include "App_Conf.h"
+#include <bsp_config.h>
 
 #ifdef __cplusplus
 extern "C" {

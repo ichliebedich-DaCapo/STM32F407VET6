@@ -6,15 +6,10 @@ project(Furina LANGUAGES C CXX ASM)
 # 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
 set(PROJECT_DIR Projects/driversDevelop)
 
-# 是否使用独立静态库链接,使用后会额外编译一些不需要的文件,可以使用链接优化-flto
-option(STATIC_LIB_LD "Independently compiled into various static libraries" OFF)
-# ---------使用AI---------
-option(AI_ENABLE "Enable AI" OFF)
-
 
 # --------------------------------------包含子cmake--------------------------------
-# 对配置项变量进行处理
-include(cmake/pre_handler.cmake)
+# 对配置项变量进行预处理，包括获取项目名称
+include(cmake/target_project.cmake)
 add_subdirectory(BSP)
 # 包含编译器的设置及相关标志的传递
 include(cmake/arm-gcc.cmake)

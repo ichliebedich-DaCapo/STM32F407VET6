@@ -4,3 +4,4 @@ set(BSP_COMPONENTS
         key
         debug
 )
+options_disable_GUI()

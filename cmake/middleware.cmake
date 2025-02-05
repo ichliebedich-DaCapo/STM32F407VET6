@@ -85,18 +85,28 @@ set_target_properties(libdsp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 # -------------------------------Middleware层------------------------------
 set(MIDDLEWARE_INC_DIRS
-        ${LVGL_INC_DIRS}
         ${DSP_INC_DIRS}
 )
 
 set(MIDDLEWARE_SRCS
         ${DATA_SRCS}
-        ${LVGL_SRCS}
         ${DSP_SRCS}
 )
 
+if (GUI_ENABLE)
+    list(APPEND MIDDLEWARE_INC_DIRS ${LVGL_INC_DIRS})
+    list(APPEND MIDDLEWARE_SRCS ${LVGL_SRCS})
+    message(STATUS "[GUI]:ON")
+else ()
+    message(STATUS "[GUI]:OFF")
+endif ()
+
+
 # 控制FreeRTOS的编译
-if (${FreeRTOS_ENABLE})
+if (FreeRTOS_ENABLE)
     list(APPEND MIDDLEWARE_INC_DIRS ${FREERTOS_INC_DIRS})
     list(APPEND MIDDLEWARE_SRCS ${FREERTOS_SRCS})
+    message(STATUS "[FreeRTOS]:ON")
+else ()
+    message(STATUS "[FreeRTOS]:OFF")
 endif ()

@@ -2,7 +2,7 @@
 // Created by fairy on 2025/1/11 15:03.
 //
 #include "RNG.h"
-#include "App_Conf.h"
+
 // 头文件
 
 #include "stm32f4xx_hal.h"

@@ -10,9 +10,11 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
 set(LIB_DIR ${BUILD_DIR}/lib)
 set(BIN_DIR ${BUILD_DIR}/bin)
+set(INC_DIR ${BUILD_DIR}/inc)
 ensure_directory(${BUILD_DIR})
 ensure_directory(${LIB_DIR})
 ensure_directory(${BIN_DIR})
+ensure_directory(${INC_DIR})
 
 
 # ------设置各文件目录------

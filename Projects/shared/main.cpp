@@ -1,4 +1,4 @@
-#include "App_Conf.h"
+#include <project_config.h>
 #include "baseInit.h"
 
 #ifdef FreeRTOS_ENABLE // 是否启用RTOS
@@ -7,7 +7,7 @@
 
 #endif// FreeRTOS_ENABLE
 
-#ifndef GUI_DISABLE
+#ifdef GUI_ENABLE
 
 #include "lcd.h"
 #include "GUI.hpp"
@@ -47,9 +47,8 @@ int main()
 
     Key::init();
 
-#ifndef GUI_DISABLE
+#ifdef GUI_ENABLE
     GUI::init<lcd_flush>();
-
 #endif
 
     app_init();
@@ -85,7 +84,7 @@ int main()
 #else
     for (;;)
     {
-#ifndef GUI_DISABLE
+#ifdef GUI_ENABLE
         GUI::handler();
 #endif
         Key::handler();
