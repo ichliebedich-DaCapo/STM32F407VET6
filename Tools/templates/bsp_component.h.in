@@ -1,0 +1,14 @@
+#ifndef FURINA_@COMPONENT_NAME_UPPER@_H
+#define FURINA_@COMPONENT_NAME_UPPER@_H
+#include <bsp_config.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
+
+
+#ifdef __cplusplus
+}
+#endif
+#endif //FURINA_@COMPONENT_NAME_UPPER@_H

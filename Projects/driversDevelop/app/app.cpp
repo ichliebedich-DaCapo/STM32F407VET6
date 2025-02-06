@@ -2,7 +2,6 @@
 // Created by fairy on 2025/1/9 13:31.
 //
 #include <project_config.h>
-
 #ifdef FreeRTOS_ENABLE
 #include "cmsis_os2.h"
 #endif

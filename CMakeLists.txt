@@ -7,6 +7,8 @@ project(Furina LANGUAGES C CXX ASM)
 set(PROJECT_DIR Projects/driversDevelop)
 
 
+
+
 # --------------------------------------包含子cmake--------------------------------
 # 对配置项变量进行预处理，包括获取项目名称
 include(cmake/target_project.cmake)
@@ -66,5 +68,5 @@ add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
         COMMAND ${CMAKE_OBJCOPY} -Oihex $<TARGET_FILE:${PROJECT_NAME}.elf> ${HEX_FILE}
         COMMAND ${CMAKE_OBJCOPY} -Obinary $<TARGET_FILE:${PROJECT_NAME}.elf> ${BIN_FILE}
         COMMAND ${CMAKE_NM} -n $<TARGET_FILE:${PROJECT_NAME}.elf> > ${SYMBOL_TABLE}
-        COMMAND ${SIZE} $<TARGET_FILE:${PROJECT_NAME}.elf>
+        COMMAND ${CMAKE_SIZE} $<TARGET_FILE:${PROJECT_NAME}.elf>
         COMMENT "Building ${HEX_FILE}   Building ${BIN_FILE}")

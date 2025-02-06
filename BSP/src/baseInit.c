@@ -27,7 +27,7 @@ void BaseInit()
     SystemClock_DefaultConfig();// 系统时钟初始化
 
     // 开启FreeRTOS的运行时统计信息
-#if FreeRTOS_DEBUG && defined(FreeRTOS_ENABLE)
+#if FREERTOS_DEBUG && defined(FREERTOS_ENABLE)
     ConfigureTimerForRunTimeStats();
 #endif
 

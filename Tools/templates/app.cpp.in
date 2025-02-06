@@ -1,0 +1,38 @@
+#include <project_config.h>
+#ifdef FreeRTOS_ENABLE
+#include "cmsis_os2.h"
+#endif
+#ifdef GUI_ENABLE
+#include "GUI.hpp"
+#endif
+// 头文件
+#include <key.hpp>
+
+// 函数
+void app_init()
+{
+
+}
+
+
+void key_handler()
+{
+    switch (Key::getCode())
+    {
+        case keyk0:
+            if (Key::stateHandler(KEY_STATE_NONE))
+            {
+
+            }
+        break;
+
+
+        default:
+        break;
+    }
+}
+
+void background_handler()
+{
+
+}

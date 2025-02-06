@@ -5,6 +5,7 @@ set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
 set(CMAKE_AR arm-none-eabi-ar)
 set(CMAKE_OBJCOPY arm-none-eabi-objcopy)
 set(CMAKE_OBJDUMP arm-none-eabi-objdump)
+set(CMAKE_SIZE arm-none-eabi-size)
 
 # 设置编译标准
 set(CMAKE_CXX_STANDARD 20)

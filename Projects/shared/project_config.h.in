@@ -4,8 +4,9 @@
 
 
 // 配置项
+// 与启用中间库和一些工程的编译有关
 #cmakedefine GUI_ENABLE
 #cmakedefine FREERTOS_ENABLE
-
+#cmakedefine FREERTOS_DEBUG
 
 #endif

@@ -1,0 +1,13 @@
+#include "ui.hpp"
+struct lv_ui_t lv_ui;
+struct lv_ui_t *gui = &lv_ui;
+
+auto GUI_Base::screen_init()->void
+{
+
+}
+
+auto GUI_Base::events_init()->void
+{
+
+}

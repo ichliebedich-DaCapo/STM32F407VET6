@@ -171,9 +171,8 @@ standard names. */
 /* USER CODE BEGIN Defines */
 /* Section where parameter definitions can be added (for instance, to override default ones in FreeRTOS.h) */
 
-#include "App_Conf.h"
-
-#if FreeRTOS_DEBUG
+#include <project_config.h>
+#if FREERTOS_DEBUG
 #define configRECORD_STACK_HIGH_ADDRESS 1   // 用于显示任务堆栈信息
 #define configGENERATE_RUN_TIME_STATS 1 // 任务表的运行时列
 extern CCMRAM_VAR volatile uint32_t CPU_RunTime;// 定义一个变量存储CPU运行时间

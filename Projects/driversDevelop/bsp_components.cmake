@@ -6,3 +6,4 @@ set_bsp_components(
 )
 
 #options_disable_GUI()
+options_enable_FreeRTOS()
