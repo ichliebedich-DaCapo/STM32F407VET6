@@ -20,13 +20,13 @@ PB6     ------> CTP_INT
 #define FT_RST_L     HAL_GPIO_WritePin(TOUCH_RST_GPIO_Port, TOUCH_RST_Pin, GPIO_PIN_RESET)
 #define FT_RST_H     HAL_GPIO_WritePin(TOUCH_RST_GPIO_Port, TOUCH_RST_Pin, GPIO_PIN_SET)
 
+uint8_t id2;
 
 //
 //触摸初始化函数（驱动芯片FT6336U）（返回1成功返回0失败）
 uint8_t touch_init( void )
 {
-
-    uint8_t id;
+    uint8_t id=100;
 
     // 初始化i2c1
     i2c1_Init();
@@ -51,17 +51,19 @@ uint8_t touch_init( void )
 
     ft6336_rest();
 
-    if(!ft6336_RdReg(FT_ID_G_FOCALTECH_ID,&id, 1))
-    {
-        return FT_FALSE1;//I2C通信故障
-    }
-//    return id;
-    if(id != PANNEL_ID)
-    {
-        return id;//寄存器值不匹配
-
-    }
-    return FT_TRUE;
+//    if(!ft6336_RdReg(FT_ID_G_FOCALTECH_ID,&id, 1))
+//    {
+//        return FT_FALSE1;//I2C通信故障
+//    }
+    ft6336_RdReg(FT_ID_G_FOCALTECH_ID,&id, 1);
+    id2=id;
+    return id2;
+//    if(id != PANNEL_ID)
+//    {
+//        return id;//寄存器值不匹配
+//
+//    }
+//    return FT_TRUE;
 }
 
 
@@ -72,7 +74,6 @@ static void ft6336_rest( void )
     FT_RST_H;
     touch_delay_us( 50000 );
 }
-
 
 uint8_t ft6336_WeReg( uint16_t regAdd, uint8_t *pData, uint16_t Size )
 {

@@ -32,6 +32,13 @@ const uint16_t touch_press_reg[2]={FT_TP1_REG,FT_TP2_REG};
 static uint8_t touch_isOK=6;
 stru_pos touch;
 
+uint8_t  write_dat=0x55;
+uint8_t  write_addr=0x8D;
+uint8_t write_state;
+
+uint8_t test_id;
+uint8_t FT_ID=0x03;
+
 // 函数
 
 // 数组
@@ -63,6 +70,10 @@ void key_handler()
 //                    usr_ScanTouchProcess(&touch);
 ////                    HAL_Delay(10);
 //                }
+
+                write_state = ft6336_WeReg(write_addr, &write_dat, 1);//I2C通信故障
+
+
             }
             break;
 
@@ -70,15 +81,20 @@ void key_handler()
         case keyk1:
             if (Key::stateHandler(KEY_STATE_NONE))
             {
-                LCD_Clear(0xffff);
+//                LCD_Clear(0xffff);
 //                for(uint16_t i=10;i<200;i++) UI::set_button1_value(i);
+
+//                ft6336_RdReg((FT_ID<<1)|0x01,&test_id, 1);
+//                FT_ID++;
+                ft6336_RdReg(0x85,&test_id, 1);
+                write_addr++;
+
             }
             break;
         case keyk2:
             LCD_Clear(0xFF36); // 填充颜色 0xFF36
             lcd_flush(20,20,100,100,color);
 //            for(uint16_t i=10;i<200;i++) UI::set_button2_value(i);
-
             break;
 
         case keyk3:

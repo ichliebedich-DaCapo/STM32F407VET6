@@ -7,7 +7,8 @@
 #include "App_Conf.h"
 #include "stm32f4xx_hal.h"
 #include <stdint.h>
-
+#include "debug.h"
+#include "stdio.h"
 
 #ifdef __cplusplus
 extern "C" {
