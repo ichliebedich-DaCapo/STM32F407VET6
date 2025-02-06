@@ -33,7 +33,7 @@ uint8_t touch_init( void )
     //≈‰÷√GPIO
     GPIO_InitTypeDef GPIO_InitStruct = {0};
     __HAL_RCC_GPIOB_CLK_ENABLE();
-    HAL_GPIO_WritePin(TOUCH_RST_GPIO_Port, TOUCH_RST_Pin,GPIO_PIN_SET);
+    HAL_GPIO_WritePin(TOUCH_RST_GPIO_Port, TOUCH_RST_Pin,GPIO_PIN_RESET);
     GPIO_InitStruct.Pin = TOUCH_RST_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStruct.Pull = GPIO_PULLUP;
@@ -51,10 +51,15 @@ uint8_t touch_init( void )
 
     ft6336_rest();
 
-    ft6336_RdReg(FT_ID_G_FOCALTECH_ID,&id, 1);
+    if(!ft6336_RdReg(FT_ID_G_FOCALTECH_ID,&id, 1))
+    {
+        return FT_FALSE1;//I2CÕ®–≈π ’œ
+    }
+//    return id;
     if(id != PANNEL_ID)
     {
-        return FT_FALSE;
+        return id;//ºƒ¥Ê∆˜÷µ≤ª∆•≈‰
+
     }
     return FT_TRUE;
 }
@@ -73,7 +78,7 @@ uint8_t ft6336_WeReg( uint16_t regAdd, uint8_t *pData, uint16_t Size )
 {
     HAL_StatusTypeDef status;
 
-    status = I2C_ReadRegister(FT6336_ADDR, regAdd,pData, Size);
+    status = I2C_WriteRegister(FT6336_ADDR, regAdd,pData, Size);
     if( status == HAL_OK)
         return FT6336_OK;
     else
@@ -83,12 +88,8 @@ uint8_t ft6336_WeReg( uint16_t regAdd, uint8_t *pData, uint16_t Size )
 uint8_t ft6336_RdReg( uint16_t regAdd, uint8_t *pData, uint16_t Size )
 {
     HAL_StatusTypeDef status;
-
-    status = I2C_WriteRegister(FT6336_ADDR, regAdd,pData, Size);
-    if( status == HAL_OK)
-        return FT6336_OK;
-    else
-        return FT6336_ERROR;
+    status = I2C_ReadRegister(FT6336_ADDR, regAdd,pData, Size);
+    return (status == HAL_OK) ? FT6336_OK : FT6336_ERROR;
 }
 
 

@@ -32,18 +32,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】i2c.c 完成了I2C1_Init">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】i2c和touch驱动完成，测试触摸屏，报错：找不到INT">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application/Base/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/ISR.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/Base/baseInit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Base/baseInit.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/lcd.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/lcd.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/i2c.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/i2c.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/inc/touch.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/touch.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/lcd.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/i2c.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/i2c.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/src/touch.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/touch.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/driversDevelop/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/driversDevelop/ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/UI/driversDevelop/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/UI/driversDevelop/ui.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1933,15 +1931,9 @@
       <workItem from="1738685232812" duration="141000" />
       <workItem from="1738723713201" duration="6978000" />
       <workItem from="1738733828371" duration="1481000" />
-      <workItem from="1738757696835" duration="1064000" />
-    </task>
-    <task id="LOCAL-00036" summary="【语音存储与回放】稍微优化了Flash读写函数">
-      <option name="closed" value="true" />
-      <created>1729473023590</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1729473023590</updated>
+      <workItem from="1738757696835" duration="12693000" />
+      <workItem from="1738771923988" duration="1385000" />
+      <workItem from="1738813297930" duration="8255000" />
     </task>
     <task id="LOCAL-00037" summary="【语音存储与回放】启用了DMA用于FSMC传输数据，准备测试分支的读取内部温度传感器">
       <option name="closed" value="true" />
@@ -2327,7 +2319,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738685312939</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="【驱动开发】i2c和touch驱动完成，测试触摸屏，报错：找不到INT">
+      <option name="closed" value="true" />
+      <created>1738759026961</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1738759026961</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2362,7 +2362,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【跨越】已经把AI模型初步部署进工程里了" />
     <MESSAGE value="【准备】什么辣鸡gitignore，草" />
     <MESSAGE value="【准备】是我错了" />
     <MESSAGE value="【跨越】AI模型能跑，但我没有掌握如何处理输入与输出数据" />
@@ -2387,15 +2386,14 @@
     <MESSAGE value="【驱动开发】完成lvgl库与SPI屏幕接口，屏幕显示正常，无触摸" />
     <MESSAGE value="【与AI对话式制作UI测试】DEEPSEEK写的计数器" />
     <MESSAGE value="【驱动开发】i2c.c 完成了I2C1_Init" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】i2c.c 完成了I2C1_Init" />
+    <MESSAGE value="【驱动开发】i2c和touch驱动完成，测试触摸屏，报错：找不到INT" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】i2c和touch驱动完成，测试触摸屏，报错：找不到INT" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
-        <watch expression="temp" />
-        <watch expression="read_wave[i]" />
-        <watch expression="read_wave" />
-        <watch expression="threshold" />
+        <watch expression="touch_isOK" language="ObjectiveC" />
+        <watch expression="id" />
       </configuration>
     </watches-manager>
   </component>

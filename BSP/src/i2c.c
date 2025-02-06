@@ -4,7 +4,6 @@
 
 #include "i2c.h"
 
-
 I2C_HandleTypeDef hi2c1;
 /* I2C1 init function */
 void i2c1_Init(void)
@@ -44,12 +43,12 @@ void i2c1_Init(void)
 
 }
 // 写数据到I2C设备
-void I2C_Write(unsigned char DevAddress, unsigned char *pData, unsigned int Size) {
+void I2C_Write(uint8_t DevAddress, uint8_t *pData, uint16_t Size) {
     HAL_I2C_Master_Transmit(&hi2c1, DevAddress, pData, Size, HAL_MAX_DELAY);
 }
 
 // 从I2C设备读取数据
-void I2C_Read(unsigned char DevAddress, unsigned char *pData, unsigned int Size) {
+void I2C_Read(uint8_t DevAddress, uint8_t *pData, uint16_t Size) {
      HAL_I2C_Master_Receive(&hi2c1, DevAddress, pData, Size, HAL_MAX_DELAY);
 }
 /**
@@ -60,7 +59,7 @@ void I2C_Read(unsigned char DevAddress, unsigned char *pData, unsigned int Size)
   * @param  Size: 读取的数据长度
   * @retval HAL_StatusTypeDef: 操作状态（HAL_OK表示成功）
   */
-HAL_StatusTypeDef I2C_ReadRegister(unsigned char DevAddress, unsigned char RegAddress, unsigned char *pData, unsigned int Size) {
+HAL_StatusTypeDef I2C_ReadRegister(uint16_t DevAddress, uint16_t RegAddress, uint8_t *pData, uint16_t Size) {
     return HAL_I2C_Mem_Read(&hi2c1, DevAddress, RegAddress, I2C_MEMADD_SIZE_8BIT, pData, Size, HAL_MAX_DELAY);
 }
 
@@ -72,6 +71,6 @@ HAL_StatusTypeDef I2C_ReadRegister(unsigned char DevAddress, unsigned char RegAd
   * @param  Size: 写入的数据长度
   * @retval HAL_StatusTypeDef: 操作状态（HAL_OK表示成功）
   */
-HAL_StatusTypeDef I2C_WriteRegister(unsigned char DevAddress, unsigned char RegAddress, unsigned char *pData, unsigned int Size) {
+HAL_StatusTypeDef I2C_WriteRegister(uint16_t DevAddress, uint16_t RegAddress, uint8_t *pData,uint16_t Size) {
     return HAL_I2C_Mem_Write(&hi2c1, DevAddress, RegAddress, I2C_MEMADD_SIZE_8BIT, pData, Size, HAL_MAX_DELAY);
 }

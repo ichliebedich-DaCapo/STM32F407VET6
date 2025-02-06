@@ -13,6 +13,7 @@
 #include "RNG.h"
 #include "lcd.h"
 #include "ui.hpp"
+#include "touch.h"
 #ifndef GUI_DISABLE
 #include "GUI.hpp"
 #endif
@@ -28,7 +29,7 @@ AsyncDelay_HAL async_delay(500);
 
 
 const uint16_t touch_press_reg[2]={FT_TP1_REG,FT_TP2_REG};
-static int touch_isOK;
+static uint8_t touch_isOK=6;
 stru_pos touch;
 
 // 函数
@@ -40,7 +41,7 @@ void app_init()
     adc1_temperature_sensor_init();
     RNG_Init();
     ITM_Init();
-
+    usr_touchInit();
 }
 
 void key_handler()
@@ -57,11 +58,11 @@ void key_handler()
 //                for(uint16_t i=20;i<200;i++)LCD_Set_Pixel(i,100,0x0000);
 //                for(uint16_t i=30;i<100;i++)LCD_Set_Pixel(i,200,0x0000);
 //                for(uint16_t i=40;i<50;i++)LCD_Set_Pixel(i,250,0x0000);
-                while (1)
-                {
-                    usr_ScanTouchProcess(&touch);
-                    HAL_Delay(10);
-                }
+//                while (1)
+//                {
+//                    usr_ScanTouchProcess(&touch);
+////                    HAL_Delay(10);
+//                }
             }
             break;
 

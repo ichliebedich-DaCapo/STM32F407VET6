@@ -37,7 +37,7 @@ void BaseInit()
     fsmc_init();
     lcd_init();// 初始化LCD
     key_exti_init();
-    touch_init();// 初始化触摸屏
+//    touch_init();// 初始化触摸屏
 
 #ifdef USE_FSMC_DMA
     fsmc_dma_init();// 初始化FSMC+DMA

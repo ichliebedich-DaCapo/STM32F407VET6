@@ -16,10 +16,12 @@ extern "C" {
 #define FT6336_OK                 1
 #define FT6336_ERROR              0
 
-#define FT_TRUE                  1
-#define FT_FALSE                 0
+#define FT_FALSE                  0
+#define FT_TRUE                   1
+#define FT_FALSE1                 2
+#define FT_FALSE2                 3
 
-#define FT6336_ADDR              0X71
+#define FT6336_ADDR              0x71
 
 //FT5426 部分寄存器定义
 #define FT_DEVIDE_MODE           0x00         //FT6336模式控制寄存器
@@ -37,8 +39,9 @@ extern "C" {
 #define FT_ID_G_THGROUP          0x80         //触摸有效值设置寄存器
 #define FT_ID_G_PERIODACTIVE     0x88         //激活状态周期设置寄存器
 
-// MATCH VALUE LIST
 #define PANNEL_ID                0x11
+// MATCH VALUE LIST
+
 
 uint8_t touch_init( void );
 static void touch_delay_us(uint32_t us);
