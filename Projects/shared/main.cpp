@@ -1,30 +1,13 @@
 #include <project_config.h>
 #include "baseInit.h"
-
-#ifdef FreeRTOS_ENABLE // 是否启用RTOS
-
-#include "cmsis_os2.h"
-
-#endif// FreeRTOS_ENABLE
-
-#ifdef GUI_ENABLE
-
-#include "lcd.h"
-#include "GUI.hpp"
-
-#endif
-
 #include "key.hpp"
 
-
 extern void app_init();// 应用程序初始化函数,强制定义
-
-
 extern void background_handler();// 后台处理函数
 __attribute__((weak)) void background_handler() {}
 
-#ifdef FreeRTOS_ENABLE
 
+#ifdef FreeRTOS_ENABLE
 void backgroundTask(void *argument)// 后台线程
 {
     for (;;)
@@ -32,7 +15,6 @@ void backgroundTask(void *argument)// 后台线程
         background_handler();
     }
 }
-
 #endif
 
 

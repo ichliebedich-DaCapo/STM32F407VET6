@@ -5,8 +5,8 @@ include(bsp_drivers.cmake)
 #add_library(bsp OBJECT)
 
 # -----------根据项目需求选择驱动----------
-if (EXISTS "${PROJECT_SOURCE_DIR}/projects/${TARGET_PROJECT}/bsp_components.cmake")
-    include(${PROJECT_SOURCE_DIR}/projects/${TARGET_PROJECT}/bsp_components.cmake)
+if (EXISTS "${PROJECT_SOURCE_DIR}/projects/${TARGET_PROJECT}/project_config.cmake")
+    include(${PROJECT_SOURCE_DIR}/projects/${TARGET_PROJECT}/project_config.cmake)
 else ()
     # 在Projects下对应的项目目录里添加bsp_components.cmake
     message(WARNING "Can not find bsp_components.cmake!!")

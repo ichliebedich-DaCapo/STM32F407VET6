@@ -7,7 +7,7 @@ project(Furina LANGUAGES C CXX ASM)
 set(PROJECT_DIR Projects/driversDevelop)
 
 # 创建test项目目录，其下有ui和app目录，并且各目录下有相应文件
-create_project(test)
+
 
 
 # --------------------------------------包含子cmake--------------------------------

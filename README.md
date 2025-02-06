@@ -20,7 +20,7 @@ ___
 [arm-toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
 &nbsp;arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi
 <br>
-`分支说明`:main分支是已经测试稳定通过的，ZQ和DV分支是两条测试用的分支  &nbsp;&nbsp;&nbsp;&nbsp; JY快更新你的DV
+`分支说明`:main分支是已经测试稳定通过的，ZQ和DV分支是两条测试用的分支  &nbsp;&nbsp;&nbsp;&nbsp;
 <br>
 `其他`：工程里嵌套了一个模仿GUI Guider的lvgl模拟器，使用SDL2构建，
 目录为Adapter/GUI/lvgl_simulator，编译的是32位程序（比64位编译要快）。
@@ -29,7 +29,7 @@ ___
 ___
 ## 简介
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-> 此为stm32f407vet6的一个C/C++混编工程用于练手，会不定期更新一些简单基础实验项目供参考。
+> 此为stm32f407vet6的一个C/C++混编工程，适合在同一个开发平台练手用，会不定期更新一些简单基础实验项目供参考。
 整个工程使用CMakeLists组织，工程结构如下图
 
 ![img](Resource/pictures/project_structure.png)
@@ -227,6 +227,5 @@ create_project(test)
 
 
 ___
-<!-- 相戏耳 -->
 **人员**：WJY、WZX、XZQ &nbsp;&nbsp;&nbsp; 软件：JY、ZQ &nbsp;&nbsp; 硬件：ZX <br>
 <!-- ZQ发起&开发&维护  JY开发  ZX硬件支持-->
