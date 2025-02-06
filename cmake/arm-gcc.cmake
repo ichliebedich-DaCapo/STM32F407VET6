@@ -21,7 +21,6 @@ add_compile_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
 # 使用硬件浮点单元（FPU）进行浮点运算  指定浮点单元的类型为 FPv4-SP（单精度浮点单元），并限制寄存器数量为 16 个
 add_compile_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
 
-
 # 将每个函数放在单独的段中，便于链接器优化   将每个全局变量放在单独的段中，便于链接器优化
 # 将每个函数放在独立的节区中:允许链接器删除未使用的函数，减少代码大小;将每个全局变量放在独立的节区中:允许链接器删除未使用的变量，减少数据大小。
 # 禁止将未初始化的全局变量放在COMMON节区中:确保未初始化的全局变量被正确分配到.bss 节区;设置编译器错误消息的最大长度为无限制:确保编译器错误消息完整显示
@@ -56,6 +55,15 @@ if (NOT STATIC_LIB_LD AND LTO_ENABLE)
     add_compile_options(-flto=auto -fuse-linker-plugin)
     add_link_options(-flto=auto -fuse-linker-plugin)
 endif ()
+
+#-finline-functions：自动内联合适的函数。
+#-finline-limit=n：设置内联函数的最大复杂度，默认值为225。你可以根据需要调整这个值。
+#-Winline-function-return-type：对返回类型不一致的内联函数发出警告。
+add_compile_options(-finline-functions)
+
+# ----------------------调试选项--------------------------
+# 开启内联警告，当函数内联失败时，编译器会发出警告。
+add_compile_options(-Winline)
 
 #---------------------------链接选项--------------------------
 # 链接标志：指在编译和链接过程中，传递给链接器（Linker）的选项或参数，和链接选项是一个东西

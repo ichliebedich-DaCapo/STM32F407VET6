@@ -34,18 +34,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】Projects帮助文档">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】添加了LTO优化配置项，并解决了缺失系统调用的问题，为此引入了used扩展">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/syscall/syscalls.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/syscall/syscalls.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/system/linker/STM32F407VETX_FLASH.ld" beforeDir="false" afterPath="$PROJECT_DIR$/Core/system/linker/STM32F407VETX_FLASH.ld" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/Third_Party/FreeRTOS/Source/tasks.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Third_Party/FreeRTOS/Source/tasks.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/project_config.h.in" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/project_config.h.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/thinking/ZQ/Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/thinking/ZQ/Log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake/arm-gcc.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/arm-gcc.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/common_functions.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/common_functions.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/projects.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/projects.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1992,15 +1986,7 @@
       <workItem from="1738646545452" duration="14948000" />
       <workItem from="1738671960184" duration="13674000" />
       <workItem from="1738727453857" duration="31195000" />
-      <workItem from="1738809856086" duration="34336000" />
-    </task>
-    <task id="LOCAL-00067" summary="已经融合，可以正常编译">
-      <option name="closed" value="true" />
-      <created>1734254062073</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1734254062073</updated>
+      <workItem from="1738809856086" duration="37614000" />
     </task>
     <task id="LOCAL-00068" summary="测试了module特性，可以正常使用">
       <option name="closed" value="true" />
@@ -2386,7 +2372,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738837255836</updated>
     </task>
-    <option name="localTasksCounter" value="116" />
+    <task id="LOCAL-00116" summary="【工程重构】添加了LTO优化配置项，并解决了缺失系统调用的问题，为此引入了used扩展">
+      <option name="closed" value="true" />
+      <created>1738848731611</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1738848731611</updated>
+    </task>
+    <option name="localTasksCounter" value="117" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2408,7 +2402,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/ZQ" />
+                        <option value="ZQ" />
                       </list>
                     </value>
                   </entry>
@@ -2421,7 +2415,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】成功使用CLion的RTOS集成功能，并且把FreeRTOS的堆栈都放到了CCMRAM中" />
     <MESSAGE value="【驱动开发】准备在模拟器里设置一些常用的组件" />
     <MESSAGE value="【驱动开发】添加了电源管理模式，但并未验证" />
     <MESSAGE value="【驱动开发】补充了GUI线程" />
@@ -2446,7 +2439,8 @@
     <MESSAGE value="【工程重构】修复了project.h头文件，更新了Readme文档" />
     <MESSAGE value="【工程重构】BSP帮助文档" />
     <MESSAGE value="【工程重构】Projects帮助文档" />
-    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】Projects帮助文档" />
+    <MESSAGE value="【工程重构】添加了LTO优化配置项，并解决了缺失系统调用的问题，为此引入了used扩展" />
+    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】添加了LTO优化配置项，并解决了缺失系统调用的问题，为此引入了used扩展" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

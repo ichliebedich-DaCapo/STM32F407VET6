@@ -285,17 +285,11 @@ void HAL_DisableMemorySwappingBank(void);
   */
 
 /**
-  * @}
+  * @brief 错误处理
+  * @note 一开始我是想把这个函数内联的，但是编译器认为这个函数被调用的可能性很小，不建议内联。我想了想，觉得它说的没有问题，
+  *         就没有把它内联了
   */ 
-static inline void Error_Handler(void)
-{
-  __disable_irq();
-  while(1) 
-  {
-      __ASM volatile ("bkpt ");
-  }
-}
-
+void Error_Handler(void);
 
 #ifdef __cplusplus
 }
