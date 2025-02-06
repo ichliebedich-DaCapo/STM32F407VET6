@@ -22,61 +22,87 @@ ___
 <br>
 `分支说明`:main分支是已经测试稳定通过的，ZQ和DV分支是两条测试用的分支  &nbsp;&nbsp;&nbsp;&nbsp; JY快更新你的DV
 <br>
-`其他`：工程里嵌套了一个模仿GUI Guider的lvgl模拟器，使用的是SDL2，
-目录为GUI/lvgl_simulator，编译的是32位程序（比64位编译要快）。
+`其他`：工程里嵌套了一个模仿GUI Guider的lvgl模拟器，使用SDL2构建，
+目录为Adapter/GUI/lvgl_simulator，编译的是32位程序（比64位编译要快）。
 
 
 ___
 ## 简介
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-> 此为stm32f407vet6的一个C/C++混编工程用于练手，会不定期更新一些简单基础实验项目可供参考。
-整个工程使用CMakeLists组织,可分为下面几个部分
+> 此为stm32f407vet6的一个C/C++混编工程用于练手，会不定期更新一些简单基础实验项目供参考。
+整个工程使用CMakeLists组织，工程结构如下图
+
+![img](Resource/pictures/project_structure.png)
 
 
-- `Application`：即应用级，是与硬件无关的部分，只管应用的实现。包含各种实验项目，如语音存储与回放、双音频信号发生器等。
-通过CMakelists顶部的变量来控制使用哪个项目。主体由C++实现同时其头文件不提供任何接口，仅有宏声明  <br><br>
-- `BSP`：即板级支持包(本想命名为Drivers但重名了),基于HAL编写的裸机驱动，同时提供对应C接口供使用。后文中所指的驱动级即此处 <br><br>
-- `Core`：即SoC内核文件，存放的是系统调用、启动文件等与SoC相关的文件，不用做任何改变。<br><br>
-- `Drivers`：由CubeMX生成的目录，存放的是ST官方HAL，仅在stm32fxx_hal.h里添加了一个Error_Handler内联函数。为避免误操作，整个文件夹设置成了只读状态  <br><br>
-- `GUI`：即用户交互的，使用的是LVGL，包含了界面设计和界面逻辑以及资源文件三部分 。同时里面内嵌了一个LVGL模拟器，在lv-simulator目录。 <br><br>
-- `Library`：即库，包含了第三方库如FreeRTOS、LVGL、FATS等，同时添加了DATA目录，用于存放一些数据，如正弦波波形数据等  <br><br>
-- `Module`：即模块级，主要用于编写各种算法等，尽量与驱动无关，主要由C++实现  <br><br>
+**主要工程目录可分为下面几个部分**
+- `Projects`：即项目级，是与硬件无关的部分，为上层应用的实现。源于“多数项目只有逻辑实现、ui界面和调用的驱动不同”，
+    把驱动实现、ui界面和应用逻辑实现分离。在Projects下有各个目录，其名称代表各种实验项目，
+    如语音存储与回放、双音频信号发生器等。每个项目目录下又有app和ui目录，分别表示应用逻辑和ui界面实现。
+<br><br>
 
+- `BSP`：即板级支持包，基于HAL编写的适配于开发板的裸机驱动，若要移植到自己的开发板需要修改配置。
+    考虑到兼容性，bsp驱动均使用纯C实现
+<br><br>
+
+- `Core`：即SoC内核文件，其下有Drivers、syscall和system子目录，分别存放的是
+    HAL驱动、系统调用和系统配置，系统配置里存放的是启动文件和链接脚本。
+<br><br>
+
+- `Middleware`：即中间层，用于存放各种第三方库等中间件，比如FreeRTOS、LVGL、FATS等。
+    中间件里的各个库均为完备状态，不需要额外依赖。
+<br><br>
+
+- `Adapter`：即适配层，用于对接中间层与BSP驱动层，与中间层一一对应。比如GUI目录是为了适配LVGL库，
+    在GUI目录下的GUI.hpp实现了lvgl显示和触摸的初始化，采用的是模板函数，避免了额外开销。
+    同时GUI内嵌了一个LVGL模拟器，在lv-simulator目录。
+<br><br>
+
+- `Algorithm`：即算法层，不依赖驱动，主要实现各种算法，比如绘制、滤波、异步延迟等。
+<br><br>
+
+- `Tools`：即工具层，里面存放的是一些配置文件和自动化脚本等。
+<br><br>
+
+- `cmake`：即cmake层，里面存放的是一些cmake文件，用于控制文件编译、配置编译工具链、定义公共函数等。
+  <br><br>
 
 <br>
 
 ####  如何使用CMakelists控制不同实验项目的编译
 <p style="text-indent: 2em;">
-在CMakelists的头部有如下变量定义，set是CMakelists的“函数”，用于设置变量。用法为set(变量名 值)，变量名可以是自定义的，
-也可以是CMakeLists里定义好的。这里可以看到，设置了一个变量“APP_DIR”，其值为目录“Application/signalGenerator”，
-这就表明要使用“signalGenerator”这个实验项目，即信号发生器（双音频信号发生器）。<br>
+在工程目录的CMakeLists的头部有如下变量定义，set是CMakeLists的“函数”，用于设置变量。用法为set(变量名 值)，变量名可以是自定义的，
+也可以是CMakeLists里定义好的。这里可以看到，设置了一个变量“PROJECT_DIR”，其值为目录“Projects/driversDevelop”，
+这就表明要使用“driversDevelop”这个实验项目，即信号发生器（双音频信号发生器）。
+<br>
+</p>
+<p style="text-indent: 2em;">
+如果你要使用其他项目，比如语音存储与回放，那么只需要将driversDevelop改为voiceStorage即可。
+嵌入的lvgl模拟器，也是如此，在CMakeLists里通过相同的方式来设置。每次修改完成后都要重新cmake一下。
 </p>
 
-<p style="text-indent: 2em;">
-如果你要使用其他项目，比如语音存储与回放，那么只需要将set(APP_DIR Application/voiceStorage)即可。里面嵌入的lvgl模拟器，也是如此，
-在CMakelists里通过相同的方式来设置。
-</p>
+
 
 ```cmake
 # --------------------------------------选择你的项目--------------------------------
 # 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
-set(APP_DIR Application/signalGenerator)
+set(PROJECT_DIR Projects/driversDevelop)
 # --------------------------------------选择你的项目------------------------------
 ```
 
 <p style="text-indent: 2em;">
-那么它是如何实现的呢？在CMakelists往下翻，可以看到这一句，通过前面设置的变量${APP_DIR}来选择性编译其目录下的
-app.cpp文件。你没有看错，为了方便管理，不同实验项目都是由app.hpp/cpp组成，只有目录名称不同，在Application目录里
-你可以清晰地看到这一点。
+那么它是如何实现的呢？在cmake目录下有个target_project.cmake文件，
+用于解析CmakeLists传入的PROJECT_DIR变量，然后进行字符串处理，得到项目目录的路径。
 </p>
 
 ```cmake
-# ------Application库------
-file(GLOB_RECURSE APPLICATION_SRC "${APP_DIR}/app.cpp" "Application/Base/*.cpp")
-add_library(libapp STATIC ${APPLICATION_SRC})
-target_include_directories(libapp PUBLIC Application/Base)
-# 需要链接 libdsp libdata libgui libbsp libmodule等，根据需要选
-target_link_libraries(libapp PUBLIC libdsp libdata libgui libbsp libmodule)
+# --------对选择的项目进行字符串处理，以匹配对应的UI文件---------
+# 提取 APP_DIR 的末尾部分
+string(REGEX REPLACE "^.*/(.+)$" "\\1" APP_DIR_LAST_PART "${PROJECT_DIR}")
+set(TARGET_PROJECT ${APP_DIR_LAST_PART})
+# 设置APP和UI目录
+set(APP_DIR ${PROJECT_DIR}/app)
+set(UI_DIR ${PROJECT_DIR}/ui)
 ```
 
 
@@ -84,37 +110,24 @@ ___
 
 ## 项目
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-> 本工程由于融合了多个简单实验项目，采用选择性编译的方法来避免冲突，原理在上文中提到。
-在Application目录下的Conf目录里，有一个名为App_Conf.h，该文件的主要作用是传递应用级头文件的宏，
-以此来控制不同模块的编译。
+> 本工程由于融合了多个简单实验项目，为避免冲突采用选择性编译的方法，原理在上文中提到。
+    同时为了管理工程，使用了下面几个头文件，其内部使用到了各种宏定义，它们均由cmake自动生成。
+![img](Resource/pictures/project_header.png)
 
 ### _说明_：
-- 应用级文件一般由app.hpp/cpp组成，每个实验项目都在Application有一个独立的目录，比如signalGenerator、voiceStorage等。
-其中头文件app.hpp里没有任何接口变量什么的，只有一堆宏声明，用于控制不同模块的编译。
+- 为方便管理，上述几个头文件均由cmake自动生成，除了stm32f4xx_hal_conf.h在Drivers目录外，
+    其余头文件均在构建目录下的build/inc目录
 <br><br>
--  正如前文所述，app.hpp里有一堆宏来控制不同模块的编译，在不同模块里会通过引用App_Conf.h间接引用app.hpp，进而
-通过预编译指令 **#ifdef** 来控制改编译单元是否编译。
+-  不同层用不同头文件控制，bsp层由bsp_config.h控制，中间层和项目层均由project_config.h控制。
 <br><br>
-- 补充了是否启用FreeRTOS的宏，如果不需要使用RTOS，可在应用级文件定义一个宏APP_NO_RTOS,同时在CMakeLists里把FreeRTOS资源文件注释掉
+- 更多相关详细介绍请查看Docs/help目录下的文档介绍，其内介绍了开发驱动、开发项目文件的规范及注意事项。
 <br><br>
 
-### _流程_：
-- **开始**： 可以先从Application/Base里的main.cpp开始看，这里对初始化函数和处理函数都进行了封装。
-<br><br>
-- **架构**：整个工程如前面所说分成三个部分，编写代码的主要地方也在三级目录下的.c/h文件里，通过文件名可以识别出。
-先从顶层Application开始看，里面主要实现了两个函数app_init和key_handler，见名知义，
-同时main函数不再是我们编写代码的主场地。
-<br><br>
-- **宏**：在App_Conf.h里可以看到一些奇怪的宏，这里被注释的宏只是为了记忆，方便编写app.hpp/cpp时知道定义哪个宏
-<br><br>
-- **模块层的静态类**：模块层基本上都是用静态类来实现的，这是为了更好地封装同时不至于二进制文件膨胀。其中，
-  变量和一些简单函数基本上都是私有成员，这么做主要是不让其他函数随意访问这里的变量，只能通过给定的接口实现（代码逻辑更清晰），
-  不然与以前随处定义的全局变量一样容易产生混淆。
-<br><br>
+
 
 ___
 
-## 规范：
+## 语言规范：
 >为了让项目的代码规范一点，我们约定了一些规则。
 
 
@@ -130,9 +143,9 @@ ___
 - `文件命名规范`：BSP和模块级尽量小写为主，不同属性尽量用下划线隔开，方便调用接口；
 应用级尽量采用驼峰命名法。之所以是尽量，是因为C/C++的命名本来就已经很混乱了哈哈哈哈哈<br><br>
 - `函数`：为了提高驱动性能，实现简单功能的函数尽量内敛，其内局部变量尽量使用字长单位<br><br>
-- `变量`：尽量不使用全局变量,尽量使用函数式编程，减少副作用<br><br>
+- `变量`：尽量控制全局变量的使用，命名要规范<br><br>
 - `调试`：统一开-O2级别优化，遇到问题再开-Og。在CLion里面体现为使用Release选项。同时要注意volatile变量的使用<br><br>
-- `语法使用规范`：由于单片机资源有限，不能使用泛型编程如模版。类可以使用，尽量使用静态类以实现零成本抽象，
+- `语法使用规范`：由于单片机资源有限，不能过度使用泛型编程如模板。类可以使用，尽量使用静态类以实现零成本抽象，
 避免实例化对象，尤其是new的使用。<br><br>
 
 
@@ -192,58 +205,28 @@ cmake也还行，但是试来试去就是不行，淦。-->
 ___
 
 ## CLion开发体验提升
-- **文件模板**：这个模板使用的是Apache Velocity,可以自行上网或者跟AI交流，让它给你生成符合自己需求的模板
-<br><br>
-C文件模板
-```
-#parse("C File Header.h")
-#if (${HEADER_FILENAME})
-#[[#include]]# "${HEADER_FILENAME}"
-#end
-\#if 1
-// 头文件
+`自动化脚本`
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    为了更快地开发，创建bsp驱动文件与创建项目目录的过程均被封装为了cmake函数，
+    在cmake目录下的common_functions.cmake文件中。可以通过在CMakeLists中调用
+    create_bsp()和create_project()来快速创建bsp驱动文件与项目目录。
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+示例如下，在CMakeLists添加了相应函数，并向里面传入名称，然后重新cmake一下
+即可自动创建相关目录及模板文件。模板文件在Tools/templates，可自行修改
 
-// 函数
+```cmake
+# --------------------------------------选择你的项目--------------------------------
+# 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
+set(PROJECT_DIR Projects/driversDevelop)
 
-
-#endif
-```
-
-C头文件模板<br>
-&nbsp;&nbsp;&nbsp;&nbsp;根据个人去配置，这里面可以检测是否是hpp文件
-```
-#parse("C File Header.h")
-#[[#ifndef]]# ${INCLUDE_GUARD}
-#[[#define]]# ${INCLUDE_GUARD}
-## 设置一个变量名用来调用endsWith方法
-#set($filename = ${FILE_NAME})
-\#include "Module_Conf.h"
-/* 预编译命令 */
-\#if 1
-// 头文件
-
-#if ($filename.endsWith(".h"))
-#ifdef __cplusplus
-extern "C" {
-#endif
-#end
-// 宏定义
-
-
-// 接口
-
-#if ($filename.endsWith(".h"))
-#ifdef __cplusplus
-}
-#endif
-#end
-/* 预编译命令 */
-#endif
-#[[#endif]]# //${INCLUDE_GUARD}
+# 创建test项目目录，其下有ui和app目录，并且各目录下有相应文件
+create_project(test)
 ```
 
 
 ___
 <!-- 相戏耳 -->
-**人员**：WJY、WZX、XZQ +HNT &nbsp;&nbsp;&nbsp; 软：JY、ZQ &nbsp;&nbsp; 硬：ZX <br>
+**人员**：WJY、WZX、XZQ &nbsp;&nbsp;&nbsp; 软件：JY、ZQ &nbsp;&nbsp; 硬件：ZX <br>
 <!-- ZQ发起&开发&维护  JY开发  ZX硬件支持-->

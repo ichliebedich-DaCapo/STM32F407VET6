@@ -4,10 +4,7 @@
 
 #ifndef FURINA_DAC_H
 #define FURINA_DAC_H
-
 #include <bsp_config.h>
-
-
 #ifdef __cplusplus
 extern "C" {
 #endif

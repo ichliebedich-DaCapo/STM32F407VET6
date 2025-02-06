@@ -3,10 +3,26 @@
 #include<common_config.h>
 
 
-// 配置项
+// ---------配置项-----------
 // 与启用中间库和一些工程的编译有关
 #cmakedefine GUI_ENABLE
 #cmakedefine FREERTOS_ENABLE
 #cmakedefine FREERTOS_DEBUG
 
+
+// ----------与头文件包含有关----------
+#ifdef __cplusplus
+// C++头文件
+#ifdef GUI_ENABLE
+#include "GUI.hpp"
 #endif
+
+#else
+// C头文件
+#ifdef FreeRTOS_ENABLE
+#include "cmsis_os2.h"
+#endif
+
+#endif // __cplusplus
+
+#endif // PROJECT_CONFIG_H

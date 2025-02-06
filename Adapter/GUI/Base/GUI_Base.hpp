@@ -4,7 +4,7 @@
 #ifndef SIMULATOR_GUI_BASE_HPP
 #define SIMULATOR_GUI_BASE_HPP
 
-#include <cstdio>
+
 #ifdef ARM_MATH_CM4
 
 #endif

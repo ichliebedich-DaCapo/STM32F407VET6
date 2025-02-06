@@ -3,9 +3,8 @@
 //
 #ifndef SIMULATOR_FPS_HPP
 #define SIMULATOR_FPS_HPP
-
 #include "label.hpp"
-
+#include <cstdio>
 #define SIMPLE_FPS 1// 使用简单模式
 
 /**

@@ -34,22 +34,14 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】模板文件生成脚本已有思路，算法层和适配层明天再整理，帮助文档可以写了">
-      <change afterPath="$PROJECT_DIR$/Tools/templates/app.cpp.in" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tools/templates/bsp_component.c.in" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tools/templates/bsp_component.h.in" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tools/templates/ui.cpp.in" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tools/templates/ui.hpp.in" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】FreeRTOS和GUI的开关功能已调试完毕。自动化生成bsp和工程脚本已测试完毕">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/adc.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/adc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/Third_Party/FreeRTOS/FreeRTOSConfig.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Third_Party/FreeRTOS/FreeRTOSConfig.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/bsp_components.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/bsp_components.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Base/GUI_Base.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Base/GUI_Base.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/FPS.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/FPS.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/dac.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/dac.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/shared/project_config.h.in" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/project_config.h.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/arm-gcc.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/arm-gcc.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/common_function.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/common_function.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/middleware.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/middleware.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tools/templates/app.cpp.in" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/templates/app.cpp.in" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1996,15 +1988,7 @@
       <workItem from="1738646545452" duration="14948000" />
       <workItem from="1738671960184" duration="13674000" />
       <workItem from="1738727453857" duration="31195000" />
-      <workItem from="1738809856086" duration="6367000" />
-    </task>
-    <task id="LOCAL-00063" summary="【跨越】AI模型能跑，但我没有掌握如何处理输入与输出数据">
-      <option name="closed" value="true" />
-      <created>1732036617441</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1732036617441</updated>
+      <workItem from="1738809856086" duration="10732000" />
     </task>
     <task id="LOCAL-00064" summary="【阻碍】无论输入什么都只输出1，得要先排除浮点数据造成的影响">
       <option name="closed" value="true" />
@@ -2390,7 +2374,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738763340329</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="【工程重构】FreeRTOS和GUI的开关功能已调试完毕。自动化生成bsp和工程脚本已测试完毕">
+      <option name="closed" value="true" />
+      <created>1738818519655</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1738818519655</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2425,7 +2417,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】可以尝试优化驱动组织关系，以及GUI控制启闭了" />
     <MESSAGE value="【驱动开发】在自动化编译情况下，无关文件并不会编译，那么驱动编译宏就失去了作用" />
     <MESSAGE value="【驱动开发】把堆栈段放在了CCMRAM中，并设为4字节对齐。只是在Key中定义state变量并放入CCMRAM，会导致奇怪的问题" />
     <MESSAGE value="【驱动开发】添加了FreeRTOS控制宏，同时修复了按键中断中信号量卡死的问题" />
@@ -2450,7 +2441,8 @@
     <MESSAGE value="【工程重构】准备用自动产生的stm32f4xx_hal_conf.h来代替原先的" />
     <MESSAGE value="【工程重构】BSP及HAL自动查找依赖已经基本完成" />
     <MESSAGE value="【工程重构】模板文件生成脚本已有思路，算法层和适配层明天再整理，帮助文档可以写了" />
-    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】模板文件生成脚本已有思路，算法层和适配层明天再整理，帮助文档可以写了" />
+    <MESSAGE value="【工程重构】FreeRTOS和GUI的开关功能已调试完毕。自动化生成bsp和工程脚本已测试完毕" />
+    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】FreeRTOS和GUI的开关功能已调试完毕。自动化生成bsp和工程脚本已测试完毕" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

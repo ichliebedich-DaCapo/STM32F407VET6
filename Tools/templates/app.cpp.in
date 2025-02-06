@@ -1,10 +1,4 @@
 #include <project_config.h>
-#ifdef FreeRTOS_ENABLE
-#include "cmsis_os2.h"
-#endif
-#ifdef GUI_ENABLE
-#include "GUI.hpp"
-#endif
 // 头文件
 #include <key.hpp>
 
