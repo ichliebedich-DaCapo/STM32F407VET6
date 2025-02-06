@@ -25,7 +25,7 @@ set(FREERTOS_ENABLE OFF CACHE INTERNAL "FreeRTOS option")
 set(FREERTOS_DEBUG OFF CACHE INTERNAL "FreeRTOS debug option")
 set(AI_ENABLE OFF CACHE INTERNAL "AI option")
 set(STATIC_LIB_LD OFF CACHE INTERNAL "Independent static library link option")
-
+set(LTO_ENABLE OFF CACHE INTERNAL "Linker option")
 
 # 关闭GUI
 macro(options_disable_GUI)
@@ -51,6 +51,11 @@ endmacro()
 # 开启静态库链接
 macro(options_enable_static_lib_ld)
     set(STATIC_LIB_LD ON CACHE INTERNAL "Independent static library link option")
+endmacro()
+
+# 使用LTO优化
+macro(options_enable_LTO)
+    set(LTO_ENABLE ON CACHE INTERNAL "Linker option")
 endmacro()
 
 # -----------------------------脚本宏----------------------------------

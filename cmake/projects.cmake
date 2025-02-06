@@ -68,17 +68,18 @@ set(ALL_INC_DIRS
 )
 
 set(ALL_SRCS
+        # BSP层
+        ${BSP_SRCS}
         # Algorithm层
         ${ALGORITHM_SRCS}
         # Adapter层
         ${ADAPTER_SRCS}
-        # BSP层
-        ${BSP_SRCS}
         # Middleware层
         ${MIDDLEWARE_SRCS}
         # Projects层
         ${PROJECTS_SRCS}
 )
+
 
 if (STATIC_LIB_LD)
     # 这里面不能直接添加到静态库里 否则链接时会出现找不到定义的现象
@@ -88,7 +89,8 @@ else ()
 
     # 添加公共的头文件目录、源文件
     include_directories(${ALL_INC_DIRS})
-    file(GLOB_RECURSE SOURCES ${ALL_SRCS})
+    set(SOURCES ${ALL_SRCS})
+    message(STATUS "SOURCES: ${SOURCES}")
 endif ()
 
 

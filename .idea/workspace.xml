@@ -34,19 +34,18 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】BSP帮助文档">
-      <change afterPath="$PROJECT_DIR$/Docs/help/projects.md" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】Projects帮助文档">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docs/help/module_apis.md" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/help/module_apis.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docs/help/porting_guide.md" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/help/porting_guide.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/bsp_components.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/test/app/app.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/test/ui/ui.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/test/ui/ui.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/syscall/syscalls.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/syscall/syscalls.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/system/linker/STM32F407VETX_FLASH.ld" beforeDir="false" afterPath="$PROJECT_DIR$/Core/system/linker/STM32F407VETX_FLASH.ld" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middleware/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middleware/Third_Party/FreeRTOS/Source/tasks.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Third_Party/FreeRTOS/Source/tasks.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/project_config.h.in" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/project_config.h.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/arm-gcc.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/arm-gcc.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/common_functions.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/common_functions.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/projects.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/projects.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1993,15 +1992,7 @@
       <workItem from="1738646545452" duration="14948000" />
       <workItem from="1738671960184" duration="13674000" />
       <workItem from="1738727453857" duration="31195000" />
-      <workItem from="1738809856086" duration="23663000" />
-    </task>
-    <task id="LOCAL-00066" summary="准备融合">
-      <option name="closed" value="true" />
-      <created>1734251699351</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1734251699352</updated>
+      <workItem from="1738809856086" duration="34336000" />
     </task>
     <task id="LOCAL-00067" summary="已经融合，可以正常编译">
       <option name="closed" value="true" />
@@ -2387,7 +2378,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738829262574</updated>
     </task>
-    <option name="localTasksCounter" value="115" />
+    <task id="LOCAL-00115" summary="【工程重构】Projects帮助文档">
+      <option name="closed" value="true" />
+      <created>1738837255836</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1738837255836</updated>
+    </task>
+    <option name="localTasksCounter" value="116" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2409,7 +2408,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="ZQ" />
+                        <option value="origin/ZQ" />
                       </list>
                     </value>
                   </entry>
@@ -2422,7 +2421,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】添加了FreeRTOS控制宏，同时修复了按键中断中信号量卡死的问题" />
     <MESSAGE value="【驱动开发】成功使用CLion的RTOS集成功能，并且把FreeRTOS的堆栈都放到了CCMRAM中" />
     <MESSAGE value="【驱动开发】准备在模拟器里设置一些常用的组件" />
     <MESSAGE value="【驱动开发】添加了电源管理模式，但并未验证" />
@@ -2447,7 +2445,8 @@
     <MESSAGE value="【工程重构】FreeRTOS和GUI的开关功能已调试完毕。自动化生成bsp和工程脚本已测试完毕" />
     <MESSAGE value="【工程重构】修复了project.h头文件，更新了Readme文档" />
     <MESSAGE value="【工程重构】BSP帮助文档" />
-    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】BSP帮助文档" />
+    <MESSAGE value="【工程重构】Projects帮助文档" />
+    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】Projects帮助文档" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

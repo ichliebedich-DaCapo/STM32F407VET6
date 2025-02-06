@@ -168,7 +168,7 @@ SECTIONS
     . = ALIGN(4);
     _eccmram = .;       /* create a global symbol at ccmram end */
   } >CCMRAM
-  /*原为“AT> FLASH”，由于暂时只用于定义变量（不能定义的时候初始化），所以就不用放在FLASH*/
+  /*【修改】原为“AT> FLASH”，由于暂时只用于定义变量（不能定义的时候初始化），所以就不用放在FLASH*/
 
   /* Uninitialized data section into "RAM" Ram type memory */
   . = ALIGN(4);
@@ -196,7 +196,7 @@ SECTIONS
     . = . + _Min_Stack_Size;
     . = ALIGN(4);
   } >CCMRAM
-  /*原本在RAM中，并且是8字节对齐*/
+  /*【修改】原本在RAM中，并且是8字节对齐*/
 
   /* Remove information from the compiler libraries */
   /DISCARD/ :

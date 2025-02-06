@@ -8,7 +8,7 @@
 #cmakedefine GUI_ENABLE
 #cmakedefine FREERTOS_ENABLE
 #cmakedefine FREERTOS_DEBUG
-
+#cmakedefine LTO_ENABLE
 
 // ----------与头文件包含有关----------
 #ifdef __cplusplus
@@ -24,5 +24,14 @@
 #endif
 
 #endif // __cplusplus
+
+
+// -------------与gcc扩展有关--------------
+#ifdef LTO_ENABLE
+#define USED __attribute__((used))
+#else
+#define USED
+
+#endif
 
 #endif // PROJECT_CONFIG_H

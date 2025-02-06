@@ -45,15 +45,16 @@ add_compile_options($<$<COMPILE_LANGUAGE:ASM>:-x$<SEMICOLON>assembler-with-cpp>)
 #-fprofile-generate（生成配置文件） 和 -fprofile-use（基于配置文件的优化）
 add_compile_options(-Ofast -g)
 # 必须关闭静态库独立模块编译，才能够使用链接优化
-if (NOT STATIC_MODULE_LD)
+if (NOT STATIC_LIB_LD AND LTO_ENABLE)
     #仅使用 add_compile_options(-flto)：
     #   结果：编译器生成的中间表示（IR）包含优化所需的信息，但链接器不会进行优化。
     #   问题：LTO 的效果不完整，性能提升有限。
     #仅使用 add_link_options(-flto)：
     #   结果：链接器尝试进行优化，但编译器生成的对象文件可能不包含足够的信息。
     #   问题：链接器无法进行有效的优化，可能导致编译错误或优化失败。
-    #        add_compile_options(-flto )
-    #        add_link_options(-flto)
+    # 全局启用LTO并行优化
+    add_compile_options(-flto=auto -fuse-linker-plugin)
+    add_link_options(-flto=auto -fuse-linker-plugin)
 endif ()
 
 #---------------------------链接选项--------------------------
@@ -71,4 +72,3 @@ add_link_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
 #-Wl,--strip-all：删除所有符号表和调试信息。可以显著减小二进制文件的大小，但会影响调试体验。
 #-Wl,--strip-debug：仅删除调试信息。
 add_link_options(-Wl,-gc-sections,--relax,--as-needed,--print-memory-usage,-Map=${BIN_DIR}/${PROJECT_NAME}.map)
-#add_link_options(-Wl,--strip-all)# 好像没有作用

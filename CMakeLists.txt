@@ -31,9 +31,8 @@ include(cmake/projects.cmake)
 
 
 # 定义一个可执行文件目标，生成了 ELF 文件
-add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
-# 将 bsp 对象库中的对象文件链接到 xxx.elf
-#target_link_libraries(${PROJECT_NAME}.elf PRIVATE $<TARGET_OBJECTS:bsp>)
+add_executable(${PROJECT_NAME}.elf ${SOURCES})
+
 
 # 导入模块
 if (${STATIC_LIB_LD})
