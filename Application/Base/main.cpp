@@ -35,7 +35,6 @@ void backgroundTask(void *argument)// 后台线程
 
 #endif
 
-
 int main()
 {
     /*基础初始化*/

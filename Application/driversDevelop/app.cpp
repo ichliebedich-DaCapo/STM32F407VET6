@@ -39,6 +39,7 @@ uint8_t write_state;
 uint8_t test_id;
 uint8_t FT_ID=0x03;
 
+uint8_t point_number=0;
 // 函数
 
 // 数组
@@ -71,8 +72,8 @@ void key_handler()
 ////                    HAL_Delay(10);
 //                }
 
-                write_state = ft6336_WeReg(write_addr, &write_dat, 1);//I2C通信故障
-
+//                write_state = ft6336_WeReg(write_addr, &write_dat, 1);//I2C通信故障
+                ft6336_RdReg(FT_REG_NUM_FINGER,&point_number,1);
 
             }
             break;
