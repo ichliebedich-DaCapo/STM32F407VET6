@@ -67,9 +67,9 @@ function(add_driver_component comp)
         endforeach ()
 
         # 添加源文件
-        if (${comp}_SRCS)
+        if (${comp}_SRC)
             #            target_sources(bsp PRIVATE ${${comp}_SRCS})
-            list(APPEND BSP_SRCS ${${comp}_SRCS})
+            list(APPEND BSP_SRCS ${${comp}_SRC})
             set(BSP_SRCS "${BSP_SRCS}" CACHE INTERNAL "List of BSP source files")
         endif ()
     endif ()

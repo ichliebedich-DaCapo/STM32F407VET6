@@ -34,14 +34,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】FreeRTOS和GUI的开关功能已调试完毕。自动化生成bsp和工程脚本已测试完毕">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Base/GUI_Base.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Base/GUI_Base.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/FPS.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/FPS.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/dac.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/dac.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/project_config.h.in" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/project_config.h.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/templates/app.cpp.in" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/templates/app.cpp.in" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】修复了project.h头文件，更新了Readme文档">
+      <change afterPath="$PROJECT_DIR$/Docs/help/bsp.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/bsp_drivers.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/bsp_drivers.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1988,15 +1984,7 @@
       <workItem from="1738646545452" duration="14948000" />
       <workItem from="1738671960184" duration="13674000" />
       <workItem from="1738727453857" duration="31195000" />
-      <workItem from="1738809856086" duration="10732000" />
-    </task>
-    <task id="LOCAL-00064" summary="【阻碍】无论输入什么都只输出1，得要先排除浮点数据造成的影响">
-      <option name="closed" value="true" />
-      <created>1732039874063</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1732039874063</updated>
+      <workItem from="1738809856086" duration="13997000" />
     </task>
     <task id="LOCAL-00065" summary="【跨越】我的第一个AI模型">
       <option name="closed" value="true" />
@@ -2382,7 +2370,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738818519655</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="【工程重构】修复了project.h头文件，更新了Readme文档">
+      <option name="closed" value="true" />
+      <created>1738824067427</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1738824067427</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2404,7 +2400,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/no_dirty_point" />
+                        <option value="ZQ" />
                       </list>
                     </value>
                   </entry>
@@ -2417,7 +2413,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】在自动化编译情况下，无关文件并不会编译，那么驱动编译宏就失去了作用" />
     <MESSAGE value="【驱动开发】把堆栈段放在了CCMRAM中，并设为4字节对齐。只是在Key中定义state变量并放入CCMRAM，会导致奇怪的问题" />
     <MESSAGE value="【驱动开发】添加了FreeRTOS控制宏，同时修复了按键中断中信号量卡死的问题" />
     <MESSAGE value="【驱动开发】成功使用CLion的RTOS集成功能，并且把FreeRTOS的堆栈都放到了CCMRAM中" />
@@ -2442,7 +2437,8 @@
     <MESSAGE value="【工程重构】BSP及HAL自动查找依赖已经基本完成" />
     <MESSAGE value="【工程重构】模板文件生成脚本已有思路，算法层和适配层明天再整理，帮助文档可以写了" />
     <MESSAGE value="【工程重构】FreeRTOS和GUI的开关功能已调试完毕。自动化生成bsp和工程脚本已测试完毕" />
-    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】FreeRTOS和GUI的开关功能已调试完毕。自动化生成bsp和工程脚本已测试完毕" />
+    <MESSAGE value="【工程重构】修复了project.h头文件，更新了Readme文档" />
+    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】修复了project.h头文件，更新了Readme文档" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
