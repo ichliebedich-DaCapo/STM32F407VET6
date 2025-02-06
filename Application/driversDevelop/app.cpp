@@ -30,7 +30,8 @@ AsyncDelay_HAL async_delay(500);
 
 const uint16_t touch_press_reg[2]={FT_TP1_REG,FT_TP2_REG};
 static uint8_t touch_isOK=6;
-stru_pos touch;
+stru_pos touch_pos;
+uint8_t touch_state;
 
 uint8_t  write_dat=0x55;
 uint8_t  write_addr=0x8D;
@@ -40,6 +41,7 @@ uint8_t test_id;
 uint8_t FT_ID=0x03;
 
 uint8_t point_number=0;
+stru_pos pos;
 // 函数
 
 // 数组
@@ -74,7 +76,7 @@ void key_handler()
 
 //                write_state = ft6336_WeReg(write_addr, &write_dat, 1);//I2C通信故障
                 ft6336_RdReg(FT_REG_NUM_FINGER,&point_number,1);
-
+//                touch_state=usr_ScanTouchProcess(&touch_pos);
             }
             break;
 

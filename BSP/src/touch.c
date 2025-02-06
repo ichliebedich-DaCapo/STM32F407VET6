@@ -50,20 +50,21 @@ uint8_t touch_init( void )
     HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
     ft6336_rest();
+    HAL_Delay( 50);
 
-//    if(!ft6336_RdReg(FT_ID_G_FOCALTECH_ID,&id, 1))
-//    {
-//        return FT_FALSE1;//I2C通信故障
-//    }
-    ft6336_RdReg(FT_ID_G_FOCALTECH_ID,&id, 1);
-    id2=id;
-    return id2;
-//    if(id != PANNEL_ID)
-//    {
-//        return id;//寄存器值不匹配
-//
-//    }
-//    return FT_TRUE;
+    if(!ft6336_RdReg(FT_ID_G_FOCALTECH_ID,&id, 1))
+    {
+        return FT_FALSE1;//I2C通信故障
+    }
+//    ft6336_RdReg(FT_ID_G_FOCALTECH_ID,&id, 1);
+//    id2=id;
+//    return id2;
+    if(id != PANNEL_ID)
+    {
+        return FT_FALSE2;//寄存器值不匹配
+
+    }
+    return id;
 }
 
 

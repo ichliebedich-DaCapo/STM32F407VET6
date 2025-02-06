@@ -40,6 +40,7 @@ extern "C" {
 #define FT_ID_G_PERIODACTIVE     0x88         //激活状态周期设置寄存器
 
 #define PANNEL_ID                0x11
+
 // MATCH VALUE LIST
 
 
