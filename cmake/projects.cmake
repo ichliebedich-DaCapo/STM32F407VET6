@@ -3,16 +3,15 @@
 # -----------------------UI---------------------
 file(GLOB_RECURSE UI_SRCS "${UI_DIR}/*.cpp" "${UI_DIR}/*.c")
 set(UI_INC_DIRS ${UI_DIR})
-add_library(libui STATIC ${UI_SRCS})
-target_include_directories(libui PUBLIC ${UI_INC_DIRS})
-target_link_libraries(libui PUBLIC libgui)
+
 
 # -----------------------App---------------------
 file(GLOB_RECURSE APP_SRCS "${APP_DIR}/*.cpp" "${PROJECTS_DIR}/shared/*.cpp")
 set(APP_INC_DIRS ${APP_DIR} ${PROJECTS_DIR}/shared)
 add_library(libapp STATIC ${APP_SRCS})
 target_include_directories(libapp PUBLIC ${APP_INC_DIRS})
-target_link_libraries(libapp PUBLIC  libdata libbsp libalgorithm)
+set_target_properties(libapp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+
 
 
 
@@ -46,7 +45,19 @@ if (GUI_ENABLE)
     list(APPEND PROJECTS_SRCS
             ${UI_SRCS}
     )
+
+    add_library(libui STATIC ${UI_SRCS})
+    target_include_directories(libui PUBLIC ${UI_INC_DIRS})
+    target_link_libraries(libui PUBLIC libgui)
+    set_target_properties(libui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 endif ()
+
+
+# --------------------合并------------------------
+add_library(ProjectsObjects OBJECT ${PROJECTS_SRCS})
+add_library(libprojects STATIC $<TARGET_OBJECTS:ProjectsObjects>)
+target_link_libraries(libprojects PUBLIC  libui libapp)
+set_target_properties(libprojects PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
 # ----------------------------包含所有目录和资源文件--------------------------
@@ -84,13 +95,15 @@ set(ALL_SRCS
 if (STATIC_LIB_LD)
     # 这里面不能直接添加到静态库里 否则链接时会出现找不到定义的现象
     file(GLOB_RECURSE SOURCES "Core/*.*" "Application/Base/ISR.cpp")
+
+
 else ()
 
 
     # 添加公共的头文件目录、源文件
     include_directories(${ALL_INC_DIRS})
     set(SOURCES ${ALL_SRCS})
-    message(STATUS "SOURCES: ${SOURCES}")
+#    message(STATUS "SOURCES: ${SOURCES}")
 endif ()
 
 

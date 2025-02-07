@@ -14,18 +14,21 @@
   </component>
   <component name="CMakeRunConfigurationManager">
     <generated>
-      <config projectName="Furina" targetName="libalgorithm" />
       <config projectName="Furina" targetName="libdata" />
       <config projectName="Furina" targetName="libfreertos" />
       <config projectName="Furina" targetName="liblvgl" />
       <config projectName="Furina" targetName="libmodule" />
       <config projectName="Furina" targetName="libdrivers" />
+      <config projectName="Furina" targetName="libgui" />
+      <config projectName="Furina" targetName="libmiddleware" />
+      <config projectName="Furina" targetName="libalgorithm" />
       <config projectName="Furina" targetName="Furina.elf" />
       <config projectName="Furina" targetName="libbsp" />
-      <config projectName="Furina" targetName="libui" />
       <config projectName="Furina" targetName="libapp" />
       <config projectName="Furina" targetName="libdsp" />
-      <config projectName="Furina" targetName="libgui" />
+      <config projectName="Furina" targetName="MiddlewareObjects" />
+      <config projectName="Furina" targetName="ProjectsObjects" />
+      <config projectName="Furina" targetName="libprojects" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -34,12 +37,15 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】添加了LTO优化配置项，并解决了缺失系统调用的问题，为此引入了used扩展">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】开启了内联警告。GUI层打算先使用元编程+CRTP的模式实现链式调用，之后再尝试解析器、脚本化开发什么的。">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docs/thinking/ZQ/Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/thinking/ZQ/Log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/arm-gcc.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/arm-gcc.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/adapter.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/adapter.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/algorithm.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/algorithm.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/bsp.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/bsp.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/middleware.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/middleware.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/projects.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/projects.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1711,9 +1717,19 @@
     <option name="rtosType" value="FreeRTOS" />
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="MiddlewareObjects" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="MiddlewareObjects" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProjectsObjects" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="ProjectsObjects" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="libalgorithm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libalgorithm" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
@@ -1721,7 +1737,12 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="libui" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libui" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
+    <configuration name="libmiddleware" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libmiddleware" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libprojects" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libprojects" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -1744,7 +1765,10 @@
     </configuration>
     <list>
       <item itemvalue="CMake 应用程序.libalgorithm" />
-      <item itemvalue="CMake 应用程序.libui" />
+      <item itemvalue="CMake 应用程序.libmiddleware" />
+      <item itemvalue="CMake 应用程序.MiddlewareObjects" />
+      <item itemvalue="CMake 应用程序.libprojects" />
+      <item itemvalue="CMake 应用程序.ProjectsObjects" />
       <item itemvalue="OpenOCD 下载并运行.OCD Furina" />
     </list>
   </component>
@@ -1986,15 +2010,8 @@
       <workItem from="1738646545452" duration="14948000" />
       <workItem from="1738671960184" duration="13674000" />
       <workItem from="1738727453857" duration="31195000" />
-      <workItem from="1738809856086" duration="37614000" />
-    </task>
-    <task id="LOCAL-00068" summary="测试了module特性，可以正常使用">
-      <option name="closed" value="true" />
-      <created>1734270514223</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1734270514223</updated>
+      <workItem from="1738809856086" duration="38747000" />
+      <workItem from="1738901212863" duration="2842000" />
     </task>
     <task id="LOCAL-00069" summary="终于可以把模块的声明和实现分开了">
       <option name="closed" value="true" />
@@ -2380,7 +2397,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738848731611</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="【工程重构】开启了内联警告。GUI层打算先使用元编程+CRTP的模式实现链式调用，之后再尝试解析器、脚本化开发什么的。">
+      <option name="closed" value="true" />
+      <created>1738853604537</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1738853604537</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2415,7 +2440,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】准备在模拟器里设置一些常用的组件" />
     <MESSAGE value="【驱动开发】添加了电源管理模式，但并未验证" />
     <MESSAGE value="【驱动开发】补充了GUI线程" />
     <MESSAGE value="【驱动开发】添加了硬件随机数生成驱动" />
@@ -2440,7 +2464,8 @@
     <MESSAGE value="【工程重构】BSP帮助文档" />
     <MESSAGE value="【工程重构】Projects帮助文档" />
     <MESSAGE value="【工程重构】添加了LTO优化配置项，并解决了缺失系统调用的问题，为此引入了used扩展" />
-    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】添加了LTO优化配置项，并解决了缺失系统调用的问题，为此引入了used扩展" />
+    <MESSAGE value="【工程重构】开启了内联警告。GUI层打算先使用元编程+CRTP的模式实现链式调用，之后再尝试解析器、脚本化开发什么的。" />
+    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】开启了内联警告。GUI层打算先使用元编程+CRTP的模式实现链式调用，之后再尝试解析器、脚本化开发什么的。" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
