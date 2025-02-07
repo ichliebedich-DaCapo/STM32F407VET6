@@ -19,11 +19,14 @@
       <config projectName="Furina" targetName="liblvgl" />
       <config projectName="Furina" targetName="libmodule" />
       <config projectName="Furina" targetName="libdrivers" />
+      <config projectName="Furina" targetName="AdapterObjects" />
       <config projectName="Furina" targetName="libgui" />
       <config projectName="Furina" targetName="libmiddleware" />
       <config projectName="Furina" targetName="libalgorithm" />
+      <config projectName="Furina" targetName="libadapter" />
       <config projectName="Furina" targetName="Furina.elf" />
       <config projectName="Furina" targetName="libbsp" />
+      <config projectName="Furina" targetName="libui" />
       <config projectName="Furina" targetName="libapp" />
       <config projectName="Furina" targetName="libdsp" />
       <config projectName="Furina" targetName="MiddlewareObjects" />
@@ -37,15 +40,20 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】开启了内联警告。GUI层打算先使用元编程+CRTP的模式实现链式调用，之后再尝试解析器、脚本化开发什么的。">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】准备以静态库方式链接">
+      <change afterPath="$PROJECT_DIR$/cmake/structure/core.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/bsp_drivers.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/bsp_drivers.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/core.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/cmsis_hal.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/help/bsp.md" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/help/bsp.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middleware/Data/waveData.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Data/waveData.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/adapter.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/adapter.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/algorithm.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/algorithm.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/bsp.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/bsp.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/middleware.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/middleware.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/projects.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/projects.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/adapter.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/adapter.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/algorithm.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/algorithm.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/bsp.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/bsp.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/projects.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/projects.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1671,45 +1679,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;OpenOCD 下载并运行.OCD Furina.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;cf.advertisement.text.has.clang-format&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ZQ&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Program/Embedded/MCU/STM32/Furina/Projects/voiceStorageAndPlay&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;CMakeSettings&quot;,
-    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
-    &quot;two.files.diff.last.used.file&quot;: &quot;D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "OpenOCD 下载并运行.OCD Furina.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.west.config.association.type.startup.service": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.advertisement.text.has.clang-format": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "ZQ",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "E:/Program/Embedded/MCU/STM32/Furina/cmake",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "CMakeSettings",
+    "structure.view.defaults.are.configured": "true",
+    "two.files.diff.last.used.file": "D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Program\Embedded\MCU\STM32\Furina\cmake" />
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\Projects\voiceStorageAndPlay" />
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\Projects\StorageOscilloscope" />
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\Projects\signalGenerator" />
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\Projects\LinearDisplacementSensor\app" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Program\Embedded\MCU\STM32\Furina\cmake\structure" />
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\BSP" />
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\BSP\src" />
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\BSP\inc" />
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\Tools" />
-      <recent name="E:\Program\Embedded\MCU\STM32\Furina\Adapter\GUI\lvgl-simulator" />
     </key>
   </component>
   <component name="RtosSettings">
@@ -1717,6 +1726,11 @@
     <option name="rtosType" value="FreeRTOS" />
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
+    <configuration name="AdapterObjects" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="AdapterObjects" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MiddlewareObjects" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="MiddlewareObjects" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -1732,6 +1746,11 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="libadapter" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libadapter" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="libalgorithm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libalgorithm" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -1743,6 +1762,11 @@
       </method>
     </configuration>
     <configuration name="libprojects" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libprojects" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libui" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libui" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -1764,10 +1788,13 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="CMake 应用程序.AdapterObjects" />
+      <item itemvalue="CMake 应用程序.libadapter" />
       <item itemvalue="CMake 应用程序.libalgorithm" />
       <item itemvalue="CMake 应用程序.libmiddleware" />
       <item itemvalue="CMake 应用程序.MiddlewareObjects" />
       <item itemvalue="CMake 应用程序.libprojects" />
+      <item itemvalue="CMake 应用程序.libui" />
       <item itemvalue="CMake 应用程序.ProjectsObjects" />
       <item itemvalue="OpenOCD 下载并运行.OCD Furina" />
     </list>
@@ -2011,15 +2038,7 @@
       <workItem from="1738671960184" duration="13674000" />
       <workItem from="1738727453857" duration="31195000" />
       <workItem from="1738809856086" duration="38747000" />
-      <workItem from="1738901212863" duration="2842000" />
-    </task>
-    <task id="LOCAL-00069" summary="终于可以把模块的声明和实现分开了">
-      <option name="closed" value="true" />
-      <created>1734273951315</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1734273951315</updated>
+      <workItem from="1738901212863" duration="4995000" />
     </task>
     <task id="LOCAL-00070" summary="略微调整了flash_storage模块的编写">
       <option name="closed" value="true" />
@@ -2405,7 +2424,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738853604537</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary="【工程重构】准备以静态库方式链接">
+      <option name="closed" value="true" />
+      <created>1738904117181</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1738904117181</updated>
+    </task>
+    <option name="localTasksCounter" value="119" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2440,7 +2467,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】添加了电源管理模式，但并未验证" />
     <MESSAGE value="【驱动开发】补充了GUI线程" />
     <MESSAGE value="【驱动开发】添加了硬件随机数生成驱动" />
     <MESSAGE value="【驱动开发】添加显示CPU温度模块，同时找到了Label显示含浮点数的格式字符串只显示f的原因" />
@@ -2465,7 +2491,8 @@
     <MESSAGE value="【工程重构】Projects帮助文档" />
     <MESSAGE value="【工程重构】添加了LTO优化配置项，并解决了缺失系统调用的问题，为此引入了used扩展" />
     <MESSAGE value="【工程重构】开启了内联警告。GUI层打算先使用元编程+CRTP的模式实现链式调用，之后再尝试解析器、脚本化开发什么的。" />
-    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】开启了内联警告。GUI层打算先使用元编程+CRTP的模式实现链式调用，之后再尝试解析器、脚本化开发什么的。" />
+    <MESSAGE value="【工程重构】准备以静态库方式链接" />
+    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】准备以静态库方式链接" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

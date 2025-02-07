@@ -85,6 +85,8 @@ set(ALL_SRCS
         ${ALGORITHM_SRCS}
         # Adapter层
         ${ADAPTER_SRCS}
+        # Core层
+        ${CORE_SRCS}
         # Middleware层
         ${MIDDLEWARE_SRCS}
         # Projects层
@@ -93,17 +95,12 @@ set(ALL_SRCS
 
 
 if (STATIC_LIB_LD)
-    # 这里面不能直接添加到静态库里 否则链接时会出现找不到定义的现象
-    file(GLOB_RECURSE SOURCES "Core/*.*" "Application/Base/ISR.cpp")
-
-
+    include_directories(${INC_DIR})
+    set(SOURCES ${CORE_SRCS})
 else ()
-
-
     # 添加公共的头文件目录、源文件
     include_directories(${ALL_INC_DIRS})
     set(SOURCES ${ALL_SRCS})
-#    message(STATUS "SOURCES: ${SOURCES}")
 endif ()
-
+    message(STATUS "SOURCES: ${SOURCES}")
 

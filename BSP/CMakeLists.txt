@@ -16,8 +16,8 @@ endif ()
 
 # 初始化已添加组件列表和源文件列表
 set(ADDED_COMPONENTS "" CACHE INTERNAL "List of added components")
-set(BSP_SRCS "${CORE_SRCS}" CACHE INTERNAL "List of BSP source files")
-set(BSP_INC_DIRS "${CORE_INC_DIRS}" CACHE INTERNAL "List of BSP header dirs")
+set(BSP_SRCS "" CACHE INTERNAL "List of BSP source files")
+set(BSP_INC_DIRS "${DRIVERS_INC_DIRS}" CACHE INTERNAL "List of BSP header dirs")
 
 
 # 递归解析依赖

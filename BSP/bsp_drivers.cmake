@@ -50,7 +50,7 @@ set(w25qxx_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/w25qxx.c)
 
 
 # 依赖项文件映射
-include(core.cmake)
+include(cmsis_hal.cmake)
 set(hal_SRC ${HAL_SRC_DIR}/stm32f4xx_hal.c)
 # ADC
 set(hal_adc_SRC ${HAL_SRC_DIR}/stm32f4xx_hal_adc.c)

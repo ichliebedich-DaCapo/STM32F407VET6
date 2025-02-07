@@ -6,7 +6,6 @@
 #define FURINA_WAVEDATA_H
 
 #include <stdint.h>
-#include "App_Conf.h"
 //#include <stdint-gcc.h>
 /**
  * @brief 波形数据

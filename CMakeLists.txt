@@ -9,7 +9,6 @@ set(PROJECT_DIR Projects/driversDevelop)
 # 创建test项目目录，其下有ui和app目录，并且各目录下有相应文件
 
 
-
 # --------------------------------------包含子cmake--------------------------------
 # 对配置项变量进行预处理，包括获取项目名称
 include(cmake/target_project.cmake)
@@ -18,16 +17,18 @@ add_subdirectory(BSP)
 include(cmake/arm-gcc.cmake)
 # 与stm32相关的一些宏，同时指定链接脚本
 include(cmake/stm32f4xx.cmake)
+# 包含Core层(不含Drivers）
+include(cmake/structure/core.cmake)
 # 包含HAL驱动库
-include(cmake/bsp.cmake)
+include(cmake/structure/bsp.cmake)
 # 包含算法
-include(cmake/algorithm.cmake)
+include(cmake/structure/algorithm.cmake)
 # 包含中间件
-include(cmake/middleware.cmake)
+include(cmake/structure/middleware.cmake)
 # 包含适配层
-include(cmake/adapter.cmake)
+include(cmake/structure/adapter.cmake)
 # 项目库
-include(cmake/projects.cmake)
+include(cmake/structure/projects.cmake)
 
 
 # 定义一个可执行文件目标，生成了 ELF 文件
@@ -36,9 +37,9 @@ add_executable(${PROJECT_NAME}.elf ${SOURCES})
 
 # 导入模块
 if (STATIC_LIB_LD)
-#    target_sources(libapp PUBLIC
-#            FILE_SET CXX_MODULES FILES
-#            ${cxx_modules})
+    #    target_sources(libapp PUBLIC
+    #            FILE_SET CXX_MODULES FILES
+    #            ${cxx_modules})
 else ()
     target_sources(${PROJECT_NAME}.elf PUBLIC
             FILE_SET CXX_MODULES FILES
