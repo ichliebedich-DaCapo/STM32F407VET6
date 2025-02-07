@@ -26,24 +26,22 @@ public:
 
     // 设置计数器值
     static inline auto set_value_label(int value) -> void;
-    // 设置计数器值
-    static inline auto set_value_button1(int value) -> void;
-    // 设置计数器值
-    static inline auto set_value_button2(int value) -> void;
+    // 触摸点1 x坐标
+    static inline auto set_value_x1(int value) -> void;
+    // 触摸点1 y坐标
+    static inline auto set_value_y1(int value) -> void;
+    // 触摸点2 x坐标
+    static inline auto set_value_x2(int value) -> void;
+    // 触摸点2 y坐标
+    static inline auto set_value_y2(int value) -> void;
+
 
 private:
     static inline int counter_value = 0; // 计数器值
 };
 void GUI_Base::events_init()
 {
-    // 绑定 "+" 按钮事件
-    gui->main.btn_plus.add_event(btn_fun(CounterLogic::increment();));
 
-    // 绑定 "-" 按钮事件
-    gui->main.btn_minus.add_event(btn_fun(CounterLogic::decrement();));
-
-    // 绑定复位按钮事件
-    gui->main.btn_reset.add_event(btn_fun(CounterLogic::reset();));
 }
 
 // 函数
@@ -65,22 +63,29 @@ auto GUI_Base::screen_init()->void
     gui->main.label_counter.init(200, 150, 80, 40, "0", &lv_customer_font_SourceHanSerifSC_Regular_15);
     gui->main.label_counter.set_align(LV_ALIGN_CENTER, 0, 0);
 
-    // "+" 按钮
-    gui->main.btn_plus.init(100, 250, 80, 40, "+", &lv_customer_font_SourceHanSerifSC_Regular_15);
-    gui->main.btn_plus.set_align(LV_ALIGN_CENTER, -100, 0);
-    lv_obj_set_style_bg_color(gui->main.btn_plus.get_obj(), lv_color_hex(0x34e6ff), LV_PART_MAIN); // 蓝色背景
-    lv_obj_set_style_text_color(gui->main.btn_plus.get_obj(), lv_color_hex(0x000000), LV_PART_MAIN); // 黑色文字
+    // 触摸点1 x坐标 按钮
+    gui->main.btn_x1.init(50, 100, 80, 40, "0", &lv_customer_font_SourceHanSerifSC_Regular_15);
+//    gui->main.btn_x1.set_align(LV_ALIGN_CENTER, 0, 0);
+    lv_obj_set_style_bg_color(gui->main.btn_x1.get_obj(), lv_color_hex(0x34e6ff), LV_PART_MAIN); // 蓝色背景
+    lv_obj_set_style_text_color(gui->main.btn_x1.get_obj(), lv_color_hex(0x000000), LV_PART_MAIN); // 黑色文字
 
-    // "-" 按钮
-    gui->main.btn_minus.init(300, 250, 80, 40, "-", &lv_customer_font_SourceHanSerifSC_Regular_15);
-    gui->main.btn_minus.set_align(LV_ALIGN_CENTER, 100, 0);
-    lv_obj_set_style_bg_color(gui->main.btn_minus.get_obj(), lv_color_hex(0x34e6ff), LV_PART_MAIN); // 蓝色背景
-    lv_obj_set_style_text_color(gui->main.btn_minus.get_obj(), lv_color_hex(0x000000), LV_PART_MAIN); // 黑色文字
-    // 复位按钮
-    gui->main.btn_reset.init(200, 300, 80, 40, "复位", &lv_customer_font_SourceHanSerifSC_Regular_15);
-    gui->main.btn_reset.set_align(LV_ALIGN_CENTER, 0, 50);
-    lv_obj_set_style_bg_color(gui->main.btn_reset.get_obj(), lv_color_hex(0x34e6ff), LV_PART_MAIN); // 蓝色背景
-    lv_obj_set_style_text_color(gui->main.btn_reset.get_obj(), lv_color_hex(0x000000), LV_PART_MAIN); // 黑色文字
+    // 触摸点1 y坐标 按钮
+    gui->main.btn_y1.init(150, 100, 80, 40, "0", &lv_customer_font_SourceHanSerifSC_Regular_15);
+//    gui->main.btn_y1.set_align(LV_ALIGN_CENTER, 0, 0);
+    lv_obj_set_style_bg_color(gui->main.btn_y1.get_obj(), lv_color_hex(0x34e6ff), LV_PART_MAIN); // 蓝色背景
+    lv_obj_set_style_text_color(gui->main.btn_y1.get_obj(), lv_color_hex(0x000000), LV_PART_MAIN); // 黑色文字
+
+    // 触摸点2 x坐标 按钮
+    gui->main.btn_x2.init(50, 150, 80, 40, "0", &lv_customer_font_SourceHanSerifSC_Regular_15);
+//    gui->main.btn_x2.set_align(LV_ALIGN_CENTER, 0, 0);
+    lv_obj_set_style_bg_color(gui->main.btn_x2.get_obj(), lv_color_hex(0x34e6ff), LV_PART_MAIN); // 蓝色背景
+    lv_obj_set_style_text_color(gui->main.btn_x2.get_obj(), lv_color_hex(0x000000), LV_PART_MAIN); // 黑色文字
+
+    // 触摸点2 y坐标 按钮
+    gui->main.btn_y2.init(150, 150, 80, 40, "0", &lv_customer_font_SourceHanSerifSC_Regular_15);
+//    gui->main.btn_y2.set_align(LV_ALIGN_CENTER, 0, 0);
+    lv_obj_set_style_bg_color(gui->main.btn_y2.get_obj(), lv_color_hex(0x34e6ff), LV_PART_MAIN); // 蓝色背景
+    lv_obj_set_style_text_color(gui->main.btn_y2.get_obj(), lv_color_hex(0x000000), LV_PART_MAIN); // 黑色文字
 }
 
 
@@ -121,17 +126,29 @@ auto CounterLogic::set_value_label(int value) -> void
     sprintf(buf, "%d", counter_value);
     gui->main.label_counter.set_text(buf);
 }
-auto CounterLogic::set_value_button1(int value) -> void
+auto CounterLogic::set_value_x1(int value) -> void
 {
     char buf[12];
     sprintf(buf, "%d", value);
-    gui->main.btn_plus.set_text(buf);
+    gui->main.btn_x1.set_text(buf);
 }
-auto CounterLogic::set_value_button2(int value) -> void
+auto CounterLogic::set_value_y1(int value) -> void
 {
     char buf[12];
     sprintf(buf, "%d", value);
-    gui->main.btn_minus.set_text(buf);
+    gui->main.btn_y1.set_text(buf);
+}
+auto CounterLogic::set_value_x2(int value) -> void
+{
+    char buf[12];
+    sprintf(buf, "%d", value);
+    gui->main.btn_x2.set_text(buf);
+}
+auto CounterLogic::set_value_y2(int value) -> void
+{
+    char buf[12];
+    sprintf(buf, "%d", value);
+    gui->main.btn_y2.set_text(buf);
 }
 /***************************UI接口*********************************/
 void UI::pressA()
@@ -149,13 +166,21 @@ auto UI::set_counter_value(int value) -> void
 {
     CounterLogic::set_value_label(value);
 }
-auto UI::set_button1_value(int value) -> void
+auto UI::set_x1_value(int value) -> void
 {
-    CounterLogic::set_value_button1(value);
+    CounterLogic::set_value_x1(value);
 }
-auto UI::set_button2_value(int value) -> void
+auto UI::set_y1_value(int value) -> void
 {
-    CounterLogic::set_value_button2(value);
+    CounterLogic::set_value_y1(value);
+}
+auto UI::set_x2_value(int value) -> void
+{
+    CounterLogic::set_value_x2(value);
+}
+auto UI::set_y2_value(int value) -> void
+{
+    CounterLogic::set_value_y2(value);
 }
 auto UI::get_counter_value() -> int
 {

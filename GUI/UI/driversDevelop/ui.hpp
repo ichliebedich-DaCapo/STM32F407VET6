@@ -12,9 +12,10 @@ struct lv_ui_t
     {
         Component screen{}; // 屏幕自身
         Label label_counter; // 计数器显示
-        Button btn_plus; // "+" 按钮
-        Button btn_minus; // "-" 按钮
-        Button btn_reset; // 复位按钮
+        Button btn_x1;     // 触摸点1 x坐标 按钮
+        Button btn_y1;    // 触摸点1 y坐标 按钮
+        Button btn_x2;    // 触摸点2 x坐标 按钮
+        Button btn_y2;    // 触摸点2 y坐标 按钮
     } main;// 主屏幕
 
 };
@@ -44,9 +45,10 @@ public:
     // 设置计数器值
     static auto set_counter_value(int value) -> void;
 
-    static auto set_button1_value(int value) -> void;
-    static auto set_button2_value(int value) -> void;
-
+    static auto set_x1_value(int value) -> void;
+    static auto set_x2_value(int value) -> void;
+    static auto set_y1_value(int value) -> void;
+    static auto set_y2_value(int value) -> void;
     // 获取计数器值
     static auto get_counter_value() -> int;
 

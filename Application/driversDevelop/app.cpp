@@ -30,18 +30,20 @@ AsyncDelay_HAL async_delay(500);
 
 const uint16_t touch_press_reg[2]={FT_TP1_REG,FT_TP2_REG};
 static uint8_t touch_isOK=6;
-stru_pos touch_pos;
+
+stru_pos pos;
 uint8_t touch_state;
+uint8_t touch_pos_buf1[4];
+uint8_t touch_pos_buf2[4];
 
 uint8_t  write_dat=0x55;
 uint8_t  write_addr=0x8D;
-uint8_t write_state;
 
 uint8_t test_id;
 uint8_t FT_ID=0x03;
 
 uint8_t point_number=0;
-stru_pos pos;
+
 // 函数
 
 // 数组
@@ -74,9 +76,27 @@ void key_handler()
 ////                    HAL_Delay(10);
 //                }
 
-//                write_state = ft6336_WeReg(write_addr, &write_dat, 1);//I2C通信故障
-                ft6336_RdReg(FT_REG_NUM_FINGER,&point_number,1);
+
+                ft6336_RdReg(FT_REG_NUM_FINGER, &point_number, 1);
+
+                ft6336_RdReg(touch_press_reg[0], touch_pos_buf1, 4);
+                //竖屏
+//                UI::set_button1_value(((uint16_t)(touch_pos_buf1[0]&0X0F)<<8)+touch_pos_buf1[1]);
+//                UI::set_button2_value(((uint16_t)(touch_pos_buf1[2]&0X0F)<<8)+touch_pos_buf1[3]);
+                //横屏
+                UI::set_x1_value(480 - (((uint16_t) (touch_pos_buf1[2] & 0X0F) << 8) + touch_pos_buf1[3]));
+                UI::set_y1_value(((uint16_t) (touch_pos_buf1[0] & 0X0F) << 8) + touch_pos_buf1[1]);
+
+                ft6336_RdReg(touch_press_reg[1], touch_pos_buf2, 4);
+                //竖屏
+//                UI::set_button1_value(((uint16_t)(touch_pos_buf1[0]&0X0F)<<8)+touch_pos_buf1[1]);
+//                UI::set_button2_value(((uint16_t)(touch_pos_buf1[2]&0X0F)<<8)+touch_pos_buf1[3]);
+                //横屏
+                UI::set_x2_value(480 - (((uint16_t) (touch_pos_buf2[2] & 0X0F) << 8) + touch_pos_buf2[3]));
+                UI::set_y2_value(((uint16_t) (touch_pos_buf2[0] & 0X0F) << 8) + touch_pos_buf2[1]);
+
 //                touch_state=usr_ScanTouchProcess(&touch_pos);
+
             }
             break;
 
@@ -89,7 +109,7 @@ void key_handler()
 
 //                ft6336_RdReg((FT_ID<<1)|0x01,&test_id, 1);
 //                FT_ID++;
-                ft6336_RdReg(0x85,&test_id, 1);
+                ft6336_RdReg(0xA8,&test_id, 1);
                 write_addr++;
 
             }
@@ -150,7 +170,7 @@ void key_handler()
             break;
 
         case keykF:
-            LCD_Clear(0xFEDC); // 填充颜色 0xFEDC
+//            LCD_Clear(0xFEDC); // 填充颜色 0xFEDC
             break;
 
         default:
@@ -177,6 +197,25 @@ void background_handler()
         printf("%f\r\n", get_adc1_temperature());
 
     }
+
+//    ft6336_RdReg(FT_REG_NUM_FINGER, &point_number, 1);
+//
+//    ft6336_RdReg(touch_press_reg[0], touch_pos_buf1, 4);
+//    //竖屏
+////                UI::set_button1_value(((uint16_t)(touch_pos_buf1[0]&0X0F)<<8)+touch_pos_buf1[1]);
+////                UI::set_button2_value(((uint16_t)(touch_pos_buf1[2]&0X0F)<<8)+touch_pos_buf1[3]);
+//    //横屏
+//    UI::set_x1_value(480 - (((uint16_t) (touch_pos_buf1[2] & 0X0F) << 8) + touch_pos_buf1[3]));
+//    UI::set_y1_value(((uint16_t) (touch_pos_buf1[0] & 0X0F) << 8) + touch_pos_buf1[1]);
+//
+//    ft6336_RdReg(touch_press_reg[1], touch_pos_buf2, 4);
+//    //竖屏
+////                UI::set_button1_value(((uint16_t)(touch_pos_buf1[0]&0X0F)<<8)+touch_pos_buf1[1]);
+////                UI::set_button2_value(((uint16_t)(touch_pos_buf1[2]&0X0F)<<8)+touch_pos_buf1[3]);
+//    //横屏
+//    UI::set_x2_value(480 - (((uint16_t) (touch_pos_buf2[2] & 0X0F) << 8) + touch_pos_buf2[3]));
+//    UI::set_y2_value(((uint16_t) (touch_pos_buf2[0] & 0X0F) << 8) + touch_pos_buf2[1]);
+
 //    CPU::print<get_adc1_temperature>();
 }
 
@@ -219,6 +258,7 @@ uint8_t usr_ScanTouchProcess( stru_pos *pPos)
                 {
                     switch(0)
                     {
+                        //竖屏1
                         case 0:
                             pPos->xpox[i]=((uint16_t)(buf[0]&0X0F)<<8)+buf[1];
                             pPos->ypox[i]=((uint16_t)(buf[2]&0X0F)<<8)+buf[3];
@@ -231,14 +271,15 @@ uint8_t usr_ScanTouchProcess( stru_pos *pPos)
                             pPos->xpox[i]=480-(((uint16_t)(buf[0]&0X0F)<<8)+buf[1]);
                             pPos->ypox[i]=320-(((uint16_t)(buf[2]&0X0F)<<8)+buf[3]);
                             break;
+                            //横屏1
                         case 3:
                             pPos->ypox[i] = ((uint16_t)(buf[0]&0X0F)<<8)+buf[1];
                             pPos->xpox[i] = 480-(((uint16_t)(buf[2]&0X0F)<<8)+buf[3]);
                             break;
                     }
                     UI::set_counter_value(i);
-                    UI::set_button1_value(pPos->xpox[i]);
-                    UI::set_button2_value(pPos->ypox[i]);
+                    UI::set_x1_value(pPos->xpox[i]);
+                    UI::set_y1_value(pPos->ypox[i]);
 //                    printf("x[%d]:%d,y[%d]:%d\r\n",i,pPos->xpox[i],i,pPos->ypox[i]);
                 }
             }

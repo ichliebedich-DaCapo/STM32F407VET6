@@ -41,8 +41,8 @@ extern "C" {
 
 #define PANNEL_ID                0x11
 
-// MATCH VALUE LIST
 
+// MATCH VALUE LIST
 
 uint8_t touch_init( void );
 static void touch_delay_us(uint32_t us);
