@@ -1,73 +1,95 @@
 //
-// Created by 34753 on 2024/9/22.
+// Created by fairy on 2024/9/22.
 //
-
+#pragma once
 #ifndef FURINA_KEY_HPP
 #define FURINA_KEY_HPP
-
 #include <cstdint>
 #include <project_config.h>
 
+constexpr uint8_t KEY_STATE_NONE =0x0;// 无状态,无需使用
+constexpr uint8_t KEY_STATE_TWO =0x2;
+constexpr uint8_t KEY_STATE_THREE =0x3;
+constexpr uint8_t KEY_STATE_FOUR =0x4;
 
-#define KEY_STATE_NONE 0x0  // 无状态,无需使用
-#define KEY_STATE_TWO 0x2   // 存储两个状态
-#define KEY_STATE_THREE 0x3 // 存储三个状态
-#define KEY_STATE_FOUR 0x4  // 存储四个状态
+constexpr uint8_t keyK0 = 0x0;
+constexpr uint8_t keyK1 = 0x1;
+constexpr uint8_t keyK2 = 0x2;
+constexpr uint8_t keyK3 = 0x3;
+constexpr uint8_t keyK4 = 0x4;
+constexpr uint8_t keyK5 = 0x5;
+constexpr uint8_t keyK6 = 0x6;
+constexpr uint8_t keyK7 = 0x7;
+constexpr uint8_t keyK8 = 0x8;
+constexpr uint8_t keyK9 = 0x9;
+constexpr uint8_t keyKA = 0xA;
+constexpr uint8_t keyKB = 0xB;
+constexpr uint8_t keyKC = 0xC;
+constexpr uint8_t keyKD = 0xD;
+constexpr uint8_t keyKE = 0xE;
+constexpr uint8_t keyKF = 0xF;
 
-#define keyk0 0x0
-#define keyk1 0x1
-#define keyk2 0x2
-#define keyk3 0x3
-#define keyk4 0x4
-#define keyk5 0x5
-#define keyk6 0x6
-#define keyk7 0x7
-#define keyk8 0x8
-#define keyk9 0x9
-#define keykA 0xA
-#define keykB 0xB
-#define keykC 0xC
-#define keykD 0xD
-#define keykE 0xE
-#define keykF 0xF
+extern void key_handler();// 按键处理函数
 
-/**
- * @brief 按键类
- * @details 适配于矩阵键盘(16个键)
- * @note    先设计一个简单的短按判断，后面再说
- *          构想：
- *              按键中断（外部中断）设为双边沿触发。当按下按键时，先由下降沿触发，此时由外部中断释放信号量，按键任务接收到了信号量并记录时刻，然后每次阻塞50ms，持续4次。
- *          当松开按键时，由上升沿触发，此时由外部中断释放信号量，按键任务接收到了信号量并记录时刻。若200ms内接受到了上升沿触发得到的信号量，那么就判断为短按。如果超过200ms，
- *          那么之后每100ms判断1次长按
- */
 
-class Key
-{
+class Key {
 public:
-    static auto setCode(uint8_t keycode) { code = keycode; }
 
-    [[nodiscard]] static auto getCode() { return code; }// 获取键值
+    // 平台适配接口（通过模板参数注入）
+    template<typename Adapter>
+    class Core {
+    public:
+        // 状态处理（保持原有位操作逻辑）
+        static uint8_t handle_state(uint8_t max_states) {
+            const uint8_t shift = current_code_ <<1;
+            uint8_t state = (states_ >> shift) & 0x03;
+            state = (state + 1) % max_states;
+            states_ = (states_ & ~(0x03 << shift)) | (state << shift);
+            return state;
+        }
 
-    [[nodiscard]] static auto getState(uint8_t keycode) { return state & (0x3 << keycode * 2); }// 获取键位状态
+        // 中断服务例程入口,传入按键编码
+        static inline void isr_entry(uint8_t code) {
+            current_code_ = code;
+            Adapter::notify_from_isr();
+        }
 
-#ifndef FreeRTOS_ENABLE
-    static auto setSign()->void { sign = 0xFF; }// 设置标志，表明已读取
-    static auto handler()->  void;// 反正都是阻塞式等待，也就无所谓多一步取反
-#endif// FreeRTOS_ENABLE
-    static auto resetState(uint8_t keycode) { state &= ~(0x3 << (keycode * 2));  /*清除指定键位的状态*/}
+        // 主循环处理
+        static inline void poll() {
+            if (Adapter::acquire()) {
+               key_handler();
+            }
+        }
 
-    static uint8_t stateHandler(uint8_t maxKeyStates);
-    static auto init()->void;// 手动初始化，因为CCMRAM不会在定义时初始化变量
+        static inline uint8_t& getCode(){return current_code_;}
 
-    // 私有成员变量
-private:
-    static inline uint32_t state=0;// 按键状态,使用掩码操作，给每个按键分配两个位，用于存储最多4个状态.不知道什么原因，不能放入CCMRAM中，否则无法正常使用
-    CCMRAM_VAR static inline uint8_t code;// 当前键值
-#ifndef FreeRTOS_ENABLE
-    CCMRAM_VAR static inline uint8_t sign;// 标志
-#endif// FreeRTOS_ENABLE
+
+        template<void (*key_init)(void)>
+        static inline void init()
+        {
+            key_init();
+            Adapter::init();
+        }
+
+    private:
+        static inline uint32_t states_ = 0;
+        static inline uint8_t current_code_ = 0;
+    };
 };
 
+
+// 平台适配层空实现（供用户特化）
+template<typename T>
+struct KeyAdapter {
+    // 通知信号，裸机下设置标志，RTOS下释放信号量
+    static void notify_from_isr() {}
+
+    // 获取信号，裸机下等待标志，RTOS下等待信号量
+    static bool acquire() { return false; }
+
+    // 初始化
+    static void init() {}
+};
 
 
 #endif //FURINA_KEY_HPP

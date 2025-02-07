@@ -10,20 +10,6 @@
 #cmakedefine FREERTOS_DEBUG
 #cmakedefine LTO_ENABLE
 
-// ----------与头文件包含有关----------
-#ifdef __cplusplus
-// C++头文件
-#ifdef GUI_ENABLE
-#include "GUI.hpp"
-#endif
-
-#else
-// C头文件
-#ifdef FreeRTOS_ENABLE
-#include "cmsis_os2.h"
-#endif
-
-#endif // __cplusplus
 
 
 // -------------与gcc扩展有关--------------

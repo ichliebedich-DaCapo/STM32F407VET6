@@ -1,3 +1,5 @@
+# Middleware层存在的目的是为了提供给Adapter层作适配
+
 # 设置中间件子目录
 set(DATA_DIR ${MIDDLEWARE_DIR}/Data)
 set(ARM_MATH_DIR ${MIDDLEWARE_DIR}/ARM_MATH)
@@ -39,13 +41,14 @@ set(LVGL_INC_DIRS
 
 
 # ------FreeRTOS库------
-# 不愧是CubeMX生成的库，和HAL耦合得太严重了
 file(GLOB_RECURSE FREERTOS_SRCS
         "${FREERTOS_DIR}/Source/*.c"
         "${FREERTOS_DIR}/Source/CMSIS_RTOS_V2/cmsis_os2.c"
         "${FREERTOS_DIR}/Source/portable/GCC/ARM_CM4F/port.c"
 )
+# FreeRTOS依赖于CMSIS，而CMSIS部分依赖于HAL，所以引入BSP目录
 set(FREERTOS_INC_DIRS
+        ${BSP_INC_DIRS}
         ${FREERTOS_DIR}
         ${FREERTOS_DIR}/Source/include
         ${FREERTOS_DIR}/Source/CMSIS_RTOS_V2
@@ -88,7 +91,7 @@ if (GUI_ENABLE)
     message(STATUS "[GUI]:ON")
 
     add_library(liblvgl STATIC ${LVGL_SRCS})
-    target_include_directories(liblvgl PUBLIC ${LVGL_DIR})
+    target_include_directories(liblvgl PUBLIC ${LVGL_INC_DIRS})
     set_target_properties(liblvgl PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 else ()
     message(STATUS "[GUI]:OFF")
@@ -110,11 +113,3 @@ endif ()
 
 
 
-# ------合并后的库------
-# 使用 OBJECT 库来避免重复编译
-add_library(MiddlewareObjects OBJECT ${MIDDLEWARE_SRCS})
-
-# 创建合并库
-add_library(libmiddleware STATIC $<TARGET_OBJECTS:MiddlewareObjects>)
-target_include_directories(libmiddleware PUBLIC ${MIDDLEWARE_INC_DIRS})
-set_target_properties(libmiddleware PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})

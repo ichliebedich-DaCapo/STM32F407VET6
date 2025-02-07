@@ -18,6 +18,7 @@ endif ()
 set(ADDED_COMPONENTS "" CACHE INTERNAL "List of added components")
 set(BSP_SRCS "" CACHE INTERNAL "List of BSP source files")
 set(BSP_INC_DIRS "${DRIVERS_INC_DIRS}" CACHE INTERNAL "List of BSP header dirs")
+#message(STATUS "BSP:${BSP_INC_DIRS}")
 
 
 # 递归解析依赖

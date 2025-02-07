@@ -5,6 +5,9 @@ set(SYSCALL_DIR ${CORE_DIR}/syscall)
 set(SYSTEM_DIR ${CORE_DIR}/system)
 # 设置system子目录
 set(STARTUP_DIR ${SYSTEM_DIR}/startup)
+# 设置Drivers
+set(DRIVERS_DIR ${CORE_DIR}/Drivers)
+set(CMSIS_DIR ${DRIVERS_DIR}/CMSIS)
 
 # -----------------------系统调用和启动文件-----------------------
 file(GLOB_RECURSE SYSCALL_SRCS "${SYSCALL_DIR}/*.c")

@@ -3,9 +3,7 @@
 //
 #include "baseInit.h"
 #include "stm32f4xx_hal.h"
-#include "lcd.h"
 #include "fsmc.h"
-#include "key_exit.h"
 
 #include "CPU_RunTime.h"
 #include "RCC.h"
@@ -27,18 +25,20 @@ void BaseInit()
     SystemClock_DefaultConfig();// 系统时钟初始化
 
     // 开启FreeRTOS的运行时统计信息
-#if FREERTOS_DEBUG && defined(FREERTOS_ENABLE)
+#if defined(FREERTOS_DEBUG)  && defined(FREERTOS_ENABLE)
     ConfigureTimerForRunTimeStats();
 #endif
 
     fsmc_init();
-    lcd_init();// 初始化LCD
-    key_exti_init();
-
 
 #ifdef USE_FSMC_DMA
     fsmc_dma_init();// 初始化FSMC+DMA
 #endif
+
+
+#ifdef FREERTOS_ENABLE
+    osKernelInitialize();// FreeRTOS内核初始化
+#endif// FREERTOS_ENABLE
 }
 
 

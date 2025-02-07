@@ -14,24 +14,17 @@
   </component>
   <component name="CMakeRunConfigurationManager">
     <generated>
+      <config projectName="Furina" targetName="libalgorithm" />
       <config projectName="Furina" targetName="libdata" />
       <config projectName="Furina" targetName="libfreertos" />
       <config projectName="Furina" targetName="liblvgl" />
       <config projectName="Furina" targetName="libmodule" />
       <config projectName="Furina" targetName="libdrivers" />
-      <config projectName="Furina" targetName="AdapterObjects" />
-      <config projectName="Furina" targetName="libgui" />
-      <config projectName="Furina" targetName="libmiddleware" />
-      <config projectName="Furina" targetName="libalgorithm" />
-      <config projectName="Furina" targetName="libadapter" />
       <config projectName="Furina" targetName="Furina.elf" />
       <config projectName="Furina" targetName="libbsp" />
-      <config projectName="Furina" targetName="libui" />
       <config projectName="Furina" targetName="libapp" />
       <config projectName="Furina" targetName="libdsp" />
-      <config projectName="Furina" targetName="MiddlewareObjects" />
-      <config projectName="Furina" targetName="ProjectsObjects" />
-      <config projectName="Furina" targetName="libprojects" />
+      <config projectName="Furina" targetName="libgui" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -40,20 +33,27 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】准备以静态库方式链接">
-      <change afterPath="$PROJECT_DIR$/cmake/structure/core.cmake" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】调整了项目分层，Core分离为Drivers和System">
+      <change afterPath="$PROJECT_DIR$/Projects/shared/key_rtos_adapter.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Base/GUI.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Base/GUI.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/inc/key.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/inc/key.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/src/key.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/src/key.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/bsp_drivers.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/bsp_drivers.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/core.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/cmsis_hal.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/baseInit.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/baseInit.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docs/help/bsp.md" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/help/bsp.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/Data/waveData.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Data/waveData.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/thinking/ZQ/Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/thinking/ZQ/Log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/adapter.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/adapter.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/algorithm.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/algorithm.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/bsp.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/bsp.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/projects.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/projects.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/ISR.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/project_config.h.in" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/project_config.h.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/structure/adapter.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/adapter.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/structure/algorithm.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/algorithm.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/structure/bsp.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/bsp.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/structure/core.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/core.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/structure/middleware.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/middleware.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/structure/projects.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/projects.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1726,47 +1726,12 @@
     <option name="rtosType" value="FreeRTOS" />
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
-    <configuration name="AdapterObjects" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="AdapterObjects" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MiddlewareObjects" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="MiddlewareObjects" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ProjectsObjects" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="ProjectsObjects" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="libadapter" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libadapter" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="libalgorithm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libalgorithm" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="libmiddleware" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libmiddleware" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="libprojects" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libprojects" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="libui" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libui" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
+    <configuration name="static_lib" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libapp" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -1788,14 +1753,7 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="CMake 应用程序.AdapterObjects" />
-      <item itemvalue="CMake 应用程序.libadapter" />
-      <item itemvalue="CMake 应用程序.libalgorithm" />
-      <item itemvalue="CMake 应用程序.libmiddleware" />
-      <item itemvalue="CMake 应用程序.MiddlewareObjects" />
-      <item itemvalue="CMake 应用程序.libprojects" />
-      <item itemvalue="CMake 应用程序.libui" />
-      <item itemvalue="CMake 应用程序.ProjectsObjects" />
+      <item itemvalue="CMake 应用程序.static_lib" />
       <item itemvalue="OpenOCD 下载并运行.OCD Furina" />
     </list>
   </component>
@@ -2038,15 +1996,7 @@
       <workItem from="1738671960184" duration="13674000" />
       <workItem from="1738727453857" duration="31195000" />
       <workItem from="1738809856086" duration="38747000" />
-      <workItem from="1738901212863" duration="4995000" />
-    </task>
-    <task id="LOCAL-00070" summary="略微调整了flash_storage模块的编写">
-      <option name="closed" value="true" />
-      <created>1734680719286</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1734680719286</updated>
+      <workItem from="1738901212863" duration="25046000" />
     </task>
     <task id="LOCAL-00071" summary="略微完善了flash_storage模块，并编写了测试案例">
       <option name="closed" value="true" />
@@ -2432,7 +2382,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738904117181</updated>
     </task>
-    <option name="localTasksCounter" value="119" />
+    <task id="LOCAL-00119" summary="【工程重构】调整了项目分层，Core分离为Drivers和System">
+      <option name="closed" value="true" />
+      <created>1738906356893</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1738906356893</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2467,7 +2425,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】补充了GUI线程" />
     <MESSAGE value="【驱动开发】添加了硬件随机数生成驱动" />
     <MESSAGE value="【驱动开发】添加显示CPU温度模块，同时找到了Label显示含浮点数的格式字符串只显示f的原因" />
     <MESSAGE value="【驱动开发】添加了超频的接口" />
@@ -2492,7 +2449,8 @@
     <MESSAGE value="【工程重构】添加了LTO优化配置项，并解决了缺失系统调用的问题，为此引入了used扩展" />
     <MESSAGE value="【工程重构】开启了内联警告。GUI层打算先使用元编程+CRTP的模式实现链式调用，之后再尝试解析器、脚本化开发什么的。" />
     <MESSAGE value="【工程重构】准备以静态库方式链接" />
-    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】准备以静态库方式链接" />
+    <MESSAGE value="【工程重构】调整了项目分层，Core分离为Drivers和System" />
+    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】调整了项目分层，Core分离为Drivers和System" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

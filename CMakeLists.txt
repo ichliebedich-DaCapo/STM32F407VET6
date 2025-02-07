@@ -37,9 +37,9 @@ add_executable(${PROJECT_NAME}.elf ${SOURCES})
 
 # 导入模块
 if (STATIC_LIB_LD)
-    #    target_sources(libapp PUBLIC
-    #            FILE_SET CXX_MODULES FILES
-    #            ${cxx_modules})
+        target_sources(libalgorithm PUBLIC
+                FILE_SET CXX_MODULES FILES
+                ${cxx_modules})
 else ()
     target_sources(${PROJECT_NAME}.elf PUBLIC
             FILE_SET CXX_MODULES FILES
@@ -49,7 +49,7 @@ endif ()
 
 # 是否链接静态库
 if (STATIC_LIB_LD)
-    target_link_libraries(${PROJECT_NAME}.elf PRIVATE libbsp libmiddleware libalgorithm libprojects libadapter)
+    target_link_libraries(${PROJECT_NAME}.elf PRIVATE libapp)
     set_target_properties(${PROJECT_NAME}.elf PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
 endif ()
 

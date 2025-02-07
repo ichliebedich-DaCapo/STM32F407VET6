@@ -3,14 +3,22 @@ set(AI_DIR ${ADAPTER_DIR}/AI)
 
 # -------------------GUI库-------------------
 file(GLOB_RECURSE GUI_SRCS
+        # GUI组件
         "${GUI_DIR}/Base/*.cpp"
         "${GUI_DIR}/Component/src/*.cpp"
         "${GUI_DIR}/Render/*.cpp"
+        # GUI衍生物
+        "${UI_DIR}/*.cpp"
+        "${UI_DIR}/*.c"
 )
+message(STATUS "GUI_SRCS:${GUI_SRCS}")
 set(GUI_INC_DIRS
+        # GUI组件
         ${GUI_DIR}/Base
         ${GUI_DIR}/Component/inc
         ${GUI_DIR}/Render
+        # GUI衍生物
+        ${UI_DIR}
 )
 
 # ----------------AI库----------------
@@ -19,13 +27,9 @@ set(AI_INC_DIRS ${AI_DIR}/${APP_DIR_LAST_PART}/App ${AI_DIR}/${APP_DIR_LAST_PART
 
 
 # ----------------------Adapter层------------------------
-set(ADAPTER_INC_DIRS
+set(ADAPTER_INC_DIRS )
 
-)
-
-set(ADAPTER_SRCS
-
-)
+set(ADAPTER_SRCS )
 
 # -------控制GUI的编译------
 if (GUI_ENABLE)
@@ -35,10 +39,11 @@ if (GUI_ENABLE)
     add_library(libgui STATIC ${GUI_SRCS})
     target_include_directories(libgui PUBLIC ${GUI_INC_DIRS})
     # 依赖lvgl库
-    target_link_libraries(libgui PRIVATE liblvgl libbsp)
+    target_link_libraries(libgui PUBLIC liblvgl libbsp)
     # 设置静态库的输出目录
     set_target_properties(libgui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 endif ()
+
 
 # -------控制AI的编译------
 if (AI_ENABLE)
@@ -54,13 +59,3 @@ if (AI_ENABLE)
     set_target_properties(libai PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 endif ()
 
-# -----------------合并后的库---------------
-if(ADAPTER_SRCS)
-# 使用 OBJECT 库来避免重复编译
-add_library(AdapterObjects OBJECT ${ADAPTER_SRCS})
-
-# 创建合并库
-add_library(libadapter STATIC $<TARGET_OBJECTS:AdapterObjects>)
-target_include_directories(libadapter PUBLIC ${ADAPTER_INC_DIRS})
-set_target_properties(libadapter PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
-endif ()

@@ -15,18 +15,18 @@
 #include <bsp_config.h>
 #include "timer.h"
 #include "adc.h"
-#include "key.hpp"
+#include "key_rtos_adapter.hpp"
 #include "usart.h"
 
 #ifdef GUI_ENABLE
 #include "GUI.hpp"
 #endif
-
-#include "fsmc.h"
 #ifdef FreeRTOS_ENABLE
 #include "cmsis_os2.h"
-extern osSemaphoreId_t keySemHandle;
 #endif
+#include "fsmc.h"
+
+
 
 #define KEY_RAM (*((volatile unsigned short *)0x6006000C)) // 键盘接口地址
 //extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
@@ -88,13 +88,7 @@ extern "C" {
 void EXTI0_IRQHandler()
 {
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_0);
-    Key::setCode(KEY_RAM & 0xF);//获取键值
-#ifdef FreeRTOS_ENABLE
-    /*释放信号量*/
-    osSemaphoreRelease(keySemHandle);
-#else
-    Key::setSign();
-#endif
+    PlatformKey ::isr_entry(KEY_RAM & 0xF);//获取键值
 }
 
 
@@ -119,7 +113,7 @@ void DMA2_Stream6_IRQHandler(void)
 //            /* Process Unlocked */
 //            __HAL_UNLOCK(&hdma_memtomem_dma2_stream6);// 不能少
 //        }
-//#ifndef GUI_DISABLE
+//#ifndef GUI_ENABLE
 //      GUI::display_flush_ready();
 //#endif
 //    }

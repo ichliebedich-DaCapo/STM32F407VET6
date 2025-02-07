@@ -12,6 +12,10 @@ target_include_directories(libalgorithm PUBLIC ${ALGORITHM_INC_DIRS})
 set_target_properties(libalgorithm PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
+if(FREERTOS_ENABLE)
+    target_link_libraries(libalgorithm PUBLIC libfreertos)
+endif ()
+
 
 
 # -------------------module特性-----------------------
