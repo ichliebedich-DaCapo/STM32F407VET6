@@ -3,6 +3,7 @@
 //
 #include "touch.h"
 #include "i2c.h"
+#include "delay.h"
 #include "stm32f4xx_hal.h"
 
 
@@ -50,7 +51,7 @@ uint8_t touch_init( void )
     HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
     ft6336_rest();
-    HAL_Delay( 50);
+
 
     if(!ft6336_RdReg(FT_ID_G_FOCALTECH_ID,&id, 1))
     {
@@ -71,9 +72,11 @@ uint8_t touch_init( void )
 static void ft6336_rest( void )
 {
     FT_RST_L;
-    touch_delay_us( 10 );
+//    touch_delay_us( 10 );
+    delay_us(10);
     FT_RST_H;
-    touch_delay_us( 50000 );
+//    touch_delay_us( 50000 );
+    delay_us( 50000);
 }
 
 uint8_t ft6336_WeReg( uint16_t regAdd, uint8_t *pData, uint16_t Size )

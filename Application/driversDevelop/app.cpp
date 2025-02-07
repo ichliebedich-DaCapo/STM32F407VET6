@@ -14,6 +14,7 @@
 #include "lcd.h"
 #include "ui.hpp"
 #include "touch.h"
+#include "delay.h"
 #ifndef GUI_DISABLE
 #include "GUI.hpp"
 #endif
@@ -53,6 +54,7 @@ void app_init()
     adc1_temperature_sensor_init();
     RNG_Init();
     ITM_Init();
+    delay_Init();
     usr_touchInit();
 }
 
@@ -70,11 +72,10 @@ void key_handler()
 //                for(uint16_t i=20;i<200;i++)LCD_Set_Pixel(i,100,0x0000);
 //                for(uint16_t i=30;i<100;i++)LCD_Set_Pixel(i,200,0x0000);
 //                for(uint16_t i=40;i<50;i++)LCD_Set_Pixel(i,250,0x0000);
-//                while (1)
-//                {
+
 //                    usr_ScanTouchProcess(&touch);
 ////                    HAL_Delay(10);
-//                }
+
 
 
                 ft6336_RdReg(FT_REG_NUM_FINGER, &point_number, 1);
@@ -109,8 +110,15 @@ void key_handler()
 
 //                ft6336_RdReg((FT_ID<<1)|0x01,&test_id, 1);
 //                FT_ID++;
-                ft6336_RdReg(0xA8,&test_id, 1);
-                write_addr++;
+
+//                ft6336_RdReg(0xA8,&test_id, 1);
+//                __BKPT(0);
+
+
+                __BKPT(0);
+
+//                write_addr++;
+
 
             }
             break;
@@ -121,8 +129,11 @@ void key_handler()
             break;
 
         case keyk3:
-            LCD_Clear(0x4242); // 填充颜色 0x4242
-            break;
+//            LCD_Clear(0x4242); // 填充颜色 0x4242
+//            ft6336_WeReg(write_addr,&write_dat,1);
+//            ft6336_RdReg(write_addr,&test_id, 1);
+//            write_addr++;
+//            break;
 
         case keyk4:
             LCD_Clear(0x1234); // 填充颜色 0x1234
@@ -196,25 +207,22 @@ void background_handler()
     {
         printf("%f\r\n", get_adc1_temperature());
 
+
     }
 
-//    ft6336_RdReg(FT_REG_NUM_FINGER, &point_number, 1);
-//
-//    ft6336_RdReg(touch_press_reg[0], touch_pos_buf1, 4);
-//    //竖屏
-////                UI::set_button1_value(((uint16_t)(touch_pos_buf1[0]&0X0F)<<8)+touch_pos_buf1[1]);
-////                UI::set_button2_value(((uint16_t)(touch_pos_buf1[2]&0X0F)<<8)+touch_pos_buf1[3]);
-//    //横屏
-//    UI::set_x1_value(480 - (((uint16_t) (touch_pos_buf1[2] & 0X0F) << 8) + touch_pos_buf1[3]));
-//    UI::set_y1_value(((uint16_t) (touch_pos_buf1[0] & 0X0F) << 8) + touch_pos_buf1[1]);
-//
-//    ft6336_RdReg(touch_press_reg[1], touch_pos_buf2, 4);
-//    //竖屏
-////                UI::set_button1_value(((uint16_t)(touch_pos_buf1[0]&0X0F)<<8)+touch_pos_buf1[1]);
-////                UI::set_button2_value(((uint16_t)(touch_pos_buf1[2]&0X0F)<<8)+touch_pos_buf1[3]);
-//    //横屏
-//    UI::set_x2_value(480 - (((uint16_t) (touch_pos_buf2[2] & 0X0F) << 8) + touch_pos_buf2[3]));
-//    UI::set_y2_value(((uint16_t) (touch_pos_buf2[0] & 0X0F) << 8) + touch_pos_buf2[1]);
+    ft6336_RdReg(FT_REG_NUM_FINGER, &point_number, 1);
+
+    ft6336_RdReg(touch_press_reg[0], touch_pos_buf1, 4);
+    //横屏
+    UI::set_x1_value(480 - (((uint16_t) (touch_pos_buf1[2] & 0X0F) << 8) + touch_pos_buf1[3]));
+    UI::set_y1_value(((uint16_t) (touch_pos_buf1[0] & 0X0F) << 8) + touch_pos_buf1[1]);
+
+    ft6336_RdReg(touch_press_reg[1], touch_pos_buf2, 4);
+    //横屏
+    UI::set_x2_value(480 - (((uint16_t) (touch_pos_buf2[2] & 0X0F) << 8) + touch_pos_buf2[3]));
+    UI::set_y2_value(((uint16_t) (touch_pos_buf2[0] & 0X0F) << 8) + touch_pos_buf2[1]);
+
+    delay_us(30000);
 
 //    CPU::print<get_adc1_temperature>();
 }
