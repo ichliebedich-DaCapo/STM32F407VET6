@@ -21,4 +21,5 @@ set(STATIC_LIB_LD OFF CACHE INTERNAL "Independent static library link option")
 # 开启静态库链接
 macro(options_enable_static_lib_ld)
     set(STATIC_LIB_LD ON CACHE INTERNAL "Independent static library link option")
+    message(STATUS "[STATIC LIB]:ON")
 endmacro()

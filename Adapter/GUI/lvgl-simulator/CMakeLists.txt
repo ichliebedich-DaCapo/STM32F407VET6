@@ -4,8 +4,9 @@ include(common_functions.cmake)
 
 # ------------------------ 配置选项 ------------------------
 set(PROJECT_DIR ../../../Projects/driversDevelop)  # 项目选择
-options_enable_static_lib_ld()
-
+#options_enable_static_lib_ld()
+# 引入命名空间后，这该死的静态库链接容易出问题
+message(WARNING "static_lib_ld has some problems!")
 # ------------------------ 路径配置 ------------------------
 # 基础路径
 set(PROJECT_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/..")
@@ -64,10 +65,11 @@ set(GUI_INC_DIRS
         "${PROJECT_ROOT_DIR}/Component/inc")
 find_sources(GUI_COMPONENTS
         "${PROJECT_ROOT_DIR}/Component/src"
+
         "${PROJECT_ROOT_DIR}/Base"
         "${UI_DIR}"
 )
-set(GUI_SRCS ${GUI_COMPONENTS} "test.cpp")
+set(GUI_SRCS ${GUI_COMPONENTS} "test.cpp" "${PROJECT_ROOT_DIR}/Component/inspiration.cpp")
 add_library(gui STATIC ${GUI_SRCS})
 target_include_directories(gui PUBLIC ${GUI_INC_DIRS})
 target_link_libraries(gui PUBLIC lvgl render drivers)

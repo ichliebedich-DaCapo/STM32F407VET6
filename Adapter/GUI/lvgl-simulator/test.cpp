@@ -3,10 +3,8 @@
  *  @note 本文件一是为了能加载出UI这个文件夹，二为测试，给模拟器开一些“洞”，以更自由地测试。
  */
 
-
 #include <cmath>
 #include <unistd.h>
-#include "lvgl.h"
 #include "GUI.hpp"
 #include "ui.hpp"
 #include "simulator.hpp"
@@ -18,8 +16,9 @@
 #include <functional>
 #include <utility>
 
+// 去他妈的宏
 #undef main
-
+#undef interface
 
 class KeyboardInput
 {
@@ -75,13 +74,13 @@ int keyboard_thread(void *data)
     keyboard.addKeyCheck('A', []()
     {
         std::cout << "A pressed" << std::endl;
-        UI::pressA();
+        gui::interface::pressA();
     });
 
     keyboard.addKeyCheck('S', []()
     {
         std::cout << "S pressed" << std::endl;
-        UI::pressS();
+        gui::interface::pressS();
     });
 
     keyboard.addKeyCheck('D', []()

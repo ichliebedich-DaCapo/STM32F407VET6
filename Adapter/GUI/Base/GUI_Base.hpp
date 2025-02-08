@@ -21,15 +21,40 @@
 #include "anim.hpp"
 #include "CPU.hpp"
 
-class GUI_Base
+
+namespace gui
 {
-public:
-    static void screen_init();// 默认父对象为gui.main.screen
-    static void events_init();
-};
+    // 初始化相关
+    namespace init
+    {
+        void screen();// 初始化界面，需要用户实现
+        void events();// 初始化事件，需要用户实现
+    }
 
 
+    // 控件定义
+    namespace widgets
+    {
+        // 主屏幕
+        namespace main
+        {
+            extern Component scr;// 主屏幕，由于会与init里的screen函数重名，所以就简化了名称
+        }
 
+        // 占个位置
+        namespace others
+        {
+
+        }
+    }
+
+
+    // 自己定义各种对外接口，用于app里调用驱动时可以实时更新画面
+    namespace interface
+    {
+
+    }
+}
 
 
 
