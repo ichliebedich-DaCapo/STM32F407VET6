@@ -33,10 +33,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】部分优化了CMakeLists">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】整理并优化了模拟器的CMakeLists">
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/common_functions.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/common_functions.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1980,15 +1978,7 @@
       <workItem from="1738727453857" duration="31195000" />
       <workItem from="1738809856086" duration="38747000" />
       <workItem from="1738901212863" duration="25046000" />
-      <workItem from="1738980913369" duration="5036000" />
-    </task>
-    <task id="LOCAL-00073" summary="语音存储与回放可以使用，接下来只要添加各种逻辑即可">
-      <option name="closed" value="true" />
-      <created>1734774212737</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1734774212737</updated>
+      <workItem from="1738980913369" duration="5674000" />
     </task>
     <task id="LOCAL-00074" summary="【语音存储与回放】完善了播放速度等逻辑">
       <option name="closed" value="true" />
@@ -2374,7 +2364,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738992654563</updated>
     </task>
-    <option name="localTasksCounter" value="122" />
+    <task id="LOCAL-00122" summary="【工程重构】整理并优化了模拟器的CMakeLists">
+      <option name="closed" value="true" />
+      <created>1738994805156</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1738994805156</updated>
+    </task>
+    <option name="localTasksCounter" value="123" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2409,7 +2407,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】添加了超频的接口" />
     <MESSAGE value="【驱动开发】添加了ITM串口打印功能" />
     <MESSAGE value="钟爱" />
     <MESSAGE value="逆鳞" />
@@ -2434,7 +2431,8 @@
     <MESSAGE value="【工程重构】调整了项目分层，Core分离为Drivers和System" />
     <MESSAGE value="【工程重构】修复了模拟器，但CMakeLists并未优化" />
     <MESSAGE value="【工程重构】部分优化了CMakeLists" />
-    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】部分优化了CMakeLists" />
+    <MESSAGE value="【工程重构】整理并优化了模拟器的CMakeLists" />
+    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】整理并优化了模拟器的CMakeLists" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

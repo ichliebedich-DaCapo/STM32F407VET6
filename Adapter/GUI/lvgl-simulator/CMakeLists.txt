@@ -106,3 +106,5 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
 if (CMAKE_TOOLCHAIN_FILE)
     message(STATUS "Using toolchain file: ${CMAKE_TOOLCHAIN_FILE}")
 endif ()
+
+# 因为32位编译比64位快，所以没有使用64位编译工具链
