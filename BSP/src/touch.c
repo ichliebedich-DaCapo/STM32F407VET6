@@ -21,8 +21,6 @@ PB6     ------> CTP_INT
 #define FT_RST_L     HAL_GPIO_WritePin(TOUCH_RST_GPIO_Port, TOUCH_RST_Pin, GPIO_PIN_RESET)
 #define FT_RST_H     HAL_GPIO_WritePin(TOUCH_RST_GPIO_Port, TOUCH_RST_Pin, GPIO_PIN_SET)
 
-uint8_t id2;
-
 //
 //触摸初始化函数（驱动芯片FT6336U）（返回1成功返回0失败）
 uint8_t touch_init( void )
@@ -57,9 +55,6 @@ uint8_t touch_init( void )
     {
         return FT_FALSE1;//I2C通信故障
     }
-//    ft6336_RdReg(FT_ID_G_FOCALTECH_ID,&id, 1);
-//    id2=id;
-//    return id2;
     if(id != PANNEL_ID)
     {
         return FT_FALSE2;//寄存器值不匹配
@@ -97,15 +92,29 @@ uint8_t ft6336_RdReg( uint16_t regAdd, uint8_t *pData, uint16_t Size )
     return (status == HAL_OK) ? FT6336_OK : FT6336_ERROR;
 }
 
-
-
-static void touch_delay_us(uint32_t us)
+int32_t touch_read_single_point(int32_t *last_x, int32_t *last_y)
 {
-    uint32_t i=0;
+    uint8_t point_number;
+    uint8_t touch_pos_buf[4];
 
-    while(us--){
-        for(i=0;i<1000;i++);
+    // 读取触摸点的数量
+    ft6336_RdReg(FT_REG_NUM_FINGER, &point_number, 1);
+
+    // 如果没有触摸点，返回0
+    if (point_number == 0) {
+        return 0;
     }
+
+    // 读取第一个触摸点的坐标
+    ft6336_RdReg(FT_TP1_REG, touch_pos_buf, 4);
+
+    // 解析触摸点的坐标 横屏
+    *last_x = 480 - (((uint16_t)(touch_pos_buf[2] & 0x0F) << 8) + touch_pos_buf[3]);
+    *last_y = ((uint16_t)(touch_pos_buf[0] & 0x0F) << 8) + touch_pos_buf[1];
+
+    // 返回1表示有触摸点
+    return 1;
 }
+
 
 

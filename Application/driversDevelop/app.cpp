@@ -200,7 +200,6 @@ void adc1_isr()
 
 float temp;
 uint32_t rand;
-
 void background_handler()
 {
     if (async_delay.is_timeout())
@@ -210,19 +209,21 @@ void background_handler()
 
     }
 
-    ft6336_RdReg(FT_REG_NUM_FINGER, &point_number, 1);
-
-    ft6336_RdReg(touch_press_reg[0], touch_pos_buf1, 4);
-    //横屏
-    UI::set_x1_value(480 - (((uint16_t) (touch_pos_buf1[2] & 0X0F) << 8) + touch_pos_buf1[3]));
-    UI::set_y1_value(((uint16_t) (touch_pos_buf1[0] & 0X0F) << 8) + touch_pos_buf1[1]);
-
-    ft6336_RdReg(touch_press_reg[1], touch_pos_buf2, 4);
-    //横屏
-    UI::set_x2_value(480 - (((uint16_t) (touch_pos_buf2[2] & 0X0F) << 8) + touch_pos_buf2[3]));
-    UI::set_y2_value(((uint16_t) (touch_pos_buf2[0] & 0X0F) << 8) + touch_pos_buf2[1]);
-
-    delay_us(30000);
+/***********测试两指代码*************/
+//    ft6336_RdReg(FT_REG_NUM_FINGER, &point_number, 1);
+//
+//    ft6336_RdReg(touch_press_reg[0], touch_pos_buf1, 4);
+//    //横屏
+//    UI::set_x1_value(480 - (((uint16_t) (touch_pos_buf1[2] & 0X0F) << 8) + touch_pos_buf1[3]));
+//    UI::set_y1_value(((uint16_t) (touch_pos_buf1[0] & 0X0F) << 8) + touch_pos_buf1[1]);
+//
+//    ft6336_RdReg(touch_press_reg[1], touch_pos_buf2, 4);
+//    //横屏
+//    UI::set_x2_value(480 - (((uint16_t) (touch_pos_buf2[2] & 0X0F) << 8) + touch_pos_buf2[3]));
+//    UI::set_y2_value(((uint16_t) (touch_pos_buf2[0] & 0X0F) << 8) + touch_pos_buf2[1]);
+//
+//    delay_us(30000);
+/*************************/
 
 //    CPU::print<get_adc1_temperature>();
 }

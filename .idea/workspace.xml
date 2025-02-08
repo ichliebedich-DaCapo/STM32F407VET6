@@ -32,14 +32,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】读取两个触摸点数据成功，但第二个触摸点无法读取左小半边数据&#10;某次测试后，未修改代码，IIC再次抽风，键盘中断和初始化全部失败，touch_isOK报2">
-      <change afterPath="$PROJECT_DIR$/BSP/inc/delay.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BSP/src/delay.c" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】增加delay.c，双指触摸功能测试成功">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Application/driversDevelop/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/touch.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/touch.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -465,15 +459,9 @@
       <workItem from="1738856545299" duration="3695000" />
       <workItem from="1738898876577" duration="8849000" />
       <workItem from="1738910105748" duration="11017000" />
-      <workItem from="1738923296661" duration="887000" />
-    </task>
-    <task id="LOCAL-00042" summary="【双音频信号发生器】已解决紊乱问题，现在尝试解决优化速率">
-      <option name="closed" value="true" />
-      <created>1730606427778</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1730606427778</updated>
+      <workItem from="1738923296661" duration="2240000" />
+      <workItem from="1738985966081" duration="2000" />
+      <workItem from="1739009555264" duration="5000" />
     </task>
     <task id="LOCAL-00043" summary="【双音频信号发生器】准备解决绘制漏墨问题">
       <option name="closed" value="true" />
@@ -859,7 +847,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738909897345</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="【驱动开发】增加delay.c，双指触摸功能测试成功">
+      <option name="closed" value="true" />
+      <created>1738925417374</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1738925417374</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -894,7 +890,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="准备融合" />
     <MESSAGE value="已经融合，可以正常编译" />
     <MESSAGE value="测试了module特性，可以正常使用" />
     <MESSAGE value="终于可以把模块的声明和实现分开了" />
@@ -919,7 +914,8 @@
     <MESSAGE value="【驱动开发】触碰点数量检测成功" />
     <MESSAGE value="【驱动开发】修正复位时序用的延时函数" />
     <MESSAGE value="【驱动开发】读取两个触摸点数据成功，但第二个触摸点无法读取左小半边数据&#10;某次测试后，未修改代码，IIC再次抽风，键盘中断和初始化全部失败，touch_isOK报2" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】读取两个触摸点数据成功，但第二个触摸点无法读取左小半边数据&#10;某次测试后，未修改代码，IIC再次抽风，键盘中断和初始化全部失败，touch_isOK报2" />
+    <MESSAGE value="【驱动开发】增加delay.c，双指触摸功能测试成功" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】增加delay.c，双指触摸功能测试成功" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

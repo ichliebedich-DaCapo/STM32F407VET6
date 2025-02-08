@@ -47,7 +47,7 @@ int main()
     Key::init();
 
 #ifndef GUI_DISABLE
-    GUI::init<lcd_flush>();
+    GUI::init<lcd_flush,touch_read_single_point>();
 
 #endif
 

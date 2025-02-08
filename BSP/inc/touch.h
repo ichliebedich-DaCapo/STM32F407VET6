@@ -45,7 +45,7 @@ extern "C" {
 // MATCH VALUE LIST
 
 uint8_t touch_init( void );
-static void touch_delay_us(uint32_t us);
+int32_t touch_read_single_point(int32_t *last_x, int32_t *last_y);
 static void  ft6336_rest( void );
 int ft6336_rd_register(uint16_t reg, uint8_t *buff, uint8_t len);
 int ft6336_rd_sigleReg(uint16_t reg, uint8_t *val );
