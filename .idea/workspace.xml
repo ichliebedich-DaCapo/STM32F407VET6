@@ -33,18 +33,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】重构了Key，引入了模板特化以适配裸机和RTOS。整理了静态库的链接关系">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】修复了模拟器，但CMakeLists并未优化">
+      <change afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/common_functions.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Base/GUI.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Base/GUI.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Render/WaveCurve.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Render/WaveCurve.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/Drivers/simulator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/Drivers/simulator.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/Drivers/simulator.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/Drivers/simulator.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docs/thinking/ZQ/Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/thinking/ZQ/Log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/arm-gcc.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/arm-gcc.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/structure/projects.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/projects.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1988,15 +1981,7 @@
       <workItem from="1738727453857" duration="31195000" />
       <workItem from="1738809856086" duration="38747000" />
       <workItem from="1738901212863" duration="25046000" />
-      <workItem from="1738980913369" duration="764000" />
-    </task>
-    <task id="LOCAL-00071" summary="略微完善了flash_storage模块，并编写了测试案例">
-      <option name="closed" value="true" />
-      <created>1734682045548</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1734682045548</updated>
+      <workItem from="1738980913369" duration="4105000" />
     </task>
     <task id="LOCAL-00072" summary="flash_storage模块测试完毕">
       <option name="closed" value="true" />
@@ -2382,7 +2367,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738906356893</updated>
     </task>
-    <option name="localTasksCounter" value="120" />
+    <task id="LOCAL-00120" summary="【工程重构】修复了模拟器，但CMakeLists并未优化">
+      <option name="closed" value="true" />
+      <created>1738982402903</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1738982402903</updated>
+    </task>
+    <option name="localTasksCounter" value="121" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2404,7 +2397,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/no_dirty_point" />
+                        <option value="ZQ" />
                       </list>
                     </value>
                   </entry>
@@ -2417,7 +2410,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】添加了硬件随机数生成驱动" />
     <MESSAGE value="【驱动开发】添加显示CPU温度模块，同时找到了Label显示含浮点数的格式字符串只显示f的原因" />
     <MESSAGE value="【驱动开发】添加了超频的接口" />
     <MESSAGE value="【驱动开发】添加了ITM串口打印功能" />
@@ -2442,7 +2434,8 @@
     <MESSAGE value="【工程重构】开启了内联警告。GUI层打算先使用元编程+CRTP的模式实现链式调用，之后再尝试解析器、脚本化开发什么的。" />
     <MESSAGE value="【工程重构】准备以静态库方式链接" />
     <MESSAGE value="【工程重构】调整了项目分层，Core分离为Drivers和System" />
-    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】调整了项目分层，Core分离为Drivers和System" />
+    <MESSAGE value="【工程重构】修复了模拟器，但CMakeLists并未优化" />
+    <option name="LAST_COMMIT_MESSAGE" value="【工程重构】修复了模拟器，但CMakeLists并未优化" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

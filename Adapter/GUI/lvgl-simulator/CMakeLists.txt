@@ -1,155 +1,120 @@
-# ----------------------------------设置你的UI路径（选择项目）------------------------------
+cmake_minimum_required(VERSION 3.10)
+project(Simulator LANGUAGES C CXX)
+include(common_functions.cmake)
+# ------------------------ 选项配置 ------------------------
+# 选择你的项目（必要的，不能修改）
 set(PROJECT_DIR ../../../Projects/driversDevelop)
-# ----------------------------------选项------------------------------
-#set(USE_STATIC_LIBRARY True)
+set(USE_STATIC_LIBRARY OFF)# 使用普通的变量定义即可，不需要使用option
 
-# ----------------------------------自动根据选项来配置------------------------------
+# ------------------------ 路径配置 ------------------------
+set(PROJECT_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/..")
+set(THIRD_PARTY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../../Middleware/Third_Party")
 
-# ----------------------------------选项------------------------------
-# 提取最后一个斜杠后的部分
+# 提取最后一个斜杠后的部分（必要的）
 string(REGEX REPLACE ".*/" "" APP "${PROJECT_DIR}")
 set(UI_DIR ${PROJECT_DIR}/ui)
-cmake_minimum_required(VERSION 3.10)
-project(Simulator C CXX)
 
-#set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=gnu++2a")
-# 定义路径
-set(PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
-set(APP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../Application)
-set(SIMULATOR_DIR ${CMAKE_CURRENT_SOURCE_DIR})
-set(BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../Base)
-set(COMPONENT_DIR ${PROJECT_SOURCE_DIR}/Component)
-set(RENDER_DIR ${PROJECT_SOURCE_DIR}/Render)
-set(DRIVERS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Drivers)
-
-# 生成的目标文件目录
-set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
-set(BIN_DIR ${BUILD_DIR}/bin)
-set(LIB_DIR ${BUILD_DIR}/lib)
-# SDL2库
-set(SDL2_INCLUDE_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/include)
-set(SDL2_BIN_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/bin)
-set(SDL2_LIB_DIR ${SIMULATOR_DIR}/SDL2/i686-w64-mingw32/lib)
+# SDL2配置
+set(SDL2_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/SDL2/i686-w64-mingw32")
+set(SDL2_INC_DIR "${SDL2_ROOT}/include")
+set(SDL2_LIB_DIR "${SDL2_ROOT}/lib")
+set(SDL2_BIN_DIR "${SDL2_ROOT}/bin")
 
 
-# 编译选项 开-O2和-O3有时候会卡死，但相同情况下真机没有问题
+# LVGL配置
+set(LVGL_DIR "${THIRD_PARTY_DIR}/LVGL")
+set(LVGL_SRC_DIR "${LVGL_DIR}/lvgl/src")
+set(LVGL_PORTING_DIR "${LVGL_DIR}/lvgl/examples/porting")
+set(LVGL_INC_DIRS "${LVGL_PORTING_DIR}" "${LVGL_DIR}/lvgl")
+
+# 项目组件路径
+set(DRIVERS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Drivers")
+set(RENDER_DIR "${PROJECT_ROOT_DIR}/Render")
+set(COMPONENT_DIR "${PROJECT_ROOT_DIR}/Component")
+set(COMPONENT_INC_DIR "${COMPONENT_DIR}/inc")
+set(COMPONENT_SRC_DIR "${COMPONENT_DIR}/src")
+set(BASE_DIR "${PROJECT_ROOT_DIR}/Base")
+
+# 输出目录
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+
+# ------------------------ 编译选项 ------------------------
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_compile_options(-O2 -g)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fconcepts")
+# 给C++添加标志
+set(${CMAKE_CXX_FLAGS} "${CMAKE_CXX_FLAGS} -fconcepts")
 
-# 添加链接选项,显示内存分布，但现在不能使用
-#add_link_options(-Wl,-gc-sections,--print-memory-usage,-Map=${BIN_DIR}/${PROJECT_NAME}.map)
-
-
-#------------------------------------------库-------------------------------------------
-set(LVGL_DIR ../../../Middleware/Third_Party/LVGL)
-set(LVGL_INC_DIRS ${LVGL_DIR}/  ${LVGL_DIR}/lvgl/src ${LVGL_DIR}/lvgl/examples/porting)
-#---------------lvgl库---------------
-file(GLOB_RECURSE LVGL_SRCS "${LVGL_DIR}/lvgl/src/*.c" "${LVGL_DIR}/lvgl/examples/porting/*.c")
-add_library(liblvgl STATIC ${LVGL_SRCS})
-target_include_directories(liblvgl PUBLIC ${LVGL_INC_DIRS})
-set_target_properties(liblvgl PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
-
-#---------------Drivers库---------------
-file(GLOB_RECURSE DRIVERS_SRCS "${DRIVERS_DIR}/*.cpp")
-add_library(libdrivers STATIC ${DRIVERS_SRCS})
-target_include_directories(libdrivers PUBLIC
-        ${DRIVERS_DIR}
-        ${LVGL_DIR}
-        ${SDL2_INCLUDE_DIR}
+# ------------------------ 库定义 ------------------------
+# LVGL库
+find_sources(LVGL_SRCS
+        "${LVGL_SRC_DIR}"
+        "${LVGL_PORTING_DIR}"
 )
-set_target_properties(libdrivers PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+add_library(lvgl STATIC ${LVGL_SRCS})
+target_include_directories(lvgl PUBLIC ${LVGL_INC_DIRS})
 
-#---------------Render库---------------
-# 渲染，即实现底层绘制算法
-file(GLOB_RECURSE RENDER_SRCS "${RENDER_DIR}/*.cpp")
-add_library(librender STATIC ${RENDER_SRCS}
-        ../Render/WaveCurve.cpp)
-target_include_directories(librender PUBLIC
-        ${RENDER_DIR}
-)
-target_link_libraries(librender PUBLIC libsimulator)
-set_target_properties(librender PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+# Drivers库
+set(DRIVERS_INC_DIRS ${DRIVERS_DIR} ${LVGL_INC_DIRS} ${SDL2_INC_DIR})
+find_sources(DRIVERS_SRCS "${DRIVERS_DIR}")
+add_library(drivers STATIC ${DRIVERS_SRCS})
+# 依赖SDL2
+target_link_libraries(drivers PUBLIC SDL2)
+target_include_directories(drivers PUBLIC ${DRIVERS_INC_DIRS})
 
 
-#---------------GUI库---------------
-file(GLOB_RECURSE COMPONENT_SRCS "${COMPONENT_DIR}/src/*.cpp" "${COMPONENT_DIR}/inspiration.cpp")
-file(GLOB_RECURSE BASE_SRCS "${BASE_DIR}/*.cpp")
-file(GLOB_RECURSE UI_SRCS "${UI_DIR}/*.cpp" "${UI_DIR}/*.c" "test.cpp")
-add_library(libgui STATIC
-        ${COMPONENT_SRCS}
-        ${BASE_SRCS}
-        ${UI_SRCS}
-)
-target_include_directories(libgui PUBLIC
-        ${UI_DIR}
-        ${BASE_DIR}
-        ${COMPONENT_DIR}
-)
-target_link_libraries(libgui PUBLIC liblvgl librender)
-# 设置静态库的输出目录
-set_target_properties(libgui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+# Render库
+set(RENDER_INC_DIRS ${RENDER_DIR})
+find_sources(RENDER_SRCS "${RENDER_DIR}")
+add_library(render STATIC ${RENDER_SRCS})
+target_include_directories(render PUBLIC ${RENDER_INC_DIRS})
 
+# GUI库
+find_sources(COMPONENT_SRCS "${COMPONENT_SRC_DIR}")
+find_sources(BASE_SRCS "${BASE_DIR}")
+find_sources(UI_SRCS "${UI_DIR}")
+set(GUI_SRCS "${COMPONENT_SRCS}" "${BASE_SRCS}" "${UI_SRCS}" "test.cpp")
+set(GUI_INC_DIRS ${UI_DIR} ${BASE_DIR} ${COMPONENT_INC_DIR})
+add_library(gui STATIC ${GUI_SRCS})
+target_include_directories(gui PUBLIC ${GUI_INC_DIRS})
+target_link_libraries(gui PUBLIC lvgl render drivers)
 
-# --------资源文件-------
-if (USE_STATIC_LIBRARY)
-    file(GLOB_RECURSE SOURCE ${SIMULATOR_DIR}/main.cpp)
-else ()
-    file(GLOB_RECURSE SOURCE
-            ${SIMULATOR_DIR}/main.cpp
-
-            # lvgl
-            ${LVGL_SRCS}
-
-            # drivers
-            ${DRIVERS_SRCS}
-
-            # GUI
-            ${RENDER_SRCS}
-            ${COMPONENT_SRCS}
-            ${BASE_SRCS}
-            ${UI_SRCS}
-    )
-    include_directories(
-            #lvgl
-            ${LVGL_INC_DIRS}
-
-            # DRIVERS
-            ${DRIVERS_DIR}
-
-            #SDL2
-            ${SDL2_INCLUDE_DIR}
-
-            # GUI
-            ${RENDER_DIR}
-
-            ${UI_DIR}
-            ${BASE_DIR}
-            ${COMPONENT_DIR}/inc
-    )
-endif ()
-
-
-# 全局设置应该链接的库的目录
-set(LIBRARIES SDL2)
+# ------------------------ 可执行文件 ------------------------
+# 主程序源文件
+set(MAIN_SRC "${CMAKE_CURRENT_SOURCE_DIR}/main.cpp")
 link_directories(${SDL2_LIB_DIR})
-
-# -----------------创建可执行文件-----------------
-add_executable(${PROJECT_NAME} ${SOURCE})
-# 动态库或者可执行文件的生成位置
-set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
-
 if (USE_STATIC_LIBRARY)
-    target_link_libraries(${PROJECT_NAME} PRIVATE libdrivers libgui ${LIBRARIES})
+    # 静态库模式：链接所有静态库
+    add_executable(${PROJECT_NAME} ${MAIN_SRC})
+    target_link_libraries(${PROJECT_NAME} PRIVATE gui)
 else ()
-    target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBRARIES})
+    # 直接编译模式：包含所有源文件
+    set(ALL_SRCS "${LVGL_SRCS}" "${DRIVERS_SRCS}" "${RENDER_SRCS}" "${GUI_SRCS}")
+
+    add_executable(${PROJECT_NAME} ${MAIN_SRC} ${ALL_SRCS})
+
+    # 包含所有头文件目录
+    target_include_directories(${PROJECT_NAME} PRIVATE
+            ${LVGL_INC_DIRS}
+            ${DRIVERS_INC_DIRS}
+            ${RENDER_INC_DIRS}
+            ${GUI_INC_DIRS}
+    )
+
+    target_link_libraries(${PROJECT_NAME} PRIVATE SDL2)
 endif ()
 
-# 使用 configure_file 只有当源文件发生变化时才会复制（在CMakelists阶段操作）
-configure_file(${SDL2_BIN_DIR}/SDL2.dll ${BIN_DIR}/SDL2.dll COPYONLY)
+# ------------------------ 后期配置 ------------------------
+# 复制SDL2动态库
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        "${SDL2_BIN_DIR}/SDL2.dll"
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>
+)
 
-
+# 工具链文件提示
 if (CMAKE_TOOLCHAIN_FILE)
     message(STATUS "Using toolchain file: ${CMAKE_TOOLCHAIN_FILE}")
 endif ()
-
