@@ -68,14 +68,10 @@ set(ALL_SRCS
         ${APP_SRCS}
 )
 
-
+# 静态库的设计思路应是不常改的给封装为库，其他文件全部添加到ALL_SRCS
 if (STATIC_LIB_LD)
     set(SOURCES ${CORE_SRCS})
     include_directories(${INC_DIR})
-    # 如果启用FreeRTOS，则需要添加FreeRTOS的头文件目录，不然无法使用RTOS
-    if (FREERTOS_ENABLE)
-        include_directories(${FREERTOS_INC_DIRS})
-    endif ()
 else ()
     # 添加公共的头文件目录、源文件
     include_directories(${ALL_INC_DIRS})

@@ -5,8 +5,9 @@
 #define FURINA_GUI_HPP
 
 #include "GUI_Base.hpp"
+#ifdef GUI_ENABLE
 #include "lcd.h"
-
+#endif
 
 
 // 宏定义

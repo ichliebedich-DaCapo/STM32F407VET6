@@ -1,14 +1,14 @@
 # ----------------------------------设置你的UI路径（选择项目）------------------------------
-set(UI_DIR ../UI/driversDevelop)
+set(PROJECT_DIR ../../../Projects/driversDevelop)
 # ----------------------------------选项------------------------------
-#set(USE_STATIC_LIBRARY True)9
+#set(USE_STATIC_LIBRARY True)
 
 # ----------------------------------自动根据选项来配置------------------------------
 
 # ----------------------------------选项------------------------------
 # 提取最后一个斜杠后的部分
-string(REGEX REPLACE ".*/" "" APP "${UI_DIR}")
-
+string(REGEX REPLACE ".*/" "" APP "${PROJECT_DIR}")
+set(UI_DIR ${PROJECT_DIR}/ui)
 cmake_minimum_required(VERSION 3.10)
 project(Simulator C CXX)
 
@@ -22,7 +22,7 @@ set(BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../Base)
 set(COMPONENT_DIR ${PROJECT_SOURCE_DIR}/Component)
 set(RENDER_DIR ${PROJECT_SOURCE_DIR}/Render)
 set(DRIVERS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Drivers)
-set(LVGL_DIR ./../../Library/Third_Party/lvgl/ ./../../Library/Third_Party/lvgl/lvgl/src ./../../Library/Third_Party/lvgl/lvgl/examples/porting)
+
 # 生成的目标文件目录
 set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
 set(BIN_DIR ${BUILD_DIR}/bin)
@@ -42,10 +42,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fconcepts")
 
 
 #------------------------------------------库-------------------------------------------
+set(LVGL_DIR ../../../Middleware/Third_Party/LVGL)
+set(LVGL_INC_DIRS ${LVGL_DIR}/  ${LVGL_DIR}/lvgl/src ${LVGL_DIR}/lvgl/examples/porting)
 #---------------lvgl库---------------
-file(GLOB_RECURSE LVGL_SRCS "./../../Library/Third_Party/lvgl/lvgl/src/*.c" "./../../Library/Third_Party/lvgl/lvgl/examples/porting/*.c")
+file(GLOB_RECURSE LVGL_SRCS "${LVGL_DIR}/lvgl/src/*.c" "${LVGL_DIR}/lvgl/examples/porting/*.c")
 add_library(liblvgl STATIC ${LVGL_SRCS})
-target_include_directories(liblvgl PUBLIC ${LVGL_DIR})
+target_include_directories(liblvgl PUBLIC ${LVGL_INC_DIRS})
 set_target_properties(liblvgl PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 #---------------Drivers库---------------
@@ -73,12 +75,11 @@ set_target_properties(librender PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 #---------------GUI库---------------
 file(GLOB_RECURSE COMPONENT_SRCS "${COMPONENT_DIR}/src/*.cpp" "${COMPONENT_DIR}/inspiration.cpp")
 file(GLOB_RECURSE BASE_SRCS "${BASE_DIR}/*.cpp")
-file(GLOB_RECURSE UI_SRCS "${UI_DIR}/*.cpp" "${UI_DIR}/*.c" "../UI/test.cpp")
+file(GLOB_RECURSE UI_SRCS "${UI_DIR}/*.cpp" "${UI_DIR}/*.c" "test.cpp")
 add_library(libgui STATIC
         ${COMPONENT_SRCS}
         ${BASE_SRCS}
         ${UI_SRCS}
-        ../UI/StorageOscilloscope/Draw_wave.cpp
 )
 target_include_directories(libgui PUBLIC
         ${UI_DIR}
@@ -111,7 +112,7 @@ else ()
     )
     include_directories(
             #lvgl
-            ${LVGL_DIR}
+            ${LVGL_INC_DIRS}
 
             # DRIVERS
             ${DRIVERS_DIR}

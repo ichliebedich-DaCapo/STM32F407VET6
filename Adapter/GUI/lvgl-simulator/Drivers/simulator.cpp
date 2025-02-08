@@ -8,11 +8,14 @@
 
 static volatile bool keep_running = true;
 
+constexpr int HOR=480;// 屏幕宽度
+constexpr int VER=320;// 屏幕高度
+
 static SDL_Window *window;
 static SDL_Renderer *renderer;
 static SDL_Texture *texture;
-static int HOR;// 屏幕宽度
-static int VER;// 屏幕高度
+
+
 
 // 屏幕显存
 static uint16_t TFT_GRAM[320][480];
@@ -35,10 +38,8 @@ bool simulator_is_running() { return keep_running; }
  * @brief 初始化 SDL
  * @note 初始化了 SDL 窗口、渲染器、纹理，并创建了一个更新纹理的线程.默认颜色编码为 RGB565
  */
-void simulator_init(int32_t hor, int32_t ver)
+void simulator_init()
 {
-    HOR = hor;
-    VER = ver;
 
     // 初始化 SDL
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
@@ -50,7 +51,7 @@ void simulator_init(int32_t hor, int32_t ver)
 
     // 创建窗口
     window = SDL_CreateWindow("LVGL Simulator", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                              hor, ver, SDL_WINDOW_SHOWN | SDL_WINDOW_INPUT_FOCUS);
+                              HOR, VER, SDL_WINDOW_SHOWN | SDL_WINDOW_INPUT_FOCUS);
 
     // 创建渲染器（此处使用硬件加速，可以使用软件加速SDL_RENDERER_SOFTWARE）
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
@@ -58,7 +59,7 @@ void simulator_init(int32_t hor, int32_t ver)
     // 创建纹理
     texture = SDL_CreateTexture(renderer,
                                 SDL_PIXELFORMAT_RGB565, SDL_TEXTUREACCESS_STREAMING,
-                                hor, ver);
+                                HOR, VER);
 
 
     if (!window || !renderer || !texture)
