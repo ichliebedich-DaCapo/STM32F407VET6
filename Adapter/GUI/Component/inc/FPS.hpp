@@ -80,7 +80,7 @@ auto FPS::print(bool time) -> void
         // 显示帧率
         sprintf(buf, "%.2f", 1000.0 * (count++) / get_tick());
     }
-    label_fps.set_text(buf);
+    label_fps.text(buf);
 #else
     char buf[9];
     // 显示一帧的时间
@@ -120,22 +120,22 @@ auto FPS::restart() -> void
 auto FPS::set_right() -> void
 {
 
-    label_fps.set_text_align(LV_TEXT_ALIGN_RIGHT);
+    label_fps.text_align(LV_TEXT_ALIGN_RIGHT);
 }
 
 auto FPS::set_center() -> void
 {
-    label_fps.set_text_align(LV_TEXT_ALIGN_CENTER);
+    label_fps.text_align(LV_TEXT_ALIGN_CENTER);
 }
 
 auto FPS::set_left() -> void
 {
-    label_fps.set_text_align(LV_TEXT_ALIGN_LEFT);
+    label_fps.text_align(LV_TEXT_ALIGN_LEFT);
 }
 
 auto FPS::clear() -> void
 {
-    label_fps.set_text("");
+    label_fps.text("");
 }
 
 #endif //SIMULATOR_FPS_HPP

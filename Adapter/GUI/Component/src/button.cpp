@@ -10,10 +10,6 @@
  * @details 鉴于平时创建按钮都大同小异，为了方便创建按钮，仿照声明式创建，但创建时会占用一定的栈开销。
  *          可以通过设置背景颜色、字体、文字颜色、圆角等来创建不同风格的按钮。
  */
-auto Button::init() -> void
-{
-    _obj = lv_btn_create(_parent);
-}
 
 /**
  * @brief 自定义风格按钮
@@ -28,35 +24,8 @@ auto Button::init() -> void
  * @param string 文本
  */
 
-auto Button::init(Coord x, Coord y, Coord w, Coord h, Strings text, Font font) -> void
-{
-    Button::init();
-    Button::set_pos_size(x, y, w, h);
-    Button::border_radius(5);
-    Button::bg_color(Color_Firefly_Green);
-    Button::bg_opa(125);
-
-//    if (font)
-//    {
-        label.init(text, font, _obj);
-        label.set_align(LV_ALIGN_CENTER);
-//    }
-}
 
 
-auto Button::click() -> void
-{
-    send_event(LV_EVENT_CLICKED);
-}
 
-auto Button::set_font(Font font) -> void
-{
-    label.set_font(font);
-}
-
-auto Button::set_text(Strings text) -> void
-{
-    label.set_text(text);
-}
 
 

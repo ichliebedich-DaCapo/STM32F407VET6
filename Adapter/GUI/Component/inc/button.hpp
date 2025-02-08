@@ -7,23 +7,53 @@
 #include "component.hpp"
 #include "label.hpp"
 
-class Button : public Component
+class Button : public Widget<Button>
 {
 public:
 
     // 使用前必须设置父对象
-    auto init() -> void;
+    Button& init(Obj parent = parent_)
+    {
+        create_obj(&lv_button_class);
+        return *this;
+    }
 
-    // 自定义风格按钮
-    auto init(Coord x, Coord y, Coord w, Coord h, Strings text= nullptr ,Font font= nullptr) -> void;
+    Button& init(Coord x, Coord y, Coord w, Coord h, Strings text= nullptr ,Font font= nullptr)
+    {
+        create_obj(&lv_button_class);
+        init(x,y,w,h,text,font);
+        border_radius(5);
+        bg_color(Color_Firefly_Green);
+        bg_opa(125);
+        label.init(text, font, obj_);
+        label.center();
+        return *this;
+    }
+
 
     // 点击事件
-    auto click() -> void;
+    Button& click()
+    {
+        send_event<LV_EVENT_CLICKED>();
+        return *this;
+    }
 
     // 设置字体类型
-    [[maybe_unused]] auto set_font(Font font) -> void;
+    Button& font(Font font)
+    {
+        label.font(font);
+        return *this;
+    }
 
-    [[maybe_unused]] auto set_text(Strings text) -> void;
+
+    // 设置文本
+    Button& text(Strings text)
+    {
+        label.text(text);
+        return *this;
+    }
+
+
 
 private:
     Label label;

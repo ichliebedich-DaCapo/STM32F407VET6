@@ -29,7 +29,7 @@ auto CPU::print() -> void
 {
     char buf[13];
     sprintf(buf, "CPU: %2.2f°C", get_cpu_temperature());
-    label_cpu.set_text(buf);
+    label_cpu.text(buf);
 }
 
 #endif //FURINA_CPU_HPP
