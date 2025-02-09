@@ -10,7 +10,6 @@
 extern "C" {
 #endif
 
-
 void LCD_Set_Window(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey);// 设置显示窗口
 
 void LCD_Clear(uint16_t color);// 清屏
