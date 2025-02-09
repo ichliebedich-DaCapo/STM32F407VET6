@@ -51,9 +51,11 @@ private:
 auto FPS::init(Font font, Coord x, Coord y, Coord width, Coord height) -> void
 {
 #if SIMPLE_FPS
-    label_fps.init(x, y, width, height, "0", font);
+    Label::Font(font);
+    label_fps.init(x, y, width, height, "0");
 #else
-    label_fps.init(x, y, width, height, "print\n0", font);
+    Label::Font(font);
+    label_fps.init(x, y, width, height, "print\n0");
 #endif
 
 

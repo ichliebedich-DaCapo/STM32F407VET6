@@ -18,6 +18,7 @@ using Flag_t = lv_obj_flag_t;
 using Grad_dir = lv_grad_dir_t;
 using Border_side = lv_border_side_t;
 using Font = const lv_font_t *;// 字体类型
+using Font_t = const lv_font_t;
 using Strings = const char *;// 字符串
 using ImageSrc = const lv_img_dsc_t *;// 图片资源
 using ChartAxis = lv_chart_axis_t;// 图表坐标

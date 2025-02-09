@@ -41,33 +41,31 @@ private:
 using namespace gui::widgets::main;
 namespace gui::init
 {
-
     void screen()
     {
+        // 设置全局字体格式
+        Label::Font(lv_customer_font_SourceHanSerifSC_Regular_15);
+        Button::Font(lv_customer_font_SourceHanSerifSC_Regular_15);
 
         // 计数器显示
-        widgets::main::label_counter.init("0", &lv_customer_font_SourceHanSerifSC_Regular_15)
-        .pos_size(200, 150, 80, 40)
-        .center();
-
+        widgets::main::label_counter.init("0")
+                .pos_size(200, 150, 80, 40)
+                .center();
 
         // "+" 按钮
-        btn_plus.init(100, 250, 80, 40, "+", &lv_customer_font_SourceHanSerifSC_Regular_15)
-                .center( -100)
-                .bg_color(lv_color_hex(0x34e6ff), LV_PART_MAIN)
-                .text_color(lv_color_hex(0x000000), LV_PART_MAIN);
+        btn_plus.init(100, 250, 80, 40, "+")
+                .center(-100)
+                .bg_color(lv_color_hex(0x34e6ff), LV_PART_MAIN);
 
         // "-" 按钮
-        btn_minus.init(300, 250, 80, 40, "-", &lv_customer_font_SourceHanSerifSC_Regular_15)
-        .center(100)
-        .bg_color(lv_color_hex(0x34e6ff), LV_PART_MAIN)
-        .text_color(lv_color_hex(0x000000), LV_PART_MAIN);
+        btn_minus.init(300, 250, 80, 40, "-")
+                .center(100)
+                .bg_color(lv_color_hex(0x34e6ff), LV_PART_MAIN);
 
         // 复位按钮
-        btn_reset.init(200, 300, 80, 40, "复位", &lv_customer_font_SourceHanSerifSC_Regular_15)
-        .center( 0, 50)
-        .bg_color(lv_color_hex(0x34e6ff), LV_PART_MAIN)
-        .text_color(lv_color_hex(0x000000), LV_PART_MAIN);
+        btn_reset.init(200, 300, 80, 40, "复位")
+                .center(0, 50)
+                .bg_color(lv_color_hex(0x34e6ff), LV_PART_MAIN);
 
     }
 

@@ -13,46 +13,65 @@
 class Label : public Widget<Label>
 {
 public:
-    // 初始化文本框
+    /**
+     * @brief 全局设置字体
+     * @param font 使用引用类型，在函数内部取地址，避免还要多写一个&符号
+     */
+    static inline void Font(Font_t &font)
+    {
+        font_ = &font;
+    }
+    // 设置全局字体
+    static inline void Font(::Font font)
+    {
+        font_ = font;
+    }
+
+
+    // 初始化文本框，默认为黑色字体
     inline Label &init(Obj parent = parent_)
     {
-        create_obj(&lv_label_class);
+        create_obj(&lv_label_class, parent);
+        Label::text_color(lv_color_black());// 设置文本颜色为黑色
         return *this;
     }
 
-    Label &init(Strings text, Font font, Obj parent = parent_)
+    // 只要设置文本，就默认为黑色字体
+    inline Label &init(Strings text, Obj parent = parent_)
     {
         init(parent);
         // 初始化文本内容
         lv_label_set_text(obj_, text);
-        Label::font(font);
+        lv_obj_set_style_text_font(obj_, font_, selector_default);
         return *this;
     }
 
-    Label &init(Coord x, Coord y, Coord w, Coord h, Strings string, Font font, Color text_color = lv_color_black())
+
+    // 文本颜色默认为黑
+    inline Label &init(Coord x, Coord y, Coord w, Coord h, Obj parent = parent_)
     {
-        init(string, font);
+        init(parent);
         pos_size(x, y, w, h);
-        Label::text_color(text_color);
         return *this;
     }
 
-    // 设置字体
-    Label &font(Font font, Selector selector = selector_default)
+    inline Label &init(Coord x, Coord y, Coord w, Coord h, Strings string, Obj parent = parent_)
     {
-        lv_obj_set_style_text_font(obj_, font, selector);
+        init(string, parent);
+        pos_size(x, y, w, h);
         return *this;
     }
+
 
     // 设置字间距
-    Label &space(Coord space, Selector selector = selector_default)
+    inline Label &space(Coord space, Selector selector = selector_default)
     {
         lv_obj_set_style_text_letter_space(obj_, space, selector);
         return *this;
     }
 
     // 设置文本颜色
-    Label &text_color(Color color, Selector selector = selector_default)
+    inline Label &text_color(Color color, Selector selector = selector_default)
     {
         lv_obj_set_style_text_color(obj_, color, selector);
         return *this;
@@ -60,9 +79,21 @@ public:
 
 
     // 设置文本对齐方式
-    Label &text_align(Align_text align, Selector selector = selector_default)
+    inline Label &text_align(Align_text align, Selector selector = selector_default)
     {
         lv_obj_set_style_text_align(obj_, align, selector);
+        return *this;
+    }
+
+    // 设置字体
+    inline  Label& font(::Font font)
+    {
+        lv_obj_set_style_text_font(obj_, font, selector_default);
+        return *this;
+    }
+    inline  Label& font(Font_t &font)
+    {
+        lv_obj_set_style_text_font(obj_, &font, selector_default);
         return *this;
     }
 
@@ -83,6 +114,8 @@ public:
         return *this;
     }
 
+private:
+    static inline ::Font font_{};// 避免别名与本地函数名冲突
 };
 
 
