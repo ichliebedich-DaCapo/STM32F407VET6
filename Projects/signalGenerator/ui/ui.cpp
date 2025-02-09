@@ -2,6 +2,11 @@
 // Created by fairy on 2024/10/22 16:34.
 //
 #include "ui.hpp"
+#ifdef ARM_MATH_CM4
+#include "lcd.h"
+#endif
+
+
 /**
  * @简介：双音频信号发生器
  * @note
@@ -379,7 +384,7 @@ namespace gui::init
         btn_ratio_add.init(335, 265, 30, 30, "+");
         btn_freq.init(400, 265, 40, 30, "800");// 按钮_频率：8K、16K // 根据对称性，x：480-40-40
         label_title.init(190, 13, 140, 30, "双音频信号发生器");// 标签：标题
-        
+
         // 设置按钮全局字体
         Button::Font(lv_customer_font_SourceHanSerifSC_Regular_13);
         Label::Font(lv_customer_font_SourceHanSerifSC_Regular_13);
@@ -412,11 +417,12 @@ namespace gui::init
     void events()
     {
         /*  创建定时器*/
-        tick_timer.create([](lv_timer_t *)
+        tick_timer.create([](Timer_t)
                           {
                               SignalGenerator::handler();
                               SignalGenerator::print_tick();
                           }, Freq_8K);
+
         // 绑定播放事件
         widgets::main::imgbtn_play.OnPressedReleased<SignalGenerator::start, SignalGenerator::stop>();
 

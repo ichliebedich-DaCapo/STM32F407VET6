@@ -49,43 +49,6 @@ using Event_Handler = lv_event_cb_t;
 using Timer_t = lv_timer_t *;
 
 
-//******************出于某种简化的目的，我使用了非常邪恶的宏定义*******************//
-/**
- * @brief void*类型的"语法糖"，用于生成匿名函数，简化函数定义过程.如果你要调用这个函数那么还需要在后面加上();
- * @param ... 函数体
- * @note 仿Koltin的lambda表达式，只能说宏定义是真滴强大
- * @example 假设现在有一个函数void bond(void*); 需要传一个void*的函数，那么
- *          正常调用：
- *              bond([]()
- *              {
- *              int a=0;
- *              a=a+2;
- *              })
- *
- *          使用宏：
- *           bond(fun(
- *           int a=0;
- *           a=a+2;
- *           ))
- *
- *           调用宏所代表的函数：
- *           fun(
- *           int a=0;
- *           a=a+2;
- *           )();
- *
- */
-
-// 用于调用
-#define FUN(...) [](){ __VA_ARGS__}()
-
-
-// 用于定时器的状态事件回调
-#define timer_fun(...) [](Timer_t){__VA_ARGS__}
-
-
-
-
 
 
 /**
@@ -427,6 +390,21 @@ public:
         return static_cast<Derived &>(*this);
     }
 
+
+    // 持续按压事件绑定
+    template<void(*press)() = nullptr>
+    Derived &OnPressed()
+    {
+        bind_event<[](Event_t e)
+        {
+            if (lv_event_get_code(e) == LV_EVENT_PRESSED)
+            {
+                press();
+            }
+        }, LV_EVENT_PRESSED>();
+
+        return static_cast<Derived &>(*this);
+    }
 
     // 状态管理方法
     Derived &add_flag(Flag_t f)

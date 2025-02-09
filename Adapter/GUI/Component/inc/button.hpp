@@ -4,7 +4,7 @@
 #ifndef SIMULATOR_BUTTON_HPP
 #define SIMULATOR_BUTTON_HPP
 
-#include "widgets.hpp"
+#include "widget.hpp"
 
 class Button : public Widget<Button>
 {

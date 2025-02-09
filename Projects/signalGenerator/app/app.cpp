@@ -11,18 +11,13 @@
  *
  *      后来看到要求才发现是256*800与256*1K，无意中测了一下DAC最快转换速率
  */
-#include "app.hpp"
-
+#include <project_config.h>
+#include "key_adapter.hpp"
 #include "timer.h"
 #include "dac.h"
-#include "wave_signal.hpp"
 #include "key.hpp"
-#include "GUI.hpp"
-
-#include "WaveCurve.hpp"
-#include "GUI.hpp"
 #include "ui.hpp"
-
+#include "waveData.h"
 
 
 static inline auto set_freq(bool freq) -> void
@@ -39,50 +34,51 @@ void app_init()
     timer6_init(FREQ_84M_to_256x800);// 预期1KHz
     dac_init();
 }
-
+// 使用命名空间
+using namespace gui::widgets::main;
 void key_handler()
 {
 
-    switch (Key::getCode())
+    switch (PlatformKey ::getCode())
     {
-        case keyk0:// 播放
-            if (Key::stateHandler(KEY_STATE_TWO))
+        case keyK0:// 播放
+            if (PlatformKey::handle_state(KEY_STATE_TWO))
             {
-                gui->main.imgbtn_play.press();
+                imgbtn_play.press();
 
             }
             else
             {
-                gui->main.imgbtn_play.release();
+                imgbtn_play.release();
             }
             break;
 
-        case keyk1:// 播放模式
-            if (!Key::stateHandler(KEY_STATE_TWO))
+        case keyK1:// 播放模式
+            if (!PlatformKey::handle_state(KEY_STATE_TWO))
             {// 单频模式
-                set_freq(uiInterface::get_freq());
+                set_freq(gui::interface::get_freq());
             }
-            gui->main.btn_mode.click();
+            btn_mode.click();
             break;
 
-        case keyk2:// 偏置-
-            gui->main.btn_bias_sub.click();
+        case keyK2:// 偏置-
+            btn_bias_sub.click();
             break;
 
-        case keyk3:// 偏置+
-            gui->main.btn_bias_add.click();
+        case keyK3:// 偏置+
+            btn_bias_add.click();
             break;
 
-        case keyk4:// 比例-
-            gui->main.btn_ratio_sub.click();
+        case keyK4:// 比例-
+            btn_ratio_sub.click();
             break;
 
-        case keyk5:// 比例+
-            gui->main.btn_ratio_add.click();
+        case keyK5:// 比例+
+            btn_ratio_add.click();
             break;
 
-        case keyk6:// 频率
-            if (Key::stateHandler(KEY_STATE_TWO))
+        case keyK6:// 频率
+            if (PlatformKey::handle_state(KEY_STATE_TWO))
             {
                 timer6_set_freq(FREQ_84M_to_256x1k);// 256*1k
             }
@@ -90,66 +86,66 @@ void key_handler()
             {
                 timer6_set_freq(FREQ_84M_to_256x800);// 256*800
             }
-            if (uiInterface::get_mode())
+            if (gui::interface::get_mode())
             {
-                set_freq(uiInterface::get_freq());
+                set_freq(gui::interface::get_freq());
             }
-            gui->main.btn_freq.click();
+            btn_freq.click();
             break;
 
 
-        case keyk7:// 波形是否产生
-            if (Key::stateHandler(KEY_STATE_TWO))
+        case keyK7:// 波形是否产生
+            if (PlatformKey::handle_state(KEY_STATE_TWO))
             {
-                uiInterface::wave_is_generate();
+                gui::interface::wave_is_generate();
                 timer6_start_it();
                 dac_start();
             }
             else
             {
-                uiInterface::wave_is_not_generate();
+                gui::interface::wave_is_not_generate();
                 timer6_stop_it();
                 dac_stop();
             }
             break;
 
-        case keyk8:// 减少波形点数
-            uiInterface::sub_wave_cnt();
+        case keyK8:// 减少波形点数
+            gui::interface::sub_wave_cnt();
             break;
-        case keyk9:// 增加波形点数
-            uiInterface::add_wave_cnt();
+        case keyK9:// 增加波形点数
+            gui::interface::add_wave_cnt();
             break;
-        case keykA:// 减少周期
-            uiInterface::sub_period();
+        case keyKA:// 减少周期
+            gui::interface::sub_period();
             break;
-        case keykB:// 增加周期
-            uiInterface::add_period();
+        case keyKB:// 增加周期
+            gui::interface::add_period();
             break;
-        case keykC:// 切换波形类型
-            uiInterface::switch_wave_type();
+        case keyKC:// 切换波形类型
+            gui::interface::switch_wave_type();
 
             break;
-        case keykD:// 清屏
-            uiInterface::clear_screen();
+        case keyKD:// 清屏
+            gui::interface::clear_screen();
             break;
-        case keykE:// 是否显示FPS一帧时间
-            if (Key::stateHandler(KEY_STATE_TWO))
+        case keyKE:// 是否显示FPS一帧时间
+            if (PlatformKey::handle_state(KEY_STATE_TWO))
             {
-                uiInterface::set_fps_mode(true);
+                gui::interface::set_fps_mode(true);
             }
             else
             {
-                uiInterface::set_fps_mode(false);
+                gui::interface::set_fps_mode(false);
             }
             break;
-        case keykF:// 是否显示FPS
-            if (Key::stateHandler(KEY_STATE_TWO))
+        case keyKF:// 是否显示FPS
+            if (PlatformKey::handle_state(KEY_STATE_TWO))
             {
-                uiInterface::show_fps(true);
+                gui::interface::show_fps(true);
             }
             else
             {
-                uiInterface::show_fps(false);
+                gui::interface::show_fps(false);
             }
             break;
 
@@ -181,12 +177,12 @@ void timer6_isr()
     //    HAL_DAC_SetValue(&hdac, DAC1_CHANNEL_1, DAC_ALIGN_12B_R,sine_wave[index]<<4);
 
     // 防止数据溢出
-    int wave_date = sineWave[index++] + uiInterface::get_bias();
+    int wave_date = sineWave[index++] + gui::interface::get_bias();
     wave_date = (wave_date > 255) ? 255 : (wave_date < 0) ? 0 : wave_date;
     DAC1_DR = wave_date << 4;
 
     // 检测模式
-    if (uiInterface::get_mode())
+    if (gui::interface::get_mode())
     {
         // 获取计差数值
         volatile uint32_t temp_count = HAL_GetTick();
@@ -204,10 +200,10 @@ void timer6_isr()
         // 1K -> 800
         if (freq)
         {
-            if (uiInterface::get_ratio() != 0)
+            if (gui::interface::get_ratio() != 0)
             {
                 // 使用大于号是为了防止频率过低导致无法时间会偏离
-                if (temp_count >= uiInterface::get_period() << 1)
+                if (temp_count >= gui::interface::get_period() << 1)
                 {
                     flag = true;
                     set_freq(false);
@@ -221,13 +217,13 @@ void timer6_isr()
             // 极端情况：
             // ① _ratio为100，那么会直接跳过
             // ② _ratio为0，那么会一直执行这个
-            if (uiInterface::get_ratio() != 100)
+            if (gui::interface::get_ratio() != 100)
             {
                 // 切频处理
                 if (flag)// 判断是否是第一次
                 {
                     // 使用大于号是为了防止频率过低导致无法时间会偏离
-                    if (temp_count >= uiInterface::get_period() * uiInterface::get_ratio() / 50)
+                    if (temp_count >= gui::interface::get_period() * gui::interface::get_ratio() / 50)
                     {
                         flag = false;// 停止切换
                         freq = true;

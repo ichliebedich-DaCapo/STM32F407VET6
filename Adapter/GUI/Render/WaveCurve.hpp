@@ -7,7 +7,7 @@
 
 /* 预编译命令 */
 // 用于区分模拟器和真机
-#ifdef GUI_ENABLE
+#ifdef ARM_MATH_CM4
 
 #include "stdint.h"
 

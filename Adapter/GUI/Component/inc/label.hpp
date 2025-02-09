@@ -4,7 +4,7 @@
 #ifndef SIMULATOR_LABEL_HPP
 #define SIMULATOR_LABEL_HPP
 
-#include "widgets.hpp"
+#include "widget.hpp"
 
 
 /**

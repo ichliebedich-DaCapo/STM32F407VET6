@@ -1,6 +1,6 @@
 #include <project_config.h>
 #include "baseInit.h"
-#include "key_rtos_adapter.hpp"
+#include "key_adapter.hpp"
 
 #ifdef GUI_ENABLE
 

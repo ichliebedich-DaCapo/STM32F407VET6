@@ -4,7 +4,7 @@
 #ifndef SIMULATOR_IMAGEBUTTON_HPP
 #define SIMULATOR_IMAGEBUTTON_HPP
 
-#include "widgets.hpp"
+#include "widget.hpp"
 
 
 /**
@@ -40,7 +40,7 @@ public:
     }
 
     // 默认发送的事件为LV_EVENT_CLICKED,因为平时用得最多就是这个。后面可自行添加
-    ImageButton &press(lv_event_cb_t event_cb)
+    ImageButton &press()
     {
         lv_imgbtn_set_state(obj_, LV_IMGBTN_STATE_CHECKED_RELEASED);
         lv_obj_add_state(obj_, LV_STATE_CHECKED); // 选中
@@ -79,34 +79,7 @@ public:
         return *this;
     }
 
-    // 未验证
-    template<void(*press)() = nullptr>
-    ImageButton &OnPressed(lv_event_cb_t event_cb)
-    {
-        bind_event<[](Event_t e)
-        {
-            if (lv_event_get_code(e) == LV_EVENT_PRESSED)
-            {
-                press();
-            }
-        }, LV_EVENT_PRESSED>();
 
-        return *this;
-    }
-
-    template<void(*release)() = nullptr>
-    ImageButton &OnReleased(lv_event_cb_t event_cb)
-    {
-        bind_event<[](Event_t e)
-        {
-            if (lv_event_get_code(e) == LV_EVENT_RELEASED)
-            {
-                release();
-            }
-        }, LV_EVENT_RELEASED>();
-
-        return *this;
-    }
 
 };
 

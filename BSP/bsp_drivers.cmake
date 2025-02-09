@@ -7,7 +7,7 @@ set(BSP_DRIVERS
         "adc:timer,hal_adc,hal_adc_ex"
         "baseinit:rcc,lcd,hal_tim,key_exit"
         "cpu_runtime:"
-        "dac:hal_dac"
+        "dac:hal_dac,timer"
         "debug:"
         "esp8266:"
         "fsmc:hal_sram,hal_dma"
@@ -20,7 +20,7 @@ set(BSP_DRIVERS
         "sdio:"
         "spi:hal_spi"
         "tcp:"
-        "timer:"
+        "timer:hal_tim_ex"
         "usart:"
         "w25qxx:"
         # HAL库

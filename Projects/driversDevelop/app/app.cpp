@@ -14,7 +14,7 @@
 #include "timer.h"
 #include "RNG.h"
 #include "lcd.h"
-#include "key_rtos_adapter.hpp"
+#include "key_adapter.hpp"
 
 #include "RCC.h"
 #include "debug.h"

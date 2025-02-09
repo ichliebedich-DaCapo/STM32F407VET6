@@ -4,7 +4,7 @@
 #ifndef SIMULATOR_COMPONENT_HPP
 #define SIMULATOR_COMPONENT_HPP
 
-#include "widgets.hpp"
+#include "widget.hpp"
 
 /**
  * @brief 空白组件类

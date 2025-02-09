@@ -3,7 +3,7 @@
 //
 #ifndef SIMULATOR_ANIM_HPP
 #define SIMULATOR_ANIM_HPP
-#include "widgets.hpp"
+#include "widget.hpp"
 
 class Animator
 {

@@ -15,7 +15,7 @@
 #include <bsp_config.h>
 #include "timer.h"
 #include "adc.h"
-#include "key_rtos_adapter.hpp"
+#include "key_adapter.hpp"
 #include "usart.h"
 
 #ifdef GUI_ENABLE

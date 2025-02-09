@@ -4,7 +4,7 @@
 #ifndef SIMULATOR_CHART_HPP
 #define SIMULATOR_CHART_HPP
 
-#include "widgets.hpp"
+#include "widget.hpp"
 
 /**
  * @brief 图表类
