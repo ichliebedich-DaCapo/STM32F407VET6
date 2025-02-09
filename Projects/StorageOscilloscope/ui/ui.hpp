@@ -6,31 +6,20 @@
 
 #include "GUI_Base.hpp"
 
-
-
-/*********************组件*******************/
-struct lv_ui_t
+namespace gui::widgets::main
 {
-    // 主屏幕
-    struct
-    {
-        Component screen{};// 屏幕自身
-        Component rect{};//示波器方框
-        Label vpp{};// 电压峰峰值
-        Button trigger_mode{};//触发方式
-        Button left_shift{};//左移
-        Button right_shift{};//右移
-        Button scan_speed{};//切换扫描速度
-        Button latch{};//锁存功能
-        Button magnification{};//放大倍数
-        Label title{};// 标题
-        Label magnification_value{};// 放大倍数
-        Label scan_speed_value{};// 扫描速度
-    } main;// 主屏幕
-
-};
-
-extern struct lv_ui_t* gui;
+    extern Component rect;//示波器方框
+    extern Label label_vpp;// 电压峰峰值
+    extern Button trigger_mode;//触发方式
+    extern Button left_shift;//左移
+    extern Button right_shift;//右移
+    extern Button scan_speed;//切换扫描速度
+    extern Button latch;//锁存功能
+    extern Button magnification;//放大倍数
+    extern Label title;// 标题
+    extern Label magnification_value;// 放大倍数
+    extern Label scan_speed_value;// 扫描速度
+}
 
 
 // 加载资源文件
@@ -55,21 +44,27 @@ namespace border_info
 //    constexpr uint16_t margin = 2;
 }
 
-class UI_Interface
+
+namespace gui::interface
 {
-public:
-    static void display(uint8_t (&read_wave)[400]);
-    static void clear_screen();
-    static void left_shift(uint8_t (&read_wave)[400]);
-    static void right_shift(uint8_t (&read_wave)[400]);
-    static void switch_trigger_mode(uint8_t trigger_mode_flag);
-    static void switch_latch_mode(uint8_t latch_mode_flag);
-    static void print_magnification(uint8_t magnification);
-    static void print_vpp_max_min(float vpp, float v_max, float v_min);
-    static void print_scan_speed(uint8_t& magnification);
-};
+    void display(uint8_t (&read_wave)[400]);
 
+    void clear_screen();
 
+    void left_shift(uint8_t (&read_wave)[400]);
+
+    void right_shift(uint8_t (&read_wave)[400]);
+
+    void switch_trigger_mode(uint8_t trigger_mode_flag);
+
+    void switch_latch_mode(uint8_t latch_mode_flag);
+
+    void print_magnification(uint8_t magnification);
+
+    void print_vpp_max_min(float vpp, float v_max, float v_min);
+
+    void print_scan_speed(uint8_t &magnification);
+}
 
 
 #endif //SIMULATOR_UI_HPP

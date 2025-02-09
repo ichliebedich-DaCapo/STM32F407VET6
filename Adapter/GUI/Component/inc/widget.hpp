@@ -219,26 +219,6 @@ public:
         return static_cast<Derived &>(*this);
     }
 
-    // 设置文本颜色
-    Derived &text_color(Color color, Selector selector = selector_default)
-    {
-        lv_obj_set_style_text_color(obj_, color, selector);
-        return static_cast<Derived &>(*this);
-    }
-
-    // 设置文本透明度
-    Derived &text_opa(uint8_t opa, Selector selector = selector_default)
-    {
-        lv_obj_set_style_text_opa(obj_, opa, selector);
-        return static_cast<Derived &>(*this);
-    }
-
-    // 设置文本字体
-    Derived &text_font(Font font, Selector selector = selector_default)
-    {
-        lv_obj_set_style_text_font(obj_, font, selector);
-        return static_cast<Derived &>(*this);
-    }
 
     /**
     * @brief 设置背景渐变

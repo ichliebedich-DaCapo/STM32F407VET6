@@ -9,6 +9,7 @@
 
 /**
  * @brief 文本框类
+ * @details 如果文本不设置字体就传入字符串，那么会卡死
  */
 class Label : public Widget<Label>
 {
@@ -21,6 +22,7 @@ public:
     {
         font_ = &font;
     }
+
     // 设置全局字体
     static inline void Font(::Font font)
     {
@@ -42,7 +44,8 @@ public:
         init(parent);
         // 初始化文本内容
         lv_label_set_text(obj_, text);
-        lv_obj_set_style_text_font(obj_, font_, selector_default);
+        if (font_)
+            lv_obj_set_style_text_font(obj_, font_, selector_default);
         return *this;
     }
 
@@ -77,6 +80,14 @@ public:
         return *this;
     }
 
+    // 设置文本透明度
+    Label &text_opa(uint8_t opa, Selector selector = selector_default)
+    {
+        lv_obj_set_style_text_opa(obj_, opa, selector);
+        return *this;
+    }
+
+
 
     // 设置文本对齐方式
     inline Label &text_align(Align_text align, Selector selector = selector_default)
@@ -86,12 +97,13 @@ public:
     }
 
     // 设置字体
-    inline  Label& font(::Font font)
+    inline Label &font(::Font font)
     {
         lv_obj_set_style_text_font(obj_, font, selector_default);
         return *this;
     }
-    inline  Label& font(Font_t &font)
+
+    inline Label &font(Font_t &font)
     {
         lv_obj_set_style_text_font(obj_, &font, selector_default);
         return *this;

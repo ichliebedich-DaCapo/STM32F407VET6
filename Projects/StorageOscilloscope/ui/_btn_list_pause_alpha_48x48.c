@@ -2,7 +2,7 @@
 #include "lvgl.h"
 #else
 
-#include "lvgl/lvgl.h"
+#include "lvgl.h"
 
 #endif
 

@@ -6,8 +6,20 @@
 #include <cstdio>
 #include "Draw_wave.hpp"
 
-struct lv_ui_t lv_ui;
-struct lv_ui_t *gui = &lv_ui;
+namespace gui::widgets::main
+{
+    Component rect;//示波器方框
+    Label label_vpp;// 电压峰峰值
+    Button trigger_mode;//触发方式
+    Button left_shift;//左移
+    Button right_shift;//右移
+    Button scan_speed;//切换扫描速度
+    Button latch;//锁存功能
+    Button magnification;//放大倍数
+    Label title;// 标题
+    Label magnification_value;// 放大倍数
+    Label scan_speed_value;// 扫描速度 
+}
 
 // 宏定义
 #define Strong_Print 0 // 使用更强烈的显示（时间和索引都会加倍）
@@ -113,58 +125,58 @@ private:
 
 };
 
-//
-///***********************界面布置***********************/
-auto GUI_Base::screen_init() -> void
+namespace ui_main = gui::widgets::main;
+using namespace ui_main;
+
+namespace gui::init
 {
-    Component::set_parent(gui->main.screen.get_obj());
-    gui->main.screen.bg_color(lv_color_black());
+    void screen()
+    {
+        scr.bg_color(lv_color_black());
+
+        // 设置全局字体
+       Label::Font(lv_customer_font_SourceHanSerifSC_Regular_15);
+       Button::Font(lv_customer_font_SourceHanSerifSC_Regular_15);
+
+        // 设置边框
+        rect.init(border_info::x, border_info::y, border_info::width, border_info::height)
+                .border_radius(5);
+
+        // 设置边框背景颜色和边框颜色
+        rect.bg_color(lv_color_black())
+                .border_color(lv_color_hex(0X6675));
+
+        //按钮_触发模式：单次触发、多次触发
+        trigger_mode.init(15, 270, 60, 40, "单次触发");
+        latch.init(280, 270, 60, 40, "锁存关");//按钮_锁存模式
+
+        //按钮_图像水平移动：左移、右移
+        left_shift.init(135, 270, 40, 40, "左移");
+        right_shift.init(200, 270, 40, 40, "右移");
+
+        //按钮_切换扫描速度
+        scan_speed.init(415, 10, 60, 40, "扫描速度");
+
+        //按钮_切换放大倍数
+        magnification.init(415, 110, 60, 40, "放大倍数");
+
+        /********************标签******************/
+        magnification_value.init(415, 60, 60, 40, "1");
+        scan_speed_value.init(415, 160, 60, 40, "1");
+
+        widgets::main::label_vpp.init(15, 10, 60, 40, "2.0");
+    }
 
 
-    // 设置边框
-    gui->main.rect.init(border_info::x, border_info::y, border_info::width, border_info::height);
-    gui->main.rect.border_radius(5);
-    // 设置边框背景颜色和边框颜色
-    gui->main.rect.bg_color(lv_color_black());
-    gui->main.rect.border_color(lv_color_hex(0X6675));
+    void events()
+    {
+        tick_timer.create([](Timer_t) { StorageOscilloscope::print_tick(); }, Freq_16K);
+    }
 
-    //按钮_触发模式：单次触发、多次触发
-    gui->main.trigger_mode.init(15, 270, 60, 40, "单次触发", &lv_customer_font_SourceHanSerifSC_Regular_15);
-
-    //按钮_锁存模式
-    gui->main.latch.init(280, 270, 60, 40, "锁存关", &lv_customer_font_SourceHanSerifSC_Regular_15);
-
-    //按钮_图像水平移动：左移、右移
-    gui->main.left_shift.init(135, 270, 40, 40, "左移", &lv_customer_font_SourceHanSerifSC_Regular_15);
-    gui->main.right_shift.init(200, 270, 40, 40, "右移", &lv_customer_font_SourceHanSerifSC_Regular_15);
-
-    //按钮_切换扫描速度
-    gui->main.scan_speed.init(415, 10, 60, 40, "扫描速度", &lv_customer_font_SourceHanSerifSC_Regular_15);
-
-    //按钮_切换放大倍数
-    gui->main.magnification.init(415, 110, 60, 40, "放大倍数", &lv_customer_font_SourceHanSerifSC_Regular_15);
-
-    /********************标签******************/
-    gui->main.magnification_value.init(415, 60, 60, 40, "1", &lv_customer_font_SourceHanSerifSC_Regular_15);
-    gui->main.scan_speed_value.init(415, 160, 60, 40, "1", &lv_customer_font_SourceHanSerifSC_Regular_15);
 }
+
 
 ///***********************函数实现***********************/
-
-
-
-auto GUI_Base::events_init() -> void
-{
-    /*  创建定时器*/
-    tick_timer.create(timer_fun(
-                              StorageOscilloscope::print_tick();
-                      ), Freq_16K);
-    gui->main.magnification.add_event(btn_fun(
-                                              printf("press button\n");
-
-                                      ));
-
-}
 
 auto StorageOscilloscope::handler(uint8_t (&read_wave)[400]) -> void
 {
@@ -211,7 +223,7 @@ auto StorageOscilloscope::print_magnification(auto magnification) -> void
             temp = 1;
             break;
     }
-    gui->main.magnification_value.set_text("%d", temp);
+    magnification_value.text("%d", temp);
 }
 
 auto StorageOscilloscope::print_scan_speed(auto &scan_speed) -> void
@@ -252,7 +264,7 @@ auto StorageOscilloscope::print_scan_speed(auto &scan_speed) -> void
             break;
 
     }
-    gui->main.scan_speed_value.set_text(buf);
+    scan_speed_value.text(buf);
 }
 
 // 更新时间
@@ -319,14 +331,6 @@ void StorageOscilloscope::left_shift(uint8_t (&read_wave)[400])
     draw_dashed_dividers(border_info::x, border_info::y, border_info::width, border_info::height, 10, 8, 0X8410,
                          border_info::margin, 4,
                          4);
-//     if(use_square) draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_start_index, array_length, 0);
-//     if(use_sine)   draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_start_index, array_length, 0);
-//    if (use_square)
-//        draw_interpolated_wave(start_x, start_y, square_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
-//                               0);
-//    if (use_sine)
-//        draw_interpolated_wave(start_x, start_y, sine_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
-//                               0);
     draw_interpolated_wave(start_x, start_y, read_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
                            0);
 
@@ -359,14 +363,6 @@ void StorageOscilloscope::right_shift(uint8_t (&read_wave)[400])
     draw_dashed_dividers(border_info::x, border_info::y, border_info::width, border_info::height, 10, 8, 0X8410,
                          border_info::margin, 4,
                          4);
-    //     if(use_square) draw_interpolated_line_simple(start_x, start_y, square_wave, length, wave_start_index, array_length, 0);
-//     if(use_sine)   draw_interpolated_line_simple(start_x, start_y, sine_wave, length, wave_start_index, array_length, 0);
-//    if (use_square)
-//        draw_interpolated_wave(start_x, start_y, square_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
-//                               0);
-//    if (use_sine)
-//        draw_interpolated_wave(start_x, start_y, sine_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
-//                               0);
     draw_interpolated_wave(start_x, start_y, read_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
                            0);
 
@@ -375,64 +371,65 @@ void StorageOscilloscope::right_shift(uint8_t (&read_wave)[400])
 //设置触发模式
 auto StorageOscilloscope::set_trigger_mode(uint8_t &trigger_mode_flag) -> void
 {
-    gui->main.trigger_mode.set_text(trigger_mode_flag ? "单次触发" : "多次触发");
+    trigger_mode.text(trigger_mode_flag ? "单次触发" : "多次触发");
 }
 
 //设置触发模式
 auto StorageOscilloscope::set_latch_mode(uint8_t &latch_mode_flag) -> void
 {
-    gui->main.latch.set_text(latch_mode_flag ? "锁存开" : "锁存关");
+    latch.text(latch_mode_flag ? "锁存开" : "锁存关");
 }
 
 auto StorageOscilloscope::print_vpp_max_min(float &vpp, float &max, float &min) -> void
 {
-    char buf[24];
-    sprintf(buf, "%.3f\n%.3f\n%.3f", vpp, max, min);
-//    Text::set_text(GUI_Base::get_ui()->main.label_vpp, buf);
-
+//    char buf[24];
+//    sprintf(buf, "%.3f\n%.3f\n%.3f", vpp, max, min);
+    gui::widgets::main::label_vpp.text("%.3f\n%.3f\n%.3f", vpp, max, min);
 }
 
 
 /***********************对外接口***********************/
-void UI_Interface::display(uint8_t (&read_wave)[400])
+namespace gui::interface
 {
-    StorageOscilloscope::handler(read_wave);
-}
+    void display(uint8_t (&read_wave)[400])
+    {
+        StorageOscilloscope::handler(read_wave);
+    }
 
-void UI_Interface::clear_screen()
-{
-    StorageOscilloscope::clear();
-}
+    void clear_screen()
+    {
+        StorageOscilloscope::clear();
+    }
 
-void UI_Interface::left_shift(uint8_t (&read_wave)[400])
-{
-    StorageOscilloscope::left_shift(read_wave);
-}
+    void left_shift(uint8_t (&read_wave)[400])
+    {
+        StorageOscilloscope::left_shift(read_wave);
+    }
 
-void UI_Interface::right_shift(uint8_t (&read_wave)[400])
-{
-    StorageOscilloscope::right_shift(read_wave);
-}
+    void right_shift(uint8_t (&read_wave)[400])
+    {
+        StorageOscilloscope::right_shift(read_wave);
+    }
 
-void UI_Interface::switch_trigger_mode(uint8_t trigger_mode_flag)
-{
-    StorageOscilloscope::set_trigger_mode(trigger_mode_flag);
-}
+    void switch_trigger_mode(uint8_t trigger_mode_flag)
+    {
+        StorageOscilloscope::set_trigger_mode(trigger_mode_flag);
+    }
 
-void UI_Interface::switch_latch_mode(uint8_t latch_mode_flag)
-{
-    StorageOscilloscope::set_latch_mode(latch_mode_flag);
-}
+    void switch_latch_mode(uint8_t latch_mode_flag)
+    {
+        StorageOscilloscope::set_latch_mode(latch_mode_flag);
+    }
 
-void UI_Interface::print_magnification(uint8_t magnification)
-{
-    StorageOscilloscope::print_magnification(magnification);
-}
+    void print_magnification(uint8_t magnification)
+    {
+        StorageOscilloscope::print_magnification(magnification);
+    }
 
-void UI_Interface::print_scan_speed(uint8_t &scan_speed)
-{
-    StorageOscilloscope::print_scan_speed(scan_speed);
-}
+    void print_scan_speed(uint8_t &scan_speed)
+    {
+        StorageOscilloscope::print_scan_speed(scan_speed);
+    }
 
 
 /**
@@ -442,9 +439,10 @@ void UI_Interface::print_scan_speed(uint8_t &scan_speed)
  * @param v_min
  * @note 已经自行计算12位ADC数据对应的电压值，单位为V
  */
-void UI_Interface::print_vpp_max_min(float vpp, float v_max, float v_min)
-{
-    StorageOscilloscope::print_vpp_max_min(vpp, v_max, v_min);
+    void print_vpp_max_min(float vpp, float v_max, float v_min)
+    {
+        StorageOscilloscope::print_vpp_max_min(vpp, v_max, v_min);
+    }
+
+
 }
-
-
