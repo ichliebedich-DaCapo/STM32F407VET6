@@ -14,13 +14,13 @@ class ImageButton : public Widget<ImageButton>
 {
 public:
     // 使用前必须设置父对象
-    ImageButton& init()
+    ImageButton &init()
     {
         create_obj(&lv_imagebutton_class);
         return *this;
     }
 
-    ImageButton& init(Coord x, Coord y, Coord w, Coord h, ImageSrc release_src = nullptr,
+    ImageButton &init(Coord x, Coord y, Coord w, Coord h, ImageSrc release_src = nullptr,
                       ImageSrc press_src = nullptr)
     {
         init();
@@ -32,16 +32,15 @@ public:
     }
 
 
-
     // 默认居中，大部分情况下都用不到旁边两个参数，需要时再补充
-    ImageButton& src(lv_imagebutton_state_t  state, ImageSrc src)
+    ImageButton &src(lv_imagebutton_state_t state, ImageSrc src)
     {
         lv_imgbtn_set_src(obj_, state, nullptr, src, nullptr);
         return *this;
     }
 
     // 默认发送的事件为LV_EVENT_CLICKED,因为平时用得最多就是这个。后面可自行添加
-    ImageButton& press(lv_event_cb_t event_cb)
+    ImageButton &press(lv_event_cb_t event_cb)
     {
         lv_imgbtn_set_state(obj_, LV_IMGBTN_STATE_CHECKED_RELEASED);
         lv_obj_add_state(obj_, LV_STATE_CHECKED); // 选中
@@ -49,18 +48,67 @@ public:
         return *this;
     }
 
-
-    ImageButton& release()
+    ImageButton &release()
     {
         lv_imgbtn_set_state(obj_, LV_IMGBTN_STATE_RELEASED);
-        lv_obj_clear_state(obj_, LV_STATE_CHECKED); // 取消选中
+        lv_obj_remove_state(obj_, LV_STATE_CHECKED); // 取消选中
         send_event<LV_EVENT_CLICKED>();
+        // 这个发送事件逻辑并未修复
         return *this;
     }
 
+    // 绑定函数
+    template<void(*press)() = nullptr, void(*release)() = nullptr>
+    ImageButton &OnPressedReleased()
+    {
+        bind_event<[](Event_t e)
+        {
+            if (lv_event_get_code(e) == LV_EVENT_CLICKED)
+            {
+                if (lv_obj_has_state(lv_event_get_target_obj(e), LV_STATE_CHECKED))
+                {
+                    press();
+                }
+                else
+                {
+                    release();
+                }
+            }
+        }, LV_EVENT_CLICKED>();
+
+        return *this;
+    }
+
+    // 未验证
+    template<void(*press)() = nullptr>
+    ImageButton &OnPressed(lv_event_cb_t event_cb)
+    {
+        bind_event<[](Event_t e)
+        {
+            if (lv_event_get_code(e) == LV_EVENT_PRESSED)
+            {
+                press();
+            }
+        }, LV_EVENT_PRESSED>();
+
+        return *this;
+    }
+
+    template<void(*release)() = nullptr>
+    ImageButton &OnReleased(lv_event_cb_t event_cb)
+    {
+        bind_event<[](Event_t e)
+        {
+            if (lv_event_get_code(e) == LV_EVENT_RELEASED)
+            {
+                release();
+            }
+        }, LV_EVENT_RELEASED>();
+
+        return *this;
+    }
 
 };
-
 
 
 #endif //SIMULATOR_IMAGEBUTTON_HPP

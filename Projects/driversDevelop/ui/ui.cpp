@@ -73,16 +73,14 @@ namespace gui::init
     void events()
     {
         // 绑定 "+" 按钮事件
-        btn_plus.bind_event(btn_fun(CounterLogic::increment();));
+        widgets::main::btn_plus.OnClicked<CounterLogic::increment>();
 
         // 绑定 "-" 按钮事件
-        btn_minus.bind_event(btn_fun(CounterLogic::decrement();));
+        widgets::main::btn_minus.OnClicked<CounterLogic::decrement>();
 
         // 绑定复位按钮事件
-        btn_reset.bind_event(btn_fun(CounterLogic::reset();));
+        widgets::main::btn_reset.OnClicked<CounterLogic::reset>();
     }
-
-
 }
 
 

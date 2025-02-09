@@ -85,55 +85,8 @@ using Timer_t = lv_timer_t *;
 
 
 
-/**
- * @brief 用于图片按钮的状态事件回调
- * @param handler stateHandler类型的函数形参
- * @details 你需要定义一个stateHandler类型的函数
- * @example 可以使用lambda表达式：
-            state_fun([](bool check)
-            {
-                if(check)
-                {
-                 int a = 0;
-                 a=a+2;
-                }
-                else
-                {
-                int a = 0;
-                }
-           });
- */
-#define imgbtn_fun(handler) [](Event_t e){ \
-if(lv_event_get_code(e)==LV_EVENT_CLICKED)\
-{\
-handler(lv_obj_has_state(lv_event_get_target_obj(e), LV_STATE_CHECKED));\
-}\
-}
 
 
-// 按钮函数
-#define btn_fun(...) [](Event_t e) \
-{                                \
-    if(lv_event_get_code(e)==LV_EVENT_CLICKED) \
-    {                            \
-        __VA_ARGS__                 \
-    }                                \
-}
-
-
-#define imgbtn_fun2(press_fun, release_fun)     [](Event e){\
-if(lv_event_get_code(e)==LV_EVENT_CLICKED)\
-{\
-if(lv_obj_has_state(lv_event_get_target_obj(e), LV_STATE_CHECKED))\
-{\
-press_fun\
-}\
-else\
-{\
-release_fun\
-}\
-}\
-}
 
 /**
  * @brief 控件基类的数据模型，为了防止实例化多个静态变量而设计的
@@ -413,11 +366,18 @@ public:
         return static_cast<Derived &>(*this);
     };
 
-    // 事件系统（支持17种标准事件）
-    template<EventCode Event=LV_EVENT_ALL>
-    Derived &bind_event(Event_Handler handler)
+
+    /**
+     * @brief 绑定事件
+     * @tparam handler 给默认参数nullptr是为了防止刚写就报错
+     * @tparam Event 事件类型，默认为全部
+     * @note 出于大多数情况的考虑，函数一般都是定义好的，所以用模板参数来传递
+     * @return
+     */
+    template<Event_Handler handler= nullptr,EventCode Event=LV_EVENT_ALL>
+    Derived &bind_event()
     {
-        lv_obj_add_event_cb(obj_, handler, Event, this);
+        lv_obj_add_event_cb(obj_, handler, Event, nullptr);
         return static_cast<Derived &>(*this);
     }
 
@@ -452,6 +412,21 @@ public:
         lv_obj_send_event(obj_, Event, param);
         return static_cast<Derived &>(*this);
     }
+
+    // 绑定点击事件
+    template<void(*handler)()= nullptr>
+    inline Derived &OnClicked()
+    {
+        bind_event<[](Event_t e){
+            if(lv_event_get_code(e)==LV_EVENT_CLICKED)
+            {
+                handler();
+            }
+        },LV_EVENT_CLICKED>();
+
+        return static_cast<Derived &>(*this);
+    }
+
 
     // 状态管理方法
     Derived &add_flag(Flag_t f)
