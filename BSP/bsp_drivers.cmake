@@ -22,7 +22,7 @@ set(BSP_DRIVERS
         "tcp:"
         "timer:hal_tim_ex"
         "usart:hal_uart"
-        "w25qxx:"
+        "w25qxx:spi"
         # HAL库
         "hal_sram:ll_fsmc"
 )

@@ -1,8 +1,7 @@
 set_bsp_components(
         adc
-        rng
-        key
-        debug
+        dac
+        w25qxx
 )
 
 #options_disable_GUI()

@@ -1,31 +1,25 @@
 //
 // Created by fairy on 2024/9/22.
 //
-
-#include "app.hpp"
-
-
+#include <project_config.h>
+#include <bsp_config.h>
 #include "lvgl.h"
 #include "key.hpp"
 #include "spi.h"
 #include "timer.h"
 #include "adc.h"
 #include "dac.h"
-#include "GUI.hpp"
 #include "w25qxx.h"
-
+#include "ui.hpp"
+#include "key_adapter.hpp"
 // 导入算法类
 import flash_storage;
-//const osThreadAttr_t voiceTask_attributes = {
-//        .name = "voiceTask",
-//        .stack_size = 128 * 4,
-//        .priority = (osPriority_t) osPriorityNormal,
-//};
-//void VoiceTask(void *argument);
 
 
 // 使用别名
 using W25QXXFlashStorage = FlashStorage<w25qxx_page_write, w25qxx_buffer_read>;
+namespace ui_main = gui::widgets::main;
+using namespace ui_main;
 
 enum class PlayerState : uint8_t
 {
@@ -68,15 +62,16 @@ public:
     static auto reset_play() -> void;
 
     // 获取是否录过音
-    static auto get_recorded_state()->bool{return is_recorded;}
+    static auto get_recorded_state() -> bool { return is_recorded; }
 
     // 设置是否录过音
-    static auto set_recorded_state(bool state)->void{is_recorded = state;}
+    static auto set_recorded_state(bool state) -> void { is_recorded = state; }
 
-    static auto get_save_state()->bool{return save_state;}
-    static auto set_save_state(bool state)->void{save_state = state;}
+    static auto get_save_state() -> bool { return save_state; }
 
-    static auto load_info()->void;
+    static auto set_save_state(bool state) -> void { save_state = state; }
+
+    static auto load_info() -> void;
 
 private:
     static uint8_t inline is_recorded = 0;// 是否录过音，如果录过，那么采样率不能再变了
@@ -90,16 +85,17 @@ private:
 
 auto Player::on() -> void
 {
-    ImageButton::press(GUI_Base::get_ui()->main.imgbtn_play);
-    UI_Interface::set_time(play_time);// 设置当前播放时间
+    imgbtn_play.press();
+
+    gui::interface::set_time(play_time);// 设置当前播放时间
     timer6_start_it();
     dac_start();
 }
 
 auto Player::off() -> void
 {
-    ImageButton::release(GUI_Base::get_ui()->main.imgbtn_play);
-    play_time = UI_Interface::get_time();// 获取当前播放时间
+    imgbtn_play.release();
+    play_time = gui::interface::get_time();// 获取当前播放时间
     timer6_stop_it();
     dac_stop();
 }
@@ -109,29 +105,30 @@ auto Player::record_on() -> void
     if (is_recorded != 0xFF)
     {
         W25QXXFlashStorage::write_isr_pre();// 预加载
-    } else
+    }
+    else
     {
         // 预加载完毕
         is_recorded = 0xFF;
     }
 
-    UI_Interface::resume_record();
-    UI_Interface::set_time(record_time);// 设置当前录音时间
+    gui::interface::resume_record();
+    gui::interface::set_time(record_time);// 设置当前录音时间
     timer2_start();
     adc1_start_it();// 开启ADC采集
 }
 
 auto Player::record_off() -> void
 {
-    UI_Interface::pause_record();
-    record_time = UI_Interface::get_time();// 获取当前录音时间
+    gui::interface::pause_record();
+    record_time = gui::interface::get_time();// 获取当前录音时间
     timer2_stop();
     adc1_stop_it();// 关闭ADC采集
 }
 
 auto Player::set_speed(PlaySpeed speed) -> void
 {
-    UI_Interface::set_play_speed(speed);
+    gui::interface::set_play_speed(speed);
     switch (speed)
     {
         case PlaySpeed::SPEED_NORMAL:
@@ -143,7 +140,7 @@ auto Player::set_speed(PlaySpeed speed) -> void
             break;
 
         case PlaySpeed::SPEED_1_5:
-            timer6_set_arr(timer6_get_arr() * 2/3);
+            timer6_set_arr(timer6_get_arr() * 2 / 3);
             break;
 
         default:
@@ -160,9 +157,9 @@ auto Player::saveInfo() -> void
     if (!save_state)
     {
         save_state = true;
-        UI_Interface::saveInfo(save_state);
+        gui::interface::saveInfo(save_state);
         FlashInfo info{};
-        info.record_rate =static_cast<uint8_t>(record_sample_rate);
+        info.record_rate = static_cast<uint8_t>(record_sample_rate);
         info.last_record_addr = W25QXXFlashStorage::get_addr();
         info.last_play_addr = play_addr;
         info.record_time = record_time;
@@ -174,16 +171,16 @@ auto Player::saveInfo() -> void
 auto Player::erase() -> void
 {
     // 显示正在擦除
-    UI_Interface::erasing();
+    gui::interface::erasing();
 
     // 重置时间
-    play_time =0;
+    play_time = 0;
     record_time = 0;
     is_recorded = 0;
     // 重置保存状态
     save_state = false;
-    UI_Interface::saveInfo(save_state);
-    UI_Interface::set_time(0);
+    gui::interface::saveInfo(save_state);
+    gui::interface::set_time(0);
 
     // 整片擦除，省得我闹心
     w25qxx_async_chip_erase();
@@ -192,7 +189,7 @@ auto Player::erase() -> void
 
 auto Player::readData() -> uint16_t
 {
-    if(play_addr >= W25QXXFlashStorage::get_addr())
+    if (play_addr >= W25QXXFlashStorage::get_addr())
     {
         Player::off();
     }
@@ -203,7 +200,7 @@ auto Player::readData() -> uint16_t
 auto Player::set_record_sample_rate(RecordSampleRate sample_rate) -> void
 {
     record_sample_rate = sample_rate;
-    UI_Interface::set_record_state(sample_rate);
+    gui::interface::set_record_state(sample_rate);
     switch (sample_rate)
     {
         case RecordSampleRate::SAMPLE_RATE_8K:
@@ -235,16 +232,16 @@ auto Player::reset_play() -> void
 {
     play_addr = 256;
     play_time = 0;
-    UI_Interface::reset_time();
+    gui::interface::reset_time();
 }
 
 auto Player::load_info() -> void
 {
     FlashInfo info = W25QXXFlashStorage::readInfo();
-    if(info.last_play_addr == 0xFFFFFFFF)
+    if (info.last_play_addr == 0xFFFFFFFF)
     {
         save_state = false;
-        UI_Interface::saveInfo(save_state);
+        gui::interface::saveInfo(save_state);
     }
     else
     {
@@ -254,11 +251,11 @@ auto Player::load_info() -> void
         record_time = info.record_time;
         set_record_sample_rate(static_cast<RecordSampleRate>(info.record_rate));
         is_recorded = 0xFF;// 已录音
-        UI_Interface::set_time(play_time);
+        gui::interface::set_time(play_time);
         set_player_state(PlayerState::Normal);
         // 保存状态
         save_state = true;
-        UI_Interface::saveInfo(save_state);
+        gui::interface::saveInfo(save_state);
     }
 
 }
@@ -268,97 +265,106 @@ void app_init()
 {
     spi2_init();// 初始化SPI2
     dac_init();
-    adc1_init();
+    adc1_init(ADC_CHANNEL_0);
     w25qxx_init();// 初始化flash
     timer2_init(FREQ_84M_to_16K);// 分频为16KHz
     timer6_init(FREQ_84M_to_16K);
 }
+
 FlashInfo info;
 uint8_t buffer[20];
+
 /*语音存储与回放处理函数,用于处理各种按键响应*/
 void key_handler()
 {
-    switch (Key::getCode())
+    switch (PlatformKey::getCode())
     {
-        case keyk0:// 播放
+        case keyK0:// 播放
             if (Player::get_player_state() == PlayerState::Erase)
                 return;
 
-            if (Key::stateHandler(2))
+            if (PlatformKey::handle_state(2))
             {
                 if (Player::get_player_state() == PlayerState::Record)
                 {
                     Player::record_off();// 关闭录音
-                    Key::resetState(keyk1);// 重置按键1的状态
+                    // 重置按键1的状态
+#warning "reset函数还没有修复！可自行补充"
                 }
                 Player::set_player_state(PlayerState::Play);
                 Player::on();
-            } else
+            }
+            else
             {
                 Player::set_player_state(PlayerState::Normal);
                 Player::off();
             }
             break;
 
-        case keyk1:// 录音
+        case keyK1:// 录音
             if (Player::get_player_state() == PlayerState::Erase)
                 return;
 
-            if(Player::get_save_state())
+            if (Player::get_save_state())
                 return;
 
-            if (Key::stateHandler(2))
+            if (PlatformKey::handle_state(2))
             {
                 if (Player::get_player_state() == PlayerState::Play)
                 {
                     Player::off();// 关闭播放
-                    Key::resetState(keyk0);// 重置按键0的状态
+                    // 重置按键0的状态
+#warning "reset函数还没有修复！可自行补充"
                 }
                 Player::set_player_state(PlayerState::Record);
 
                 // 设置为录过音
-                if(!Player::get_recorded_state())
+                if (!Player::get_recorded_state())
                 {
                     Player::set_recorded_state(true);
                 }
 
                 Player::record_on();
-            } else
+            }
+            else
             {
                 Player::set_player_state(PlayerState::Normal);
                 Player::record_off();
             }
             break;
 
-        case keyk2:// 慢放
-            if (Key::stateHandler(2))
+        case keyK2:// 慢放
+            if (PlatformKey::handle_state(2))
             {
                 Player::set_speed(PlaySpeed::SPEED_0_75);
-            } else
+            }
+            else
             {
                 Player::set_speed(PlaySpeed::SPEED_NORMAL);
             }
             break;
 
-        case keyk3:// 快放
-            if (Key::stateHandler(2))
+        case keyK3:// 快放
+            if (PlatformKey::handle_state(2))
             {
                 Player::set_speed(PlaySpeed::SPEED_1_5);
-            } else
+            }
+            else
             {
                 Player::set_speed(PlaySpeed::SPEED_NORMAL);
             }
             break;
             // 录音采样率切换
-        case keyk4:
+        case keyK4:
             // 如果已经录制过，则不能切换采样率
-            if(Player::get_recorded_state())
+            if (Player::get_recorded_state())
                 return;
 
-            if (Key::stateHandler(2))
+            if (PlatformKey::handle_state(2))
             {
                 Player::set_record_sample_rate(RecordSampleRate::SAMPLE_RATE_16K);
-            } else
+            }
+            else
             {
                 //
                 Player::set_record_sample_rate(RecordSampleRate::SAMPLE_RATE_8K);
@@ -366,30 +372,29 @@ void key_handler()
             break;
 
             // 保存信息
-        case keyk5:
+        case keyK5:
             Player::saveInfo();
             break;
 
             // 重置播放
-        case keyk8:
+        case keyK8:
             Player::reset_play();
             break;
 
             // 加载
-        case keykE:
-    Player::load_info();
+        case keyKE:
+            Player::load_info();
 
 
             break;
 
-        case keykF:
-            if(Player::get_player_state()==PlayerState::Erase) { return; }
-            else if(Player::get_player_state()==PlayerState::Play) { Player::off(); }
-            else if (Player::get_player_state()==PlayerState::Record){ Player::record_off();}
+        case keyKF:
+            if (Player::get_player_state() == PlayerState::Erase) { return; }
+            else if (Player::get_player_state() == PlayerState::Play) { Player::off(); }
+            else if (Player::get_player_state() == PlayerState::Record) { Player::record_off(); }
 
-            // 重置按键状态
-            Key::resetState(keyk0);
-            Key::resetState(keyk1);
+            // 重置按键0、1状态
+#warning "reset函数还没有修复！可自行补充"
 
 
             Player::set_player_state(PlayerState::Erase);
@@ -418,7 +423,7 @@ void background_handler()
             Player::set_player_state(PlayerState::Normal);
 
             // 显示擦除完毕
-            UI_Interface::erase_done();
+            gui::interface::erase_done();
         }
     }
 }
@@ -428,7 +433,7 @@ void background_handler()
 void adc1_isr()
 {
     // 12位舍弃低4位
-    W25QXXFlashStorage::write_isr(HAL_ADC_GetValue(&hadc1) >> 4);
+    W25QXXFlashStorage::write_isr(get_ADC1_value(ADC_CHANNEL_0) >> 4);
 }
 
 // 用于播放DAC数据
