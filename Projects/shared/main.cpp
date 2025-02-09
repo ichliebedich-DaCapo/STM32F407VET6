@@ -1,7 +1,7 @@
 #include <project_config.h>
 #include "baseInit.h"
 #include "key_adapter.hpp"
-
+#include "key_exit.h"
 #ifdef GUI_ENABLE
 
 #include "GUI.hpp"

@@ -8,8 +8,8 @@
 namespace gui::widgets::main
 {
     Label label_counter; // 计数器显示
-    Label label_x1;     // 触摸点1 x坐标 按钮
-    Label label_y1;    // 触摸点1 y坐标 按钮
+    Button btn_x1;     // 触摸点1 x坐标 按钮
+    Button btn_y1;    // 触摸点1 y坐标 按钮
     Button btn_x2;    // 触摸点2 x坐标 按钮
     Button btn_y2;    // 触摸点2 y坐标 按钮
 }
@@ -73,10 +73,10 @@ namespace gui::init
         widgets::main::label_counter.init("0").pos_size(260, 150, 80, 40);
 
         // 触摸点1 x坐标
-        label_x1.init(80, 100, 80, 40, "0").bg_color(lv_color_hex(0x34e6ff));
+        btn_x1.init(50, 100, 80, 40, "0").bg_color(lv_color_hex(0x34e6ff));
 
         // 触摸点1 y坐标
-        label_y1.init(180, 100, 80, 40, "0").bg_color(lv_color_hex(0x34e6ff));
+        btn_y1.init(150, 100, 80, 40, "0").bg_color(lv_color_hex(0x34e6ff));
 
         // 触摸点2 x坐标 按钮
         btn_x2.init(50, 150, 80, 40, "+").bg_color(lv_color_hex(0x34e6ff));
@@ -93,7 +93,6 @@ namespace gui::init
 
         // 绑定 "-" 按钮事件
         widgets::main::btn_y2.OnClicked<CounterLogic::decrement>();
-
 
         // 屏幕触摸事件
         widgets::main::scr.OnPressing<CounterLogic::update_point>();
@@ -178,14 +177,14 @@ auto CounterLogic::set_value_x1(int value) -> void
 {
     char buf[12];
     sprintf(buf, "%d", value);
-    label_x1.text(buf);
+    btn_x1.text(buf);
 }
 
 auto CounterLogic::set_value_y1(int value) -> void
 {
     char buf[12];
     sprintf(buf, "%d", value);
-    label_y1.text(buf);
+    btn_y1.text(buf);
 }
 
 auto CounterLogic::set_value_x2(int value) -> void

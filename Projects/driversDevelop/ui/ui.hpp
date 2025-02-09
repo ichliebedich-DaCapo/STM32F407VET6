@@ -10,8 +10,8 @@
 namespace gui::widgets::main
 {
     extern Label label_counter; // 计数器显示
-    extern Label btn_x1;     // 触摸点1 x坐标 按钮
-    extern Label btn_y1;    // 触摸点1 y坐标 按钮
+    extern Button btn_x1;     // 触摸点1 x坐标 按钮
+    extern Button btn_y1;    // 触摸点1 y坐标 按钮
     extern Button btn_x2;    // 触摸点2 x坐标 按钮
     extern Button btn_y2;    // 触摸点2 y坐标 按钮
 }

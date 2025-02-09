@@ -3,7 +3,6 @@
 
 
 #include "key.hpp"
-#include "key_exit.h"
 #include <project_config.h>
 
 #ifdef FREERTOS_ENABLE
