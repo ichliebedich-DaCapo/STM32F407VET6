@@ -42,7 +42,7 @@ public:
     // GUI处理函数
     static inline auto handler() -> void { lv_task_handler(); }
 
-    // 刷新回调
+    // 刷新回调,可供DMA回调函数使用
     static inline auto display_flush_ready() -> void { lv_display_flush_ready(disp); }
 
 private:
@@ -98,12 +98,8 @@ auto GUI::disp_drv_init() -> void
     {
         flush(area->x1, area->y1, area->x2, area->y2, (const uint16_t *) px_map);
 
-        // 由于使用DMA中断，下面这个函数在DMA中断回调里
-        // ARM_MATH_CM4只在单片机的cmakelist中有定义，在模拟器的cmake中没有定义
-        // 8088屏幕使用了DMA不需要lv_display_flush_ready，SPI屏幕未使用DMA需要lv_display_flush_ready
-        lv_display_flush_ready(disp_drv);
-#warning "please find some defines to fit it！"
-
+        // 只有定义了DMA中断回调才不需要这个函数，那么这就要求DMA中断启用时需要设置相关宏定义
+        display_flush_ready();
 });
 
     // 缓冲区  双缓冲明显优于单缓冲

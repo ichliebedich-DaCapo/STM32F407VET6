@@ -4,8 +4,7 @@
 #ifndef SIMULATOR_BUTTON_HPP
 #define SIMULATOR_BUTTON_HPP
 
-#include "component.hpp"
-#include "label.hpp"
+#include "widgets.hpp"
 
 class Button : public Widget<Button>
 {
@@ -50,7 +49,7 @@ public:
     }
 
     // 设置文本
-    inline Button &text(Strings fmt, ...)
+    Button &text(Strings fmt, ...)
     {
         va_list args;
         va_start(args, fmt);

@@ -75,6 +75,7 @@ target_include_directories(gui PUBLIC ${GUI_INC_DIRS})
 target_link_libraries(gui PUBLIC lvgl render drivers)
 
 # ------------------------ 可执行目标 ------------------------
+add_compile_options(-Winline)
 add_link_options(-Wl,-gc-sections,--relax,--as-needed,-Map=${CMAKE_BINARY_DIR}/${PROJECT_NAME}.map)
 add_executable(${PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/main.cpp")
 

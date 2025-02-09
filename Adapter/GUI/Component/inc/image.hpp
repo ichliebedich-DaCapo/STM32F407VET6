@@ -4,7 +4,7 @@
 #ifndef SIMULATOR_IMAGE_HPP
 #define SIMULATOR_IMAGE_HPP
 
-#include "component.hpp"
+#include "widgets.hpp"
 
 // 图片类
 class Image : public Widget<Image>

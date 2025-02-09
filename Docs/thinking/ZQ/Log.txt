@@ -1,3 +1,10 @@
+2025.2.9日
+【GUI】：
+    1，现在既没有发生问题，代码也没膨胀，也能成功内联，真棒！(当然，我还没有正式使用链式调用）
+    Memory region         Used Size  Region Size  %age Used
+              CCMRAM:         56 KB        64 KB     87.50%
+                 RAM:       46104 B       128 KB     35.17%
+               FLASH:      386464 B       512 KB     73.71%
 
 2025.2.8六
 【GUI】：

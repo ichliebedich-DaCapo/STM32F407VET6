@@ -34,12 +34,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【工程重构】引入命名空间，成功解决ui资源文件与组件库混乱的依赖关系。">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Base/GUI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Base/GUI.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/component.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/component.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Base/GUI.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Base/GUI.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/thinking/ZQ/Log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Docs/thinking/ZQ/Log.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1712,6 +1708,11 @@
     <option name="rtosType" value="FreeRTOS" />
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="static_lib" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libapp" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -1981,6 +1982,7 @@
       <workItem from="1738980913369" duration="6211000" />
       <workItem from="1739002959896" duration="3131000" />
       <workItem from="1739074706977" duration="671000" />
+      <workItem from="1739078398834" duration="220000" />
     </task>
     <task id="LOCAL-00076" summary="【简易存储示波器】准备合并">
       <option name="closed" value="true" />

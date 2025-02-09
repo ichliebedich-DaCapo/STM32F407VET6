@@ -4,7 +4,7 @@
 #ifndef SIMULATOR_IMAGEBUTTON_HPP
 #define SIMULATOR_IMAGEBUTTON_HPP
 
-#include "component.hpp"
+#include "widgets.hpp"
 
 
 /**

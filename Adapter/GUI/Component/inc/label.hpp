@@ -4,7 +4,7 @@
 #ifndef SIMULATOR_LABEL_HPP
 #define SIMULATOR_LABEL_HPP
 
-#include "component.hpp"
+#include "widgets.hpp"
 
 
 /**
@@ -74,7 +74,7 @@ public:
      * @note 不使用auto来简化，因为会导致二进制膨胀
      * @return
      */
-    inline Label &text(Strings fmt, ...)
+    Label &text(Strings fmt, ...)
     {
         va_list args;
         va_start(args, fmt);

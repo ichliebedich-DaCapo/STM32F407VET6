@@ -4,7 +4,7 @@
 #ifndef SIMULATOR_SLIDER_HPP
 #define SIMULATOR_SLIDER_HPP
 
-#include "component.hpp"
+#include "widgets.hpp"
 
 class Slider : public Widget<Slider>
 {

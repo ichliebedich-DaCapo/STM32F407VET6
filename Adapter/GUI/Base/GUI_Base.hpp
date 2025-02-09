@@ -9,7 +9,7 @@
 
 #endif
 // 头文件
-#include "lvgl.h"
+#include "component.hpp"
 #include "timer.hpp"
 #include "chart.hpp"
 #include "slider.hpp"

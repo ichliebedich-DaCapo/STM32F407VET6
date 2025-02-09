@@ -41,30 +41,34 @@ private:
 using namespace gui::widgets::main;
 namespace gui::init
 {
+
     void screen()
     {
 
         // 计数器显示
+        widgets::main::label_counter.init("0", &lv_customer_font_SourceHanSerifSC_Regular_15)
+        .pos_size(200, 150, 80, 40)
+        .center();
 
-        label_counter.init(200, 150, 80, 40, "0", &lv_customer_font_SourceHanSerifSC_Regular_15);
-        label_counter.align(LV_ALIGN_CENTER, 0, 0);
 
         // "+" 按钮
-        btn_plus.init(100, 250, 80, 40, "+", &lv_customer_font_SourceHanSerifSC_Regular_15);
-        btn_plus.align(LV_ALIGN_CENTER, -100, 0);
-        lv_obj_set_style_bg_color(btn_plus, lv_color_hex(0x34e6ff), LV_PART_MAIN); // 蓝色背景
-        lv_obj_set_style_text_color(btn_plus, lv_color_hex(0x000000), LV_PART_MAIN); // 黑色文字
+        btn_plus.init(100, 250, 80, 40, "+", &lv_customer_font_SourceHanSerifSC_Regular_15)
+                .center( -100)
+                .bg_color(lv_color_hex(0x34e6ff), LV_PART_MAIN)
+                .text_color(lv_color_hex(0x000000), LV_PART_MAIN);
 
         // "-" 按钮
-        btn_minus.init(300, 250, 80, 40, "-", &lv_customer_font_SourceHanSerifSC_Regular_15);
-        btn_minus.align(LV_ALIGN_CENTER, 100, 0);
-        lv_obj_set_style_bg_color(btn_minus, lv_color_hex(0x34e6ff), LV_PART_MAIN); // 蓝色背景
-        lv_obj_set_style_text_color(btn_minus, lv_color_hex(0x000000), LV_PART_MAIN); // 黑色文字
+        btn_minus.init(300, 250, 80, 40, "-", &lv_customer_font_SourceHanSerifSC_Regular_15)
+        .center(100)
+        .bg_color(lv_color_hex(0x34e6ff), LV_PART_MAIN)
+        .text_color(lv_color_hex(0x000000), LV_PART_MAIN);
+
         // 复位按钮
-        btn_reset.init(200, 300, 80, 40, "复位", &lv_customer_font_SourceHanSerifSC_Regular_15);
-        btn_reset.align(LV_ALIGN_CENTER, 0, 50);
-        lv_obj_set_style_bg_color(btn_reset, lv_color_hex(0x34e6ff), LV_PART_MAIN); // 蓝色背景
-        lv_obj_set_style_text_color(btn_reset, lv_color_hex(0x000000), LV_PART_MAIN); // 黑色文字
+        btn_reset.init(200, 300, 80, 40, "复位", &lv_customer_font_SourceHanSerifSC_Regular_15)
+        .center( 0, 50)
+        .bg_color(lv_color_hex(0x34e6ff), LV_PART_MAIN)
+        .text_color(lv_color_hex(0x000000), LV_PART_MAIN);
+
     }
 
 
