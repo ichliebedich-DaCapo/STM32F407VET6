@@ -4,7 +4,7 @@ include(cmake/configure_project.cmake)
 project(Furina LANGUAGES C CXX ASM)
 # --------------------------------------选择你的项目--------------------------------
 # 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
-set(PROJECT_DIR Projects/StorageOscilloscope)
+set(PROJECT_DIR Projects/driversDevelop)
 
 # 创建test项目目录，其下有ui和app目录，并且各目录下有相应文件
 
