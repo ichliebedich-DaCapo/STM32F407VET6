@@ -5,6 +5,7 @@
 #include "i2c.h"
 
 I2C_HandleTypeDef hi2c1;
+
 /* I2C1 init function */
 void i2c1_Init(void)
 {

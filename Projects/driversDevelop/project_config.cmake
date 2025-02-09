@@ -1,8 +1,8 @@
 set_bsp_components(
         adc
         rng
-        key
         debug
+        touch
 )
 
 #options_disable_GUI()

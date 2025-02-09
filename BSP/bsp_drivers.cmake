@@ -9,8 +9,10 @@ set(BSP_DRIVERS
         "cpu_runtime:"
         "dac:hal_dac,timer"
         "debug:"
+        "delay:timer"
         "esp8266:"
         "fsmc:hal_sram,hal_dma"
+        "i2c:hal_i2c"
         "key_exit:"
         "lcd:fsmc,spi"
         "mqtt:"
@@ -21,6 +23,7 @@ set(BSP_DRIVERS
         "spi:hal_spi"
         "tcp:"
         "timer:hal_tim_ex"
+        "touch:delay,i2c"
         "usart:hal_uart"
         "w25qxx:spi"
         # HAL库
@@ -28,13 +31,16 @@ set(BSP_DRIVERS
 )
 
 # 驱动源文件映射
+# 这个将来可以简化
 set(adc_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/adc.c)
 set(baseinit_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/baseInit.c)
 set(cpu_runtime_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/CPU_RunTime.c)
 set(dac_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/dac.c)
 set(debug_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/debug.c)
+set(delay_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/delay.c)
 set(esp8266_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/esp8266.c)
 set(fsmc_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/fsmc.c)
+set(i2c_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/i2c.c)
 set(key_exit_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/key_exit.c)
 set(lcd_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/lcd.c)
 set(mqtt_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/mqtt.c)
@@ -45,6 +51,7 @@ set(sdio_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/sdio.c)
 set(spi_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/spi.c)
 set(tcp_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/tcp.c)
 set(timer_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/timer.c)
+set(touch_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/touch.c)
 set(usart_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/usart.c)
 set(w25qxx_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/w25qxx.c)
 

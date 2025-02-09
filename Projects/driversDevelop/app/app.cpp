@@ -18,7 +18,7 @@
 #include "touch.h"
 #include "delay.h"
 #include "key_adapter.hpp"
-
+#include "app.hpp"
 #include "RCC.h"
 #include "debug.h"
 
@@ -68,7 +68,7 @@ void key_handler()
             {
 //                LCD_Clear(0x36ff);
 //                for(uint16_t i=10;i<200;i++)LCD_Set_Pixel(i,20,0x0000);
-//                for(uint16_t i=10;i<200;i++) UI::set_counter_value(i);
+//                for(uint16_t i=10;i<200;i++) gui::interface::set_counter_value(i);
 //                for(uint16_t i=20;i<200;i++)LCD_Set_Pixel(i,100,0x0000);
 //                for(uint16_t i=30;i<100;i++)LCD_Set_Pixel(i,200,0x0000);
 //                for(uint16_t i=40;i<50;i++)LCD_Set_Pixel(i,250,0x0000);
@@ -82,19 +82,19 @@ void key_handler()
 
                 ft6336_RdReg(touch_press_reg[0], touch_pos_buf1, 4);
                 //竖屏
-//                UI::set_button1_value(((uint16_t)(touch_pos_buf1[0]&0X0F)<<8)+touch_pos_buf1[1]);
-//                UI::set_button2_value(((uint16_t)(touch_pos_buf1[2]&0X0F)<<8)+touch_pos_buf1[3]);
+//                gui::interface::set_button1_value(((uint16_t)(touch_pos_buf1[0]&0X0F)<<8)+touch_pos_buf1[1]);
+//                gui::interface::set_button2_value(((uint16_t)(touch_pos_buf1[2]&0X0F)<<8)+touch_pos_buf1[3]);
                 //横屏
-                UI::set_x1_value(480 - (((uint16_t) (touch_pos_buf1[2] & 0X0F) << 8) + touch_pos_buf1[3]));
-                UI::set_y1_value(((uint16_t) (touch_pos_buf1[0] & 0X0F) << 8) + touch_pos_buf1[1]);
+                gui::interface::set_x1_value(480 - (((uint16_t) (touch_pos_buf1[2] & 0X0F) << 8) + touch_pos_buf1[3]));
+                gui::interface::set_y1_value(((uint16_t) (touch_pos_buf1[0] & 0X0F) << 8) + touch_pos_buf1[1]);
 
                 ft6336_RdReg(touch_press_reg[1], touch_pos_buf2, 4);
                 //竖屏
-//                UI::set_button1_value(((uint16_t)(touch_pos_buf1[0]&0X0F)<<8)+touch_pos_buf1[1]);
-//                UI::set_button2_value(((uint16_t)(touch_pos_buf1[2]&0X0F)<<8)+touch_pos_buf1[3]);
+//                gui::interface::set_button1_value(((uint16_t)(touch_pos_buf1[0]&0X0F)<<8)+touch_pos_buf1[1]);
+//                gui::interface::set_button2_value(((uint16_t)(touch_pos_buf1[2]&0X0F)<<8)+touch_pos_buf1[3]);
                 //横屏
-                UI::set_x2_value(480 - (((uint16_t) (touch_pos_buf2[2] & 0X0F) << 8) + touch_pos_buf2[3]));
-                UI::set_y2_value(((uint16_t) (touch_pos_buf2[0] & 0X0F) << 8) + touch_pos_buf2[1]);
+                gui::interface::set_x2_value(480 - (((uint16_t) (touch_pos_buf2[2] & 0X0F) << 8) + touch_pos_buf2[3]));
+                gui::interface::set_y2_value(((uint16_t) (touch_pos_buf2[0] & 0X0F) << 8) + touch_pos_buf2[1]);
 
 //                touch_state=usr_ScanTouchProcess(&touch_pos);
 
@@ -106,7 +106,7 @@ void key_handler()
             if (PlatformKey ::handle_state(KEY_STATE_NONE))
             {
 //                LCD_Clear(0xffff);
-//                for(uint16_t i=10;i<200;i++) UI::set_button1_value(i);
+//                for(uint16_t i=10;i<200;i++) gui::interface::set_button1_value(i);
 
 //                ft6336_RdReg((FT_ID<<1)|0x01,&test_id, 1);
 //                FT_ID++;
@@ -125,7 +125,7 @@ void key_handler()
         case keyK2:
             LCD_Clear(0xFF36); // 填充颜色 0xFF36
             lcd_flush(20,20,100,100,color);
-//            for(uint16_t i=10;i<200;i++) UI::set_button2_value(i);
+//            for(uint16_t i=10;i<200;i++) gui::interface::set_button2_value(i);
             break;
 
         case keyK3:
@@ -214,13 +214,13 @@ void background_handler()
 //
 //    ft6336_RdReg(touch_press_reg[0], touch_pos_buf1, 4);
 //    //横屏
-//    UI::set_x1_value(480 - (((uint16_t) (touch_pos_buf1[2] & 0X0F) << 8) + touch_pos_buf1[3]));
-//    UI::set_y1_value(((uint16_t) (touch_pos_buf1[0] & 0X0F) << 8) + touch_pos_buf1[1]);
+//    gui::interface::set_x1_value(480 - (((uint16_t) (touch_pos_buf1[2] & 0X0F) << 8) + touch_pos_buf1[3]));
+//    gui::interface::set_y1_value(((uint16_t) (touch_pos_buf1[0] & 0X0F) << 8) + touch_pos_buf1[1]);
 //
 //    ft6336_RdReg(touch_press_reg[1], touch_pos_buf2, 4);
 //    //横屏
-//    UI::set_x2_value(480 - (((uint16_t) (touch_pos_buf2[2] & 0X0F) << 8) + touch_pos_buf2[3]));
-//    UI::set_y2_value(((uint16_t) (touch_pos_buf2[0] & 0X0F) << 8) + touch_pos_buf2[1]);
+//    gui::interface::set_x2_value(480 - (((uint16_t) (touch_pos_buf2[2] & 0X0F) << 8) + touch_pos_buf2[3]));
+//    gui::interface::set_y2_value(((uint16_t) (touch_pos_buf2[0] & 0X0F) << 8) + touch_pos_buf2[1]);
 //
 //    delay_us(30000);
 /*************************/
@@ -286,9 +286,9 @@ uint8_t usr_ScanTouchProcess( stru_pos *pPos)
                             pPos->xpox[i] = 480-(((uint16_t)(buf[2]&0X0F)<<8)+buf[3]);
                             break;
                     }
-                    UI::set_counter_value(i);
-                    UI::set_x1_value(pPos->xpox[i]);
-                    UI::set_y1_value(pPos->ypox[i]);
+                    gui::interface::set_counter_value(i);
+                    gui::interface::set_x1_value(pPos->xpox[i]);
+                    gui::interface::set_y1_value(pPos->ypox[i]);
 //                    printf("x[%d]:%d,y[%d]:%d\r\n",i,pPos->xpox[i],i,pPos->ypox[i]);
                 }
             }

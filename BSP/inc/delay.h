@@ -4,9 +4,7 @@
 
 #ifndef FURINA_DELAY_H
 #define FURINA_DELAY_H
-#include "App_Conf.h"
-#include "stm32f4xx_hal.h"
-#include <stdint.h>
+#include <bsp_config.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -14,7 +12,7 @@ extern "C" {
 
 void delay_Init();
 
-// ÑÓÊ±Î¢Ãëº¯Êý
+// å»¶æ—¶å¾®ç§’å‡½æ•°
 void delay_us(uint16_t us);
 
 

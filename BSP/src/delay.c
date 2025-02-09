@@ -16,7 +16,7 @@ void timer14_stop()
     HAL_TIM_Base_Stop(&htim14);
 }
 
-// ÉèÖÃÔ¤·ÖÆµ
+// è®¾ç½®é¢„åˆ†é¢‘
 void timer14_set_psc(uint16_t psc)
 {
     __HAL_TIM_SET_PRESCALER(&htim14, psc);
@@ -43,27 +43,27 @@ void delay_Init()
     {
         Error_Handler();
     }
-    // Æô¶¯¶¨Ê±Æ÷²»ÄÜÆµ·±¿ª¹Ø£¬·ñÔò»áÒì³£
+    // å¯åŠ¨å®šæ—¶å™¨ä¸èƒ½é¢‘ç¹å¼€å…³ï¼Œå¦åˆ™ä¼šå¼‚å¸¸
     timer14_start();
 }
 
 /**
- * @brief Î¢Ãë¼¶ÑÓÊ±
- * @param us Î¢Ãë
- * @Õð¾ª Ö»ÊÊºÏµ¥Ïß³Ì£¬¶øÇÒ²»ÄÜÊäÈë0»òÕß0xFFFF
+ * @brief å¾®ç§’çº§å»¶æ—¶
+ * @param us å¾®ç§’
+ * @éœ‡æƒŠ åªé€‚åˆå•çº¿ç¨‹ï¼Œè€Œä¸”ä¸èƒ½è¾“å…¥0æˆ–è€…0xFFFF
  */
 void delay_us(uint16_t us)
 {
-    // Æô¶¯¶¨Ê±Æ÷
+    // å¯åŠ¨å®šæ—¶å™¨
 
-    // ÆµÂÊÎª84MHz£¬84M/1000 = 84000
+    // é¢‘çŽ‡ä¸º84MHzï¼Œ84M/1000 = 84000
     volatile uint16_t final_count =TIM14->CNT+us;
 
-    // Õë¶ÔÒç³öÇé¿ö
+    // é’ˆå¯¹æº¢å‡ºæƒ…å†µ
     while (TIM14->CNT>final_count);
 
-    // ·ÇÒç³ö
+    // éžæº¢å‡º
     while (TIM14->CNT < final_count);
 
-    // Í£Ö¹¶¨Ê±Æ÷
+    // åœæ­¢å®šæ—¶å™¨
 }

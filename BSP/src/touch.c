@@ -4,11 +4,11 @@
 #include "touch.h"
 #include "i2c.h"
 #include "delay.h"
-#include "stm32f4xx_hal.h"
 
 
 
-/**GPIOÒı½Å¶¨Òå
+
+/**GPIOå¼•è„šå®šä¹‰
 PB5     ------> CTP_RST
 PB6     ------> CTP_INT
 */
@@ -17,19 +17,19 @@ PB6     ------> CTP_INT
 #define TOUCH_INT_Pin GPIO_PIN_6
 #define TOUCH_INT_GPIO_Port GPIOB
 
-// º¯ÊıÖØ¶¨Òå
+// å‡½æ•°é‡å®šä¹‰
 #define FT_RST_L     HAL_GPIO_WritePin(TOUCH_RST_GPIO_Port, TOUCH_RST_Pin, GPIO_PIN_RESET)
 #define FT_RST_H     HAL_GPIO_WritePin(TOUCH_RST_GPIO_Port, TOUCH_RST_Pin, GPIO_PIN_SET)
 
 //
-//´¥Ãş³õÊ¼»¯º¯Êı£¨Çı¶¯Ğ¾Æ¬FT6336U£©£¨·µ»Ø1³É¹¦·µ»Ø0Ê§°Ü£©
+//è§¦æ‘¸åˆå§‹åŒ–å‡½æ•°ï¼ˆé©±åŠ¨èŠ¯ç‰‡FT6336Uï¼‰ï¼ˆè¿”å›1æˆåŠŸè¿”å›0å¤±è´¥ï¼‰
 uint8_t touch_init( void )
 {
     uint8_t id=100;
 
-    // ³õÊ¼»¯i2c1
+    // åˆå§‹åŒ–i2c1
     i2c1_Init();
-    //ÅäÖÃGPIO
+    //é…ç½®GPIO
     GPIO_InitTypeDef GPIO_InitStruct = {0};
     __HAL_RCC_GPIOB_CLK_ENABLE();
     HAL_GPIO_WritePin(TOUCH_RST_GPIO_Port, TOUCH_RST_Pin,GPIO_PIN_RESET);
@@ -39,7 +39,7 @@ uint8_t touch_init( void )
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     HAL_GPIO_Init(TOUCH_RST_GPIO_Port, &GPIO_InitStruct);
 
-    //ÅäÖÃÍâ²¿ÖĞ¶Ï ¿ÉÒÔ·ÅÔÚBSP\src\key_exitÖĞ
+    //é…ç½®å¤–éƒ¨ä¸­æ–­ å¯ä»¥æ”¾åœ¨BSP\src\key_exitä¸­
     GPIO_InitStruct.Pin = TOUCH_INT_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
     GPIO_InitStruct.Pull = GPIO_PULLUP;
@@ -53,11 +53,11 @@ uint8_t touch_init( void )
 
     if(!ft6336_RdReg(FT_ID_G_FOCALTECH_ID,&id, 1))
     {
-        return FT_FALSE1;//I2CÍ¨ĞÅ¹ÊÕÏ
+        return FT_FALSE1;//I2Cé€šä¿¡æ•…éšœ
     }
     if(id != PANNEL_ID)
     {
-        return FT_FALSE2;//¼Ä´æÆ÷Öµ²»Æ¥Åä
+        return FT_FALSE2;//å¯„å­˜å™¨å€¼ä¸åŒ¹é…
 
     }
     return id;
@@ -97,22 +97,22 @@ int32_t touch_read_single_point(int32_t *last_x, int32_t *last_y)
     uint8_t point_number;
     uint8_t touch_pos_buf[4];
 
-    // ¶ÁÈ¡´¥ÃşµãµÄÊıÁ¿
+    // è¯»å–è§¦æ‘¸ç‚¹çš„æ•°é‡
     ft6336_RdReg(FT_REG_NUM_FINGER, &point_number, 1);
 
-    // Èç¹ûÃ»ÓĞ´¥Ãşµã£¬·µ»Ø0
+    // å¦‚æœæ²¡æœ‰è§¦æ‘¸ç‚¹ï¼Œè¿”å›0
     if (point_number == 0) {
         return 0;
     }
 
-    // ¶ÁÈ¡µÚÒ»¸ö´¥ÃşµãµÄ×ø±ê
+    // è¯»å–ç¬¬ä¸€ä¸ªè§¦æ‘¸ç‚¹çš„åæ ‡
     ft6336_RdReg(FT_TP1_REG, touch_pos_buf, 4);
 
-    // ½âÎö´¥ÃşµãµÄ×ø±ê ºáÆÁ
+    // è§£æè§¦æ‘¸ç‚¹çš„åæ ‡ æ¨ªå±
     *last_x = 480 - (((uint16_t)(touch_pos_buf[2] & 0x0F) << 8) + touch_pos_buf[3]);
     *last_y = ((uint16_t)(touch_pos_buf[0] & 0x0F) << 8) + touch_pos_buf[1];
 
-    // ·µ»Ø1±íÊ¾ÓĞ´¥Ãşµã
+    // è¿”å›1è¡¨ç¤ºæœ‰è§¦æ‘¸ç‚¹
     return 1;
 }
 

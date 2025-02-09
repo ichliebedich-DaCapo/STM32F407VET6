@@ -4,19 +4,17 @@
 
 #ifndef FURINA_I2C_H
 #define FURINA_I2C_H
-#include "App_Conf.h"
-#include "stm32f4xx_hal.h"
-#include <stdint.h>
+#include <bsp_config.h>
 #include "debug.h"
-#include "stdio.h"
+
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void i2c1_Init(); // I2C1³õÊ¼»¯
-void I2C_Write(uint8_t DevAddress, uint8_t *pData, uint16_t Size); // Ğ´Êı¾İµ½I2CÉè±¸
-void I2C_Read(uint8_t DevAddress, uint8_t *pData, uint16_t Size);  // ´ÓI2CÉè±¸¶ÁÈ¡Êı¾İ
+void i2c1_Init(); // I2C1åˆå§‹åŒ–
+void I2C_Write(uint8_t DevAddress, uint8_t *pData, uint16_t Size); // å†™æ•°æ®åˆ°I2Cè®¾å¤‡
+void I2C_Read(uint8_t DevAddress, uint8_t *pData, uint16_t Size);  // ä»I2Cè®¾å¤‡è¯»å–æ•°æ®
 HAL_StatusTypeDef I2C_ReadRegister(uint16_t DevAddress, uint16_t RegAddress, uint8_t *pData, uint16_t Size);
 HAL_StatusTypeDef I2C_WriteRegister(uint16_t DevAddress, uint16_t RegAddress, uint8_t *pData, uint16_t Size);
 #ifdef __cplusplus

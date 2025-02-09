@@ -26,8 +26,6 @@ namespace
 }
 
 
-
-
 /**
  * @brief GUI类
  */
@@ -35,7 +33,8 @@ class GUI
 {
 public:
 
-    template<void(*lcd_init)(),void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p),
+    template<void(*lcd_init)(), void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
+                                                   const uint16_t *color_p),
             int32_t (*touchpad_read_xy)(int32_t *last_x, int32_t *last_y) = nullptr>
     static auto init() -> void;
 
@@ -60,23 +59,23 @@ private:
 };
 
 
-template<void(*lcd_init)(),void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p),
+template<void(*lcd_init)(), void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
+                                               const uint16_t *color_p),
         int32_t (*touchpad_read_xy)(int32_t *last_x, int32_t *last_y)>
 auto GUI::init() -> void
 {
 
-    lcd_init();// 初始化LCD
+    /********初始化LCD*******/
+    if constexpr (lcd_init != nullptr) { lcd_init(); }
+
     /********初始化LVGL*******/
     lv_init();
 
     /******初始化显示设备******/
-    disp_drv_init<disp_flush>();
+    if constexpr (disp_flush != nullptr) { disp_drv_init<disp_flush>(); }
 
     /*****初始化触摸屏******/
-    if constexpr (touchpad_read_xy != nullptr)
-    {
-        touchpad_init<touchpad_read_xy>();
-    }
+    if constexpr (touchpad_read_xy != nullptr) { touchpad_init<touchpad_read_xy>(); }
 
 
     /*****初始化GUI组件*****/
@@ -100,7 +99,7 @@ auto GUI::disp_drv_init() -> void
 
         // 只有定义了DMA中断回调才不需要这个函数，那么这就要求DMA中断启用时需要设置相关宏定义
         display_flush_ready();
-});
+    });
 
     // 缓冲区  双缓冲明显优于单缓冲
     LV_ATTRIBUTE_MEM_ALIGN

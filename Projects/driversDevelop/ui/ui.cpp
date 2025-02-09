@@ -2,17 +2,18 @@
 // Created by fairy on 2025/1/10 18:43.
 //
 #include "ui.hpp"
-// 头文件
+
 
 // 变量
 namespace gui::widgets::main
 {
     Label label_counter; // 计数器显示
-    Button btn_plus; // "+" 按钮
-    Button btn_minus; // "-" 按钮
-    Button btn_reset; // 复位按钮
+    Button btn_x1;     // 触摸点1 x坐标 按钮
+    Button btn_y1;    // 触摸点1 y坐标 按钮
+    Button btn_x2;    // 触摸点2 x坐标 按钮
+    Button btn_y2;    // 触摸点2 y坐标 按钮
 }
-
+static int counter_value = 0; // 计数器值存储
 
 // 计数器逻辑
 class CounterLogic
@@ -31,7 +32,19 @@ public:
     static inline auto get_value() -> int;
 
     // 设置计数器值
-    static inline auto set_value(int value) -> void;
+    static inline auto set_value_label(int value) -> void;
+
+    // 触摸点1 x坐标
+    static inline auto set_value_x1(int value) -> void;
+
+    // 触摸点1 y坐标
+    static inline auto set_value_y1(int value) -> void;
+
+    // 触摸点2 x坐标
+    static inline auto set_value_x2(int value) -> void;
+
+    // 触摸点2 y坐标
+    static inline auto set_value_y2(int value) -> void;
 
 private:
     static inline int counter_value = 0; // 计数器值
@@ -48,59 +61,63 @@ namespace gui::init
         Button::Font(lv_customer_font_SourceHanSerifSC_Regular_15);
 
         // 计数器显示
-        widgets::main::label_counter.init("0")
-                .pos_size(200, 150, 80, 40)
+        widgets::main::label_counter.init("0").pos_size(200, 150, 80, 40)
                 .center();
 
-        // "+" 按钮
-        btn_plus.init(100, 250, 80, 40, "+")
-                .center(-100)
-                .bg_color(lv_color_hex(0x34e6ff), LV_PART_MAIN);
+        // 触摸点1 x坐标 按钮
+        btn_x1.init(50, 100, 80, 40, "0").bg_color(lv_color_hex(0x34e6ff));
 
-        // "-" 按钮
-        btn_minus.init(300, 250, 80, 40, "-")
-                .center(100)
-                .bg_color(lv_color_hex(0x34e6ff), LV_PART_MAIN);
+        // 触摸点1 y坐标 按钮
+        btn_y1.init(150, 100, 80, 40, "0").bg_color(lv_color_hex(0x34e6ff));
 
-        // 复位按钮
-        btn_reset.init(200, 300, 80, 40, "复位")
-                .center(0, 50)
-                .bg_color(lv_color_hex(0x34e6ff), LV_PART_MAIN);
+        // 触摸点2 x坐标 按钮
+        btn_x2.init(50, 150, 80, 40, "0").bg_color(lv_color_hex(0x34e6ff));
 
+        // 触摸点2 y坐标 按钮
+        btn_y2.init(150, 150, 80, 40, "0").bg_color(lv_color_hex(0x34e6ff));
     }
 
 
     void events()
     {
         // 绑定 "+" 按钮事件
-        widgets::main::btn_plus.OnClicked<CounterLogic::increment>();
+        widgets::main::btn_x1.OnClicked<CounterLogic::increment>();
 
         // 绑定 "-" 按钮事件
-        widgets::main::btn_minus.OnClicked<CounterLogic::decrement>();
+        widgets::main::btn_x2.OnClicked<CounterLogic::decrement>();
 
         // 绑定复位按钮事件
-        widgets::main::btn_reset.OnClicked<CounterLogic::reset>();
+        widgets::main::btn_y1.OnClicked<CounterLogic::reset>();
     }
 }
 
 
-// UI接口
+/// UI接口
 namespace gui::interface
 {
-    void pressA()
-    {
-
-    }
-
-    void pressS()
-    {
-
-
-    }
-
     auto set_counter_value(int value) -> void
     {
-        CounterLogic::set_value(value);
+        CounterLogic::set_value_label(value);
+    }
+
+    auto set_x1_value(int value) -> void
+    {
+        CounterLogic::set_value_x1(value);
+    }
+
+    auto set_y1_value(int value) -> void
+    {
+        CounterLogic::set_value_y1(value);
+    }
+
+    auto set_x2_value(int value) -> void
+    {
+        CounterLogic::set_value_x2(value);
+    }
+
+    auto set_y2_value(int value) -> void
+    {
+        CounterLogic::set_value_y2(value);
     }
 
     auto get_counter_value() -> int
@@ -109,7 +126,7 @@ namespace gui::interface
     }
 }
 
-// -----------------------------成员函数的实现---------------------------------------
+
 
 auto CounterLogic::increment() -> void
 {
@@ -140,10 +157,38 @@ auto CounterLogic::get_value() -> int
     return counter_value;
 }
 
-auto CounterLogic::set_value(int value) -> void
+auto CounterLogic::set_value_label(int value) -> void
 {
     counter_value = value;
     char buf[12];
     sprintf(buf, "%d", counter_value);
     label_counter.text(buf);
+}
+
+auto CounterLogic::set_value_x1(int value) -> void
+{
+    char buf[12];
+    sprintf(buf, "%d", value);
+    btn_x1.text(buf);
+}
+
+auto CounterLogic::set_value_y1(int value) -> void
+{
+    char buf[12];
+    sprintf(buf, "%d", value);
+    btn_y1.text(buf);
+}
+
+auto CounterLogic::set_value_x2(int value) -> void
+{
+    char buf[12];
+    sprintf(buf, "%d", value);
+    btn_x2.text(buf);
+}
+
+auto CounterLogic::set_value_y2(int value) -> void
+{
+    char buf[12];
+    sprintf(buf, "%d", value);
+    btn_y2.text(buf);
 }

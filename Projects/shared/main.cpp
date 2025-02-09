@@ -5,6 +5,7 @@
 #ifdef GUI_ENABLE
 
 #include "GUI.hpp"
+#include "touch.h"
 
 #endif
 
