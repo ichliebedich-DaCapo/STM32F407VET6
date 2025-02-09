@@ -41,6 +41,7 @@ public:
     init(Coord x, Coord y, Coord w, Coord h, Strings text = nullptr, Obj parent = parent_)
     {
         init(text, parent);
+        pos_size(x, y, w, h);
         border_radius(5);
         bg_color(Color_Firefly_Green);
         bg_opa(125);
@@ -74,7 +75,7 @@ public:
     {
         va_list args;
         va_start(args, fmt);
-        lv_label_set_text_fmt(obj_, fmt, args);
+        lv_label_set_text_fmt(label, fmt, args);
         va_end(args);
         return *this;
     }

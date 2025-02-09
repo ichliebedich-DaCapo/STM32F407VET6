@@ -16,7 +16,7 @@
 #include <functional>
 #include <utility>
 
-// 去他妈的宏
+// 去他宝贝的宏
 #undef main
 #undef interface
 
@@ -74,13 +74,13 @@ int keyboard_thread(void *data)
     keyboard.addKeyCheck('A', []()
     {
         std::cout << "A pressed" << std::endl;
-        gui::interface::pressA();
+//        gui::interface::pressA();
     });
 
     keyboard.addKeyCheck('S', []()
     {
         std::cout << "S pressed" << std::endl;
-        gui::interface::pressS();
+//        gui::interface::pressS();
     });
 
     keyboard.addKeyCheck('D', []()

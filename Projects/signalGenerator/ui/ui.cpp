@@ -2,7 +2,6 @@
 // Created by fairy on 2024/10/22 16:34.
 //
 #include "ui.hpp"
-#include "GUI.hpp"
 /**
  * @简介：双音频信号发生器
  * @note
@@ -221,8 +220,30 @@ constexpr uint16_t bg_color = 0xFFFF;
 constexpr uint16_t line_color = 0x0000;
 
 // 变量
-struct lv_ui_t lv_ui;
-struct lv_ui_t *gui = &lv_ui;
+namespace gui::widgets::main
+{
+    Component screen{};// 屏幕自身
+    Component rect;//示波器方框
+    Button btn_mode;// 模式
+    Label label_mode;
+    Button btn_freq;// 频率
+    Label label_freq;
+    Button btn_ratio_add;// 比例
+    Button btn_ratio_sub;
+    Label label_ratio;
+    Button btn_bias_add;// 偏置
+    Button btn_bias_sub;
+    Label label_bias;
+    Label label_tick;// 时刻
+    Label label_info;// 信息
+    Label label_title;// 标题
+    ImageButton imgbtn_play;// 播放键
+    Label label_cpu;
+    Label label_wave_cnt;// 波形点数
+    Label label_wave_type;// 波形类型
+    Label label_wave_generate;// 波形生成
+    Label label_wave_period;// 波形周期
+}
 
 Timer tick_timer;
 uint8_t Buf[point_cnt];
@@ -334,104 +355,91 @@ private:
     static inline bool is_fps_time = false;// 是否开启FPS时间 -> keyk14
 };
 
+// 命名空间别名,简化书写
+namespace ui_main = gui::widgets::main;
+using namespace ui_main;
 
-/***********************函数实现***********************/
-auto GUI_Base::screen_init() -> void
+namespace gui::init
 {
-    Component::set_parent(gui->main.screen.get_obj());
+    void screen()
+    {
+        // 设置边框
+        rect.init(78, 36, 324, 208)
+                .border_radius(5);
 
-    // 设置边框
-    gui->main.rect.init(78, 36, 324, 208);
-    gui->main.rect.border_radius(5);
+        // 设置按钮全局字体
+        Button::Font(lv_customer_font_SourceHanSerifSC_Regular_15);
+        Label::Font(lv_customer_font_SourceHanSerifSC_Regular_15);
 
-    //  按钮_模式：单频、混频
-    gui->main.btn_mode.init(40, 265, 40, 30, "单频", &lv_customer_font_SourceHanSerifSC_Regular_15);
-    gui->main.label_mode.init(45, 300, 40, 20, "模式", &lv_customer_font_SourceHanSerifSC_Regular_13);
+        //  按钮_模式：单频、混频
+        btn_mode.init(40, 265, 40, 30, "单频");
+        btn_bias_sub.init(115, 265, 30, 30, "-");
+        btn_bias_add.init(155, 265, 30, 30, "+");
+        btn_ratio_sub.init(295, 265, 30, 30, "-");
+        btn_ratio_add.init(335, 265, 30, 30, "+");
+        btn_freq.init(400, 265, 40, 30, "800");// 按钮_频率：8K、16K // 根据对称性，x：480-40-40
+        label_title.init(190, 13, 140, 30, "双音频信号发生器");// 标签：标题
+        
+        // 设置按钮全局字体
+        Button::Font(lv_customer_font_SourceHanSerifSC_Regular_13);
+        Label::Font(lv_customer_font_SourceHanSerifSC_Regular_13);
 
-    // 按钮_偏置：+、-
-    gui->main.btn_bias_sub.init(115, 265, 30, 30, "-", &lv_customer_font_SourceHanSerifSC_Regular_15);
-    gui->main.btn_bias_add.init(155, 265, 30, 30, "+", &lv_customer_font_SourceHanSerifSC_Regular_15);
-    gui->main.label_bias.init(118, 300, 80, 20, "偏置：0", &lv_customer_font_SourceHanSerifSC_Regular_13);
+        label_bias.init(118, 300, 80, 20, "偏置：0");
+        label_mode.init(45, 300, 40, 20, "模式");
+        label_freq.init(405, 300, 40, 20, "频率");
+        label_ratio.init(298, 300, 80, 20, "占比：50%");
+
+        // 标签：信息
+        label_info.init(420, 60, 60, 80, "  队伍：\n\n王正翔\n吴俊颐\n谢智晴\n何乃滔");
+        label_cpu.init(0, 0, 80, 30, "CPU:35℃\n");// 标签：CPU温度
+        label_tick.init(5, 50, 50, 80, "tick：\n0");// 标签：时刻
+        label_wave_cnt.init(5, 80, 60, 80, "点数：128");// 标签：显示点数
+        label_wave_period.init(5, 160, 70, 80, "周期：1.5s");// 标签：波形周期
+        label_wave_type.init(5, 210, 60, 80, "线性插值");// 标签：算法
+
+        // 标签：波形生成
+        label_wave_generate.init(430, 200, 50, 80, "波形未产生");
+        label_wave_generate.hidden();
+
+        // 图片按钮：停止、播放
+        imgbtn_play.init(216, 256, 58, 60, &btn_list_play, &btn_list_pause);
+
+        // print
+        FPS::init(&lv_customer_font_SourceHanSerifSC_Regular_13, 415, 0);
+        FPS::set_right();
+    }
+
+    void events()
+    {
+        /*  创建定时器*/
+        tick_timer.create([](lv_timer_t *)
+                          {
+                              SignalGenerator::handler();
+                              SignalGenerator::print_tick();
+                          }, Freq_8K);
+        // 绑定播放事件
+        widgets::main::imgbtn_play.OnPressedReleased<SignalGenerator::start, SignalGenerator::stop>();
+
+        // 绑定频率事件
+        widgets::main::btn_freq.OnClicked<SignalGenerator::switch_freq>();
 
 
-    // 按钮_频率：8K、16K
-    gui->main.btn_freq.init(400, 265, 40, 30, "800", &lv_customer_font_SourceHanSerifSC_Regular_15);// 根据对称性，x：480-40-40
-    gui->main.label_freq.init(405, 300, 40, 20, "频率", &lv_customer_font_SourceHanSerifSC_Regular_13);
-
-    // 按钮_占比：+、-
-    gui->main.btn_ratio_sub.init(295, 265, 30, 30, "-", &lv_customer_font_SourceHanSerifSC_Regular_15);
-    gui->main.btn_ratio_add.init(335, 265, 30, 30, "+", &lv_customer_font_SourceHanSerifSC_Regular_15);
-    gui->main.label_ratio.init(298, 300, 80, 20, "占比：50%", &lv_customer_font_SourceHanSerifSC_Regular_13);
+        // 绑定偏置事件
+        widgets::main::btn_bias_sub.OnClicked<SignalGenerator::sub_bias>();
+        widgets::main::btn_bias_add.OnClicked<SignalGenerator::add_bias>();
 
 
-    // 图片按钮：停止、播放
-    gui->main.imgbtn_play.init(216, 256, 58, 60, &btn_list_play, &btn_list_pause);
+        // 绑定模式事件
+        btn_mode.OnClicked<SignalGenerator::switch_mode>();
 
-
-    // 标签：信息
-    gui->main.label_info.init(420, 60, 60, 80, "  队伍：\n\n王正翔\n吴俊颐\n谢智晴\n何乃滔",
-                              &lv_customer_font_SourceHanSerifSC_Regular_13);
-
-    // 标签：CPU温度
-    gui->main.label_cpu.init(0, 0, 80, 30, "CPU:35℃\n", &lv_customer_font_SourceHanSerifSC_Regular_13);
-
-    // 标签：时刻
-    gui->main.label_tick.init(5, 50, 50, 80, "tick：\n0", &lv_customer_font_SourceHanSerifSC_Regular_13);
-
-    // 标签：显示点数
-    gui->main.label_wave_cnt.init(5, 80, 60, 80, "点数：128", &lv_customer_font_SourceHanSerifSC_Regular_13);
-
-    // 标签：波形周期
-    gui->main.label_wave_period.init(5, 160, 70, 80, "周期：1.5s", &lv_customer_font_SourceHanSerifSC_Regular_13);
-
-    // 标签：算法
-    gui->main.label_wave_type.init(5, 210, 60, 80, "线性插值", &lv_customer_font_SourceHanSerifSC_Regular_13);
-
-
-    // 标签：波形生成
-    gui->main.label_wave_generate.init(430, 200, 50, 80, "波形未产生", &lv_customer_font_SourceHanSerifSC_Regular_13);
-    gui->main.label_wave_generate.hidden();
-
-    // 标签：标题
-    gui->main.label_title.init(190, 13, 140, 30, "双音频信号发生器", &lv_customer_font_SourceHanSerifSC_Regular_15);
-
-    // print
-    FPS::init(&lv_customer_font_SourceHanSerifSC_Regular_13, 415, 0);
-    FPS::set_right();
+        // 绑定占比事件
+        btn_ratio_add.OnClicked<SignalGenerator::add_ratio>();
+        btn_ratio_sub.OnClicked<SignalGenerator::sub_ratio>();
+    }
 }
 
 
 /***********************函数实现***********************/
-
-void GUI_Base::events_init()
-{
-    /*  创建定时器*/
-    tick_timer.create([](lv_timer_t *)
-                      {
-                          SignalGenerator::handler();
-                          SignalGenerator::print_tick();
-                      }, Freq_8K);
-    // 绑定播放事件
-    gui->main.imgbtn_play.add_event(imgbtn_fun2({ SignalGenerator::start(); }, { SignalGenerator::stop(); }));
-
-    // 绑定频率事件
-    gui->main.btn_freq.add_event(btn_fun(SignalGenerator::switch_freq();));
-
-
-    // 绑定偏置事件
-    gui->main.btn_bias_add.add_event(btn_fun(SignalGenerator::add_bias();));
-    gui->main.btn_bias_sub.add_event(btn_fun(SignalGenerator::sub_bias();));
-
-
-    // 绑定模式事件
-    gui->main.btn_mode.add_event(btn_fun(SignalGenerator::switch_mode();));
-
-    // 绑定占比事件
-    gui->main.btn_ratio_add.add_event(btn_fun(SignalGenerator::add_ratio();));
-    gui->main.btn_ratio_sub.add_event(btn_fun(SignalGenerator::sub_ratio();));
-
-}
-
 
 auto SignalGenerator::handler() -> void
 {
@@ -553,7 +561,7 @@ auto SignalGenerator::add_bias() -> void
         bias += 10;
     char buf[12];
     sprintf(buf, "偏置：%d", bias);
-    gui->main.label_bias.set_text(buf);
+    label_bias.text(buf);
 }
 
 // 减偏置
@@ -563,7 +571,7 @@ auto SignalGenerator::sub_bias() -> void
         bias -= 10;
     char buf[12];
     sprintf(buf, "偏置：%d", bias);
-    gui->main.label_bias.set_text(buf);
+    label_bias.text(buf);
 }
 
 auto SignalGenerator::add_ratio() -> void
@@ -582,7 +590,7 @@ auto SignalGenerator::sub_ratio() -> void
 
 auto SignalGenerator::print_tick() -> void
 {
-    gui->main.label_tick.set_text("tick：\n%lu", get_tick());
+    label_tick.text("tick：\n%lu", get_tick());
 }
 
 
@@ -592,17 +600,17 @@ auto SignalGenerator::set_freq(bool freq) -> void
 {
     _freq = freq;
     index_offset = _freq ? index_offset_16K : index_offset_8K;
-    gui->main.btn_freq.set_text(_freq ? "16K" : "8K");
+    btn_freq.text(_freq ? "16K" : "8K");
 
 #if Strong_Print
-    timer.set_period(_freq ? Freq_16K : Freq_8K);
+    timer.period(_freq ? Freq_16K : Freq_8K);
 #endif
 }
 
 auto SignalGenerator::set_mode(bool &mode) -> void
 {
     _mode = mode;
-    gui->main.btn_mode.set_text(_mode ? "双频" : "单频");
+    btn_mode.text(_mode ? "双频" : "单频");
 }
 
 auto SignalGenerator::set_ratio(uint8_t ratio) -> void
@@ -610,7 +618,7 @@ auto SignalGenerator::set_ratio(uint8_t ratio) -> void
     _ratio = ratio;
     char buf[12];
     sprintf(buf, "占比：%d%%", _ratio);
-    gui->main.label_ratio.set_text(buf);
+    label_ratio.text(buf);
 }
 
 // 更新时间
@@ -661,7 +669,7 @@ auto SignalGenerator::add_wave_cnt() -> void
 
     LCD_Color_Clean(start_x, start_y, start_x + chart_width, start_y + chart_height, bg_color);// 清除显示
     sprintf(buf, "点数：%3d", wave_cnt);
-    gui->main.label_wave_cnt.set_text(buf);
+    label_wave_cnt.text(buf);
 }
 
 auto SignalGenerator::sub_wave_cnt() -> void
@@ -677,7 +685,7 @@ auto SignalGenerator::sub_wave_cnt() -> void
 
     LCD_Color_Clean(start_x, start_y, start_x + chart_width, start_y + chart_height, bg_color);// 清除显示
     sprintf(buf, "点数：%3d", wave_cnt);
-    gui->main.label_wave_cnt.set_text(buf);
+    label_wave_cnt.text(buf);
 }
 
 auto SignalGenerator::switch_wave_type() -> void
@@ -710,18 +718,18 @@ auto SignalGenerator::switch_wave_type() -> void
             break;
     }
 //    LCD_Color_Clean(80, 40, 400, 240, 0xFFFF);
-gui->main.label_wave_type.set_text(buf);
+    label_wave_type.text(buf);
 }
 
 
 auto SignalGenerator::wave_is_generate() -> void
 {
-    gui->main.label_wave_generate.appear();
+    label_wave_generate.appear();
 }
 
 auto SignalGenerator::wave_is_not_generate() -> void
 {
-    gui->main.label_wave_generate.hidden();
+    label_wave_generate.hidden();
 }
 
 auto SignalGenerator::add_period() -> void
@@ -730,7 +738,7 @@ auto SignalGenerator::add_period() -> void
     if (period < 9000)
         period += 100;
     sprintf(buf, "周期：%lu.%lus", period / 1000, period % 1000 / 100);
-    gui->main.label_wave_period.set_text(buf);
+    label_wave_period.text(buf);
 }
 
 auto SignalGenerator::sub_period() -> void
@@ -739,7 +747,7 @@ auto SignalGenerator::sub_period() -> void
     if (period > 100)
         period -= 100;
     sprintf(buf, "周期：%lu.%lus", period / 1000, period % 1000 / 100);
-    gui->main.label_wave_period.set_text(buf);
+    label_wave_period.text(buf);
 }
 
 auto SignalGenerator::get_period() -> uint32_t
@@ -770,91 +778,97 @@ auto SignalGenerator::get_freq() -> bool
 
 
 /*****************************对外接口**************************/
-auto uiInterface::show_fps(bool is_show) -> void
+
+namespace gui::interface
 {
-    SignalGenerator::show_fps(is_show);
-}
+    auto show_fps(bool is_show) -> void
+    {
+        SignalGenerator::show_fps(is_show);
+    }
 
 /**
  * 设置FPS显示模式
  * @param fps_mode ture表示显示一帧消耗的时间，false表示显示帧数
  */
-auto uiInterface::set_fps_mode(bool fps_mode) -> void
-{
-    SignalGenerator::set_fps_mode(fps_mode);
-}
+    auto set_fps_mode(bool fps_mode) -> void
+    {
+        SignalGenerator::set_fps_mode(fps_mode);
+    }
 
-auto uiInterface::add_wave_cnt() -> void
-{
-    SignalGenerator::add_wave_cnt();
-}
+    auto add_wave_cnt() -> void
+    {
+        SignalGenerator::add_wave_cnt();
+    }
 
-auto uiInterface::sub_wave_cnt() -> void
-{
-    SignalGenerator::sub_wave_cnt();
-}
+    auto sub_wave_cnt() -> void
+    {
+        SignalGenerator::sub_wave_cnt();
+    }
 
-auto uiInterface::switch_wave_type() -> void
-{
-    SignalGenerator::switch_wave_type();
-}
+    auto switch_wave_type() -> void
+    {
+        SignalGenerator::switch_wave_type();
+    }
 
 
-auto uiInterface::wave_is_generate() -> void
-{
-    SignalGenerator::wave_is_generate();
-}
+    auto wave_is_generate() -> void
+    {
+        SignalGenerator::wave_is_generate();
+    }
 
-auto uiInterface::wave_is_not_generate() -> void
-{
-    SignalGenerator::wave_is_not_generate();
-}
+    auto wave_is_not_generate() -> void
+    {
+        SignalGenerator::wave_is_not_generate();
+    }
 
-auto uiInterface::clear_screen() -> void
-{
-    LCD_Color_Clean(80, 40, 400, 240, 0xFFFF);
-}
+    auto clear_screen() -> void
+    {
+        LCD_Color_Clean(80, 40, 400, 240, 0xFFFF);
+    }
 
-auto uiInterface::add_period() -> void
-{
-    SignalGenerator::add_period();
-}
+    auto add_period() -> void
+    {
+        SignalGenerator::add_period();
+    }
 
-auto uiInterface::sub_period() -> void
-{
-    SignalGenerator::sub_period();
-}
+    auto sub_period() -> void
+    {
+        SignalGenerator::sub_period();
+    }
 
-auto uiInterface::get_period() -> uint32_t
-{
-    return SignalGenerator::get_period();
-}
+    auto get_period() -> uint32_t
+    {
+        return SignalGenerator::get_period();
+    }
 
-auto uiInterface::get_ratio() -> uint8_t
-{
-    return SignalGenerator::get_ratio();
-}
+    auto get_ratio() -> uint8_t
+    {
+        return SignalGenerator::get_ratio();
+    }
 
-auto uiInterface::get_bias() -> int8_t
-{
-    return SignalGenerator::get_bias();
-}
+    auto get_bias() -> int8_t
+    {
+        return SignalGenerator::get_bias();
+    }
 
 /**
  * @brief 获取模式
  * @return ture为混频，false为单频
  */
-auto uiInterface::get_mode() -> bool
-{
-    return SignalGenerator::get_mode();
-}
+    auto get_mode() -> bool
+    {
+        return SignalGenerator::get_mode();
+    }
 
 /**
  * @brief 获取频率
  * @return false为800，true为1K
  */
-auto uiInterface::get_freq() -> bool
-{
-    return SignalGenerator::get_freq();
+    auto get_freq() -> bool
+    {
+        return SignalGenerator::get_freq();
+    }
+
+
 }
 

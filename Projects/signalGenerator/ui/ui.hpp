@@ -7,42 +7,32 @@
 #include "GUI_Base.hpp"
 
 /*********************组件*******************/
-struct lv_ui_t
+namespace gui::widgets::main
 {
-    // 主屏幕
-    struct
-    {
-        Component screen{};// 屏幕自身
-        Component rect;//示波器方框
-        Button btn_mode;// 模式
-        Label label_mode;
-        Button btn_freq;// 频率
-        Label label_freq;
-        Button btn_ratio_add;// 比例
-        Button btn_ratio_sub;
-        Label label_ratio;
-        Button btn_bias_add;// 偏置
-        Button btn_bias_sub;
-        Label label_bias;
-        Label label_tick;// 时刻
-        Label label_info;// 信息
-        Label label_title;// 标题
-        ImageButton imgbtn_play;// 播放键
-        Label label_cpu;
-        Label label_wave_cnt;// 波形点数
-        Label label_wave_type;// 波形类型
-        Label label_wave_generate;// 波形生成
-        Label label_wave_period;// 波形周期
-    } main;// 主屏幕
+    extern Component rect;//示波器方框
+    extern Button btn_mode;// 模式
+    extern Label label_mode;
+    extern Button btn_freq;// 频率
+    extern Label label_freq;
+    extern Button btn_ratio_add;// 比例
+    extern Button btn_ratio_sub;
+    extern Label label_ratio;
+    extern Button btn_bias_add;// 偏置
+    extern Button btn_bias_sub;
+    extern Label label_bias;
+    extern Label label_tick;// 时刻
+    extern Label label_info;// 信息
+    extern Label label_title;// 标题
+    extern ImageButton imgbtn_play;// 播放键
+    extern Label label_cpu;
+    extern Label label_wave_cnt;// 波形点数
+    extern Label label_wave_type;// 波形类型
+    extern Label label_wave_generate;// 波形生成
+    extern Label label_wave_period;// 波形周期
+}
 
-};
-extern struct lv_ui_t* gui;
-
-
-// 对外接口
-class uiInterface
+namespace gui::interface
 {
-public:
     // 是否显示FPS
     static auto show_fps(bool is_show) -> void;
 
@@ -87,8 +77,7 @@ public:
 
     // 获取频率
     static auto get_freq() -> bool;
-};
-
+}
 
 
 
