@@ -3,35 +3,26 @@
 //
 #ifndef SIMULATOR_UI_HPP
 #define SIMULATOR_UI_HPP
+#include "GUI_Base.hpp"
 
-#include "lvgl.h"
-/* 预编译命令 */
-#if 1
-// 头文件
-/*********************组件*******************/
-struct lv_ui_t
+namespace gui::widgets::main
 {
-    using Obj = lv_obj_t *;
-    struct
-    {
-        Obj screen;// 屏幕自身
-        Obj img_slider_flag;
-        Obj imgbtn_slow;
-        Obj imgbtn_acc;
-        Obj label_title_music;
-        Obj slider;
-        Obj label_play_speed;
-        Obj label_slider_time;
-        Obj imgbtn_play;
-        Obj spectrum;// 频谱
-        Obj label_record_state;// 录音状态
-        Obj label_save_state;// 保存状态
-        Obj label_record_sample_rate;// 录音采样率
-    } main;// 主屏幕
+    extern Image img_slider_flag;
+    extern ImageButton imgbtn_slow;
+    extern ImageButton imgbtn_acc;
+    extern Label label_title_music;
+    extern Slider slider;
+    extern Label label_play_speed;
+    extern Label label_slider_time;
+    extern ImageButton imgbtn_play;
+    extern Component spectrum;// 频谱
+    extern Label label_record_state;// 录音状态
+    extern Label label_save_state;// 保存状态
+    extern Label label_record_sample_rate;// 录音采样率
+}
 
-};
-// 取别名
-using lv_ui_t = struct lv_ui_t;
+
+
 
 // 加载资源文件
 LV_FONT_DECLARE(lv_customer_font_SourceHanSerifSC_Regular_14)
@@ -58,24 +49,22 @@ enum class PlaySpeed: uint8_t
     SPEED_1_5=150,// 1.5倍
 };
 
-class UI_Interface
+namespace gui::interface
 {
-public:
-    static auto reset_time() -> void;// 重置进度条时间
-    static auto get_time()->uint32_t ;
-    static auto set_time(uint32_t t)->void;
-    static auto resume_record() -> void;// 开启进度条时间
-    static auto pause_record() -> void;// 关闭进度条时间
-    static auto set_record_state(RecordSampleRate state) -> void;
-    static auto set_play_speed(PlaySpeed speed) -> void;
-    static auto saveInfo(bool state) -> void;
-    static auto erasing()->void ;
-    static auto erase_done()->void ;
-};
+    auto reset_time() -> void;// 重置进度条时间
+    auto get_time()->uint32_t ;
+    auto set_time(uint32_t t)->void;
+    auto resume_record() -> void;// 开启进度条时间
+    auto pause_record() -> void;// 关闭进度条时间
+    auto set_record_state(RecordSampleRate state) -> void;
+    auto set_play_speed(PlaySpeed speed) -> void;
+    auto saveInfo(bool state) -> void;
+    auto erasing()->void ;
+    auto erase_done()->void ;
+}
 
 
 
 
-/* 预编译命令 */
-#endif
+
 #endif //SIMULATOR_UI_HPP

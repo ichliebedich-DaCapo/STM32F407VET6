@@ -11,7 +11,7 @@ class Image : public Widget<Image>
 {
 public:
     // 使用前必须设置父对象
-    Image& init()
+   inline Image& init()
     {
         create_obj(&lv_image_class);
         return *this;
@@ -21,6 +21,15 @@ public:
     {
         init();
         set_src(src);
+        pos_size(x,y,w,h);
+        add_flag(LV_OBJ_FLAG_CLICKABLE);
+        return *this;
+    }
+
+    Image& init(Coord x,Coord y,Coord w,Coord h,ImageSrc_t& src)
+    {
+        init();
+        set_src(&src);
         pos_size(x,y,w,h);
         add_flag(LV_OBJ_FLAG_CLICKABLE);
         return *this;

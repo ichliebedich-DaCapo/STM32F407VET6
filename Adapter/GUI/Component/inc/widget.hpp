@@ -21,6 +21,7 @@ using Font = const lv_font_t *;// 字体类型
 using Font_t = const lv_font_t;
 using Strings = const char *;// 字符串
 using ImageSrc = const lv_img_dsc_t *;// 图片资源
+using ImageSrc_t = const lv_img_dsc_t;
 using ChartAxis = lv_chart_axis_t;// 图表坐标
 using ChartSeries = lv_chart_series_t *&;
 using ChartSeries_t = lv_chart_series_t *;
@@ -383,10 +384,17 @@ public:
         bind_event<[](Event_t e){
             if(lv_event_get_code(e)==LV_EVENT_CLICKED)
             {
-                handler();
+                if constexpr (handler) { handler(); }
             }
         },LV_EVENT_CLICKED>();
 
+        return static_cast<Derived &>(*this);
+    }
+
+    template<void(*handler)(Event_t e)= nullptr>
+    inline Derived &OnClicked()
+    {
+        bind_event<handler,LV_EVENT_CLICKED>();
         return static_cast<Derived &>(*this);
     }
 
@@ -405,6 +413,28 @@ public:
 
         return static_cast<Derived &>(*this);
     }
+
+    template<void(*press)() = nullptr, void(*release)() = nullptr>
+    Derived &OnPressedReleased()
+    {
+        bind_event<[](Event_t e)
+        {
+            if (lv_event_get_code(e) == LV_EVENT_CLICKED)
+            {
+                if (lv_obj_has_state(lv_event_get_target_obj(e), LV_STATE_CHECKED))
+                {
+                    press();
+                }
+                else
+                {
+                    release();
+                }
+            }
+        }, LV_EVENT_CLICKED>();
+
+        return static_cast<Derived &>(*this);
+    }
+
 
     // 状态管理方法
     Derived &add_flag(Flag_t f)

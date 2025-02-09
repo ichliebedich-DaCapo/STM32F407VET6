@@ -57,27 +57,8 @@ public:
         return *this;
     }
 
-    // 绑定函数
-    template<void(*press)() = nullptr, void(*release)() = nullptr>
-    ImageButton &OnPressedReleased()
-    {
-        bind_event<[](Event_t e)
-        {
-            if (lv_event_get_code(e) == LV_EVENT_CLICKED)
-            {
-                if (lv_obj_has_state(lv_event_get_target_obj(e), LV_STATE_CHECKED))
-                {
-                    press();
-                }
-                else
-                {
-                    release();
-                }
-            }
-        }, LV_EVENT_CLICKED>();
 
-        return *this;
-    }
+
 
 
 
