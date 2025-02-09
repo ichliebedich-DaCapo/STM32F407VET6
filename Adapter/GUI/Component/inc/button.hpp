@@ -12,51 +12,56 @@ class Button : public Widget<Button>
 public:
 
     // 使用前必须设置父对象
-    Button& init(Obj parent = parent_)
+    inline Button &init(Strings text = nullptr, Font font = nullptr, Obj parent = parent_)
     {
-        create_obj(&lv_button_class);
+        create_obj(&lv_button_class, parent);
+
+        // 创建label，以Button为父对象
+        label = lv_label_create(obj_);
+        Button::font(font);
+        lv_label_set_text(label, text);
+        lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);// 设置label居中
         return *this;
     }
 
-    Button& init(Coord x, Coord y, Coord w, Coord h, Strings text= nullptr ,Font font= nullptr)
+    inline Button &
+    init(Coord x, Coord y, Coord w, Coord h, Strings text = nullptr, Font font = nullptr, Obj parent = parent_)
     {
-        create_obj(&lv_button_class);
-        init(x,y,w,h,text,font);
+        init(text, font, parent);
         border_radius(5);
         bg_color(Color_Firefly_Green);
         bg_opa(125);
-        label.init(text, font, obj_);
-        label.center();
         return *this;
     }
 
 
     // 点击事件
-    Button& click()
+    inline Button &click()
     {
         send_event<LV_EVENT_CLICKED>();
         return *this;
     }
 
     // 设置字体类型
-    Button& font(Font font)
+    inline Button &font(Font font)
     {
-        label.font(font);
+        lv_obj_set_style_text_font(label, font, selector_default);
         return *this;
     }
-
 
     // 设置文本
-    Button& text(Strings text)
+    inline Button &text(Strings fmt, ...)
     {
-        label.text(text);
+        va_list args;
+        va_start(args, fmt);
+        lv_label_set_text_fmt(obj_, fmt, args);
+        va_end(args);
         return *this;
     }
-
 
 
 private:
-    Label label;
+    Obj_t label;
 };
 
 

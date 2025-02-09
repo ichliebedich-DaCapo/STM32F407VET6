@@ -24,7 +24,7 @@ public:
     {
         init(parent);
         // 初始化文本内容
-        Label::text(text);
+        lv_label_set_text(obj_, text);
         Label::font(font);
         return *this;
     }

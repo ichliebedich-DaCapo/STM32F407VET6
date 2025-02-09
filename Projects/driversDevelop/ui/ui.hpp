@@ -13,6 +13,7 @@ namespace gui::widgets::main
     extern Button btn_plus; // "+" 按钮
     extern Button btn_minus; // "-" 按钮
     extern Button btn_reset; // 复位按钮
+
 }
 
 

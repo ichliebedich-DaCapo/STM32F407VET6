@@ -6,7 +6,7 @@
 
 // 头文件
 #include "lvgl.h"
-
+#include "stdio.h"
 
 // 定义别名
 using Obj = lv_obj_t *&;// 组件对象(用于给函数传参）
@@ -137,23 +137,31 @@ release_fun\
 }
 
 /**
+ * @brief 控件基类的数据模型，为了防止实例化多个静态变量而设计的
+ */
+class WidgetModel
+{
+protected:
+    Obj_t obj_ ;
+    // 方便获取父对象，因为一般而言定义多个组件时往往只有一个公共付对象
+    static inline Obj_t parent_ = nullptr;
+};
+
+
+
+/**
  * @brief 控件基类，采用元编程+CRTP模式
  * @tparam Derived
  */
 template<typename Derived>
-class Widget
+class Widget: public WidgetModel
 {
-protected:
-    Obj_t obj_ = nullptr;
-    // 方便获取父对象，因为一般而言定义多个组件时往往只有一个公共付对象
-    static inline Obj_t parent_ = nullptr;
-
 public:
     Widget() = default;// 删除构造函数，避免在初始化lvgl之前创建lvgl对象
     ~Widget() = default;
 
     // 隐式转换为原生对象
-    operator lv_obj_t *() const noexcept { return obj_; }
+    operator Obj_t()const  noexcept { return obj_; }
 
     // 没必要且极度危险！！
 //    // 重载=运算符，相当于将原生对象赋值给组件对象
@@ -163,7 +171,7 @@ public:
 //        return static_cast<Derived &>(*this);
 //    }
 
-    // 返回父对象
+    // 返回的是该组件的父对象（不是parent_)
     Obj get_parent() const noexcept { return parent_; }
 
     // 设置父对象
@@ -489,10 +497,9 @@ public:
 
 protected:
     // 公共初始化模板（供派生类调用）
-#warning "需要传入一个obj对象，给parent使用"
-    void create_obj(const lv_obj_class_t *cls)
+    void create_obj(const lv_obj_class_t *cls,Obj parent = parent_)
     {
-        obj_ = lv_obj_class_create_obj(cls, parent_);
+        obj_ = lv_obj_class_create_obj(cls, parent);
         lv_obj_class_init_obj(obj_);
     }
 };
@@ -506,7 +513,7 @@ class Component : public Widget<Component>
 {
 public:
     // 极度危险！！
-    //    // 显式引入基类运算符
+    // // 显式引入基类运算符
     //    using Widget<Component>::operator=;
 
     // 只能调用一次，不然会出现内存泄漏
