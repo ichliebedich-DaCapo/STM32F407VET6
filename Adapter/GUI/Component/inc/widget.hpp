@@ -394,6 +394,20 @@ public:
         return static_cast<Derived &>(*this);
     }
 
+    template<void(*pressing)() = nullptr>
+    Derived &OnPressing()
+    {
+        bind_event<[](Event_t e)
+        {
+            if (lv_event_get_code(e) == LV_EVENT_PRESSING)
+            {
+                pressing();
+            }
+        }, LV_EVENT_PRESSING>();
+
+        return static_cast<Derived &>(*this);
+    }
+
     template<void(*press)() = nullptr, void(*release)() = nullptr>
     Derived &OnPressedReleased()
     {

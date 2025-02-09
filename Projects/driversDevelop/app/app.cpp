@@ -66,17 +66,6 @@ void key_handler()
         case keyK0:
             if (PlatformKey ::handle_state(KEY_STATE_NONE))
             {
-//                LCD_Clear(0x36ff);
-//                for(uint16_t i=10;i<200;i++)LCD_Set_Pixel(i,20,0x0000);
-//                for(uint16_t i=10;i<200;i++) gui::interface::set_counter_value(i);
-//                for(uint16_t i=20;i<200;i++)LCD_Set_Pixel(i,100,0x0000);
-//                for(uint16_t i=30;i<100;i++)LCD_Set_Pixel(i,200,0x0000);
-//                for(uint16_t i=40;i<50;i++)LCD_Set_Pixel(i,250,0x0000);
-
-//                    usr_ScanTouchProcess(&touch);
-////                    HAL_Delay(10);
-
-
 
                 ft6336_RdReg(FT_REG_NUM_FINGER, &point_number, 1);
 

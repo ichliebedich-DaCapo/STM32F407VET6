@@ -3,7 +3,7 @@ project(Simulator LANGUAGES C CXX)
 include(common_functions.cmake)
 
 # ------------------------ 配置选项 ------------------------
-set(PROJECT_DIR ../../../Projects/StorageOscilloscope)  # 项目选择
+set(PROJECT_DIR ../../../Projects/driversDevelop)  # 项目选择
 #options_enable_static_lib_ld()
 # 引入命名空间后，这该死的静态库链接容易出问题
 #message(WARNING "static_lib_ld has some problems!")

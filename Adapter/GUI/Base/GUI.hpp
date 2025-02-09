@@ -44,6 +44,10 @@ public:
     // 刷新回调,可供DMA回调函数使用
     static inline auto display_flush_ready() -> void { lv_display_flush_ready(disp); }
 
+    // 获取设备
+    static inline auto get_display() -> lv_display_t * { return disp; }
+    static inline auto get_indev() -> lv_indev_t * { return indev_touchpad; }
+
 private:
     static auto resource_init() -> void;// 初始化界面
 
@@ -55,7 +59,7 @@ private:
 
 private:
     static inline lv_display_t *disp;
-//    static inline lv_indev_t *indev_touchpad;
+    static inline lv_indev_t *indev_touchpad;
 };
 
 
@@ -117,7 +121,7 @@ auto GUI::disp_drv_init() -> void
 template<int32_t (*touchpad_read_xy)(int32_t *, int32_t *)>
 auto GUI::touchpad_init() -> void
 {
-    lv_indev_t *indev_touchpad = lv_indev_create();
+    indev_touchpad = lv_indev_create();
     lv_indev_set_type(indev_touchpad, LV_INDEV_TYPE_POINTER);
     lv_indev_set_read_cb(indev_touchpad, [](lv_indev_t *indev_drv, lv_indev_data_t *data)
     {
@@ -130,6 +134,7 @@ auto GUI::touchpad_init() -> void
             data->state = LV_INDEV_STATE_RELEASED;
         }
     });
+
 }
 
 #endif //FURINA_GUI_HPP
