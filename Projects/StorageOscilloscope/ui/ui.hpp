@@ -15,7 +15,7 @@ namespace gui::widgets::main
     extern Button right_shift;//右移
     extern Button scan_speed;//切换扫描速度
     extern Button latch;//锁存功能
-    extern Button magnification;//放大倍数
+    extern Button btn_magnification;//放大倍数
     extern Label title;// 标题
     extern Label magnification_value;// 放大倍数
     extern Label scan_speed_value;// 扫描速度

@@ -15,7 +15,7 @@ namespace gui::widgets::main
     Button right_shift;//右移
     Button scan_speed;//切换扫描速度
     Button latch;//锁存功能
-    Button magnification;//放大倍数
+    Button btn_magnification;//放大倍数
     Label title;// 标题
     Label magnification_value;// 放大倍数
     Label scan_speed_value;// 扫描速度 
@@ -158,7 +158,7 @@ namespace gui::init
         scan_speed.init(415, 10, 60, 40, "扫描速度");
 
         //按钮_切换放大倍数
-        magnification.init(415, 110, 60, 40, "放大倍数");
+        btn_magnification.init(415, 110, 60, 40, "放大倍数");
 
         /********************标签******************/
         magnification_value.init(415, 60, 60, 40, "1");

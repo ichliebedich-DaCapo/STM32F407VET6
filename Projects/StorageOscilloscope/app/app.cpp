@@ -8,7 +8,7 @@
  * S     ------> 4：CS
  */
 #include <cstdio>
-#include "key.hpp"
+#include "key_adapter.hpp"
 #include "w25qxx.h"
 #include "timer.h"
 #include "spi.h"
@@ -39,6 +39,11 @@ import Flags;
 #define SAMPLE_RATE_1K 12499
 #define SAMPLE_RATE_500HZ 24999
 #define SAMPLE_RATE_200HZ 62499
+
+// 使用别名
+namespace  ui_main =gui::widgets::main;
+using namespace ui_main;
+
 
 /*********类型声明**********/
 enum class OSC_Flags : uint8_t
@@ -192,7 +197,7 @@ void find_peak_max_min()
             default:
                 break;
         }
-        UI_Interface::print_vpp_max_min(temp_vpp, max, min);
+        gui::interface::print_vpp_max_min(temp_vpp, max, min);
     }
 }
 
@@ -241,91 +246,91 @@ void app_init()
 
 void key_handler()
 {
-    switch (Key::getCode())
+    switch (PlatformKey ::getCode())
     {
-        case keyk0://启闭后台读取任务
-            if (Key::stateHandler(KEY_STATE_NONE))
+        case keyK0://启闭后台读取任务
+            if (PlatformKey ::handle_state(KEY_STATE_NONE))
             {
                 OSCFlags ::toggle_flag(OSC_Flags::READ);
             }
 
             break;
 
-        case keyk1://切换单次触发和连续触发模式
-            if (Key::stateHandler(KEY_STATE_NONE))
+        case keyK1://切换单次触发和连续触发模式
+            if (PlatformKey ::handle_state(KEY_STATE_NONE))
             {
                 OSCFlags ::toggle_flag(OSC_Flags::OSC_TRIGGER_MODE);
-                UI_Interface::switch_trigger_mode(OSCFlags::get_flag(OSC_Flags::OSC_TRIGGER_MODE));
-                gui->main.trigger_mode.click();
+                gui::interface::switch_trigger_mode(OSCFlags::get_flag(OSC_Flags::OSC_TRIGGER_MODE));
+                trigger_mode.click();
             }
             break;
 
 
-        case keyk2://启闭锁存模式
-            if (Key::stateHandler(KEY_STATE_NONE))
+        case keyK2://启闭锁存模式
+            if (PlatformKey ::handle_state(KEY_STATE_NONE))
             {
                 OSCFlags ::toggle_flag(OSC_Flags::LATCH_MODE);
-                UI_Interface::switch_latch_mode(OSCFlags ::get_flag(OSC_Flags::LATCH_MODE));
+                gui::interface::switch_latch_mode(OSCFlags ::get_flag(OSC_Flags::LATCH_MODE));
             }
             break;
 
-        case keyk3://图像左移
-            UI_Interface::left_shift(read_wave);
+        case keyK3://图像左移
+            gui::interface::left_shift(read_wave);
             break;
 
-        case keyk4://图像右移
-            UI_Interface::right_shift(read_wave);
+        case keyK4://图像右移
+            gui::interface::right_shift(read_wave);
             break;
 
 
-        case keyk5:
+        case keyK5:
 
 
             break;
-        case keyk6://切换程控放大器放大倍数
+        case keyK6://切换程控放大器放大倍数
             if (magnification > 1)
                 magnification--;
             set_magnification(magnification);
-            UI_Interface::print_magnification(magnification);
+            gui::interface::print_magnification(magnification);
             break;
-        case keyk7:
+        case keyK7:
             if (magnification < 3)
                 magnification++;
             set_magnification(magnification);
-            UI_Interface::print_magnification(magnification);
+            gui::interface::print_magnification(magnification);
             break;
 
             // 测试4：测试读取数据
-        case keyk8://测试程序
+        case keyK8://测试程序
             OSCFlags ::toggle_flag(OSC_Flags::READ);
             break;
 
 
-        case keykB:
+        case keyKB:
             // 测试读命令
             if (sample_rate < 9)
                 sample_rate++;
 
             set_sample_rate(sample_rate);
-            UI_Interface::print_scan_speed(sample_rate);
+            gui::interface::print_scan_speed(sample_rate);
             break;
-        case keykC:
+        case keyKC:
             if (sample_rate > 0)
                 sample_rate--;
             set_sample_rate(sample_rate);
-            UI_Interface::print_scan_speed(sample_rate);
+            gui::interface::print_scan_speed(sample_rate);
             break;
 
-        case keykD:
+        case keyKD:
             threshold -= 100;
             TRIGGER_THRESHOLD = threshold;
             break;
-        case keykE:
+        case keyKE:
             threshold += 100;
             TRIGGER_THRESHOLD = threshold;
             break;
 
-        case keykF://重置FPGA
+        case keyKF://重置FPGA
             HAL_Delay(50);
             HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
             HAL_Delay(60);
@@ -389,7 +394,7 @@ void background_handler()
         }
 
         //绘制波形
-        UI_Interface::display(read_wave);
+        gui::interface::display(read_wave);
 
 
         if (OSCFlags::check_flag(OSC_Flags::OSC_TRIGGER_MODE))
@@ -400,7 +405,7 @@ void background_handler()
 //        else
 //        {
 //            memset(read_wave, 0, sizeof(read_wave));
-//            UI_Interface::display(read_wave);
+//            gui::interface::display(read_wave);
 //        }
 
 
