@@ -2,6 +2,7 @@ set_bsp_components(
         dac
         lcd
         touch
+        delay
 )
 
 #options_disable_GUI()

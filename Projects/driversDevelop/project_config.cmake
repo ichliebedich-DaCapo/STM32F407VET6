@@ -1,6 +1,7 @@
 set_bsp_components(
         lcd
         touch
+        delay
         adc
         rng
         debug
