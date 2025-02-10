@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/BSP/inc/delay.h" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BSP/inc/esp8266.h" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BSP/inc/i2c.h" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BSP/inc/mqtt.h" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BSP/inc/tcp.h" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BSP/inc/touch.h" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BSP/src/delay.c" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BSP/src/esp8266.c" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BSP/src/i2c.c" charset="GB18030" />
     <file url="file://$PROJECT_DIR$/BSP/src/mqtt.c" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BSP/src/tcp.c" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/BSP/src/touch.c" charset="UTF-8" />
   </component>
 </project>

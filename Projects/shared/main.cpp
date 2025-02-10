@@ -1,4 +1,5 @@
 #include <project_config.h>
+#include <bsp_config.h>
 #include "baseInit.h"
 #include "key_adapter.hpp"
 #include "key_exit.h"
@@ -29,7 +30,7 @@ int main()
     PlatformKey::init<key_exti_init>();// 初始化按键
 
 #ifdef GUI_ENABLE
-    GUI::init<lcd_init,lcd_flush,touch_read_single_point>();
+    GUI::init<lcd_flush,touch_read_single_point>();
 #endif
 
     app_init();

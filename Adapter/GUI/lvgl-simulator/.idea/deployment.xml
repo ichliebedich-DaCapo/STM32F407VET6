@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="Ubuntu (8847daf5-da74-45f0-b01c-49d11dd29bc0)">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../Render" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/../Component/src" web="/" />
+            <mapping local="$PROJECT_DIR$/../Component" web="/" />
+            <mapping local="$PROJECT_DIR$/../Base" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/themes" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/themes/simple" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/themes/mono" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/themes/default" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/libs/tjpgd" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/libs/fsdrv" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/libs/qrcode" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/libs/freetype" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/libs/ffmpeg" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/libs/lz4" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/libs/gif" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/libs/lodepng" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/libs/tiny_ttf" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/libs/libjpeg_turbo" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/libs/rlottie" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/libs/rle" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/libs/bmp" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/libs/libpng" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/libs/bin_decoder" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/libs/thorvg" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/libs/barcode" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/draw" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/draw/sw" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/draw/sw/blend" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/draw/vg_lite" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/draw/nxp/pxp" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/draw/nxp/vglite" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/draw/sdl" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/draw/renesas/dave2d" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/layouts/flex" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/layouts" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/layouts/grid" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/tick" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/osal" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/span" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/switch" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/keyboard" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/calendar" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/bar" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/spinner" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/checkbox" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/animimage" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/roller" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/slider" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/label" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/buttonmatrix" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/lottie" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/line" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/objx_templ" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/spinbox" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/list" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/table" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/win" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/led" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/button" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/menu" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/chart" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/property" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/tabview" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/imagebutton" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/msgbox" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/textarea" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/canvas" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/scale" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/arc" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/dropdown" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/image" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/tileview" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/font" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/misc" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/misc/cache" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/others/monkey" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/others/imgfont" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/others/vg_lite_tvg" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/others/ime" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/others/snapshot" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/others/file_explorer" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/others/fragment" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/others/observer" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/others/gridnav" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/others/sysmon" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/core" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/indev" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/drivers/x11" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/drivers/libinput" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/drivers/glfw" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/drivers/qnx" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/drivers/windows" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/drivers/evdev" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/drivers/wayland" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/drivers/sdl" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/drivers/display/st7796" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/drivers/display/renesas_glcdc" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/drivers/display/lcd" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/drivers/display/st7789" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/drivers/display/fb" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/drivers/display/drm" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/drivers/display/ili9341" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/drivers/display/st7735" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/drivers/display/tft_espi" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/drivers/nuttx" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/stdlib/clib" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/stdlib" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/stdlib/rtthread" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/stdlib/builtin" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/stdlib/micropython" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/display" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/examples/porting" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../Projects/driversDevelop/ui" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
