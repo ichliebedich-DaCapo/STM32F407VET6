@@ -6,9 +6,8 @@
 
 #include "GUI_Base.hpp"
 
-
-#ifdef GUI_ENABLE
-#include "lcd.h"
+#ifdef ARM_MATH_CM4
+#include <project_config.h>
 #endif
 
 
