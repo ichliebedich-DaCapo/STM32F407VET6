@@ -1,5 +1,28 @@
 在资源紧张的单片机开发中，为了方便使用，我封装一些高频的lvgl的API。由于lvgl的组件创建必须在lvgl初始化之后手动调用，
 所以我没有定义构造函数，而是用init来代替lv_obj_create。下面是使用CRTP模式的封装，除了Label外还有Button等组件的派生类。
+using Obj = lv_obj_t *&;// 组件对象(用于给函数传参）
+using Obj_t = lv_obj_t *;// 组件对象（用于定义组件）
+using Coord = lv_coord_t;// 坐标
+using Color = lv_color_t;// 颜色
+using Selector = lv_style_selector_t;
+using Align_text = lv_text_align_t;// 对齐类型
+using Align = lv_align_t;
+using Flag_t = lv_obj_flag_t;
+using Grad_dir = lv_grad_dir_t;
+using Border_side = lv_border_side_t;
+using Font = const lv_font_t *;// 字体类型
+using Font_t = const lv_font_t;
+using Strings = const char *;// 字符串
+using ImageSrc = const lv_img_dsc_t *;// 图片资源
+using ImageSrc_t = const lv_img_dsc_t;
+using ChartAxis = lv_chart_axis_t;// 图表坐标
+using ChartSeries = lv_chart_series_t *&;
+using ChartSeries_t = lv_chart_series_t *;
+using ChartType = lv_chart_type_t;
+using Event_t = lv_event_t *;
+using EventCode = lv_event_code_t;
+using Event_Handler = lv_event_cb_t;
+using Timer_t = lv_timer_t *;
 class WidgetModel
 {
 protected:
@@ -46,7 +69,7 @@ public:
     Derived& clip_corner(Selector selector = selector_default);
     Derived& invalidate();
     template<Event_Handler handler = nullptr, EventCode Event = LV_EVENT_ALL>
-    Derived& bind_event();
+    inline Derived &bind_event(Event_Handler lambda_handler = nullptr)
     Derived& remove_event(Event_Handler& handler);
     template<uint32_t Index>
     Derived& remove_event();
@@ -104,12 +127,15 @@ namespace gui::widgets::main
     Button btn_y1;    // 触摸点1 y坐标 按钮
     Button btn_x2;    // 触摸点2 x坐标 按钮
     Button btn_y2;    // 触摸点2 y坐标 按钮
+    Obj_t message;  // 消息弹窗
     ……
 }
 界面的设计是在screen函数里实现的
 using namespace gui::widgets::main;
 namespace gui::init
 {
+    void test(){/*……*/}
+
     void screen()
     {
         // 设置全局字体格式
@@ -131,8 +157,19 @@ namespace gui::init
         // 触摸点2 y坐标 按钮
         btn_y2.init(150, 150, 80, 40, "-").bg_color(lv_color_hex(0x34e6ff));
 
+        btn_y2.OnClicked([](Event_t e){/*……*/});
+        btn_y1.OnClicked<test>();
+
+        message = lv_msgbox_create(gui::widgets::main::scr);// scr是这些组件默认的父对象，在别的地方已经定义过了
         ……
     }
 }
-你可以根据上面的示例帮我设计一个好看的界面，界面内容你可以自定义，类的成员函数你可以尽管调用，如果有些设计的API没有，
-你可以直接使用lvgl9的API（因为我已经把对象隐式转换为了lv_obj_t*类型）
+屏幕为480*320，你可以根据上面的示例帮我设计一个好看的界面xxx，界面内容xxx。
+类的成员函数你可以尽管调用，如果有些组件或者API，你可以直接使用lvgl9的组件或者API，因为我已经把对象隐式转换为了lv_obj_t*类型，可以衔接使用。
+同时还要注意下面几点
+1,目前我只有15和13号两种字体，且没有图片，你可以先用纯色代替。定义全局字体之后，如果用的是含字符串参数的init函数，
+那么后面就不需要使用font来主动设置字体类型，初始化会默认使用全局字体。字体里没有那么多汉字，建议用数字和英文代替
+2,lv_color_hex不是编译期，不能用constexpr来定义，可以使用宏定义
+3,如果你使用一些变量、常量或者函数，记得在前面定义
+4,绑定事件时可以使用bind_event，因为模板参数不能传递lambda,定义void(*)函数时可以把函数名放在模板参数里，
+如果使用lambda（无捕获），那么要把lambda放入函数形参里，lambda的函数类型必须是[](Event_t e){}

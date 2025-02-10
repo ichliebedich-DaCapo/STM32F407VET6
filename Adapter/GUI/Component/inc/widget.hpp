@@ -310,10 +310,14 @@ public:
      * @return
      */
     template<Event_Handler handler = nullptr, EventCode Event = LV_EVENT_ALL>
-    inline Derived &bind_event()
+    inline Derived &bind_event(Event_Handler lambda_handler = nullptr)
     {
-        static_assert(handler != nullptr, "Event handler cannot be null");
-        lv_obj_add_event_cb(obj_, handler, Event, nullptr);
+        if constexpr (handler != nullptr)
+            lv_obj_add_event_cb(obj_, handler, Event, nullptr);
+        else
+        {
+            lv_obj_add_event_cb(obj_, lambda_handler, Event, nullptr);
+        }
         return static_cast<Derived &>(*this);
     }
 
@@ -351,15 +355,23 @@ public:
 
     // 绑定点击事件
     template<void(*handler)() = nullptr>
-    inline Derived &OnClicked()
+    inline Derived &OnClicked(Event_Handler lambda_handler = nullptr)
     {
-        bind_event<[](Event_t e)
+
+        if constexpr (handler != nullptr)
         {
-            if (lv_event_get_code(e) == LV_EVENT_CLICKED)
+            bind_event<[](Event_t e)
             {
-                if constexpr (handler) { handler(); }
-            }
-        }, LV_EVENT_CLICKED>();
+                if (lv_event_get_code(e) == LV_EVENT_CLICKED)
+                {
+                    handler();
+                }
+            }, LV_EVENT_CLICKED>();
+        }
+        else
+        {
+            bind_event<nullptr, LV_EVENT_CLICKED>(lambda_handler);
+        }
 
         return static_cast<Derived &>(*this);
     }
@@ -447,7 +459,7 @@ public:
         add_flag(LV_OBJ_FLAG_HIDDEN);
         return static_cast<Derived &>(*this);
     }
-    
+
 // 更安全的动画实现（示例代码）
     template<typename T>
     Derived &animate(lv_anim_exec_xcb_t exec_cb, T start, T end, uint16_t time,
@@ -455,7 +467,7 @@ public:
     {
         lv_anim_t a;
         lv_anim_init(&a);
-        lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t)exec_cb);
+        lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t) exec_cb);
         lv_anim_set_var(&a, obj_); // 直接操作LVGL对象
         lv_anim_set_values(&a, start, end);
         lv_anim_set_time(&a, time);

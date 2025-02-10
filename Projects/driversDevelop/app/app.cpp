@@ -24,7 +24,6 @@
 #include "app.hpp"
 #include "RCC.h"
 #include "debug.h"
-
 import async_delay;
 #include <cstdio>
 
@@ -82,16 +81,12 @@ void key_handler()
 //                gui::interface::set_button1_value(((uint16_t)(touch_pos_buf1[0]&0X0F)<<8)+touch_pos_buf1[1]);
 //                gui::interface::set_button2_value(((uint16_t)(touch_pos_buf1[2]&0X0F)<<8)+touch_pos_buf1[3]);
             //横屏
-            gui::interface::set_x2_value(480 - (((uint16_t) (touch_pos_buf1[2] & 0X0F) << 8) + touch_pos_buf1[3]));
-            gui::interface::set_y2_value(((uint16_t) (touch_pos_buf1[0] & 0X0F) << 8) + touch_pos_buf1[1]);
 
             ft6336_RdReg(touch_press_reg[1], touch_pos_buf2, 4);
             //竖屏
 //                gui::interface::set_button1_value(((uint16_t)(touch_pos_buf1[0]&0X0F)<<8)+touch_pos_buf1[1]);
 //                gui::interface::set_button2_value(((uint16_t)(touch_pos_buf1[2]&0X0F)<<8)+touch_pos_buf1[3]);
             //横屏
-            gui::interface::set_x2_value(480 - (((uint16_t) (touch_pos_buf2[2] & 0X0F) << 8) + touch_pos_buf2[3]));
-            gui::interface::set_y2_value(((uint16_t) (touch_pos_buf2[0] & 0X0F) << 8) + touch_pos_buf2[1]);
 
 //                touch_state=usr_ScanTouchProcess(&touch_pos);
 
@@ -284,9 +279,6 @@ uint8_t usr_ScanTouchProcess(stru_pos *pPos)
                             pPos->xpox[i] = 480 - (((uint16_t) (buf[2] & 0X0F) << 8) + buf[3]);
                             break;
                     }
-                    gui::interface::set_counter_value(i);
-                    gui::interface::set_x1_value(pPos->xpox[i]);
-                    gui::interface::set_y1_value(pPos->ypox[i]);
 //                    printf("x[%d]:%d,y[%d]:%d\r\n",i,pPos->xpox[i],i,pPos->ypox[i]);
                 }
             }

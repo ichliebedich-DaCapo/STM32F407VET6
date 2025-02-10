@@ -4,214 +4,134 @@
 #include "ui.hpp"
 #include "GUI.hpp"
 
-// 变量
-namespace gui::widgets::main
-{
-    Label label_counter; // 计数器显示
-    Button btn_x1;     // 触摸点1 x坐标 按钮
-    Button btn_y1;    // 触摸点1 y坐标 按钮
-    Button btn_x2;    // 触摸点2 x坐标 按钮
-    Button btn_y2;    // 触摸点2 y坐标 按钮
-}
-static int counter_value = 0; // 计数器值存储
-
-// 计数器逻辑
-class CounterLogic
-{
-public:
-    // 更新触摸点坐标
-    static inline auto update_point() -> void;
-
-public:
-    // 获取触摸点坐标
-    static inline  auto get_touch_point() -> void;
-
-    // 增加计数器
-    static inline auto increment() -> void;
-
-    // 减少计数器
-    static inline auto decrement() -> void;
-
-    // 复位计数器
-    static inline auto reset() -> void;
-
-    // 获取计数器值
-    static inline auto get_value() -> int;
-
-    // 设置计数器值
-    static inline auto set_value_label(int value) -> void;
-
-    // 触摸点1 x坐标
-    static inline auto set_value_x1(int value) -> void;
-
-    // 触摸点1 y坐标
-    static inline auto set_value_y1(int value) -> void;
-
-    // 触摸点2 x坐标
-    static inline auto set_value_x2(int value) -> void;
-
-    // 触摸点2 y坐标
-    static inline auto set_value_y2(int value) -> void;
-
-private:
-    static inline int counter_value = 0; // 计数器值
-    static inline lv_point_t point_1{};
-    static inline lv_point_t point_2{};// 不存在第二个触摸点
-};
-
 // 默认使用main屏幕里的组件（暂时用不到其他界面）
 using namespace gui::widgets::main;
-namespace gui::init
-{
-    void screen()
-    {
-        // 设置全局字体格式
+
+
+// 颜色宏定义
+#define COLOR_PRIMARY lv_color_hex(0x34e6ff)
+#define COLOR_SECONDARY lv_color_hex(0x606060)
+#define COLOR_BG lv_color_hex(0xF5F5F5)
+#define COLOR_TEXT_MAIN lv_color_hex(0x333333)
+
+namespace gui::widgets::main {
+    // 状态显示组件
+    Label lbl_status;
+    Label lbl_time;
+
+    // 数据仪表组件
+    Label lbl_temp_value;
+    Label lbl_humi_value;
+    Label lbl_press_value;
+
+    // 控制按钮
+    Button btn_fan;
+    Button btn_light;
+    Button btn_alarm;
+
+    // 设置按钮
+    Button btn_settings;
+}
+
+namespace gui::init {
+    // 事件处理函数示例
+    void toggle_fan() {
+        static bool state = false;
+        widgets::main::btn_fan.text(state  ? "OFF" : "ON")
+                .bg_color(state ? COLOR_SECONDARY : COLOR_PRIMARY);
+        state = !state;
+    }
+
+    void screen() {
+        // 设置全局字体
         Label::Font(lv_customer_font_SourceHanSerifSC_Regular_15);
         Button::Font(lv_customer_font_SourceHanSerifSC_Regular_15);
 
-        // 计数器显示
-        label_counter.init("0").pos_size(260, 150, 80, 40);
+        // 状态栏容器
+        auto status_bar = lv_obj_create(scr);
+        lv_obj_set_size(status_bar, 480, 30);
+        lv_obj_set_style_bg_color(status_bar, COLOR_PRIMARY, 0);
 
-        // 触摸点1 x坐标
-        btn_x1.init(50, 100, 80, 40, "0").bg_color(lv_color_hex(0x34e6ff));
+        // 状态显示
+        widgets::main::lbl_status.init(status_bar)
+                .text("STATUS: NORMAL").pos(10, 0)
+                .text_color(lv_color_white());
 
-        // 触摸点1 y坐标
-        btn_y1.init(150, 100, 80, 40, "0").bg_color(lv_color_hex(0x34e6ff));
+        widgets::main::lbl_time.init(status_bar)
+                .text("12:00").align(LV_ALIGN_RIGHT_MID, -10, 0)
+                .text_color(lv_color_white());
 
-        // 触摸点2 x坐标 按钮
-        btn_x2.init(50, 150, 80, 40, "+").bg_color(lv_color_hex(0x34e6ff));
+        // 主数据面板
+        auto data_panel = lv_obj_create(scr);
+        lv_obj_set_size(data_panel, 300, 250);
+        lv_obj_align(data_panel, LV_ALIGN_TOP_LEFT, 10, 40);
+        lv_obj_set_style_radius(data_panel, 10, 0);
 
-        // 触摸点2 y坐标 按钮
-        btn_y2.init(150, 150, 80, 40, "-").bg_color(lv_color_hex(0x34e6ff));
+        // 温度显示
+        widgets::main::lbl_temp_value.init(data_panel)
+                .pos_size(20, 20, 260, 60)
+                .text("25.6℃")
+                .font(lv_customer_font_SourceHanSerifSC_Regular_15)
+                .text_align(LV_TEXT_ALIGN_CENTER)
+                .bg_color(COLOR_BG)
+                .border_radius(8);
 
+        // 湿度显示
+        widgets::main::lbl_humi_value.init(data_panel)
+                .pos_size(20, 100, 260, 60)
+                .text("65% RH")
+                .font(lv_customer_font_SourceHanSerifSC_Regular_15)
+                .text_align(LV_TEXT_ALIGN_CENTER)
+                .bg_color(COLOR_BG)
+                .border_radius(8);
 
+        // 控制面板
+        auto ctrl_panel = lv_obj_create(scr);
+        lv_obj_set_size(ctrl_panel, 150, 250);
+        lv_obj_align(ctrl_panel, LV_ALIGN_TOP_RIGHT, -10, 40);
+        lv_obj_set_style_pad_all(ctrl_panel, 10, 0);
 
-    }
+        // 风扇控制按钮
+        widgets::main::btn_fan.init()
+                .pos_size(0, 0, 130, 50)
+                .text("FAN: OFF")
+                .bg_color(COLOR_SECONDARY)
+                .OnClicked<toggle_fan>();
 
+        // 灯光控制按钮
+        widgets::main::btn_light.init()
+                .pos_size(0, 60, 130, 50)
+                .text("LIGHT")
+                .bg_color(COLOR_PRIMARY)
+                .OnClicked([](Event_t e) {
 
-    void events()
-    {
-        // 绑定 "+" 按钮事件
-        widgets::main::btn_x2.OnClicked<CounterLogic::increment>();
+                });
 
-        // 绑定 "-" 按钮事件
-        widgets::main::btn_y2.OnClicked<CounterLogic::decrement>();
+        // 底部操作栏
+        auto bottom_bar = lv_obj_create(scr);
+        lv_obj_set_size(bottom_bar, 480, 40);
+        lv_obj_align(bottom_bar, LV_ALIGN_BOTTOM_MID, 0, 0);
 
-        // 屏幕触摸事件
-        widgets::main::scr.OnPressing<CounterLogic::update_point>();
+        widgets::main::btn_settings.init()
+                .pos_size(400, 5, 70, 30)
+                .text("SETTING")
+                .bg_color(COLOR_PRIMARY);
     }
 }
 
+namespace gui::init{
+    void events()
+    {
+
+    }
+}
 
 /// UI接口
 namespace gui::interface
 {
-    auto set_counter_value(int value) -> void
-    {
-        CounterLogic::set_value_label(value);
-    }
 
-    auto set_x1_value(int value) -> void
-    {
-        CounterLogic::set_value_x1(value);
-    }
-
-    auto set_y1_value(int value) -> void
-    {
-        CounterLogic::set_value_y1(value);
-    }
-
-    auto set_x2_value(int value) -> void
-    {
-        CounterLogic::set_value_x2(value);
-    }
-
-    auto set_y2_value(int value) -> void
-    {
-        CounterLogic::set_value_y2(value);
-    }
-
-    auto get_counter_value() -> int
-    {
-        return CounterLogic::get_value();
-    }
 }
 
 
 
-auto CounterLogic::increment() -> void
-{
-    counter_value++;
-    char buf[12];
-    sprintf(buf, "%d", counter_value);
-    label_counter.text(buf);
-}
 
-auto CounterLogic::decrement() -> void
-{
-    counter_value--;
-    char buf[12];
-    sprintf(buf, "%d", counter_value);
-    label_counter.text(buf);
-}
-
-auto CounterLogic::reset() -> void
-{
-    counter_value = 0;
-    char buf[12];
-    sprintf(buf, "%d", counter_value);
-    label_counter.text(buf);
-}
-
-auto CounterLogic::get_value() -> int
-{
-    return counter_value;
-}
-
-auto CounterLogic::set_value_label(int value) -> void
-{
-    counter_value = value;
-    char buf[12];
-    sprintf(buf, "%d", counter_value);
-    label_counter.text(buf);
-}
-
-auto CounterLogic::set_value_x1(int value) -> void
-{
-    char buf[12];
-    sprintf(buf, "%d", value);
-    btn_x1.text(buf);
-}
-
-auto CounterLogic::set_value_y1(int value) -> void
-{
-    char buf[12];
-    sprintf(buf, "%d", value);
-    btn_y1.text(buf);
-}
-
-auto CounterLogic::set_value_x2(int value) -> void
-{
-    char buf[12];
-    sprintf(buf, "%d", value);
-    btn_x2.text(buf);
-}
-
-auto CounterLogic::set_value_y2(int value) -> void
-{
-    char buf[12];
-    sprintf(buf, "%d", value);
-    btn_y2.text(buf);
-}
-
-auto CounterLogic::get_touch_point() -> void
-{
-    lv_indev_get_point(lv_indev_get_act(), &point_1);
-}
-
-auto CounterLogic::update_point() -> void
-{
-    get_touch_point();
-    set_value_x1(point_1.x);
-    set_value_y1(point_1.y);
-}
