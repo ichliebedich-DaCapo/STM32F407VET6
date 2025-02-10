@@ -1,8 +1,10 @@
 set_bsp_components(
+        lcd
+        touch
         adc
         rng
         debug
-        touch
+
 )
 
 #options_disable_GUI()

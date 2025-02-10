@@ -1,6 +1,7 @@
 set_bsp_components(
         adc
         w25qxx
+        lcd
 )
 
 #options_disable_GUI()

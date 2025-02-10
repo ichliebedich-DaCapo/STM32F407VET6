@@ -1,22 +1,25 @@
 //
 // Created by fairy on 2024/9/22.
 //
+#include <project_config.h>
+#include <bsp_config.h>
 #include "baseInit.h"
-#include "stm32f4xx_hal.h"
 #include "fsmc.h"
-
 #include "CPU_RunTime.h"
 #include "RCC.h"
+
 #ifdef GUI_ENABLE
+
+#include "lcd.h"
+#include "touch.h"
 #include "lvgl.h"
 #include "lv_port_disp.h"
-#endif
 
+#endif
 
 
 TIM_HandleTypeDef htim7;
 extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
-
 
 
 void BaseInit()
@@ -25,23 +28,26 @@ void BaseInit()
     SystemClock_DefaultConfig();// 系统时钟初始化
 
     // 开启FreeRTOS的运行时统计信息
-#if defined(FREERTOS_DEBUG)  && defined(FREERTOS_ENABLE)
+#if defined(FREERTOS_DEBUG) && defined(FREERTOS_ENABLE)
     ConfigureTimerForRunTimeStats();
 #endif
 
     fsmc_init();
 
+
 #ifdef USE_FSMC_DMA
     fsmc_dma_init();// 初始化FSMC+DMA
 #endif
 
+#ifdef GUI_ENABLE
+    lcd_init();
+    touch_init();
+#endif
 
 #ifdef FREERTOS_ENABLE
     osKernelInitialize();// FreeRTOS内核初始化
 #endif// FREERTOS_ENABLE
 }
-
-
 
 
 // 用于初始化硬件资源
@@ -79,7 +85,8 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
     if (uwAPB1Prescaler == RCC_HCLK_DIV1)
     {
         uwTimclock = HAL_RCC_GetPCLK1Freq();
-    } else
+    }
+    else
     {
         uwTimclock = 2UL * HAL_RCC_GetPCLK1Freq();
     }
@@ -119,7 +126,8 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
                 /* Configure the TIM IRQ priority */
                 HAL_NVIC_SetPriority(TIM7_IRQn, TickPriority, 0U);
                 uwTickPrio = TickPriority;
-            } else
+            }
+            else
             {
                 status = HAL_ERROR;
             }
@@ -147,12 +155,14 @@ inline void HAL_ResumeTick(void)
 
 void TIM7_IRQHandler()
 {
-//    if (__HAL_TIM_GET_IT_SOURCE(&htim7, TIM_IT_UPDATE) != RESET)
-//    {
-//        __HAL_TIM_CLEAR_IT(&htim7, TIM_IT_UPDATE);
-//        HAL_IncTick();
-//        lv_tick_inc(1);
-//    }
+#if 0
+    if (__HAL_TIM_GET_IT_SOURCE(&htim7, TIM_IT_UPDATE) != RESET)
+    {
+        __HAL_TIM_CLEAR_IT(&htim7, TIM_IT_UPDATE);
+        HAL_IncTick();
+        lv_tick_inc(1);
+    }
+#endif
 
     // 我把TIM7当做系统时钟，只用到了基础定时器的更新计时功能，所以并不需要判断中断源
     __HAL_TIM_CLEAR_FLAG(&htim7, TIM_FLAG_UPDATE);
@@ -162,7 +172,6 @@ void TIM7_IRQHandler()
     lv_tick_inc(1);
 #endif
 }
-
 
 
 #undef DMA2_S6CR
