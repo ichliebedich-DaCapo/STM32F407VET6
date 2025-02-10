@@ -5,7 +5,6 @@
 #include <bsp_config.h>
 #include "baseInit.h"
 #include "fsmc.h"
-#include "CPU_RunTime.h"
 #include "RCC.h"
 
 #ifdef GUI_ENABLE
@@ -15,6 +14,10 @@
 #include "lvgl.h"
 #include "lv_port_disp.h"
 
+#endif
+
+#if defined(FREERTOS_DEBUG) && defined(FREERTOS_ENABLE)
+#include "CPU_RunTime.h"
 #endif
 
 
@@ -33,7 +36,6 @@ void BaseInit()
 #endif
 
     fsmc_init();
-
 
 #ifdef USE_FSMC_DMA
     fsmc_dma_init();// 初始化FSMC+DMA
