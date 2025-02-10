@@ -12,6 +12,8 @@ namespace gui::widgets::main
     Button btn_y1;    // 触摸点1 y坐标 按钮
     Button btn_x2;    // 触摸点2 x坐标 按钮
     Button btn_y2;    // 触摸点2 y坐标 按钮
+    Slider slider_1;   // 滑动条
+    Roller roller_1;
 }
 static int counter_value = 0; // 计数器值存储
 
@@ -83,6 +85,10 @@ namespace gui::init
 
         // 触摸点2 y坐标 按钮
         btn_y2.init(150, 150, 80, 40, "-").bg_color(lv_color_hex(0x34e6ff));
+
+        // 测试 滑动条
+        slider_1.init(50, 200, 200, 10).bg_color(lv_color_hex(0x34e6ff));
+
     }
 
 
