@@ -34,14 +34,14 @@ def convert_style_calls(blocks, widget_var):
 
                 # 处理状态，如果是默认状态，那么就不添加
                 param = "" if state == "LV_PART_MAIN|LV_STATE_DEFAULT" else f", {state}"
-                # 每个样式前加上一个Tab，是为了更好地区分
+                # 每个样式前加上一个Tab，是为了与init对齐
                 converted.append(f"\t.{prop}({value}{param})")
 
 
     return converted
 
 
-# 处理组件块
+# 处理组件块（不含屏幕）
 def process_component_block(component_name, create_line, init_lines, style_block, widget_type):
     # 定义组件名前缀映射表
     prefix_map = {
@@ -67,13 +67,15 @@ def process_component_block(component_name, create_line, init_lines, style_block
     pos = size = None
     for line in init_lines:
         if "lv_obj_set_pos" in line:
-            pos = re.findall(r'\d+',line)
+            parts = line.strip('();').split(',')
+            pos =[parts[-2], parts[-1]]
         elif "lv_obj_set_size" in line:
-            size = re.findall(r'\d+',line)
+            parts = line.strip('();').split(',')
+            size = [parts[-2], parts[-1]]
         elif "lv_obj_add_flag" in line:
             # 以逗号分割，并且取最后一个，同时丢弃");"
             flag = line.split(',')[-1].strip().rstrip(');')
-            init_code.append(f".add_flag({flag})")
+            init_code.append(f"\n\t\t\t.add_flag({flag})")
 
     # 构建初始化的链式调用
     init_chain = []
@@ -101,19 +103,27 @@ def generate_output(project_name, components):
         if comp['var_name'] != "scr":
             widgets_ns.append(f"Component  {comp['var_name']};")
 
-        # 屏幕初始化代码
-        screen_code = []
-        if comp['init_chain']:
-            screen_code.append(
-                f"{comp['var_name']}" + "".join(comp['init_chain'])
-            )
-        screen_code.extend(comp['style_code'])
+            # 屏幕初始化代码
+            screen_code = []
+            if comp['init_chain']:
+                screen_code.append(
+                    f"{comp['var_name']}" + "".join(comp['init_chain'])
+                )
+            screen_code.extend(comp['style_code'])
 
-        # 给样式代码添加一个分号
-        if screen_code:
-            screen_code[-1] += ";\n"
+            # 给样式代码添加一个分号
+            if screen_code:
+                screen_code[-1] += ";\n"
+            screen_ns.extend(screen_code)
 
-        screen_ns.extend(screen_code)
+        else:
+            screen_code = []
+            screen_code.extend(comp['style_code'])
+            if screen_code:
+                screen_code[0] += "scr"
+                screen_code[-1] += ";\n"
+            screen_ns.extend(screen_code)
+
 
     widgets_block = "\n\t".join(widgets_ns)
     screen_block = "\n\t\t".join(screen_ns)
@@ -174,6 +184,7 @@ def main():
         # 样式块代码以注释为分割符
         style_block = parts[1].strip()
         style_code = convert_style_calls(style_block, "scr")
+
         # 处理组件
         component ={
             "var_name": "scr",
