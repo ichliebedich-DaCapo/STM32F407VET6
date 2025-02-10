@@ -9,6 +9,7 @@
 #cmakedefine BSP_USE_CPU_RUNTIME
 #cmakedefine BSP_USE_DAC
 #cmakedefine BSP_USE_DEBUG
+#cmakedefine BSP_USE_DELAY
 #cmakedefine BSP_USE_ESP8266
 #cmakedefine BSP_USE_FSMC
 #cmakedefine BSP_USE_KEY_EXIT

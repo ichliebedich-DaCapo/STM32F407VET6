@@ -54,8 +54,6 @@ void app_init()
     adc1_temperature_sensor_init();
     RNG_Init();
     ITM_Init();
-    delay_Init();
-    usr_touchInit();
 }
 
 void key_handler()

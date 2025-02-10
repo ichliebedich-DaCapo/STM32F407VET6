@@ -20,6 +20,10 @@
 #include "CPU_RunTime.h"
 #endif
 
+#ifdef BSP_USE_DELAY
+#include "delay.h"
+#endif
+
 
 TIM_HandleTypeDef htim7;
 extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
@@ -33,6 +37,10 @@ void BaseInit()
     // 开启FreeRTOS的运行时统计信息
 #if defined(FREERTOS_DEBUG) && defined(FREERTOS_ENABLE)
     ConfigureTimerForRunTimeStats();
+#endif
+
+#ifdef BSP_USE_DELAY
+    delay_Init();
 #endif
 
     fsmc_init();
