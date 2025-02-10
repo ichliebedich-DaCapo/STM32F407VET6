@@ -70,7 +70,7 @@ namespace gui::init
         Button::Font(lv_customer_font_SourceHanSerifSC_Regular_15);
 
         // 计数器显示
-        widgets::main::label_counter.init("0").pos_size(260, 150, 80, 40);
+        label_counter.init("0").pos_size(260, 150, 80, 40);
 
         // 触摸点1 x坐标
         btn_x1.init(50, 100, 80, 40, "0").bg_color(lv_color_hex(0x34e6ff));

@@ -50,19 +50,16 @@ using Event_Handler = lv_event_cb_t;
 using Timer_t = lv_timer_t *;
 
 
-
-
 /**
  * @brief 控件基类的数据模型，为了防止实例化多个静态变量而设计的
  */
 class WidgetModel
 {
 protected:
-    Obj_t obj_ ;
+    Obj_t obj_;
     // 方便获取父对象，因为一般而言定义多个组件时往往只有一个公共付对象
     static inline Obj_t parent_ = nullptr;
 };
-
 
 
 /**
@@ -70,22 +67,15 @@ protected:
  * @tparam Derived
  */
 template<typename Derived>
-class Widget: public WidgetModel
+class Widget : public WidgetModel
 {
 public:
     Widget() = default;// 删除构造函数，避免在初始化lvgl之前创建lvgl对象
     ~Widget() = default;
 
     // 隐式转换为原生对象
-    operator Obj_t()const  noexcept { return obj_; }
+    operator Obj_t() const noexcept { return obj_; }
 
-    // 没必要且极度危险！！
-//    // 重载=运算符，相当于将原生对象赋值给组件对象
-//    Derived &operator=(Obj_t obj)noexcept
-//    {
-//        obj_ = obj;
-//        return static_cast<Derived &>(*this);
-//    }
 
     // 返回的是该组件的父对象（不是parent_)
     Obj get_parent() const noexcept { return parent_; }
@@ -102,19 +92,19 @@ public:
     }
 
     // 基础属性链式方法
-    Derived &size(Coord w, Coord h)
+    inline Derived &size(Coord w, Coord h)
     {
         lv_obj_set_size(obj_, w, h);
         return static_cast<Derived &>(*this);
     }
 
-    Derived &pos(Coord x, Coord y)
+    inline Derived &pos(Coord x, Coord y)
     {
         lv_obj_set_pos(obj_, x, y);
         return static_cast<Derived &>(*this);
     }
 
-    Derived &pos_size(Coord x, Coord y, Coord w, Coord h)
+    inline Derived &pos_size(Coord x, Coord y, Coord w, Coord h)
     {
         pos(x, y);
         size(w, h);
@@ -122,98 +112,98 @@ public:
     }
 
     // 设置样式大小
-    Derived &style_size(Coord w, Coord h, Selector selector = selector_default)
+    inline Derived &style_size(Coord w, Coord h, Selector selector = selector_default)
     {
         lv_obj_set_style_size(obj_, w, h, selector);
         return static_cast<Derived &>(*this);
     }
 
     // 设置背景颜色
-    Derived &bg_color(Color color, Selector selector = selector_default)
+    inline Derived &bg_color(Color color, Selector selector = selector_default)
     {
         lv_obj_set_style_bg_color(obj_, color, selector);
         return static_cast<Derived &>(*this);
     }
 
     // 设置背景透明度
-    Derived &bg_opa(uint8_t opa, Selector selector = selector_default)
+    inline Derived &bg_opa(uint8_t opa, Selector selector = selector_default)
     {
         lv_obj_set_style_bg_opa(obj_, opa, selector);
         return static_cast<Derived &>(*this);
     }
 
     // 设置背景渐变颜色
-    Derived &bg_grad_color(Color color, Selector selector = selector_default)
+    inline Derived &bg_grad_color(Color color, Selector selector = selector_default)
     {
         lv_obj_set_style_bg_grad_color(obj_, color, selector);
         return static_cast<Derived &>(*this);
     }
 
     // 设置背景渐变透明度
-    Derived &bg_grad_opa(uint8_t opa, Selector selector = selector_default)
+    inline Derived &bg_grad_opa(uint8_t opa, Selector selector = selector_default)
     {
         lv_obj_set_style_bg_grad_opa(obj_, opa, selector);
         return static_cast<Derived &>(*this);
     }
 
     // 设置背景渐变停止点
-    Derived &bg_grad_stop(Coord stop, Selector selector = selector_default)
+    inline Derived &bg_grad_stop(Coord stop, Selector selector = selector_default)
     {
         lv_obj_set_style_bg_grad_stop(obj_, stop, selector);
         return static_cast<Derived &>(*this);
     }
 
     // 设置背景渐变方向
-    Derived &bg_grad_dir(Grad_dir dir, Selector selector = selector_default)
+    inline Derived &bg_grad_dir(Grad_dir dir, Selector selector = selector_default)
     {
         lv_obj_set_style_bg_grad_dir(obj_, dir, selector);
         return static_cast<Derived &>(*this);
     }
 
     // 设置边框宽度
-    Derived &border_width(Coord w, Selector selector = selector_default)
+    inline Derived &border_width(Coord w, Selector selector = selector_default)
     {
         lv_obj_set_style_border_width(obj_, w, selector);
         return static_cast<Derived &>(*this);
     }
 
     // 设置边框颜色
-    Derived &border_color(Color color, Selector selector = selector_default)
+    inline Derived &border_color(Color color, Selector selector = selector_default)
     {
         lv_obj_set_style_border_color(obj_, color, selector);
         return static_cast<Derived &>(*this);
     }
 
     // 设置边框透明度
-    Derived &border_opa(uint8_t opa, Selector selector = selector_default)
+    inline Derived &border_opa(uint8_t opa, Selector selector = selector_default)
     {
         lv_obj_set_style_border_opa(obj_, opa, selector);
         return static_cast<Derived &>(*this);
     }
 
     // 设置边框侧
-    Derived &border_side(Border_side side, Selector selector = selector_default)
+    inline Derived &border_side(Border_side side, Selector selector = selector_default)
     {
         lv_obj_set_style_border_side(obj_, side, selector);
         return static_cast<Derived &>(*this);
     }
 
     // 设置边框圆角半径
-    Derived &border_radius(Coord radius, Selector selector = selector_default)
+    inline Derived &border_radius(Coord radius, Selector selector = selector_default)
     {
         lv_obj_set_style_radius(obj_, radius, selector);
         return static_cast<Derived &>(*this);
     }
 
     // 设置线条宽度
-    Derived &line_width(Coord w, Selector selector = selector_default)
+    inline Derived &line_width(Coord w, Selector selector = selector_default)
     {
         lv_obj_set_style_border_width(obj_, w, selector);
         return static_cast<Derived &>(*this);
     }
 
     // 设置阴影宽度
-    Derived &shadow_width(Coord w, Selector selector = selector_default)
+    inline Derived &shadow_width(Coord w, Selector selector = selector_default)
     {
         lv_obj_set_style_shadow_width(obj_, w, selector);
         return static_cast<Derived &>(*this);
@@ -227,7 +217,7 @@ public:
     * @param opa 背景透明度
     * @param grad_dir 渐变方向
     */
-    Derived &
+    inline Derived &
     bg_grad(Color color, Color grad_color, uint8_t opa, Grad_dir grad_dir, Selector selector = selector_default)
     {
         bg_color(color, selector);
@@ -244,7 +234,8 @@ public:
     * @param width   边框宽度
     * @param opa     边框透明度
     */
-    Derived &border(Color color, Coord radius, Coord width, uint8_t opa=255, Selector selector = selector_default)
+    inline Derived &
+    border(Color color, Coord radius, Coord width, uint8_t opa = 255, Selector selector = selector_default)
     {
         border_color(color, selector);
         border_radius(radius, selector);
@@ -254,29 +245,29 @@ public:
     }
 
     // 将对象移动到背景层
-    Derived &to_background()
+    inline Derived &to_background()
     {
         lv_obj_move_background(obj_);
         return static_cast<Derived &>(*this);
     }
 
     // 将对象移动到前景层
-    Derived &to_foreground()
+    inline Derived &to_foreground()
     {
         lv_obj_move_foreground(obj_);
         return static_cast<Derived &>(*this);
     }
 
     // 高级布局方法
-    Derived &align(Align align, Coord x_ofs = 0,
-                   Coord y_ofs = 0)
+    inline Derived &align(Align align, Coord x_ofs = 0,
+                          Coord y_ofs = 0)
     {
         lv_obj_align(obj_, align, x_ofs, y_ofs);
         return static_cast<Derived &>(*this);
     }
 
     // 对象居中
-    Derived &center(Coord x_ofs = 0, Coord y_ofs = 0)
+    inline Derived &center(Coord x_ofs = 0, Coord y_ofs = 0)
     {
         lv_obj_align(obj_, LV_ALIGN_CENTER, x_ofs, y_ofs);
         return static_cast<Derived &>(*this);
@@ -284,27 +275,27 @@ public:
 
     // 样式系统（支持普通样式和本地样式）
     template<typename Style>
-    Derived &add_style(Style &&style, Selector selector = selector_default)
+    inline Derived &add_style(Style &&style, Selector selector = selector_default)
     {
         lv_obj_add_style(obj_, style.get(), selector);
         return static_cast<Derived &>(*this);
     }
 
-    Derived &remove_style_all()
+    inline Derived &remove_style_all()
     {
         lv_obj_remove_style_all(obj_);
         return static_cast<Derived &>(*this);
     }
 
     // 圆角裁剪
-    Derived &clip_corner(Selector selector = selector_default)
+    inline Derived &clip_corner(Selector selector = selector_default)
     {
         lv_obj_set_style_clip_corner(obj_, true, selector);
         return static_cast<Derived &>(*this);
     }
 
     // 重绘
-    Derived &invalidate()
+    inline Derived &invalidate()
     {
         lv_obj_invalidate(obj_);  // 使频谱区域无效，触发重绘
         return static_cast<Derived &>(*this);
@@ -318,9 +309,10 @@ public:
      * @note 出于大多数情况的考虑，函数一般都是定义好的，所以用模板参数来传递
      * @return
      */
-    template<Event_Handler handler= nullptr,EventCode Event=LV_EVENT_ALL>
-    Derived &bind_event()
+    template<Event_Handler handler = nullptr, EventCode Event = LV_EVENT_ALL>
+    inline Derived &bind_event()
     {
+        static_assert(handler != nullptr, "Event handler cannot be null");
         lv_obj_add_event_cb(obj_, handler, Event, nullptr);
         return static_cast<Derived &>(*this);
     }
@@ -330,7 +322,7 @@ public:
      * @param handler 即当初绑定的事件回调函数
      * @return
      */
-    Derived &remove_event(Event_Handler &handler)
+    inline Derived &remove_event(Event_Handler &handler)
     {
         lv_obj_remove_event_cb(obj_, handler);
         return static_cast<Derived &>(*this);
@@ -342,7 +334,7 @@ public:
      * @return
      */
     template<uint32_t Index>
-    Derived &remove_event()
+    inline Derived &remove_event()
     {
         lv_obj_remove_event(obj_, Index);
         return static_cast<Derived &>(*this);
@@ -351,37 +343,38 @@ public:
 
     // 发送事件
     template<EventCode Event, void *param = nullptr>
-    Derived &send_event()
+    inline Derived &send_event()
     {
         lv_obj_send_event(obj_, Event, param);
         return static_cast<Derived &>(*this);
     }
 
     // 绑定点击事件
-    template<void(*handler)()= nullptr>
+    template<void(*handler)() = nullptr>
     inline Derived &OnClicked()
     {
-        bind_event<[](Event_t e){
-            if(lv_event_get_code(e)==LV_EVENT_CLICKED)
+        bind_event<[](Event_t e)
+        {
+            if (lv_event_get_code(e) == LV_EVENT_CLICKED)
             {
                 if constexpr (handler) { handler(); }
             }
-        },LV_EVENT_CLICKED>();
+        }, LV_EVENT_CLICKED>();
 
         return static_cast<Derived &>(*this);
     }
 
-    template<void(*handler)(Event_t e)= nullptr>
+    template<void(*handler)(Event_t e) = nullptr>
     inline Derived &OnClicked()
     {
-        bind_event<handler,LV_EVENT_CLICKED>();
+        bind_event<handler, LV_EVENT_CLICKED>();
         return static_cast<Derived &>(*this);
     }
 
 
     // 持续按压事件绑定
     template<void(*press)() = nullptr>
-    Derived &OnPressed()
+    inline Derived &OnPressed()
     {
         bind_event<[](Event_t e)
         {
@@ -395,7 +388,7 @@ public:
     }
 
     template<void(*pressing)() = nullptr>
-    Derived &OnPressing()
+    inline Derived &OnPressing()
     {
         bind_event<[](Event_t e)
         {
@@ -409,7 +402,7 @@ public:
     }
 
     template<void(*press)() = nullptr, void(*release)() = nullptr>
-    Derived &OnPressedReleased()
+    inline Derived &OnPressedReleased()
     {
         bind_event<[](Event_t e)
         {
@@ -431,55 +424,54 @@ public:
 
 
     // 状态管理方法
-    Derived &add_flag(Flag_t f)
+    inline Derived &add_flag(Flag_t f)
     {
         lv_obj_add_flag(obj_, f);
         return static_cast<Derived &>(*this);
     }
 
-    Derived &clear_flag(Flag_t f)
+    inline Derived &clear_flag(Flag_t f)
     {
         lv_obj_clear_flag(obj_, f);
         return static_cast<Derived &>(*this);
     }
 
-    Derived &appear()
+    inline Derived &appear()
     {
         clear_flag(LV_OBJ_FLAG_HIDDEN);
         return static_cast<Derived &>(*this);
     }
 
-    Derived &hidden()
+    inline Derived &hidden()
     {
         add_flag(LV_OBJ_FLAG_HIDDEN);
         return static_cast<Derived &>(*this);
     }
-
-    // 动画系统
-    template<auto Prop, typename T>
-    Derived &animate(T start, T end, uint16_t time,
+    
+// 更安全的动画实现（示例代码）
+    template<typename T>
+    Derived &animate(lv_anim_exec_xcb_t exec_cb, T start, T end, uint16_t time,
                      lv_anim_path_cb_t path = lv_anim_path_linear)
     {
         lv_anim_t a;
         lv_anim_init(&a);
-        lv_anim_set_exec_cb(&a, [](void *var, int32_t v)
-        {
-            (static_cast<Derived *>(var)->*Prop) = v;
-        });
-        lv_anim_set_var(&a, this);
+        lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t)exec_cb);
+        lv_anim_set_var(&a, obj_); // 直接操作LVGL对象
+        lv_anim_set_values(&a, start, end);
+        lv_anim_set_time(&a, time);
+        lv_anim_set_path_cb(&a, path);
         lv_anim_start(&a);
         return static_cast<Derived &>(*this);
     }
 
 protected:
     // 公共初始化模板（供派生类调用）
-    void create_obj(const lv_obj_class_t *cls,Obj parent = parent_)
+    void create_obj(const lv_obj_class_t *cls, Obj parent = parent_)
     {
         obj_ = lv_obj_class_create_obj(cls, parent);
         lv_obj_class_init_obj(obj_);
     }
 };
-
 
 
 #endif //SIMULATOR_WIDGETS_HPP

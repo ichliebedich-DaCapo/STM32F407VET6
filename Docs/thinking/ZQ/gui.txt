@@ -1,0 +1,138 @@
+在资源紧张的单片机开发中，为了方便使用，我封装一些高频的lvgl的API。由于lvgl的组件创建必须在lvgl初始化之后手动调用，
+所以我没有定义构造函数，而是用init来代替lv_obj_create。下面是使用CRTP模式的封装，除了Label外还有Button等组件的派生类。
+class WidgetModel
+{
+protected:
+    Obj_t obj_;
+    static inline Obj_t parent_ = nullptr;
+};
+
+template<typename Derived>
+class Widget : public WidgetModel
+{
+public:
+    Widget() = default;
+    ~Widget() = default;
+    operator Obj_t() const noexcept;
+    Obj get_parent() const noexcept;
+    static void parent(Obj parent);
+    static void parent(Obj_t parent);
+    Derived& size(Coord w, Coord h);
+    Derived& pos(Coord x, Coord y);
+    Derived& pos_size(Coord x, Coord y, Coord w, Coord h);
+    Derived& style_size(Coord w, Coord h, Selector selector = selector_default);
+    Derived& bg_color(Color color, Selector selector = selector_default);
+    Derived& bg_opa(uint8_t opa, Selector selector = selector_default);
+    Derived& bg_grad_color(Color color, Selector selector = selector_default);
+    Derived& bg_grad_opa(uint8_t opa, Selector selector = selector_default);
+    Derived& bg_grad_stop(Coord stop, Selector selector = selector_default);
+    Derived& bg_grad_dir(Grad_dir dir, Selector selector = selector_default);
+    Derived& border_width(Coord w, Selector selector = selector_default);
+    Derived& border_color(Color color, Selector selector = selector_default);
+    Derived& border_opa(uint8_t opa, Selector selector = selector_default);
+    Derived& border_side(Border_side side, Selector selector = selector_default);
+    Derived& border_radius(Coord radius, Selector selector = selector_default);
+    Derived& line_width(Coord w, Selector selector = selector_default);
+    Derived& shadow_width(Coord w, Selector selector = selector_default);
+    Derived& bg_grad(Color color, Color grad_color, uint8_t opa, Grad_dir grad_dir, Selector selector = selector_default);
+    Derived& border(Color color, Coord radius, Coord width, uint8_t opa = 255, Selector selector = selector_default);
+    Derived& to_background();
+    Derived& to_foreground();
+    Derived& align(Align align, Coord x_ofs = 0, Coord y_ofs = 0);
+    Derived& center(Coord x_ofs = 0, Coord y_ofs = 0);
+    template<typename Style>
+    Derived& add_style(Style&& style, Selector selector = selector_default);
+    Derived& remove_style_all();
+    Derived& clip_corner(Selector selector = selector_default);
+    Derived& invalidate();
+    template<Event_Handler handler = nullptr, EventCode Event = LV_EVENT_ALL>
+    Derived& bind_event();
+    Derived& remove_event(Event_Handler& handler);
+    template<uint32_t Index>
+    Derived& remove_event();
+    template<EventCode Event, void* param = nullptr>
+    Derived& send_event();
+    template<void(*handler)() = nullptr>
+    Derived& OnClicked();
+    template<void(*handler)(Event_t e) = nullptr>
+    Derived& OnClicked();
+    template<void(*press)() = nullptr>
+    Derived& OnPressed();
+    template<void(*pressing)() = nullptr>
+    Derived& OnPressing();
+    template<void(*press)() = nullptr, void(*release)() = nullptr>
+    Derived& OnPressedReleased();
+    Derived& add_flag(Flag_t f);
+    Derived& clear_flag(Flag_t f);
+    Derived& appear();
+    Derived& hidden();
+    template<typename T>
+    Derived& animate(lv_anim_exec_xcb_t exec_cb, T start, T end, uint16_t time,
+                    lv_anim_path_cb_t path = lv_anim_path_linear);
+protected:
+    void create_obj(const lv_obj_class_t* cls, Obj parent = parent_);
+};
+// 派生类
+class Label : public Widget<Label>
+{
+public:
+    static void Font(Font_t& font);
+    static void Font(::Font font);
+
+    Label& init(Obj parent = parent_);
+    Label& init(Strings text, Obj parent = parent_);
+    Label& init(Coord x, Coord y, Coord w, Coord h, Obj parent = parent_);
+    Label& init(Coord x, Coord y, Coord w, Coord h, Strings string, Obj parent = parent_);
+
+    Label& space(Coord space, Selector selector = selector_default);
+    Label& text_color(Color color, Selector selector = selector_default);
+    Label& text_opa(uint8_t opa, Selector selector = selector_default);
+    Label& text_align(Align_text align, Selector selector = selector_default);
+    Label& font(::Font font);
+    Label& font(Font_t& font);
+    Label& text(Strings fmt, ...);
+
+private:
+    static inline ::Font font_{};
+};
+在ui.cpp中，只需要定义组件和设计界面即可，下面是示例
+变量定义是在命名空间里定义的
+namespace gui::widgets::main
+{
+    Label label_counter; // 计数器显示
+    Button btn_x1;     // 触摸点1 x坐标 按钮
+    Button btn_y1;    // 触摸点1 y坐标 按钮
+    Button btn_x2;    // 触摸点2 x坐标 按钮
+    Button btn_y2;    // 触摸点2 y坐标 按钮
+    ……
+}
+界面的设计是在screen函数里实现的
+using namespace gui::widgets::main;
+namespace gui::init
+{
+    void screen()
+    {
+        // 设置全局字体格式
+        Label::Font(lv_customer_font_SourceHanSerifSC_Regular_15);
+        Button::Font(lv_customer_font_SourceHanSerifSC_Regular_15);
+
+        // 计数器显示
+        label_counter.init("0").pos_size(260, 150, 80, 40);
+
+        // 触摸点1 x坐标
+        btn_x1.init(50, 100, 80, 40, "0").bg_color(lv_color_hex(0x34e6ff));
+
+        // 触摸点1 y坐标
+        btn_y1.init(150, 100, 80, 40, "0").bg_color(lv_color_hex(0x34e6ff));
+
+        // 触摸点2 x坐标 按钮
+        btn_x2.init(50, 150, 80, 40, "+").bg_color(lv_color_hex(0x34e6ff));
+
+        // 触摸点2 y坐标 按钮
+        btn_y2.init(150, 150, 80, 40, "-").bg_color(lv_color_hex(0x34e6ff));
+
+        ……
+    }
+}
+你可以根据上面的示例帮我设计一个好看的界面，界面内容你可以自定义，类的成员函数你可以尽管调用，如果有些设计的API没有，
+你可以直接使用lvgl9的API（因为我已经把对象隐式转换为了lv_obj_t*类型）
