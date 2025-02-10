@@ -1,4 +1,5 @@
 /lvgl-simulator/build/
+/lvgl-simulator/.idea/
 /lvgl-simulator/cmake-build-debug-/
 /lvgl-simulator/cmake-build-debug-mingw_nxp/
 /lvgl-simulator/cmake-build-debug-mingw_nxp_w32/
