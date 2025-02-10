@@ -15,7 +15,14 @@ namespace gui::init
 {
     void screen()
     {
-        obj_blueCounter_cont_1.init( 93,   60,   294,   200)
+        scr	.bg_opa(255)
+			.bg_color(lv_color_hex(0x599cc7))
+			.bg_grad_dir(LV_GRAD_DIR_VER)
+			.bg_grad_color(lv_color_hex(0x8dcdeb))
+			.bg_main_stop(0)
+			.bg_grad_stop(255);
+
+		obj_blueCounter_cont_1.init( 93,   60,   294,   200)
 			.border_width(4)
 			.border_opa(255)
 			.border_color(lv_color_hex(0xacceea))

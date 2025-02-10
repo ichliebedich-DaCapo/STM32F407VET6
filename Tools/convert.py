@@ -5,6 +5,11 @@ import glob
 import argparse
 
 
+# 我应该分成两个样式处理表，一个处理屏幕的，比较简单，另一个处理其他组件的文件。
+# 因为处理屏幕需要把名称变成scr，其他组件则是真名
+# 我应该在处理样式表时定义一个映射表，把组件名映射为对应的样式名，并且把一些函数整合到一起
+
+
 def parse_setup_function(content):
     print("searching...")
     pattern = r'void setup_scr_(\w+)\(lv_ui \*ui\)\s*{([^}]+)}'
@@ -28,6 +33,7 @@ def convert_style_calls(blocks, widget_var):
             # 匹配对应函数 第二个是非贪婪捕获，第三个是贪婪捕获，不过在这里都差不多
             match = re.match(r'lv_obj_set_style_(\w+)\(ui->\w+,\s*(.+?),\s*(.*)\);', line)
             if match:
+                # 定义一个函数映射表
                 prop = match.group(1)
                 value = match.group(2)
                 state = match.group(3)
@@ -120,7 +126,7 @@ def generate_output(project_name, components):
             screen_code = []
             screen_code.extend(comp['style_code'])
             if screen_code:
-                screen_code[0] += "scr"
+                screen_code[0] = "scr" + screen_code[0]
                 screen_code[-1] += ";\n"
             screen_ns.extend(screen_code)
 
@@ -181,8 +187,8 @@ def main():
         code_block = blocks[2].strip()
         # 以“//Write  style for"为分隔符(样式注释行被去除)
         parts = re.split(r'//Write style for.*',code_block, maxsplit=1)
-        # 样式块代码以注释为分割符
-        style_block = parts[1].strip()
+        # 样式块代码以注释为分割符,并且必须以列表的形式，不然会被分割为一个个字符
+        style_block = [parts[1].strip()]
         style_code = convert_style_calls(style_block, "scr")
 
         # 处理组件
