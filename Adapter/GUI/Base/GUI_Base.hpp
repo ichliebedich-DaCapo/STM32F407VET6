@@ -20,6 +20,7 @@
 #include "FPS.hpp"
 #include "anim.hpp"
 #include "CPU.hpp"
+#include "roller.hpp"
 
 
 namespace gui

@@ -7,6 +7,7 @@ import argparse
 
 
 def parse_setup_function(content):
+    print("searching...")
     pattern = r'void setup_scr_(\w+)\(lv_ui \*ui\)\s*{([^}]+)}'
     match = re.search(pattern,  content, re.DOTALL)
     if not match:
@@ -96,19 +97,20 @@ def generate_output(project_name, components):
 
         screen_ns.extend(screen_code)
 
-    widgets_block = "\n".join(widgets_ns)
-    screen_block = "\n    ".join(screen_ns)
+    widgets_block = "\n\t".join(widgets_ns)
+    screen_block = "\n\t\t".join(screen_ns)
 
     return f"""namespace gui::widgets::main 
 {{
-{widgets_block}
+    {widgets_block}
 }}
 
+// 使用命名空间
+using namespace gui::widgets::main;
 namespace gui::init 
 {{
     void screen()
     {{
-        using namespace gui::widgets::main;
         {screen_block}
     }}
 }}"""
@@ -129,11 +131,11 @@ def main():
     with open(target_files[0]) as f:
         content = f.read()
 
-    # 定位 setup_scr_* 函数
+    # 定位 setup_scr_* 函数,并获取工程名和函数体
     project_name, func_body = parse_setup_function(content)
 
-    # Process code blocks
-    blocks = re.split(r'(//Write {2}codes? \w+)', func_body)
+    # 把函数体按照注释来分割
+    blocks = re.split(r'(//Write\s+codes?\s+\w+)', func_body)
     components = []
     current_component = None
 
