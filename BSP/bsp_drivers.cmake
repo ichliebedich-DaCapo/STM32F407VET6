@@ -5,7 +5,7 @@ set(BSP_DRIVERS
         "default:hal,hal_cortex,hal_gpio,baseinit"
         # BSP驱动
         "adc:timer,hal_adc,hal_adc_ex"
-        "baseinit:rcc,hal_tim,key_exit"
+        "baseinit:rcc,lcd,hal_tim,key_exit"
         "cpu_runtime:"
         "dac:hal_dac,timer"
         "debug:"

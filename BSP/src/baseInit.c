@@ -37,6 +37,7 @@ void BaseInit()
 
     fsmc_init();
 
+
 #ifdef USE_FSMC_DMA
     fsmc_dma_init();// 初始化FSMC+DMA
 #endif

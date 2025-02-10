@@ -32,7 +32,7 @@ class GUI
 {
 public:
 
-    template<void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
+    template<void(*lcd_init)(), void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
                                                    const uint16_t *color_p),
             int32_t (*touchpad_read_xy)(int32_t *last_x, int32_t *last_y) = nullptr>
     static auto init() -> void;
@@ -45,7 +45,6 @@ public:
 
     // 获取设备
     static inline auto get_display() -> lv_display_t * { return disp; }
-
     static inline auto get_indev() -> lv_indev_t * { return indev_touchpad; }
 
 private:
@@ -63,11 +62,14 @@ private:
 };
 
 
-template<void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
+template<void(*lcd_init)(), void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
                                                const uint16_t *color_p),
         int32_t (*touchpad_read_xy)(int32_t *last_x, int32_t *last_y)>
 auto GUI::init() -> void
 {
+
+    /********初始化LCD*******/
+    if constexpr (lcd_init != nullptr) { lcd_init(); }
 
     /********初始化LVGL*******/
     lv_init();

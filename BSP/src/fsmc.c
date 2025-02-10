@@ -4,6 +4,7 @@
 
 #include "fsmc.h"
 
+#include "stm32f4xx_hal.h"
 #include "stm32f4xx.h"//内嵌了stm32f4xx_ll_fsmc.h
 
 

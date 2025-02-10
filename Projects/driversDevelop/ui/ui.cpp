@@ -83,9 +83,6 @@ namespace gui::init
 
         // 触摸点2 y坐标 按钮
         btn_y2.init(150, 150, 80, 40, "-").bg_color(lv_color_hex(0x34e6ff));
-
-
-
     }
 
 

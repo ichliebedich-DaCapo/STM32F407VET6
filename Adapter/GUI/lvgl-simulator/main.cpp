@@ -12,10 +12,8 @@ extern int keyboard_thread(void *data);
 #undef main
 int main(int argc, char *argv[])
 {
-    simulator_init();
-
     // GUI初始化
-    GUI::init<LCD_Color_Fill,touchpad_read_xy>();
+    GUI::init<simulator_init,LCD_Color_Fill,touchpad_read_xy>();
 
     SDL_CreateThread(lv_tick_thread, "lv_tick", nullptr);// lv_tick线程
     SDL_CreateThread(keyboard_thread, "keyboard", nullptr);// 键盘线程
@@ -27,6 +25,7 @@ int main(int argc, char *argv[])
         GUI::handler();// lvgl事件处理
 
         SDL_Delay(10);// 短暂休眠
+
     }
 
     // 清理资源
