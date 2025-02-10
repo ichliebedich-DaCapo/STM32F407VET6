@@ -1,4 +1,6 @@
 set_bsp_components(
+        lcd
+        touch
         adc
         dac
         w25qxx

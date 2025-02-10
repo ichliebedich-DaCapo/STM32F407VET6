@@ -3,8 +3,10 @@
 #include "baseInit.h"
 #include "key_adapter.hpp"
 #include "key_exit.h"
+
 #ifdef GUI_ENABLE
 
+#include "lcd.h"
 #include "GUI.hpp"
 #include "touch.h"
 
@@ -21,7 +23,6 @@ extern void background_handler();// 后台处理函数
 __attribute__((weak)) void background_handler() {}
 
 
-
 int main()
 {
     /*基础初始化*/
@@ -30,7 +31,7 @@ int main()
     PlatformKey::init<key_exti_init>();// 初始化按键
 
 #ifdef GUI_ENABLE
-    GUI::init<lcd_flush,touch_read_single_point>();
+    GUI::init<lcd_flush, touch_read_single_point>();
 #endif
 
     app_init();

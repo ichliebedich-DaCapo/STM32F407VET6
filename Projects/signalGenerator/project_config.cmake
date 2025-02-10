@@ -1,5 +1,7 @@
 set_bsp_components(
         dac
+        lcd
+        touch
 )
 
 #options_disable_GUI()
