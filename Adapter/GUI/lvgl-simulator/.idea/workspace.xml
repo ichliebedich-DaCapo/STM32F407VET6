@@ -29,10 +29,9 @@
   <component name="ChangeListManager">
     <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Component/inc/chart.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Component/inc/chart.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/src/i2c.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/i2c.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +132,7 @@
       <option name="presentableId" value="Default" />
       <updated>1739163029517</updated>
       <workItem from="1739163030599" duration="8542000" />
-      <workItem from="1739243626305" duration="13893000" />
+      <workItem from="1739243626305" duration="17889000" />
     </task>
     <servers />
   </component>

@@ -1,6 +1,7 @@
 //
 // Created by fairy on 2025/1/10 18:43.
 //
+#include <cstring>
 #include "ui.hpp"
 #include "GUI.hpp"
 
@@ -20,7 +21,11 @@ namespace gui::widgets::main
     Button btn_hidden; // 隐藏按键
     Button btn_Random_data; // 生成随机数据按键
 
+    static constexpr size_t DATA_POINTS = 128;
     ChartSeries_t series; //数据 系列1
+    ChartSeries_t series_dirty; //数据 系列2 脏数据
+    int16_t data_cache[DATA_POINTS];  // 数据缓存
+    bool dirty_flags[DATA_POINTS];    // 脏标记数组
 }
 static int counter_value = 0; // 计数器值存储
 
@@ -74,11 +79,24 @@ public:
     // 生成随机数据
     static inline auto generate_data()->void;
 
+    static inline auto toggle_generation() -> void;
+
+    // 新增定时器回调函数
+    static void timer_cb(lv_timer_t* timer)
+    {
+        if(CounterLogic::is_generating) {
+            CounterLogic::generate_data();
+        }
+    }
+
 private:
     static inline int counter_value = 0; // 计数器值
     static inline lv_point_t point_1{};
     static inline lv_point_t point_2{};// 不存在第二个触摸点
-
+    // 添加生成状态标志
+    static inline bool is_generating = false;
+    // 添加定时器指针
+    static inline lv_timer_t* update_timer = nullptr;
 };
 
 // 默认使用main屏幕里的组件（暂时用不到其他界面）
@@ -121,11 +139,20 @@ namespace gui::init
         // 切换界面按键
         btn_hidden.init(400,280,80,40,"chart");
 
-        // 测试 图表控件
-        chart_1.init(50, 50, 300, 250,128).set_update_mode(LV_CHART_UPDATE_MODE_CIRCULAR).set_div_count(20,10).set_div_color(lv_color_hex(0x34e6ff))
-                .hidden();;
+//        // 测试 图表控件
+        chart_1.init(50,  50, 300, 250,128)
+                .set_update_mode(LV_CHART_UPDATE_MODE_SHIFT)  // 改为SHIFT模式
+                .set_div_color(lv_color_hex(0x34e6ff))
+                .hidden();
         btn_Random_data.init(360,150,80,40,"start/end").hidden();
+
         series =chart_1.add_series(lv_color_hex(0x34e6ff),LV_CHART_AXIS_PRIMARY_Y);
+        // 创建脏标记系列（白色点）
+        series_dirty = chart_1.add_series(lv_color_white(), LV_CHART_AXIS_PRIMARY_Y);
+
+        // 初始化缓存
+        memset(data_cache, 0, sizeof(data_cache));
+        memset(dirty_flags, 0, sizeof(dirty_flags));
 
 //        for(int i = 0;i < 128;++i)
 //        {
@@ -158,6 +185,9 @@ namespace gui::init
 
         // 绑定 随机生成数据事件
         widgets::main::btn_Random_data.OnPressing<CounterLogic::generate_data>();
+
+        // 绑定 随机生成数据事件
+        widgets::main::btn_Random_data.OnClicked<CounterLogic::toggle_generation>();
     }
 }
 
@@ -291,24 +321,152 @@ auto CounterLogic::set_value_weekday_dropdown()->void
 
 auto CounterLogic::hidden_all() -> void
 {
-    label_counter.hidden();
-    label_weekday.hidden();
-    btn_x1.hidden();
-    btn_y1.hidden();
-    btn_x2.hidden();
-    btn_y2.hidden();
-    slider_1.hidden();
-    roller_1.hidden();
-    dropdown_1.hidden();
+    lv_obj_delete(label_counter);
+    lv_obj_delete(label_weekday);
+    lv_obj_delete(btn_x1);
+    lv_obj_delete(btn_y1);
+    lv_obj_delete(btn_x2);
+    lv_obj_delete(btn_y2);
+    lv_obj_delete(slider_1);
+    lv_obj_delete(roller_1);
+    lv_obj_delete(dropdown_1);
+    lv_obj_delete(btn_hidden);
+
+
+//    label_counter.hidden();
+//    label_weekday.hidden();
+//    btn_x1.hidden();
+//    btn_y1.hidden();
+//    btn_x2.hidden();
+//    btn_y2.hidden();
+//    slider_1.hidden();
+//    roller_1.hidden();
+//    dropdown_1.hidden();
+//    btn_hidden.hidden();
     chart_1.appear();
     btn_Random_data.appear();
 }
-
-// 生成随机数据
 auto CounterLogic::generate_data()->void
 {
-    for(int i = 0;i < 128;++i)
+    for (int i = 0; i < 128; ++i)
     {
         lv_chart_set_next_value(chart_1, series, lv_rand(0, 255));
+    }
+}
+// 生成随机数据
+//auto CounterLogic::generate_data()->void
+//{
+//    for(int i = 0;i < 128;++i)
+//    {
+//        lv_chart_set_next_value(chart_1, series, lv_rand(0, 255));
+//    }
+//
+//    for(int i = 0; i < DATA_POINTS; ++i) {
+//        int16_t new_val = lv_rand(0, 255);
+//
+//        // 仅当数值变化时标记脏点
+//        if(data_cache[i] != new_val) {
+//            data_cache[i] = new_val;
+//            dirty_flags[i] = true;
+//
+//            // 设置白色点实现擦除效果
+//            lv_chart_set_value_by_id(chart_1, series_dirty, i, 255);
+//        }
+//    }
+//    for(int i = 0; i < DATA_POINTS; ++i) {
+//        if(dirty_flags[i]) {
+//            // 更新实际数据点
+//            lv_chart_set_value_by_id(chart_1, series, i, data_cache[i]);
+//
+//            // 重置脏标记
+//            dirty_flags[i] = false;
+//            lv_chart_set_value_by_id(chart_1, series_dirty, i, LV_CHART_POINT_NONE);
+//        }
+//    }
+//
+//    // 控制刷新频率
+//    static uint32_t last_refresh = 0;
+//    if(lv_tick_elaps(last_refresh) > 30) { // ~30fps
+//        lv_chart_refresh(chart_1);
+//        last_refresh = lv_tick_get();
+//    }
+//}
+
+
+// 修改后的generate_data函数
+//auto CounterLogic::generate_data()->void
+//{
+//    static uint32_t last_refresh = 0;
+//    bool need_partial_refresh = false;
+//
+//    // 第一阶段：数据变化检测
+//    for(int i = 0; i < DATA_POINTS; ++i) {
+//        int16_t new_val = lv_rand(0, 255);
+//        if(data_cache[i] != new_val) {
+//            data_cache[i] = new_val;
+//            dirty_flags[i] = true;
+//            need_partial_refresh = true;
+//        }
+//    }
+//
+//    // 第二阶段：智能区域更新
+//    if(need_partial_refresh) {
+//        for(int i = 0; i < DATA_POINTS; ++i) {
+//            if(dirty_flags[i]) {
+//                // 获取旧点位置
+//                lv_point_t old_pos;
+//                lv_chart_get_point_pos_by_id(chart_1, series, i, &old_pos);
+//
+//                // 更新数据点
+//                lv_chart_set_value_by_id(chart_1, series, i, data_cache[i]);
+//
+//                // 计算刷新区域（扩展2像素）
+//                lv_area_t area = {
+//                        .x1 = (lv_coord_t)(old_pos.x - 2),
+//                        .y1 = (lv_coord_t)(old_pos.y - 2),
+//                        .x2 = (lv_coord_t)(old_pos.x + 2),
+//                        .y2 = (lv_coord_t)(old_pos.y + 2)
+//                };
+//
+//                // 标记需要刷新的区域
+//                lv_obj_invalidate_area(chart_1, &area);
+//
+//                // 获取新点位置并标记
+//                lv_chart_get_point_pos_by_id(chart_1, series, i, &old_pos);
+//                area.x1 = old_pos.x - 2;
+//                area.y1 = old_pos.y - 2;
+//                area.x2 = old_pos.x + 2;
+//                area.y2 = old_pos.y + 2;
+//                lv_obj_invalidate_area(chart_1, &area);
+//
+//                dirty_flags[i] = false;
+//            }
+//        }
+//    }
+//
+//    // 第三阶段：受控刷新
+//    if(lv_tick_elaps(last_refresh) > 30) { // 33ms ≈ 30fps
+//        // 仅刷新标记区域
+//        lv_refr_now(NULL);
+//        last_refresh = lv_tick_get();
+//    }
+//}
+// 新增切换生成状态的方法
+auto CounterLogic::toggle_generation() -> void
+{
+    is_generating = !is_generating;
+
+    // 更新按钮文本
+    btn_Random_data.text(is_generating  ? "Stop" : "Start");
+
+    // 管理定时器
+    if(is_generating) {
+        // 创建定时器（20ms间隔 ≈ 50fps）
+        update_timer = lv_timer_create(timer_cb, 20, NULL);
+    } else {
+        if(update_timer) {
+            lv_timer_del(update_timer);
+            update_timer = nullptr;
+        }
     }
 }
