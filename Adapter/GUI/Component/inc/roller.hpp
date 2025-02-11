@@ -2,23 +2,23 @@
 // Created by DV on 2025/2/10.
 //
 
-#ifndef SIMULATOR_SLIDER_HPP
-#define SIMULATOR_SLIDER_HPP
+#ifndef SIMULATOR_Roller_HPP
+#define SIMULATOR_Roller_HPP
 #include "widget.hpp"
 
 class Roller : public Widget<Roller>
 {
 public:
-    // Ê¹ÓÃÇ°±ØĞëÉèÖÃ¸¸¶ÔÏó
+
     Roller& init()
     {
         create_obj(&lv_roller_class);
         return *this;
     }
-
+    // ä½¿ç”¨å‰å¿…é¡»è®¾ç½®çˆ¶å¯¹è±¡
     Roller& init(Coord x, Coord y, Coord w, Coord h,
-                 const char* options,Color bg_color = lv_color_hex(0x2195f6), uint8_t opa = 125,
-                 uint32_t visible_rows = 3,
+                 const char* options="",uint32_t visible_rows = 3,
+                 Color bg_color = lv_color_hex(0x2195f6), uint8_t opa = 125,
                  lv_roller_mode_t mode = LV_ROLLER_MODE_NORMAL,
                  uint32_t default_selection = 0)
     {
@@ -30,49 +30,42 @@ public:
         Roller::setSelected(default_selection);
         return *this;
     }
-    // ÉèÖÃÑ¡ÏîÁĞ±í
+    // è®¾ç½®é€‰é¡¹åˆ—è¡¨
     Roller& setOptions(const char* options, lv_roller_mode_t mode = LV_ROLLER_MODE_NORMAL) {
         lv_roller_set_options(obj_, options, mode);
         return *this;
     }
 
-    // ÉèÖÃÑ¡ÖĞÏî
+    // è®¾ç½®é€‰ä¸­é¡¹
     Roller& setSelected(uint32_t sel_opt, lv_anim_enable_t anim = LV_ANIM_OFF) {
         lv_roller_set_selected(obj_, sel_opt, anim);
         return *this;
     }
 
-    // ÉèÖÃ¿É¼ûĞĞÊı
+    // è®¾ç½®å¯è§è¡Œæ•°
     Roller& setVisibleRowCount(uint32_t row_cnt) {
         lv_roller_set_visible_row_count(obj_, row_cnt);
         return *this;
     }
 
-//    // »ñÈ¡µ±Ç°Ñ¡ÖĞË÷Òı
-//    uint32_t getSelected() const {
-//        return lv_roller_get_selected(obj_);
-//    }
+    // è·å–å½“å‰é€‰ä¸­ç´¢å¼•
+    [[nodiscard]] uint32_t getSelected() const {
+        return lv_roller_get_selected(obj_);
+    }
 
-    // »ñÈ¡Ñ¡ÖĞÏîÎÄ±¾£¨C·ç¸ñ»º³åÇø£©
+    // è·å–é€‰ä¸­é¡¹æ–‡æœ¬ï¼ˆCé£æ ¼ç¼“å†²åŒºï¼‰
     void getSelectedStr(char* buf, uint32_t buf_size) const {
         lv_roller_get_selected_str(obj_, buf, buf_size);
     }
 
-//    // »ñÈ¡Ñ¡ÖĞÏîÎÄ±¾£¨C++×Ö·û´®£©
-//    std::string getSelectedString() const {
-//        char buf[256];
-//        lv_roller_get_selected_str(obj_, buf, sizeof(buf));
-//        return std::string(buf);
-//    }
+    // è·å–åŸå§‹é€‰é¡¹æ•°æ®
+    [[nodiscard]] const char* getOptions() const {
+        return lv_roller_get_options(obj_);
+    }
 
-//    // »ñÈ¡Ô­Ê¼Ñ¡ÏîÊı¾İ
-//    const char* getOptions() const {
-//        return lv_roller_get_options(obj_);
-//    }
-
-//    // »ñÈ¡Ñ¡Ïî×ÜÊı
-//    uint32_t getOptionCount() const {
-//        return lv_roller_get_option_count(obj_);
-//    }
+    // è·å–é€‰é¡¹æ€»æ•°
+    [[nodiscard]] uint32_t getOptionCount() const {
+        return lv_roller_get_option_count(obj_);
+    }
 };
-#endif //SIMULATOR_SLIDER_HPP
+#endif //SIMULATOR_Roller_HPP

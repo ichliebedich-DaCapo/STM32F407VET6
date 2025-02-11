@@ -371,6 +371,20 @@ public:
         return static_cast<Derived &>(*this);
     }
 
+    // 绑定值变化事件
+    template<void(*handler)()= nullptr>
+    inline Derived &OnValueChanged()
+    {
+        bind_event<[](Event_t e){
+            if(lv_event_get_code(e)==LV_EVENT_VALUE_CHANGED )
+            {
+                if constexpr (handler) { handler(); }
+            }
+        },LV_EVENT_VALUE_CHANGED>();
+
+        return static_cast<Derived &>(*this);
+    }
+
     template<void(*handler)(Event_t e)= nullptr>
     inline Derived &OnClicked()
     {

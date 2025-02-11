@@ -50,20 +50,22 @@ public:
     }
 
 
-    // 文本颜色默认为黑
-    inline Label &init(Coord x, Coord y, Coord w, Coord h, Obj parent = parent_)
+    // 文本颜色默认为黑,感觉这个最通用
+    inline Label &init(Coord x, Coord y, Coord w, Coord h,Strings text,Color text_color=lv_color_black())
     {
-        init(parent);
+        init();
         pos_size(x, y, w, h);
+        lv_label_set_text(obj_, text);
+        Label::text_color(text_color);// 设置文本颜色为黑色
         return *this;
     }
 
-    inline Label &init(Coord x, Coord y, Coord w, Coord h, Strings string, Obj parent = parent_)
-    {
-        init(string, parent);
-        pos_size(x, y, w, h);
-        return *this;
-    }
+//    inline Label &init(Coord x, Coord y, Coord w, Coord h, Strings string, Obj parent = parent_)
+//    {
+//        init(string, parent);
+//        pos_size(x, y, w, h);
+//        return *this;
+//    }
 
 
     // 设置字间距

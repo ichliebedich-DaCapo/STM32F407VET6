@@ -21,6 +21,7 @@
 #include "anim.hpp"
 #include "CPU.hpp"
 #include "roller.hpp"
+#include "dropdown.hpp"
 
 
 namespace gui

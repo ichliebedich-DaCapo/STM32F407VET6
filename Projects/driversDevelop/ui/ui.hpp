@@ -16,7 +16,8 @@ namespace gui::widgets::main
     extern Button btn_y2;    // 触摸点2 y坐标 按钮
     extern Slider slider_1;   // 滑动条
     extern Roller roller_1;    //滚轮控件
-
+    extern Dropdown dropdown_1; // 下拉框控件
+    extern Label label_weekday; // 星期几显示
 }
 
 

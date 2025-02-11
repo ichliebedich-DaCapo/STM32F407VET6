@@ -8,12 +8,16 @@
 namespace gui::widgets::main
 {
     Label label_counter; // 计数器显示
+    Label label_weekday; // 星期几显示
     Button btn_x1;     // 触摸点1 x坐标 按钮
     Button btn_y1;    // 触摸点1 y坐标 按钮
     Button btn_x2;    // 触摸点2 x坐标 按钮
     Button btn_y2;    // 触摸点2 y坐标 按钮
     Slider slider_1;   // 滑动条
-    Roller roller_1;
+    Roller roller_1;   //滚轮控件
+    Dropdown dropdown_1; // 下拉框控件
+
+
 }
 static int counter_value = 0; // 计数器值存储
 
@@ -55,6 +59,12 @@ public:
     // 触摸点2 y坐标
     static inline auto set_value_y2(int value) -> void;
 
+    // 设置星期几显示
+    static inline auto set_value_weekday_roller()->void;
+
+    // 设置星期几显示
+    static inline auto set_value_weekday_dropdown()->void;
+
 private:
     static inline int counter_value = 0; // 计数器值
     static inline lv_point_t point_1{};
@@ -89,6 +99,14 @@ namespace gui::init
         // 测试 滑动条
         slider_1.init(50, 200, 200, 10).bg_color(lv_color_hex(0x34e6ff));
 
+        // 星期几显示
+        label_weekday.init(305, 50, 80, 40,"None");
+
+        // 测试 滚轮控件
+        roller_1.init(270, 100, 50, 40,"Mon\nTue\nWed\nThu\nFri\nSat\nSun").bg_color(lv_color_hex(0x34e6ff));
+
+        // 测试 下拉框控件
+        dropdown_1.init(320, 100, 100, 40,"Mon\nTue\nWed\nThu\nFri\nSat\nSun").bg_color(lv_color_hex(0x34e6ff)).direction(LV_DIR_BOTTOM);
     }
 
 
@@ -102,6 +120,12 @@ namespace gui::init
 
         // 屏幕触摸事件
         widgets::main::scr.OnPressing<CounterLogic::update_point>();
+
+        // 绑定 星期几 滚轮控件事件
+        widgets::main::roller_1.OnClicked<CounterLogic::set_value_weekday_roller>();
+
+        // 绑定 星期几 下拉框事件
+        widgets::main::dropdown_1.OnValueChanged<CounterLogic::set_value_weekday_dropdown>();
     }
 }
 
@@ -217,4 +241,17 @@ auto CounterLogic::update_point() -> void
     get_touch_point();
     set_value_x1(point_1.x);
     set_value_y1(point_1.y);
+}
+auto CounterLogic::set_value_weekday_roller()->void
+{
+    char buf[12];
+    roller_1.getSelectedStr(buf,12);
+    label_weekday.text(buf);
+}
+
+auto CounterLogic::set_value_weekday_dropdown()->void
+{
+    char buf[12];
+    dropdown_1.getSelectedStr(buf,12);
+    label_weekday.text(buf);
 }
