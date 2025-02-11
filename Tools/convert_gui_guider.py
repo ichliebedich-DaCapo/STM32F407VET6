@@ -27,12 +27,13 @@ def parse_setup_function(content):
         raise ValueError("Could not find setup_scr_* function")
     return match.group(1), match.group(2).strip()
 
+
 # ---------------------------------工具函数----------------------------------------
 # 检测列表里的两个参数，判断是否是某个值，满足下面规则
 # 规则1：如果第二个元素是 value，那么省略它
 # 规则2：如果第一个元素是 value，第二个元素不是 value，那么两个元素都不能省略
 # 规则3：如果两个元素都是 value，那么都省略，返回空字符串
-def check_default_arguments_2(parts,value):
+def check_default_arguments_2(parts, value):
     # 去除空白
     last_two = [p.strip() for p in parts]
 
@@ -50,12 +51,29 @@ def check_default_arguments_2(parts,value):
     return ', '.join(result) if result else ''
 
 
+# 输入组件创建代码块，返回组件前缀和组件类型
+def get_widget_type(create_line):
+    widget_map = {
+        "lv_obj_create": ["obj",'Component'],
+        "lv_imagebutton_create": ["imgbtn",'ImageButton'],
+        "lv_label_create": ["label",'Label'],
+        "lv_image_create": ["img",'Image'],
+        "lv_btn_create": ["btn",'Button']
+    }
+    for func, widget_info in widget_map.items():
+        if func in create_line:
+            return widget_info
+
+    # 报错，确保能及时发现有未入库的函数，以便及时添加
+    raise ValueError(f"Could not find prefix for {create_line}")
+
+
 # --------------------------------分步处理代码块------------------------------------
 
 # 处理样式块,已经包含里样式的正确代码，不用在前面加上组件名
 def convert_style_calls(blocks):
     converted = []
-    default_config=[
+    default_config = [
         ['border_width', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
         ['text_color', 'lv_color_hex(0xffffff)', 'LV_PART_MAIN|LV_STATE_DEFAULT'],
         ['text_opa', "255", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
@@ -110,6 +128,8 @@ def convert_style_calls(blocks):
 @note: 把各个初始化行解析并转为链式调用
 @return 返回的是处理后的列表
 """
+
+
 def process_init_function(init_lines):
     # 定义处理规则：每个函数对应的参数提取方式和转换逻辑
     group_functions_handlers = {
@@ -156,9 +176,9 @@ def process_init_function(init_lines):
             # 多阶段处理器
             'processor': lambda parts, mapping: (
                 # 如果存在映射表，那么就只提取最后两个参数
-                parts[-3] + check_default_arguments_2(parts[-2:],'0')
+                parts[-3] + check_default_arguments_2(parts[-2:], '0')
                 if parts[-3] in mapping
-                else check_default_arguments_2(parts[-2:],'0'),
+                else check_default_arguments_2(parts[-2:], '0'),
                 # 再检查是否在映射表中，不在就用默认处理
                 mapping.get(parts[-3].strip(), {'method': 'align', 'args': "{}"})
             ),
@@ -261,29 +281,12 @@ def process_init_function(init_lines):
 @ init_lines 初始化组件属性的代码行
 @ style_block 样式代码块
 """
+
+
 def process_component_block(component_name, create_line, init_lines, style_block):
-    # 定义组件名前缀映射表
-    prefix_map = {
-        "lv_obj_create": "obj_",
-        "lv_imagebutton_create": "imgbtn_",
-        "lv_label_create": "label_",
-        "lv_image_create": "img_",
-        "lv_btn_create": "btn_"
-    }
-
-    # 获取组件名前缀,如果找不到就默认为obj_
-    prefix = ""
-    for func, p in prefix_map.items():
-        if func in create_line:
-            prefix = p
-            break
-
-    if prefix == "":
-        # 报错，确保能及时发现有未入库的函数，以便及时添加
-        raise ValueError(f"Could not find prefix for {create_line}")
-
+    prefix,widget_type = get_widget_type(create_line)
     # 合成新组件名
-    var_name = prefix + component_name
+    var_name = prefix + '_' + component_name
 
     # 处理初始化行，获取位置大小等信息，如果遇到create就跳过（因为链式调用里会把这个包含进函数里）
     init_chain = process_init_function(init_lines)
@@ -295,6 +298,7 @@ def process_component_block(component_name, create_line, init_lines, style_block
         "var_name": var_name,
         "init_chain": init_chain,
         "style_code": style_code,
+        "widget_type":widget_type
     }
 
 
@@ -344,12 +348,13 @@ def process_main_screen_blocks(blocks):
             "var_name": "scr",
             "init_chain": "",
             "style_code": style_code,
+            "widget_type":''
         }
         components.append(component)
 
 
 """
-处理组件的代码块
+处理组件代码块，把初步分割的代码块进行更细致的处理
 @param blocks: 块代码
 @notes: 添加进了components
 """
@@ -383,8 +388,16 @@ def process_component_blocks(blocks):
 def generate_output(project_name):
     for comp in components:
         # 组件定义代码
-        if comp['var_name'] != "scr":
-            widgets_ns.append(f"Component  {comp['var_name']};")
+        if comp['var_name'] == "scr":
+            screen_code = []
+            screen_code.extend(comp['style_code'])
+            if screen_code:
+                screen_code[0] = "scr" + screen_code[0]
+                screen_code[-1] += ";\n"
+            screen_ns.extend(screen_code)
+
+        else:
+            widgets_ns.append(f"{comp['widget_type']}  {comp['var_name']};")
 
             # 屏幕初始化代码
             screen_code = []
@@ -399,13 +412,6 @@ def generate_output(project_name):
                 screen_code[-1] += ";\n"
             screen_ns.extend(screen_code)
 
-        else:
-            screen_code = []
-            screen_code.extend(comp['style_code'])
-            if screen_code:
-                screen_code[0] = "scr" + screen_code[0]
-                screen_code[-1] += ";\n"
-            screen_ns.extend(screen_code)
 
     widgets_block = "\n\t".join(widgets_ns)
     screen_block = "\n\t\t".join(screen_ns)

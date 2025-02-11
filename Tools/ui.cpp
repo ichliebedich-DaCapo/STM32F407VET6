@@ -3,10 +3,10 @@
 namespace gui::widgets::main 
 {
     Component  obj_blueCounter_cont_1;
-	Component  imgbtn_blueCounter_plus;
-	Component  imgbtn_blueCounter_minus;
-	Component  label_blueCounter_counter;
-	Component  img_blueCounter_logo;
+	ImageButton  imgbtn_blueCounter_plus;
+	ImageButton  imgbtn_blueCounter_minus;
+	Label  label_blueCounter_counter;
+	Image  img_blueCounter_logo;
 }
 
 // 使用命名空间
