@@ -88,7 +88,7 @@ def process_component_block(component_name, create_line, init_lines, style_block
     # 合成新组件名
     var_name = prefix + component_name
 
-    # 处理初始化行，获取位置大小等信息
+    # 处理初始化行，获取位置大小等信息，如果遇到create就跳过（因为链式调用里会把这个包含进函数里）
     init_code = []
     pos = size = None
     for line in init_lines:
@@ -102,9 +102,29 @@ def process_component_block(component_name, create_line, init_lines, style_block
             # 以逗号分割，并且取最后一个，同时丢弃");"
             flag = line.split(',')[-1].strip().rstrip(');')
             init_code.append(f"\n\t\t\t.add_flag({flag})")
-        # else :
+        elif "lv_obj_set_scrollbar_mode" in line:
+            # 以逗号分割，并且取最后一个，同时丢弃");"
+            mode = line.split(',')[-1].strip().rstrip(');')
+            init_code.append(f"\n\t\t\t.scrollbar_mode({mode})")
+        elif "lv_imagebutton_set_src" in line:
+            # 取出括号内的，并以逗号分割
+            parts = line.strip('();').split(',')
+            src = ""
+            # 取出C函数的后面4个参数，如果为NULL，则不添加
+            for part in parts[-4:-1]:
+                if part.strip() == "NULL":
+                    continue
+                if src != "":
+                    src += ", "
+                src += part.strip()
+            init_code.append(f"\n\t\t\t.src({src})")
+        elif "lv_label_create" in line:
+            # 如果是初始化代码里的label创建，那么就跳过
+            continue
+        else :
             # 确保不遗漏任何初始化函数
-            # raise ValueError(f"Could not find prefix for {line}")
+            raise ValueError(f"Could not find init for {line}")
+
 
     # 构建初始化的链式调用
     init_chain = []
