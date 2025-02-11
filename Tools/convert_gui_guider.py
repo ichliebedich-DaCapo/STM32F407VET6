@@ -171,81 +171,90 @@ def has_parent(parent_name):
     return has_relation(parent_name=parent_name)
 
 
-def analyze_lvgl_function(func_name, args):
-    """
-    解析无参函数
-    :return:
-    """
     # 定义处理规则：每个函数对应的参数提取方式和转换逻辑
-    group_functions_handlers = {
-        'pos_size': {
-            'functions': {
-                'lv_obj_set_pos': {'type': 'pos', 'arg_indices': [-2, -1]},
-                'lv_obj_set_size': {'type': 'size', 'arg_indices': [-2, -1]}
-            },
-            # 处理函数：当收集齐pos和size后生成代码
-            'handler': lambda pos, size: f".pos_size({', '.join(pos + size)})"
+group_functions_handlers = {
+    'pos_size': {
+        'functions': {
+            'lv_obj_set_pos': {'type': 'pos', 'arg_indices': [-2, -1]},
+            'lv_obj_set_size': {'type': 'size', 'arg_indices': [-2, -1]}
         },
-    }
-    # 组状态存储
-    group_data = {'pos_size': {'pos': None, 'size': None}}
+        # 处理函数：当收集齐pos和size后生成代码
+        'handler': lambda pos, size: f".pos_size({', '.join(pos + size)})"
+    },
+}
+# 组状态存储
+group_data = {'pos_size': {'pos': None, 'size': None}}
 
-    function_handlers = {
-        # 独立函数处理
-        'lv_obj_add_flag': {
-            # 参数到方法的映射表
-            'mapping': {
-                'LV_OBJ_FLAG_CHECKABLE': {'method': 'checkable', 'args': None},
-                'LV_OBJ_FLAG_HIDDEN': {'method': 'hidden', 'args': None},
-                'LV_FLAG_SCROLLABLE': {'method': 'scrollable', 'args': None},
-                # 可继续扩展...
-            },
-            # 多阶段处理器
-            'processor': lambda parts, mapping: (
-                # 先提取原始参数
-                parts[-1].strip(),
-                # 再检查是否在映射表中，不在就用默认处理
-                mapping.get(parts[-1].strip(), {'method': 'add_flag', 'args': "{}"})
-            ),
-            'template': lambda method, args: (
-                f"\n\t\t\t.{method}({args})" if args
-                else f"\n\t\t\t.{method}()"
-            )
+function_handlers = {
+    # 独立函数处理
+    'lv_obj_add_flag': {
+        # 参数到方法的映射表
+        'mapping': {
+            'LV_OBJ_FLAG_CHECKABLE': {'method': 'checkable', 'args': None},
+            'LV_OBJ_FLAG_HIDDEN': {'method': 'hidden', 'args': None},
+            'LV_FLAG_SCROLLABLE': {'method': 'scrollable', 'args': None},
+            # 可继续扩展...
         },
-        'lv_obj_align': {
-            'mapping': {
-                'LV_ALIGN_CENTER': {'method': 'center', 'args': '{}'},
-                'LV_ALIGN_RIGHT': {'method': 'right', 'args': '{}'},
-                'LV_FLAG_LEFT': {'method': 'left', 'args': '{}'},
-            },
-            # 多阶段处理器
-            'processor': lambda parts, mapping: (
-                # 如果存在映射表，那么就只提取最后两个参数
-                parts[-3] + check_default_arguments_2(parts[-2:], '0')
-                if parts[-3] in mapping
-                else check_default_arguments_2(parts[-2:], '0'),
-                # 再检查是否在映射表中，不在就用默认处理
-                mapping.get(parts[-3].strip(), {'method': 'align', 'args': "{}"})
-            ),
-            'template': lambda method, args: (
-                f"\n\t\t\t.{method}({args})"
-            )
+        # 多阶段处理器
+        'processor': lambda parts, mapping: (
+            # 先提取原始参数
+            parts[-1].strip(),
+            # 再检查是否在映射表中，不在就用默认处理
+            mapping.get(parts[-1].strip(), {'method': 'add_flag', 'args': "{}"})
+        ),
+        'template': lambda method, args: (
+            f"\n\t\t\t.{method}({args})" if args
+            else f"\n\t\t\t.{method}()"
+        )
+    },
+    'lv_obj_align': {
+        'mapping': {
+            'LV_ALIGN_CENTER': {'method': 'center', 'args': '{}'},
+            'LV_ALIGN_RIGHT': {'method': 'right', 'args': '{}'},
+            'LV_FLAG_LEFT': {'method': 'left', 'args': '{}'},
         },
-        'lv_obj_set_scrollbar_mode': {
-            'processor': lambda parts: (
-                parts[-1].strip() if parts[-1].strip() != 'LV_SCROLLBAR_MODE_OFF'
-                else None
-            ),
-            'template': "\n\t\t\t.scrollbar_mode({})"
-        },
-        # 图像按钮特殊处理
-        'lv_imagebutton_set_src': {
-            'processor': lambda parts: ', '.join([
-                p.strip() for p in parts[-4:-1] if p.strip() != 'NULL'
-            ]),
-            'template': "\n\t\t\t.src({})"
-        }
+        # 多阶段处理器
+        'processor': lambda parts, mapping: (
+            # 如果存在映射表，那么就只提取最后两个参数
+            parts[-3] + check_default_arguments_2(parts[-2:], '0')
+            if parts[-3] in mapping
+            else check_default_arguments_2(parts[-2:], '0'),
+            # 再检查是否在映射表中，不在就用默认处理
+            mapping.get(parts[-3].strip(), {'method': 'align', 'args': "{}"})
+        ),
+        'template': lambda method, args: (
+            f"\n\t\t\t.{method}({args})"
+        )
+    },
+    'lv_obj_set_scrollbar_mode': {
+        'processor': lambda parts: (
+            parts[-1].strip() if parts[-1].strip() != 'LV_SCROLLBAR_MODE_OFF'
+            else None
+        ),
+        'template': "\n\t\t\t.scrollbar_mode({})"
+    },
+    # 图像按钮特殊处理
+    'lv_imagebutton_set_src': {
+        'processor': lambda parts: ', '.join([
+            p.strip() for p in parts[-4:-1] if p.strip() != 'NULL'
+        ]),
+        'template': "\n\t\t\t.src({})"
     }
+}
+
+def convert_function(func_name, params):
+    # 处理样式类函数
+    # 1，根据函数名选择具体的规则。
+    # 2，找到字典里的函数名后，根据形参的不同，选择对应的method或者省略特定的参数。
+    # 3，函数名只需要匹配在不在即可，也就是 if xxx in
+    # 4,每个函数名规则都有默认的method，形参也默认，只有当形参匹配时才重新设置method和参数
+    # 5,也就是映射表，映射的是参数与函数名的对应的关系，传入的是参数列表，
+
+
+    # 其他未处理情况
+    return f"{func_name}({', '.join(params)})"
+
+
 
 # --------------------------------分步处理代码块------------------------------------
 
@@ -336,7 +345,7 @@ def process_init_function(init_lines, component_name, widget_info):
                 # 查询当前组件的组件信息
                 current_widget_info = find_relations(child_name=current_component_name)[1]
                 pre_name = current_widget_info[0]+'_'+ current_component_name
-            function_info = analyze_lvgl_function(func_name,args)
+            function_info = convert_function(func_name,args)
             init_code.append(f"{pre_name}.{function_info}")
             previous_component_name = current_component_name
 

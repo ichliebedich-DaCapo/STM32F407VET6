@@ -90,6 +90,30 @@ namespace gui::init
     
     void events()
     {
-    
+        我要把lvgl代码转为特定的表达式，现在我准备定义一个函数，传入函数名和函数形参表两个参数，函数名是字符串类型，形参表是列表类型，
+        已经做过处理，通过逗号分割并且去除空白符。比如“lv_obj_set_pos(ui->blueCounter_plus, 193, 15);”传入的参数是'lv_obj_set_pos'和['193','15']，前面一个参数会被丢弃不用考虑
+        函数要做的事情是把函数名和形参表解析为'【特定函数名】(【形参(可选)】)'，具体的规则是：
+        1，我把要处理的函数分成两部分，一部分是独立函数，也就是处理一次即可返回字符串；另一部分是组合函数，只要把参数信息存储到一个全局列表里，最后再定义一个函数来专门处理组合函数，返回的是None
+        2，现在先讨论独立函数，需要根据函数名和参数表来生成特定的格式，这一部分我还没有想好，关系有些乱。总之，有的函数，形如lv_obj_set_style_pad_all，
+        需要转换的特定函数名是'style_pad_all'，而【形参】则需要根据具体情况来决定是否省略，比如这个对于这个函数"lv_obj_set_style_pad_all(ui->blueCounter_plus, 0, LV_STATE_DEFAULT);"
+        如果最后一个形参'LV_STATE_DEFAULT'，那么转换的形参表就可以把最后一个形参省略。如果倒数第二个形参为'0'并且最后一个形参是'LV_STATE_DEFAULT'，那么这两个形参都可以省略。其他情况都不能省略。
+        有的函数比如'lv_obj_add_flag(ui->blueCounter_plus, LV_OBJ_FLAG_CHECKABLE);',如果最后一个形参是'LV_OBJ_FLAG_HIDDEN'等特定标志，那么转换的函数名就是hidden()，不含参；
+        如果最后一个参数不是特定标志表里的，那么转换的函数名就是add_flag()，括号里还需要传入参数。
+        3，从前面的表述你应该能看出来，不同函数名的转换规则不同，即使是同一个函数，其转换规则也会因为形参的不同而改变，而且还需要考虑到省略形参的情况。这些规则我不知道如何定义，方便后续扩展
+        lv_obj_set_pos(ui->blueCounter_plus, 193, 15);
+        lv_obj_set_size(ui->blueCounter_plus, 65, 65);
+        lv_obj_add_flag(ui->blueCounter_plus, LV_OBJ_FLAG_CHECKABLE);
+        lv_imagebutton_set_src(ui->blueCounter_plus, LV_IMAGEBUTTON_STATE_RELEASED, &_btn_RGB565A8_65x65, NULL, NULL);
+        lv_imagebutton_set_src(ui->blueCounter_plus, LV_IMAGEBUTTON_STATE_PRESSED, &_btn_RGB565A8_65x65, NULL, NULL);
+        lv_imagebutton_set_src(ui->blueCounter_plus, LV_IMAGEBUTTON_STATE_CHECKED_RELEASED, &_btn_RGB565A8_65x65, NULL, NULL);
+        lv_imagebutton_set_src(ui->blueCounter_plus, LV_IMAGEBUTTON_STATE_CHECKED_PRESSED, &_btn_RGB565A8_65x65, NULL, NULL);
+        lv_label_set_text(ui->blueCounter_plus_label, "+");
+        lv_label_set_long_mode(ui->blueCounter_plus_label, LV_LABEL_LONG_WRAP);
+        lv_obj_align(ui->blueCounter_plus_label, LV_ALIGN_CENTER, 0, 0);
+        lv_obj_set_style_pad_all(ui->blueCounter_plus, 0, LV_STATE_DEFAULT);
+        lv_obj_set_style_text_font(ui->blueCounter_plus, &lv_font_arial_34, LV_PART_MAIN|LV_STATE_DEFAULT);
+        lv_obj_set_style_text_opa(ui->blueCounter_plus, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+        lv_obj_set_style_text_align(ui->blueCounter_plus, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+        lv_obj_set_style_shadow_width(ui->blueCounter_plus, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     }
 }
