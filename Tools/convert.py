@@ -4,7 +4,6 @@ import re
 import glob
 import argparse
 
-
 # 我应该分成两个样式处理表，一个处理屏幕的，比较简单，另一个处理其他组件的文件。
 # 因为处理屏幕需要把名称变成scr，其他组件则是真名
 # 我应该在处理样式表时定义一个映射表，把组件名映射为对应的样式名，并且把一些函数整合到一起
@@ -16,6 +15,7 @@ screen_ns = []
 # 组件块代码
 components = []
 
+
 # --------------------------------预处理------------------------------------
 
 # 寻找setup_scr_*函数
@@ -26,6 +26,29 @@ def parse_setup_function(content):
     if not match:
         raise ValueError("Could not find setup_scr_* function")
     return match.group(1), match.group(2).strip()
+
+# ---------------------------------工具函数----------------------------------------
+# 检测列表里的两个参数，判断是否是某个值，满足下面规则
+# 规则1：如果第二个元素是 value，那么省略它
+# 规则2：如果第一个元素是 value，第二个元素不是 value，那么两个元素都不能省略
+# 规则3：如果两个元素都是 value，那么都省略，返回空字符串
+def check_default_arguments_2(parts,value):
+    # 去除空白
+    last_two = [p.strip() for p in parts]
+
+    if last_two[1] == value:
+        # 第二个元素是 value，省略它
+        result = [last_two[0]] if last_two[0] != value else []
+    elif last_two[0] == value and last_two[1] != value:
+        # 第一个元素是 value，第二个元素不是 value，两个元素都不能省略
+        result = last_two
+    else:
+        # 其他情况
+        result = [p for p in last_two if p != value]
+
+    # 如果结果为空，返回空字符串；否则用逗号连接结果
+    return ', '.join(result) if result else ''
+
 
 # --------------------------------分步处理代码块------------------------------------
 
@@ -53,8 +76,8 @@ def convert_style_calls(blocks, widget_var):
                 # 每个样式前加上一个Tab，是为了与init对齐
                 converted.append(f"\t.{prop}({value}{param})")
 
-
     return converted
+
 
 # 处理初始化代码块（不包含创建）
 """
@@ -62,6 +85,8 @@ def convert_style_calls(blocks, widget_var):
 @note: 把各个初始化行解析并转为链式调用
 @return 返回的是处理后的列表
 """
+
+
 def process_init_function(init_lines):
     # 定义处理规则：每个函数对应的参数提取方式和转换逻辑
     group_functions_handlers = {
@@ -80,18 +105,53 @@ def process_init_function(init_lines):
     function_handlers = {
         # 独立函数处理
         'lv_obj_add_flag': {
-            'arg_indices': [-1],
-            'processor': lambda parts: parts[-1].strip(),
-            'template': "\n\t\t\t.add_flag({})"
+            # 参数到方法的映射表
+            'mapping': {
+                'LV_OBJ_FLAG_CHECKABLE': {'method': 'checkable', 'args': None},
+                'LV_OBJ_FLAG_HIDDEN': {'method': 'hidden', 'args': None},
+                'LV_FLAG_SCROLLABLE': {'method': 'scrollable', 'args': None},
+                # 可继续扩展...
+            },
+            # 多阶段处理器
+            'processor': lambda parts, mapping: (
+                # 先提取原始参数
+                parts[-1].strip(),
+                # 再检查是否在映射表中，不在就用默认处理
+                mapping.get(parts[-1].strip(), {'method': 'add_flag', 'args': "{}"})
+            ),
+            'template': lambda method, args: (
+                f"\n\t\t\t.{method}({args})" if args
+                else f"\n\t\t\t.{method}()"
+            )
+        },
+        'lv_obj_align': {
+            'mapping': {
+                'LV_ALIGN_CENTER': {'method': 'center', 'args': '{}'},
+                'LV_ALIGN_RIGHT': {'method': 'right', 'args': '{}'},
+                'LV_FLAG_LEFT': {'method': 'left', 'args': '{}'},
+            },
+            # 多阶段处理器
+            'processor': lambda parts, mapping: (
+                # 如果存在映射表，那么就只提取最后两个参数
+                parts[-3] + check_default_arguments_2(parts[-2:],'0')
+                if parts[-3] in mapping
+                else check_default_arguments_2(parts[-2:],'0'),
+                # 再检查是否在映射表中，不在就用默认处理
+                mapping.get(parts[-3].strip(), {'method': 'align', 'args': "{}"})
+            ),
+            'template': lambda method, args: (
+                f"\n\t\t\t.{method}({args})"
+            )
         },
         'lv_obj_set_scrollbar_mode': {
-            'arg_indices': [-1],
-            'processor': lambda parts: parts[-1].strip(),
+            'processor': lambda parts: (
+                parts[-1].strip() if parts[-1].strip() != 'LV_SCROLLBAR_MODE_OFF'
+                else None
+            ),
             'template': "\n\t\t\t.scrollbar_mode({})"
         },
         # 图像按钮特殊处理
         'lv_imagebutton_set_src': {
-            'arg_indices': [-4, -3, -2],  # 根据参数位置截取
             'processor': lambda parts: ', '.join([
                 p.strip() for p in parts[-4:-1] if p.strip() != 'NULL'
             ]),
@@ -101,7 +161,6 @@ def process_init_function(init_lines):
 
     # 会被跳过的C函数
     skip_functions = 'lv_label_create'
-
 
     # 处理初始化代码的主逻辑
     init_code = []
@@ -130,15 +189,30 @@ def process_init_function(init_lines):
 
         # 处理独立函数
         for func_name, config in function_handlers.items():
-            # 跳过创建函数和空行
-            if skip_functions in line or not line.strip():
-                continue
-
             if func_name in line:
+                # 收集括号内的所有参数
                 parts = line.strip('();').split(',')
-                # 使用处理器处理参数
-                processed_args = config['processor'](parts)# 调用lambda处理C函数的参数
-                init_code.append(config['template'].format(processed_args))# 调用模板将参数嵌入其中
+
+                # 如果存在映射表，则使用映射表
+                if 'mapping' in config:
+                    raw_arg, method_info = config['processor'](parts, config['mapping'])
+                    if method_info['args'] is None:
+                        # 无参函数
+                        code = config['template'](method_info['method'], '')
+                    else:
+                        # 有参函数
+                        code = config['template'](
+                            method_info['method'],
+                            method_info['args'].format(raw_arg)
+                        )
+                    init_code.append(code)
+                else:
+                    processed_args = config['processor'](parts)
+                    # 调用模板将参数嵌入其中,如果是默认值，那么就跳过这个函数行
+                    if processed_args is None:
+                        break
+                    init_code.append(config['template'].format(processed_args))
+
                 handled = True
                 break
 
@@ -156,6 +230,7 @@ def process_init_function(init_lines):
                 init_code.insert(0, "\n\t\t\t" + group_functions_handlers[group_name]['handler'](pos, size))
     return init_code
 
+
 # 处理组件代码块
 """
 @ component_name 组件名称
@@ -163,6 +238,8 @@ def process_init_function(init_lines):
 @ init_lines 初始化组件属性的代码行
 @ style_block 样式代码块
 """
+
+
 def process_component_block(component_name, create_line, init_lines, style_block):
     # 定义组件名前缀映射表
     prefix_map = {
@@ -170,7 +247,7 @@ def process_component_block(component_name, create_line, init_lines, style_block
         "lv_imagebutton_create": "imgbtn_",
         "lv_label_create": "label_",
         "lv_image_create": "img_",
-        "lv_btn_create":"btn_"
+        "lv_btn_create": "btn_"
     }
 
     # 获取组件名前缀,如果找不到就默认为obj_
@@ -199,21 +276,24 @@ def process_component_block(component_name, create_line, init_lines, style_block
         "style_code": style_code,
     }
 
+
 # --------------------------------处理屏幕和组件代码块------------------------------------
 """
 处理主屏幕的代码块
 @param blocks: 块代码
 @notes: 添加进了components
 """
+
+
 def process_main_screen_blocks(blocks):
     # 处理主组件，从1开始，因为0是注释前面的，是空行
     if len(blocks) >= 3:
         code_block = blocks[2].strip()
         # 以“//Write  style for"为分隔符(样式注释行被去除)，正常情况还剩下初始化代码和样式代码两块
-        parts = re.split(r'//Write style for.*',code_block, maxsplit=1)
+        parts = re.split(r'//Write style for.*', code_block, maxsplit=1)
         # 舍弃初始化代码块，只保留样式块代码
         style_block = parts[1].strip()
-        style_code =[]
+        style_code = []
         # 给每一块代码分成若干行,每行舍弃首尾空白符
         lines = style_block.split('\n')
         is_first_line = True
@@ -239,7 +319,7 @@ def process_main_screen_blocks(blocks):
                     style_code.append(f"\t.{prop}({value}{param})")
 
         # 处理组件
-        component ={
+        component = {
             "var_name": "scr",
             "init_chain": "",
             "style_code": style_code,
@@ -252,6 +332,8 @@ def process_main_screen_blocks(blocks):
 @param blocks: 块代码
 @notes: 添加进了components
 """
+
+
 def process_component_blocks(blocks):
     # 遍历注释行和代码块，起始为注释行，偶数为代码块，步长为2
     for i in range(3, len(blocks), 2):
@@ -261,10 +343,10 @@ def process_component_blocks(blocks):
         # 获取组件名
         component_name = comment_line.split()[-1]
         # 以“//Write  style for"为分隔符(样式注释行被去除)
-        parts = re.split(r'//Write style for.*',code_block, maxsplit=1)
+        parts = re.split(r'//Write style for.*', code_block, maxsplit=1)
         # 组件初始化代码每行分割，去除空行  样式块代码以注释为分割符
         creation_block = parts[0].strip().split('\n')
-        style_block = re.split(r'//Write style for.*',parts[1])
+        style_block = re.split(r'//Write style for.*', parts[1])
 
         # 处理组件
         component = process_component_block(
@@ -275,9 +357,9 @@ def process_component_blocks(blocks):
         )
         components.append(component)
 
+
 # ----------------------------------输出结果处理--------------------------------------------
 def generate_output(project_name):
-
     for comp in components:
         # 组件定义代码
         if comp['var_name'] != "scr":
@@ -303,7 +385,6 @@ def generate_output(project_name):
                 screen_code[0] = "scr" + screen_code[0]
                 screen_code[-1] += ";\n"
             screen_ns.extend(screen_code)
-
 
     widgets_block = "\n\t".join(widgets_ns)
     screen_block = "\n\t\t".join(screen_ns)

@@ -43,11 +43,12 @@ namespace gui::init
 
 		imgbtn_blueCounter_plus
 			.pos_size(193, 15, 65, 65)
-			.add_flag(LV_OBJ_FLAG_CHECKABLE)
+			.checkable()
 			.src(LV_IMAGEBUTTON_STATE_RELEASED, &_btn_RGB565A8_65x65)
 			.src(LV_IMAGEBUTTON_STATE_PRESSED, &_btn_RGB565A8_65x65)
 			.src(LV_IMAGEBUTTON_STATE_CHECKED_RELEASED, &_btn_RGB565A8_65x65)
 			.src(LV_IMAGEBUTTON_STATE_CHECKED_PRESSED, &_btn_RGB565A8_65x65)
+			.center()
 			.text_color(lv_color_hex(0x4d6e81))
 			.text_font(&lv_font_arial_34)
 			.text_opa(255)
@@ -64,11 +65,12 @@ namespace gui::init
 
 		imgbtn_blueCounter_minus
 			.pos_size(193, 100, 65, 65)
-			.add_flag(LV_OBJ_FLAG_CHECKABLE)
+			.checkable()
 			.src(LV_IMAGEBUTTON_STATE_RELEASED, &_btn_RGB565A8_65x65)
 			.src(LV_IMAGEBUTTON_STATE_PRESSED, &_btn_RGB565A8_65x65)
 			.src(LV_IMAGEBUTTON_STATE_CHECKED_RELEASED, &_btn_RGB565A8_65x65)
 			.src(LV_IMAGEBUTTON_STATE_CHECKED_PRESSED, &_btn_RGB565A8_65x65)
+			.center()
 			.text_color(lv_color_hex(0x4d6e81))
 			.text_font(&lv_font_arial_34)
 			.text_opa(255)
