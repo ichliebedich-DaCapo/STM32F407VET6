@@ -56,6 +56,95 @@ def convert_style_calls(blocks, widget_var):
 
     return converted
 
+# 处理初始化代码块
+"""
+@param init_lines: 包含了各种初始化代码的行
+@note: 把各个初始化行解析并转为链式调用
+@return 返回的是处理后的列表
+"""
+def process_init_function(init_lines):
+    # 定义处理规则：每个函数对应的参数提取方式和转换逻辑
+    function_handlers = {
+        # 位置和尺寸合并处理（组）
+        'pos_size_group': {
+            'functions': {
+                'lv_obj_set_pos': {'type': 'pos', 'arg_indices': [-2, -1]},
+                'lv_obj_set_size': {'type': 'size', 'arg_indices': [-2, -1]}
+            },
+            # 处理函数：当收集齐pos和size后生成代码
+            'handler': lambda pos, size: f".pos_size({', '.join(pos + size)})"
+        },
+        # 独立函数处理
+        'lv_obj_add_flag': {
+            'arg_indices': [-1],
+            'processor': lambda parts: parts[-1].strip().rstrip(');'),
+            'template': "\n\t\t\t.add_flag({})"
+        },
+        'lv_obj_set_scrollbar_mode': {
+            'arg_indices': [-1],
+            'processor': lambda parts: parts[-1].strip().rstrip(');'),
+            'template': "\n\t\t\t.scrollbar_mode({})"
+        },
+        # 图像按钮特殊处理
+        'lv_imagebutton_set_src': {
+            'arg_indices': [-4, -3, -2],  # 根据参数位置截取
+            'processor': lambda parts: ', '.join([
+                p.strip() for p in parts[-4:-1] if p.strip() != 'NULL'
+            ]),
+            'template': "\n\t\t\t.src({})"
+        }
+    }
+
+    # 处理初始化代码的主逻辑
+    init_code = []
+    group_data = {'pos_size_group': {'pos': None, 'size': None}} # 组状态存储
+    skip_functions = ['lv_label_create']
+    for line in init_lines:
+        # 跳过创建函数和空行
+        if skip_functions in line or not line.strip():
+            continue
+
+        handled = False
+        # 先检查是否是组函数
+        for group_name, group_info in function_handlers.items():
+            if 'functions' in group_info: # 是组处理规则
+                for func_name, config in group_info['functions'].items():
+                    if func_name in line:
+                        parts = line.strip('();').split(',')
+                        # 提取参数并存储到组
+                        args = [parts[i].strip() for i in config['arg_indices']]
+                        group_data[group_name][config['type']] = args
+                        handled = True
+                        break
+                if handled:
+                    break
+
+
+        if handled:
+            continue
+
+        # 处理独立函数
+        for func_name, config in function_handlers.items():
+            if 'functions' not in config and func_name in line: # 独立函数
+                parts = line.strip('();').split(',')
+                # 使用处理器处理参数
+                processed_args = config['processor'](parts)
+                init_code.append(config['template'].format(processed_args))
+                handled = True
+                break
+
+        # 确保所有初始化函数都被处理
+        if not handled:
+            raise ValueError(f"Unhandled init function: {line}")
+
+    # 后处理组数据生成代码
+    for group_name, data in group_data.items():
+        if group_name == 'pos_size_group':
+            pos = data['pos']
+            size = data['size']
+            if pos and size:
+                init_code.insert(0, "\n\t\t\t" + function_handlers[group_name]['handler'](pos, size))
+    return init_code
 
 # 处理组件代码块
 """
