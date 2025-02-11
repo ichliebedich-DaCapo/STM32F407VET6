@@ -184,7 +184,6 @@ group_functions_handlers = {
 }
 # 组状态存储
 group_data = {'pos_size': {'pos': None, 'size': None}}
-
 function_handlers = {
     # 独立函数处理
     'lv_obj_add_flag': {
