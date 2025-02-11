@@ -56,7 +56,7 @@ def convert_style_calls(blocks, widget_var):
 
     return converted
 
-# 处理初始化代码块
+# 处理初始化代码块（不包含创建）
 """
 @param init_lines: 包含了各种初始化代码的行
 @note: 把各个初始化行解析并转为链式调用
@@ -64,9 +64,8 @@ def convert_style_calls(blocks, widget_var):
 """
 def process_init_function(init_lines):
     # 定义处理规则：每个函数对应的参数提取方式和转换逻辑
-    function_handlers = {
-        # 位置和尺寸合并处理（组）
-        'pos_size_group': {
+    group_functions_handlers = {
+        'pos_size': {
             'functions': {
                 'lv_obj_set_pos': {'type': 'pos', 'arg_indices': [-2, -1]},
                 'lv_obj_set_size': {'type': 'size', 'arg_indices': [-2, -1]}
@@ -74,15 +73,20 @@ def process_init_function(init_lines):
             # 处理函数：当收集齐pos和size后生成代码
             'handler': lambda pos, size: f".pos_size({', '.join(pos + size)})"
         },
+    }
+    # 组状态存储
+    group_data = {'pos_size': {'pos': None, 'size': None}}
+
+    function_handlers = {
         # 独立函数处理
         'lv_obj_add_flag': {
             'arg_indices': [-1],
-            'processor': lambda parts: parts[-1].strip().rstrip(');'),
+            'processor': lambda parts: parts[-1].strip(),
             'template': "\n\t\t\t.add_flag({})"
         },
         'lv_obj_set_scrollbar_mode': {
             'arg_indices': [-1],
-            'processor': lambda parts: parts[-1].strip().rstrip(');'),
+            'processor': lambda parts: parts[-1].strip(),
             'template': "\n\t\t\t.scrollbar_mode({})"
         },
         # 图像按钮特殊处理
@@ -95,55 +99,61 @@ def process_init_function(init_lines):
         }
     }
 
+    # 会被跳过的C函数
+    skip_functions = 'lv_label_create'
+
+
     # 处理初始化代码的主逻辑
     init_code = []
-    group_data = {'pos_size_group': {'pos': None, 'size': None}} # 组状态存储
-    skip_functions = ['lv_label_create']
     for line in init_lines:
         # 跳过创建函数和空行
         if skip_functions in line or not line.strip():
             continue
 
         handled = False
-        # 先检查是否是组函数
-        for group_name, group_info in function_handlers.items():
-            if 'functions' in group_info: # 是组处理规则
-                for func_name, config in group_info['functions'].items():
-                    if func_name in line:
-                        parts = line.strip('();').split(',')
-                        # 提取参数并存储到组
-                        args = [parts[i].strip() for i in config['arg_indices']]
-                        group_data[group_name][config['type']] = args
-                        handled = True
-                        break
-                if handled:
+        # 先处理组函数
+        for group_name, group_info in group_functions_handlers.items():
+            for func_name, config in group_info['functions'].items():
+                if func_name in line:
+                    parts = line.strip('();').split(',')
+                    # 提取参数并存储到组状态里
+                    args = [parts[i].strip() for i in config['arg_indices']]
+                    group_data[group_name][config['type']] = args
+                    handled = True
                     break
+            if handled:
+                break
 
-
+        # 是组函数就不是独立函数
         if handled:
             continue
 
         # 处理独立函数
         for func_name, config in function_handlers.items():
-            if 'functions' not in config and func_name in line: # 独立函数
+            # 跳过创建函数和空行
+            if skip_functions in line or not line.strip():
+                continue
+
+            if func_name in line:
                 parts = line.strip('();').split(',')
                 # 使用处理器处理参数
-                processed_args = config['processor'](parts)
-                init_code.append(config['template'].format(processed_args))
+                processed_args = config['processor'](parts)# 调用lambda处理C函数的参数
+                init_code.append(config['template'].format(processed_args))# 调用模板将参数嵌入其中
                 handled = True
                 break
 
         # 确保所有初始化函数都被处理
-        if not handled:
-            raise ValueError(f"Unhandled init function: {line}")
+        # if not handled:
+        #     raise ValueError(f"Unhandled init function: {line}")
 
-    # 后处理组数据生成代码
+    # 处理组数据生成代码
     for group_name, data in group_data.items():
-        if group_name == 'pos_size_group':
+        if group_name == 'pos_size':
             pos = data['pos']
             size = data['size']
             if pos and size:
-                init_code.insert(0, "\n\t\t\t" + function_handlers[group_name]['handler'](pos, size))
+                # 将pos和size合并成字符串并插入首位
+                init_code.insert(0, "\n\t\t\t" + group_functions_handlers[group_name]['handler'](pos, size))
     return init_code
 
 # 处理组件代码块
@@ -178,49 +188,7 @@ def process_component_block(component_name, create_line, init_lines, style_block
     var_name = prefix + component_name
 
     # 处理初始化行，获取位置大小等信息，如果遇到create就跳过（因为链式调用里会把这个包含进函数里）
-    init_code = []
-    pos = size = None
-    for line in init_lines:
-        if "lv_obj_set_pos" in line:
-            parts = line.strip('();').split(',')
-            pos =[parts[-2], parts[-1]]
-        elif "lv_obj_set_size" in line:
-            parts = line.strip('();').split(',')
-            size = [parts[-2], parts[-1]]
-        elif "lv_obj_add_flag" in line:
-            # 以逗号分割，并且取最后一个，同时丢弃");"
-            flag = line.split(',')[-1].strip().rstrip(');')
-            init_code.append(f"\n\t\t\t.add_flag({flag})")
-        elif "lv_obj_set_scrollbar_mode" in line:
-            # 以逗号分割，并且取最后一个，同时丢弃");"
-            mode = line.split(',')[-1].strip().rstrip(');')
-            init_code.append(f"\n\t\t\t.scrollbar_mode({mode})")
-        elif "lv_imagebutton_set_src" in line:
-            # 取出括号内的，并以逗号分割
-            parts = line.strip('();').split(',')
-            src = ""
-            # 取出C函数的后面4个参数，如果为NULL，则不添加
-            for part in parts[-4:-1]:
-                if part.strip() == "NULL":
-                    continue
-                if src != "":
-                    src += ", "
-                src += part.strip()
-            init_code.append(f"\n\t\t\t.src({src})")
-        elif "lv_label_create" in line:
-            # 如果是初始化代码里的label创建，那么就跳过
-            continue
-        else :
-            # 确保不遗漏任何初始化函数
-            raise ValueError(f"Could not find init for {line}")
-
-
-    # 构建初始化的链式调用
-    init_chain = []
-    if pos and size:
-        # 初始化链先添加位置大小，并且位置大小用逗号分隔
-        init_chain.append(f".init({',  '.join(pos + size)})")
-    init_chain.extend(init_code)
+    init_chain = process_init_function(init_lines)
 
     # 处理样式块，样式块是一段段样式初始化代码
     style_code = convert_style_calls(style_block, var_name)

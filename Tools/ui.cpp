@@ -22,7 +22,8 @@ namespace gui::init
 			.bg_main_stop(0)
 			.bg_grad_stop(255);
 
-		obj_blueCounter_cont_1.init( 93,   60,   294,   200)
+		obj_blueCounter_cont_1
+			.pos_size(93, 60, 294, 200)
 			.border_width(4)
 			.border_opa(255)
 			.border_color(lv_color_hex(0xacceea))
@@ -40,8 +41,13 @@ namespace gui::init
 			.pad_right(0)
 			.shadow_width(0);
 
-		imgbtn_blueCounter_plus.init( 193,   15,   65,   65)
+		imgbtn_blueCounter_plus
+			.pos_size(193, 15, 65, 65)
 			.add_flag(LV_OBJ_FLAG_CHECKABLE)
+			.src(LV_IMAGEBUTTON_STATE_RELEASED, &_btn_RGB565A8_65x65)
+			.src(LV_IMAGEBUTTON_STATE_PRESSED, &_btn_RGB565A8_65x65)
+			.src(LV_IMAGEBUTTON_STATE_CHECKED_RELEASED, &_btn_RGB565A8_65x65)
+			.src(LV_IMAGEBUTTON_STATE_CHECKED_PRESSED, &_btn_RGB565A8_65x65)
 			.text_color(lv_color_hex(0x4d6e81))
 			.text_font(&lv_font_arial_34)
 			.text_opa(255)
@@ -56,8 +62,13 @@ namespace gui::init
 			.image_recolor_opa(0, LV_PART_MAIN|LV_IMAGEBUTTON_STATE_RELEASED)
 			.image_opa(255, LV_PART_MAIN|LV_IMAGEBUTTON_STATE_RELEASED);
 
-		imgbtn_blueCounter_minus.init( 193,   100,   65,   65)
+		imgbtn_blueCounter_minus
+			.pos_size(193, 100, 65, 65)
 			.add_flag(LV_OBJ_FLAG_CHECKABLE)
+			.src(LV_IMAGEBUTTON_STATE_RELEASED, &_btn_RGB565A8_65x65)
+			.src(LV_IMAGEBUTTON_STATE_PRESSED, &_btn_RGB565A8_65x65)
+			.src(LV_IMAGEBUTTON_STATE_CHECKED_RELEASED, &_btn_RGB565A8_65x65)
+			.src(LV_IMAGEBUTTON_STATE_CHECKED_PRESSED, &_btn_RGB565A8_65x65)
 			.text_color(lv_color_hex(0x4d6e81))
 			.text_font(&lv_font_arial_34)
 			.text_opa(255)
@@ -72,7 +83,8 @@ namespace gui::init
 			.image_recolor_opa(0, LV_PART_MAIN|LV_IMAGEBUTTON_STATE_RELEASED)
 			.image_opa(255, LV_PART_MAIN|LV_IMAGEBUTTON_STATE_RELEASED);
 
-		label_blueCounter_counter.init( 58,   74,   114,   50)
+		label_blueCounter_counter
+			.pos_size(58, 74, 114, 50)
 			.border_width(0)
 			.radius(8)
 			.text_color(lv_color_hex(0x024f5a))
@@ -88,7 +100,8 @@ namespace gui::init
 			.pad_left(0)
 			.shadow_width(0);
 
-		img_blueCounter_logo.init( 11,   10,   60,   34)
+		img_blueCounter_logo
+			.pos_size(11, 10, 60, 34)
 			.add_flag(LV_OBJ_FLAG_CLICKABLE)
 			.image_recolor_opa(0)
 			.image_opa(255);
