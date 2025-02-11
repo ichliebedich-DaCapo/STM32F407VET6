@@ -123,6 +123,42 @@ void setup_scr_blueCounter(lv_ui *ui)
     lv_obj_set_style_image_recolor_opa(ui->blueCounter_minus, 0, LV_PART_MAIN|LV_IMAGEBUTTON_STATE_RELEASED);
     lv_obj_set_style_image_opa(ui->blueCounter_minus, 255, LV_PART_MAIN|LV_IMAGEBUTTON_STATE_RELEASED);
 
+    //Write codes blueCounter_btn_1
+    ui->blueCounter_btn_1 = lv_button_create(ui->blueCounter_cont_1);
+    lv_obj_set_pos(ui->blueCounter_btn_1, 260, -42);
+    lv_obj_set_size(ui->blueCounter_btn_1, 100, 50);
+    ui->blueCounter_btn_1_label = lv_label_create(ui->blueCounter_btn_1);
+    lv_label_set_text(ui->blueCounter_btn_1_label, "Button");
+    lv_label_set_long_mode(ui->blueCounter_btn_1_label, LV_LABEL_LONG_WRAP);
+    lv_obj_align(ui->blueCounter_btn_1_label, LV_ALIGN_CENTER, 0, 0);
+    lv_obj_set_style_pad_all(ui->blueCounter_btn_1, 0, LV_STATE_DEFAULT);
+    lv_obj_set_width(ui->blueCounter_btn_1_label, LV_PCT(100));
+
+    //Write style for blueCounter_btn_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+    lv_obj_set_style_bg_opa(ui->blueCounter_btn_1, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui->blueCounter_btn_1, lv_color_hex(0x2195f6), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_grad_dir(ui->blueCounter_btn_1, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_border_width(ui->blueCounter_btn_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_radius(ui->blueCounter_btn_1, 5, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_width(ui->blueCounter_btn_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui->blueCounter_btn_1, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->blueCounter_btn_1, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui->blueCounter_btn_1, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui->blueCounter_btn_1, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+    //Write codes blueCounter_logo
+    ui->blueCounter_logo = lv_image_create(ui->blueCounter_cont_1);
+    lv_obj_set_pos(ui->blueCounter_logo, 11, 10);
+    lv_obj_set_size(ui->blueCounter_logo, 60, 34);
+    lv_obj_add_flag(ui->blueCounter_logo, LV_OBJ_FLAG_CLICKABLE);
+    lv_image_set_src(ui->blueCounter_logo, &_NXP_Logo_RGB565A8_60x34);
+    lv_image_set_pivot(ui->blueCounter_logo, 50,50);
+    lv_image_set_rotation(ui->blueCounter_logo, 0);
+
+    //Write style for blueCounter_logo, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+    lv_obj_set_style_image_recolor_opa(ui->blueCounter_logo, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_image_opa(ui->blueCounter_logo, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+
     //Write codes blueCounter_counter
     ui->blueCounter_counter = lv_label_create(ui->blueCounter_cont_1);
     lv_obj_set_pos(ui->blueCounter_counter, 58, 74);
@@ -146,18 +182,37 @@ void setup_scr_blueCounter(lv_ui *ui)
     lv_obj_set_style_pad_left(ui->blueCounter_counter, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_width(ui->blueCounter_counter, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
 
-    //Write codes blueCounter_logo
-    ui->blueCounter_logo = lv_image_create(ui->blueCounter_cont_1);
-    lv_obj_set_pos(ui->blueCounter_logo, 11, 10);
-    lv_obj_set_size(ui->blueCounter_logo, 60, 34);
-    lv_obj_add_flag(ui->blueCounter_logo, LV_OBJ_FLAG_CLICKABLE);
-    lv_image_set_src(ui->blueCounter_logo, &_NXP_Logo_RGB565A8_60x34);
-    lv_image_set_pivot(ui->blueCounter_logo, 50,50);
-    lv_image_set_rotation(ui->blueCounter_logo, 0);
+    //Write codes blueCounter_cb_1
+    ui->blueCounter_cb_1 = lv_checkbox_create(ui->blueCounter);
+    lv_obj_set_pos(ui->blueCounter_cb_1, 32, 260);
+    lv_checkbox_set_text(ui->blueCounter_cb_1, "checkbox");
 
-    //Write style for blueCounter_logo, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
-    lv_obj_set_style_image_recolor_opa(ui->blueCounter_logo, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
-    lv_obj_set_style_image_opa(ui->blueCounter_logo, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    //Write style for blueCounter_cb_1, Part: LV_PART_MAIN, State: LV_STATE_DEFAULT.
+    lv_obj_set_style_pad_top(ui->blueCounter_cb_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_left(ui->blueCounter_cb_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_right(ui->blueCounter_cb_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_pad_bottom(ui->blueCounter_cb_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui->blueCounter_cb_1, lv_color_hex(0x0D3055), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui->blueCounter_cb_1, &lv_font_montserratMedium_16, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_opa(ui->blueCounter_cb_1, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_text_letter_space(ui->blueCounter_cb_1, 2, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_border_width(ui->blueCounter_cb_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_radius(ui->blueCounter_cb_1, 6, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui->blueCounter_cb_1, 255, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui->blueCounter_cb_1, lv_color_hex(0xffffff), LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_grad_dir(ui->blueCounter_cb_1, LV_GRAD_DIR_NONE, LV_PART_MAIN|LV_STATE_DEFAULT);
+    lv_obj_set_style_shadow_width(ui->blueCounter_cb_1, 0, LV_PART_MAIN|LV_STATE_DEFAULT);
+
+    //Write style for blueCounter_cb_1, Part: LV_PART_INDICATOR, State: LV_STATE_DEFAULT.
+    lv_obj_set_style_pad_all(ui->blueCounter_cb_1, 3, LV_PART_INDICATOR|LV_STATE_DEFAULT);
+    lv_obj_set_style_border_width(ui->blueCounter_cb_1, 2, LV_PART_INDICATOR|LV_STATE_DEFAULT);
+    lv_obj_set_style_border_opa(ui->blueCounter_cb_1, 255, LV_PART_INDICATOR|LV_STATE_DEFAULT);
+    lv_obj_set_style_border_color(ui->blueCounter_cb_1, lv_color_hex(0x2195f6), LV_PART_INDICATOR|LV_STATE_DEFAULT);
+    lv_obj_set_style_border_side(ui->blueCounter_cb_1, LV_BORDER_SIDE_FULL, LV_PART_INDICATOR|LV_STATE_DEFAULT);
+    lv_obj_set_style_radius(ui->blueCounter_cb_1, 6, LV_PART_INDICATOR|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui->blueCounter_cb_1, 255, LV_PART_INDICATOR|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui->blueCounter_cb_1, lv_color_hex(0xffffff), LV_PART_INDICATOR|LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_grad_dir(ui->blueCounter_cb_1, LV_GRAD_DIR_NONE, LV_PART_INDICATOR|LV_STATE_DEFAULT);
 
     //The custom code of blueCounter.
 

@@ -15,8 +15,7 @@ namespace gui::init
 {
     void screen()
     {
-        scr.bg_opa(255)
-			.bg_color(lv_color_hex(0x599cc7))
+        scr.bg_color(lv_color_hex(0x599cc7))
 			.bg_grad_dir(LV_GRAD_DIR_VER)
 			.bg_grad_color(lv_color_hex(0x8dcdeb))
 			.bg_main_stop(0)

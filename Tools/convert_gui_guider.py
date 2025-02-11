@@ -125,12 +125,13 @@ def convert_style_calls(blocks):
 # 处理初始化代码块（不包含创建）
 """
 @param init_lines: 包含了各种初始化代码的行
+@param component_name: 没有前缀的组件名
 @note: 把各个初始化行解析并转为链式调用
 @return 返回的是处理后的列表
 """
 
 
-def process_init_function(init_lines):
+def process_init_function(init_lines,component_name):
     # 定义处理规则：每个函数对应的参数提取方式和转换逻辑
     group_functions_handlers = {
         'pos_size': {
@@ -289,7 +290,7 @@ def process_component_block(component_name, create_line, init_lines, style_block
     var_name = prefix + '_' + component_name
 
     # 处理初始化行，获取位置大小等信息，如果遇到create就跳过（因为链式调用里会把这个包含进函数里）
-    init_chain = process_init_function(init_lines)
+    init_chain = process_init_function(init_lines,component_name)
 
     # 处理样式块，样式块是一段段样式初始化代码
     style_code = convert_style_calls(style_block)
@@ -336,6 +337,9 @@ def process_main_screen_blocks(blocks):
 
                 # 处理状态，如果是默认状态，那么就不添加
                 param = "" if state == "LV_PART_MAIN|LV_STATE_DEFAULT" else f", {state}"
+                if prop == "bg_opa" and value == "255":
+                    continue
+
                 # 除却第一行外每个样式前加上一个Tab，是为了与init对齐
                 if is_first_line:
                     is_first_line = False
@@ -397,6 +401,7 @@ def generate_output(project_name):
             screen_ns.extend(screen_code)
 
         else:
+            # 组件定义代码
             widgets_ns.append(f"{comp['widget_type']}  {comp['var_name']};")
 
             # 屏幕初始化代码

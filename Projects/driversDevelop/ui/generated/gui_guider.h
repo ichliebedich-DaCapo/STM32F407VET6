@@ -26,8 +26,11 @@ typedef struct
 	lv_obj_t *blueCounter_plus_label;
 	lv_obj_t *blueCounter_minus;
 	lv_obj_t *blueCounter_minus_label;
-	lv_obj_t *blueCounter_counter;
+	lv_obj_t *blueCounter_btn_1;
+	lv_obj_t *blueCounter_btn_1_label;
 	lv_obj_t *blueCounter_logo;
+	lv_obj_t *blueCounter_counter;
+	lv_obj_t *blueCounter_cb_1;
 }lv_ui;
 
 typedef void (*ui_setup_scr_t)(lv_ui * ui);
@@ -62,6 +65,8 @@ LV_IMAGE_DECLARE(_NXP_Logo_RGB565A8_60x34);
 LV_FONT_DECLARE(lv_font_arial_34)
 LV_FONT_DECLARE(lv_font_montserratMedium_34)
 LV_FONT_DECLARE(lv_font_montserratMedium_13)
+LV_FONT_DECLARE(lv_font_montserratMedium_16)
+LV_FONT_DECLARE(lv_font_montserratMedium_12)
 LV_FONT_DECLARE(lv_font_arial_40)
 LV_FONT_DECLARE(lv_font_arial_11)
 
