@@ -33,8 +33,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】按键中标签只能显示两个字符，数字没影响">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】bug:按键中标签只能显示两个字符，数字没影响">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/chart.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/chart.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -474,15 +478,7 @@
       <workItem from="1739155244217" duration="6552000" />
       <workItem from="1739163331229" duration="17434000" />
       <workItem from="1739184023009" duration="11939000" />
-      <workItem from="1739243531608" duration="11677000" />
-    </task>
-    <task id="LOCAL-00048" summary="【双音频信号发生器】算法基本OK">
-      <option name="closed" value="true" />
-      <created>1730717047441</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1730717047441</updated>
+      <workItem from="1739243531608" duration="20257000" />
     </task>
     <task id="LOCAL-00049" summary="【双音频信号发生器】调整项目组织结构">
       <option name="closed" value="true" />
@@ -868,7 +864,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739257355437</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="【驱动开发】bug:按键中标签只能显示两个字符，数字没影响">
+      <option name="closed" value="true" />
+      <created>1739257602155</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1739257602155</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -903,7 +907,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="flash_storage模块测试完毕" />
     <MESSAGE value="语音存储与回放可以使用，接下来只要添加各种逻辑即可" />
     <MESSAGE value="【语音存储与回放】完善了播放速度等逻辑" />
     <MESSAGE value="【语音存储与回放】修复了已知问题(doge" />
@@ -928,7 +931,8 @@
     <MESSAGE value="【驱动开发】添加roller控件中（半成品）" />
     <MESSAGE value="【驱动开发】roller控件和dropdown控件完善，修复label中init函数无法生成字符问题，新增OnValueChanged值变化事件，准备测试chart" />
     <MESSAGE value="【驱动开发】按键中标签只能显示两个字符，数字没影响" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】按键中标签只能显示两个字符，数字没影响" />
+    <MESSAGE value="【驱动开发】bug:按键中标签只能显示两个字符，数字没影响" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】bug:按键中标签只能显示两个字符，数字没影响" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

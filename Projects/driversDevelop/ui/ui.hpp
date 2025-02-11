@@ -20,6 +20,7 @@ namespace gui::widgets::main
     extern Label label_weekday; // 星期几显示
     extern Button btn_hidden; // 隐藏按键
     extern Chart chart_1;       // 图表控价
+    extern Button btn_Random_data; // 生成随机数据按键
 }
 
 

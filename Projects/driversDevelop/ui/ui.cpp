@@ -18,7 +18,9 @@ namespace gui::widgets::main
     Dropdown dropdown_1; // 下拉框控件
     Chart chart_1;       // 图表控价
     Button btn_hidden; // 隐藏按键
+    Button btn_Random_data; // 生成随机数据按键
 
+    ChartSeries_t series; //数据 系列1
 }
 static int counter_value = 0; // 计数器值存储
 
@@ -69,10 +71,14 @@ public:
     // 隐藏
     static inline auto hidden_all()->void;
 
+    // 生成随机数据
+    static inline auto generate_data()->void;
+
 private:
     static inline int counter_value = 0; // 计数器值
     static inline lv_point_t point_1{};
     static inline lv_point_t point_2{};// 不存在第二个触摸点
+
 };
 
 // 默认使用main屏幕里的组件（暂时用不到其他界面）
@@ -113,10 +119,20 @@ namespace gui::init
         dropdown_1.init(320, 100, 100, 40,"Mon\nTue\nWed\nThu\nFri\nSat\nSun").bg_color(lv_color_hex(0x34e6ff)).direction(LV_DIR_BOTTOM);
 
         // 切换界面按键
-        btn_hidden.init(400,280,80,40,"hidden");
+        btn_hidden.init(400,280,80,40,"chart");
 
         // 测试 图表控件
-        chart_1.init(320, 100, 100, 40);
+        chart_1.init(50, 50, 300, 250,128).set_update_mode(LV_CHART_UPDATE_MODE_CIRCULAR).set_div_count(20,10).set_div_color(lv_color_hex(0x34e6ff))
+                .hidden();;
+        btn_Random_data.init(360,150,80,40,"start/end").hidden();
+        series =chart_1.add_series(lv_color_hex(0x34e6ff),LV_CHART_AXIS_PRIMARY_Y);
+
+//        for(int i = 0;i < 128;++i)
+//        {
+//            lv_chart_set_next_value(chart_1, series, lv_rand(0, 255));
+//        }
+
+
     }
 
 
@@ -137,8 +153,11 @@ namespace gui::init
         // 绑定 星期几 下拉框事件
         widgets::main::dropdown_1.OnValueChanged<CounterLogic::set_value_weekday_dropdown>();
 
-//        // 绑定 隐藏事件
+        // 绑定 隐藏事件
         widgets::main::btn_hidden.OnClicked<CounterLogic::hidden_all>();
+
+        // 绑定 随机生成数据事件
+        widgets::main::btn_Random_data.OnPressing<CounterLogic::generate_data>();
     }
 }
 
@@ -281,5 +300,15 @@ auto CounterLogic::hidden_all() -> void
     slider_1.hidden();
     roller_1.hidden();
     dropdown_1.hidden();
+    chart_1.appear();
+    btn_Random_data.appear();
 }
 
+// 生成随机数据
+auto CounterLogic::generate_data()->void
+{
+    for(int i = 0;i < 128;++i)
+    {
+        lv_chart_set_next_value(chart_1, series, lv_rand(0, 255));
+    }
+}
