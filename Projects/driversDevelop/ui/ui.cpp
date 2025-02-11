@@ -113,10 +113,10 @@ namespace gui::init
         dropdown_1.init(320, 100, 100, 40,"Mon\nTue\nWed\nThu\nFri\nSat\nSun").bg_color(lv_color_hex(0x34e6ff)).direction(LV_DIR_BOTTOM);
 
         // 切换界面按键
-        btn_hidden.init(400,280,80,40).text("hidden");
+        btn_hidden.init(400,280,80,40,"hidden");
 
-//        // 测试 图表控件
-//        chart_1.init(320, 100, 100, 40);
+        // 测试 图表控件
+        chart_1.init(320, 100, 100, 40);
     }
 
 
@@ -137,8 +137,8 @@ namespace gui::init
         // 绑定 星期几 下拉框事件
         widgets::main::dropdown_1.OnValueChanged<CounterLogic::set_value_weekday_dropdown>();
 
-        // 绑定 隐藏事件
-        widgets::main::dropdown_1.OnClicked<CounterLogic::hidden_all>();
+//        // 绑定 隐藏事件
+        widgets::main::btn_hidden.OnClicked<CounterLogic::hidden_all>();
     }
 }
 
@@ -281,6 +281,5 @@ auto CounterLogic::hidden_all() -> void
     slider_1.hidden();
     roller_1.hidden();
     dropdown_1.hidden();
-    chart_1.hidden();
 }
 
