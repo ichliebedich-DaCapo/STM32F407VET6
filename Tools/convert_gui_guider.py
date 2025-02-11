@@ -53,8 +53,21 @@ def check_default_arguments_2(parts,value):
 # --------------------------------分步处理代码块------------------------------------
 
 # 处理样式块,已经包含里样式的正确代码，不用在前面加上组件名
-def convert_style_calls(blocks, widget_var):
+def convert_style_calls(blocks):
     converted = []
+    default_config=[
+        ['border_width', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
+        ['text_color', 'lv_color_hex(0xffffff)', 'LV_PART_MAIN|LV_STATE_DEFAULT'],
+        ['text_opa', "255", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
+        ['text_line_space', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
+        ['text_align', 'LV_TEXT_ALIGN_CENTER', 'LV_PART_MAIN|LV_STATE_DEFAULT'],
+        ['bg_opa', "255", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
+        ['pad_top', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
+        ['pad_right', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
+        ['pad_bottom', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
+        ['pad_left', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
+        ['shadow_width', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT']
+    ]
     for block in blocks:
         # 给每一块代码分成若干行
         lines = block.split('\n')
@@ -63,6 +76,7 @@ def convert_style_calls(blocks, widget_var):
             if not line:
                 continue
 
+            # 这里能做到这么简洁是因为lvgl 9.2的所有样式API都只有三个参数，并且前缀相同
             # 匹配对应函数 第二个是非贪婪捕获，第三个是贪婪捕获，不过在这里都差不多
             match = re.match(r'lv_obj_set_style_(\w+)\(ui->\w+,\s*(.+?),\s*(.*)\);', line)
             if match:
@@ -71,10 +85,21 @@ def convert_style_calls(blocks, widget_var):
                 value = match.group(2)
                 state = match.group(3)
 
-                # 处理状态，如果是默认状态，那么就不添加
-                param = "" if state == "LV_PART_MAIN|LV_STATE_DEFAULT" else f", {state}"
+                # 如果在默认配置表里找到了对应函数，那么就对照默认配置修改
+                index = next((i for i, item in enumerate(default_config) if item[0] == prop), -1)
+                if index != -1:
+                    # 处理状态，如果是默认状态，那么就不添加
+                    state = "" if state == 'LV_PART_MAIN|LV_STATE_DEFAULT' else f", {state}"
+                    value = "" if value == default_config[index][1] and state == "" else f"{value}"
+                    if state == "" and value == "":
+                        # 如果都为默认值，那么就跳过这次处理
+                        continue
+                else:
+                    # 暂时不与上面的合并，因为以后可能会有新的样式
+                    state = "" if state == 'LV_PART_MAIN|LV_STATE_DEFAULT' else f", {state}"
+
                 # 每个样式前加上一个Tab，是为了与init对齐
-                converted.append(f"\t.{prop}({value}{param})")
+                converted.append(f"\t.{prop}({value}{state})")
 
     return converted
 
@@ -85,8 +110,6 @@ def convert_style_calls(blocks, widget_var):
 @note: 把各个初始化行解析并转为链式调用
 @return 返回的是处理后的列表
 """
-
-
 def process_init_function(init_lines):
     # 定义处理规则：每个函数对应的参数提取方式和转换逻辑
     group_functions_handlers = {
@@ -238,8 +261,6 @@ def process_init_function(init_lines):
 @ init_lines 初始化组件属性的代码行
 @ style_block 样式代码块
 """
-
-
 def process_component_block(component_name, create_line, init_lines, style_block):
     # 定义组件名前缀映射表
     prefix_map = {
@@ -268,7 +289,7 @@ def process_component_block(component_name, create_line, init_lines, style_block
     init_chain = process_init_function(init_lines)
 
     # 处理样式块，样式块是一段段样式初始化代码
-    style_code = convert_style_calls(style_block, var_name)
+    style_code = convert_style_calls(style_block)
 
     return {
         "var_name": var_name,
