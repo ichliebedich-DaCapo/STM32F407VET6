@@ -33,18 +33,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】添加roller控件中（半成品）">
-      <change afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/dropdown.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Adapter/GUI/Component/src/dropdown.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】roller控件和dropdown控件完善，修复label中init函数无法生成字符问题，新增OnValueChanged值变化事件，准备测试chart">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Base/GUI_Base.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Base/GUI_Base.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/button.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/button.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/label.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/label.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/roller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/roller.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/widget.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/widget.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.hpp" afterDir="false" />
     </list>
@@ -486,15 +479,7 @@
       <workItem from="1739155244217" duration="6552000" />
       <workItem from="1739163331229" duration="17434000" />
       <workItem from="1739184023009" duration="11939000" />
-      <workItem from="1739243531608" duration="5700000" />
-    </task>
-    <task id="LOCAL-00046" summary="【双音频信号发生器】贝塞尔二次曲线，些许漏墨，但速度下降了不少。线性插值也是，真奇怪">
-      <option name="closed" value="true" />
-      <created>1730651874179</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1730651874179</updated>
+      <workItem from="1739243531608" duration="11313000" />
     </task>
     <task id="LOCAL-00047" summary="【双音频信号发生器】贝塞尔二次曲线_又见漏墨端倪，真机上右一小块没有正常显示，模拟器上可以">
       <option name="closed" value="true" />
@@ -880,7 +865,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739183744415</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="【驱动开发】roller控件和dropdown控件完善，修复label中init函数无法生成字符问题，新增OnValueChanged值变化事件，准备测试chart">
+      <option name="closed" value="true" />
+      <created>1739251425541</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1739251425542</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -915,7 +908,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="略微调整了flash_storage模块的编写" />
     <MESSAGE value="略微完善了flash_storage模块，并编写了测试案例" />
     <MESSAGE value="flash_storage模块测试完毕" />
     <MESSAGE value="语音存储与回放可以使用，接下来只要添加各种逻辑即可" />
@@ -940,7 +932,8 @@
     <MESSAGE value="【驱动开发】框架改变" />
     <MESSAGE value="【驱动开发】屏幕白屏" />
     <MESSAGE value="【驱动开发】添加roller控件中（半成品）" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】添加roller控件中（半成品）" />
+    <MESSAGE value="【驱动开发】roller控件和dropdown控件完善，修复label中init函数无法生成字符问题，新增OnValueChanged值变化事件，准备测试chart" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】roller控件和dropdown控件完善，修复label中init函数无法生成字符问题，新增OnValueChanged值变化事件，准备测试chart" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

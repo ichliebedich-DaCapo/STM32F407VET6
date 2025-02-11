@@ -23,6 +23,7 @@ public:
     }
 
 
+
     // 使用前必须设置父对象
     inline Button &init(Strings text = nullptr, Obj parent = parent_)
     {
@@ -30,6 +31,7 @@ public:
 
         // 创建label，以Button为父对象
         label = lv_label_create(obj_);
+
         Button::font(font_);
         lv_label_set_text(label, text);
         lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);// 设置label居中
@@ -47,6 +49,7 @@ public:
         bg_opa(125);
         return *this;
     }
+
 
 
     // 点击事件

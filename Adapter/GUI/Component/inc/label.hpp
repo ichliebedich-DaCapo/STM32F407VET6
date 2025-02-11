@@ -51,7 +51,7 @@ public:
 
 
     // 文本颜色默认为黑,感觉这个最通用
-    inline Label &init(Coord x, Coord y, Coord w, Coord h,Strings text,Color text_color=lv_color_black())
+    inline Label &init(Coord x, Coord y, Coord w, Coord h,Strings text="",Color text_color=lv_color_black())
     {
         init();
         pos_size(x, y, w, h);

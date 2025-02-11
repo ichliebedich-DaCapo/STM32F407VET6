@@ -16,7 +16,8 @@ namespace gui::widgets::main
     Slider slider_1;   // 滑动条
     Roller roller_1;   //滚轮控件
     Dropdown dropdown_1; // 下拉框控件
-
+    Chart chart_1;       // 图表控价
+    Button btn_hidden; // 隐藏按键
 
 }
 static int counter_value = 0; // 计数器值存储
@@ -65,6 +66,9 @@ public:
     // 设置星期几显示
     static inline auto set_value_weekday_dropdown()->void;
 
+    // 隐藏
+    static inline auto hidden_all()->void;
+
 private:
     static inline int counter_value = 0; // 计数器值
     static inline lv_point_t point_1{};
@@ -100,13 +104,19 @@ namespace gui::init
         slider_1.init(50, 200, 200, 10).bg_color(lv_color_hex(0x34e6ff));
 
         // 星期几显示
-        label_weekday.init(305, 50, 80, 40,"None");
+        label_weekday.init(305, 50, 80, 40,"None").text_align(LV_TEXT_ALIGN_CENTER);
 
         // 测试 滚轮控件
         roller_1.init(270, 100, 50, 40,"Mon\nTue\nWed\nThu\nFri\nSat\nSun").bg_color(lv_color_hex(0x34e6ff));
 
         // 测试 下拉框控件
         dropdown_1.init(320, 100, 100, 40,"Mon\nTue\nWed\nThu\nFri\nSat\nSun").bg_color(lv_color_hex(0x34e6ff)).direction(LV_DIR_BOTTOM);
+
+        // 切换界面按键
+        btn_hidden.init(400,280,80,40).text("hidden");
+
+//        // 测试 图表控件
+//        chart_1.init(320, 100, 100, 40);
     }
 
 
@@ -122,10 +132,13 @@ namespace gui::init
         widgets::main::scr.OnPressing<CounterLogic::update_point>();
 
         // 绑定 星期几 滚轮控件事件
-        widgets::main::roller_1.OnClicked<CounterLogic::set_value_weekday_roller>();
+        widgets::main::roller_1.OnValueChanged<CounterLogic::set_value_weekday_roller>();
 
         // 绑定 星期几 下拉框事件
         widgets::main::dropdown_1.OnValueChanged<CounterLogic::set_value_weekday_dropdown>();
+
+        // 绑定 隐藏事件
+        widgets::main::dropdown_1.OnClicked<CounterLogic::hidden_all>();
     }
 }
 
@@ -254,4 +267,20 @@ auto CounterLogic::set_value_weekday_dropdown()->void
     char buf[12];
     dropdown_1.getSelectedStr(buf,12);
     label_weekday.text(buf);
+
 }
+
+auto CounterLogic::hidden_all() -> void
+{
+    label_counter.hidden();
+    label_weekday.hidden();
+    btn_x1.hidden();
+    btn_y1.hidden();
+    btn_x2.hidden();
+    btn_y2.hidden();
+    slider_1.hidden();
+    roller_1.hidden();
+    dropdown_1.hidden();
+    chart_1.hidden();
+}
+

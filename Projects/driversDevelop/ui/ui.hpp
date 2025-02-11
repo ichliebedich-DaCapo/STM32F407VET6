@@ -18,6 +18,8 @@ namespace gui::widgets::main
     extern Roller roller_1;    //滚轮控件
     extern Dropdown dropdown_1; // 下拉框控件
     extern Label label_weekday; // 星期几显示
+    extern Button btn_hidden; // 隐藏按键
+    extern Chart chart_1;       // 图表控价
 }
 
 
