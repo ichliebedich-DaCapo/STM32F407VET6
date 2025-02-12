@@ -170,8 +170,27 @@ def has_parent(parent_name):
     """ 检查是否存在指定父组件 """
     return has_relation(parent_name=parent_name)
 
-
     # 定义处理规则：每个函数对应的参数提取方式和转换逻辑
+
+
+def get_method_from_map(method_map, args,default_method):
+    """
+    解析method映射表。如果映射表里的handler是None，那么就说明是单参数，对应索引即可
+    :param method_map: 方法的参数映射表
+    :param args: 函数的完整形参
+    :param default_method:默认方法
+    :return:
+    """
+    if method_map['mapping']['handler'] is None:
+        params =[args[i] for i in method_map['mapping']['index']]
+        return method_map['mapping'].get(params, default_method)
+    else:
+        # 映射表里的method的第一个参数要确保是判断结果，结果若为None，那么就使用默认method
+        result,method = method_map['mapping']['handler'](args,method_map['mapping'])
+        if result is None:
+            return default_method
+        return method
+
 group_functions_handlers = {
     'pos_size': {
         'functions': {
@@ -234,25 +253,92 @@ function_handlers = {
     },
     # 图像按钮特殊处理
     'lv_imagebutton_set_src': {
-        'processor': lambda parts: ', '.join([
-            p.strip() for p in parts[-4:-1] if p.strip() != 'NULL'
-        ]),
-        'template': "\n\t\t\t.src({})"
+        # 参数缺省映射表，由专门的函数进行重载解析，最后返回参数列表。如果无参就返回None
+        'args_map': ['NULL','NULL'],
+        'method_map': {
+            # pos确定哪些参数决定改变method
+            'index': [1],
+            'mapping': {
+                '': {'method': 'src', 'args': "{}"},
+            },
+            # 多参数处理时，需要自定一个lambda，用于返回处理的结果。单参数，直接默认从映射表里找
+            # 第一
+            'handler':None
+        },
+        # method给出的默认值的意思是：Flase:形参全缺省，那么函数调用可省略，True：形参全缺省，函数调用也不能省略。
+        'method_processor': lambda args,method_map: (
+            True,
+            get_method_from_map(method_map, args, 'src')
+
+       )
     }
 }
 
-def convert_function(func_name, params):
+
+
+
+
+
+def omit_parameters(args, default_values):
+    """
+    根据C++重载规则处理参数列表，省略符合条件的参数。
+
+    :param args: 传入的参数列表
+    :param default_values: 默认值列表，对应参数列表中最后几个参数的默认值
+    :return: 处理后的参数列表和判断值（True表示有参数未省略，False表示全省略）
+    """
+    assert len(args) >= len(default_values), "参数列表长度必须大于等于默认值列表长度"
+
+    default_count = len(default_values)  # 确保这是一个整数
+    t = 0
+    # 从后往前逐个检查参数是否符合默认值
+    for i in range(default_count):
+        pos = -(i + 1)
+        if args[pos] == default_values[i]:
+            t += 1
+        else:
+            break
+    # 生成处理后的参数列表
+    processed_args = args[:len(args) - t] if t > 0 else list(args)  # 使用list()确保返回一个新的列表
+    # 判断是否所有可省略参数都符合条件
+    all_omitted = t == len(default_values)
+    return not all_omitted, processed_args
+
+
+def convert_function_args(func_name, args):
+    """
+    转换函数与形参
+    :param func_name:
+    :param args:为避免影响后续扩展，这里传输整个形参表
+    :return: 如果处理正常，就会返回正确的值
+    """
     # 处理样式类函数
     # 1，根据函数名选择具体的规则。
     # 2，找到字典里的函数名后，根据形参的不同，选择对应的method或者省略特定的参数。
     # 3，函数名只需要匹配在不在即可，也就是 if xxx in
     # 4,每个函数名规则都有默认的method，形参也默认，只有当形参匹配时才重新设置method和参数
     # 5,也就是映射表，映射的是参数与函数名的对应的关系，传入的是参数列表，
-
+    # 6，映射表改变的是method，参数值改变的是它本身。
+    # 7，所以需要两个处理器，每个处理器除了传入参数外，还需要传入映射表
+    # 如果存在映射表，则使用映射表,不存在的话，处理器会默认
+    # 专门对参数的处理会有缺省，method则不需要。也就是说会缺省也是默认值的体现。
+    # 8，缺省采取从右往左，按照优先级依次缺省。那么参数的缺省可以专门写一个函数来处理，字典里存放的就是缺省默认值
+    # 9，整个表达式省略的情况：参数全部默认并且method没有特殊处理，那么就省略。那么这两个函数可以分别给出个结果
+    # 10,method给出的默认值的意思是：Flase:形参全缺省，那么函数调用可省略，True：形参全缺省，函数调用也不能省略。
+    for funcs, config in function_handlers.items():
+        # 匹配函数规则
+        if func_name in funcs:
+            # 处理参数规则
+            args_result, final_args = omit_parameters(args, config['args_map'])
+            method_result, final_method = config['method_processor'](args, config['method_map'])
+            if args_result or method_result:
+                return f"{final_method}({', '.join(final_args)})"
+            else:
+                return None
 
     # 其他未处理情况
-    return f"{func_name}({', '.join(params)})"
-
+    raise NotImplementedError(f"Function '{func_name}' not implemented.")
+    # return None
 
 
 # --------------------------------分步处理代码块------------------------------------
@@ -343,8 +429,8 @@ def process_init_function(init_lines, component_name, widget_info):
                 init_code[-1] = init_code[-1] + ';'
                 # 查询当前组件的组件信息
                 current_widget_info = find_relations(child_name=current_component_name)[1]
-                pre_name = current_widget_info[0]+'_'+ current_component_name
-            function_info = convert_function(func_name,args)
+                pre_name = current_widget_info[0] + '_' + current_component_name
+            function_info = convert_function_args(func_name, args)
             init_code.append(f"{pre_name}.{function_info}")
             previous_component_name = current_component_name
 
@@ -357,7 +443,7 @@ def process_init_function(init_lines, component_name, widget_info):
             # 定义组件代码
             widgets_ns.append(f"{current_widget_info[1]}  {new_child_var_name};")
             # 把组件加入关系字典，以没有前缀的形式便于查找
-            if not add_component_relations(child_var_name,current_widget_info, parent_var_name):
+            if not add_component_relations(child_var_name, current_widget_info, parent_var_name):
                 raise Exception("组件关系错误")
             # 把处理过的上行代码添加分号,隔离开
             init_code[-1] = init_code[-1] + ';'
@@ -389,26 +475,6 @@ def process_init_function(init_lines, component_name, widget_info):
             if func_name in line:
                 # 收集括号内的所有参数
                 parts = line.strip('();').split(',')
-
-                # 如果存在映射表，则使用映射表
-                if 'mapping' in config:
-                    raw_arg, method_info = config['processor'](parts, config['mapping'])
-                    if method_info['args'] is None:
-                        # 无参函数
-                        code = config['template'](method_info['method'], '')
-                    else:
-                        # 有参函数
-                        code = config['template'](
-                            method_info['method'],
-                            method_info['args'].format(raw_arg)
-                        )
-                    init_code.append(code)
-                else:
-                    processed_args = config['processor'](parts)
-                    # 调用模板将参数嵌入其中,如果是默认值，那么就跳过这个函数行
-                    if processed_args is None:
-                        break
-                    init_code.append(config['template'].format(processed_args))
 
                 handled = True
                 break
