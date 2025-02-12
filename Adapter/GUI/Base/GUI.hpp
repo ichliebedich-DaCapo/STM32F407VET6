@@ -20,7 +20,7 @@ namespace
 {
     constexpr uint16_t DISP_HOR_RES = 480;
     constexpr uint16_t DISP_VER_RES = 320;
-    constexpr uint16_t DISP_BUF_SIZE = 20;
+    constexpr uint16_t DISP_BUF_SIZE = 20;  //20
     constexpr uint8_t BYTE_PER_PIXEL = (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565));
 }
 

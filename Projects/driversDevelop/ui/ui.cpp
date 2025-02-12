@@ -22,11 +22,63 @@ namespace gui::widgets::main
     Button btn_Random_data; // 生成随机数据按键
 
     static constexpr size_t DATA_POINTS = 128;
+    static constexpr size_t POOL_SIZE = 400;
+    static inline size_t current_index = 0;     // 当前读取位置
     ChartSeries_t series; //数据 系列1
     ChartSeries_t series_dirty; //数据 系列2 脏数据
     int16_t data_cache[DATA_POINTS];  // 数据缓存
     bool dirty_flags[DATA_POINTS];    // 脏标记数组
 }
+
+constexpr uint16_t start_x = border_info::x + 2 * border_info::margin;                       //82
+constexpr uint16_t start_y = border_info::y + border_info::height - 2 * border_info::margin;   //240
+uint8_t CH0_buff[200] = {0};//波形数据存储
+uint8_t length = 200;
+uint8_t wave_start_index = 0;
+uint16_t array_length = 400;
+uint8_t read_wave[400]={111,110,102,109,118,108,114,123,117,121,
+                                   118,117,109,116,115,117,115,110,112,116,
+                                   113,104,113,122,127,125,117,123,115,115,
+                                   124,129,129,125,115,107,113,115,117,124,
+                                   122,112,120,120,119,111,111,117,127,124,
+                                   117,127,130,126,132,135,145,150,153,147,
+                                   144,135,141,141,141,149,151,155,149,150,
+                                   149,157,157,147,151,154,163,170,165,171,
+                                   168,168,175,178,174,169,165,155,158,167,
+                                   174,172,178,170,174,168,163,162,157,148,
+                                   140,132,134,136,130,133,128,118,125,124,
+                                   131,140,141,134,124,130,127,125,127,119,
+                                   116,120,127,133,125,126,129,122,124,127,
+                                   127,130,135,138,136,142,148,150,143,136,
+                                   132,125,116,111,107,114,124,117,109,104,
+                                   107,99,96,101,111,113,118,120,121,122,
+                                   116,115,109,115,111,109,106,115,112,119,
+                                   116,106,98,98,102,96,104,111,112,114,
+                                   121,131,125,135,139,134,134,124,121,115,
+                                   106,116,107,109,118,128,137,127,134,126,
+                                   128,121,111,102,101,95,93,85,93,85,
+                                   79,83,92,82,79,86,85,88,89,80,
+                                   86,87,89,84,84,75,65,58,62,67,
+                                   72,78,72,71,71,73,79,81,81,77,
+                                   79,80,81,84,89,99,101,99,104,96,
+                                   99,99,93,100,99,102,112,112,107,98,
+                                   96,95,95,97,103,109,103,93,89,97,
+                                   95,88,97,87,80,78,79,82,85,82,
+                                   89,95,85,91,81,72,62,62,61,65,
+                                   69,61,59,52,43,33,36,28,31,21,
+                                   13,9,9,10,10,6,2,11,21,24,
+                                   22,13,22,28,24,31,33,42,34,42,
+                                   42,36,34,24,16,26,31,36,45,55,
+                                   61,54,47,50,50,48,45,42,50,46,
+                                   40,41,42,42,46,47,43,42,42,43,
+                                   34,32,30,30,28,24,24,28,23,19,
+                                   11,6,1,0,2,0,5,0,0,0,
+                                   7,2,5,4,7,1,0,9,10,19,
+                                   28,34,35,30,27,36,37,43,49,45,
+                                   48,38,30,32,29,25,20,25,27,24,
+
+
+}; // 随机数池
 static int counter_value = 0; // 计数器值存储
 
 // 计数器逻辑
@@ -89,6 +141,7 @@ public:
         }
     }
 
+
 private:
     static inline int counter_value = 0; // 计数器值
     static inline lv_point_t point_1{};
@@ -97,6 +150,54 @@ private:
     static inline bool is_generating = false;
     // 添加定时器指针
     static inline lv_timer_t* update_timer = nullptr;
+
+    static constexpr size_t RAND_POOL_SIZE = 400; // 预生成池大小
+    static inline uint8_t rand_pool[RAND_POOL_SIZE]={111,110,102,109,118,108,114,123,117,121,
+                                                     118,117,109,116,115,117,115,110,112,116,
+                                                     113,104,113,122,127,125,117,123,115,115,
+                                                     124,129,129,125,115,107,113,115,117,124,
+                                                     122,112,120,120,119,111,111,117,127,124,
+                                                     117,127,130,126,132,135,145,150,153,147,
+                                                     144,135,141,141,141,149,151,155,149,150,
+                                                     149,157,157,147,151,154,163,170,165,171,
+                                                     168,168,175,178,174,169,165,155,158,167,
+                                                     174,172,178,170,174,168,163,162,157,148,
+                                                     140,132,134,136,130,133,128,118,125,124,
+                                                     131,140,141,134,124,130,127,125,127,119,
+                                                     116,120,127,133,125,126,129,122,124,127,
+                                                     127,130,135,138,136,142,148,150,143,136,
+                                                     132,125,116,111,107,114,124,117,109,104,
+                                                     107,99,96,101,111,113,118,120,121,122,
+                                                     116,115,109,115,111,109,106,115,112,119,
+                                                     116,106,98,98,102,96,104,111,112,114,
+                                                     121,131,125,135,139,134,134,124,121,115,
+                                                     106,116,107,109,118,128,137,127,134,126,
+                                                     128,121,111,102,101,95,93,85,93,85,
+                                                     79,83,92,82,79,86,85,88,89,80,
+                                                     86,87,89,84,84,75,65,58,62,67,
+                                                     72,78,72,71,71,73,79,81,81,77,
+                                                     79,80,81,84,89,99,101,99,104,96,
+                                                     99,99,93,100,99,102,112,112,107,98,
+                                                     96,95,95,97,103,109,103,93,89,97,
+                                                     95,88,97,87,80,78,79,82,85,82,
+                                                     89,95,85,91,81,72,62,62,61,65,
+                                                     69,61,59,52,43,33,36,28,31,21,
+                                                     13,9,9,10,10,6,2,11,21,24,
+                                                     22,13,22,28,24,31,33,42,34,42,
+                                                     42,36,34,24,16,26,31,36,45,55,
+                                                     61,54,47,50,50,48,45,42,50,46,
+                                                     40,41,42,42,46,47,43,42,42,43,
+                                                     34,32,30,30,28,24,24,28,23,19,
+                                                     11,6,1,0,2,0,5,0,0,0,
+                                                     7,2,5,4,7,1,0,9,10,19,
+                                                     28,34,35,30,27,36,37,43,49,45,
+                                                     48,38,30,32,29,25,20,25,27,24,
+
+
+    }; // 随机数池;
+
+
+
 };
 
 // 默认使用main屏幕里的组件（暂时用不到其他界面）
@@ -144,15 +245,23 @@ namespace gui::init
                 .set_update_mode(LV_CHART_UPDATE_MODE_SHIFT)  // 改为SHIFT模式
                 .set_div_color(lv_color_hex(0x34e6ff))
                 .hidden();
+
+        // 测试 生成随机数据按键
         btn_Random_data.init(360,150,80,40,"start/end").hidden();
 
-        series =chart_1.add_series(lv_color_hex(0x34e6ff),LV_CHART_AXIS_PRIMARY_Y);
-        // 创建脏标记系列（白色点）
-        series_dirty = chart_1.add_series(lv_color_white(), LV_CHART_AXIS_PRIMARY_Y);
+        // print
+        FPS::init(&lv_customer_font_SourceHanSerifSC_Regular_13, 415, 0);
+        FPS::set_right();
 
-        // 初始化缓存
-        memset(data_cache, 0, sizeof(data_cache));
-        memset(dirty_flags, 0, sizeof(dirty_flags));
+
+        // 创建系列1（
+        series =chart_1.add_series(lv_color_hex(0x34e6ff),LV_CHART_AXIS_PRIMARY_Y);
+//        // 创建脏标记系列（白色点）
+//        series_dirty = chart_1.add_series(lv_color_white(), LV_CHART_AXIS_PRIMARY_Y);
+//
+//        // 初始化缓存
+//        memset(data_cache, 0, sizeof(data_cache));
+//        memset(dirty_flags, 0, sizeof(dirty_flags));
 
 //        for(int i = 0;i < 128;++i)
 //        {
@@ -188,6 +297,7 @@ namespace gui::init
 
         // 绑定 随机生成数据事件
         widgets::main::btn_Random_data.OnClicked<CounterLogic::toggle_generation>();
+
     }
 }
 
@@ -348,11 +458,30 @@ auto CounterLogic::hidden_all() -> void
 }
 auto CounterLogic::generate_data()->void
 {
-    for (int i = 0; i < 128; ++i)
-    {
-        lv_chart_set_next_value(chart_1, series, lv_rand(0, 255));
+// 批量设置128个点
+    for (int i = 0; i < 128; ++i) {
+//         循环访问数组
+        size_t idx = (current_index + i) % POOL_SIZE;
+        lv_chart_set_next_value(chart_1, series, rand_pool[idx]);
     }
+//     更新索引（每次前进1位置）
+    current_index = (current_index + 20) % POOL_SIZE;
+    if(wave_start_index+length>array_length) wave_start_index=0;
+
+    FPS::print(false);
+
+
+//    draw_dashed_dividers(border_info::x, border_info::y, border_info::width, border_info::height, 10, 8, 0X8410,
+//                         border_info::margin, 4, 4);
+//    draw_interpolated_wave(start_x, start_y, read_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
+//                           0xFFFF);
+//
+//    wave_start_index = (wave_start_index +  20) % array_length;
+//    if(wave_start_index+length>array_length) wave_start_index=0;
+//    FPS::print(false);
 }
+
+
 // 生成随机数据
 //auto CounterLogic::generate_data()->void
 //{
@@ -462,7 +591,7 @@ auto CounterLogic::toggle_generation() -> void
     // 管理定时器
     if(is_generating) {
         // 创建定时器（20ms间隔 ≈ 50fps）
-        update_timer = lv_timer_create(timer_cb, 20, NULL);
+        update_timer = lv_timer_create(timer_cb, 50, NULL);
     } else {
         if(update_timer) {
             lv_timer_del(update_timer);

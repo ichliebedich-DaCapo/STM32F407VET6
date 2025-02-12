@@ -28,10 +28,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/../Render/WaveDraw.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Render/WaveDraw.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Base/GUI.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Base/GUI.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../BSP/src/i2c.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/i2c.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/roller/lv_roller.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/roller/lv_roller.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../cmake/arm-gcc.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cmake/arm-gcc.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,6 +96,11 @@
   }
 }</component>
   <component name="RunManager" selected="CMake 应用程序.Simulator">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Simulator" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Simulator" TARGET_NAME="Simulator" CONFIG_NAME="Debug-MinGW_NXP" RUN_TARGET_PROJECT_NAME="Simulator" RUN_TARGET_NAME="Simulator">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -116,11 +127,11 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="CMake 应用程序.Simulator" />
       <item itemvalue="CMake 应用程序.drivers" />
       <item itemvalue="CMake 应用程序.gui" />
       <item itemvalue="CMake 应用程序.lvgl" />
       <item itemvalue="CMake 应用程序.render" />
-      <item itemvalue="CMake 应用程序.Simulator" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
@@ -132,7 +143,11 @@
       <option name="presentableId" value="Default" />
       <updated>1739163029517</updated>
       <workItem from="1739163030599" duration="8542000" />
-      <workItem from="1739243626305" duration="17889000" />
+      <workItem from="1739243626305" duration="17893000" />
+      <workItem from="1739286826216" duration="1369000" />
+      <workItem from="1739289041689" duration="4000" />
+      <workItem from="1739289054827" duration="7000" />
+      <workItem from="1739335538836" duration="5343000" />
     </task>
     <servers />
   </component>

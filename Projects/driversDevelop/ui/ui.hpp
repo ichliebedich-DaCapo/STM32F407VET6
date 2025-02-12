@@ -5,7 +5,7 @@
 #define SIMULATOR_UI_HPP
 
 #include "GUI_Base.hpp"
-
+#include "WaveDraw.hpp"
 /// 声明各组件
 namespace gui::widgets::main
 {
@@ -22,7 +22,20 @@ namespace gui::widgets::main
     extern Chart chart_1;       // 图表控价
     extern Button btn_Random_data; // 生成随机数据按键
 }
-
+// 边框信息
+namespace border_info
+{
+    constexpr uint16_t x = 10;
+    constexpr uint16_t y = 10;
+    constexpr uint16_t width = 400;
+    constexpr uint16_t height = 250;
+    constexpr uint16_t margin = 2;
+//    constexpr uint16_t x = 78;
+//    constexpr uint16_t y = 36;
+//    constexpr uint16_t width = 324;
+//    constexpr uint16_t height = 208;
+//    constexpr uint16_t margin = 2;
+}
 
 /// UI接口
 namespace gui::interface
