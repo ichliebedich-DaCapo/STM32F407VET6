@@ -505,7 +505,7 @@ def process_init_function(init_lines, component_name, widget_info):
 
 def process_component_block(component_name, create_line, init_lines, style_block):
     """
-    处理组件代码块
+    处理一块组件代码块
     :param component_name: 从注释里包含的组件名称
     :param create_line: 创建组件的代码行
     :param init_lines: 初始化代码行
@@ -628,6 +628,21 @@ def process_component_blocks(blocks):
 
 # ----------------------------------输出结果处理--------------------------------------------
 def generate_output(project_name):
+    """
+    输出转换后的代码结果。
+    ①初始化代码可以划分为几个组件块，每个组件块都办包含了自己的名称和若干代码行。
+    ②组件的每行代码行都有解析器解析后存储到属于该组件的位置
+    ③那么包含了所有组件信息的列表应该这样设计算。
+    ④components [['component_name',['.init(89,63)','pos(165,35)',……]],……]
+    ⑤为了便于处理，应把初始化代码和样式定义代码分开，最后在合并到一起。或者说如果发现解析出的函数名含"lv_obj_style"
+        那么就使用样式代码的处理方式，最后都穿插到components里。这样也便于后续自定义lvgl代码也能解析
+    ⑥对于塞入初始化代码的块，其实可以不用直接转为字符串的形式，可以先用列表存储起来，即
+        [['component_name',[['func_name','args'],,……]],……]
+        收集所有信息 → 统合信息（把一些函数和参数拼接） → 链接函数调用块（把包含函数信息的列表拼接为字符串）
+         → 解析组件（把components解析为对应的代码，首行的组件名称与函数调用拼接在一起）→ 代码生成
+    :param project_name:
+    :return:
+    """
     for comp in components:
         # 组件定义代码
         if comp['var_name'] == "scr":
