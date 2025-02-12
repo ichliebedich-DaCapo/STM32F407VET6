@@ -173,33 +173,6 @@ def has_parent(parent_name):
     # 定义处理规则：每个函数对应的参数提取方式和转换逻辑
 
 
-def get_method_from_map(method_map, all_omitted,args):
-    """
-    解析method映射表。会有三个返回值，一个是判断函数调用是否省略，剩下的返回值是函数名和形参表
-    :param method_map: 方法的参数映射表
-    :param all_omitted: 是否全缺省，如果全缺省并且类型符合的话，那么直接跳过这一步骤
-    :param args: 经过缺省处理后的函数形参，之所以这样是因为C++重载的规则，可以缺省的一定是在后面
-    ，而且我也不打算打乱顺序，所以不会影响前面的顺序
-
-    :return:
-    """
-    if all_omitted and method_map['type'] is None:
-        # 如果全缺省并且类型为None，那么就跳过函数调用
-        return None,[],[]
-    else:
-        # 获取默认method
-        default_method = method_map['default']
-        if method_map['mapping']['handler'] is None:
-            # 如果映射表里的handler是None，那么就说明是单参数，直接以默认值去搜索对应的名称
-            params =[args[i] for i in method_map['mapping']['index']]
-            return method_map['mapping'].get(params, default_method)
-        else:
-            # 映射表里的method的第一个参数要确保是判断结果，结果若为None，那么就使用默认method
-            result,method = method_map['mapping']['handler'](args,method_map['mapping'])
-            if result is None:
-                return default_method
-            return method
-
 group_functions_handlers = {
     'pos_size': {
         'functions': {
@@ -263,27 +236,79 @@ function_handlers = {
     # 图像按钮特殊处理
     'lv_imagebutton_set_src': {
         # 参数缺省映射表，由专门的函数进行重载解析，最后返回参数列表。如果无参就返回None
-        'args_map': ['NULL','NULL'],
+        'args_map': ['NULL', 'NULL'],
         'method_map': {
             # 确定哪些参数能决定改变method，单映射的情况下，handler为None即可
             'index': [1],
-            # 映射表可以为空
+            # 映射表可以为空，映射之后这个参数就要去掉，因为我的目的是简化
             'mapping': {
                 'LV_IMAGEBUTTON_STATE_RELEASED': 'released_src',
             },
             # 类型为None表示参数全缺省即可免去调用，不为None表示不缺省就省略。
-            'type':{},
+            'type': '',
             # method默认在映射表里去找，如果找不到就用默认值
-            'default':'src',
-            # 多参数处理时，需要自定一个lambda，用于返回处理的结果。单参数，直接默认从映射表里找
-            'handler':None
+            'default': 'src',
+            # 单参数或者多参数处理时，需要自定一个lambda，用于返回处理的结果。
+            # 输入的参数是索引(或者处理过的参数)、参数表和mapping，需要返回一个判断结果（以None为标志）和一个最终处理的函数名和参数表
+            # 事实上，更复杂的的需求不可能依靠lambda来完成，但是现在并没有遇到情况，就先用lambda代替
+            'handler': None
         },
     }
 }
 
 
+def get_method_from_map(method_map, all_omitted, args):
+    """
+    解析method映射表，返回是否省略调用、方法名和参数列表。
+    :param method_map: 方法的参数映射表，包含index、mapping、handler等键。
+    :param all_omitted: 是否所有参数都被省略。
+    :param args: 处理后的参数列表。
+    :return: (omit_call, method_name, processed_args)
+            第一个参数为True表示可以跳过
+    """
+    # 如果全缺省并且类型为None，那么就跳过函数调用
+    if all_omitted and method_map.get('type') is None:
+        return True, None, []
 
+    # 获取默认method和handler
+    default_method = method_map.get('default', '')
+    handler = method_map.get('handler')
 
+    if handler is None:
+        # 如果handler不存在
+        indices = method_map.get('index', [])
+        if not indices:
+            # 如果是无参数映射，直接返回默认方法和参数
+            return False, default_method, args
+
+        # 处理单参数映射，取第一个索引
+        index = indices[0]
+        if index >= len(args):
+            # 单参数映射超出范围,说明映射表需要修正
+            raise ValueError(f"Invalid index {index} for method mapping")
+
+        # 进行单参数映射
+        param = args[index]
+        mapping = method_map.get('mapping', {})
+        method = mapping.get(param, default_method)
+
+        if method == default_method:
+            return False, default_method, args
+        else:
+            # 存在映射，则删除指定元素
+            new_args = list(args)
+            del new_args[index]
+            return False, method, new_args
+    else:
+        # 如果handler存在（单参数映射或者多参数映射）
+        indices = method_map.get('index', [])
+        params = [args[i] for i in indices if i < len(args)]
+        # 使用映射表里的lambda，输入索引(或者处理过的参数)、参数表和mapping，返回结果、method和参数
+        # 映射表里的method的第一个参数要确保是判断结果，结果若为None，那么就使用默认method
+        result, method, final_args = handler(params, args, method_map.get('mapping', {}))
+        if result is None:
+            method = default_method
+        return False, method, final_args
 
 
 def omit_parameters(args, default_values):
