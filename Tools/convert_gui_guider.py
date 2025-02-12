@@ -12,11 +12,13 @@ import re
 widgets_ns = []
 # 界面初始化代码块
 screen_ns = []
+
 # 组件代码块
 widgets = []
 # 组件的关系, 格式为 [['子组件名', [子组件类型], '父组件名'], ...]
 widgets_relations = []
-
+# 组件定义代码块，格式为 ['Component xxx','']
+widgets_define = []
 
 # --------------------------------预处理------------------------------------
 
@@ -92,9 +94,9 @@ def parse_function_line(code_line):
         r'(?:([^=\s]+)\s*=\s*)?'  # 变量名（可选）
         r'([a-zA-Z_]\w*)'  # 函数名
         r'\s*\(\s*'  # 左括号
-        r'((?:[^()]*(?:\([^()]*\))*[^()]*)'  # 形参表（允许一层括号嵌套）
-        r'\)\s*;'  # 右括号和分号
-        r')\s*$'  # 结束空白
+        r'([^()]*(?:\([^()]*\))*[^()]*'  # 形参表（允许一层括号嵌套）
+        r')\)\s*;'  # 右括号和分号
+        r'\s*$'  # 结束空白
     )
 
     # 使用正则表达式进行匹配
@@ -118,7 +120,6 @@ def extract_comp_name_from_var(var):
     :param var: 包含箭头的变量名字符串
     :return: 箭头右边的变量名部分
     """
-
     # 查找箭头的位置
     arrow_index = var.find('->')
 
@@ -149,17 +150,60 @@ def extract_c_code_lines(input_text):
     return code_lines
 
 # -----------------------------与组件有关系--------------------------------
-def add_widget(widget_name,widget_func,widget_args):
+def check_widget_exists( widget_name):
+    """检查组件是否已存在
+    Args:
+        widget_name (str): 要检查的组件名称
+    Returns:
+        bool: 是否存在
     """
-    添加组件初始化信息
-    :param widget_name: 组件名称，string
-    :param widget_func: 函数名称，string
-    :param widget_args: 完整函数形参表，list
-    :return:
-    """
-    widgets.append([widget_name, widget_func, widget_args])
-    return True
+    return any(widget[0] == widget_name for widget in widgets)
 
+def add_function_to_existing(widget_name, func_name, args):
+    """添加函数到已有组件
+    Args:
+        widget_name (str): 目标组件名称
+        func_name (str): 要添加的函数名称
+        args (list): 函数参数列表
+    """
+    for widget in widgets:
+        if widget[0] == widget_name:
+            widget[1].append([func_name, args.copy()])  # 使用拷贝避免引用问题
+            break
+
+def create_new_widget(widget_name, func_name, args):
+    """创建新组件结构
+    Args:
+        widget_name (str): 组件名称
+        func_name (str): 函数名称
+        args (list): 函数参数列表
+    Returns:
+        list: 新组件结构
+    """
+    return [widget_name, [[func_name, args.copy()]]]
+
+def add_widget_function(widget_name, func_name, args):
+    """添加组件函数（主函数）
+    实现逻辑：
+    1. 存在组件 -> 追加函数
+    2. 不存在组件 -> 创建新组件
+    Args:
+        widget_name (str): 组件名称
+        func_name (str): 函数名称
+        args (list): 函数参数列表
+    """
+    if check_widget_exists(widget_name):
+        add_function_to_existing(widgets, widget_name, func_name, args)
+    else:
+        new_widget = create_new_widget(widget_name, func_name, args)
+        widgets.append(new_widget)
+
+
+
+
+
+
+# ------------------------------与组件关系有关------------------------
 def add_widget_relations(child_name, child_info, parent_name):
     """
     添加组件关系（支持类型列表）
@@ -385,10 +429,10 @@ def omit_parameters(args, default_values):
 
 def convert_function_args(func_name, args):
     """
-    转换函数与形参
+    转换函数与形参:输入函数名和完整形参表，会返回生成好的C++函数
     :param func_name:
     :param args:为避免影响后续扩展，这里传输整个形参表
-    :return: 如果处理正常，就会返回正确的值
+    :return: 如果处理正常，就会返回正确的C++函数代码（前面带点）
     """
     # 处理样式类函数
     # 1，根据函数名选择具体的规则。
@@ -413,7 +457,7 @@ def convert_function_args(func_name, args):
             if final_result:
                 return None
             else:
-                return f"{final_method}({', '.join(final_args[1:])})"
+                return f".{final_method}({', '.join(final_args[1:])})"
 
     # 其他未处理情况
     # TODO 暂时不处理，因为目前没有遇到需要处理这种情况
@@ -424,7 +468,13 @@ def convert_function_args(func_name, args):
 # --------------------------------分步处理代码块------------------------------------
 
 # 处理样式块,已经包含里样式的正确代码，不用在前面加上组件名
-def convert_style_calls(blocks):
+def convert_style_calls(func_name, args):
+    """
+    转换样式代码
+    :param func_name:
+    :param args:
+    :return: converted(string) 返回的是转换好的样式代码，如果不需要那么就返回None
+    """
     converted = []
     default_config = [
         ['border_width', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
@@ -439,141 +489,40 @@ def convert_style_calls(blocks):
         ['pad_left', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
         ['shadow_width', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT']
     ]
-    for block in blocks:
-        # 给每一块代码分成若干行
-        lines = block.split('\n')
-        for line in lines:
-            line = line.strip()
-            if not line:
-                continue
 
-            # 这里能做到这么简洁是因为lvgl 9.2的所有样式API都只有三个参数，并且前缀相同
-            # 匹配对应函数 第二个是非贪婪捕获，第三个是贪婪捕获，不过在这里都差不多
-            match = re.match(r'lv_obj_set_style_(\w+)\(ui->\w+,\s*(.+?),\s*(.*)\);', line)
-            if match:
-                # 定义一个函数映射表
-                prop = match.group(1)
-                value = match.group(2)
-                state = match.group(3)
 
-                # 如果在默认配置表里找到了对应函数，那么就对照默认配置修改
-                index = next((i for i, item in enumerate(default_config) if item[0] == prop), -1)
-                if index != -1:
-                    # 处理状态，如果是默认状态，那么就不添加
-                    state = "" if state == 'LV_PART_MAIN|LV_STATE_DEFAULT' else f", {state}"
-                    value = "" if value == default_config[index][1] and state == "" else f"{value}"
-                    if state == "" and value == "":
-                        # 如果都为默认值，那么就跳过这次处理
-                        continue
-                else:
-                    # 暂时不与上面的合并，因为以后可能会有新的样式
-                    state = "" if state == 'LV_PART_MAIN|LV_STATE_DEFAULT' else f", {state}"
+    # 这里能做到这么简洁是因为lvgl 9.2的所有样式API都只有三个参数，并且前缀相同
+    # 匹配对应函数 第二个是非贪婪捕获，第三个是贪婪捕获，不过在这里都差不多
+    match = re.match(r'lv_obj_set_style_(\w+)', func_name)
+    if match is None:
+        # 不应该出现的情况
+        raise NotImplementedError(f"Function '{func_name}' not implemented.")
+    prop = match.groups()
+    value = args[1]
+    state = args[2]
 
-                # 每个样式前加上一个Tab，是为了与init对齐
-                converted.append(f"\t.{prop}({value}{state})")
+    # 如果在默认配置表里找到了对应函数，那么就对照默认配置修改
+    index = next((i for i, item in enumerate(default_config) if item[0] == prop), -1)
+    if index != -1:
+        # 处理状态，如果是默认状态，那么就不添加
+        state = "" if state == 'LV_PART_MAIN|LV_STATE_DEFAULT' else f", {state}"
+        value = "" if value == default_config[index][1] and state == "" else f"{value}"
+        if state == "" and value == "":
+            # 如果都为默认值，那么就跳过这次处理
+            return None
+    else:
+        # 暂时不与上面的合并，因为以后可能会有新的样式
+        state = "" if state == 'LV_PART_MAIN|LV_STATE_DEFAULT' else f", {state}"
+
+    # 每个样式前加上一个Tab，是为了与init对齐
+    converted.append(f".{prop}({value}{state})")
 
     return converted
 
 
-# def process_init_function(init_lines, widget_name, widget_info):
-#     # 处理初始化代码块（不包含创建）
-#     """
-#     :param widget_info:
-#     :param init_lines: 包含了各种初始化代码的行
-#     :param widget_name: 没有前缀的组件名
-#     :note: 把各个初始化行解析并转为链式调用
-#     :return 返回的是处理后的列表
-#     """
-#     # 处理初始化代码的主逻辑
-#     init_code = []
-#     previous_widget_name = ''  # 存储上一个组件的名称，用于判断链式调用
-#     for line in init_lines:
-#         # 跳过创建函数和空行
-#         if not line.strip():
-#             continue
-#
-#         # 词法解析，获取变量名、函数名（不为空）和参数表
-#         var_name, func_name, args = parse_function_line(line)
-#         if func_name is None:
-#             continue
-#
-#         # 初始化代码有两种,一种是创建组件，一种是初始化组件
-#         if var_name is None:
-#             # 初始化组件
-#             pre_name = '\n\t\t'
-#             current_widget_name = extract_comp_name_from_var(args[0])
-#             # 如果组件名称相同，那么就继续添加参数
-#             if previous_widget_name != current_widget_name:
-#                 # 把处理过的上行代码添加分号,隔离开
-#                 # print(f"var:{var_name}  func:{func_name}  args:{args}")
-#                 if init_code:
-#                     init_code[-1] = init_code[-1] + ';\n'
-#                 # 查询当前组件的组件信息
-#                 current_widget_info = find_relations(child_name=current_widget_name)[1]
-#                 pre_name = current_widget_info[0] + '_' + current_widget_name
-#             function_info = convert_function_args(func_name, args)
-#             init_code.append(f"{pre_name}.{function_info}")
-#             previous_widget_name = current_widget_name
-#
-#         else:
-#             # 创建子组件，需要先分析组件类型和父对象
-#             current_widget_info = get_widget_type(line)
-#             child_var_name = extract_comp_name_from_var(var_name)
-#             parent_var_name = extract_comp_name_from_var(args[0])
-#             new_child_var_name = current_widget_info[0] + '_' + child_var_name
-#             # 定义组件代码
-#             widgets_ns.append(f"{current_widget_info[1]}  {new_child_var_name};")
-#             # 把组件加入关系字典，以没有前缀的形式便于查找
-#             if not add_widget_relations(child_var_name, current_widget_info, parent_var_name):
-#                 raise Exception("组件关系错误")
-#             # 把处理过的上行代码添加分号,隔离开
-#             init_code[-1] = init_code[-1] + ';\n'
-#             # 添加此时的代码
-#             new_parent_var_name = find_relations(child_name=parent_var_name)[1][0] + '_' + parent_var_name
-#             init_code.append(f"{new_child_var_name}.init({new_parent_var_name})")
-#             previous_widget_name = child_var_name  # 存档
-#     return init_code
 
 
 
-
-# def process_widget_block(widget_name, create_line, init_lines, style_block):
-#     """
-#     处理一块组件代码块
-#     :param widget_name: 从注释里包含的组件名称
-#     :param create_line: 创建组件的代码行
-#     :param init_lines: 初始化代码行
-#     :param style_block: 样式代码块
-#     :return: 组件字典
-#     """
-#     # 词法解析，获取变量名、函数名（不为空）和参数表
-#     _, func_name, args = parse_function_line(create_line)
-#     widget_info = get_widget_type(create_line)
-#     print(create_line)
-#     print(f"{widget_name} | {widget_info}")
-#     # 如果没有捕获到，那么就跳过
-#     if func_name is None:
-#         return None
-#     # 添加组件关系
-#     if not add_widget_relations(widget_name, widget_info, args[0]):
-#         # 存在预期外的重复组件关系
-#         raise ValueError("Failed to add widget relations")
-#
-#     # 合成新组件名
-#     var_name = widget_info[0] + '_' + widget_name
-#
-#     # 处理初始化行，获取位置大小等信息，如果遇到create就跳过（因为链式调用里会把这个包含进函数里）
-#     init_chain = process_init_function(init_lines, widget_name, widget_info)
-#
-#     # 处理样式块，样式块是一段段样式初始化代码
-#     style_code = convert_style_calls(style_block)
-#
-#     return {
-#         "var_name": var_name,
-#         "init_chain": init_chain,
-#         "style_code": style_code,
-#         "widget_info": widget_info
-#     }
 
 # --------------------------------解析代码------------------------------------
 # -------------处理代码行----------------
@@ -593,8 +542,8 @@ def process_code_lines(code_lines):
             # print(f"line:{line}")
             # print(f"var:{var}  func:{func_name}  args:{args}")
             widget_name = extract_comp_name_from_var(args[0])
-            # ②存储初始化信息  [['widget_name','func_name',[args]],……]
-            add_widget(widget_name, func_name, args)
+            # ②存储初始化信息  [['widget_name',['func_name',[args]],……],……]
+            add_widget_function(widget_name, func_name, args)
         else :
             # 创建组件代码行：组件关系提取到widgets_relations里
             # ui->blueCounter_cont_1 = lv_obj_create(ui->blueCounter);
@@ -609,90 +558,50 @@ def process_code_lines(code_lines):
                 raise ValueError("Failed to add widget relations")
         
 
-
-
-# --------------------------------处理屏幕和组件代码块------------------------------------
-def process_main_screen_blocks(blocks):
+# ----------------解析组件信息-------------------
+def iterate_widgets():
+    """遍历组件结构的通用函数
+    # 1,链式调用需要一张表，组件在前面，然后init后跟父组件,接着不断往后添加到列表里
+    # ['widget_name.init(parent_name)','.pos()','size()',]
+    # 2,根据实际情况，组件名称前需要\n\t\t，两个Tab，而其他链式调用则需要三个Tab
+    # 3,对widgets_define添加了组件定义的信息，但是没有把里面的代码通过'\n\t'连接
+    Args:
+    Returns:
+        widgets_init_code(list):由一段段组件初始化代码组成,最后是需要通过'\n\t'进行拼接
     """
-    处理主屏幕的代码块
-    @param blocks: 块代码
-    @notes: 添加进了widgets
-    """
-    # 处理主组件，从1开始，因为0是注释前面的，是空行
-    if len(blocks) >= 3:
-        code_block = blocks[2].strip()
-        # 以“//Write  style for"为分隔符(样式注释行被去除)，正常情况还剩下初始化代码和样式代码两块
-        parts = re.split(r'//Write style for.*', code_block, maxsplit=1)
-        # 舍弃初始化代码块，只保留样式块代码
-        style_block = parts[1].strip()
-        style_code = []
-        # 给每一块代码分成若干行,每行舍弃首尾空白符
-        lines = style_block.split('\n')
-        is_first_line = True
-        for line in lines:
-            line = line.strip()
-            if not line:
+    widgets_init_code = []
+    for widget in widgets:
+        widget_name = widget[0]
+        function_list = widget[1]
+        # 链式调用：创建组件的代码
+        widget_relation = find_relations(child_name=widget_name)
+        widget_info = widget_relation[1]
+        parent_name = widget_relation[2]
+        init_chain =[f'\n{widget_name}.init({parent_name})']
+        # 组件定义
+        widget_name_var_name = widget_info[0] + '_' + widget_name
+        widgets_define.append(f'{widget_info[1]} {widget_name_var_name}')
+        for func_info in function_list:
+            func_name = func_info[0]
+            args = func_info[1]
+
+            # 获得处理过后的C++函数代码
+            if 'lv_obj_set_style' in func_name:
+                # 如果是样式函数
+                func_code = convert_style_calls(func_name, args)
+            else:
+                func_code = convert_function_args(func_name, args)
+
+            # 判断是否跳过调用
+            if func_code is None:
                 continue
+            else:
+                init_chain.append(func_code)
 
-            # 匹配对应函数 第二个是非贪婪捕获，第三个是贪婪捕获，不过在这里都差不多
-            match = re.match(r'lv_obj_set_style_(\w+)\(ui->\w+,\s*(.+?),\s*(.*)\);', line)
-            if match:
-                prop = match.group(1)
-                value = match.group(2)
-                state = match.group(3)
+        # 拼接为组件初始化代码
+        widgets_init_code.append('\n\t'.join(init_chain))
+    return widgets_init_code
 
-                # 处理状态，如果是默认状态，那么就不添加
-                param = "" if state == "LV_PART_MAIN|LV_STATE_DEFAULT" else f", {state}"
-                if prop == "bg_opa" and value == "255":
-                    continue
-
-                # 除却第一行外每个样式前加上一个Tab，是为了与init对齐
-                if is_first_line:
-                    is_first_line = False
-                    style_code.append(f".{prop}({value}{param})")
-                else:
-                    style_code.append(f"\t.{prop}({value}{param})")
-
-        # 处理组件
-        widget = {
-            "var_name": "scr",
-            "init_chain": "",
-            "style_code": style_code,
-            "widget_type": ''
-        }
-        widgets.append(widget)
-
-
-# def process_widget_blocks(blocks):
-#     """
-#     处理组件代码块，把初步分割的代码块进行更细致的处理
-#     @param blocks: 块代码
-#     @notes: 添加进了widgets
-#     """
-#     # 遍历注释行和代码块，起始为注释行，偶数为代码块，步长为2
-#     for i in range(3, len(blocks), 2):
-#         comment_line = blocks[i].strip()
-#         code_block = blocks[i + 1].strip()
-#
-#         # 获取组件名
-#         widget_name = comment_line.split()[-1]
-#         # 以“//Write  style for"为分隔符(样式注释行被去除)
-#         parts = re.split(r'//Write style for.*', code_block, maxsplit=1)
-#         # 组件初始化代码每行分割，去除空行  样式块代码以注释为分割符
-#         creation_block = parts[0].strip().split('\n')
-#         style_block = re.split(r'//Write style for.*', parts[1])
-#
-#         # 处理组件
-#         widget = process_widget_block(
-#             widget_name,
-#             creation_block[0],
-#             creation_block[1:-1],
-#             style_block
-#         )
-#         # 如果处理失败，跳过
-#         if widget is None:
-#             continue
-#         widgets.append(widget)
 
 
 # ----------------------------------输出结果处理--------------------------------------------
@@ -712,36 +621,11 @@ def generate_output(project_name):
     :param project_name:
     :return:
     """
-    for comp in widgets:
-        # 组件定义代码
-        if comp['var_name'] == "scr":
-            screen_code = []
-            screen_code.extend(comp['style_code'])
-            if screen_code:
-                screen_code[0] = "scr" + screen_code[0]
-                screen_code[-1] += ";\n"
-            screen_ns.extend(screen_code)
 
-        else:
-            # 组件定义代码
-            widget_type = comp['widget_info'][1]
-            widgets_ns.append(f"{widget_type}  {comp['var_name']};")
 
-            # 屏幕初始化代码
-            screen_code = []
-            if comp['init_chain']:
-                screen_code.append(
-                    f"{comp['var_name']}" + "".join(comp['init_chain'])
-                )
-            screen_code.extend(comp['style_code'])
-
-            # 给样式代码添加一个分号
-            if screen_code:
-                screen_code[-1] += ";\n"
-            screen_ns.extend(screen_code)
-
-    widgets_block = "\n\t".join(widgets_ns)
-    screen_block = "\n\t\t".join(screen_ns)
+    widgets_block = "\n\t".join(widgets_define)
+    widgets_init_code = iterate_widgets()
+    screen_block = "\n\t".join(widgets_init_code)
 
     return f"""#include "ui.hpp"
 
@@ -800,11 +684,11 @@ def main():
     print("widgets:")
     print(widgets)
 
-    # 输出结果
-    # output = generate_output(project_name)
-    #
-    # with open("ui.cpp", "w", encoding='utf-8') as f:
-    #     f.write(output)
+    # 【解析信息】：把组件信息解析为对应的代码，并输出
+    output = generate_output(project_name)
+
+    with open("ui.cpp", "w", encoding='utf-8') as f:
+        f.write(output)
 
 
 
