@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
+import argparse
+import glob
 import os
 import re
-import glob
-import argparse
 
 # 我应该分成两个样式处理表，一个处理屏幕的，比较简单，另一个处理其他组件的文件。
 # 因为处理屏幕需要把名称变成scr，其他组件则是真名
@@ -65,21 +65,29 @@ def get_widget_type(create_line):
         "lv_imagebutton_create": ["imgbtn", 'ImageButton'],
         "lv_label_create": ["label", 'Label'],
         "lv_image_create": ["img", 'Image'],
-        "lv_btn_create": ["btn", 'Button']
+        "lv_button_create": ["btn", 'Button'],
+        "lv_checkbox_create":['chekcbox','CheckBox'],
     }
     for func, widget_info in widget_map.items():
         if func in create_line:
             return widget_info
 
     # 报错，确保能及时发现有未入库的函数，以便及时添加
-    raise ValueError(f"Could not find prefix for {create_line}")
+    # TODO: 这里需要进一步检查，把所有匹配上的都添加进去
+    # raise ValueError(f"Could not find prefix for {create_line}")
 
 
 # 词法解析,解析代码行的赋值函数语句
 # 返回的是变量名，函数名，参数列表（已去除两端空白字符）
 def parse_function_line(code_line):
+    """
+    词法解析，把代码行解析为【变量名（可选）】、【函数名】和【形参表（已去除两端空白字符，并分割）】
+    :param code_line: 去除换行的代码行
+    :return: (var_name, func_name, args)，未匹配到会返回None
+    """
+
     # 正则表达式模式
-    pattern = r'(?:([a-zA-Z_][a-zA-Z0-9_->]*)\s*=\s*)?(\w+)$([^)]*)$'
+    pattern = r'^\s*(?:([a-zA-Z_]\w*(?:->[a-zA-Z_]\w*)*)\s*=\s*)?([a-zA-Z_]\w*)\s*\(([^)]*)\)\s*;'
 
     # 使用正则表达式进行匹配
     match = re.search(pattern, code_line)
@@ -88,7 +96,7 @@ def parse_function_line(code_line):
         var_name = match.group(1)  # 等号左边的变量名，如果不存在则为 None
         func_name = match.group(2)  # 函数名
         args_str = match.group(3).strip()  # 参数字符串，并去除两端空白字符
-
+        # print(f"var:{var_name}  func:{func_name}  args:{args_str}")
         # 如果参数字符串不为空，则按逗号分割参数
         if args_str:
             args = [arg.strip() for arg in args_str.split(',')]
@@ -140,9 +148,10 @@ def add_component_relations(child_name, child_type, parent_name):
 def find_relations(child_name=None, child_type=None, parent_name=None):
     """
     通用查询函数（支持类型包含式查询）
-    :param parent_name: 父组件
-    :param child_name: 子组件
-    :param child_type: 可传入单个类型或列表，查询包含关系
+    :param parent_name: 父组件（可选）
+    :param child_name: 子组件（可选）
+    :param child_type: 子组件类型（可选）
+    :return 返回的是[child_name,child_type,parent_name]类型
     """
     return [
         rel for rel in components_relations
@@ -152,7 +161,7 @@ def find_relations(child_name=None, child_type=None, parent_name=None):
                    (not isinstance(child_type, list) and child_type in rel[1])
            )) and
            (parent_name is None or rel[2] == parent_name)
-    ]
+    ][0]
 
 
 def has_relation(child_name=None, child_type=None, parent_name=None):
@@ -170,68 +179,71 @@ def has_parent(parent_name):
     """ 检查是否存在指定父组件 """
     return has_relation(parent_name=parent_name)
 
-    # 定义处理规则：每个函数对应的参数提取方式和转换逻辑
 
 
-group_functions_handlers = {
-    'pos_size': {
-        'functions': {
-            'lv_obj_set_pos': {'type': 'pos', 'arg_indices': [-2, -1]},
-            'lv_obj_set_size': {'type': 'size', 'arg_indices': [-2, -1]}
-        },
-        # 处理函数：当收集齐pos和size后生成代码
-        'handler': lambda pos, size: f".pos_size({', '.join(pos + size)})"
-    },
-}
 # 组状态存储
-group_data = {'pos_size': {'pos': None, 'size': None}}
 function_handlers = {
-    # 独立函数处理
+    'lv_obj_set_size': {
+        # 不存在缺省参数
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'size',
+            'handler': None
+        }
+    },
+    'lv_obj_set_pos': {
+        # 不存在缺省参数
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'pos',
+            'handler': None
+        }
+    },
     'lv_obj_add_flag': {
-        # 参数到方法的映射表
-        'mapping': {
-            'LV_OBJ_FLAG_CHECKABLE': {'method': 'checkable', 'args': None},
-            'LV_OBJ_FLAG_HIDDEN': {'method': 'hidden', 'args': None},
-            'LV_FLAG_SCROLLABLE': {'method': 'scrollable', 'args': None},
-            # 可继续扩展...
-        },
-        # 多阶段处理器
-        'processor': lambda parts, mapping: (
-            # 先提取原始参数
-            parts[-1].strip(),
-            # 再检查是否在映射表中，不在就用默认处理
-            mapping.get(parts[-1].strip(), {'method': 'add_flag', 'args': "{}"})
-        ),
-        'template': lambda method, args: (
-            f"\n\t\t\t.{method}({args})" if args
-            else f"\n\t\t\t.{method}()"
-        )
+        # 不存在缺省参数
+        'args_map': [],
+        'method_map': {
+            'index': [1],
+            'mapping': {
+                'LV_OBJ_FLAG_CHECKABLE': 'checkable',
+                'LV_OBJ_FLAG_HIDDEN': 'hidden',
+                'LV_FLAG_SCROLLABLE': 'scrollable',
+            },
+            'type': '',
+            'default': 'add_flag',
+            'handler': None
+        }
     },
     'lv_obj_align': {
-        'mapping': {
-            'LV_ALIGN_CENTER': {'method': 'center', 'args': '{}'},
-            'LV_ALIGN_RIGHT': {'method': 'right', 'args': '{}'},
-            'LV_FLAG_LEFT': {'method': 'left', 'args': '{}'},
-        },
-        # 多阶段处理器
-        'processor': lambda parts, mapping: (
-            # 如果存在映射表，那么就只提取最后两个参数
-            parts[-3] + check_default_arguments_2(parts[-2:], '0')
-            if parts[-3] in mapping
-            else check_default_arguments_2(parts[-2:], '0'),
-            # 再检查是否在映射表中，不在就用默认处理
-            mapping.get(parts[-3].strip(), {'method': 'align', 'args': "{}"})
-        ),
-        'template': lambda method, args: (
-            f"\n\t\t\t.{method}({args})"
-        )
+        # 有两个缺省参数
+        'args_map': [0, 0],
+        'method_map': {
+            'index': [1],
+            'mapping': {
+                'LV_ALIGN_CENTER': 'center',
+                'LV_ALIGN_RIGHT': 'right',
+                'LV_FLAG_LEFT': 'left',
+            },
+            'type': '',
+            'default': 'align',
+            'handler': None
+        }
     },
     'lv_obj_set_scrollbar_mode': {
-        'processor': lambda parts: (
-            parts[-1].strip() if parts[-1].strip() != 'LV_SCROLLBAR_MODE_OFF'
-            else None
-        ),
-        'template': "\n\t\t\t.scrollbar_mode({})"
+        'args_map': ['LV_SCROLLBAR_MODE_OFF'],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': None,
+            'default': 'scrollbar_mode',
+            'handler': None
+        }
     },
     # 图像按钮特殊处理
     'lv_imagebutton_set_src': {
@@ -257,14 +269,14 @@ function_handlers = {
 }
 
 
-def get_method_from_map(method_map, all_omitted, args):
+def get_method_from_map(all_omitted, args, method_map):
     """
     解析method映射表，返回是否省略调用、方法名和参数列表。
-    :param method_map: 方法的参数映射表，包含index、mapping、handler等键。
     :param all_omitted: 是否所有参数都被省略。
     :param args: 处理后的参数列表。
+    :param method_map: 方法的参数映射表，包含index、mapping、handler等键。
     :return: (omit_call, method_name, processed_args)
-            第一个参数为True表示可以跳过
+            第一个参数为True表示可以跳过,最后一个参数是包含了第一个参数，即组件自身，需要主动剔除掉
     """
     # 如果全缺省并且类型为None，那么就跳过函数调用
     if all_omitted and method_map.get('type') is None:
@@ -361,17 +373,18 @@ def convert_function_args(func_name, args):
         # 匹配函数规则
         if func_name in funcs:
             # 处理参数规则
-            args_result, final_args = omit_parameters(args, config['args_map'])
-            method_result, final_method = config['method_processor'](args, config['method_map'])
+            args_result, handle_args = omit_parameters(args, config['args_map'])
+            final_result, final_method, final_args = get_method_from_map(args_result, handle_args, config['method_map'])
             # 判断是否该省略调用
-            if args_result or method_result:
-                return f"{final_method}({', '.join(final_args)})"
-            else:
+            if final_result:
                 return None
+            else:
+                return f"{final_method}({', '.join(final_args[1:])})"
 
     # 其他未处理情况
-    raise NotImplementedError(f"Function '{func_name}' not implemented.")
-    # return None
+    # TODO 暂时不处理，因为目前没有遇到需要处理这种情况
+    # raise NotImplementedError(f"Function '{func_name}' not implemented.")
+    return None
 
 
 # --------------------------------分步处理代码块------------------------------------
@@ -439,7 +452,6 @@ def process_init_function(init_lines, component_name, widget_info):
     """
     # 处理初始化代码的主逻辑
     init_code = []
-    child_relations = []  # 子组件名，子组件前缀，父组件名
     previous_component_name = ''  # 存储上一个组件的名称，用于判断链式调用
     for line in init_lines:
         # 跳过创建函数和空行
@@ -454,12 +466,14 @@ def process_init_function(init_lines, component_name, widget_info):
         # 初始化代码有两种,一种是创建组件，一种是初始化组件
         if var_name is None:
             # 初始化组件
-            pre_name = ''
+            pre_name = '\n\t\t'
             current_component_name = extract_right_variable_name(args[0])
             # 如果组件名称相同，那么就继续添加参数
             if previous_component_name != current_component_name:
                 # 把处理过的上行代码添加分号,隔离开
-                init_code[-1] = init_code[-1] + ';'
+                # print(f"var:{var_name}  func:{func_name}  args:{args}")
+                if init_code:
+                    init_code[-1] = init_code[-1] + ';\n'
                 # 查询当前组件的组件信息
                 current_widget_info = find_relations(child_name=current_component_name)[1]
                 pre_name = current_widget_info[0] + '_' + current_component_name
@@ -479,61 +493,14 @@ def process_init_function(init_lines, component_name, widget_info):
             if not add_component_relations(child_var_name, current_widget_info, parent_var_name):
                 raise Exception("组件关系错误")
             # 把处理过的上行代码添加分号,隔离开
-            init_code[-1] = init_code[-1] + ';'
+            init_code[-1] = init_code[-1] + ';\n'
             # 添加此时的代码
             new_parent_var_name = find_relations(child_name=parent_var_name)[1][0] + '_' + parent_var_name
             init_code.append(f"{new_child_var_name}.init({new_parent_var_name})")
             previous_component_name = child_var_name  # 存档
-
-        handled = False
-        # 先处理组函数
-        for group_name, group_info in group_functions_handlers.items():
-            for func_name, config in group_info['functions'].items():
-                if func_name in line:
-                    parts = line.strip('();').split(',')
-                    # 提取参数并存储到组状态里
-                    args = [parts[i].strip() for i in config['arg_indices']]
-                    group_data[group_name][config['type']] = args
-                    handled = True
-                    break
-            if handled:
-                break
-
-        # 是组函数就不是独立函数
-        if handled:
-            continue
-
-        # 处理独立函数
-        for func_name, config in function_handlers.items():
-            if func_name in line:
-                # 收集括号内的所有参数
-                parts = line.strip('();').split(',')
-
-                handled = True
-                break
-
-        # 确保所有初始化函数都被处理
-        # if not handled:
-        #     raise ValueError(f"Unhandled init function: {line}")
-
-    # 处理组数据生成代码
-    for group_name, data in group_data.items():
-        if group_name == 'pos_size':
-            pos = data['pos']
-            size = data['size']
-            if pos and size:
-                # 将pos和size合并成字符串并插入首位
-                init_code.insert(0, "\n\t\t\t" + group_functions_handlers[group_name]['handler'](pos, size))
     return init_code
 
 
-#
-"""
-@ component_name 
-@ create_line 创建组件的代码行
-@ init_lines 初始化组件属性的代码行
-@ style_block 样式代码块
-"""
 
 
 def process_component_block(component_name, create_line, init_lines, style_block):
@@ -548,6 +515,11 @@ def process_component_block(component_name, create_line, init_lines, style_block
     # 词法解析，获取变量名、函数名（不为空）和参数表
     _, func_name, args = parse_function_line(create_line)
     widget_info = get_widget_type(create_line)
+    print(create_line)
+    print(f"{component_name} | {widget_info}")
+    # 如果没有捕获到，那么就跳过
+    if func_name is None:
+        return None
     # 添加组件关系
     if not add_component_relations(component_name, widget_info, args[0]):
         # 存在预期外的重复组件关系
@@ -648,6 +620,9 @@ def process_component_blocks(blocks):
             creation_block[1:-1],
             style_block
         )
+        # 如果处理失败，跳过
+        if component is None:
+            continue
         components.append(component)
 
 
@@ -665,7 +640,8 @@ def generate_output(project_name):
 
         else:
             # 组件定义代码
-            widgets_ns.append(f"{comp['widget_type']}  {comp['var_name']};")
+            widget_type = comp['widget_info'][1]
+            widgets_ns.append(f"{widget_type}  {comp['var_name']};")
 
             # 屏幕初始化代码
             screen_code = []
