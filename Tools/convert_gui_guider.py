@@ -87,25 +87,29 @@ def parse_function_line(code_line):
     """
 
     # 正则表达式模式
-    pattern = r'^\s*(?:([a-zA-Z_]\w*(?:->[a-zA-Z_]\w*)*)\s*=\s*)?([a-zA-Z_]\w*)\s*\(([^)]*)\)\s*;'
+    pattern = re.compile(
+        r'^\s*'  # 起始空白
+        r'(?:([^=\s]+)\s*=\s*)?'  # 变量名（可选）
+        r'([a-zA-Z_]\w*)'  # 函数名
+        r'\s*\(\s*'  # 左括号
+        r'((?:[^()]*(?:\([^()]*\))*[^()]*)'  # 形参表（允许一层括号嵌套）
+        r'\)\s*;'  # 右括号和分号
+        r')\s*$'  # 结束空白
+    )
 
     # 使用正则表达式进行匹配
-    match = re.search(pattern, code_line)
-
+    match = pattern.match(code_line)
     if match:
-        var = match.group(1)  # 等号左边的变量名，如果不存在则为 None
-        func_name = match.group(2)  # 函数名
-        args_str = match.group(3).strip()  # 参数字符串，并去除两端空白字符
-        # print(f"var:{var}  func:{func_name}  args:{args_str}")
-        # 如果参数字符串不为空，则按逗号分割参数
-        if args_str:
-            args = [arg.strip() for arg in args_str.split(',')]
-        else:
-            args = []  # 如果没有参数，则返回空列表
-
-        return var, func_name, args
+        var_name, func_name, params = match.groups()
+        # 清理形参表中的多余空格
+        params = params.strip() if params else ''
+        # print(f'code_line:|{code_line}|')
+        # print(f"var:{var_name}  func:{func_name}  args:{params}")
+        return var_name, func_name, params
     else:
-        return None, None, None  # 如果没有匹配到，返回 None
+        print(f"code_line:|{code_line}|")
+        raise ValueError("Could not find function line")
+        # 如果没有匹配到，返回错误提示
 
 
 def extract_comp_name_from_var(var):
@@ -586,8 +590,8 @@ def process_code_lines(code_lines):
             # 初始化代码行：把组件信息提取到widgets里
             # lv_obj_set_scrollbar_mode(ui->blueCounter_cont_1, LV_SCROLLBAR_MODE_OFF);
             # ①先获取组件名称
-            print(f"line:{line}")
-            print(f"var:{var}  func:{func_name}  args:{args}")
+            # print(f"line:{line}")
+            # print(f"var:{var}  func:{func_name}  args:{args}")
             widget_name = extract_comp_name_from_var(args[0])
             # ②存储初始化信息  [['widget_name','func_name',[args]],……]
             add_widget(widget_name, func_name, args)
