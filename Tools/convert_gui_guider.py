@@ -173,23 +173,32 @@ def has_parent(parent_name):
     # 定义处理规则：每个函数对应的参数提取方式和转换逻辑
 
 
-def get_method_from_map(method_map, args,default_method):
+def get_method_from_map(method_map, all_omitted,args):
     """
-    解析method映射表。如果映射表里的handler是None，那么就说明是单参数，对应索引即可
+    解析method映射表。会有三个返回值，一个是判断函数调用是否省略，剩下的返回值是函数名和形参表
     :param method_map: 方法的参数映射表
-    :param args: 函数的完整形参
-    :param default_method:默认方法
+    :param all_omitted: 是否全缺省，如果全缺省并且类型符合的话，那么直接跳过这一步骤
+    :param args: 经过缺省处理后的函数形参，之所以这样是因为C++重载的规则，可以缺省的一定是在后面
+    ，而且我也不打算打乱顺序，所以不会影响前面的顺序
+
     :return:
     """
-    if method_map['mapping']['handler'] is None:
-        params =[args[i] for i in method_map['mapping']['index']]
-        return method_map['mapping'].get(params, default_method)
+    if all_omitted and method_map['type'] is None:
+        # 如果全缺省并且类型为None，那么就跳过函数调用
+        return None,[],[]
     else:
-        # 映射表里的method的第一个参数要确保是判断结果，结果若为None，那么就使用默认method
-        result,method = method_map['mapping']['handler'](args,method_map['mapping'])
-        if result is None:
-            return default_method
-        return method
+        # 获取默认method
+        default_method = method_map['default']
+        if method_map['mapping']['handler'] is None:
+            # 如果映射表里的handler是None，那么就说明是单参数，直接以默认值去搜索对应的名称
+            params =[args[i] for i in method_map['mapping']['index']]
+            return method_map['mapping'].get(params, default_method)
+        else:
+            # 映射表里的method的第一个参数要确保是判断结果，结果若为None，那么就使用默认method
+            result,method = method_map['mapping']['handler'](args,method_map['mapping'])
+            if result is None:
+                return default_method
+            return method
 
 group_functions_handlers = {
     'pos_size': {
@@ -256,21 +265,19 @@ function_handlers = {
         # 参数缺省映射表，由专门的函数进行重载解析，最后返回参数列表。如果无参就返回None
         'args_map': ['NULL','NULL'],
         'method_map': {
-            # pos确定哪些参数决定改变method
+            # 确定哪些参数能决定改变method，单映射的情况下，handler为None即可
             'index': [1],
+            # 映射表可以为空
             'mapping': {
-                '': {'method': 'src', 'args': "{}"},
+                'LV_IMAGEBUTTON_STATE_RELEASED': 'released_src',
             },
+            # 类型为None表示参数全缺省即可免去调用，不为None表示不缺省就省略。
+            'type':{},
+            # method默认在映射表里去找，如果找不到就用默认值
+            'default':'src',
             # 多参数处理时，需要自定一个lambda，用于返回处理的结果。单参数，直接默认从映射表里找
-            # 第一
             'handler':None
         },
-        # method给出的默认值的意思是：Flase:形参全缺省，那么函数调用可省略，True：形参全缺省，函数调用也不能省略。
-        'method_processor': lambda args,method_map: (
-            True,
-            get_method_from_map(method_map, args, 'src')
-
-       )
     }
 }
 
@@ -331,6 +338,7 @@ def convert_function_args(func_name, args):
             # 处理参数规则
             args_result, final_args = omit_parameters(args, config['args_map'])
             method_result, final_method = config['method_processor'](args, config['method_map'])
+            # 判断是否该省略调用
             if args_result or method_result:
                 return f"{final_method}({', '.join(final_args)})"
             else:
