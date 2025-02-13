@@ -3,6 +3,7 @@ import argparse
 import glob
 import os
 import re
+from enum import Enum
 from pathlib import Path
 from typing import Dict, Tuple, List
 
@@ -752,6 +753,321 @@ namespace gui::init
         f.write(output)
 
 
+
+
+"""
+DeepSeek-R1 UI代码生成系统 v2.5 
+功能特性：
+1. 模板驱动的代码结构生成 
+2. 智能依赖关系解析 
+3. 多级代码校验机制 
+4. 可扩展的钩子系统 
+5. 分布式文件输出支持 
+"""
+
+from datetime import datetime
+from pathlib import Path
+import textwrap
+import re
+import networkx as nx
+from enum import Enum
+from dataclasses import dataclass
+from typing import List, Dict, Callable
+
+class GenerateMode(Enum):
+    """生成模式枚举"""
+    OVERWRITE = 1
+    APPEND = 2
+    DRY_RUN = 3
+
+@dataclass
+class CodeTemplate:
+    """
+    代码模板配置容器
+    Attributes:
+        framework (str): 整体代码框架模板
+        define_namespace (str): 组件定义命名空间模板
+        init_namespace (str): 初始化逻辑命名空间模板
+        function_template (str): 函数结构模板
+    """
+    framework: str = """\
+// Auto-generated UI Code 
+{includes}
+ 
+{define_namespace}
+ 
+using namespace {define_namespace};
+ 
+{init_namespace}
+"""
+    define_namespace: str = """\
+namespace {ns_name} {{
+{define_blocks}
+}} // end {ns_name}"""
+
+    init_namespace: str = """\
+namespace {ns_name} {{
+{init_blocks}
+}} // end {ns_name}"""
+
+    function_template: str = """\
+void {func_name}() {{
+{func_body}
+}}"""
+
+class DependencyResolver:
+    """依赖关系解析器"""
+
+    def __init__(self):
+        self.dependency_graph  = nx.DiGraph()
+
+    def analyze(self, code_blocks: List[str]) -> None:
+        """
+        分析代码块间的父子依赖关系
+        Args:
+            code_blocks: 代码块列表，每个元素为字符串形式的代码段
+        """
+        for block in code_blocks:
+            # 使用正则提取初始化关系：child.init(parent)
+            match = re.search(r'(\w+)\.init\((\w+)\)',  block)
+            if match:
+                child, parent = match.groups()
+                self.dependency_graph.add_edge(parent,  child)
+
+    def get_ordered_blocks(self, blocks: List[str]) -> List[str]:
+        """
+        获取拓扑排序后的代码块列表
+        Returns:
+            按依赖顺序排列的代码块列表
+        """
+        ordered = []
+        try:
+            for node in nx.topological_sort(self.dependency_graph):
+                ordered.extend([b  for b in blocks if f"{node}." in b])
+        except nx.NetworkXUnfeasible:
+            raise ValueError("检测到循环依赖，请检查组件初始化顺序")
+        return ordered
+
+class CodeValidator:
+    """代码校验器"""
+
+    # 校验规则表：元组格式(正则模式, 错误信息)
+    RULES = [
+        (r';\s*$', "缺失语句结束分号"),
+        (r'\)\s*{', "函数调用后错误的大括号"),
+        (r'\bLV_\w+', "未经验证的LVGL常量使用"),
+        (r'\b\d{4}[^x]', "疑似魔术数字，建议使用常量")
+    ]
+
+    @classmethod
+    def validate_block(cls, code_block: str) -> List[str]:
+        """
+        执行代码块校验
+        Returns:
+            错误信息列表，空列表表示校验通过
+        """
+        errors = []
+        for line_num, line in enumerate(code_block.split('\n'),  1):
+            for pattern, msg in cls.RULES:
+                if re.search(pattern,  line):
+                    errors.append(f" 行{line_num}: {line.strip()}  | 问题: {msg}")
+        return errors
+
+class HookSystem:
+    """钩子管理系统"""
+
+    HOOK_POINTS = (
+        'pre_define',   # 定义块生成前
+        'post_define',  # 定义块生成后
+        'pre_init',     # 初始化块生成前
+        'post_generate' # 全部生成完成后
+    )
+
+    def __init__(self):
+        self.hooks  = {point: [] for point in self.HOOK_POINTS}
+
+    def add_hook(self, point: str, callback: Callable) -> None:
+        """
+        注册钩子函数
+        Args:
+            point: 钩子点名称，必须是HOOK_POINTS成员
+            callback: 无参数的回调函数，返回字符串将插入代码
+        """
+        if point not in self.HOOK_POINTS:
+            raise ValueError(f"无效钩子点: {point}")
+        self.hooks[point].append(callback)
+
+class TemplateGenerator:
+    """模板驱动代码生成器"""
+
+    def __init__(self, template: CodeTemplate = CodeTemplate()):
+        """
+        Args:
+            template: 代码模板配置
+        """
+        self.template  = template
+        self.placeholders  = {
+            'includes': '#include "ui_core.h"',
+            'define_namespace': 'gui::widgets',
+            'init_namespace': 'gui::runtime',
+            'func_name': 'initialize_components'
+        }
+        self.hooks  = HookSystem()
+        self.validator  = CodeValidator()
+        self.resolver  = DependencyResolver()
+
+    def generate(
+            self,
+            define_blocks: List[str],
+            init_blocks: List[str],
+            output_path: str,
+            mode: GenerateMode = GenerateMode.OVERWRITE
+    ) -> bool:
+        """
+        执行代码生成流程
+        Args:
+            define_blocks: 组件定义代码块列表
+            init_blocks: 初始化代码块列表
+            output_path: 输出文件路径
+            mode: 生成模式
+        Returns:
+            生成是否成功
+        """
+        # 阶段1：预处理
+        self._execute_hooks('pre_define')
+        validated_defines = self._validate_blocks(define_blocks)
+        ordered_inits = self.resolver.get_ordered_blocks(init_blocks)
+
+        # 阶段2：构建代码结构
+        define_content = self._build_define_content(validated_defines)
+        init_content = self._build_init_content(ordered_inits, mode)
+
+        # 阶段3：生成最终代码
+        final_code = self.template.framework.format(
+            includes=self.placeholders['includes'],
+            define_namespace=define_content,
+            init_namespace=init_content
+        )
+
+        # 阶段4：后处理
+        self._execute_hooks('post_generate')
+        Path(output_path).write_text(final_code)
+        return True
+
+    def _build_define_content(self, blocks: List[str]) -> str:
+        """构建定义部分代码"""
+        content = '\n\n'.join(blocks)
+        return self.template.define_namespace.format(
+            ns_name=self.placeholders['define_namespace'],
+            define_blocks=content
+        )
+
+    def _build_init_content(self, blocks: List[str], mode: GenerateMode) -> str:
+        """构建初始化部分代码"""
+        func_body = textwrap.indent('\n\n'.join(blocks),  '    ')
+        init_func = self.template.function_template.format(
+            func_name=self.placeholders['func_name'],
+            func_body=func_body
+        )
+        return self.template.init_namespace.format(
+            ns_name=self.placeholders['init_namespace'],
+            init_blocks=init_func
+        )
+
+    def _validate_blocks(self, blocks: List[str]) -> List[str]:
+        """执行代码块校验"""
+        clean_blocks = []
+        for block in blocks:
+            if errors := self.validator.validate_block(block):
+                raise ValueError(f"代码校验失败:\n" + '\n'.join(errors))
+            clean_blocks.append(block)
+        return clean_blocks
+
+    def _execute_hooks(self, point: str) -> None:
+        """执行指定钩子点的回调"""
+        for hook in self.hooks.hooks.get(point,  []):
+            hook()
+
+# 使用示例
+if __name__ == "__main__":
+    # 示例输入数据
+    sample_defines = [
+        """// 主面板定义 
+lv_obj_t* main_panel = lv_obj_create(lv_scr_act());
+lv_obj_set_size(main_panel, 800, 480);""",
+
+        """// 功能按钮定义 
+lv_obj_t* btn_confirm = lv_btn_create(main_panel);
+lv_obj_align(btn_confirm, LV_ALIGN_BOTTOM_RIGHT, -20, -20);"""
+    ]
+
+    sample_inits = [
+        """main_panel.init() 
+    .bg_color(lv_color_hex(0xFFFFFF))
+    .border_width(2);""",
+
+        """btn_confirm.init(main_panel) 
+    .size(100, 40)
+    .text("确认")
+    .on_click([](lv_event_t* e) {
+        // 点击处理逻辑 
+    });"""
+    ]
+
+    # 初始化生成器
+    generator = TemplateGenerator()
+
+    # 添加版本信息钩子
+    generator.hooks.add_hook('pre_define',  lambda: f"// Generated by DeepSeek-R1 on {datetime.now():%Y-%m-%d  %H:%M}\n")
+
+    # 配置依赖解析
+    generator.resolver.analyze(sample_inits)
+
+    # 执行生成
+    generator.generate(
+        define_blocks=sample_defines,
+        init_blocks=sample_inits,
+        output_path="generated_ui.cpp",
+        mode=GenerateMode.OVERWRITE
+    )
+
+    print("代码生成成功！输出文件：generated_ui.cpp")
+
+"""
+生成文件示例(generated_ui.cpp) ：
+// Generated by DeepSeek-R1 on 2025-02-13 23:14 
+ 
+// Auto-generated UI Code 
+#include "ui_core.h"
+ 
+namespace gui::widgets {
+// 主面板定义 
+lv_obj_t* main_panel = lv_obj_create(lv_scr_act());
+lv_obj_set_size(main_panel, 800, 480);
+ 
+// 功能按钮定义 
+lv_obj_t* btn_confirm = lv_btn_create(main_panel);
+lv_obj_align(btn_confirm, LV_ALIGN_BOTTOM_RIGHT, -20, -20);
+} // end gui::widgets 
+ 
+using namespace gui::widgets;
+ 
+namespace gui::runtime {
+void initialize_components() {
+    main_panel.init() 
+        .bg_color(lv_color_hex(0xFFFFFF))
+        .border_width(2);
+ 
+    btn_confirm.init(main_panel) 
+        .size(100, 40)
+        .text("确认")
+        .on_click([](lv_event_t* e) {
+            // 点击处理逻辑 
+        });
+}
+} // end gui::runtime 
+"""
+
 # ---------------------------------------工具函数-------------------------------------------
 def find_c_functions(func_name: str,
                      search_path: str,
@@ -868,7 +1184,8 @@ def main():
     widgets_init_code = iterate_widgets(screen_name)
 
     # 【输出代码文件】：把组件相关代码信息，按照特定格式写入文件中
-    generate_output(widgets_define,widgets_init_code)
+    # generate_output(widgets_define,widgets_init_code)
+    #【测试地点】
 
 
 
