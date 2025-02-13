@@ -4,7 +4,6 @@ import glob
 import os
 import re
 
-
 # 组件代码块
 widgets = []
 # 组件的关系, 格式为 [['子组件名', [子组件类型], '父组件名'], ...]
@@ -22,7 +21,6 @@ def parse_setup_function(content):
     if not match:
         raise ValueError("Could not find setup_scr_* function")
     return match.group(1), match.group(2).strip()
-
 
 
 # ---------------------------------工具函数----------------------------------------
@@ -234,9 +232,6 @@ def find_relations(child_name=None):
             return rel
 
 
-
-
-
 # 函数映射表
 function_handlers = {
     # 图像按钮
@@ -286,7 +281,7 @@ function_handlers = {
         }
     },
     # 不存在缺省参数
-    'lv_obj_set_width':{
+    'lv_obj_set_width': {
         'args_map': [],
         'method_map': {
             'index': [],
@@ -360,7 +355,7 @@ function_handlers = {
         }
     },
     # 全缺省可免调用
-    'lv_label_set_long_mode':{
+    'lv_label_set_long_mode': {
         'args_map': ['LV_LABEL_LONG_WRAP'],
         'method_map': {
             'index': [],
@@ -514,6 +509,7 @@ def convert_function_args(func_name, args):
 
 # --------------------------------分步处理代码块------------------------------------
 
+
 # 处理样式块,已经包含里样式的正确代码，不用在前面加上组件名
 def convert_style_calls(func_name, args):
     """
@@ -522,19 +518,36 @@ def convert_style_calls(func_name, args):
     :param args:
     :return: converted(string) 返回的是转换好的样式代码，如果不需要那么就返回None
     """
+    # 每个列表都有2~3个元素，左边是匹配的函数名（相当于键），第二个元素是默认值（为''表示没有），第三个元素是函数的简写（如果有的话）
     default_config = [
-        ['border_width', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
-        ['text_color', 'lv_color_hex(0xffffff)', 'LV_PART_MAIN|LV_STATE_DEFAULT'],
-        ['text_opa', "255", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
-        ['text_line_space', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
-        ['text_align', 'LV_TEXT_ALIGN_CENTER', 'LV_PART_MAIN|LV_STATE_DEFAULT'],
-        ['bg_opa', "255", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
-        ['pad_top', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
-        ['pad_right', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
-        ['pad_bottom', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
-        ['pad_left', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
-        ['shadow_width', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT']
+        ['border_width', "0"],
+        ['text_color', 'lv_color_hex(0xffffff)'],
+        ['text_opa', "255"],
+        ['text_font', '', 'font'],
+        ['text_line_space', "0"],
+        ['text_align', 'LV_TEXT_ALIGN_CENTER'],
+        ['bg_opa', "255"],
+        ['pad_top', "0"],
+        ['pad_right', "0"],
+        ['pad_bottom', "0"],
+        ['pad_left', "0"],
+        ['shadow_width', "0"],
+        ['image_recolor_opa','255'],
+        ['image_opa','255'],
+        ['text_letter_space','0','letter_space']
     ]
+
+    def list_get2(lst, default=None):
+        """
+        类似于字典的get方法，用于列表。这里默认去第三个元素
+        :param lst: 要检查的列表
+        :param default: 如果索引超出范围时返回的默认值
+        :return: 列表中指定索引处的元素或默认值
+        """
+        try:
+            return lst[2]
+        except IndexError:
+            return default
 
     # 这里能做到这么简洁是因为lvgl 9.2的所有样式API都只有三个参数，并且前缀相同
     # 匹配对应函数 第二个是非贪婪捕获，第三个是贪婪捕获，不过在这里都差不多
@@ -547,19 +560,18 @@ def convert_style_calls(func_name, args):
     value = args[1]
     state = args[2]
 
+
     # 如果在默认配置表里找到了对应函数，那么就对照默认配置修改
     index = next((i for i, item in enumerate(default_config) if item[0] == prop), -1)
+    prop = list_get2(default_config[index], prop)  # 从默认配置里看看有没有第三个元素（简写）
+    print(f"prop:{args[0]} {match.group(1)}---{prop}")
+    # 处理状态，如果是默认状态，那么就不添加
+    state = "" if state == 'LV_PART_MAIN|LV_STATE_DEFAULT' else f", {state}"
     if index != -1:
-
-        # 处理状态，如果是默认状态，那么就不添加
-        state = "" if state == 'LV_PART_MAIN|LV_STATE_DEFAULT' else f", {state}"
         value = "" if value == default_config[index][1] and state == "" else f"{value}"
         if state == "" and value == "":
             # 如果都为默认值，那么就跳过这次处理
             return None
-    else:
-        # 暂时不与上面的合并，因为以后可能会有新的样式
-        state = "" if state == 'LV_PART_MAIN|LV_STATE_DEFAULT' else f", {state}"
 
     # 每个样式前加上一个Tab，是为了与init对齐
     converted = f".{prop}({value}{state})"
@@ -633,7 +645,7 @@ def iterate_widgets(screen_name):
             screen_init_chain.append(func_code)
     # 给组件的第一个样式函数前加上scr
     screen_init_chain[0] = '\n\tscr' + screen_init_chain[0]
-    screen_init_chain[-1] += ';'    # 末尾添加分号
+    screen_init_chain[-1] += ';'  # 末尾添加分号
     widgets_init_code.append('\n\t\t'.join(screen_init_chain))
 
     # 处理其他组件
@@ -648,7 +660,7 @@ def iterate_widgets(screen_name):
         widget_name_var_name = widget_info[0] + '_' + widget_name
         if parent_name == screen_name:
             # 空即默认主屏幕
-            parent_name_var_name =''
+            parent_name_var_name = ''
         else:
             parent_relation = find_relations(child_name=parent_name)
             parent_widget_info = parent_relation[1]
@@ -675,7 +687,7 @@ def iterate_widgets(screen_name):
                 widget_init_chain.append(func_code)
 
         # 拼接为组件初始化代码
-        widget_init_chain[-1] +=';' # 末尾添加分号
+        widget_init_chain[-1] += ';'  # 末尾添加分号
         widgets_init_code.append('\n\t\t'.join(widget_init_chain))
     # 给定义组件代码的首元素添加\n
     widgets_define[0] = '\n' + widgets_define[0]

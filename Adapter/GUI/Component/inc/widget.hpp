@@ -25,6 +25,8 @@ using ImageSrc_t = const lv_img_dsc_t;
 using ChartAxis = lv_chart_axis_t;// 图表坐标
 using ChartSeries = lv_chart_series_t *&;
 using ChartSeries_t = lv_chart_series_t *;
+using Scrollbar_mode =lv_scrollbar_mode_t;
+using ImageButton_State = lv_imagebutton_state_t;
 using ChartType = lv_chart_type_t;
 using AnimExecCallback = lv_anim_exec_xcb_t;// 动画执行事件回调
 using AnimCompletedCallback = lv_anim_completed_cb_t;// 动画执行完毕事件回调
@@ -101,6 +103,12 @@ public:
     inline Derived &pos(Coord x, Coord y)
     {
         lv_obj_set_pos(obj_, x, y);
+        return static_cast<Derived &>(*this);
+    }
+
+    inline Derived &width(int32_t w)
+    {
+        lv_obj_set_width(obj_, w);
         return static_cast<Derived &>(*this);
     }
 
@@ -215,6 +223,45 @@ public:
         return static_cast<Derived &>(*this);
     }
 
+    inline Derived& image_recolor_opa(uint8_t opa=0, Selector selector = selector_default)
+    {
+        lv_obj_set_style_image_recolor_opa(obj_, opa, selector);
+        return static_cast<Derived &>(*this);
+    }
+
+    inline Derived& image_opa(uint8_t opa=0, Selector selector = selector_default)
+    {
+        lv_obj_set_style_image_opa(obj_, opa, selector);
+        return static_cast<Derived &>(*this);
+    }
+
+    // 设置字间距
+    inline Derived &letter_space(Coord space, Selector selector = selector_default)
+    {
+        lv_obj_set_style_text_letter_space(obj_, space, selector);
+        return static_cast<Derived &>(*this);
+    }
+
+    // 设置字体颜色
+    inline Derived &text_color(Color color, Selector selector = selector_default)
+    {
+        lv_obj_set_style_text_color(obj_, color, selector);
+        return static_cast<Derived &>(*this);
+    }
+
+    // 设置字体格式
+    inline Derived &font(::Font font, Selector selector = selector_default)
+    {
+        lv_obj_set_style_text_font(obj_, font, selector);
+        return static_cast<Derived &>(*this);
+    }
+
+    // 设置字体透明度
+    inline Derived &text_opa(uint8_t opa, Selector selector = selector_default)
+    {
+        lv_obj_set_style_text_opa(obj_, opa, selector);
+        return static_cast<Derived &>(*this);
+    }
 
     /**
     * @brief 设置背景渐变
@@ -286,6 +333,12 @@ public:
         return static_cast<Derived &>(*this);
     }
 
+    inline Derived &pad_all(int32_t pad, Selector selector = selector_default)
+    {
+        lv_obj_set_style_pad_all(obj_, pad, selector);
+        return static_cast<Derived  &>(*this);
+    }
+
     // 样式系统（支持普通样式和本地样式）
     template<typename Style>
     inline Derived &add_style(Style &&style, Selector selector = selector_default)
@@ -306,6 +359,14 @@ public:
         lv_obj_set_style_clip_corner(obj_, true, selector);
         return static_cast<Derived &>(*this);
     }
+
+    // 滚动条
+    inline Derived &scrollbar_mode(Scrollbar_mode mode)
+    {
+        lv_obj_set_scrollbar_mode(obj_, mode);
+        return static_cast<Derived &>(*this);
+    }
+
 
     // 重绘
     inline Derived &invalidate()
