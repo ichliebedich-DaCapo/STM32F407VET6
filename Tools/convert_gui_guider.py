@@ -560,14 +560,12 @@ def convert_style_calls(func_name, args):
     value = args[1]
     state = args[2]
 
-
     # 如果在默认配置表里找到了对应函数，那么就对照默认配置修改
     index = next((i for i, item in enumerate(default_config) if item[0] == prop), -1)
-    prop = list_get2(default_config[index], prop)  # 从默认配置里看看有没有第三个元素（简写）
-    print(f"prop:{args[0]} {match.group(1)}---{prop}")
     # 处理状态，如果是默认状态，那么就不添加
     state = "" if state == 'LV_PART_MAIN|LV_STATE_DEFAULT' else f", {state}"
     if index != -1:
+        prop = list_get2(default_config[index], prop)  # 从默认配置里看看有没有第三个元素（简写）
         value = "" if value == default_config[index][1] and state == "" else f"{value}"
         if state == "" and value == "":
             # 如果都为默认值，那么就跳过这次处理
