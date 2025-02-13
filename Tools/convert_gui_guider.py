@@ -3,6 +3,8 @@ import argparse
 import glob
 import os
 import re
+from pathlib import Path
+from typing import Dict, Tuple, List
 
 # 组件代码块
 widgets = []
@@ -202,15 +204,17 @@ def remove_widget(widget_name):
 
 
 # ------------------------------与组件关系有关------------------------
-def add_widget_relations(child_name, child_info, parent_name):
+def add_widget_relations(child_name, child_info=None, parent_name=''):
     """
     添加组件关系（支持类型列表）
     :param child_name: 子组件名
-    :param child_info: 子组件类型列表（如 ["UI", "Button"]）
+    :param child_info: 子组件类型列表（如 ["UI", "Button"]）,None表示没有
     :param parent_name: 父组件名
     :return: True表示添加成功，False表示已存在
     """
     # 自动包装单元素类型为列表（可选）
+    if child_info is None:
+        child_info = []
     if not isinstance(child_info, list):
         child_info = [child_info]
 
@@ -745,29 +749,111 @@ namespace gui::init
     }}
 }}"""
 
+# ---------------------------------------工具函数-------------------------------------------
+def find_c_functions(func_name: str,
+                     search_path: str,
+                     file_name: str = "setup_scr_*.c") -> Tuple[Tuple[str, List[str], str], ...]:
+    """搜索指定C文件并返回结构化函数信息
 
-# -------------------------------------主函数--------------------------------------------
-def main():
-    # 确定文件路径
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--path", default="../Projects/driversDevelop/ui/generated")
-    args = parser.parse_args()
+    Args:
+        func_name: 支持通配符的函数名（如"set_src_*"）
+        search_path: 文件搜索根路径
+        file_name: 文件名匹配模式（原pattern参数）
 
-    # 【定位文件】：寻找目标文件(暂时只处理单个屏幕文件）
-    target_files = glob.glob(os.path.join(args.path, "setup_scr_*.c"))
-    if not target_files:
-        raise FileNotFoundError("No setup files found")
-    if len(target_files) > 1:
-        raise ValueError("Multiple setup files found")
+    Returns:
+        元组格式: (
+            ("函数名", ["参数1类型 参数1", ...], "去花括号函数体"),
+            ...
+        )
 
-    # 打开目标文件并读取内容(默认编码为 utf-8)
-    with open(target_files[0], 'r', encoding='utf-8') as f:
+    Raises:
+        FileNotFoundError: 文件未找到时抛出
+        ValueError: 多个文件匹配或未找到函数时抛出
+    """
+    target_file = Path(search_path).glob(file_name)
+    matched_files = list(target_file)
+
+    # 文件校验
+    if len(matched_files) == 0:
+        raise FileNotFoundError(f"No files match '{file_name}' in {search_path}")
+    if len(matched_files) > 1:
+        raise ValueError(f"Multiple files match '{file_name}': {matched_files}")
+
+    # 读取文件内容
+    with open(matched_files[0], 'r', encoding='utf-8') as f:
         content = f.read()
 
+        # 未指定函数名时返回完整内容
+    if not func_name:
+        return (("full_content", [], content),)
+
+    # 构建正则表达式模式
+    name_pattern = re.escape(func_name).replace(r'\*',  '.*').replace(r'\?', '.')
+    func_regex = re.compile(
+        r'^\s*((?:[\w\d_]+\s+)+?)'  # 返回类型 
+        rf'({name_pattern})\s*'     # 函数名 
+        r'\(([^)]*)\)\s*'           # 参数列表 
+        r'\{',
+        re.MULTILINE
+    )
+
+    functions = []
+    for match in func_regex.finditer(content):
+        # 提取函数信息
+        func_name = match.group(2)
+        params = [p.strip() for p in match.group(3).split(',')  if p.strip()]
+
+        # 提取函数体（去花括号）
+        start = match.end()
+        brace_level = 1
+        end_pos = None
+
+        for i in range(start, len(content)):
+            if content[i] == '{': brace_level +=1
+            elif content[i] == '}': brace_level -=1
+
+            if brace_level == 0:
+                end_pos = i
+                break
+
+        if end_pos is None:
+            continue  # 忽略不完整定义
+
+        # 清理函数体格式
+        func_body = content[start:end_pos].strip()
+        func_body = re.sub(r'^\s*{ |\s*}$', '', func_body, flags=re.DOTALL).strip()
+
+        functions.append((func_name,  params, func_body))
+
+    if not functions:
+        raise ValueError(f"No functions matching '{func_name}' found")
+
+    return tuple(functions)
+
+def extract_screen_name(func_name: str) -> str:
+    """
+    从函数名里提取屏幕名称
+    :param func_name:
+    :return:
+    """
+    match = re.search(r'setup_scr_(\w+)', func_name)
+    if match:
+        return match.group(1)
+    else:
+        raise ValueError("No project name found")
+# -------------------------------------主函数--------------------------------------------
+def main():
     # 【定位屏幕初始化代码】：定位 setup_scr_* 函数,并获取工程名和函数体
-    project_name, func_body = parse_setup_function(content)
-    # 把主屏幕放入组件中，并且把父组件名设置为''来标记
-    widgets_relations.append([project_name, [], '', []])
+    c_content = find_c_functions(search_path="../Projects/driversDevelop/ui/generated",
+                           func_name="setup_scr_*",
+                           file_name="setup_scr_*.c")
+    # 获取第一个满足条件的函数
+    setup_scr_function = c_content[0]
+    # 获取函数体和屏幕名称
+    screen_name = extract_screen_name(setup_scr_function[0])
+    func_body = setup_scr_function[2]
+    # 添加屏幕组件关系
+    add_widget_relations(screen_name)
 
     # 【提取代码行】：从setup_scr_*函数体代码提取出代码行
     code_lines = extract_c_code_lines(func_body)
@@ -776,7 +862,7 @@ def main():
     process_code_lines(code_lines)
 
     # 【解析信息】：把组件信息解析为对应的代码，并输出
-    output = generate_output(project_name)
+    output = generate_output(screen_name)
 
     with open("ui.cpp", "w", encoding='utf-8') as f:
         f.write(output)
