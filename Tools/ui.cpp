@@ -31,7 +31,6 @@ namespace gui::init
 	obj_blueCounter_cont_1.init()
 		.pos(93, 60)
 		.size(294, 200)
-		.scrollbar_mode()
 		.border_width(4)
 		.border_opa(255)
 		.border_color(lv_color_hex(0xacceea))

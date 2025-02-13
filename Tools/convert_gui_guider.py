@@ -328,7 +328,7 @@ function_handlers = {
     },
     # 全缺省可免调用
     'lv_obj_set_scrollbar_mode': {
-        'args_map': ['LV_SCROLLBAR_MODE_OFF'],
+        'args_map': ['LV_SCROLLBAR_MODE_AUTO'],
         'method_map': {
             'index': [],
             'mapping': {},
@@ -669,6 +669,7 @@ def iterate_widgets(screen_name):
 
             # 判断是否跳过调用
             if func_code is None:
+                print(f'Skipped function: \t{extract_comp_name_from_var(args[0])}\t{func_name}')
                 continue
             else:
                 widget_init_chain.append(func_code)
