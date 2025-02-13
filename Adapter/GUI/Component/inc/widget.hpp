@@ -145,6 +145,12 @@ public:
         lv_obj_set_style_bg_grad_opa(obj_, opa, selector);
         return static_cast<Derived &>(*this);
     }
+    // 设置背景主停止点
+    inline Derived &bg_main_stop(Coord start, Selector selector = selector_default)
+    {
+        lv_obj_set_style_bg_main_stop(obj_, start, selector);
+        return static_cast<Derived &>(*this);
+    }
 
     // 设置背景渐变停止点
     inline Derived &bg_grad_stop(Coord stop, Selector selector = selector_default)
@@ -460,7 +466,7 @@ public:
         return static_cast<Derived &>(*this);
     }
 
-// 更安全的动画实现（示例代码）
+// 更安全的动画实现（暂不可用）
     template<typename T>
     Derived &animate(lv_anim_exec_xcb_t exec_cb, T start, T end, uint16_t time,
                      lv_anim_path_cb_t path = lv_anim_path_linear)

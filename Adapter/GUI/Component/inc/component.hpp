@@ -19,7 +19,7 @@ public:
 
     // 只能调用一次，不然会出现内存泄漏
     // 不主动设置父对象，那么就默认为上一次调用parent函数设置的父对象
-    Component &init(Obj parent = parent_)
+    inline Component &init(Obj_t parent = parent_)
     {
         obj_ = lv_obj_create(parent);
         return *this;

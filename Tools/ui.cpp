@@ -28,7 +28,7 @@ namespace gui::init
 		.bg_main_stop(0)
 		.bg_grad_stop(255);
 
-	obj_blueCounter_cont_1.init(blueCounter)
+	obj_blueCounter_cont_1.init()
 		.pos(93, 60)
 		.size(294, 200)
 		.scrollbar_mode()
@@ -43,14 +43,14 @@ namespace gui::init
 		.bg_main_stop(0)
 		.bg_grad_stop(255);
 
-	imgbtn_blueCounter_plus.init(blueCounter_cont_1)
+	imgbtn_blueCounter_plus.init(obj_blueCounter_cont_1)
 		.pos(193, 15)
 		.size(65, 65)
 		.checkable()
 		.released_src(&_btn_RGB565A8_65x65)
-		.src(LV_IMAGEBUTTON_STATE_PRESSED, &_btn_RGB565A8_65x65)
-		.src(LV_IMAGEBUTTON_STATE_CHECKED_RELEASED, &_btn_RGB565A8_65x65)
-		.src(LV_IMAGEBUTTON_STATE_CHECKED_PRESSED, &_btn_RGB565A8_65x65)
+		.pressed_src(&_btn_RGB565A8_65x65)
+		.checked_released_src(&_btn_RGB565A8_65x65)
+		.checked_pressed_src(&_btn_RGB565A8_65x65)
 		.pad_all(0, LV_STATE_DEFAULT)
 		.text_color(lv_color_hex(0x4d6e81))
 		.text_font(&lv_font_arial_34)
@@ -63,19 +63,19 @@ namespace gui::init
 		.image_recolor_opa(0, LV_PART_MAIN|LV_IMAGEBUTTON_STATE_RELEASED)
 		.image_opa(255, LV_PART_MAIN|LV_IMAGEBUTTON_STATE_RELEASED);
 
-	label_blueCounter_plus_label.init(blueCounter_plus)
+	label_blueCounter_plus_label.init(imgbtn_blueCounter_plus)
 		.text("+")
 		.long_mode()
 		.center(0, 0);
 
-	imgbtn_blueCounter_minus.init(blueCounter_cont_1)
+	imgbtn_blueCounter_minus.init(obj_blueCounter_cont_1)
 		.pos(193, 100)
 		.size(65, 65)
 		.checkable()
 		.released_src(&_btn_RGB565A8_65x65)
-		.src(LV_IMAGEBUTTON_STATE_PRESSED, &_btn_RGB565A8_65x65)
-		.src(LV_IMAGEBUTTON_STATE_CHECKED_RELEASED, &_btn_RGB565A8_65x65)
-		.src(LV_IMAGEBUTTON_STATE_CHECKED_PRESSED, &_btn_RGB565A8_65x65)
+		.pressed_src(&_btn_RGB565A8_65x65)
+		.checked_released_src(&_btn_RGB565A8_65x65)
+		.checked_pressed_src(&_btn_RGB565A8_65x65)
 		.pad_all(0, LV_STATE_DEFAULT)
 		.text_color(lv_color_hex(0x4d6e81))
 		.text_font(&lv_font_arial_34)
@@ -88,12 +88,12 @@ namespace gui::init
 		.image_recolor_opa(0, LV_PART_MAIN|LV_IMAGEBUTTON_STATE_RELEASED)
 		.image_opa(255, LV_PART_MAIN|LV_IMAGEBUTTON_STATE_RELEASED);
 
-	label_blueCounter_minus_label.init(blueCounter_minus)
+	label_blueCounter_minus_label.init(imgbtn_blueCounter_minus)
 		.text("-")
 		.long_mode()
 		.center(0, 0);
 
-	btn_blueCounter_btn_1.init(blueCounter_cont_1)
+	btn_blueCounter_btn_1.init(obj_blueCounter_cont_1)
 		.pos(260, -42)
 		.size(100, 50)
 		.pad_all(0, LV_STATE_DEFAULT)
@@ -102,13 +102,13 @@ namespace gui::init
 		.radius(5)
 		.text_font(&lv_font_montserratMedium_16);
 
-	label_blueCounter_btn_1_label.init(blueCounter_btn_1)
+	label_blueCounter_btn_1_label.init(btn_blueCounter_btn_1)
 		.text("Button")
 		.long_mode()
 		.center(0, 0)
 		.width(LV_PCT(100));
 
-	img_blueCounter_logo.init(blueCounter_cont_1)
+	img_blueCounter_logo.init(obj_blueCounter_cont_1)
 		.pos(11, 10)
 		.size(60, 34)
 		.add_flag(LV_OBJ_FLAG_CLICKABLE)
@@ -117,7 +117,7 @@ namespace gui::init
 		.image_recolor_opa(0)
 		.image_opa(255);
 
-	label_blueCounter_counter.init(blueCounter_cont_1)
+	label_blueCounter_counter.init(obj_blueCounter_cont_1)
 		.pos(58, 74)
 		.size(114, 50)
 		.text("0")
@@ -128,7 +128,7 @@ namespace gui::init
 		.text_letter_space(2)
 		.bg_opa(0);
 
-	chekcbox_blueCounter_cb_1.init(blueCounter)
+	chekcbox_blueCounter_cb_1.init()
 		.pos(32, 260)
 		.text("checkbox")
 		.text_color(lv_color_hex(0x0D3055))

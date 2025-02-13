@@ -249,6 +249,9 @@ function_handlers = {
             # 映射表可以为空，映射之后这个参数就要去掉，因为我的目的是简化
             'mapping': {
                 'LV_IMAGEBUTTON_STATE_RELEASED': 'released_src',
+                'LV_IMAGEBUTTON_STATE_PRESSED': 'pressed_src',
+                'LV_IMAGEBUTTON_STATE_CHECKED_RELEASED': 'checked_released_src',
+                'LV_IMAGEBUTTON_STATE_CHECKED_PRESSED': 'checked_pressed_src',
             },
             # 类型为None表示参数全缺省即可免去调用，不为None表示不缺省就省略（这个优先级是高于args_map为空的）。
             'type': '',
@@ -643,7 +646,14 @@ def iterate_widgets(screen_name):
         parent_name = widget_relation[2]
         # 转为合成名
         widget_name_var_name = widget_info[0] + '_' + widget_name
-        widget_init_chain = [f'\n\t{widget_name_var_name}.init({parent_name})']
+        if parent_name == screen_name:
+            # 空即默认主屏幕
+            parent_name_var_name =''
+        else:
+            parent_relation = find_relations(child_name=parent_name)
+            parent_widget_info = parent_relation[1]
+            parent_name_var_name = parent_widget_info[0] + '_' + parent_name
+        widget_init_chain = [f'\n\t{widget_name_var_name}.init({parent_name_var_name})']
         # 组件定义
         widgets_define.append(f'\t{widget_info[1]} {widget_name_var_name};')
         for func_info in function_list:
@@ -723,7 +733,7 @@ def main():
     parser.add_argument("--path", default="../Projects/driversDevelop/ui/generated")
     args = parser.parse_args()
 
-    # 【定位文件】：寻找目标文件
+    # 【定位文件】：寻找目标文件(暂时只处理单个屏幕文件）
     target_files = glob.glob(os.path.join(args.path, "setup_scr_*.c"))
     if not target_files:
         raise FileNotFoundError("No setup files found")
