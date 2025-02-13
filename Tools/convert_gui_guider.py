@@ -105,6 +105,7 @@ def parse_function_line(code_line):
         var_name, func_name, params = match.groups()
         # 清理形参表中的多余空格
         params = params.strip() if params else ''
+        params = params.split(',') if params else []
         # print(f'code_line:|{code_line}|')
         # print(f"var:{var_name}  func:{func_name}  args:{params}")
         return var_name, func_name, params
@@ -183,7 +184,7 @@ def create_new_widget(widget_name, func_name, args):
     return [widget_name, [[func_name, args.copy()]]]
 
 def add_widget_function(widget_name, func_name, args):
-    """添加组件函数（主函数）
+    """添加组件函数
     实现逻辑：
     1. 存在组件 -> 追加函数
     2. 不存在组件 -> 创建新组件
@@ -193,15 +194,34 @@ def add_widget_function(widget_name, func_name, args):
         args (list): 函数参数列表
     """
     if check_widget_exists(widget_name):
-        add_function_to_existing(widgets, widget_name, func_name, args)
+        add_function_to_existing(widget_name, func_name, args)
     else:
         new_widget = create_new_widget(widget_name, func_name, args)
         widgets.append(new_widget)
 
 
+def find_widget(widget_name):
+    """
+    查找指定组件
+    :param widget_name:
+    :return: 找到就返回列表，找不到就返回None
+    """
+    for item in widgets:
+        if item[0] == widget_name:
+            return item
+    return None
 
-
-
+def remove_widget(widget_name):
+    """
+    删除指定组件
+    :param widget_name: 组件名称
+    :return: 删除后组件的剩余数量
+    """
+    # 使用列表解析来创建一个新的列表，排除掉要删除的元素
+    original_length = len(widgets)
+    widgets[:] = [item for item in widgets if item[0] != widget_name]
+    removed_count = original_length - len(widgets)
+    return removed_count  # 返回已删除项目的数量
 
 # ------------------------------与组件关系有关------------------------
 def add_widget_relations(child_name, child_info, parent_name):
@@ -497,10 +517,11 @@ def convert_style_calls(func_name, args):
     if match is None:
         # 不应该出现的情况
         raise NotImplementedError(f"Function '{func_name}' not implemented.")
-    prop = match.groups()
+
+    prop = match.group()
     value = args[1]
     state = args[2]
-
+    print(f"prop:|{prop}|,value:|{value}|,state:|{state}|")
     # 如果在默认配置表里找到了对应函数，那么就对照默认配置修改
     index = next((i for i, item in enumerate(default_config) if item[0] == prop), -1)
     if index != -1:
@@ -539,8 +560,6 @@ def process_code_lines(code_lines):
             # 初始化代码行：把组件信息提取到widgets里
             # lv_obj_set_scrollbar_mode(ui->blueCounter_cont_1, LV_SCROLLBAR_MODE_OFF);
             # ①先获取组件名称
-            # print(f"line:{line}")
-            # print(f"var:{var}  func:{func_name}  args:{args}")
             widget_name = extract_comp_name_from_var(args[0])
             # ②存储初始化信息  [['widget_name',['func_name',[args]],……],……]
             add_widget_function(widget_name, func_name, args)
@@ -559,17 +578,37 @@ def process_code_lines(code_lines):
         
 
 # ----------------解析组件信息-------------------
-def iterate_widgets():
+def iterate_widgets(screen_name):
     """遍历组件结构的通用函数
     # 1,链式调用需要一张表，组件在前面，然后init后跟父组件,接着不断往后添加到列表里
     # ['widget_name.init(parent_name)','.pos()','size()',]
     # 2,根据实际情况，组件名称前需要\n\t\t，两个Tab，而其他链式调用则需要三个Tab
     # 3,对widgets_define添加了组件定义的信息，但是没有把里面的代码通过'\n\t'连接
     Args:
+        screen_name(string): 项目名称，这里是为了把屏幕名称替换为scr
     Returns:
         widgets_init_code(list):由一段段组件初始化代码组成,最后是需要通过'\n\t'进行拼接
     """
     widgets_init_code = []
+    # 处理屏幕组件
+    screen_widget = find_widget(screen_name)
+    screen_func_list = screen_widget[1]
+    screen_init_chain =[]
+    # 剔除屏幕组件
+    remove_widget(screen_name)
+    for scr_func_info in screen_func_list:
+        func_name = scr_func_info[0]
+        args = scr_func_info[1]
+        if 'lv_obj_set_style' in func_name:
+            # 如果是样式函数
+            func_code = convert_style_calls(func_name, args)
+            screen_init_chain.append(func_code)
+    # 给组件的第一个样式函数前加上scr
+    print(f"screen_init_chain:{screen_init_chain}")
+    screen_init_chain[0] = 'scr'+screen_init_chain[0]
+    widgets_init_code.append('\n\t'.join(screen_init_chain))
+
+    # 处理其他组件
     for widget in widgets:
         widget_name = widget[0]
         function_list = widget[1]
@@ -624,7 +663,7 @@ def generate_output(project_name):
 
 
     widgets_block = "\n\t".join(widgets_define)
-    widgets_init_code = iterate_widgets()
+    widgets_init_code = iterate_widgets(project_name)
     screen_block = "\n\t".join(widgets_init_code)
 
     return f"""#include "ui.hpp"
@@ -679,10 +718,6 @@ def main():
     # 【处理代码行】：从每行代码里提取到组件初始化信息和组件关系
     process_code_lines(code_lines)
 
-    print("widgets_relations:")
-    print(widgets_relations)
-    print("widgets:")
-    print(widgets)
 
     # 【解析信息】：把组件信息解析为对应的代码，并输出
     output = generate_output(project_name)
