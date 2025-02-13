@@ -468,17 +468,17 @@ auto CounterLogic::hidden_all() -> void
 }
 auto CounterLogic::generate_data()->void
 {
-// 批量设置128个点
-    for (int i = 0; i < 128; ++i) {
-//         循环访问数组
-        size_t idx = (current_index + i) % POOL_SIZE;
-        lv_chart_set_next_value(chart_1, series, rand_pool[idx]);
-    }
-//     更新索引（每次前进1位置）
-    current_index = (current_index + 20) % POOL_SIZE;
-    if(wave_start_index+length>array_length) wave_start_index=0;
-
-    FPS::print(false);
+//// 批量设置128个点
+//    for (int i = 0; i < 128; ++i) {
+////         循环访问数组
+//        size_t idx = (current_index + i) % POOL_SIZE;
+//        lv_chart_set_next_value(chart_1, series, rand_pool[idx]);
+//    }
+////     更新索引（每次前进1位置）
+//    current_index = (current_index + 20) % POOL_SIZE;
+//    if(wave_start_index+length>array_length) wave_start_index=0;
+//
+//    FPS::print(false);
 
 
     draw_dashed_dividers(border_info::x, border_info::y,  border_info::height, border_info::width,
@@ -492,6 +492,7 @@ auto CounterLogic::generate_data()->void
             0XFCC0,
             0xFFFF
     );
+
     params.start_index=(params.start_index +  20) % params.array_length;
     if(params.start_index+params.length>params.array_length) params.start_index=0;
 
