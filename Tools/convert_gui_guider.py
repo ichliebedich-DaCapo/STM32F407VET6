@@ -705,7 +705,7 @@ def iterate_widgets(screen_name):
 
 
 # ----------------------------------输出结果处理--------------------------------------------
-def generate_output(project_name):
+def generate_output(widgets_define_code,widgets_init_code):
     """
     输出转换后的代码结果。
     ①初始化代码可以划分为几个组件块，每个组件块都办包含了自己的名称和若干代码行。
@@ -718,16 +718,15 @@ def generate_output(project_name):
         [['widget_name',[['func_name','args'],,……]],……]
         收集所有信息 → 统合信息（把一些函数和参数拼接） → 链接函数调用块（把包含函数信息的列表拼接为字符串）
          → 解析组件（把widgets解析为对应的代码，首行的组件名称与函数调用拼接在一起）→ 代码生成
-    :param project_name:
+    :param widgets_init_code: (list)组件初始化代码
+    :param widgets_define_code: (list)组件定义代码
     :return:
     """
-
-    widgets_init_code = iterate_widgets(project_name)
     # 需要确保组件定义代码和初始化代码均为列表
-    widgets_block = "\n".join(widgets_define)
+    widgets_block = "\n".join(widgets_define_code)
     screen_block = "\n".join(widgets_init_code)
 
-    return f"""#include "ui.hpp"
+    output = f"""#include "ui.hpp"
 
 namespace gui::widgets::main 
 {{
@@ -748,6 +747,10 @@ namespace gui::init
     
     }}
 }}"""
+
+    with open("ui.cpp", "w", encoding='utf-8') as f:
+        f.write(output)
+
 
 # ---------------------------------------工具函数-------------------------------------------
 def find_c_functions(func_name: str,
@@ -790,7 +793,7 @@ def find_c_functions(func_name: str,
     # 构建正则表达式模式
     name_pattern = re.escape(func_name).replace(r'\*',  '.*').replace(r'\?', '.')
     func_regex = re.compile(
-        r'^\s*((?:[\w\d_]+\s+)+?)'  # 返回类型 
+        r'^\s*((?:[\w_]+\s+)+?)'  # 返回类型 
         rf'({name_pattern})\s*'     # 函数名 
         r'\(([^)]*)\)\s*'           # 参数列表 
         r'\{',
@@ -862,10 +865,12 @@ def main():
     process_code_lines(code_lines)
 
     # 【解析信息】：把组件信息解析为对应的代码，并输出
-    output = generate_output(screen_name)
+    widgets_init_code = iterate_widgets(screen_name)
 
-    with open("ui.cpp", "w", encoding='utf-8') as f:
-        f.write(output)
+    # 【输出代码文件】：把组件相关代码信息，按照特定格式写入文件中
+    generate_output(widgets_define,widgets_init_code)
+
+
 
 
 if __name__ == "__main__":
