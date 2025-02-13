@@ -650,9 +650,9 @@ def iterate_widgets(screen_name):
                 continue
             screen_init_chain.append(func_code)
     # 给组件的第一个样式函数前加上scr
-    screen_init_chain[0] = '\n\tscr' + screen_init_chain[0]
+    screen_init_chain[0] = '\t\tscr' + screen_init_chain[0]
     screen_init_chain[-1] += ';'  # 末尾添加分号
-    widgets_init_code.append('\n\t\t'.join(screen_init_chain))
+    widgets_init_code.append('\n\t\t\t'.join(screen_init_chain))
 
     # 处理其他组件
     for widget in widgets:
@@ -671,7 +671,7 @@ def iterate_widgets(screen_name):
             parent_relation = find_relations(child_name=parent_name)
             parent_widget_info = parent_relation[1]
             parent_name_var_name = parent_widget_info[0] + '_' + parent_name
-        widget_init_chain = [f'\n\t{widget_name_var_name}.init({parent_name_var_name})']
+        widget_init_chain = [f'\n\t\t{widget_name_var_name}.init({parent_name_var_name})']
         # 组件定义
         widgets_define.append(f'\t{widget_info[1]} {widget_name_var_name};')
         for func_info in function_list:
@@ -694,9 +694,9 @@ def iterate_widgets(screen_name):
 
         # 拼接为组件初始化代码
         widget_init_chain[-1] += ';'  # 末尾添加分号
-        widgets_init_code.append('\n\t\t'.join(widget_init_chain))
+        widgets_init_code.append('\n\t\t\t'.join(widget_init_chain))
     # 给定义组件代码的首元素添加\n
-    widgets_define[0] = '\n' + widgets_define[0]
+    # widgets_define[0] = '\n' + widgets_define[0]
     return widgets_init_code
 
 
@@ -719,6 +719,7 @@ def generate_output(project_name):
     """
 
     widgets_init_code = iterate_widgets(project_name)
+    # 需要确保组件定义代码和初始化代码均为列表
     widgets_block = "\n".join(widgets_define)
     screen_block = "\n".join(widgets_init_code)
 
@@ -726,7 +727,7 @@ def generate_output(project_name):
 
 namespace gui::widgets::main 
 {{
-    {widgets_block}
+{widgets_block}
 }}
 
 // 使用命名空间
@@ -735,7 +736,7 @@ namespace gui::init
 {{
     void screen()
     {{
-        {screen_block}
+{screen_block}
     }}
     
     void events()
