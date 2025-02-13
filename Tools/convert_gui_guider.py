@@ -87,7 +87,7 @@ def parse_function_line(code_line):
     """
     词法解析，把代码行解析为【变量名（可选）】、【函数名】和【形参表（已去除两端空白字符，并分割）】
     :param code_line: 去除换行的代码行
-    :return: (var, func_name, args)，未匹配到会返回None
+    :return: (var, func_name, args)，未匹配到会返回None,var是全匹配，包含ui->
     """
 
     # 正则表达式模式
@@ -533,7 +533,7 @@ def process_code_lines(code_lines):
     """
     处理代码行。把代码行里的信息全部存储到初始化信息表和关系表里
     :param code_lines: 已经做过处理，每行只包含代码行
-    :return: 
+    :note 向widget里添加['widget_name',[[func,[args]],……]]。其中组件名是已经去除ui->
     """
     for line in code_lines:
         # 词法解析，获取变量名、函数名（不为空）和参数表
@@ -588,7 +588,6 @@ def iterate_widgets(screen_name):
                 continue
             screen_init_chain.append(func_code)
     # 给组件的第一个样式函数前加上scr
-    # print(f"screen_init_chain:{screen_init_chain}")
     screen_init_chain[0] = 'scr' + screen_init_chain[0]
     widgets_init_code.append('\n\t'.join(screen_init_chain))
 
@@ -598,6 +597,8 @@ def iterate_widgets(screen_name):
         function_list = widget[1]
         # 链式调用：创建组件的代码
         widget_relation = find_relations(child_name=widget_name)
+        print(f'widget_relation :{widget_relation}')
+        print(f'widget_name :{widget_name}')
         widget_info = widget_relation[1]
         parent_name = widget_relation[2]
         init_chain = [f'\n{widget_name}.init({parent_name})']
