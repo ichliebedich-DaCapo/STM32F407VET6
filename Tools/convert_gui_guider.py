@@ -106,6 +106,7 @@ def parse_function_line(code_line):
         # 清理形参表中的多余空格
         params = params.strip() if params else ''
         params = params.split(',') if params else []
+        params = [p.strip() for p in params]
         # print(f'code_line:|{code_line}|')
         # print(f"var:{var_name}  func:{func_name}  args:{params}")
         return var_name, func_name, params
@@ -518,13 +519,14 @@ def convert_style_calls(func_name, args):
         # 不应该出现的情况
         raise NotImplementedError(f"Function '{func_name}' not implemented.")
 
-    prop = match.group()
+    prop = match.group(1)
     value = args[1]
     state = args[2]
-    print(f"prop:|{prop}|,value:|{value}|,state:|{state}|")
+
     # 如果在默认配置表里找到了对应函数，那么就对照默认配置修改
     index = next((i for i, item in enumerate(default_config) if item[0] == prop), -1)
     if index != -1:
+
         # 处理状态，如果是默认状态，那么就不添加
         state = "" if state == 'LV_PART_MAIN|LV_STATE_DEFAULT' else f", {state}"
         value = "" if value == default_config[index][1] and state == "" else f"{value}"
@@ -602,6 +604,9 @@ def iterate_widgets(screen_name):
         if 'lv_obj_set_style' in func_name:
             # 如果是样式函数
             func_code = convert_style_calls(func_name, args)
+            print(f'type:{type(func_code)}')
+            if func_code is None:
+                continue
             screen_init_chain.append(func_code)
     # 给组件的第一个样式函数前加上scr
     print(f"screen_init_chain:{screen_init_chain}")
