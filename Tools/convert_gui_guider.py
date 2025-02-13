@@ -538,6 +538,10 @@ def process_code_lines(code_lines):
     for line in code_lines:
         # 词法解析，获取变量名、函数名（不为空）和参数表
         var, func_name, args = parse_function_line(line)
+        # 剔除无关函数
+        if 'events_init' in func_name:
+            continue
+
         if var is None:
             # 初始化代码行：把组件信息提取到widgets里
             # lv_obj_set_scrollbar_mode(ui->blueCounter_cont_1, LV_SCROLLBAR_MODE_OFF);
@@ -645,9 +649,9 @@ def generate_output(project_name):
     :return:
     """
 
-    widgets_block = "\n\t".join(widgets_define)
     widgets_init_code = iterate_widgets(project_name)
-    screen_block = "\n\t".join(widgets_init_code)
+    widgets_block = "\n".join(widgets_define)
+    screen_block = "\n".join(widgets_init_code)
 
     return f"""#include "ui.hpp"
 
