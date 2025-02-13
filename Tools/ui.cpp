@@ -3,16 +3,16 @@
 namespace gui::widgets::main 
 {
     
-	Component obj_blueCounter_cont_1
-	ImageButton imgbtn_blueCounter_plus
-	Label label_blueCounter_plus_label
-	ImageButton imgbtn_blueCounter_minus
-	Label label_blueCounter_minus_label
-	Button btn_blueCounter_btn_1
-	Label label_blueCounter_btn_1_label
-	Image img_blueCounter_logo
-	Label label_blueCounter_counter
-	CheckBox chekcbox_blueCounter_cb_1
+	Component obj_blueCounter_cont_1;
+	ImageButton imgbtn_blueCounter_plus;
+	Label label_blueCounter_plus_label;
+	ImageButton imgbtn_blueCounter_minus;
+	Label label_blueCounter_minus_label;
+	Button btn_blueCounter_btn_1;
+	Label label_blueCounter_btn_1_label;
+	Image img_blueCounter_logo;
+	Label label_blueCounter_counter;
+	CheckBox chekcbox_blueCounter_cb_1;
 }
 
 // 使用命名空间
@@ -26,9 +26,9 @@ namespace gui::init
 		.bg_grad_dir(LV_GRAD_DIR_VER)
 		.bg_grad_color(lv_color_hex(0x8dcdeb))
 		.bg_main_stop(0)
-		.bg_grad_stop(255)
+		.bg_grad_stop(255);
 
-	blueCounter_cont_1.init(blueCounter)
+	obj_blueCounter_cont_1.init(blueCounter)
 		.pos(93, 60)
 		.size(294, 200)
 		.scrollbar_mode()
@@ -41,9 +41,9 @@ namespace gui::init
 		.bg_grad_dir(LV_GRAD_DIR_VER)
 		.bg_grad_color(lv_color_hex(0x4e95cb))
 		.bg_main_stop(0)
-		.bg_grad_stop(255)
+		.bg_grad_stop(255);
 
-	blueCounter_plus.init(blueCounter_cont_1)
+	imgbtn_blueCounter_plus.init(blueCounter_cont_1)
 		.pos(193, 15)
 		.size(65, 65)
 		.checkable()
@@ -61,12 +61,14 @@ namespace gui::init
 		.text_opa(255, LV_PART_MAIN|LV_STATE_PRESSED)
 		.shadow_width(0, LV_PART_MAIN|LV_STATE_PRESSED)
 		.image_recolor_opa(0, LV_PART_MAIN|LV_IMAGEBUTTON_STATE_RELEASED)
-		.image_opa(255, LV_PART_MAIN|LV_IMAGEBUTTON_STATE_RELEASED)
+		.image_opa(255, LV_PART_MAIN|LV_IMAGEBUTTON_STATE_RELEASED);
 
-	blueCounter_plus_label.init(blueCounter_plus)
-		.center(0, 0)
+	label_blueCounter_plus_label.init(blueCounter_plus)
+		.text("+")
+		.long_mode()
+		.center(0, 0);
 
-	blueCounter_minus.init(blueCounter_cont_1)
+	imgbtn_blueCounter_minus.init(blueCounter_cont_1)
 		.pos(193, 100)
 		.size(65, 65)
 		.checkable()
@@ -84,41 +86,51 @@ namespace gui::init
 		.text_opa(255, LV_PART_MAIN|LV_STATE_PRESSED)
 		.shadow_width(0, LV_PART_MAIN|LV_STATE_PRESSED)
 		.image_recolor_opa(0, LV_PART_MAIN|LV_IMAGEBUTTON_STATE_RELEASED)
-		.image_opa(255, LV_PART_MAIN|LV_IMAGEBUTTON_STATE_RELEASED)
+		.image_opa(255, LV_PART_MAIN|LV_IMAGEBUTTON_STATE_RELEASED);
 
-	blueCounter_minus_label.init(blueCounter_minus)
-		.center(0, 0)
+	label_blueCounter_minus_label.init(blueCounter_minus)
+		.text("-")
+		.long_mode()
+		.center(0, 0);
 
-	blueCounter_btn_1.init(blueCounter_cont_1)
+	btn_blueCounter_btn_1.init(blueCounter_cont_1)
 		.pos(260, -42)
 		.size(100, 50)
 		.pad_all(0, LV_STATE_DEFAULT)
 		.bg_color(lv_color_hex(0x2195f6))
 		.bg_grad_dir(LV_GRAD_DIR_NONE)
 		.radius(5)
-		.text_font(&lv_font_montserratMedium_16)
+		.text_font(&lv_font_montserratMedium_16);
 
-	blueCounter_btn_1_label.init(blueCounter_btn_1)
+	label_blueCounter_btn_1_label.init(blueCounter_btn_1)
+		.text("Button")
+		.long_mode()
 		.center(0, 0)
+		.width(LV_PCT(100));
 
-	blueCounter_logo.init(blueCounter_cont_1)
+	img_blueCounter_logo.init(blueCounter_cont_1)
 		.pos(11, 10)
 		.size(60, 34)
 		.add_flag(LV_OBJ_FLAG_CLICKABLE)
+		.src(&_NXP_Logo_RGB565A8_60x34)
+		.pivot(50, 50)
 		.image_recolor_opa(0)
-		.image_opa(255)
+		.image_opa(255);
 
-	blueCounter_counter.init(blueCounter_cont_1)
+	label_blueCounter_counter.init(blueCounter_cont_1)
 		.pos(58, 74)
 		.size(114, 50)
+		.text("0")
+		.long_mode()
 		.radius(8)
 		.text_color(lv_color_hex(0x024f5a))
 		.text_font(&lv_font_arial_40)
 		.text_letter_space(2)
-		.bg_opa(0)
+		.bg_opa(0);
 
-	blueCounter_cb_1.init(blueCounter)
+	chekcbox_blueCounter_cb_1.init(blueCounter)
 		.pos(32, 260)
+		.text("checkbox")
 		.text_color(lv_color_hex(0x0D3055))
 		.text_font(&lv_font_montserratMedium_16)
 		.text_letter_space(2)
@@ -133,7 +145,7 @@ namespace gui::init
 		.radius(6, LV_PART_INDICATOR|LV_STATE_DEFAULT)
 		.bg_opa(255, LV_PART_INDICATOR|LV_STATE_DEFAULT)
 		.bg_color(lv_color_hex(0xffffff), LV_PART_INDICATOR|LV_STATE_DEFAULT)
-		.bg_grad_dir(LV_GRAD_DIR_NONE, LV_PART_INDICATOR|LV_STATE_DEFAULT)
+		.bg_grad_dir(LV_GRAD_DIR_NONE, LV_PART_INDICATOR|LV_STATE_DEFAULT);
     }
     
     void events()

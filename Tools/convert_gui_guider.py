@@ -4,14 +4,6 @@ import glob
 import os
 import re
 
-# 我应该分成两个样式处理表，一个处理屏幕的，比较简单，另一个处理其他组件的文件。
-# 因为处理屏幕需要把名称变成scr，其他组件则是真名
-# 我应该在处理样式表时定义一个映射表，把组件名映射为对应的样式名，并且把一些函数整合到一起
-
-# 组件定义代码块
-widgets_ns = []
-# 界面初始化代码块
-screen_ns = []
 
 # 组件代码块
 widgets = []
@@ -32,30 +24,9 @@ def parse_setup_function(content):
     return match.group(1), match.group(2).strip()
 
 
+
 # ---------------------------------工具函数----------------------------------------
-# 检测列表里的两个参数，判断是否是某个值，满足下面规则
-# 规则1：如果第二个元素是 value，那么省略它
-# 规则2：如果第一个元素是 value，第二个元素不是 value，那么两个元素都不能省略
-# 规则3：如果两个元素都是 value，那么都省略，返回空字符串
-def check_default_arguments_2(parts, value):
-    # 去除空白
-    last_two = [p.strip() for p in parts]
-
-    if last_two[1] == value:
-        # 第二个元素是 value，省略它
-        result = [last_two[0]] if last_two[0] != value else []
-    elif last_two[0] == value and last_two[1] != value:
-        # 第一个元素是 value，第二个元素不是 value，两个元素都不能省略
-        result = last_two
-    else:
-        # 其他情况
-        result = [p for p in last_two if p != value]
-
-    # 如果结果为空，返回空字符串；否则用逗号连接结果
-    return ', '.join(result) if result else ''
-
-
-# ------------------------文本处理------------------------------
+# -----------------------文本处理--------------------------
 
 # 输入组件创建代码块，返回组件前缀和组件类型
 def get_widget_info(create_line):
@@ -78,7 +49,7 @@ def get_widget_info(create_line):
 
     # 报错，确保能及时发现有未入库的函数，以便及时添加
     # TODO: 这里需要进一步检查，把所有匹配上的都添加进去
-    # raise ValueError(f"Could not find prefix for {create_line}")
+    raise ValueError(f"Could not find prefix for {create_line}")
 
 
 # 词法解析,解析代码行的赋值函数语句
@@ -266,10 +237,31 @@ def find_relations(child_name=None):
 
 
 
-# 组状态存储
+# 函数映射表
 function_handlers = {
+    # 图像按钮
+    'lv_imagebutton_set_src': {
+        # 参数缺省映射表，由专门的函数进行重载解析，最后返回参数列表。如果无参就返回None
+        'args_map': ['NULL', 'NULL'],
+        'method_map': {
+            # 确定哪些参数能决定改变method，单映射的情况下，handler为None即可
+            'index': [1],
+            # 映射表可以为空，映射之后这个参数就要去掉，因为我的目的是简化
+            'mapping': {
+                'LV_IMAGEBUTTON_STATE_RELEASED': 'released_src',
+            },
+            # 类型为None表示参数全缺省即可免去调用，不为None表示不缺省就省略（这个优先级是高于args_map为空的）。
+            'type': '',
+            # method默认在映射表里去找，如果找不到就用默认值
+            'default': 'src',
+            # 单参数可以自定一个lambda，多参数处理时，必须要自定一个lambda，用于返回处理的结果。
+            # 输入的参数是索引(或者处理过的参数)、参数表和mapping，需要返回一个判断结果（以None为标志）和一个最终处理的函数名和参数表
+            # 事实上，更复杂的的需求不可能依靠lambda来完成，但是现在并没有遇到情况，就先用lambda代替
+            'handler': None
+        },
+    },
+    # 不存在缺省参数
     'lv_obj_set_size': {
-        # 不存在缺省参数
         'args_map': [],
         'method_map': {
             'index': [],
@@ -279,8 +271,8 @@ function_handlers = {
             'handler': None
         }
     },
+    # 不存在缺省参数
     'lv_obj_set_pos': {
-        # 不存在缺省参数
         'args_map': [],
         'method_map': {
             'index': [],
@@ -290,8 +282,19 @@ function_handlers = {
             'handler': None
         }
     },
+    # 不存在缺省参数
+    'lv_obj_set_width':{
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'width',
+            'handler': None
+        }
+    },
+    # 不存在缺省参数
     'lv_obj_add_flag': {
-        # 不存在缺省参数
         'args_map': [],
         'method_map': {
             'index': [1],
@@ -305,8 +308,8 @@ function_handlers = {
             'handler': None
         }
     },
+    # 全缺省不可免去调用
     'lv_obj_align': {
-        # 有两个缺省参数
         'args_map': [0, 0],
         'method_map': {
             'index': [1],
@@ -320,6 +323,7 @@ function_handlers = {
             'handler': None
         }
     },
+    # 全缺省可免调用
     'lv_obj_set_scrollbar_mode': {
         'args_map': ['LV_SCROLLBAR_MODE_OFF'],
         'method_map': {
@@ -330,27 +334,72 @@ function_handlers = {
             'handler': None
         }
     },
-    # 图像按钮特殊处理
-    'lv_imagebutton_set_src': {
-        # 参数缺省映射表，由专门的函数进行重载解析，最后返回参数列表。如果无参就返回None
-        'args_map': ['NULL', 'NULL'],
+    # 不存在缺省参数
+    'lv_label_set_text': {
+        'args_map': [],
         'method_map': {
-            # 确定哪些参数能决定改变method，单映射的情况下，handler为None即可
-            'index': [1],
-            # 映射表可以为空，映射之后这个参数就要去掉，因为我的目的是简化
-            'mapping': {
-                'LV_IMAGEBUTTON_STATE_RELEASED': 'released_src',
-            },
-            # 类型为None表示参数全缺省即可免去调用，不为None表示不缺省就省略。
+            'index': [],
+            'mapping': {},
             'type': '',
-            # method默认在映射表里去找，如果找不到就用默认值
-            'default': 'src',
-            # 单参数或者多参数处理时，需要自定一个lambda，用于返回处理的结果。
-            # 输入的参数是索引(或者处理过的参数)、参数表和mapping，需要返回一个判断结果（以None为标志）和一个最终处理的函数名和参数表
-            # 事实上，更复杂的的需求不可能依靠lambda来完成，但是现在并没有遇到情况，就先用lambda代替
+            'default': 'text',
             'handler': None
-        },
-    }
+        }
+    },
+    # 不存在缺省参数
+    'lv_checkbox_set_text': {
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'text',
+            'handler': None
+        }
+    },
+    # 全缺省可免调用
+    'lv_label_set_long_mode':{
+        'args_map': ['LV_LABEL_LONG_WRAP'],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': None,
+            'default': 'long_mode',
+            'handler': None
+        }
+    },
+    # 不存在缺省参数
+    'lv_image_set_src': {
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'src',
+            'handler': None
+        }
+    },
+    # 不存在缺省参数
+    'lv_image_set_pivot': {
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'pivot',
+            'handler': None
+        }
+    },
+    # 全缺省可免调用
+    'lv_image_set_rotation': {
+        'args_map': [0],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': None,
+            'default': 'rotation',
+            'handler': None
+        }
+    },
 }
 
 
@@ -441,19 +490,6 @@ def convert_function_args(func_name, args):
     :param args:为避免影响后续扩展，这里传输整个形参表
     :return: 如果处理正常，就会返回正确的C++函数代码（前面带点）
     """
-    # 处理样式类函数
-    # 1，根据函数名选择具体的规则。
-    # 2，找到字典里的函数名后，根据形参的不同，选择对应的method或者省略特定的参数。
-    # 3，函数名只需要匹配在不在即可，也就是 if xxx in
-    # 4,每个函数名规则都有默认的method，形参也默认，只有当形参匹配时才重新设置method和参数
-    # 5,也就是映射表，映射的是参数与函数名的对应的关系，传入的是参数列表，
-    # 6，映射表改变的是method，参数值改变的是它本身。
-    # 7，所以需要两个处理器，每个处理器除了传入参数外，还需要传入映射表
-    # 如果存在映射表，则使用映射表,不存在的话，处理器会默认
-    # 专门对参数的处理会有缺省，method则不需要。也就是说会缺省也是默认值的体现。
-    # 8，缺省采取从右往左，按照优先级依次缺省。那么参数的缺省可以专门写一个函数来处理，字典里存放的就是缺省默认值
-    # 9，整个表达式省略的情况：参数全部默认并且method没有特殊处理，那么就省略。那么这两个函数可以分别给出个结果
-    # 10,method给出的默认值的意思是：Flase:形参全缺省，那么函数调用可省略，True：形参全缺省，函数调用也不能省略。
     for funcs, config in function_handlers.items():
         # 匹配函数规则
         if func_name in funcs:
@@ -468,8 +504,9 @@ def convert_function_args(func_name, args):
 
     # 其他未处理情况
     # TODO 暂时不处理，因为目前没有遇到需要处理这种情况
-    # raise NotImplementedError(f"Function '{func_name}' not implemented.")
-    return None
+    # 出现这个错误，说明method映射表需要补充，在【function_handlers】字典里补充对应的{func_name}
+    raise NotImplementedError(f"Function '{func_name}' not implemented.")
+    # return None
 
 
 # --------------------------------分步处理代码块------------------------------------
@@ -593,6 +630,7 @@ def iterate_widgets(screen_name):
             screen_init_chain.append(func_code)
     # 给组件的第一个样式函数前加上scr
     screen_init_chain[0] = '\n\tscr' + screen_init_chain[0]
+    screen_init_chain[-1] += ';'    # 末尾添加分号
     widgets_init_code.append('\n\t\t'.join(screen_init_chain))
 
     # 处理其他组件
@@ -603,10 +641,11 @@ def iterate_widgets(screen_name):
         widget_relation = find_relations(child_name=widget_name)
         widget_info = widget_relation[1]
         parent_name = widget_relation[2]
-        widget_init_chain = [f'\n\t{widget_name}.init({parent_name})']
-        # 组件定义
+        # 转为合成名
         widget_name_var_name = widget_info[0] + '_' + widget_name
-        widgets_define.append(f'\t{widget_info[1]} {widget_name_var_name}')
+        widget_init_chain = [f'\n\t{widget_name_var_name}.init({parent_name})']
+        # 组件定义
+        widgets_define.append(f'\t{widget_info[1]} {widget_name_var_name};')
         for func_info in function_list:
             func_name = func_info[0]
             args = func_info[1]
@@ -625,6 +664,7 @@ def iterate_widgets(screen_name):
                 widget_init_chain.append(func_code)
 
         # 拼接为组件初始化代码
+        widget_init_chain[-1] +=';' # 末尾添加分号
         widgets_init_code.append('\n\t\t'.join(widget_init_chain))
     # 给定义组件代码的首元素添加\n
     widgets_define[0] = '\n' + widgets_define[0]
