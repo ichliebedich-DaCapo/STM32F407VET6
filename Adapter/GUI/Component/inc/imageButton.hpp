@@ -14,9 +14,9 @@ class ImageButton : public Widget<ImageButton>
 {
 public:
     // 使用前必须设置父对象
-    ImageButton &init()
+    ImageButton &init(Obj_t parent = parent_)
     {
-        create_obj(&lv_imagebutton_class);
+        create_obj(&lv_imagebutton_class,parent);
         return *this;
     }
 

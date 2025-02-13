@@ -13,9 +13,9 @@ class Chart : public Widget<Chart>
 {
 public:
     // 初始化图表
-    inline Chart &init()
+    inline Chart &init(Obj_t parent = parent_)
     {
-        create_obj(&lv_chart_class);
+        create_obj(&lv_chart_class,parent);
         return *this;
     }
 

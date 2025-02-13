@@ -10,9 +10,9 @@ class Slider : public Widget<Slider>
 {
 public:
     // 使用前必须设置父对象
-    Slider& init()
+    Slider& init(Obj_t parent =parent_)
     {
-        create_obj(&lv_slider_class);
+        create_obj(&lv_slider_class,parent);
         return *this;
     }
 

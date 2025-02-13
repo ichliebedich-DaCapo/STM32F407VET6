@@ -279,6 +279,13 @@ public:
         return static_cast<Derived &>(*this);
     }
 
+    // 设置半径
+    inline Derived &radius(Coord radius, Selector selector = selector_default)
+    {
+        lv_obj_set_style_radius(obj_, radius, selector);
+        return static_cast<Derived &>(*this);
+    }
+
     // 样式系统（支持普通样式和本地样式）
     template<typename Style>
     inline Derived &add_style(Style &&style, Selector selector = selector_default)
@@ -454,6 +461,12 @@ public:
         return static_cast<Derived &>(*this);
     }
 
+    inline Derived& checkable()
+    {
+        add_flag(LV_OBJ_FLAG_CHECKABLE);
+        return static_cast<Derived &>(*this);
+    }
+
     inline Derived &appear()
     {
         clear_flag(LV_OBJ_FLAG_HIDDEN);
@@ -484,7 +497,7 @@ public:
 
 protected:
     // 公共初始化模板（供派生类调用）
-    void create_obj(const lv_obj_class_t *cls, Obj parent = parent_)
+    void inline create_obj(const lv_obj_class_t *cls, Obj parent = parent_)
     {
         obj_ = lv_obj_class_create_obj(cls, parent);
         lv_obj_class_init_obj(obj_);

@@ -409,7 +409,7 @@ function_handlers = {
 def get_method_from_map(all_omitted, args, method_map):
     """
     解析method映射表，返回是否省略调用、方法名和参数列表。
-    :param all_omitted: 是否所有参数都被省略。
+    :param all_omitted: 是否所有参数都被省略(True/False)。
     :param args: 处理后的参数列表。
     :param method_map: 方法的参数映射表，包含index、mapping、handler等键。
     :return: (omit_call, method_name, processed_args)
@@ -466,7 +466,7 @@ def omit_parameters(args, default_values):
 
     :param args: 传入的参数列表
     :param default_values: 默认值列表，对应参数列表中最后几个参数的默认值
-    :return: 处理后的参数列表和判断值（True表示有参数未省略，False表示全省略）
+    :return: 处理后的参数列表和判断值（True表示全省略，False表示有参数未省略）
     """
     assert len(args) >= len(default_values), "参数列表长度必须大于等于默认值列表长度"
 
@@ -483,7 +483,7 @@ def omit_parameters(args, default_values):
     processed_args = args[:len(args) - t] if t > 0 else list(args)  # 使用list()确保返回一个新的列表
     # 判断是否所有可省略参数都符合条件
     all_omitted = t == len(default_values)
-    return not all_omitted, processed_args
+    return all_omitted, processed_args
 
 
 def convert_function_args(func_name, args):

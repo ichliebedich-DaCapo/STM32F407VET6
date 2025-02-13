@@ -22,11 +22,16 @@ public:
         font_ = font;
     }
 
+    inline Button& init(Obj_t parent=parent_)
+    {
+        create_obj(&lv_button_class, parent);
+        return *this;
+    }
 
     // 使用前必须设置父对象
     inline Button &init(Strings text = nullptr, Obj parent = parent_)
     {
-        create_obj(&lv_button_class, parent);
+        init(parent);
 
         // 创建label，以Button为父对象
         label = lv_label_create(obj_);

@@ -31,6 +31,7 @@ namespace gui::init
 	obj_blueCounter_cont_1.init()
 		.pos(93, 60)
 		.size(294, 200)
+		.scrollbar_mode(LV_SCROLLBAR_MODE_OFF)
 		.border_width(4)
 		.border_opa(255)
 		.border_color(lv_color_hex(0xacceea))
@@ -64,7 +65,6 @@ namespace gui::init
 
 	label_blueCounter_plus_label.init(imgbtn_blueCounter_plus)
 		.text("+")
-		.long_mode()
 		.center(0, 0);
 
 	imgbtn_blueCounter_minus.init(obj_blueCounter_cont_1)
@@ -89,7 +89,6 @@ namespace gui::init
 
 	label_blueCounter_minus_label.init(imgbtn_blueCounter_minus)
 		.text("-")
-		.long_mode()
 		.center(0, 0);
 
 	btn_blueCounter_btn_1.init(obj_blueCounter_cont_1)
@@ -103,7 +102,6 @@ namespace gui::init
 
 	label_blueCounter_btn_1_label.init(btn_blueCounter_btn_1)
 		.text("Button")
-		.long_mode()
 		.center(0, 0)
 		.width(LV_PCT(100));
 
@@ -113,6 +111,7 @@ namespace gui::init
 		.add_flag(LV_OBJ_FLAG_CLICKABLE)
 		.src(&_NXP_Logo_RGB565A8_60x34)
 		.pivot(50, 50)
+		.rotation(0)
 		.image_recolor_opa(0)
 		.image_opa(255);
 
@@ -120,7 +119,6 @@ namespace gui::init
 		.pos(58, 74)
 		.size(114, 50)
 		.text("0")
-		.long_mode()
 		.radius(8)
 		.text_color(lv_color_hex(0x024f5a))
 		.text_font(&lv_font_arial_40)

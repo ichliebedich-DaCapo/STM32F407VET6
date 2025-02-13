@@ -31,7 +31,7 @@ public:
 
 
     // 初始化文本框，默认为黑色字体
-    inline Label &init(Obj parent = parent_)
+    inline Label &init(Obj_t parent = parent_)
     {
         create_obj(&lv_label_class, parent);
         Label::text_color(lv_color_black());// 设置文本颜色为黑色
