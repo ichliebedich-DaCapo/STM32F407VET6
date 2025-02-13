@@ -65,7 +65,7 @@ namespace gui::init
 
 	label_blueCounter_plus_label.init(imgbtn_blueCounter_plus)
 		.text("+")
-		.center(0, 0);
+		.center();
 
 	imgbtn_blueCounter_minus.init(obj_blueCounter_cont_1)
 		.pos(193, 100)
@@ -89,7 +89,7 @@ namespace gui::init
 
 	label_blueCounter_minus_label.init(imgbtn_blueCounter_minus)
 		.text("-")
-		.center(0, 0);
+		.center();
 
 	btn_blueCounter_btn_1.init(obj_blueCounter_cont_1)
 		.pos(260, -42)
@@ -102,7 +102,7 @@ namespace gui::init
 
 	label_blueCounter_btn_1_label.init(btn_blueCounter_btn_1)
 		.text("Button")
-		.center(0, 0)
+		.center()
 		.width(LV_PCT(100));
 
 	img_blueCounter_logo.init(obj_blueCounter_cont_1)
@@ -111,7 +111,6 @@ namespace gui::init
 		.add_flag(LV_OBJ_FLAG_CLICKABLE)
 		.src(&_NXP_Logo_RGB565A8_60x34)
 		.pivot(50, 50)
-		.rotation(0)
 		.image_recolor_opa(0);
 
 	label_blueCounter_counter.init(obj_blueCounter_cont_1)

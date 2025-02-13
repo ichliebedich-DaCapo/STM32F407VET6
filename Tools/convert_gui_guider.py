@@ -233,6 +233,8 @@ def find_relations(child_name=None):
 
 
 # 函数映射表
+# ①缺省表要注意缺省值是字符串类型
+# ②如果缺省表为空，那么默认是全缺省，所以，如果你不想被省略，那么需要把type设为非None，比如''
 function_handlers = {
     # 图像按钮
     'lv_imagebutton_set_src': {
@@ -308,7 +310,7 @@ function_handlers = {
     },
     # 全缺省不可免去调用
     'lv_obj_align': {
-        'args_map': [0, 0],
+        'args_map': ['0','0'],
         'method_map': {
             'index': [1],
             'mapping': {
@@ -389,7 +391,7 @@ function_handlers = {
     },
     # 全缺省可免调用
     'lv_image_set_rotation': {
-        'args_map': [0],
+        'args_map': ['0'],
         'method_map': {
             'index': [],
             'mapping': {},
@@ -464,8 +466,8 @@ def omit_parameters(args, default_values):
     :return: 处理后的参数列表和判断值（True表示全省略，False表示有参数未省略）
     """
     assert len(args) >= len(default_values), "参数列表长度必须大于等于默认值列表长度"
-
-    default_count = len(default_values)  # 确保这是一个整数
+    # 默认值列表长度
+    default_count = len(default_values)
     t = 0
     # 从后往前逐个检查参数是否符合默认值
     for i in range(default_count):
@@ -474,10 +476,15 @@ def omit_parameters(args, default_values):
             t += 1
         else:
             break
+
     # 生成处理后的参数列表
-    processed_args = args[:len(args) - t] if t > 0 else list(args)  # 使用list()确保返回一个新的列表
+    if t > 0:
+        processed_args = args[:len(args) - t]
+    else:
+        processed_args = args  # 直接使用原列表，避免不必要的拷贝
+
     # 判断是否所有可省略参数都符合条件
-    all_omitted = t == len(default_values)
+    all_omitted = (t == default_count)
     return all_omitted, processed_args
 
 
@@ -493,6 +500,7 @@ def convert_function_args(func_name, args):
         if func_name in funcs:
             # 处理参数规则
             args_result, handle_args = omit_parameters(args, config['args_map'])
+            print(f'func:{func_name}')
             final_result, final_method, final_args = get_method_from_map(args_result, handle_args, config['method_map'])
             # 判断是否该省略调用
             if final_result:
@@ -532,9 +540,9 @@ def convert_style_calls(func_name, args):
         ['pad_bottom', "0"],
         ['pad_left', "0"],
         ['shadow_width', "0"],
-        ['image_recolor_opa','255'],
-        ['image_opa','255'],
-        ['text_letter_space','0','letter_space']
+        ['image_recolor_opa', '255'],
+        ['image_opa', '255'],
+        ['text_letter_space', '0', 'letter_space']
     ]
 
     def list_get2(lst, default=None):
