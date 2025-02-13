@@ -21,64 +21,74 @@ namespace gui::widgets::main
     Button btn_hidden; // 隐藏按键
     Button btn_Random_data; // 生成随机数据按键
 
-    static constexpr size_t DATA_POINTS = 128;
     static constexpr size_t POOL_SIZE = 400;
     static inline size_t current_index = 0;     // 当前读取位置
     ChartSeries_t series; //数据 系列1
-    ChartSeries_t series_dirty; //数据 系列2 脏数据
-    int16_t data_cache[DATA_POINTS];  // 数据缓存
-    bool dirty_flags[DATA_POINTS];    // 脏标记数组
+    uint8_t length = 200;
+    uint8_t wave_start_index = 0;
+    uint16_t array_length = 400;
 }
-
-constexpr uint16_t start_x = border_info::x + 2 * border_info::margin;                       //82
-constexpr uint16_t start_y = border_info::y + border_info::height - 2 * border_info::margin;   //240
+/*******WaveDraw参数表**********/
+using HighPrecisionDraw = WaveDraw<uint32_t>;
+// 初始化参数
+HighPrecisionDraw::DrawParams params{
+        /* 使用uint32_t坐标系统 */
+        .x = 10,
+        .y = 10,
+        .height = 250,
+        .width = 400,
+        .margin = 2,
+        .length = 200,
+        .start_index = 0,
+        .array_length = 400
+};
+/********缓冲区 待优化*************/
 uint8_t CH0_buff[200] = {0};//波形数据存储
-uint8_t length = 200;
-uint8_t wave_start_index = 0;
-uint16_t array_length = 400;
 uint8_t read_wave[400]={111,110,102,109,118,108,114,123,117,121,
-                                   118,117,109,116,115,117,115,110,112,116,
-                                   113,104,113,122,127,125,117,123,115,115,
-                                   124,129,129,125,115,107,113,115,117,124,
-                                   122,112,120,120,119,111,111,117,127,124,
-                                   117,127,130,126,132,135,145,150,153,147,
-                                   144,135,141,141,141,149,151,155,149,150,
-                                   149,157,157,147,151,154,163,170,165,171,
-                                   168,168,175,178,174,169,165,155,158,167,
-                                   174,172,178,170,174,168,163,162,157,148,
-                                   140,132,134,136,130,133,128,118,125,124,
-                                   131,140,141,134,124,130,127,125,127,119,
-                                   116,120,127,133,125,126,129,122,124,127,
-                                   127,130,135,138,136,142,148,150,143,136,
-                                   132,125,116,111,107,114,124,117,109,104,
-                                   107,99,96,101,111,113,118,120,121,122,
-                                   116,115,109,115,111,109,106,115,112,119,
-                                   116,106,98,98,102,96,104,111,112,114,
-                                   121,131,125,135,139,134,134,124,121,115,
-                                   106,116,107,109,118,128,137,127,134,126,
-                                   128,121,111,102,101,95,93,85,93,85,
-                                   79,83,92,82,79,86,85,88,89,80,
-                                   86,87,89,84,84,75,65,58,62,67,
-                                   72,78,72,71,71,73,79,81,81,77,
-                                   79,80,81,84,89,99,101,99,104,96,
-                                   99,99,93,100,99,102,112,112,107,98,
-                                   96,95,95,97,103,109,103,93,89,97,
-                                   95,88,97,87,80,78,79,82,85,82,
-                                   89,95,85,91,81,72,62,62,61,65,
-                                   69,61,59,52,43,33,36,28,31,21,
-                                   13,9,9,10,10,6,2,11,21,24,
-                                   22,13,22,28,24,31,33,42,34,42,
-                                   42,36,34,24,16,26,31,36,45,55,
-                                   61,54,47,50,50,48,45,42,50,46,
-                                   40,41,42,42,46,47,43,42,42,43,
-                                   34,32,30,30,28,24,24,28,23,19,
-                                   11,6,1,0,2,0,5,0,0,0,
-                                   7,2,5,4,7,1,0,9,10,19,
-                                   28,34,35,30,27,36,37,43,49,45,
-                                   48,38,30,32,29,25,20,25,27,24,
-
+                        118,117,109,116,115,117,115,110,112,116,
+                        113,104,113,122,127,125,117,123,115,115,
+                        124,129,129,125,115,107,113,115,117,124,
+                        122,112,120,120,119,111,111,117,127,124,
+                        117,127,130,126,132,135,145,150,153,147,
+                        144,135,141,141,141,149,151,155,149,150,
+                        149,157,157,147,151,154,163,170,165,171,
+                        168,168,175,178,174,169,165,155,158,167,
+                        174,172,178,170,174,168,163,162,157,148,
+                        140,132,134,136,130,133,128,118,125,124,
+                        131,140,141,134,124,130,127,125,127,119,
+                        116,120,127,133,125,126,129,122,124,127,
+                        127,130,135,138,136,142,148,150,143,136,
+                        132,125,116,111,107,114,124,117,109,104,
+                        107,99,96,101,111,113,118,120,121,122,
+                        116,115,109,115,111,109,106,115,112,119,
+                        116,106,98,98,102,96,104,111,112,114,
+                        121,131,125,135,139,134,134,124,121,115,
+                        106,116,107,109,118,128,137,127,134,126,
+                        128,121,111,102,101,95,93,85,93,85,
+                        79,83,92,82,79,86,85,88,89,80,
+                        86,87,89,84,84,75,65,58,62,67,
+                        72,78,72,71,71,73,79,81,81,77,
+                        79,80,81,84,89,99,101,99,104,96,
+                        99,99,93,100,99,102,112,112,107,98,
+                        96,95,95,97,103,109,103,93,89,97,
+                        95,88,97,87,80,78,79,82,85,82,
+                        89,95,85,91,81,72,62,62,61,65,
+                        69,61,59,52,43,33,36,28,31,21,
+                        13,9,9,10,10,6,2,11,21,24,
+                        22,13,22,28,24,31,33,42,34,42,
+                        42,36,34,24,16,26,31,36,45,55,
+                        61,54,47,50,50,48,45,42,50,46,
+                        40,41,42,42,46,47,43,42,42,43,
+                        34,32,30,30,28,24,24,28,23,19,
+                        11,6,1,0,2,0,5,0,0,0,
+                        7,2,5,4,7,1,0,9,10,19,
+                        28,34,35,30,27,36,37,43,49,45,
+                        48,38,30,32,29,25,20,25,27,24,
 
 }; // 随机数池
+
+
+
 static int counter_value = 0; // 计数器值存储
 
 // 计数器逻辑
@@ -453,7 +463,7 @@ auto CounterLogic::hidden_all() -> void
 //    roller_1.hidden();
 //    dropdown_1.hidden();
 //    btn_hidden.hidden();
-    chart_1.appear();
+//    chart_1.appear();
     btn_Random_data.appear();
 }
 auto CounterLogic::generate_data()->void
@@ -471,115 +481,24 @@ auto CounterLogic::generate_data()->void
     FPS::print(false);
 
 
-//    draw_dashed_dividers(border_info::x, border_info::y, border_info::width, border_info::height, 10, 8, 0X8410,
-//                         border_info::margin, 4, 4);
-//    draw_interpolated_wave(start_x, start_y, read_wave, CH0_buff, length, wave_start_index, array_length, 0XFCC0,
-//                           0xFFFF);
-//
-//    wave_start_index = (wave_start_index +  20) % array_length;
-//    if(wave_start_index+length>array_length) wave_start_index=0;
-//    FPS::print(false);
+    draw_dashed_dividers(border_info::x, border_info::y,  border_info::height, border_info::width,
+                         border_info::h_div, border_info::v_div, 0X8410,
+                         border_info::margin, border_info::grid_dash_length, border_info::grid_gap_length);
+
+    HighPrecisionDraw::draw_wave<WaveDrawType::Interpolated_Line, uint8_t, uint16_t>(
+            params,
+            read_wave,
+            CH0_buff,
+            0XFCC0,
+            0xFFFF
+    );
+    params.start_index=(params.start_index +  20) % params.array_length;
+    if(params.start_index+params.length>params.array_length) params.start_index=0;
+
+    FPS::print(false);
 }
 
 
-// 生成随机数据
-//auto CounterLogic::generate_data()->void
-//{
-//    for(int i = 0;i < 128;++i)
-//    {
-//        lv_chart_set_next_value(chart_1, series, lv_rand(0, 255));
-//    }
-//
-//    for(int i = 0; i < DATA_POINTS; ++i) {
-//        int16_t new_val = lv_rand(0, 255);
-//
-//        // 仅当数值变化时标记脏点
-//        if(data_cache[i] != new_val) {
-//            data_cache[i] = new_val;
-//            dirty_flags[i] = true;
-//
-//            // 设置白色点实现擦除效果
-//            lv_chart_set_value_by_id(chart_1, series_dirty, i, 255);
-//        }
-//    }
-//    for(int i = 0; i < DATA_POINTS; ++i) {
-//        if(dirty_flags[i]) {
-//            // 更新实际数据点
-//            lv_chart_set_value_by_id(chart_1, series, i, data_cache[i]);
-//
-//            // 重置脏标记
-//            dirty_flags[i] = false;
-//            lv_chart_set_value_by_id(chart_1, series_dirty, i, LV_CHART_POINT_NONE);
-//        }
-//    }
-//
-//    // 控制刷新频率
-//    static uint32_t last_refresh = 0;
-//    if(lv_tick_elaps(last_refresh) > 30) { // ~30fps
-//        lv_chart_refresh(chart_1);
-//        last_refresh = lv_tick_get();
-//    }
-//}
-
-
-// 修改后的generate_data函数
-//auto CounterLogic::generate_data()->void
-//{
-//    static uint32_t last_refresh = 0;
-//    bool need_partial_refresh = false;
-//
-//    // 第一阶段：数据变化检测
-//    for(int i = 0; i < DATA_POINTS; ++i) {
-//        int16_t new_val = lv_rand(0, 255);
-//        if(data_cache[i] != new_val) {
-//            data_cache[i] = new_val;
-//            dirty_flags[i] = true;
-//            need_partial_refresh = true;
-//        }
-//    }
-//
-//    // 第二阶段：智能区域更新
-//    if(need_partial_refresh) {
-//        for(int i = 0; i < DATA_POINTS; ++i) {
-//            if(dirty_flags[i]) {
-//                // 获取旧点位置
-//                lv_point_t old_pos;
-//                lv_chart_get_point_pos_by_id(chart_1, series, i, &old_pos);
-//
-//                // 更新数据点
-//                lv_chart_set_value_by_id(chart_1, series, i, data_cache[i]);
-//
-//                // 计算刷新区域（扩展2像素）
-//                lv_area_t area = {
-//                        .x1 = (lv_coord_t)(old_pos.x - 2),
-//                        .y1 = (lv_coord_t)(old_pos.y - 2),
-//                        .x2 = (lv_coord_t)(old_pos.x + 2),
-//                        .y2 = (lv_coord_t)(old_pos.y + 2)
-//                };
-//
-//                // 标记需要刷新的区域
-//                lv_obj_invalidate_area(chart_1, &area);
-//
-//                // 获取新点位置并标记
-//                lv_chart_get_point_pos_by_id(chart_1, series, i, &old_pos);
-//                area.x1 = old_pos.x - 2;
-//                area.y1 = old_pos.y - 2;
-//                area.x2 = old_pos.x + 2;
-//                area.y2 = old_pos.y + 2;
-//                lv_obj_invalidate_area(chart_1, &area);
-//
-//                dirty_flags[i] = false;
-//            }
-//        }
-//    }
-//
-//    // 第三阶段：受控刷新
-//    if(lv_tick_elaps(last_refresh) > 30) { // 33ms ≈ 30fps
-//        // 仅刷新标记区域
-//        lv_refr_now(NULL);
-//        last_refresh = lv_tick_get();
-//    }
-//}
 // 新增切换生成状态的方法
 auto CounterLogic::toggle_generation() -> void
 {

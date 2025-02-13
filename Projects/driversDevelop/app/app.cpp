@@ -186,7 +186,6 @@ void adc1_isr()
 }
 
 float temp;
-uint32_t rand;
 void background_handler()
 {
     if (async_delay.is_timeout())

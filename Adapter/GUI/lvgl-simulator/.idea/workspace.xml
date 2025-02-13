@@ -28,16 +28,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/../Render/WaveDraw.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Render/WaveDraw.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Render/BasicDraw.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Render/BasicDraw.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug-mingw_nxp/bin/Simulator.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Base/GUI.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Base/GUI.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Render/WaveDraw.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Render/WaveDraw.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Render/WaveDraw.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Render/WaveDraw.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/roller/lv_roller.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/roller/lv_roller.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/inc/lcd.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/inc/lcd.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/lcd.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/app/app.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cmake/arm-gcc.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cmake/arm-gcc.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,11 +98,6 @@
   }
 }</component>
   <component name="RunManager" selected="CMake 应用程序.Simulator">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Simulator" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Simulator" TARGET_NAME="Simulator" CONFIG_NAME="Debug-MinGW_NXP" RUN_TARGET_PROJECT_NAME="Simulator" RUN_TARGET_NAME="Simulator">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -147,7 +144,8 @@
       <workItem from="1739286826216" duration="1369000" />
       <workItem from="1739289041689" duration="4000" />
       <workItem from="1739289054827" duration="7000" />
-      <workItem from="1739335538836" duration="5343000" />
+      <workItem from="1739335538836" duration="15167000" />
+      <workItem from="1739416924560" duration="4047000" />
     </task>
     <servers />
   </component>

@@ -6,6 +6,7 @@
 
 #include "GUI_Base.hpp"
 #include "WaveDraw.hpp"
+#include "BasicDraw.hpp"
 /// 声明各组件
 namespace gui::widgets::main
 {
@@ -25,17 +26,23 @@ namespace gui::widgets::main
 // 边框信息
 namespace border_info
 {
-    constexpr uint16_t x = 10;
-    constexpr uint16_t y = 10;
-    constexpr uint16_t width = 400;
-    constexpr uint16_t height = 250;
-    constexpr uint16_t margin = 2;
+    constexpr uint32_t x = 10;
+    constexpr uint32_t y = 10;
+    constexpr uint32_t width = 400;
+    constexpr uint32_t height = 250;
+    constexpr uint32_t margin = 2;
+    constexpr uint32_t h_div = 10;
+    constexpr uint32_t v_div = 8;
+    constexpr uint32_t grid_dash_length = 4;
+    constexpr uint32_t grid_gap_length = 4;
 //    constexpr uint16_t x = 78;
 //    constexpr uint16_t y = 36;
 //    constexpr uint16_t width = 324;
 //    constexpr uint16_t height = 208;
 //    constexpr uint16_t margin = 2;
 }
+
+
 
 /// UI接口
 namespace gui::interface
