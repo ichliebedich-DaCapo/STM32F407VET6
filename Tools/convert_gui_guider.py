@@ -20,6 +20,7 @@ widgets_relations = []
 # 组件定义代码块，格式为 ['Component xxx','']
 widgets_define = []
 
+
 # --------------------------------预处理------------------------------------
 
 # 寻找setup_scr_*函数
@@ -53,6 +54,7 @@ def check_default_arguments_2(parts, value):
     # 如果结果为空，返回空字符串；否则用逗号连接结果
     return ', '.join(result) if result else ''
 
+
 # ------------------------文本处理------------------------------
 
 # 输入组件创建代码块，返回组件前缀和组件类型
@@ -68,7 +70,7 @@ def get_widget_info(create_line):
         "lv_label_create": ["label", 'Label'],
         "lv_image_create": ["img", 'Image'],
         "lv_button_create": ["btn", 'Button'],
-        "lv_checkbox_create":['chekcbox','CheckBox'],
+        "lv_checkbox_create": ['chekcbox', 'CheckBox'],
     }
     for func, widget_info in widget_map.items():
         if func in create_line:
@@ -151,8 +153,9 @@ def extract_c_code_lines(input_text):
             code_lines.append(code_part)
     return code_lines
 
+
 # -----------------------------与组件有关系--------------------------------
-def check_widget_exists( widget_name):
+def check_widget_exists(widget_name):
     """检查组件是否已存在
     Args:
         widget_name (str): 要检查的组件名称
@@ -160,6 +163,7 @@ def check_widget_exists( widget_name):
         bool: 是否存在
     """
     return any(widget[0] == widget_name for widget in widgets)
+
 
 def add_function_to_existing(widget_name, func_name, args):
     """添加函数到已有组件
@@ -173,6 +177,7 @@ def add_function_to_existing(widget_name, func_name, args):
             widget[1].append([func_name, args.copy()])  # 使用拷贝避免引用问题
             break
 
+
 def create_new_widget(widget_name, func_name, args):
     """创建新组件结构
     Args:
@@ -183,6 +188,7 @@ def create_new_widget(widget_name, func_name, args):
         list: 新组件结构
     """
     return [widget_name, [[func_name, args.copy()]]]
+
 
 def add_widget_function(widget_name, func_name, args):
     """添加组件函数
@@ -212,6 +218,7 @@ def find_widget(widget_name):
             return item
     return None
 
+
 def remove_widget(widget_name):
     """
     删除指定组件
@@ -223,6 +230,7 @@ def remove_widget(widget_name):
     widgets[:] = [item for item in widgets if item[0] != widget_name]
     removed_count = original_length - len(widgets)
     return removed_count  # 返回已删除项目的数量
+
 
 # ------------------------------与组件关系有关------------------------
 def add_widget_relations(child_name, child_info, parent_name):
@@ -244,39 +252,17 @@ def add_widget_relations(child_name, child_info, parent_name):
     return True
 
 
-def find_relations(child_name=None, child_type=None, parent_name=None):
+def find_relations(child_name=None):
     """
     通用查询函数（支持类型包含式查询）
-    :param parent_name: 父组件（可选）
     :param child_name: 子组件（可选）
-    :param child_type: 子组件类型（可选）
     :return 返回的是[child_name,child_type,parent_name]类型
     """
-    return [
-        rel for rel in widgets_relations
-        if (child_name is None or rel[0] == child_name) and
-           (child_type is None or (
-                   (isinstance(child_type, list) and all(ct in rel[1] for ct in child_type)) or
-                   (not isinstance(child_type, list) and child_type in rel[1])
-           )) and
-           (parent_name is None or rel[2] == parent_name)
-    ][0]
+    for rel in widgets_relations:
+        if child_name is None or rel[0] == child_name:
+            return rel
 
 
-def has_relation(child_name=None, child_type=None, parent_name=None):
-    """ 检查是否存在满足条件的条目 """
-    return len(find_relations(child_name, child_type, parent_name)) > 0
-
-
-# 快捷查询函数
-def has_child(child_name, child_type):
-    """ 检查是否存在包含指定类型的子组件 """
-    return has_relation(child_name=child_name, child_type=child_type)
-
-
-def has_parent(parent_name):
-    """ 检查是否存在指定父组件 """
-    return has_relation(parent_name=parent_name)
 
 
 
@@ -496,7 +482,6 @@ def convert_style_calls(func_name, args):
     :param args:
     :return: converted(string) 返回的是转换好的样式代码，如果不需要那么就返回None
     """
-    converted = []
     default_config = [
         ['border_width', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
         ['text_color', 'lv_color_hex(0xffffff)', 'LV_PART_MAIN|LV_STATE_DEFAULT'],
@@ -510,7 +495,6 @@ def convert_style_calls(func_name, args):
         ['pad_left', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT'],
         ['shadow_width', "0", 'LV_PART_MAIN|LV_STATE_DEFAULT']
     ]
-
 
     # 这里能做到这么简洁是因为lvgl 9.2的所有样式API都只有三个参数，并且前缀相同
     # 匹配对应函数 第二个是非贪婪捕获，第三个是贪婪捕获，不过在这里都差不多
@@ -538,13 +522,9 @@ def convert_style_calls(func_name, args):
         state = "" if state == 'LV_PART_MAIN|LV_STATE_DEFAULT' else f", {state}"
 
     # 每个样式前加上一个Tab，是为了与init对齐
-    converted.append(f".{prop}({value}{state})")
+    converted = f".{prop}({value}{state})"
 
     return converted
-
-
-
-
 
 
 # --------------------------------解析代码------------------------------------
@@ -565,7 +545,7 @@ def process_code_lines(code_lines):
             widget_name = extract_comp_name_from_var(args[0])
             # ②存储初始化信息  [['widget_name',['func_name',[args]],……],……]
             add_widget_function(widget_name, func_name, args)
-        else :
+        else:
             # 创建组件代码行：组件关系提取到widgets_relations里
             # ui->blueCounter_cont_1 = lv_obj_create(ui->blueCounter);
             # ①先获取父子组件名称
@@ -577,7 +557,7 @@ def process_code_lines(code_lines):
             if not add_widget_relations(child_name, widget_info, parent_name):
                 # 存在预期外的重复组件关系
                 raise ValueError("Failed to add widget relations")
-        
+
 
 # ----------------解析组件信息-------------------
 def iterate_widgets(screen_name):
@@ -595,7 +575,7 @@ def iterate_widgets(screen_name):
     # 处理屏幕组件
     screen_widget = find_widget(screen_name)
     screen_func_list = screen_widget[1]
-    screen_init_chain =[]
+    screen_init_chain = []
     # 剔除屏幕组件
     remove_widget(screen_name)
     for scr_func_info in screen_func_list:
@@ -604,13 +584,12 @@ def iterate_widgets(screen_name):
         if 'lv_obj_set_style' in func_name:
             # 如果是样式函数
             func_code = convert_style_calls(func_name, args)
-            print(f'type:{type(func_code)}')
             if func_code is None:
                 continue
             screen_init_chain.append(func_code)
     # 给组件的第一个样式函数前加上scr
-    print(f"screen_init_chain:{screen_init_chain}")
-    screen_init_chain[0] = 'scr'+screen_init_chain[0]
+    # print(f"screen_init_chain:{screen_init_chain}")
+    screen_init_chain[0] = 'scr' + screen_init_chain[0]
     widgets_init_code.append('\n\t'.join(screen_init_chain))
 
     # 处理其他组件
@@ -621,7 +600,7 @@ def iterate_widgets(screen_name):
         widget_relation = find_relations(child_name=widget_name)
         widget_info = widget_relation[1]
         parent_name = widget_relation[2]
-        init_chain =[f'\n{widget_name}.init({parent_name})']
+        init_chain = [f'\n{widget_name}.init({parent_name})']
         # 组件定义
         widget_name_var_name = widget_info[0] + '_' + widget_name
         widgets_define.append(f'{widget_info[1]} {widget_name_var_name}')
@@ -647,7 +626,6 @@ def iterate_widgets(screen_name):
     return widgets_init_code
 
 
-
 # ----------------------------------输出结果处理--------------------------------------------
 def generate_output(project_name):
     """
@@ -665,7 +643,6 @@ def generate_output(project_name):
     :param project_name:
     :return:
     """
-
 
     widgets_block = "\n\t".join(widgets_define)
     widgets_init_code = iterate_widgets(project_name)
@@ -716,24 +693,18 @@ def main():
     project_name, func_body = parse_setup_function(content)
     # 把主屏幕放入组件中，并且把父组件名设置为''来标记
     widgets_relations.append([project_name, [], '', []])
-    
+
     # 【提取代码行】：从setup_scr_*函数体代码提取出代码行
     code_lines = extract_c_code_lines(func_body)
 
     # 【处理代码行】：从每行代码里提取到组件初始化信息和组件关系
     process_code_lines(code_lines)
 
-
     # 【解析信息】：把组件信息解析为对应的代码，并输出
     output = generate_output(project_name)
 
     with open("ui.cpp", "w", encoding='utf-8') as f:
         f.write(output)
-
-
-
-
-
 
 
 if __name__ == "__main__":
