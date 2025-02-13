@@ -592,8 +592,8 @@ def iterate_widgets(screen_name):
                 continue
             screen_init_chain.append(func_code)
     # 给组件的第一个样式函数前加上scr
-    screen_init_chain[0] = 'scr' + screen_init_chain[0]
-    widgets_init_code.append('\n\t'.join(screen_init_chain))
+    screen_init_chain[0] = '\n\tscr' + screen_init_chain[0]
+    widgets_init_code.append('\n\t\t'.join(screen_init_chain))
 
     # 处理其他组件
     for widget in widgets:
@@ -601,14 +601,12 @@ def iterate_widgets(screen_name):
         function_list = widget[1]
         # 链式调用：创建组件的代码
         widget_relation = find_relations(child_name=widget_name)
-        print(f'widget_relation :{widget_relation}')
-        print(f'widget_name :{widget_name}')
         widget_info = widget_relation[1]
         parent_name = widget_relation[2]
-        init_chain = [f'\n{widget_name}.init({parent_name})']
+        widget_init_chain = [f'\n\t{widget_name}.init({parent_name})']
         # 组件定义
         widget_name_var_name = widget_info[0] + '_' + widget_name
-        widgets_define.append(f'{widget_info[1]} {widget_name_var_name}')
+        widgets_define.append(f'\t{widget_info[1]} {widget_name_var_name}')
         for func_info in function_list:
             func_name = func_info[0]
             args = func_info[1]
@@ -624,10 +622,12 @@ def iterate_widgets(screen_name):
             if func_code is None:
                 continue
             else:
-                init_chain.append(func_code)
+                widget_init_chain.append(func_code)
 
         # 拼接为组件初始化代码
-        widgets_init_code.append('\n\t'.join(init_chain))
+        widgets_init_code.append('\n\t\t'.join(widget_init_chain))
+    # 给定义组件代码的首元素添加\n
+    widgets_define[0] = '\n' + widgets_define[0]
     return widgets_init_code
 
 
