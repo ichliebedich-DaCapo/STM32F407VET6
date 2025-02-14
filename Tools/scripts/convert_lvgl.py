@@ -1192,11 +1192,11 @@ class TemplateGenerator:
 
         # 添加可识别的注释占位符
         placeholder = textwrap.dedent(''' 
-            // 用户自定义代码区域 
+
             /**Custom Code**/
             
             /**End Custom Code**/
-            // 自动生成代码结束 
+
         ''')
         func_body += textwrap.indent(placeholder,  '    ')
 
@@ -1213,13 +1213,16 @@ class TemplateGenerator:
         if file_type == 'cpp':
             func_signature = f'void {self.placeholders["func_name"]}()'
             existing_body = self._extract_function_body(existing_code, func_signature)
+
             if existing_body:
+                # 总是返回字符串（空或有效内容）
                 custom_code = self._extract_custom_code(existing_body)
-                return self._replace_custom_code(new_code, func_signature, custom_code)
-            else:
-                return self._add_custom_code_markers(new_code, func_signature)
-        else:
-            return new_code
+                return self._replace_custom_code(
+                    new_code,
+                    func_signature,
+                    custom_code if custom_code is not None else ""  # 空值处理
+                )
+        return new_code
 
     def _extract_function_body(self, code: str, signature: str) -> Optional[str]:
         pattern = re.compile(fr'{re.escape(signature)}\s*\{{(.*?)\}}',  re.DOTALL)
@@ -1227,13 +1230,14 @@ class TemplateGenerator:
         return match.group(1).strip()  if match else None
 
     # 修改正则表达式匹配模式，允许注释中的空格
-    def _extract_custom_code(self, func_body: str) -> Optional[str]:
+    def _extract_custom_code(self, func_body: str) -> str:  # 返回类型改为str
+        """提取自定义代码（返回空字符串代替None）"""
         pattern = re.compile(
-            r'/\*\*\s*Custom Code\s*\*\*/(.*?)/\*\*\s*End Custom Code\s*\*\*/',
-            re.DOTALL
+            r'/\*{2,}\s*Custom\s*Code\s*\*+/(.*?)/\*{2,}\s*End\s*Custom\s*Code\s*\*+/',
+            re.DOTALL | re.IGNORECASE
         )
         match = pattern.search(func_body)
-        return match.group(1).strip()  if match else None
+        return match.group(1).strip()  if match else ""  # 空匹配返回空字符串
 
     # 增强占位符替换鲁棒性
     def _replace_custom_code(self, new_code: str, signature: str, custom_code: str) -> str:
