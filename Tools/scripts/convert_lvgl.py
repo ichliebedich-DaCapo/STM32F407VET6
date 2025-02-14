@@ -892,17 +892,32 @@ class CppCodeTemplate:
     """
     framework: str = """\
 {pre_define}
-// Auto-generated UI Code, converted from GUI Guider
+/*!INCLUDES_BEGIN!*/
 {includes}
- 
+
+/*!INCLUDES_END!*/
+
+// 组件定义 
 {widgets_namespace}
 {post_define}
+
+/*!DECLARE_CODE_BEGIN!*/
+// 全局变量定义
+
+// 类声明
+
+/*!DECLARE_CODE_END!*/
 
 {pre_init}
 {init_namespace}
 {post_init}
 
 {ui_interface}
+
+/*!DEFINE_CODE_BEGIN!*/
+// 类定义
+
+/*!DEFINE_CODE_END!*/
 """
     widgets_namespace: str = """\
 namespace {ns_name} 
@@ -912,19 +927,26 @@ namespace {ns_name}
 
 /*!WIDGETS_DEFINE_END!*/
 }}
-using namespace {ns_name};
-"""
+using namespace {ns_name};"""
+
 
     init_namespace: str = """\
 namespace {ns_name}
 {{
-void {func_name}() 
-{{
+    void {func_name}() 
+    {{
 {init_blocks}
     /*!INIT_CUSTOM_BEGIN!*/
 
     /*!INIT_CUSTOM_END!*/
-}}
+    }}
+    
+    void events()
+    {{
+    /*!EVENTS_CUSTOM_BEGIN!*/
+    
+    /*!EVENTS_CUSTOM_END!*/
+    }}
 }}
 """
 
@@ -975,8 +997,9 @@ class HppCodeTemplate:
     widgets_namespace: str = """\
 namespace {ns_name}
 {{
-/*!WIDGETS_DECLARE_BEGIN!*/
 {declare_blocks}
+/*!WIDGETS_DECLARE_BEGIN!*/
+
 /*!WIDGETS_DECLARE_END!*/
 }}  
 """
@@ -1215,16 +1238,21 @@ class TemplateGenerator:
 
     def _merge_code(self, existing: str, new: str, file_type: str) -> str:
         """智能合并策略"""
-        # 定义保留规则
+        # 定义保留规则(目前只有KEEP_WHOLE)可以使用
         preserve_rules = {
             'hpp': [
                 (r'/\*!UI_INTERFACE_BEGIN!.*?\*!UI_INTERFACE_END!', 'KEEP_WHOLE'),  # 全保留
-                (r'/\*!WIDGETS_DECLARE_BEGIN!.*?\*!WIDGETS_DECLARE_END!', 'MERGE_CONTENT')  # 合并内容
+                (r'/\*!WIDGETS_DECLARE_BEGIN!.*?\*!WIDGETS_DECLARE_END!', 'KEEP_WHOLE')  # 合并内容
             ],
             'cpp': [
+                (r'/\*!INCLUDES_BEGIN!.*?\*!INCLUDES_END!', 'KEEP_WHOLE'),
+                (r'/\*!WIDGETS_DEFINE_BEGIN!.*?\*!WIDGETS_DEFINE_END!', 'KEEP_WHOLE'),
+                (r'/\*!DECLARE_CODE_BEGIN!.*?\*!DECLARE_CODE_END!', 'KEEP_WHOLE'),
+                (r'/\*!INIT_CUSTOM_BEGIN!.*?\*!INIT_CUSTOM_END!', 'KEEP_WHOLE'),
+                (r'/\*!EVENTS_CUSTOM_BEGIN!.*?\*!EVENTS_CUSTOM_END!', 'KEEP_WHOLE'),
                 (r'/\*!UI_IMPLEMENT_BEGIN!.*?\*!UI_IMPLEMENT_END!', 'KEEP_WHOLE'),
-                (r'/\*!WIDGETS_DEFINE_BEGIN!.*?\*!WIDGETS_DEFINE_END!', 'MERGE_CONTENT'),
-                (r'/\*!INIT_CUSTOM_BEGIN!.*?\*!INIT_CUSTOM_END!', 'KEEP_WHOLE')
+                (r'/\*!DEFINE_CODE_BEGIN!.*?\*!DEFINE_CODE_END!', 'KEEP_WHOLE'),
+
             ]
         }
 
@@ -1307,7 +1335,7 @@ def main():
         init_blocks=widgets_init_code,
         output_path=".",
         is_font_custom=False,
-        mode=GenerateMode.MERGE
+        mode=GenerateMode.OVERWRITE
     )
 
     print("代码生成成功！输出文件：ui.cpp")
