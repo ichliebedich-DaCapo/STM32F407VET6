@@ -908,16 +908,34 @@ class CppCodeTemplate:
 namespace {ns_name} 
 {{
 {define_blocks}
+/*!WIDGETS_DEFINE_BEGIN!*/
+
+/*!WIDGETS_DEFINE_END!*/
 }}
 using namespace {ns_name};
 """
 
-    # 初始化命名空间
     init_namespace: str = """\
 namespace {ns_name}
 {{
+void {func_name}() 
+{{
 {init_blocks}
+    /*!INIT_CUSTOM_BEGIN!*/
+
+    /*!INIT_CUSTOM_END!*/
 }}
+}}
+"""
+
+    ui_interface: str = """\
+/*!UI_IMPLEMENT_BEGIN!*/
+// 用户自定义接口实现区（安全编辑区） 
+namespace {ns_name} {{
+
+
+}}
+/*!UI_IMPLEMENT_END!*/
 """
 
     # 初始化函数模板
@@ -928,12 +946,6 @@ namespace {ns_name}
     }}
     """
 
-    ui_interface: str = """\
-namespace {ns_name}
-{{
-{define_blocks}
-}}
-"""
 
 @dataclass
 class HppCodeTemplate:
@@ -959,19 +971,24 @@ class HppCodeTemplate:
 // ------加载资源------
 {load_resources}  
 """
-    # 声明变量的命名空间
+
     widgets_namespace: str = """\
 namespace {ns_name}
 {{
+/*!WIDGETS_DECLARE_BEGIN!*/
 {declare_blocks}
+/*!WIDGETS_DECLARE_END!*/
 }}  
 """
-    # UI接口
+
     ui_interface: str = """\
-namespace {ns_name}
-{{
-{declare_blocks}
+/*!UI_INTERFACE_BEGIN!*/
+// 用户自定义接口声明区（安全编辑区）
+namespace {ns_name} {{
+
+
 }}
+/*!UI_INTERFACE_END!*/
 """
 
 
@@ -1187,83 +1204,71 @@ class TemplateGenerator:
         )
 
     def _build_init_content(self, blocks: List[str], mode: GenerateMode) -> str:
-        """构建初始化部分代码（完整实现）"""
-        func_body = textwrap.indent('\n'.join(blocks),   '')
+        func_body = textwrap.indent('\n'.join(blocks), '')
 
-        # 添加可识别的注释占位符
-        placeholder = textwrap.dedent(''' 
-
-            /**Custom Code**/
-            
-            /**End Custom Code**/
-
-        ''')
-        func_body += textwrap.indent(placeholder,  '    ')
-
-        init_func = self.cpp_template.function_template.format(
-            func_name=self.placeholders['func_name'],
-            func_body=func_body
-        )
+        # 在初始化函数外围添加标记
         return self.cpp_template.init_namespace.format(
             ns_name=self.placeholders['init_namespace'],
-            init_blocks=init_func
+            func_name=self.placeholders['func_name'],
+            init_blocks=func_body
         )
 
-    def _merge_code(self, existing_code: str, new_code: str, file_type: str) -> str:
-        if file_type == 'cpp':
-            func_signature = f'void {self.placeholders["func_name"]}()'
-            existing_body = self._extract_function_body(existing_code, func_signature)
+    def _merge_code(self, existing: str, new: str, file_type: str) -> str:
+        """智能合并策略"""
+        # 定义保留规则
+        preserve_rules = {
+            'hpp': [
+                (r'/\*!UI_INTERFACE_BEGIN!.*?\*!UI_INTERFACE_END!', 'KEEP_WHOLE'),  # 全保留
+                (r'/\*!WIDGETS_DECLARE_BEGIN!.*?\*!WIDGETS_DECLARE_END!', 'MERGE_CONTENT')  # 合并内容
+            ],
+            'cpp': [
+                (r'/\*!UI_IMPLEMENT_BEGIN!.*?\*!UI_IMPLEMENT_END!', 'KEEP_WHOLE'),
+                (r'/\*!WIDGETS_DEFINE_BEGIN!.*?\*!WIDGETS_DEFINE_END!', 'MERGE_CONTENT'),
+                (r'/\*!INIT_CUSTOM_BEGIN!.*?\*!INIT_CUSTOM_END!', 'KEEP_WHOLE')
+            ]
+        }
 
-            if existing_body:
-                # 总是返回字符串（空或有效内容）
-                custom_code = self._extract_custom_code(existing_body)
-                return self._replace_custom_code(
-                    new_code,
-                    func_signature,
-                    custom_code if custom_code is not None else ""  # 空值处理
-                )
-        return new_code
+        for pattern, mode in preserve_rules.get(file_type, []):
+            # 查找现有代码中的匹配区域
+            old_match = re.search(pattern, existing, re.DOTALL)
+            if not old_match:
+                continue
 
-    def _extract_function_body(self, code: str, signature: str) -> Optional[str]:
-        pattern = re.compile(fr'{re.escape(signature)}\s*\{{(.*?)\}}',  re.DOTALL)
-        match = pattern.search(code)
-        return match.group(1).strip()  if match else None
+            # 根据模式处理
+            if mode == 'KEEP_WHOLE':
+                # 用旧区域完全替换新区域
+                new = re.sub(pattern, old_match.group(0), new, count=1, flags=re.DOTALL)
+            elif mode == 'MERGE_CONTENT':
+                # 提取旧内容并插入新框架
+                old_content = self._extract_inner_content(old_match.group(0))
+                new = self._replace_inner_content(new, pattern, old_content)
+            elif mode == 'KEEP_CONTENT':
+                # 保留旧内容但保持新框架
+                old_content = self._extract_inner_content(old_match.group(0))
+                new = self._replace_inner_content(new, pattern, old_content, keep_markers=True)
 
-    # 修改正则表达式匹配模式，允许注释中的空格
-    def _extract_custom_code(self, func_body: str) -> str:  # 返回类型改为str
-        """提取自定义代码（返回空字符串代替None）"""
-        pattern = re.compile(
-            r'/\*{2,}\s*Custom\s*Code\s*\*+/(.*?)/\*{2,}\s*End\s*Custom\s*Code\s*\*+/',
-            re.DOTALL | re.IGNORECASE
-        )
-        match = pattern.search(func_body)
-        return match.group(1).strip()  if match else ""  # 空匹配返回空字符串
+        return new
 
-    # 增强占位符替换鲁棒性
-    def _replace_custom_code(self, new_code: str, signature: str, custom_code: str) -> str:
+    def _extract_inner_content(self, text: str) -> str:
+        """提取两个标记之间的内容（不含标记本身）"""
+        match = re.search(r'(?<=BEGIN!)[\s\S]*?(?=END!)', text, re.DOTALL)
+        return match.group(0).strip() if match else ''
+
+    def _replace_inner_content(self, new_code: str, pattern: str, content: str, keep_markers=False) -> str:
+        """替换区域内部内容"""
         def replacer(match):
-            body = match.group(1)
-            # 使用更灵活的占位符匹配
-            placeholder_pattern = re.compile(
-                r'/\*\*\s*Custom Code\s*\*\*/(.*?)/\*\*\s*End Custom Code\s*\*\*/',
-                re.DOTALL
-            )
-            replacement = f'/**Custom Code**/\n{custom_code}\n/**End Custom Code**/'
-            return f'{signature} {{\n{placeholder_pattern.sub(replacement,  body)}\n}}'
+            if keep_markers:
+                return f"{match.group(1)}{content}{match.group(3)}"
+            return f"{match.group(1)}{content}{match.group(3)}"
+
         return re.sub(
-            fr'{re.escape(signature)}\s*\{{(.*?)\}}',
+            r'(/\*!.*?_BEGIN!)(.*?)(\*!.*?_END!*/)',
             replacer,
             new_code,
-            flags=re.DOTALL
+            flags=re.DOTALL,
+            count=1
         )
 
-    def _add_custom_code_markers(self, code: str, signature: str) -> str:
-        return re.sub(
-            fr'({re.escape(signature)}\s*\{{.*?)\}}',
-            r'\1\n    /**Custom Code**/\n\n    /**End Custom Code**/\n}}',
-            code,
-            flags=re.DOTALL
-        )
 
 
 
