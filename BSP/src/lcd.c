@@ -10,7 +10,8 @@
 #include "stm32f4xx_hal.h"
 
 extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
-
+extern SPI_HandleTypeDef hspi2;
+extern SPI_HandleTypeDef hspi3;
 
 /*LCD地址*/
 #define TFT_CMD (*((volatile unsigned short *) 0x60060000)) // TFT命令寄存器片选地址
@@ -27,7 +28,7 @@ extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
 #define LCD_SORTS 9488
 #define LCD_INTERFACE_TYPE 1 // 0:8080接口 1:SPI接口 GUI.c中的同时修改
 #define delay_ms(ms)   HAL_Delay(ms)
-
+//#define USE_SPI_DMA
 // 使用SPI时
 #if LCD_INTERFACE_TYPE == 1
 // GPIO引脚定义
@@ -280,8 +281,9 @@ void lcd_init(void)
 
     GPIO_InitStruct.Pin = LCD_RS_PIN;
     HAL_GPIO_Init(LCD_RS_PORT, &GPIO_InitStruct);
-
-
+#ifdef USE_SPI_DMA
+    spi2_dma_Init();// 初始化SPI+DMA
+#endif
     spi2_init(); //硬件SPI初始化
 
     //LCD 复位
@@ -613,7 +615,9 @@ void LCD_Set_Pixel(uint16_t x, uint16_t y, uint16_t color)
 void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)
 {
 #if LCD_INTERFACE_TYPE == 0//使用8088
+#define USE_FSMC_DMA
 #ifdef USE_FSMC_DMA
+
     LCD_Set_Window(x1, y1, x2, y2);//设置LCD屏幕的扫描区域
     HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream6, (uint32_t) color_p, TFT_DATA_ADDR,
                      ((x2 + 1) - x1) * ((y2 + 1) - y1));
@@ -621,6 +625,18 @@ void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_
     LCD_Color_Fill(area->x1, area->y1, area->x2, area->y2, (const uint16_t *)color_p);
 #endif
 #elif LCD_INTERFACE_TYPE == 1//使用SPI
+
+#ifdef USE_SPI_DMA
+    /* 设置LCD窗口并启动DMA传输 */
+    LCD_Set_Window(x1, y1, x2, y2);
+    LCD_CS_LOW();
+    LCD_RS_HIGH();
+
+    uint32_t pixel_count = (x2 - x1 + 1) * (y2 - y1 + 1);
+
+    /* 启动SPI DMA传输 */
+    HAL_SPI_Transmit_DMA(&hspi2, (uint8_t*)color_p, pixel_count * 2);
+#else
     LCD_Set_Window(x1, y1, x2, y2); // 设置LCD屏幕的扫描区域
     LCD_CS_LOW(); // 使能LCD片选
     LCD_RS_HIGH(); // 设置为数据模式
@@ -633,7 +649,6 @@ void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_
     }
 
     LCD_CS_HIGH(); // 禁用LCD片选
-
+#endif
 #endif
 }
-

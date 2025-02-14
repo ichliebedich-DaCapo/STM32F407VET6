@@ -29,10 +29,16 @@
   <component name="ChangeListManager">
     <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Render/WaveDraw.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Render/WaveDraw.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Render/WaveDraw.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Render/WaveDraw.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw_nxp/bin/Simulator.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw_nxp/bin/Simulator.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/inc/spi.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/inc/spi.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/src/baseInit.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/baseInit.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/src/fsmc.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/fsmc.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/lcd.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/src/spi.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/spi.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +149,7 @@
       <workItem from="1739289041689" duration="4000" />
       <workItem from="1739289054827" duration="7000" />
       <workItem from="1739335538836" duration="15167000" />
-      <workItem from="1739416924560" duration="6150000" />
+      <workItem from="1739416924560" duration="10057000" />
     </task>
     <servers />
   </component>

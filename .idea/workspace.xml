@@ -33,12 +33,18 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】Render新增WaveDraw和BasicDraw,WaveDraw实现模版化，准备把脏区域也做到类里">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】WaveDraw模版化,插值算法的特化实现完善（不在依赖.cpp）">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Render/WaveDraw.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Render/WaveDraw.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/Render/WaveDraw.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Render/WaveDraw.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/cmake-build-debug-mingw_nxp/bin/Simulator.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/cmake-build-debug-mingw_nxp/bin/Simulator.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/spi.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/spi.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/baseInit.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/baseInit.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/fsmc.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/fsmc.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/lcd.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/spi.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/spi.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/ISR.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -227,11 +233,6 @@
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="libalgorithm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libalgorithm" CONFIG_NAME="Release-MinGW_ARM">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -487,15 +488,8 @@
       <workItem from="1739286833047" duration="2173000" />
       <workItem from="1739289061793" duration="510000" />
       <workItem from="1739332917477" duration="39246000" />
-      <workItem from="1739416938058" duration="19234000" />
-    </task>
-    <task id="LOCAL-00053" summary="【双音频信号发生器】实测过程中，发现定时器的psc和arr有些古怪：比如我明明把psc与arr颠倒了却仍得到相同的结果，另外arr在1和0范围内有些古怪。128*8K有些高，卡在定时器中断里不出来，这并不应该">
-      <option name="closed" value="true" />
-      <created>1730827807973</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1730827807974</updated>
+      <workItem from="1739416938058" duration="33229000" />
+      <workItem from="1739505218885" duration="4000" />
     </task>
     <task id="LOCAL-00054" summary="【双音频信号发生器】硬件基本功能已正确，可整一些花活了">
       <option name="closed" value="true" />
@@ -881,7 +875,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739433012842</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="【驱动开发】WaveDraw模版化,插值算法的特化实现完善（不在依赖.cpp）">
+      <option name="closed" value="true" />
+      <created>1739439349711</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1739439349711</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -916,7 +918,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【简易存储示波器】准备合并" />
     <MESSAGE value="【简易存储示波器】准备合并UI" />
     <MESSAGE value="【简易存储示波器】可以设置采样频率" />
     <MESSAGE value="【驱动开发】解决了横屏显示问题，完善了lcd.c中显示方向函数，初始化方向设置为横屏" />
@@ -941,7 +942,8 @@
     <MESSAGE value="【驱动开发】脏数组和双缓冲与lvgl原有的双缓冲和局部渲染机制冲突不起作用" />
     <MESSAGE value="【驱动开发】lvgl图表和WaveDraw的对比" />
     <MESSAGE value="【驱动开发】Render新增WaveDraw和BasicDraw,WaveDraw实现模版化，准备把脏区域也做到类里" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】Render新增WaveDraw和BasicDraw,WaveDraw实现模版化，准备把脏区域也做到类里" />
+    <MESSAGE value="【驱动开发】WaveDraw模版化,插值算法的特化实现完善（不在依赖.cpp）" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】WaveDraw模版化,插值算法的特化实现完善（不在依赖.cpp）" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

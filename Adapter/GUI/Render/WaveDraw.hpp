@@ -39,22 +39,22 @@ enum class WaveDrawType
 };
 
 /***************************绘制功能代码****************************/
-
-void draw_interpolated_wave(uint16_t x, uint16_t y,
-                            size_t height,size_t width,size_t margin,
-                            const uint8_t *p_SOC_Buff,uint8_t *p_DST_Buff,
-                            size_t length,size_t start_index, size_t array_length,
-                            uint16_t color, uint16_t background_color);
-
-
-void clear_interpolated_wave(uint16_t x, uint16_t y,
-                             size_t height,size_t width,size_t margin,
-                             const uint8_t *p_DST_Buff,
-                             size_t length,size_t start_index, size_t array_length,
-                             uint16_t background_color);
-
-
-void clear_drawn_points(uint16_t backgroundColor,Point dirtyPoints[], size_t& dirtyPointsCount);
+//留得青山在
+//void draw_interpolated_wave(uint16_t x, uint16_t y,
+//                            size_t height,size_t width,size_t margin,
+//                            const uint8_t *p_SOC_Buff,uint8_t *p_DST_Buff,
+//                            size_t length,size_t start_index, size_t array_length,
+//                            uint16_t color, uint16_t background_color);
+//
+//
+//void clear_interpolated_wave(uint16_t x, uint16_t y,
+//                             size_t height,size_t width,size_t margin,
+//                             const uint8_t *p_DST_Buff,
+//                             size_t length,size_t start_index, size_t array_length,
+//                             uint16_t background_color);
+//
+//
+//void clear_drawn_points(uint16_t backgroundColor,Point dirtyPoints[], size_t& dirtyPointsCount);
 
 /***************************模版类代码****************************/
 

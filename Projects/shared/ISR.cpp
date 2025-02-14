@@ -88,7 +88,7 @@ extern "C" {
 void EXTI0_IRQHandler()
 {
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_0);
-    PlatformKey ::isr_entry(KEY_RAM & 0xF);//获取键值
+    PlatformKey::isr_entry(KEY_RAM & 0xF);//获取键值
 }
 
 
@@ -118,9 +118,15 @@ void DMA2_Stream6_IRQHandler(void)
 //#endif
 //    }
 }
-
-
-}
+//extern DMA_HandleTypeDef hdma_spi2_tx;
+//void DMA1_Stream4_IRQHandler(void)
+//{
+//
+//    HAL_DMA_IRQHandler(&hdma_spi2_tx);
+//
+//}
+//
+//}
 
 
 
@@ -214,3 +220,4 @@ void EXTI9_5_IRQHandler(void)
 
 }
 
+}
