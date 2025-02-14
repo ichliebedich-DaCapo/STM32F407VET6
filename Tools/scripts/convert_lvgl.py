@@ -877,8 +877,7 @@ UI代码转换系统 v2.5
 class GenerateMode(Enum):
     """生成模式枚举"""
     OVERWRITE = 1
-    APPEND = 2
-    DRY_RUN = 3
+    MERGE = 2  # 新增融合模式，移除其他模式
 
 @dataclass
 class CppCodeTemplate:
@@ -909,7 +908,7 @@ class CppCodeTemplate:
 namespace {ns_name} 
 {{
 {define_blocks}
-}} // end {ns_name}
+}}
 using namespace {ns_name};
 """
 
@@ -1009,6 +1008,37 @@ class HookSystem:
         return filtered_results[0] if filtered_results else ''
 
 
+def _build_load_resources(resources, is_custom=True) -> str:
+    """构建资源加载代码"""
+    resources_list = []
+
+    # 处理字体资源
+    font_resources = []
+    for font in resources.get('font',  []):
+        # 应用custom前缀规则
+        if is_custom:
+            processed_font = font.replace("lv_font",  "lv_customer_font", 1)  # 仅替换第一个匹配项
+        else:
+            processed_font = font
+        font_resources.append(f"LV_FONT_DECLARE({processed_font})")
+
+        # 添加字体区块
+    if font_resources:
+        resources_list.append("//  字体资源")
+        resources_list.extend(font_resources)
+
+        # 处理图片资源
+    img_resources = [f"LV_IMG_DECLARE({img})" for img in resources.get('image',  [])]
+
+    # 添加图片区块
+    if img_resources:
+        resources_list.append("//  图片资源")
+        resources_list.extend(img_resources)
+
+        # 生成最终代码
+    content = "\n".join(resources_list)
+    return content
+
 
 class TemplateGenerator:
     """模板驱动代码生成器"""
@@ -1034,6 +1064,7 @@ class TemplateGenerator:
             define_blocks: List[str],
             init_blocks: List[str],
             output_path: str,
+            is_font_custom: bool = True,
             mode: GenerateMode = GenerateMode.OVERWRITE
     ) -> bool:
         """
@@ -1042,6 +1073,7 @@ class TemplateGenerator:
             define_blocks: 组件定义代码块列表
             init_blocks: 初始化代码块列表
             output_path: 输出文件路径（最后不用带反斜杠）
+            is_font_custom: 决定生成字体声明时，要不要使用自定义的字体类型。默认使用
             mode: 生成模式
         Returns:
             生成是否成功
@@ -1055,7 +1087,7 @@ class TemplateGenerator:
         # hpp
         declare_widgets_content = self._build_declare_widgets_content(define_blocks)
         declare_ui_interface = self._build_declare_ui_interface([])
-        load_resources = self._build_load_resources(resources,False)
+        load_resources = _build_load_resources(resources,is_font_custom)
         # cpp
         define_widgets_content = self._build_define_widgets_content(define_blocks)
         init_content = self._build_init_content(init_blocks, mode)
@@ -1086,7 +1118,7 @@ class TemplateGenerator:
         )
 
         # 阶段4：后处理
-        print(self._execute_hooks('post_generate'))
+        print(self.hooks.execute_hooks('post_generate'))
         # hpp
         Path(output_path+'/ui.hpp').write_text(final_hpp_code, encoding='utf-8')
         # cpp
@@ -1125,37 +1157,6 @@ class TemplateGenerator:
             declare_blocks=content
         )
 
-    def _build_load_resources(self, resources, is_custom=True) -> str:
-        """构建资源加载代码"""
-        resources_list = []
-
-        # 处理字体资源
-        font_resources = []
-        for font in resources.get('font',  []):
-            # 应用custom前缀规则
-            if is_custom:
-                processed_font = font.replace("lv_font",  "lv_customer_font", 1)  # 仅替换第一个匹配项
-            else:
-                processed_font = font
-            font_resources.append(f"LV_FONT_DECLARE({processed_font})")
-
-            # 添加字体区块
-        if font_resources:
-            resources_list.append("//  字体资源")
-            resources_list.extend(font_resources)
-
-            # 处理图片资源
-        img_resources = [f"LV_IMG_DECLARE({img})" for img in resources.get('image',  [])]
-
-        # 添加图片区块
-        if img_resources:
-            resources_list.append("//  图片资源")
-            resources_list.extend(img_resources)
-
-            # 生成最终代码
-        content = "\n".join(resources_list)
-        return content
-
     def _build_define_ui_interface(self, blocks: List[str]) -> str:
         """构建ui接口定义代码
 
@@ -1182,17 +1183,13 @@ class TemplateGenerator:
         )
 
 
-    def _execute_hooks(self, point: str) -> None:
-        """执行指定钩子点的回调"""
-        for hook in self.hooks.hooks.get(point,  []):
-            hook()
 
 
 
 # -------------------------------------主函数--------------------------------------------
 def main():
     # 【定位屏幕初始化代码】：定位 setup_scr_* 函数,并获取工程名和函数体
-    c_content = find_c_functions(search_path="../Projects/driversDevelop/ui/generated",
+    c_content = find_c_functions(search_path="E:\Program\Embedded\MCU\GUI\GUI\generated",
                            func_name="setup_scr_*",
                            file_name="setup_scr_*.c")
     # 获取第一个满足条件的函数
@@ -1223,6 +1220,7 @@ def main():
         define_blocks=widgets_define_code,
         init_blocks=widgets_init_code,
         output_path=".",
+        is_font_custom=False,
         mode=GenerateMode.OVERWRITE
     )
 
