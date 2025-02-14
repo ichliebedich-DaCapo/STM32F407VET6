@@ -709,59 +709,9 @@ def iterate_widgets(screen_name):
     return widgets_init_code
 
 
-# ----------------------------------输出结果处理--------------------------------------------
-def generate_output(widgets_define_code,widgets_init_code):
-    """
-    输出转换后的代码结果。
-    ①初始化代码可以划分为几个组件块，每个组件块都办包含了自己的名称和若干代码行。
-    ②组件的每行代码行都有解析器解析后存储到属于该组件的位置
-    ③那么包含了所有组件信息的列表应该这样设计算。
-    ④widgets [['widget_name',['.init(89,63)','pos(165,35)',……]],……]
-    ⑤为了便于处理，应把初始化代码和样式定义代码分开，最后在合并到一起。或者说如果发现解析出的函数名含"lv_obj_style"
-        那么就使用样式代码的处理方式，最后都穿插到widgets里。这样也便于后续自定义lvgl代码也能解析
-    ⑥对于塞入初始化代码的块，其实可以不用直接转为字符串的形式，可以先用列表存储起来，即
-        [['widget_name',[['func_name','args'],,……]],……]
-        收集所有信息 → 统合信息（把一些函数和参数拼接） → 链接函数调用块（把包含函数信息的列表拼接为字符串）
-         → 解析组件（把widgets解析为对应的代码，首行的组件名称与函数调用拼接在一起）→ 代码生成
-    :param widgets_init_code: (list)组件初始化代码
-    :param widgets_define_code: (list)组件定义代码
-    :return:
-    """
-    # 需要确保组件定义代码和初始化代码均为列表
-    widgets_block = "\n".join(widgets_define_code)
-    screen_block = "\n".join(widgets_init_code)
-
-    output = f"""#include "ui.hpp"
-
-namespace gui::widgets::main 
-{{
-{widgets_block}
-}}
-
-// 使用命名空间
-using namespace gui::widgets::main;
-namespace gui::init 
-{{
-    void screen()
-    {{
-{screen_block}
-    }}
-    
-    void events()
-    {{
-    
-    }}
-}}"""
-
-    with open("ui.cpp", "w", encoding='utf-8') as f:
-        f.write(output)
 
 
-
-
-
-
-# ---------------------------------------工具函数-------------------------------------------
+# ---------------------------------------文件处理函数-------------------------------------------
 def find_c_functions(func_name: str,
                      search_path: str,
                      file_name: str = "setup_scr_*.c") -> Tuple[Tuple[str, List[str], str], ...]:
@@ -854,14 +804,15 @@ def extract_screen_name(func_name: str) -> str:
     else:
         raise ValueError("No project name found")
 
-
-
+# ----------------------------------输出结果处理--------------------------------------------
 """
-DeepSeek-R1 UI代码生成系统 v2.5 
+UI代码转换系统 v2.5 
+简介：
+再看一眼就要爆炸
 功能特性：
 1. 模板驱动的代码结构生成 
-2. 智能依赖关系解析 
-3. 多级代码校验机制 
+2. 智能依赖关系解析（去除）
+3. 多级代码校验机制 （去除）
 4. 可扩展的钩子系统 
 5. 分布式文件输出支持 
 """
@@ -873,28 +824,31 @@ class GenerateMode(Enum):
     DRY_RUN = 3
 
 @dataclass
-class CodeTemplate:
+class CppCodeTemplate:
     """
     代码模板配置容器
     Attributes:
-        framework (str): 整体代码框架模板
-        define_namespace (str): 组件定义命名空间模板
+        framework (str): cpp代码框架模板
+        widgets_namespace (str): 组件定义命名空间模板
         init_namespace (str): 初始化逻辑命名空间模板
         function_template (str): 函数结构模板
+        ui_interface (str): ui接口
     """
     framework: str = """\
 {pre_define}
 // Auto-generated UI Code, converted from GUI Guider
 {includes}
  
-{define_namespace}
+{widgets_namespace}
 {post_define}
 
 {pre_init}
 {init_namespace}
 {post_init}
+
+{ui_interface}
 """
-    define_namespace: str = """\
+    widgets_namespace: str = """\
 namespace {ns_name} 
 {{
 {define_blocks}
@@ -902,18 +856,66 @@ namespace {ns_name}
 using namespace {ns_name};
 """
 
+    # 初始化命名空间
     init_namespace: str = """\
 namespace {ns_name}
 {{
 {init_blocks}
-}} // end {ns_name}"""
+}}
+"""
 
+    # 初始化函数模板
     function_template: str = """\
     void {func_name}() 
     {{
 {func_body}
-    }}"""
+    }}
+    """
 
+    ui_interface: str = """\
+namespace {ns_name}
+{{
+{define_blocks}
+}}
+"""
+
+@dataclass
+class HppCodeTemplate:
+    """
+    代码模板配置容器
+    Attributes:
+        framework (str): cpp代码框架模板
+        widgets_namespace(str): 声明组件的模板
+        ui_interface(str): ui接口
+    Note:
+        declare_namespace和ui_interface需要借助本类里的数据类型
+    """
+    framework: str = """\
+{pre_define}
+// Auto-generated UI Code, converted from GUI Guider
+{includes}
+ 
+{widgets_namespace}
+
+// 定义UI接口
+{ui_interface}
+// 加载资源
+{load_resources}  
+"""
+    # 声明变量的命名空间
+    widgets_namespace: str = """\
+namespace {ns_name}
+{{
+{declare_blocks}
+}}  
+"""
+    # UI接口
+    ui_interface: str = """\
+namespace {ns_name}
+{{
+{declare_blocks}
+}}
+"""
 
 
 class HookSystem:
@@ -923,7 +925,8 @@ class HookSystem:
         'pre_define',   # 定义块生成前
         'post_define',  # 定义块生成后
         'pre_init',     # 初始化块生成前
-        'post_init' # 全部生成完成后
+        'post_init',    # 初始化块生成后
+        'post_generate'# 全部生成完成后
     )
 
     def __init__(self):
@@ -947,20 +950,24 @@ class HookSystem:
         filtered_results = list(filter(None, results))
         return filtered_results[0] if filtered_results else ''
 
+
+
 class TemplateGenerator:
     """模板驱动代码生成器"""
 
-    def __init__(self, template: CodeTemplate = CodeTemplate()):
+    def __init__(self):
         """
         Args:
-            template: 代码模板配置
         """
-        self.template  = template
+        self.cpp_template  = CppCodeTemplate()
+        self.hpp_template  = HppCodeTemplate()
         self.placeholders  = {
-            'includes': '#include "ui.hpp"',
-            'define_namespace': 'gui::widgets::main',
+            'cpp_includes': '#include "ui.hpp"',
+            'hpp_includes': '#include "GUI_Base.hpp"',
+            'widgets_namespace': 'gui::widgets::main',
             'init_namespace': 'gui::init',
-            'func_name': 'screen'
+            'func_name': 'screen',
+            'ui_interface':'gui::interface'
         }
         self.hooks  = HookSystem()
 
@@ -976,7 +983,7 @@ class TemplateGenerator:
         Args:
             define_blocks: 组件定义代码块列表
             init_blocks: 初始化代码块列表
-            output_path: 输出文件路径
+            output_path: 输出文件路径（最后不用带反斜杠）
             mode: 生成模式
         Returns:
             生成是否成功
@@ -987,42 +994,99 @@ class TemplateGenerator:
         # ordered_inits = self.resolver.get_ordered_blocks(init_blocks)
 
         # 阶段2：构建代码结构
-        define_content = self._build_define_content(define_blocks)
+        # hpp
+        declare_widgets_content = self._build_declare_widgets_content(define_blocks)
+        declare_ui_interface = self._build_declare_ui_interface([])
+        # cpp
+        define_widgets_content = self._build_define_widgets_content(define_blocks)
         init_content = self._build_init_content(init_blocks, mode)
+        define_ui_interface = self._build_define_ui_interface([])
 
         # 阶段3：生成最终代码
-        final_code = self.template.framework.format(
+        # hpp
+        final_hpp_code = self.hpp_template.framework.format(
+            pre_define=self.hooks.execute_hooks('pre_define'),
+            # 命名空间等
+            includes=self.placeholders['hpp_includes'],
+            widgets_namespace=declare_widgets_content,
+            ui_interface= declare_ui_interface,
+            load_resources='',
+        )
+        # cpp
+        final_cpp_code = self.cpp_template.framework.format(
+            # 一群钩子
             pre_define = self.hooks.execute_hooks('pre_define'),
             post_define=self.hooks.execute_hooks('post_define'),
             pre_init=self.hooks.execute_hooks('pre_init'),
             post_init=self.hooks.execute_hooks('post_init'),
-            includes=self.placeholders['includes'],
-            define_namespace=define_content,
-            init_namespace=init_content
+            # 组件可以和初始化命名空间
+            includes=self.placeholders['cpp_includes'],
+            widgets_namespace=define_widgets_content,
+            init_namespace=init_content,
+            ui_interface=define_ui_interface,
         )
 
         # 阶段4：后处理
-        self._execute_hooks('post_generate')
-        Path(output_path).write_text(final_code, encoding='utf-8')
+        print(self._execute_hooks('post_generate'))
+        # hpp
+        Path(output_path+'/ui.hpp').write_text(final_hpp_code, encoding='utf-8')
+        # cpp
+        Path(output_path+'/ui.cpp').write_text(final_cpp_code, encoding='utf-8')
         return True
 
-    def _build_define_content(self, blocks: List[str]) -> str:
+    def _build_define_widgets_content(self, blocks: List[str]) -> str:
         """构建定义部分代码"""
         content = '\n'.join(blocks)
-        return self.template.define_namespace.format(
-            ns_name=self.placeholders['define_namespace'],
+        return self.cpp_template.widgets_namespace.format(
+            ns_name=self.placeholders['widgets_namespace'],
+            define_blocks=content
+        )
+
+    def _build_declare_widgets_content(self, blocks: List[str]) -> str:
+        """构建声明部分代码
+        Note:
+            输入的是定义代码块列表
+        """
+        declare_list = ['\textern '+ line for line in blocks]
+        content = '\n'.join(declare_list)
+        return self.hpp_template.widgets_namespace.format(
+            ns_name=self.placeholders['widgets_namespace'],
+            declare_blocks=content
+        )
+
+    def _build_declare_ui_interface(self, blocks: List[str]) -> str:
+        """构建UI接口声明代码
+        Note:
+            输入的列表是外部声明的ui接口
+        """
+        ui_interface_declare = ['extern '+ line for line in blocks if line != '']
+        content = '\n'.join(ui_interface_declare)
+        return self.hpp_template.ui_interface.format(
+            ns_name=self.placeholders['ui_interface'],
+            declare_blocks=content
+        )
+
+    def _build_define_ui_interface(self, blocks: List[str]) -> str:
+        """构建ui接口定义代码
+
+        Note:
+            ui定义代码，blocks的每个元素都是一段代码定义
+        """
+        content = '\n'.join(blocks)
+        return self.cpp_template.ui_interface.format(
+            ns_name=self.placeholders['ui_interface'],
             define_blocks=content
         )
 
     def _build_init_content(self, blocks: List[str], mode: GenerateMode) -> str:
         """构建初始化部分代码"""
         func_body = textwrap.indent('\n'.join(blocks),  '')
-        init_func = self.template.function_template.format(
+        init_func = self.cpp_template.function_template.format(
             func_name=self.placeholders['func_name'],
             func_body=func_body
         )
         # 返回初始化命名空间
-        return self.template.init_namespace.format(
+        return self.cpp_template.init_namespace.format(
             ns_name=self.placeholders['init_namespace'],
             init_blocks=init_func
         )
@@ -1059,9 +1123,6 @@ def main():
     widgets_init_code = iterate_widgets(screen_name)
 
     # 【输出代码文件】：把组件相关代码信息，按照特定格式写入文件中
-    # generate_output(widgets_define,widgets_init_code)
-    #【测试地点】
-    # 初始化生成器
     generator = TemplateGenerator()
 
     # 添加版本信息钩子
@@ -1071,7 +1132,7 @@ def main():
     generator.generate(
         define_blocks=widgets_define,
         init_blocks=widgets_init_code,
-        output_path="ui.cpp",
+        output_path=".",
         mode=GenerateMode.OVERWRITE
     )
 
