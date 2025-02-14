@@ -18,7 +18,11 @@ widgets = []
 widgets_relations = []
 # 组件定义代码块，格式为 ['Component xxx','']
 widgets_define = []
-
+# 资源文件,格式为{'font':[],'image':[]}  fonts和images都是对应的名称
+resources = {
+    'font': [],
+    'image':[],
+}
 
 # --------------------------------预处理------------------------------------
 
@@ -208,6 +212,56 @@ def remove_widget(widget_name):
     removed_count = original_length - len(widgets)
     return removed_count  # 返回已删除项目的数量
 
+# --------添加资源---------
+def add_resource(resource_type: str, resource: str) -> None:
+    """增强型资源添加函数
+    Args:
+        resource_type: 资源类型（必须与resources键名一致）
+        resource: 资源标识符，自动去除&前缀
+    """
+    # 参数校验
+    if resource_type not in resources:
+        raise ValueError(f"Invalid resource type: {resource_type}. Valid types: {list(resources.keys())}")
+
+    # 标准化处理(去除&前缀)
+    cleaned = resource.lstrip('&')
+
+    # 去重逻辑
+    if cleaned not in resources[resource_type]:
+        resources[resource_type].append(cleaned)
+
+def extract_resource(func_name: str, args: list) -> None:
+    """增强型资源提取器
+    Args:
+        func_name: LVGL API函数名
+        args: 实际调用参数列表
+    """
+    resource_map = {
+        'lv_obj_set_style_text_font': {
+            'type': 'font',   # 保持与resources键名一致
+            'index': 1
+        },
+        'lv_imagebutton_set_src':{
+            'type': 'image',
+            'index': 2
+        },
+        'lv_image_set_src': {
+            'type': 'image',
+            'index': 1
+        }
+    }
+
+    # 查询资源映射
+    if (info := resource_map.get(func_name))  is None:
+        return
+
+    # 索引有效性检查
+    if info['index'] >= len(args):
+        # 映射表里的索引有问题，赶紧修复
+        raise IndexError(f"Warning: Invalid arg index {info['index']} for {func_name}")
+
+        # 执行资源添加
+    add_resource(info['type'], str(args[info['index']]))
 
 # ------------------------------与组件关系有关------------------------
 def add_widget_relations(child_name, child_info=None, parent_name=''):
@@ -633,10 +687,11 @@ def process_code_lines(code_lines):
 # ----------------解析组件信息-------------------
 def iterate_widgets(screen_name):
     """遍历组件结构的通用函数
-    # 1,链式调用需要一张表，组件在前面，然后init后跟父组件,接着不断往后添加到列表里
-    # ['widget_name.init(parent_name)','.pos()','size()',]
-    # 2,根据实际情况，组件名称前需要\n\t\t，两个Tab，而其他链式调用则需要三个Tab
-    # 3,对widgets_define添加了组件定义的信息，但是没有把里面的代码通过'\n\t'连接
+    Note:
+        # 1,链式调用需要一张表，组件在前面，然后init后跟父组件,接着不断往后添加到列表里
+            ['widget_name.init(parent_name)','.pos()','size()',]
+        # 2,根据实际情况，组件名称前需要'\n\t\t'，两个Tab，而其他链式调用则需要三个Tab
+        # 3,对widgets_define添加了组件定义的信息，但是没有把里面的代码通过'\n\t'连接
     Args:
         screen_name(string): 项目名称，这里是为了把屏幕名称替换为scr
     Returns:
@@ -692,7 +747,9 @@ def iterate_widgets(screen_name):
                 # 如果是样式函数
                 func_code = convert_style_calls(func_name, args)
             else:
+
                 func_code = convert_function_args(func_name, args)
+            extract_resource(func_name, args)# 提取字体、图片资源
 
             # 判断是否跳过调用
             if func_code is None:
@@ -706,7 +763,7 @@ def iterate_widgets(screen_name):
         widgets_init_code.append('\n\t\t\t'.join(widget_init_chain))
     # 给定义组件代码的首元素添加\n
     # widgets_define[0] = '\n' + widgets_define[0]
-    return widgets_init_code
+    return widgets_init_code,widgets_define
 
 
 
@@ -897,9 +954,10 @@ class HppCodeTemplate:
  
 {widgets_namespace}
 
-// 定义UI接口
+// ------定义UI接口------
 {ui_interface}
-// 加载资源
+
+// ------加载资源------
 {load_resources}  
 """
     # 声明变量的命名空间
@@ -997,6 +1055,7 @@ class TemplateGenerator:
         # hpp
         declare_widgets_content = self._build_declare_widgets_content(define_blocks)
         declare_ui_interface = self._build_declare_ui_interface([])
+        load_resources = self._build_load_resources(resources,False)
         # cpp
         define_widgets_content = self._build_define_widgets_content(define_blocks)
         init_content = self._build_init_content(init_blocks, mode)
@@ -1010,7 +1069,7 @@ class TemplateGenerator:
             includes=self.placeholders['hpp_includes'],
             widgets_namespace=declare_widgets_content,
             ui_interface= declare_ui_interface,
-            load_resources='',
+            load_resources=load_resources,
         )
         # cpp
         final_cpp_code = self.cpp_template.framework.format(
@@ -1066,6 +1125,37 @@ class TemplateGenerator:
             declare_blocks=content
         )
 
+    def _build_load_resources(self, resources, is_custom=True) -> str:
+        """构建资源加载代码"""
+        resources_list = []
+
+        # 处理字体资源
+        font_resources = []
+        for font in resources.get('font',  []):
+            # 应用custom前缀规则
+            if is_custom:
+                processed_font = font.replace("lv_font",  "lv_customer_font", 1)  # 仅替换第一个匹配项
+            else:
+                processed_font = font
+            font_resources.append(f"LV_FONT_DECLARE({processed_font})")
+
+            # 添加字体区块
+        if font_resources:
+            resources_list.append("//  字体资源")
+            resources_list.extend(font_resources)
+
+            # 处理图片资源
+        img_resources = [f"LV_IMG_DECLARE({img})" for img in resources.get('image',  [])]
+
+        # 添加图片区块
+        if img_resources:
+            resources_list.append("//  图片资源")
+            resources_list.extend(img_resources)
+
+            # 生成最终代码
+        content = "\n".join(resources_list)
+        return content
+
     def _build_define_ui_interface(self, blocks: List[str]) -> str:
         """构建ui接口定义代码
 
@@ -1120,7 +1210,7 @@ def main():
     process_code_lines(code_lines)
 
     # 【解析信息】：把组件信息解析为对应的代码，并输出
-    widgets_init_code = iterate_widgets(screen_name)
+    widgets_init_code,widgets_define_code = iterate_widgets(screen_name)
 
     # 【输出代码文件】：把组件相关代码信息，按照特定格式写入文件中
     generator = TemplateGenerator()
@@ -1130,7 +1220,7 @@ def main():
 
     # 执行生成
     generator.generate(
-        define_blocks=widgets_define,
+        define_blocks=widgets_define_code,
         init_blocks=widgets_init_code,
         output_path=".",
         mode=GenerateMode.OVERWRITE
