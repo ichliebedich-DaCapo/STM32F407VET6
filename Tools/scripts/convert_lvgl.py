@@ -10,7 +10,7 @@ import networkx as nx
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
-from typing import Dict, Tuple, List, Callable
+from typing import Dict, Tuple, List, Callable, Optional
 
 # 组件代码块
 widgets = []
@@ -1119,10 +1119,27 @@ class TemplateGenerator:
 
         # 阶段4：后处理
         print(self.hooks.execute_hooks('post_generate'))
-        # hpp
-        Path(output_path+'/ui.hpp').write_text(final_hpp_code, encoding='utf-8')
-        # cpp
-        Path(output_path+'/ui.cpp').write_text(final_cpp_code, encoding='utf-8')
+        hpp_path = Path(output_path) / 'ui.hpp'
+        cpp_path = Path(output_path) / 'ui.cpp'
+
+        if mode == GenerateMode.OVERWRITE:
+            hpp_path.write_text(final_hpp_code,  encoding='utf-8')
+            cpp_path.write_text(final_cpp_code,  encoding='utf-8')
+        elif mode == GenerateMode.MERGE:
+            # 处理hpp文件
+            if hpp_path.exists():
+                existing_hpp = hpp_path.read_text(encoding='utf-8')
+                merged_hpp = self._merge_code(existing_hpp, final_hpp_code, 'hpp')
+                hpp_path.write_text(merged_hpp,  encoding='utf-8')
+            else:
+                hpp_path.write_text(final_hpp_code,  encoding='utf-8')
+            # 处理cpp文件
+            if cpp_path.exists():
+                existing_cpp = cpp_path.read_text(encoding='utf-8')
+                merged_cpp = self._merge_code(existing_cpp, final_cpp_code, 'cpp')
+                cpp_path.write_text(merged_cpp,  encoding='utf-8')
+            else:
+                cpp_path.write_text(final_cpp_code,  encoding='utf-8')
         return True
 
     def _build_define_widgets_content(self, blocks: List[str]) -> str:
@@ -1170,19 +1187,79 @@ class TemplateGenerator:
         )
 
     def _build_init_content(self, blocks: List[str], mode: GenerateMode) -> str:
-        """构建初始化部分代码"""
-        func_body = textwrap.indent('\n'.join(blocks),  '')
+        """构建初始化部分代码（完整实现）"""
+        func_body = textwrap.indent('\n'.join(blocks),   '')
+
+        # 添加可识别的注释占位符
+        placeholder = textwrap.dedent(''' 
+            // 用户自定义代码区域 
+            /**Custom Code**/
+            
+            /**End Custom Code**/
+            // 自动生成代码结束 
+        ''')
+        func_body += textwrap.indent(placeholder,  '    ')
+
         init_func = self.cpp_template.function_template.format(
             func_name=self.placeholders['func_name'],
             func_body=func_body
         )
-        # 返回初始化命名空间
         return self.cpp_template.init_namespace.format(
             ns_name=self.placeholders['init_namespace'],
             init_blocks=init_func
         )
 
+    def _merge_code(self, existing_code: str, new_code: str, file_type: str) -> str:
+        if file_type == 'cpp':
+            func_signature = f'void {self.placeholders["func_name"]}()'
+            existing_body = self._extract_function_body(existing_code, func_signature)
+            if existing_body:
+                custom_code = self._extract_custom_code(existing_body)
+                return self._replace_custom_code(new_code, func_signature, custom_code)
+            else:
+                return self._add_custom_code_markers(new_code, func_signature)
+        else:
+            return new_code
 
+    def _extract_function_body(self, code: str, signature: str) -> Optional[str]:
+        pattern = re.compile(fr'{re.escape(signature)}\s*\{{(.*?)\}}',  re.DOTALL)
+        match = pattern.search(code)
+        return match.group(1).strip()  if match else None
+
+    # 修改正则表达式匹配模式，允许注释中的空格
+    def _extract_custom_code(self, func_body: str) -> Optional[str]:
+        pattern = re.compile(
+            r'/\*\*\s*Custom Code\s*\*\*/(.*?)/\*\*\s*End Custom Code\s*\*\*/',
+            re.DOTALL
+        )
+        match = pattern.search(func_body)
+        return match.group(1).strip()  if match else None
+
+    # 增强占位符替换鲁棒性
+    def _replace_custom_code(self, new_code: str, signature: str, custom_code: str) -> str:
+        def replacer(match):
+            body = match.group(1)
+            # 使用更灵活的占位符匹配
+            placeholder_pattern = re.compile(
+                r'/\*\*\s*Custom Code\s*\*\*/(.*?)/\*\*\s*End Custom Code\s*\*\*/',
+                re.DOTALL
+            )
+            replacement = f'/**Custom Code**/\n{custom_code}\n/**End Custom Code**/'
+            return f'{signature} {{\n{placeholder_pattern.sub(replacement,  body)}\n}}'
+        return re.sub(
+            fr'{re.escape(signature)}\s*\{{(.*?)\}}',
+            replacer,
+            new_code,
+            flags=re.DOTALL
+        )
+
+    def _add_custom_code_markers(self, code: str, signature: str) -> str:
+        return re.sub(
+            fr'({re.escape(signature)}\s*\{{.*?)\}}',
+            r'\1\n    /**Custom Code**/\n\n    /**End Custom Code**/\n}}',
+            code,
+            flags=re.DOTALL
+        )
 
 
 
@@ -1221,7 +1298,7 @@ def main():
         init_blocks=widgets_init_code,
         output_path=".",
         is_font_custom=False,
-        mode=GenerateMode.OVERWRITE
+        mode=GenerateMode.MERGE
     )
 
     print("代码生成成功！输出文件：ui.cpp")
