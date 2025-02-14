@@ -510,7 +510,6 @@ def convert_function_args(func_name, args):
         if func_name in funcs:
             # 处理参数规则
             args_result, handle_args = omit_parameters(args, config['args_map'])
-            print(f'func:{func_name}')
             final_result, final_method, final_args = get_method_from_map(args_result, handle_args, config['method_map'])
             # 判断是否该省略调用
             if final_result:
@@ -867,15 +866,6 @@ DeepSeek-R1 UI代码生成系统 v2.5
 5. 分布式文件输出支持 
 """
 
-# from datetime import datetime
-# from pathlib import Path
-# import textwrap
-# import re
-#
-# from enum import Enum
-# from dataclasses import dataclass
-# from typing import List, Dict, Callable
-
 class GenerateMode(Enum):
     """生成模式枚举"""
     OVERWRITE = 1
@@ -893,7 +883,7 @@ class CodeTemplate:
         function_template (str): 函数结构模板
     """
     framework: str = """\
-// Auto-generated UI Code 
+// Auto-generated UI Code, converted from GUI Guider
 {includes}
  
 {define_namespace}
@@ -917,45 +907,13 @@ void {func_name}() {{
 {func_body}
 }}"""
 
-class DependencyResolver:
-    """依赖关系解析器"""
-
-    def __init__(self):
-        self.dependency_graph  = nx.DiGraph()
-
-    def analyze(self, code_blocks: List[str]) -> None:
-        """
-        分析代码块间的父子依赖关系
-        Args:
-            code_blocks: 代码块列表，每个元素为字符串形式的代码段
-        """
-        for block in code_blocks:
-            # 使用正则提取初始化关系：child.init(parent)
-            match = re.search(r'(\w+)\.init\((\w+)\)',  block)
-            if match:
-                child, parent = match.groups()
-                self.dependency_graph.add_edge(parent,  child)
-
-    def get_ordered_blocks(self, blocks: List[str]) -> List[str]:
-        """
-        获取拓扑排序后的代码块列表
-        Returns:
-            按依赖顺序排列的代码块列表
-        """
-        ordered = []
-        try:
-            for node in nx.topological_sort(self.dependency_graph):
-                ordered.extend([b  for b in blocks if f"{node}." in b])
-        except nx.NetworkXUnfeasible:
-            raise ValueError("检测到循环依赖，请检查组件初始化顺序")
-        return ordered
 
 class CodeValidator:
     """代码校验器"""
 
-    # 校验规则表：元组格式(正则模式, 错误信息)
+    # 校验规则表：元组格式(正则模式, 错误信息)，但现在用不到
     RULES = [
-        (r';\s*$', "缺失语句结束分号"),
+        (r'^[^.].*\S(?<!;)$', "缺失语句结束分号"),  # 检测没有以分号结尾且非空的行，但排除以圆点开头的行
         (r'\)\s*{', "函数调用后错误的大括号"),
         (r'\bLV_\w+', "未经验证的LVGL常量使用"),
         (r'\b\d{4}[^x]', "疑似魔术数字，建议使用常量")
@@ -1009,14 +967,13 @@ class TemplateGenerator:
         """
         self.template  = template
         self.placeholders  = {
-            'includes': '#include "ui_core.h"',
-            'define_namespace': 'gui::widgets',
-            'init_namespace': 'gui::runtime',
-            'func_name': 'initialize_components'
+            'includes': '#include "ui.hpp"',
+            'define_namespace': 'gui::widgets::main',
+            'init_namespace': 'gui::init',
+            'func_name': 'screen'
         }
         self.hooks  = HookSystem()
         self.validator  = CodeValidator()
-        self.resolver  = DependencyResolver()
 
     def generate(
             self,
@@ -1037,12 +994,13 @@ class TemplateGenerator:
         """
         # 阶段1：预处理
         self._execute_hooks('pre_define')
-        validated_defines = self._validate_blocks(define_blocks)
-        ordered_inits = self.resolver.get_ordered_blocks(init_blocks)
+        # 校验以后可能有用，拓扑排序适合前面的代码处理
+        # validated_defines = self._validate_blocks(define_blocks)
+        # ordered_inits = self.resolver.get_ordered_blocks(init_blocks)
 
         # 阶段2：构建代码结构
-        define_content = self._build_define_content(validated_defines)
-        init_content = self._build_init_content(ordered_inits, mode)
+        define_content = self._build_define_content(define_blocks)
+        init_content = self._build_init_content(init_blocks, mode)
 
         # 阶段3：生成最终代码
         final_code = self.template.framework.format(
@@ -1053,7 +1011,7 @@ class TemplateGenerator:
 
         # 阶段4：后处理
         self._execute_hooks('post_generate')
-        Path(output_path).write_text(final_code)
+        Path(output_path).write_text(final_code, encoding='utf-8')
         return True
 
     def _build_define_content(self, blocks: List[str]) -> str:
@@ -1090,50 +1048,6 @@ class TemplateGenerator:
         for hook in self.hooks.hooks.get(point,  []):
             hook()
 
-# 使用示例
-if __name__ == "__main__":
-    # 示例输入数据
-    sample_defines = [
-        """// 主面板定义 
-lv_obj_t* main_panel = lv_obj_create(lv_scr_act());
-lv_obj_set_size(main_panel, 800, 480);""",
-
-        """// 功能按钮定义 
-lv_obj_t* btn_confirm = lv_btn_create(main_panel);
-lv_obj_align(btn_confirm, LV_ALIGN_BOTTOM_RIGHT, -20, -20);"""
-    ]
-
-    sample_inits = [
-        """main_panel.init() 
-    .bg_color(lv_color_hex(0xFFFFFF))
-    .border_width(2);""",
-
-        """btn_confirm.init(main_panel) 
-    .size(100, 40)
-    .text("确认")
-    .on_click([](lv_event_t* e) {
-        // 点击处理逻辑 
-    });"""
-    ]
-
-    # 初始化生成器
-    generator = TemplateGenerator()
-
-    # 添加版本信息钩子
-    generator.hooks.add_hook('pre_define',  lambda: f"// Generated by DeepSeek-R1 on {datetime.now():%Y-%m-%d  %H:%M}\n")
-
-    # 配置依赖解析
-    generator.resolver.analyze(sample_inits)
-
-    # 执行生成
-    generator.generate(
-        define_blocks=sample_defines,
-        init_blocks=sample_inits,
-        output_path="generated_ui.cpp",
-        mode=GenerateMode.OVERWRITE
-    )
-
-    print("代码生成成功！输出文件：generated_ui.cpp")
 
 
 # -------------------------------------主函数--------------------------------------------
@@ -1162,6 +1076,22 @@ def main():
     # 【输出代码文件】：把组件相关代码信息，按照特定格式写入文件中
     # generate_output(widgets_define,widgets_init_code)
     #【测试地点】
+    # 初始化生成器
+    generator = TemplateGenerator()
+
+    # 添加版本信息钩子
+    generator.hooks.add_hook('pre_define',  lambda: f"// Generated by DeepSeek-R1 on {datetime.now():%Y-%m-%d  %H:%M}\n")
+
+
+    # 执行生成
+    generator.generate(
+        define_blocks=widgets_define,
+        init_blocks=widgets_init_code,
+        output_path="ui.cpp",
+        mode=GenerateMode.OVERWRITE
+    )
+
+    print("代码生成成功！输出文件：ui.cpp")
 
 
 
