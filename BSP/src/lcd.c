@@ -7,7 +7,6 @@
 #include "spi.h"
 #include "fsmc.h"
 #include "stm32f4xx_hal.h"
-
 extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
 extern SPI_HandleTypeDef hspi2;
 extern SPI_HandleTypeDef hspi3;
@@ -659,24 +658,17 @@ void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_
 
 #ifdef USE_SPI_DMA
 
-//    if (disp_flush_enabled)
-//    {
-//        unsigned int size = (x2 - x1 + 1) * (y2 - y1 + 1) * 2;
-//        lcd_st7789_set_addr_win(x1, y1, x2, y2); // 指定填充区域
-//        lcd_st7789_write_data_multiple((uint8_t *)color_p, size);
-//    }
-
-
     /* 设置LCD窗口并启动DMA传输 */
-//    LCD_Set_Window(x1, y1, x2, y2);
-//    LCD_CS_LOW();
-//    LCD_RS_HIGH();
-//
-//    uint32_t pixel_count = (x2 - x1 + 1) * (y2 - y1 + 1);
-//
-//    /* 启动SPI DMA传输 */
-//    HAL_SPI_Transmit_DMA(&hspi2, (uint8_t*)color_p, pixel_count * 2);
-//#else
+    LCD_Set_Window(x1, y1, x2, y2);
+    LCD_CS_LOW();
+    LCD_RS_HIGH();
+
+    uint32_t pixel_count = (x2 - x1 + 1) * (y2 - y1 + 1);
+
+    /* 启动SPI DMA传输 */
+    HAL_SPI_Transmit_DMA(&hspi2, (uint8_t*)color_p, pixel_count * 2);
+    LCD_CS_HIGH();
+#else
     LCD_Set_Window(x1, y1, x2, y2); // 设置LCD屏幕的扫描区域
     LCD_CS_LOW(); // 使能LCD片选
     LCD_RS_HIGH(); // 设置为数据模式
@@ -692,29 +684,18 @@ void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_
 #endif
 #endif
 }
+/************注册机制:为解决SPI+DMA回调函数问题************/
+static SPI_TxCpltCallback user_callback = NULL;
+void LCD_RegisterTxCallback(SPI_TxCpltCallback cb) {
+    user_callback = cb;
+}
+/*******************************************************/
 //需要一直发送或者接收就在回调里再调用一次接收或读取函数
 void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
 {
-//    // 1. 校验SPI实例
-//    if(hspi == &hspi2)  // 确保是SPI2的传输完成
-//    {
-//        // 2. 更新剩余像素计数器
-//        if(remaining_pixels > 0)
-//        {
-//            // 计算本次传输量（不超过缓冲区容量）
-//            uint32_t transfer_size = (remaining_pixels > 512) ? 512 : remaining_pixels;
-//
-//            // 3. 发起新DMA传输
-//            HAL_SPI_Transmit_DMA(&hspi2, dma_buffer, transfer_size * 2);  // 每个像素2字节
-//
-//            // 4. 更新剩余像素计数
-//            remaining_pixels -= transfer_size;
-//        }
-//        else
-//        {
-//            // 5. 所有传输完成后的处理
-//            LCD_CS_HIGH();  // 关闭片选
-//        }
-//    }
+    if(hspi == &hspi2) { // 指定SPI实例
+        if(user_callback) user_callback();
+    }
+
 }
 

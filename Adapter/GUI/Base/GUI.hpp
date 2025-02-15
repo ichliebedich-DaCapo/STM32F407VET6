@@ -5,6 +5,13 @@
 #define FURINA_GUI_HPP
 
 #include "GUI_Base.hpp"
+#define USE_SPI_DMA  //一定要同时更改BSP_CONFIG中的USE_SPI_DMA
+
+/************注册机制:为解决SPI+DMA回调函数问题************/
+#if defined(USE_SPI_DMA)&defined(ARM_MATH_CM4)
+#include "lcd.h"
+#endif
+/*******************************************************/
 
 #ifdef ARM_MATH_CM4
 #include <project_config.h>
@@ -46,6 +53,17 @@ public:
     // 获取设备
     static inline auto get_display() -> lv_display_t * { return disp; }
     static inline auto get_indev() -> lv_indev_t * { return indev_touchpad; }
+/************注册机制:为解决SPI+DMA回调函数问题************/
+#if defined(ARM_MATH_CM4)&defined(USE_SPI_DMA)
+    static void register_hw_callbacks() {
+
+        // 实际硬件环境下注册DMA回调
+        LCD_RegisterTxCallback([](){
+            display_flush_ready();
+        });
+    }
+#endif
+/*******************************************************/
 
 private:
     static auto resource_init() -> void;// 初始化界面
@@ -69,8 +87,15 @@ auto GUI::init() -> void
 {
 
     /********初始化LCD*******/
-    if constexpr (lcd_init != nullptr) { lcd_init(); }
-
+    if constexpr (lcd_init != nullptr)
+    {
+        lcd_init();
+/************注册机制:为解决SPI+DMA回调函数问题************/
+#if defined(ARM_MATH_CM4)&defined(USE_SPI_DMA)
+        register_hw_callbacks(); // 注册硬件回调
+#endif
+    }
+/*******************************************************/
     /********初始化LVGL*******/
     lv_init();
 
@@ -101,8 +126,12 @@ auto GUI::disp_drv_init() -> void
         flush(area->x1, area->y1, area->x2, area->y2, (const uint16_t *) px_map);
 
         // 只有定义了DMA中断回调才不需要这个函数，那么这就要求DMA中断启用时需要设置相关宏定义
+#if !defined(ARM_MATH_CM4) || !defined(USE_SPI_DMA)
         display_flush_ready();
+#endif
+
     });
+
 
     // 缓冲区  双缓冲明显优于单缓冲
     LV_ATTRIBUTE_MEM_ALIGN
