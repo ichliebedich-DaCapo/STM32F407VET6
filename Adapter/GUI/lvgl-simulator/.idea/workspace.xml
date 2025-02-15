@@ -29,16 +29,11 @@
   <component name="ChangeListManager">
     <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Render/WaveDraw.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Render/WaveDraw.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Render/WaveDraw.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Render/WaveDraw.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw_nxp/bin/Simulator.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw_nxp/bin/Simulator.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../BSP/inc/spi.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/inc/spi.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../BSP/src/baseInit.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/baseInit.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../BSP/src/fsmc.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/fsmc.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/lcd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../BSP/src/spi.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/spi.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/lv_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/lv_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,11 +97,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="drivers" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Simulator" TARGET_NAME="drivers" CONFIG_NAME="Debug-MinGW_NXP">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -150,6 +140,7 @@
       <workItem from="1739289054827" duration="7000" />
       <workItem from="1739335538836" duration="15167000" />
       <workItem from="1739416924560" duration="10057000" />
+      <workItem from="1739612920922" duration="6761000" />
     </task>
     <servers />
   </component>

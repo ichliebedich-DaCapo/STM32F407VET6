@@ -42,8 +42,9 @@ extern DMA_HandleTypeDef hdma_spi2_tx ;
 #define LCD_CS_HIGH()  spi2_cs_high()
 
 // 添加全局变量控制传输过程
-#define BUF_SIZE      512  // 缓冲区大小（像素数）
+#define BUF_SIZE      20000  // 缓冲区大小（像素数）
 uint16_t dma_buf[BUF_SIZE] __attribute__((aligned(4))); // 4字节对齐
+
 volatile static bool is_dma_busy = false;
 // 函数
 void LCD_WR_REG(uint8_t data)
@@ -388,7 +389,7 @@ void lcd_init(void)
     LCD_direction(0);//下两句被封装为此句，默认显示方向为横屏 切记：切换屏幕方向，LCD_Clear函数内要交互x,y
 //    LCD_WR_REG(0x36);
 //    LCD_WR_DATA(0x60);
-    LCD_Clear(0xffff);
+    LCD_Clear(0xffff); //删了gui直接不显示了？太奇怪了
 #else
 #endif
 }
@@ -668,49 +669,49 @@ void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_
     if (is_dma_busy) return; // 或等待
     is_dma_busy = true;
 //第一种方法
-//    LCD_Set_Window(x1, y1,x2,y2);
-//    for(int i=0; i<BUF_SIZE; i++){
-//        dma_buf[i] = color_p[i]; // 直接存储16位颜色值
-//    }
-//    uint32_t total_pixels = (x2 - x1 + 1) * (y2 - y1 + 1);
-//    uint32_t transferred = 0;
-//    LCD_CS_LOW();
-//    LCD_RS_HIGH(); // 进入GRAM数据模式
-//
-//    while(transferred < total_pixels) {
-//
-//        uint32_t chunk = (total_pixels - transferred > BUF_SIZE)
-//                         ? BUF_SIZE : (total_pixels - transferred);
-//
-//        // 更新缓冲区内容（可选）
-//        // for(int i=0; i<chunk; i++) dma_test_buf[i] = color;
-//
-//        HAL_SPI_Transmit_DMA(&hspi2, (uint8_t*)dma_buf, chunk * 2);
-//        while(HAL_SPI_GetState(&hspi2) != HAL_SPI_STATE_READY);
-//        transferred += chunk;
-//
-//    }
-//    LCD_CS_HIGH();
-
-//第二种方法
-    LCD_Set_Window(x1, y1, x2, y2);
-
-    uint32_t pixel_count = (x2-x1+1)*(y2-y1+1);
-    uint32_t byte_count = pixel_count * 2;  // 每个像素2字节
-
+    LCD_Set_Window(x1, y1,x2,y2);
+    for(int i=0; i<BUF_SIZE; i++){
+        dma_buf[i] = color_p[i]; // 直接存储16位颜色值
+    }
+    uint32_t total_pixels = (x2 - x1 + 1) * (y2 - y1 + 1);
+    uint32_t transferred = 0;
     LCD_CS_LOW();
-    LCD_RS_HIGH();
+    LCD_RS_HIGH(); // 进入GRAM数据模式
 
-    // 启动DMA传输
-    HAL_DMA_Start_IT(
-            &hdma_spi2_tx,
-            (uint32_t)(uint8_t *)color_p,  // 强制转换为字节指针
-            (uint32_t)&hspi2.Instance->DR,
-            byte_count
-    );
+    while(transferred < total_pixels) {
 
-    // 启用SPI DMA传输
-    SET_BIT(hspi2.Instance->CR2, SPI_CR2_TXDMAEN);
+        uint32_t chunk = (total_pixels - transferred > BUF_SIZE)
+                         ? BUF_SIZE : (total_pixels - transferred);
+
+        // 更新缓冲区内容（可选）
+        // for(int i=0; i<chunk; i++) dma_test_buf[i] = color;
+
+        HAL_SPI_Transmit_DMA(&hspi2, (uint8_t*)dma_buf, chunk * 2);
+        while(HAL_SPI_GetState(&hspi2) != HAL_SPI_STATE_READY);
+        transferred += chunk;
+
+    }
+    LCD_CS_HIGH();
+
+//第二种方法(不可靠，挤占lcd_clear DMA资源)
+//    LCD_Set_Window(x1, y1, x2, y2);
+//
+//    uint32_t pixel_count = (x2-x1+1)*(y2-y1+1);
+//    uint32_t byte_count = pixel_count * 2;  // 每个像素2字节
+//
+//    LCD_CS_LOW();
+//    LCD_RS_HIGH();
+//
+//    // 启动DMA传输
+//    HAL_DMA_Start_IT(
+//            &hdma_spi2_tx,
+//            (uint32_t)(uint8_t *)color_p,  // 强制转换为字节指针
+//            (uint32_t)&hspi2.Instance->DR,
+//            byte_count
+//    );
+//
+//    // 启用SPI DMA传输
+//    SET_BIT(hspi2.Instance->CR2, SPI_CR2_TXDMAEN);
 #else
     LCD_Set_Window(x1, y1, x2, y2); // 设置LCD屏幕的扫描区域
     LCD_CS_LOW(); // 使能LCD片选
@@ -737,15 +738,18 @@ void LCD_RegisterTxCallback(SPI_TxCpltCallback cb) {
 //需要一直发送或者接收就在回调里再调用一次接收或读取函数
 void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
 {
-//    if(hspi == &hspi2) { // 指定SPI实例
-//        if(user_callback) user_callback();
-//    }
     is_dma_busy = false;
+    //方法1
     if(hspi == &hspi2) { // 指定SPI实例
-        LCD_CS_HIGH();
-        CLEAR_BIT(hspi2.Instance->CR2, SPI_CR2_TXDMAEN);
         if(user_callback) user_callback();
     }
+
+    //方法2
+//    if(hspi == &hspi2) { // 指定SPI实例
+//        LCD_CS_HIGH();
+//        CLEAR_BIT(hspi2.Instance->CR2, SPI_CR2_TXDMAEN);
+//        if(user_callback) user_callback();
+//    }
 
 }
 

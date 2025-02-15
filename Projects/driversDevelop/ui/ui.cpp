@@ -463,41 +463,42 @@ auto CounterLogic::hidden_all() -> void
 //    roller_1.hidden();
 //    dropdown_1.hidden();
 //    btn_hidden.hidden();
-//    chart_1.appear();
+    chart_1.appear();
     btn_Random_data.appear();
 }
 
 auto CounterLogic::generate_data()->void
 {
-//// 批量设置128个点
-//    for (int i = 0; i < 128; ++i) {
-////         循环访问数组
-//        size_t idx = (current_index + i) % POOL_SIZE;
-//        lv_chart_set_next_value(chart_1, series, rand_pool[idx]);
-//    }
-////     更新索引（每次前进1位置）
-//    current_index = (current_index + 20) % POOL_SIZE;
-//    if(wave_start_index+length>array_length) wave_start_index=0;
-//
-//    FPS::print(false);
-
-
-    draw_dashed_dividers(border_info::x, border_info::y,  border_info::height, border_info::width,
-                         border_info::h_div, border_info::v_div, 0X8410,
-                         border_info::margin, border_info::grid_dash_length, border_info::grid_gap_length);
-
-    HighPrecisionDraw::draw_wave<WaveDrawType::Interpolated_Line, uint8_t, uint16_t>(
-            params,
-            read_wave,
-            CH0_buff,
-            0XFCC0,
-            0xFFFF
-    );
-
-    params.start_index=(params.start_index +  20) % params.array_length;
-    if(params.start_index+params.length>params.array_length) params.start_index=0;
+    //在DMA的加持下战胜了老方法
+// 批量设置128个点
+    for (int i = 0; i < 128; ++i) {
+//         循环访问数组
+        size_t idx = (current_index + i) % POOL_SIZE;
+        lv_chart_set_next_value(chart_1, series, rand_pool[idx]);
+    }
+//     更新索引（每次前进1位置）
+    current_index = (current_index + 20) % POOL_SIZE;
+    if(wave_start_index+length>array_length) wave_start_index=0;
 
     FPS::print(false);
+
+
+//    draw_dashed_dividers(border_info::x, border_info::y,  border_info::height, border_info::width,
+//                         border_info::h_div, border_info::v_div, 0X8410,
+//                         border_info::margin, border_info::grid_dash_length, border_info::grid_gap_length);
+//
+//    HighPrecisionDraw::draw_wave<WaveDrawType::Interpolated_Line, uint8_t, uint16_t>(
+//            params,
+//            read_wave,
+//            CH0_buff,
+//            0XFCC0,
+//            0xFFFF
+//    );
+//
+//    params.start_index=(params.start_index +  20) % params.array_length;
+//    if(params.start_index+params.length>params.array_length) params.start_index=0;
+//
+//    FPS::print(false);
 }
 
 
@@ -512,7 +513,7 @@ auto CounterLogic::toggle_generation() -> void
     // 管理定时器
     if(is_generating) {
         // 创建定时器（20ms间隔 ≈ 50fps）
-        update_timer = lv_timer_create(timer_cb, 50, NULL);
+        update_timer = lv_timer_create(timer_cb, 5, NULL);
     } else {
         if(update_timer) {
             lv_timer_del(update_timer);

@@ -33,8 +33,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】GUI和LCD间的硬件回调注册接口做好了，同时保证了模拟器正常运行（但lvgl还是用不上DMA）">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】SPI+DMA的GUI能显示，丝滑但颜色不对；flush会和clear函数抢资源，暂时用互斥锁解决了冲突，但是clear无法清全屏">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/cmake-build-debug-mingw_nxp/bin/Simulator.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/cmake-build-debug-mingw_nxp/bin/Simulator.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/lcd.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/lv_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/lv_conf.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -548,14 +552,7 @@
       <workItem from="1739505218885" duration="32160000" />
       <workItem from="1739592115106" duration="4873000" />
       <workItem from="1739597019600" duration="24720000" />
-    </task>
-    <task id="LOCAL-00058" summary="【双音频信号发生器】略微优化了CMakelists">
-      <option name="closed" value="true" />
-      <created>1731138259424</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1731138259424</updated>
+      <workItem from="1739622861720" duration="10001000" />
     </task>
     <task id="LOCAL-00059" summary="【双音频信号发生器】准备合并">
       <option name="closed" value="true" />
@@ -941,7 +938,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739619562601</updated>
     </task>
-    <option name="localTasksCounter" value="107" />
+    <task id="LOCAL-00107" summary="【驱动开发】SPI+DMA的GUI能显示，丝滑但颜色不对；flush会和clear函数抢资源，暂时用互斥锁解决了冲突，但是clear无法清全屏">
+      <option name="closed" value="true" />
+      <created>1739628145847</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1739628145847</updated>
+    </task>
+    <option name="localTasksCounter" value="108" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -963,7 +968,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/ZQ" />
+                        <option value="DV" />
                       </list>
                     </value>
                   </entry>
@@ -976,7 +981,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】完成lvgl库与SPI屏幕接口，屏幕显示正常，无触摸" />
     <MESSAGE value="【与AI对话式制作UI测试】DEEPSEEK写的计数器" />
     <MESSAGE value="【驱动开发】i2c.c 完成了I2C1_Init" />
     <MESSAGE value="【驱动开发】i2c和touch驱动完成，测试触摸屏，报错：找不到INT" />
@@ -1001,7 +1005,8 @@
     <MESSAGE value="【驱动开发】硬件SPI+DMA 清屏函数成功 提升很大" />
     <MESSAGE value="【驱动开发】硬件SPI+DMA 清屏函数成功 修正一点失误 将LCD_CS_LOW();等移到循环外" />
     <MESSAGE value="【驱动开发】GUI和LCD间的硬件回调注册接口做好了，同时保证了模拟器正常运行（但lvgl还是用不上DMA）" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】GUI和LCD间的硬件回调注册接口做好了，同时保证了模拟器正常运行（但lvgl还是用不上DMA）" />
+    <MESSAGE value="【驱动开发】SPI+DMA的GUI能显示，丝滑但颜色不对；flush会和clear函数抢资源，暂时用互斥锁解决了冲突，但是clear无法清全屏" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】SPI+DMA的GUI能显示，丝滑但颜色不对；flush会和clear函数抢资源，暂时用互斥锁解决了冲突，但是clear无法清全屏" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
