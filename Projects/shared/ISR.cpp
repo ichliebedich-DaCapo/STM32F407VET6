@@ -118,15 +118,23 @@ void DMA2_Stream6_IRQHandler(void)
 //#endif
 //    }
 }
-//extern DMA_HandleTypeDef hdma_spi2_tx;
-//void DMA1_Stream4_IRQHandler(void)
-//{
-//
-//    HAL_DMA_IRQHandler(&hdma_spi2_tx);
-//
-//}
-//
-//}
+#ifdef USE_SPI_DMA
+extern DMA_HandleTypeDef hdma_spi2_tx;
+extern DMA_HandleTypeDef hdma_spi2_rx;
+void DMA1_Stream4_IRQHandler(void)
+{
+
+    HAL_DMA_IRQHandler(&hdma_spi2_tx);
+
+}
+void DMA1_Stream3_IRQHandler(void)
+{
+
+    HAL_DMA_IRQHandler(&hdma_spi2_rx);
+
+}
+#endif
+}
 
 
 
@@ -220,4 +228,3 @@ void EXTI9_5_IRQHandler(void)
 
 }
 
-}

@@ -9,7 +9,8 @@ SPI_HandleTypeDef hspi2;
 SPI_HandleTypeDef hspi3;
 DMA_HandleTypeDef hdma_spi2_tx;
 DMA_HandleTypeDef hdma_spi2_rx;
-//#define USE_SPI_DMA
+
+
 /**
  * @brief SPI3初始化
  * @details 硬件SPI，软件片选，片选引脚需自行初始化
@@ -89,6 +90,8 @@ void spi2_init()
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
+
+
     hspi2.Instance = SPI2;
     hspi2.Init.Mode = SPI_MODE_MASTER;
     hspi2.Init.Direction = SPI_DIRECTION_2LINES;
@@ -101,27 +104,47 @@ void spi2_init()
     hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
     hspi2.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
     hspi2.Init.CRCPolynomial = 10;
-
-
-//    hdma_spi2_tx.Instance = DMA1_Stream4;
-//    hdma_spi2_tx.Init.Channel = DMA_CHANNEL_0;
-//    hdma_spi2_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
-//    hdma_spi2_tx.Init.PeriphInc = DMA_PINC_DISABLE;
-//    hdma_spi2_tx.Init.MemInc = DMA_MINC_ENABLE;
-//    hdma_spi2_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
-//    hdma_spi2_tx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
-//    hdma_spi2_tx.Init.Mode = DMA_NORMAL;
-//    hdma_spi2_tx.Init.Priority = DMA_PRIORITY_LOW;
-//    hdma_spi2_tx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
-
     if (HAL_SPI_Init(&hspi2) != HAL_OK)
     {
         Error_Handler();
     }
-    // 在spi2_init()中添加DMA绑定
-//    __HAL_LINKDMA(&hspi2, hdmatx, hdma_spi2_tx);
+#ifdef USE_SPI_DMA
+    hdma_spi2_tx.Instance = DMA1_Stream4;
+    hdma_spi2_tx.Init.Channel = DMA_CHANNEL_0;
+    hdma_spi2_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
+    hdma_spi2_tx.Init.PeriphInc = DMA_PINC_DISABLE;
+    hdma_spi2_tx.Init.MemInc = DMA_MINC_ENABLE;
+    hdma_spi2_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+    hdma_spi2_tx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+    hdma_spi2_tx.Init.Mode = DMA_NORMAL;
+    hdma_spi2_tx.Init.Priority = DMA_PRIORITY_LOW;
+    hdma_spi2_tx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
+
+    HAL_DMA_Init(&hdma_spi2_tx);
+
+    hdma_spi2_rx.Instance = DMA1_Stream3;
+    hdma_spi2_rx.Init.Channel = DMA_CHANNEL_0;
+    hdma_spi2_rx.Init.Direction = DMA_PERIPH_TO_MEMORY;
+    hdma_spi2_rx.Init.PeriphInc = DMA_PINC_DISABLE;
+    hdma_spi2_rx.Init.MemInc = DMA_MINC_ENABLE;
+    hdma_spi2_rx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+    hdma_spi2_rx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+    hdma_spi2_rx.Init.Mode = DMA_NORMAL;
+    hdma_spi2_rx.Init.Priority = DMA_PRIORITY_LOW;
+    hdma_spi2_rx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
+
+    HAL_DMA_Init(&hdma_spi2_rx);
+
+#endif
+
+
+#ifdef USE_SPI_DMA
+    __HAL_LINKDMA(&hspi2, hdmatx, hdma_spi2_tx);
+    __HAL_LINKDMA(&hspi2, hdmarx, hdma_spi2_rx);
+#endif
 
 }
+
 void spi2_cs_low()
 {
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
@@ -136,11 +159,11 @@ void spi2_sendByte(unsigned char data)
     HAL_SPI_Transmit(&hspi2, &data, 1, HAL_MAX_DELAY);
 }
 
+/*启用SPI+DMA向LCD传输数据*/
 void spi2_sendByteArray(unsigned char *data, unsigned int len)
 {
     HAL_SPI_Transmit(&hspi2, data, len, HAL_MAX_DELAY);
 }
-/*启用SPI+DMA向LCD传输数据*/
 
 #ifdef USE_SPI_DMA
 void spi2_dma_Init(void)
@@ -151,10 +174,15 @@ void spi2_dma_Init(void)
 
     /* DMA interrupt init */
     /* DMA1_Stream4_IRQn interrupt configuration */
+    HAL_NVIC_SetPriority(DMA1_Stream3_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(DMA1_Stream3_IRQn);
+
     HAL_NVIC_SetPriority(DMA1_Stream4_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(DMA1_Stream4_IRQn);
 
 }
+
+
 
 
 #endif

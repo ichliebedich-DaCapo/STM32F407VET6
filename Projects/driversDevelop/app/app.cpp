@@ -98,11 +98,10 @@ void key_handler()
 //                ft6336_RdReg((FT_ID<<1)|0x01,&test_id, 1);
 //                FT_ID++;
 
-                ft6336_RdReg(0xA8,&test_id, 1);
+//                ft6336_RdReg(0xA8,&test_id, 1);
 //                __BKPT(0);
-                gui::interface::set_counter_value(10);
+//                gui::interface::set_counter_value(10);
 
-                __BKPT(0);
 
 //                write_addr++;
 

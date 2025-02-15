@@ -20,7 +20,7 @@ void spi2_cs_low();// 拉低SPI2的片选
 void spi2_cs_high();// 拉高SPI2的片选
 void spi2_sendByte(unsigned char data);// 发送一个字节数据
 void spi2_sendByteArray(unsigned char *data, unsigned int len);// 发送一个字节数组
-
+void spi2_dma_sendByte(unsigned char data);
 
 #ifdef __cplusplus
 }

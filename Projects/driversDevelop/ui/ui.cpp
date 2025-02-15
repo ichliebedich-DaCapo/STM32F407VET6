@@ -466,6 +466,7 @@ auto CounterLogic::hidden_all() -> void
 //    chart_1.appear();
     btn_Random_data.appear();
 }
+
 auto CounterLogic::generate_data()->void
 {
 //// 批量设置128个点
