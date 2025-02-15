@@ -67,12 +67,6 @@ public:
         return *this;
     }
 
-    // 设置字体格式
-    ImageButton &font(Font font,Selector selector = selector_default)
-    {
-        lv_obj_set_style_text_font(obj_, font, selector);
-        return *this;
-    }
 
 
     // 默认发送的事件为LV_EVENT_CLICKED,因为平时用得最多就是这个。后面可自行添加

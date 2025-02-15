@@ -59,7 +59,7 @@ class WidgetModel
 {
 protected:
     Obj_t obj_;
-    // 方便获取父对象，因为一般而言定义多个组件时往往只有一个公共付对象
+    // 方便获取父对象，因为一般而言定义多个组件时往往只有一个公共父对象
     static inline Obj_t parent_ = nullptr;
 };
 
@@ -77,7 +77,6 @@ public:
 
     // 隐式转换为原生对象
     operator Obj_t() const noexcept { return obj_; }
-
 
     // 返回的是该组件的父对象（不是parent_)
     Obj get_parent() const noexcept { return parent_; }

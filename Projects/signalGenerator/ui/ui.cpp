@@ -416,7 +416,7 @@ namespace gui::init
 
     void events()
     {
-        /*  创建定时器*/
+        // 创建定时器
         tick_timer.create([](Timer_t)
                           {
                               SignalGenerator::handler();
@@ -424,23 +424,22 @@ namespace gui::init
                           }, Freq_8K);
 
         // 绑定播放事件
-        widgets::main::imgbtn_play.OnPressedReleased<SignalGenerator::start, SignalGenerator::stop>();
+        imgbtn_play.OnPressedReleased<SignalGenerator::start, SignalGenerator::stop>();
 
         // 绑定频率事件
-        widgets::main::btn_freq.OnClicked<SignalGenerator::switch_freq>();
-
+        btn_freq.OnClicked<SignalGenerator::switch_freq>();
 
         // 绑定偏置事件
-        widgets::main::btn_bias_sub.OnClicked<SignalGenerator::sub_bias>();
-        widgets::main::btn_bias_add.OnClicked<SignalGenerator::add_bias>();
-
-
-        // 绑定模式事件
-        btn_mode.OnClicked<SignalGenerator::switch_mode>();
+        btn_bias_sub.OnClicked<SignalGenerator::sub_bias>();
+        btn_bias_add.OnClicked<SignalGenerator::add_bias>();
 
         // 绑定占比事件
         btn_ratio_add.OnClicked<SignalGenerator::add_ratio>();
         btn_ratio_sub.OnClicked<SignalGenerator::sub_ratio>();
+
+        // 绑定模式事件
+        btn_mode.OnClicked<SignalGenerator::switch_mode>();
+
     }
 }
 
@@ -877,4 +876,5 @@ namespace gui::interface
 
 
 }
+
 

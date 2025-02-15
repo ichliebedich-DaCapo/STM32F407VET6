@@ -73,22 +73,6 @@ public:
         return *this;
     }
 
-    // 设置文本颜色
-    inline Label &text_color(Color color, Selector selector = selector_default)
-    {
-        lv_obj_set_style_text_color(obj_, color, selector);
-        return *this;
-    }
-
-    // 设置文本透明度
-    Label &text_opa(uint8_t opa, Selector selector = selector_default)
-    {
-        lv_obj_set_style_text_opa(obj_, opa, selector);
-        return *this;
-    }
-
-
-
     // 设置文本对齐方式
     inline Label &text_align(Align_text align, Selector selector = selector_default)
     {
