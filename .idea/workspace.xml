@@ -33,15 +33,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】硬件SPI+DMA 存个档">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/lcd.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/lcd.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/spi.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/spi.h" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】GUI和LCD间的硬件回调注册接口做好了，同时保证了模拟器正常运行（但lvgl还是用不上DMA）">
       <change beforePath="$PROJECT_DIR$/BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/lcd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/spi.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/spi.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/ISR.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,14 +62,69 @@
     </option>
     <option name="loadedFiles">
       <list>
-        <option value="$PROJECT_DIR$/Resource/STM32F4_svd/STM32F4_svd_V2.0/STM32F407.svd" />
+        <option value="D:\Program\stm32\STM32F407VET6\Resource\STM32F4_svd\STM32F4_svd_V2.0\STM32F407.svd" />
       </list>
     </option>
     <option name="nodes">
       <map>
         <entry key="STM32F407.svd" value="-E" />
+        <entry key="STM32F407.svd|g:DMA" value="-E" />
         <entry key="STM32F407.svd|g:GPIO" value="-C" />
-        <entry key="STM32F407.svd|g:I2C" value="-E" />
+        <entry key="STM32F407.svd|g:I2C" value="-C" />
+        <entry key="STM32F407.svd|g:SPI" value="-E" />
+        <entry key="STM32F407.svd|p:DMA1" value="-E" />
+        <entry key="STM32F407.svd|p:DMA1|HIFCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|HISR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|LIFCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|LISR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S0CR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S0FCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S0M0AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S0M1AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S0NDTR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S0PAR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S1CR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S1FCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S1M0AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S1M1AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S1NDTR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S1PAR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S2CR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S2FCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S2M0AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S2M1AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S2NDTR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S2PAR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S3CR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S3FCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S3M0AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S3M1AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S3NDTR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S3PAR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S4CR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S4FCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S4M0AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S4M1AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S4NDTR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S4PAR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S5CR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S5FCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S5M0AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S5M1AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S5NDTR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S5PAR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S6CR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S6FCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S6M0AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S6M1AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S6NDTR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S6PAR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S7CR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S7FCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S7M0AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S7M1AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S7NDTR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S7PAR" value="HC" />
         <entry key="STM32F407.svd|p:EXTI" value="-C" />
         <entry key="STM32F407.svd|p:EXTI|EMR" value="HC" />
         <entry key="STM32F407.svd|p:EXTI|FTSR" value="HC" />
@@ -94,7 +143,7 @@
         <entry key="STM32F407.svd|p:GPIOB|OSPEEDR" value="HC" />
         <entry key="STM32F407.svd|p:GPIOB|OTYPER" value="HC" />
         <entry key="STM32F407.svd|p:GPIOB|PUPDR" value="HC" />
-        <entry key="STM32F407.svd|p:I2C1" value="-E" />
+        <entry key="STM32F407.svd|p:I2C1" value="-C" />
         <entry key="STM32F407.svd|p:I2C1|CCR" value="HC" />
         <entry key="STM32F407.svd|p:I2C1|CR1" value="HC" />
         <entry key="STM32F407.svd|p:I2C1|CR2" value="HC" />
@@ -104,6 +153,16 @@
         <entry key="STM32F407.svd|p:I2C1|SR1" value="HC" />
         <entry key="STM32F407.svd|p:I2C1|SR2" value="HC" />
         <entry key="STM32F407.svd|p:I2C1|TRISE" value="HC" />
+        <entry key="STM32F407.svd|p:SPI2" value="-E" />
+        <entry key="STM32F407.svd|p:SPI2|CR1" value="HC" />
+        <entry key="STM32F407.svd|p:SPI2|CR2" value="HC" />
+        <entry key="STM32F407.svd|p:SPI2|CRCPR" value="HC" />
+        <entry key="STM32F407.svd|p:SPI2|DR" value="HC" />
+        <entry key="STM32F407.svd|p:SPI2|I2SCFGR" value="HC" />
+        <entry key="STM32F407.svd|p:SPI2|I2SPR" value="HC" />
+        <entry key="STM32F407.svd|p:SPI2|RXCRCR" value="HC" />
+        <entry key="STM32F407.svd|p:SPI2|SR" value="HC" />
+        <entry key="STM32F407.svd|p:SPI2|TXCRCR" value="HC" />
       </map>
     </option>
   </component>
@@ -488,30 +547,7 @@
       <workItem from="1739416938058" duration="33229000" />
       <workItem from="1739505218885" duration="32160000" />
       <workItem from="1739592115106" duration="4873000" />
-    </task>
-    <task id="LOCAL-00055" summary="【双音频信号发生器】基本功能已全部完备，可以添加CPU温度显示了">
-      <option name="closed" value="true" />
-      <created>1730884534574</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1730884534574</updated>
-    </task>
-    <task id="LOCAL-00056" summary="【双音频信号发生器】成功降低程序的耦合">
-      <option name="closed" value="true" />
-      <created>1731074462688</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1731074462688</updated>
-    </task>
-    <task id="LOCAL-00057" summary="【双音频信号发生器】整合了链接优化选项">
-      <option name="closed" value="true" />
-      <created>1731134723294</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1731134723294</updated>
+      <workItem from="1739597019600" duration="24720000" />
     </task>
     <task id="LOCAL-00058" summary="【双音频信号发生器】略微优化了CMakelists">
       <option name="closed" value="true" />
@@ -881,7 +917,31 @@
       <option name="project" value="LOCAL" />
       <updated>1739505456973</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="【驱动开发】硬件SPI+DMA 清屏函数成功 提升很大">
+      <option name="closed" value="true" />
+      <created>1739606015670</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1739606015671</updated>
+    </task>
+    <task id="LOCAL-00105" summary="【驱动开发】硬件SPI+DMA 清屏函数成功 修正一点失误 将LCD_CS_LOW();等移到循环外">
+      <option name="closed" value="true" />
+      <created>1739606741244</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1739606741244</updated>
+    </task>
+    <task id="LOCAL-00106" summary="【驱动开发】GUI和LCD间的硬件回调注册接口做好了，同时保证了模拟器正常运行（但lvgl还是用不上DMA）">
+      <option name="closed" value="true" />
+      <created>1739619562601</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1739619562601</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -903,7 +963,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="DV" />
+                        <option value="origin/ZQ" />
                       </list>
                     </value>
                   </entry>
@@ -916,9 +976,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【简易存储示波器】可以设置采样频率" />
-    <MESSAGE value="【驱动开发】解决了横屏显示问题，完善了lcd.c中显示方向函数，初始化方向设置为横屏" />
-    <MESSAGE value="【驱动开发】修复显示原点错误" />
     <MESSAGE value="【驱动开发】完成lvgl库与SPI屏幕接口，屏幕显示正常，无触摸" />
     <MESSAGE value="【与AI对话式制作UI测试】DEEPSEEK写的计数器" />
     <MESSAGE value="【驱动开发】i2c.c 完成了I2C1_Init" />
@@ -941,7 +998,10 @@
     <MESSAGE value="【驱动开发】Render新增WaveDraw和BasicDraw,WaveDraw实现模版化，准备把脏区域也做到类里" />
     <MESSAGE value="【驱动开发】WaveDraw模版化,插值算法的特化实现完善（不在依赖.cpp）" />
     <MESSAGE value="【驱动开发】硬件SPI+DMA 存个档" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】硬件SPI+DMA 存个档" />
+    <MESSAGE value="【驱动开发】硬件SPI+DMA 清屏函数成功 提升很大" />
+    <MESSAGE value="【驱动开发】硬件SPI+DMA 清屏函数成功 修正一点失误 将LCD_CS_LOW();等移到循环外" />
+    <MESSAGE value="【驱动开发】GUI和LCD间的硬件回调注册接口做好了，同时保证了模拟器正常运行（但lvgl还是用不上DMA）" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】GUI和LCD间的硬件回调注册接口做好了，同时保证了模拟器正常运行（但lvgl还是用不上DMA）" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -952,6 +1012,8 @@
         <watch expression="dma_buffer" />
         <watch expression="remaining_pixels" language="ObjectiveC" />
         <watch expression="dma_test_buf" />
+        <watch expression="dma_test_buf" />
+        <watch expression="flushing" />
       </configuration>
     </watches-manager>
   </component>
