@@ -42,13 +42,8 @@ extern DMA_HandleTypeDef hdma_spi2_tx ;
 #define LCD_CS_HIGH()  spi2_cs_high()
 
 // 添加全局变量控制传输过程
-static volatile uint32_t remaining_pixels = 0;
-static uint8_t dma_buffer[512*2]; // 512像素的缓冲区
-
-// 测试参数配置
-
 #define BUF_SIZE      512  // 缓冲区大小（像素数）
-uint16_t dma_test_buf[BUF_SIZE] __attribute__((aligned(4))); // 4字节对齐
+uint16_t dma_buf[BUF_SIZE] __attribute__((aligned(4))); // 4字节对齐
 // 函数
 void LCD_WR_REG(uint8_t data)
 {
@@ -540,29 +535,31 @@ void LCD_Clear(uint16_t color)
 #elif LCD_INTERFACE_TYPE == 1
 #ifdef USE_SPI_DMA
 
-/********************DMA轮询式多次传输*********************/
+/********************SPI DMA轮询式多次传输*********************/
 
 // 1. 设置局部窗口
     LCD_Set_Window(0, 0,480- 1,320- 1);
     for(int i=0; i<BUF_SIZE; i++){
-        dma_test_buf[i] = color; // 直接存储16位颜色值
+        dma_buf[i] = color; // 直接存储16位颜色值
     }
     uint32_t total_pixels = 480 * 320;
     uint32_t transferred = 0;
+    LCD_CS_LOW();
+    LCD_RS_HIGH(); // 进入GRAM数据模式
     while(transferred < total_pixels) {
-        LCD_CS_LOW();
-        LCD_RS_HIGH(); // 进入GRAM数据模式
+
         uint32_t chunk = (total_pixels - transferred > BUF_SIZE)
                          ? BUF_SIZE : (total_pixels - transferred);
 
         // 更新缓冲区内容（可选）
         // for(int i=0; i<chunk; i++) dma_test_buf[i] = color;
 
-        HAL_SPI_Transmit_DMA(&hspi2, (uint8_t*)dma_test_buf, chunk * 2);
+        HAL_SPI_Transmit_DMA(&hspi2, (uint8_t*)dma_buf, chunk * 2);
         while(HAL_SPI_GetState(&hspi2) != HAL_SPI_STATE_READY);
         transferred += chunk;
-        LCD_CS_HIGH();
+
     }
+    LCD_CS_HIGH();
 /********************SPI 无DMA*************************/
 #else
     LCD_Set_Window(0, 0, 479, 319);//横屏
@@ -698,26 +695,26 @@ void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_
 //需要一直发送或者接收就在回调里再调用一次接收或读取函数
 void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
 {
-    // 1. 校验SPI实例
-    if(hspi == &hspi2)  // 确保是SPI2的传输完成
-    {
-        // 2. 更新剩余像素计数器
-        if(remaining_pixels > 0)
-        {
-            // 计算本次传输量（不超过缓冲区容量）
-            uint32_t transfer_size = (remaining_pixels > 512) ? 512 : remaining_pixels;
-
-            // 3. 发起新DMA传输
-            HAL_SPI_Transmit_DMA(&hspi2, dma_buffer, transfer_size * 2);  // 每个像素2字节
-
-            // 4. 更新剩余像素计数
-            remaining_pixels -= transfer_size;
-        }
-        else
-        {
-            // 5. 所有传输完成后的处理
-            LCD_CS_HIGH();  // 关闭片选
-        }
-    }
+//    // 1. 校验SPI实例
+//    if(hspi == &hspi2)  // 确保是SPI2的传输完成
+//    {
+//        // 2. 更新剩余像素计数器
+//        if(remaining_pixels > 0)
+//        {
+//            // 计算本次传输量（不超过缓冲区容量）
+//            uint32_t transfer_size = (remaining_pixels > 512) ? 512 : remaining_pixels;
+//
+//            // 3. 发起新DMA传输
+//            HAL_SPI_Transmit_DMA(&hspi2, dma_buffer, transfer_size * 2);  // 每个像素2字节
+//
+//            // 4. 更新剩余像素计数
+//            remaining_pixels -= transfer_size;
+//        }
+//        else
+//        {
+//            // 5. 所有传输完成后的处理
+//            LCD_CS_HIGH();  // 关闭片选
+//        }
+//    }
 }
 
