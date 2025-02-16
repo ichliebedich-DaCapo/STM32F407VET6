@@ -583,9 +583,10 @@ def convert_function_args(func_name, args):
 
 
 # 处理样式块,已经包含里样式的正确代码，不用在前面加上组件名
-def convert_style_calls(func_name, args):
+def convert_style_calls(func_name, args,is_static_cast = False):
     """
     转换样式代码
+    :param is_static_cast: 是否强制转换（在C++中，两个enum类型做运算会警告）
     :param func_name:
     :param args:
     :return: converted(string) 返回的是转换好的样式代码，如果不需要那么就返回None
@@ -620,6 +621,19 @@ def convert_style_calls(func_name, args):
             return lst[2]
         except IndexError:
             return default
+    def add_enum_casts(code):
+        """
+        自动为形如 LV_XXX | LV_YYY 的枚举组合添加类型转换
+        示例输入：'LV_PART_MAIN|LV_STATE_PRESSED'
+        示例输出：'(lv_style_flag_t)LV_PART_MAIN|(lv_style_flag_t)LV_STATE_PRESSED'
+        """
+        # 匹配LV_开头的标识符组合
+        pattern = r'\b(LV_[A-Z0-9_]+\b)(?:\s*\|\s*(LV_[A-Z0-9_]+\b))+'
+        def replace_match(match):
+            parts = match.group(0).split('|')
+            casted = [f'static_cast<int>({part.strip()})' for part in parts]
+            return '|'.join(casted)
+        return re.sub(pattern, replace_match, code)
 
     # 这里能做到这么简洁是因为lvgl 9.2的所有样式API都只有三个参数，并且前缀相同
     match = re.match(r'lv_obj_set_style_(\w+)', func_name)
@@ -633,8 +647,12 @@ def convert_style_calls(func_name, args):
 
     # 如果在默认配置表里找到了对应函数，那么就对照默认配置修改
     index = next((i for i, item in enumerate(default_config) if item[0] == prop), -1)
+    # 判断是否需要强制转换
+    is_default_state = state == 'LV_PART_MAIN|LV_STATE_DEFAULT'
+    if is_static_cast:
+        state = add_enum_casts(state)
     # 处理状态，如果是默认状态，那么就不添加
-    state = "" if state == 'LV_PART_MAIN|LV_STATE_DEFAULT' else f", {state}"
+    state = "" if is_default_state else f", {state}"
     if index != -1:
         prop = list_get2(default_config[index], prop)  # 从默认配置里看看有没有第三个元素（简写）
         value = "" if value == default_config[index][1] and state == "" else f"{value}"
@@ -697,7 +715,7 @@ def iterate_widgets(screen_name):
         widgets_init_code(list):由一段段组件初始化代码组成,最后是需要通过'\n\t'进行拼接
     """
     widgets_init_code = []
-    # 处理屏幕组件
+    # -------处理屏幕组件------
     screen_widget = find_widget(screen_name)
     screen_func_list = screen_widget[1]
     screen_init_chain = []
@@ -707,7 +725,7 @@ def iterate_widgets(screen_name):
         func_name = scr_func_info[0]
         args = scr_func_info[1]
         if 'lv_obj_set_style' in func_name:
-            # 如果是样式函数
+            # 如果是样式函数（针对与主屏幕）
             func_code = convert_style_calls(func_name, args)
             if func_code is None:
                 continue
@@ -717,7 +735,7 @@ def iterate_widgets(screen_name):
     screen_init_chain[-1] += ';'  # 末尾添加分号
     widgets_init_code.append('\n\t\t\t'.join(screen_init_chain))
 
-    # 处理其他组件
+    # ------处理其他组件-------
     for widget in widgets:
         widget_name = widget[0]
         function_list = widget[1]
@@ -744,7 +762,7 @@ def iterate_widgets(screen_name):
             # 获得处理过后的C++函数代码
             if 'lv_obj_set_style' in func_name:
                 # 如果是样式函数
-                func_code = convert_style_calls(func_name, args)
+                func_code = convert_style_calls(func_name, args,is_static_cast=True)
             else:
 
                 func_code = convert_function_args(func_name, args)
@@ -861,17 +879,21 @@ def extract_screen_name(func_name: str) -> str:
         raise ValueError("No project name found")
 
 
-def move_files_by_pattern(source_dir, pattern, target_dir):
+import os
+import glob
+import shutil
+
+def copy_files_by_pattern(source_dir, pattern, target_dir):
     """
-    将源目录下符合通配符规则的文件移动到目标目录
+    将源目录下符合通配符规则的文件复制到目标目录
 
     参数：
-        source_dir (str): 需要移动文件的源目录路径
+        source_dir (str): 需要复制文件的源目录路径
         pattern (str): 要匹配的文件名模式（支持通配符，如*.txt）
-        target_dir (str): 文件移动的目标目录路径
+        target_dir (str): 文件复制的目标目录路径
 
     返回：
-        list: 成功移动的文件路径列表
+        list: 成功复制的文件路径列表
 
     异常：
         ValueError: 当源目录或目标目录不存在时抛出
@@ -890,8 +912,8 @@ def move_files_by_pattern(source_dir, pattern, target_dir):
     # 获取匹配的文件列表（不包含子目录）
     matched_files = glob.glob(search_pattern)
 
-    # 存储成功移动的文件路径
-    moved_files = []
+    # 存储成功复制的文件路径
+    copied_files = []
 
     # 遍历所有匹配到的文件
     for file_path in matched_files:
@@ -901,14 +923,14 @@ def move_files_by_pattern(source_dir, pattern, target_dir):
                 # 构造目标路径
                 target_path = os.path.join(target_dir, os.path.basename(file_path))
 
-                # 执行文件移动操作
-                shutil.move(file_path, target_path)
-                moved_files.append(target_path)
-                print(f"成功移动：{file_path} -> {target_path}")
+                # 执行文件复制操作
+                shutil.copy2(file_path, target_path)
+                copied_files.append(target_path)
+                print(f"成功复制：{file_path} -> {target_path}")
         except Exception as e:
-            print(f"移动文件失败：{file_path}，错误信息：{str(e)}")
+            print(f"复制文件失败：{file_path}，错误信息：{str(e)}")
 
-    return moved_files
+    return copied_files
 
 # ----------------------------------输出结果处理--------------------------------------------
 """
@@ -1390,12 +1412,12 @@ def main():
     print("代码生成成功！输出文件：ui.cpp")
 
 
-    # 移动所有字体
-    move_files_by_pattern(source_dir=r"E:\Program\Embedded\MCU\GUI\GUI\generated\guider_fonts",
+    # 复制所有字体
+    copy_files_by_pattern(source_dir=r"E:\Program\Embedded\MCU\GUI\GUI\generated\guider_fonts",
                           target_dir="../../Projects/driversDevelop/ui",
                           pattern="*.c")
-    # 移动所有图片
-    move_files_by_pattern(source_dir=r"E:\Program\Embedded\MCU\GUI\GUI\generated\images",
+    # 复制所有图片
+    copy_files_by_pattern(source_dir=r"E:\Program\Embedded\MCU\GUI\GUI\generated\images",
                           target_dir="../../Projects/driversDevelop/ui",
                           pattern="*.c")
 

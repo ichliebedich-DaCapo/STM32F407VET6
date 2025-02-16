@@ -261,13 +261,13 @@ bool lv_color32_eq(lv_color32_t c1, lv_color32_t c2)
 {
     return *((uint32_t *)&c1) == *((uint32_t *)&c2);
 }
-//这个函数原来是BGR
+
 lv_color_t lv_color_hex(uint32_t c)
 {
     lv_color_t ret;
-    ret. blue= (c >> 16) & 0xff;
+    ret.red = (c >> 16) & 0xff;
     ret.green = (c >> 8) & 0xff;
-    ret. red= (c >> 0) & 0xff;
+    ret.blue = (c >> 0) & 0xff;
     return ret;
 }
 

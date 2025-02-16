@@ -13,14 +13,14 @@ public:
      * @brief 设置全局字体，但不会改变组件的font
      * @param font 使用引用类型，在函数内部取地址，避免还要多写一个&符号
      */
-    static inline void Font(Font_t &font)
-    {
-        font_ = &font;
-    }
-    static inline void Font(::Font font)
-    {
-        font_ = font;
-    }
+//    static inline void Font(Font_t &font)
+//    {
+//        font_ = &font;
+//    }
+//    static inline void Font(::Font font)
+//    {
+//        font_ = font;
+//    }
 
     inline Button& init(Obj_t parent=parent_)
     {
@@ -66,29 +66,26 @@ public:
     // 设置字体类型
     inline Button &font(::Font font)
     {
-        lv_obj_set_style_text_font(label, font, selector_default);
+        lv_obj_set_style_text_font(obj_, font, selector_default);
         return *this;
     }
     inline Button &font(Font_t& font)
     {
-        lv_obj_set_style_text_font(label, &font, selector_default);
+        lv_obj_set_style_text_font(obj_, &font, selector_default);
         return *this;
     }
 
     // 设置文本
-    Button &text(Strings fmt, ...)
-    {
-        va_list args;
-        va_start(args, fmt);
-        lv_label_set_text_fmt(label, fmt, args);
-        va_end(args);
-        return *this;
-    }
+//    Button &text(Strings fmt, ...)
+//    {
+//        va_list args;
+//        va_start(args, fmt);
+//        lv_label_set_text_fmt(label, fmt, args);
+//        va_end(args);
+//        return *this;
+//    }
 
 
-private:
-    Obj_t label;
-    static inline ::Font font_{};
 };
 
 
