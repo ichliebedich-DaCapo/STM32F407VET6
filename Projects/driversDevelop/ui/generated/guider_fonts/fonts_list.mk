@@ -1,1 +1,0 @@
-GEN_CSRCS += lv_font_arial_34.c lv_font_montserratMedium_34.c lv_font_montserratMedium_13.c lv_font_montserratMedium_16.c lv_font_montserratMedium_12.c lv_font_arial_40.c lv_font_arial_11.c

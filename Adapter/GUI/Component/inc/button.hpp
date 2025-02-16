@@ -28,30 +28,30 @@ public:
         return *this;
     }
 
-    // 使用前必须设置父对象
-    inline Button &init(Strings text = nullptr, Obj parent = parent_)
-    {
-        init(parent);
+//    // 使用前必须设置父对象
+//    inline Button &init(Strings text = nullptr, Obj parent = parent_)
+//    {
+//        init(parent);
+//
+//        // 创建label，以Button为父对象
+//        label = lv_label_create(obj_);
+//        Button::font(font_);
+//        lv_label_set_text(label, text);
+//        lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);// 设置label居中
+//        lv_obj_set_style_text_color(label, lv_color_black(), selector_default);// 设置label字体颜色为黑色
+//        return *this;
+//    }
 
-        // 创建label，以Button为父对象
-        label = lv_label_create(obj_);
-        Button::font(font_);
-        lv_label_set_text(label, text);
-        lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);// 设置label居中
-        lv_obj_set_style_text_color(label, lv_color_black(), selector_default);// 设置label字体颜色为黑色
-        return *this;
-    }
-
-    inline Button &
-    init(Coord x, Coord y, Coord w, Coord h, Strings text = nullptr, Obj parent = parent_)
-    {
-        init(text, parent);
-        pos_size(x, y, w, h);
-        border_radius(5);
-        bg_color(Color_Firefly_Green);
-        bg_opa(125);
-        return *this;
-    }
+//    inline Button &
+//    init(Coord x, Coord y, Coord w, Coord h, Strings text = nullptr, Obj parent = parent_)
+//    {
+//        init(text, parent);
+//        pos_size(x, y, w, h);
+//        border_radius(5);
+//        bg_color(Color_Firefly_Green);
+//        bg_opa(125);
+//        return *this;
+//    }
 
 
     // 点击事件
