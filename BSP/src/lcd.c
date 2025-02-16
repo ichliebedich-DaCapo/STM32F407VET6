@@ -44,7 +44,6 @@ extern DMA_HandleTypeDef hdma_spi2_tx ;
 // 添加全局变量控制传输过程
 #define BUF_SIZE      20000  // 缓冲区大小（像素数）
 uint16_t dma_buf[BUF_SIZE] __attribute__((aligned(4))); // 4字节对齐
-
 volatile static bool is_dma_busy = false;
 // 函数
 void LCD_WR_REG(uint8_t data)
@@ -469,14 +468,14 @@ void LCD_direction(uint8_t direction)
 //            lcddev.width=LCD_W;
 //            lcddev.height=LCD_H;
 
-            LCD_WR_DATA((1<<5)|(1<<6)|(1<<7));// 横屏1; 0度
+            LCD_WR_DATA((1<<5)|(1<<6)|(1<<7)|(1<<3));// 横屏1; 0度
 //            LCD_WR_DATA((1<<5)|(1<<6));// 横屏1; 0度
             break;
         case 1:
 
 //            lcddev.width=LCD_H;
 //            lcddev.height=LCD_W;
-            LCD_WR_DATA((1<<6));// 竖屏1; 90度
+            LCD_WR_DATA((1<<6)|(1<<3));// 竖屏1; 90度
 //            LCD_WR_DATA(0);// 竖屏1; 90度
 
 
@@ -484,13 +483,13 @@ void LCD_direction(uint8_t direction)
         case 2:
 //            lcddev.width=LCD_W;
 //            lcddev.height=LCD_H;
-            LCD_WR_DATA(1<<5);// 横屏2; 180度
+            LCD_WR_DATA((1<<5)|(1<<3));// 横屏2; 180度
 //            LCD_WR_DATA((1<<5)|(1<<7));// 横屏2; 180度
             break;
         case 3:
 //            lcddev.width=LCD_H;
 //            lcddev.height=LCD_W;
-            LCD_WR_DATA(1<<7);// 竖屏2; 270度
+            LCD_WR_DATA((1<<7)|(1<<3));// 竖屏2; 270度
 //            LCD_WR_DATA((1<<6)|(1<<7));// 竖屏2; 270度
             break;
 
@@ -538,14 +537,14 @@ void LCD_Clear(uint16_t color)
 #ifdef USE_SPI_DMA
 
 /********************SPI DMA轮询式多次传输*********************/
-
+/*****8位传输，颜色有问题******/
 // 1. 设置局部窗口
     //一层互斥锁，防止和flush冲突
     if (is_dma_busy) return;
     is_dma_busy = true;
     LCD_Set_Window(0, 0,480- 1,320- 1);
     for(int i=0; i<BUF_SIZE; i++){
-        dma_buf[i] = color; // 直接存储16位颜色值
+        dma_buf[i] = __REV16(color); // 直接存储16位颜色值
     }
     uint32_t total_pixels = 480 * 320;
     uint32_t transferred = 0;
@@ -568,6 +567,8 @@ void LCD_Clear(uint16_t color)
     }
     LCD_CS_HIGH();
     is_dma_busy = false;
+
+
 /********************SPI 无DMA*************************/
 #else
     LCD_Set_Window(0, 0, 479, 319);//横屏
@@ -578,7 +579,6 @@ void LCD_Clear(uint16_t color)
     {
         spi2_sendByte(color >> 8);
         spi2_sendByte(color & 0xFF);
-
     }
     LCD_CS_HIGH();
 #endif
@@ -671,8 +671,9 @@ void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_
 //第一种方法
     LCD_Set_Window(x1, y1,x2,y2);
     for(int i=0; i<BUF_SIZE; i++){
-        dma_buf[i] = color_p[i]; // 直接存储16位颜色值
+        dma_buf[i] = __REV16(color_p[i]); // 16位字节反转宏后存储16位颜色值
     }
+
     uint32_t total_pixels = (x2 - x1 + 1) * (y2 - y1 + 1);
     uint32_t transferred = 0;
     LCD_CS_LOW();
@@ -693,7 +694,7 @@ void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_
     }
     LCD_CS_HIGH();
 
-//第二种方法(不可靠，挤占lcd_clear DMA资源)
+//第二种方法(不可靠，挤占lcd_clear DMA资源,还没搞明白)
 //    LCD_Set_Window(x1, y1, x2, y2);
 //
 //    uint32_t pixel_count = (x2-x1+1)*(y2-y1+1);
@@ -709,9 +710,10 @@ void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_
 //            (uint32_t)&hspi2.Instance->DR,
 //            byte_count
 //    );
-//
 //    // 启用SPI DMA传输
 //    SET_BIT(hspi2.Instance->CR2, SPI_CR2_TXDMAEN);
+
+
 #else
     LCD_Set_Window(x1, y1, x2, y2); // 设置LCD屏幕的扫描区域
     LCD_CS_LOW(); // 使能LCD片选

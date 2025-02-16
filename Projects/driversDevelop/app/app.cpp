@@ -135,7 +135,7 @@ void key_handler()
 
         case keyK7:
 
-            LCD_Clear(0xDEF0); // 填充颜色 0xDEF0
+            LCD_Clear(0xdf10); // 填充颜色 0xDEF0
             break;
 
         case keyK8:
