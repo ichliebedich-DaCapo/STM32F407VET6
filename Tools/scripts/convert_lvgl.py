@@ -3,6 +3,7 @@ import argparse
 import glob
 import os
 import re
+import shutil
 import textwrap
 from datetime import datetime
 
@@ -859,6 +860,56 @@ def extract_screen_name(func_name: str) -> str:
     else:
         raise ValueError("No project name found")
 
+
+def move_files_by_pattern(source_dir, pattern, target_dir):
+    """
+    将源目录下符合通配符规则的文件移动到目标目录
+
+    参数：
+        source_dir (str): 需要移动文件的源目录路径
+        pattern (str): 要匹配的文件名模式（支持通配符，如*.txt）
+        target_dir (str): 文件移动的目标目录路径
+
+    返回：
+        list: 成功移动的文件路径列表
+
+    异常：
+        ValueError: 当源目录或目标目录不存在时抛出
+    """
+
+    # 检查源目录是否存在
+    if not os.path.exists(source_dir):
+        raise ValueError(f"源目录不存在：{source_dir}")
+
+    # 检查目标目录是否存在，不存在则自动创建
+    os.makedirs(target_dir, exist_ok=True)
+
+    # 构建完整的文件搜索路径模式
+    search_pattern = os.path.join(source_dir, pattern)
+
+    # 获取匹配的文件列表（不包含子目录）
+    matched_files = glob.glob(search_pattern)
+
+    # 存储成功移动的文件路径
+    moved_files = []
+
+    # 遍历所有匹配到的文件
+    for file_path in matched_files:
+        try:
+            # 确保是文件而不是目录
+            if os.path.isfile(file_path):
+                # 构造目标路径
+                target_path = os.path.join(target_dir, os.path.basename(file_path))
+
+                # 执行文件移动操作
+                shutil.move(file_path, target_path)
+                moved_files.append(target_path)
+                print(f"成功移动：{file_path} -> {target_path}")
+        except Exception as e:
+            print(f"移动文件失败：{file_path}，错误信息：{str(e)}")
+
+    return moved_files
+
 # ----------------------------------输出结果处理--------------------------------------------
 """
 UI代码转换系统 v2.5 
@@ -1301,7 +1352,7 @@ class TemplateGenerator:
 # -------------------------------------主函数--------------------------------------------
 def main():
     # 【定位屏幕初始化代码】：定位 setup_scr_* 函数,并获取工程名和函数体
-    c_content = find_c_functions(search_path="E:\Program\Embedded\MCU\GUI\GUI\generated",
+    c_content = find_c_functions(search_path=r"E:\Program\Embedded\MCU\GUI\GUI\generated",
                            func_name="setup_scr_*",
                            file_name="setup_scr_*.c")
     # 获取第一个满足条件的函数
@@ -1331,12 +1382,22 @@ def main():
     generator.generate(
         define_blocks=widgets_define_code,
         init_blocks=widgets_init_code,
-        output_path=".",
+        output_path="../../Projects/driversDevelop/ui",
         is_font_custom=False,
         mode=GenerateMode.OVERWRITE
     )
 
     print("代码生成成功！输出文件：ui.cpp")
+
+
+    # 移动所有字体
+    move_files_by_pattern(source_dir=r"E:\Program\Embedded\MCU\GUI\GUI\generated\guider_fonts",
+                          target_dir="../../Projects/driversDevelop/ui",
+                          pattern="*.c")
+    # 移动所有图片
+    move_files_by_pattern(source_dir=r"E:\Program\Embedded\MCU\GUI\GUI\generated\images",
+                          target_dir="../../Projects/driversDevelop/ui",
+                          pattern="*.c")
 
 
 
