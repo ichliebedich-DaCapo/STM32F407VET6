@@ -33,8 +33,7 @@
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw_nxp/bin/Simulator.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw_nxp/bin/Simulator.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/lcd.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../BSP/src/spi.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/spi.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/misc/lv_color.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/misc/lv_color.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/app/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,6 +142,7 @@
       <workItem from="1739416924560" duration="10057000" />
       <workItem from="1739612920922" duration="6979000" />
       <workItem from="1739675418620" duration="1916000" />
+      <workItem from="1739772554334" duration="598000" />
     </task>
     <servers />
   </component>

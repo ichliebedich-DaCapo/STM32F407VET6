@@ -26,10 +26,6 @@ void LCD_direction(uint8_t direction);// 设置显示方向
 
 void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p);// 填充矩形区域
 
-/************注册机制:为解决SPI+DMA回调函数问题************/
-typedef void (*SPI_TxCpltCallback)(void);
-void LCD_RegisterTxCallback(SPI_TxCpltCallback cb);
-/*******************************************************/
 #ifdef __cplusplus
 }
 #endif

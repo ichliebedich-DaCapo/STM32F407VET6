@@ -44,7 +44,7 @@ extern DMA_HandleTypeDef hdma_spi2_tx ;
 // 添加全局变量控制传输过程
 #define BUF_SIZE      20000  // 缓冲区大小（像素数）
 uint16_t dma_buf[BUF_SIZE] __attribute__((aligned(4))); // 4字节对齐
-volatile static bool is_dma_busy = false;
+
 // 函数
 void LCD_WR_REG(uint8_t data)
 {
@@ -540,16 +540,14 @@ void LCD_Clear(uint16_t color)
 /*****8位传输，颜色有问题******/
 // 1. 设置局部窗口
     //一层互斥锁，防止和flush冲突
-    if (is_dma_busy) return;
-    is_dma_busy = true;
+    if (HAL_DMA_GetState(&hdma_spi2_tx) != HAL_DMA_STATE_READY) return;
     LCD_Set_Window(0, 0,480- 1,320- 1);
     for(int i=0; i<BUF_SIZE; i++){
         dma_buf[i] = __REV16(color); // 直接存储16位颜色值
     }
     uint32_t total_pixels = 480 * 320;
     uint32_t transferred = 0;
-    //双重保障，防止和flush冲突
-    if (HAL_DMA_GetState(&hdma_spi2_tx) != HAL_DMA_STATE_READY) return;
+
     LCD_CS_LOW();
     LCD_RS_HIGH(); // 进入GRAM数据模式
     while(transferred < total_pixels) {
@@ -566,7 +564,7 @@ void LCD_Clear(uint16_t color)
 
     }
     LCD_CS_HIGH();
-    is_dma_busy = false;
+
 
 
 /********************SPI 无DMA*************************/
@@ -666,8 +664,7 @@ void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_
 #elif LCD_INTERFACE_TYPE == 1//使用SPI
 
 #ifdef USE_SPI_DMA
-    if (is_dma_busy) return; // 或等待
-    is_dma_busy = true;
+    if (HAL_DMA_GetState(&hdma_spi2_tx) != HAL_DMA_STATE_READY) return;
 //第一种方法
     LCD_Set_Window(x1, y1,x2,y2);
     for(int i=0; i<BUF_SIZE; i++){
@@ -731,27 +728,6 @@ void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_
 #endif
 #endif
 }
-/************注册机制:为解决SPI+DMA回调函数问题************/
-static SPI_TxCpltCallback user_callback = NULL;
-void LCD_RegisterTxCallback(SPI_TxCpltCallback cb) {
-    user_callback = cb;
-}
-/*******************************************************/
-//需要一直发送或者接收就在回调里再调用一次接收或读取函数
-void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
-{
-    is_dma_busy = false;
-    //方法1
-    if(hspi == &hspi2) { // 指定SPI实例
-        if(user_callback) user_callback();
-    }
 
-    //方法2
-//    if(hspi == &hspi2) { // 指定SPI实例
-//        LCD_CS_HIGH();
-//        CLEAR_BIT(hspi2.Instance->CR2, SPI_CR2_TXDMAEN);
-//        if(user_callback) user_callback();
-//    }
 
-}
 

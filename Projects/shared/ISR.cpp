@@ -121,6 +121,7 @@ void DMA2_Stream6_IRQHandler(void)
 #ifdef USE_SPI_DMA
 extern DMA_HandleTypeDef hdma_spi2_tx;
 extern DMA_HandleTypeDef hdma_spi2_rx;
+extern SPI_HandleTypeDef hspi2;
 void DMA1_Stream4_IRQHandler(void)
 {
 
@@ -135,7 +136,22 @@ void DMA1_Stream3_IRQHandler(void)
 }
 #endif
 }
+//需要一直发送或者接收就在回调里再调用一次接收或读取函数
+void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
+{
+    //方法1
+    if(hspi == &hspi2) { // 指定SPI实例
+        GUI::display_flush_ready();
+    }
 
+    //方法2
+//    if(hspi == &hspi2) { // 指定SPI实例
+//        LCD_CS_HIGH();
+//        CLEAR_BIT(hspi2.Instance->CR2, SPI_CR2_TXDMAEN);
+//        if(user_callback) user_callback();
+//    }
+
+}
 
 
 /* USER CODE BEGIN Header */
