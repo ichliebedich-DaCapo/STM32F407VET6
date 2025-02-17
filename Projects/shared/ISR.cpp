@@ -143,14 +143,6 @@ void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
     if(hspi == &hspi2) { // 指定SPI实例
         GUI::display_flush_ready();
     }
-
-    //方法2
-//    if(hspi == &hspi2) { // 指定SPI实例
-//        LCD_CS_HIGH();
-//        CLEAR_BIT(hspi2.Instance->CR2, SPI_CR2_TXDMAEN);
-//        if(user_callback) user_callback();
-//    }
-
 }
 
 

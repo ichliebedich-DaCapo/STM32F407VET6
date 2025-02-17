@@ -30,7 +30,6 @@
     <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw_nxp/bin/Simulator.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw_nxp/bin/Simulator.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/lcd.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../BSP/src/spi.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/spi.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" afterDir="false" />
@@ -142,7 +141,7 @@
       <workItem from="1739416924560" duration="10057000" />
       <workItem from="1739612920922" duration="6979000" />
       <workItem from="1739675418620" duration="1916000" />
-      <workItem from="1739772554334" duration="598000" />
+      <workItem from="1739772554334" duration="1213000" />
     </task>
     <servers />
   </component>

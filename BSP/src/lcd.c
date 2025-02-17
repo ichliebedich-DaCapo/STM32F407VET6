@@ -42,7 +42,7 @@ extern DMA_HandleTypeDef hdma_spi2_tx ;
 #define LCD_CS_HIGH()  spi2_cs_high()
 
 // 添加全局变量控制传输过程
-#define BUF_SIZE      20000  // 缓冲区大小（像素数）
+#define BUF_SIZE      512  // 缓冲区大小（像素数）
 uint16_t dma_buf[BUF_SIZE] __attribute__((aligned(4))); // 4字节对齐
 
 // 函数
@@ -388,7 +388,7 @@ void lcd_init(void)
     LCD_direction(0);//下两句被封装为此句，默认显示方向为横屏 切记：切换屏幕方向，LCD_Clear函数内要交互x,y
 //    LCD_WR_REG(0x36);
 //    LCD_WR_DATA(0x60);
-    LCD_Clear(0xffff); //删了gui直接不显示了？太奇怪了
+    LCD_Clear(0xffff); //删了，方法2的gui直接不显示，方法1没有关系
 #else
 #endif
 }
@@ -665,50 +665,28 @@ void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_
 
 #ifdef USE_SPI_DMA
     if (HAL_DMA_GetState(&hdma_spi2_tx) != HAL_DMA_STATE_READY) return;
-//第一种方法
-    LCD_Set_Window(x1, y1,x2,y2);
-    for(int i=0; i<BUF_SIZE; i++){
-        dma_buf[i] = __REV16(color_p[i]); // 16位字节反转宏后存储16位颜色值
-    }
 
-    uint32_t total_pixels = (x2 - x1 + 1) * (y2 - y1 + 1);
-    uint32_t transferred = 0;
+    LCD_Set_Window(x1, y1, x2, y2);
+    uint32_t pixel_count = (x2 - x1 + 1) * (y2 - y1 + 1);
+    uint32_t byte_count = pixel_count * 2;
+
     LCD_CS_LOW();
-    LCD_RS_HIGH(); // 进入GRAM数据模式
-
-    while(transferred < total_pixels) {
-
-        uint32_t chunk = (total_pixels - transferred > BUF_SIZE)
-                         ? BUF_SIZE : (total_pixels - transferred);
-
-        // 更新缓冲区内容（可选）
-        // for(int i=0; i<chunk; i++) dma_test_buf[i] = color;
-
-        HAL_SPI_Transmit_DMA(&hspi2, (uint8_t*)dma_buf, chunk * 2);
-        while(HAL_SPI_GetState(&hspi2) != HAL_SPI_STATE_READY);
-        transferred += chunk;
-
+    LCD_RS_HIGH();
+    uint16_t *buffer = (uint16_t*)color_p;
+    for(int i=0; i<pixel_count; i++) {
+        buffer[i] = __REV16(buffer[i]); // 字节交换
     }
-    LCD_CS_HIGH();
-
-//第二种方法(不可靠，挤占lcd_clear DMA资源,还没搞明白)
-//    LCD_Set_Window(x1, y1, x2, y2);
-//
-//    uint32_t pixel_count = (x2-x1+1)*(y2-y1+1);
-//    uint32_t byte_count = pixel_count * 2;  // 每个像素2字节
-//
-//    LCD_CS_LOW();
-//    LCD_RS_HIGH();
-//
-//    // 启动DMA传输
-//    HAL_DMA_Start_IT(
-//            &hdma_spi2_tx,
-//            (uint32_t)(uint8_t *)color_p,  // 强制转换为字节指针
-//            (uint32_t)&hspi2.Instance->DR,
-//            byte_count
-//    );
-//    // 启用SPI DMA传输
-//    SET_BIT(hspi2.Instance->CR2, SPI_CR2_TXDMAEN);
+// 启动DMA传输
+    HAL_DMA_Start_IT(
+            &hdma_spi2_tx,
+            (uint32_t)buffer, // 直接使用uint16_t*地址
+            (uint32_t)&hspi2.Instance->DR, // SPI数据寄存器地址
+            byte_count
+    );
+// 启用SPI TX DMA
+    SET_BIT(hspi2.Instance->CR2, SPI_CR2_TXDMAEN);
+// 启动SPI传输（需确认SPI已使能）
+    SET_BIT(hspi2.Instance->CR1, SPI_CR1_SPE);
 
 
 #else

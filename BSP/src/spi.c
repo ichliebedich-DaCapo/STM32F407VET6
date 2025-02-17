@@ -95,17 +95,16 @@ void spi2_init()
     hspi2.Instance = SPI2;
     hspi2.Init.Mode = SPI_MODE_MASTER;
     hspi2.Init.Direction = SPI_DIRECTION_2LINES;
-//#ifndef USE_SPI_DMA
+
     hspi2.Init.DataSize = SPI_DATASIZE_8BIT;
-//#endif
-//#ifdef USE_SPI_DMA
 //    hspi2.Init.DataSize = SPI_DATASIZE_16BIT;
-//#endif
+
     hspi2.Init.CLKPolarity = SPI_POLARITY_LOW;
     hspi2.Init.CLKPhase = SPI_PHASE_1EDGE;
     hspi2.Init.NSS = SPI_NSS_SOFT;// 软硬件片选
     hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
     hspi2.Init.FirstBit = SPI_FIRSTBIT_MSB;
+//    hspi2.Init.FirstBit = SPI_FIRSTBIT_LSB;
     hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
     hspi2.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
     hspi2.Init.CRCPolynomial = 10;
@@ -125,9 +124,13 @@ void spi2_init()
     //半字
 //    hdma_spi2_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD;
 //    hdma_spi2_tx.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
+
     hdma_spi2_tx.Init.Mode = DMA_NORMAL;
     hdma_spi2_tx.Init.Priority = DMA_PRIORITY_HIGH;
     hdma_spi2_tx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
+//    hdma_spi2_tx.Init.FIFOMode = DMA_FIFOMODE_ENABLE;
+//    hdma_spi2_tx.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_FULL;
+
 
     HAL_DMA_Init(&hdma_spi2_tx);
 
@@ -142,9 +145,11 @@ void spi2_init()
     //半字
 //    hdma_spi2_rx.Init.PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD;
 //    hdma_spi2_rx.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
+
     hdma_spi2_rx.Init.Mode = DMA_NORMAL;
     hdma_spi2_rx.Init.Priority = DMA_PRIORITY_MEDIUM;
     hdma_spi2_rx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
+
 
     HAL_DMA_Init(&hdma_spi2_rx);
 
