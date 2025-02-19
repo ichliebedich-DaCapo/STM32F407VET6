@@ -33,7 +33,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】存个档，解决cmake白屏问题" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】存个档，解决cmake白屏问题">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -286,6 +288,11 @@
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="libalgorithm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libalgorithm" CONFIG_NAME="Release-MinGW_ARM">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -550,15 +557,7 @@
       <workItem from="1739772552290" duration="19981000" />
       <workItem from="1739849943967" duration="14868000" />
       <workItem from="1739881956013" duration="2373000" />
-      <workItem from="1739933275590" duration="6601000" />
-    </task>
-    <task id="LOCAL-00064" summary="【阻碍】无论输入什么都只输出1，得要先排除浮点数据造成的影响">
-      <option name="closed" value="true" />
-      <created>1732039874063</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1732039874063</updated>
+      <workItem from="1739933275590" duration="6873000" />
     </task>
     <task id="LOCAL-00065" summary="【跨越】我的第一个AI模型">
       <option name="closed" value="true" />
@@ -944,7 +943,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739941944794</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="【驱动开发】存个档，解决cmake白屏问题">
+      <option name="closed" value="true" />
+      <created>1739942006665</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1739942006665</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
