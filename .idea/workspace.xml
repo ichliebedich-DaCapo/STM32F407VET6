@@ -33,13 +33,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】SPI+DMA帧率再次提升，原先方法2是正解，RGB565前8位后8位颠倒问题存在但影响不大，lcd_init中LCD_Clear不能删（未知）">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Base/GUI.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Base/GUI.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/bsp_config.h.in" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/bsp_config.h.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/ISR.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】存个档，解决cmake白屏问题" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -556,15 +550,7 @@
       <workItem from="1739772552290" duration="19981000" />
       <workItem from="1739849943967" duration="14868000" />
       <workItem from="1739881956013" duration="2373000" />
-      <workItem from="1739933275590" duration="6223000" />
-    </task>
-    <task id="LOCAL-00063" summary="【跨越】AI模型能跑，但我没有掌握如何处理输入与输出数据">
-      <option name="closed" value="true" />
-      <created>1732036617441</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1732036617441</updated>
+      <workItem from="1739933275590" duration="6601000" />
     </task>
     <task id="LOCAL-00064" summary="【阻碍】无论输入什么都只输出1，得要先排除浮点数据造成的影响">
       <option name="closed" value="true" />
@@ -950,7 +936,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739799643133</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="【驱动开发】存个档，解决cmake白屏问题">
+      <option name="closed" value="true" />
+      <created>1739941944793</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1739941944794</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -985,7 +979,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】touch_init没有问题，测试成功（不要从init里返回值到app.cpp中，直接在key_handler中测试；寄存器0x00到0x0E是坑，不是0xFF）" />
     <MESSAGE value="【驱动开发】触碰点数量检测成功" />
     <MESSAGE value="【驱动开发】修正复位时序用的延时函数" />
     <MESSAGE value="【驱动开发】读取两个触摸点数据成功，但第二个触摸点无法读取左小半边数据&#10;某次测试后，未修改代码，IIC再次抽风，键盘中断和初始化全部失败，touch_isOK报2" />
@@ -1010,7 +1003,8 @@
     <MESSAGE value="【驱动开发】硬件SPI+DMA与lvgl对接成功，没想到解决了两个颜色问题全都解决了:LCD_direction中寄存器误操作导致RGB变BGR，lcd_flush中因小端模式（有可能）导致RGB565前八位后八位反了" />
     <MESSAGE value="【驱动开发】把回调函数塞在了ISR里，注册机制通通删掉了，GUI与硬件再次隔离开" />
     <MESSAGE value="【驱动开发】SPI+DMA帧率再次提升，原先方法2是正解，RGB565前8位后8位颠倒问题存在但影响不大，lcd_init中LCD_Clear不能删（未知）" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】SPI+DMA帧率再次提升，原先方法2是正解，RGB565前8位后8位颠倒问题存在但影响不大，lcd_init中LCD_Clear不能删（未知）" />
+    <MESSAGE value="【驱动开发】存个档，解决cmake白屏问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】存个档，解决cmake白屏问题" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
