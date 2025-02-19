@@ -33,11 +33,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】不白屏了，再试试创建新的BSP">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】能创建新的BSP了，但是一构建stm32f4xx_hal_conf.h里改的就没了">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/bsp_drivers.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/bsp_drivers.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -561,15 +558,7 @@
       <workItem from="1739849943967" duration="14868000" />
       <workItem from="1739881956013" duration="2373000" />
       <workItem from="1739933275590" duration="7198000" />
-      <workItem from="1739942570288" duration="1606000" />
-    </task>
-    <task id="LOCAL-00066" summary="准备融合">
-      <option name="closed" value="true" />
-      <created>1734251699351</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1734251699352</updated>
+      <workItem from="1739942570288" duration="2609000" />
     </task>
     <task id="LOCAL-00067" summary="已经融合，可以正常编译">
       <option name="closed" value="true" />
@@ -955,7 +944,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739942362855</updated>
     </task>
-    <option name="localTasksCounter" value="115" />
+    <task id="LOCAL-00115" summary="【驱动开发】能创建新的BSP了，但是一构建stm32f4xx_hal_conf.h里改的就没了">
+      <option name="closed" value="true" />
+      <created>1739944292891</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1739944292891</updated>
+    </task>
+    <option name="localTasksCounter" value="116" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -990,7 +987,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】修正复位时序用的延时函数" />
     <MESSAGE value="【驱动开发】读取两个触摸点数据成功，但第二个触摸点无法读取左小半边数据&#10;某次测试后，未修改代码，IIC再次抽风，键盘中断和初始化全部失败，touch_isOK报2" />
     <MESSAGE value="【驱动开发】增加delay.c，双指触摸功能测试成功" />
     <MESSAGE value="【驱动开发】框架改变" />
@@ -1015,7 +1011,8 @@
     <MESSAGE value="【驱动开发】SPI+DMA帧率再次提升，原先方法2是正解，RGB565前8位后8位颠倒问题存在但影响不大，lcd_init中LCD_Clear不能删（未知）" />
     <MESSAGE value="【驱动开发】存个档，解决cmake白屏问题" />
     <MESSAGE value="【驱动开发】不白屏了，再试试创建新的BSP" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】不白屏了，再试试创建新的BSP" />
+    <MESSAGE value="【驱动开发】能创建新的BSP了，但是一构建stm32f4xx_hal_conf.h里改的就没了" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】能创建新的BSP了，但是一构建stm32f4xx_hal_conf.h里改的就没了" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
