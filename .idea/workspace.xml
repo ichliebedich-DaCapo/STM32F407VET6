@@ -33,11 +33,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】把回调函数塞在了ISR里，注册机制通通删掉了，GUI与硬件再次隔离开">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】SPI+DMA帧率再次提升，原先方法2是正解，RGB565前8位后8位颠倒问题存在但影响不大，lcd_init中LCD_Clear不能删（未知）">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Base/GUI.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Base/GUI.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/lcd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/spi.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/spi.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/bsp_config.h.in" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/bsp_config.h.in" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/ISR.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -553,15 +553,10 @@
       <workItem from="1739597019600" duration="24720000" />
       <workItem from="1739622861720" duration="12017000" />
       <workItem from="1739675443594" duration="25267000" />
-      <workItem from="1739772552290" duration="18027000" />
-    </task>
-    <task id="LOCAL-00062" summary="【准备】是我错了">
-      <option name="closed" value="true" />
-      <created>1732036146573</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1732036146573</updated>
+      <workItem from="1739772552290" duration="19981000" />
+      <workItem from="1739849943967" duration="14868000" />
+      <workItem from="1739881956013" duration="2373000" />
+      <workItem from="1739933275590" duration="6223000" />
     </task>
     <task id="LOCAL-00063" summary="【跨越】AI模型能跑，但我没有掌握如何处理输入与输出数据">
       <option name="closed" value="true" />
@@ -947,7 +942,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739780714675</updated>
     </task>
-    <option name="localTasksCounter" value="111" />
+    <task id="LOCAL-00111" summary="【驱动开发】SPI+DMA帧率再次提升，原先方法2是正解，RGB565前8位后8位颠倒问题存在但影响不大，lcd_init中LCD_Clear不能删（未知）">
+      <option name="closed" value="true" />
+      <created>1739799643133</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1739799643133</updated>
+    </task>
+    <option name="localTasksCounter" value="112" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -982,7 +985,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】touch_init有问题，无法读取正确ID" />
     <MESSAGE value="【驱动开发】touch_init没有问题，测试成功（不要从init里返回值到app.cpp中，直接在key_handler中测试；寄存器0x00到0x0E是坑，不是0xFF）" />
     <MESSAGE value="【驱动开发】触碰点数量检测成功" />
     <MESSAGE value="【驱动开发】修正复位时序用的延时函数" />
@@ -1007,7 +1009,8 @@
     <MESSAGE value="【驱动开发】在lv_conf里找到了帧率LV_USE_PERF_MONITOR和内存占用LV_USE_MEM_MONITOR的开关" />
     <MESSAGE value="【驱动开发】硬件SPI+DMA与lvgl对接成功，没想到解决了两个颜色问题全都解决了:LCD_direction中寄存器误操作导致RGB变BGR，lcd_flush中因小端模式（有可能）导致RGB565前八位后八位反了" />
     <MESSAGE value="【驱动开发】把回调函数塞在了ISR里，注册机制通通删掉了，GUI与硬件再次隔离开" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】把回调函数塞在了ISR里，注册机制通通删掉了，GUI与硬件再次隔离开" />
+    <MESSAGE value="【驱动开发】SPI+DMA帧率再次提升，原先方法2是正解，RGB565前8位后8位颠倒问题存在但影响不大，lcd_init中LCD_Clear不能删（未知）" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】SPI+DMA帧率再次提升，原先方法2是正解，RGB565前8位后8位颠倒问题存在但影响不大，lcd_init中LCD_Clear不能删（未知）" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

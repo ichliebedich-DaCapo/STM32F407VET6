@@ -28,6 +28,7 @@
 
 
 
+
 #define KEY_RAM (*((volatile unsigned short *)0x6006000C)) // 键盘接口地址
 //extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
 
@@ -139,10 +140,12 @@ void DMA1_Stream3_IRQHandler(void)
 //需要一直发送或者接收就在回调里再调用一次接收或读取函数
 void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
 {
+#ifdef USE_SPI_DMA
     //方法1
     if(hspi == &hspi2) { // 指定SPI实例
         GUI::display_flush_ready();
     }
+#endif
 }
 
 

@@ -4,7 +4,7 @@
 
 #include "spi.h"
 #include "stm32f4xx_hal.h"
-
+#define USE_SPI_DMA
 SPI_HandleTypeDef hspi2;
 SPI_HandleTypeDef hspi3;
 DMA_HandleTypeDef hdma_spi2_tx;

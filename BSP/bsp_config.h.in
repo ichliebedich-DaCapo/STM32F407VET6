@@ -24,5 +24,5 @@
 #cmakedefine BSP_USE_TIMER
 #cmakedefine BSP_USE_USART
 #cmakedefine BSP_USE_W25QXX
-
+#cmakedefine BSP_USE_DMA
 #endif
