@@ -20,6 +20,7 @@ set(BSP_DRIVERS
         "rcc:hal_rcc,hal_flash_ex"
         "rng:hal_rng"
         "sdio:"
+        "sd_spi:spi,dma"
         "spi:hal_spi"
         "tcp:"
         "timer:hal_tim_ex"
@@ -54,7 +55,7 @@ set(timer_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/timer.c)
 set(touch_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/touch.c)
 set(usart_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/usart.c)
 set(w25qxx_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/w25qxx.c)
-
+set(sd_spi_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/sd_spi.c)
 
 # 依赖项文件映射
 include(cmsis_hal.cmake)

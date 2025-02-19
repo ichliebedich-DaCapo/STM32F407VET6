@@ -33,8 +33,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】存个档，解决cmake白屏问题">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】不白屏了，再试试创建新的BSP">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/bsp_drivers.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/bsp_drivers.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -288,9 +291,9 @@
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="libalgorithm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libalgorithm" CONFIG_NAME="Release-MinGW_ARM">
@@ -557,15 +560,8 @@
       <workItem from="1739772552290" duration="19981000" />
       <workItem from="1739849943967" duration="14868000" />
       <workItem from="1739881956013" duration="2373000" />
-      <workItem from="1739933275590" duration="6873000" />
-    </task>
-    <task id="LOCAL-00065" summary="【跨越】我的第一个AI模型">
-      <option name="closed" value="true" />
-      <created>1732083609388</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1732083609389</updated>
+      <workItem from="1739933275590" duration="7198000" />
+      <workItem from="1739942570288" duration="1606000" />
     </task>
     <task id="LOCAL-00066" summary="准备融合">
       <option name="closed" value="true" />
@@ -951,7 +947,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739942006665</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="【驱动开发】不白屏了，再试试创建新的BSP">
+      <option name="closed" value="true" />
+      <created>1739942362855</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1739942362855</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -986,7 +990,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】触碰点数量检测成功" />
     <MESSAGE value="【驱动开发】修正复位时序用的延时函数" />
     <MESSAGE value="【驱动开发】读取两个触摸点数据成功，但第二个触摸点无法读取左小半边数据&#10;某次测试后，未修改代码，IIC再次抽风，键盘中断和初始化全部失败，touch_isOK报2" />
     <MESSAGE value="【驱动开发】增加delay.c，双指触摸功能测试成功" />
@@ -1011,7 +1014,8 @@
     <MESSAGE value="【驱动开发】把回调函数塞在了ISR里，注册机制通通删掉了，GUI与硬件再次隔离开" />
     <MESSAGE value="【驱动开发】SPI+DMA帧率再次提升，原先方法2是正解，RGB565前8位后8位颠倒问题存在但影响不大，lcd_init中LCD_Clear不能删（未知）" />
     <MESSAGE value="【驱动开发】存个档，解决cmake白屏问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】存个档，解决cmake白屏问题" />
+    <MESSAGE value="【驱动开发】不白屏了，再试试创建新的BSP" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】不白屏了，再试试创建新的BSP" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

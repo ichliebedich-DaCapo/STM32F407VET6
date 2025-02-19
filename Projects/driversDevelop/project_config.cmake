@@ -5,7 +5,8 @@ set_bsp_components(
         adc
         rng
         debug
-
+        sd_spi
+        spi
 )
 
 #options_disable_GUI()

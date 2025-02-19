@@ -8,7 +8,6 @@ set(PROJECT_DIR Projects/driversDevelop)
 
 # 创建test项目目录，其下有ui和app目录，并且各目录下有相应文件
 
-
 # --------------------------------------包含子cmake--------------------------------
 # 对配置项变量进行预处理，包括获取项目名称
 include(cmake/target_project.cmake)
