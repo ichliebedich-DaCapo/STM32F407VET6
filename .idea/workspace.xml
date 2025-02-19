@@ -33,8 +33,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】能创建新的BSP了，但是一构建stm32f4xx_hal_conf.h里改的就没了">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】spi模式用不到hal库里的sd">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/baseInit.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/baseInit.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/spi.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/spi.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -558,15 +561,7 @@
       <workItem from="1739849943967" duration="14868000" />
       <workItem from="1739881956013" duration="2373000" />
       <workItem from="1739933275590" duration="7198000" />
-      <workItem from="1739942570288" duration="2609000" />
-    </task>
-    <task id="LOCAL-00067" summary="已经融合，可以正常编译">
-      <option name="closed" value="true" />
-      <created>1734254062073</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1734254062073</updated>
+      <workItem from="1739942570288" duration="15764000" />
     </task>
     <task id="LOCAL-00068" summary="测试了module特性，可以正常使用">
       <option name="closed" value="true" />
@@ -952,7 +947,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739944292891</updated>
     </task>
-    <option name="localTasksCounter" value="116" />
+    <task id="LOCAL-00116" summary="【驱动开发】spi模式用不到hal库里的sd">
+      <option name="closed" value="true" />
+      <created>1739945342561</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1739945342561</updated>
+    </task>
+    <option name="localTasksCounter" value="117" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -987,7 +990,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】读取两个触摸点数据成功，但第二个触摸点无法读取左小半边数据&#10;某次测试后，未修改代码，IIC再次抽风，键盘中断和初始化全部失败，touch_isOK报2" />
     <MESSAGE value="【驱动开发】增加delay.c，双指触摸功能测试成功" />
     <MESSAGE value="【驱动开发】框架改变" />
     <MESSAGE value="【驱动开发】屏幕白屏" />
@@ -1012,7 +1014,8 @@
     <MESSAGE value="【驱动开发】存个档，解决cmake白屏问题" />
     <MESSAGE value="【驱动开发】不白屏了，再试试创建新的BSP" />
     <MESSAGE value="【驱动开发】能创建新的BSP了，但是一构建stm32f4xx_hal_conf.h里改的就没了" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】能创建新的BSP了，但是一构建stm32f4xx_hal_conf.h里改的就没了" />
+    <MESSAGE value="【驱动开发】spi模式用不到hal库里的sd" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】spi模式用不到hal库里的sd" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -1025,6 +1028,7 @@
         <watch expression="dma_test_buf" />
         <watch expression="dma_test_buf" />
         <watch expression="flushing" />
+        <watch expression="SD_init_Status" />
       </configuration>
     </watches-manager>
   </component>

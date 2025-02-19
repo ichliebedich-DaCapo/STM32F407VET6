@@ -4,7 +4,8 @@
 
 #include "spi.h"
 #include "stm32f4xx_hal.h"
-#define USE_SPI_DMA
+//#define USE_SPI_DMA   //lcd GUI isr 都有
+#define UES_SPI_SD
 SPI_HandleTypeDef hspi2;
 SPI_HandleTypeDef hspi3;
 DMA_HandleTypeDef hdma_spi2_tx;
@@ -90,7 +91,11 @@ void spi2_init()
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-
+#ifdef UES_SPI_SD
+    GPIO_InitStruct.Pin = GPIO_PIN_1;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+#endif
 
     hspi2.Instance = SPI2;
     hspi2.Init.Mode = SPI_MODE_MASTER;

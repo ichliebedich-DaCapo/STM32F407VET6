@@ -119,6 +119,7 @@ void DMA2_Stream6_IRQHandler(void)
 //#endif
 //    }
 }
+//#define USE_SPI_DMA  //spi lcd GUI 都有
 #ifdef USE_SPI_DMA
 extern DMA_HandleTypeDef hdma_spi2_tx;
 extern DMA_HandleTypeDef hdma_spi2_rx;

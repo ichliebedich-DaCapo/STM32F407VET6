@@ -25,7 +25,7 @@ extern DMA_HandleTypeDef hdma_spi2_tx ;
 /*预编译*/
 #define LCD_SORTS 9488
 #define LCD_INTERFACE_TYPE 1 // 0:8080接口 1:SPI接口 GUI.c中的同时修改
-#define USE_SPI_DMA
+//#define USE_SPI_DMA  //spi GUI isr都有
 #define delay_ms(ms)   HAL_Delay(ms)
 
 // 使用SPI时

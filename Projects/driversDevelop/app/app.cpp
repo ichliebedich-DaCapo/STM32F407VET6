@@ -19,6 +19,7 @@
 #include "delay.h"
 #include "key_adapter.hpp"
 #include "app.hpp"
+#include "sd_spi.h"
 #include "RCC.h"
 #include "debug.h"
 
@@ -45,12 +46,15 @@ uint8_t FT_ID=0x03;
 
 uint8_t point_number=0;
 
+SD_Error SD_init_Status;
+
 // 函数
 
 // 数组
 const uint16_t color[120 * 120]={};
 void app_init()
 {
+    SD_init_Status = spi_sd_init();
     adc1_temperature_sensor_init();
     RNG_Init();
     ITM_Init();
@@ -66,7 +70,6 @@ void key_handler()
             {
 
                 ft6336_RdReg(FT_REG_NUM_FINGER, &point_number, 1);
-
                 ft6336_RdReg(touch_press_reg[0], touch_pos_buf1, 4);
                 //竖屏
 //                gui::interface::set_button1_value(((uint16_t)(touch_pos_buf1[0]&0X0F)<<8)+touch_pos_buf1[1]);

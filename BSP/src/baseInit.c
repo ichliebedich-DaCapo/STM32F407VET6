@@ -11,6 +11,7 @@
 
 #include "lcd.h"
 #include "touch.h"
+#include "sd_spi.h"
 #include "lvgl.h"
 #include "lv_port_disp.h"
 
@@ -53,6 +54,7 @@ void BaseInit()
 #ifdef GUI_ENABLE
     lcd_init();
     touch_init();
+//    spi_sd_init();
 #endif
 
 #ifdef FREERTOS_ENABLE

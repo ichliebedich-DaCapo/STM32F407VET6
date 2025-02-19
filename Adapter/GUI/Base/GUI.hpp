@@ -5,7 +5,7 @@
 #define FURINA_GUI_HPP
 
 #include "GUI_Base.hpp"
-#define USE_SPI_DMA  //一定要同时更改BSP_CONFIG中的USE_SPI_DMA
+//#define USE_SPI_DMA  //spi lcd isr 都有
 
 #ifdef ARM_MATH_CM4
 #include <project_config.h>
