@@ -480,7 +480,6 @@ auto CounterLogic::generate_data()->void
     current_index = (current_index + 20) % POOL_SIZE;
     if(wave_start_index+length>array_length) wave_start_index=0;
 
-    FPS::print(false);
 
 
 //    draw_dashed_dividers(border_info::x, border_info::y,  border_info::height, border_info::width,

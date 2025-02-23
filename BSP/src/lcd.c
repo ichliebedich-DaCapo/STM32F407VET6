@@ -25,7 +25,6 @@ extern DMA_HandleTypeDef hdma_spi2_tx ;
 /*预编译*/
 #define LCD_SORTS 9488
 #define LCD_INTERFACE_TYPE 1 // 0:8080接口 1:SPI接口 GUI.c中的同时修改
-//#define USE_SPI_DMA  //spi GUI isr都有
 #define delay_ms(ms)   HAL_Delay(ms)
 
 // 使用SPI时
@@ -283,7 +282,7 @@ void lcd_init(void)
 
     GPIO_InitStruct.Pin = LCD_RS_PIN;
     HAL_GPIO_Init(LCD_RS_PORT, &GPIO_InitStruct);
-#ifdef USE_SPI_DMA
+#ifdef DMA_SPI_ENABLE
     spi2_dma_Init();// 初始化SPI+DMA
 #endif
     spi2_init(); //硬件SPI初始化
@@ -535,7 +534,7 @@ void LCD_Clear(uint16_t color)
         LCD_WRITE_DATA(color);
     }
 #elif LCD_INTERFACE_TYPE == 1
-#ifdef USE_SPI_DMA
+#ifdef DMA_SPI_ENABLE
 
 /********************SPI DMA轮询式多次传输*********************/
 /*****8位传输，颜色有问题******/
@@ -664,7 +663,7 @@ void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_
 #endif
 #elif LCD_INTERFACE_TYPE == 1//使用SPI
 
-#ifdef USE_SPI_DMA
+#ifdef DMA_SPI_ENABLE
     if (HAL_DMA_GetState(&hdma_spi2_tx) != HAL_DMA_STATE_READY) return;
 
     LCD_Set_Window(x1, y1, x2, y2);

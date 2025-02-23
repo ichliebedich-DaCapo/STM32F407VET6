@@ -4,8 +4,7 @@
 
 #include "spi.h"
 #include "stm32f4xx_hal.h"
-//#define USE_SPI_DMA   //lcd GUI isr 都有
-#define UES_SPI_SD
+//#define UES_SPI_SD
 SPI_HandleTypeDef hspi2;
 SPI_HandleTypeDef hspi3;
 DMA_HandleTypeDef hdma_spi2_tx;
@@ -117,7 +116,7 @@ void spi2_init()
     {
         Error_Handler();
     }
-#ifdef USE_SPI_DMA
+#ifdef DMA_SPI_ENABLE
     hdma_spi2_tx.Instance = DMA1_Stream4;
     hdma_spi2_tx.Init.Channel = DMA_CHANNEL_0;
     hdma_spi2_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
@@ -161,7 +160,7 @@ void spi2_init()
 #endif
 
 
-#ifdef USE_SPI_DMA
+#ifdef DMA_SPI_ENABLE
     __HAL_LINKDMA(&hspi2, hdmatx, hdma_spi2_tx);
     __HAL_LINKDMA(&hspi2, hdmarx, hdma_spi2_rx);
 #endif
@@ -188,7 +187,7 @@ void spi2_sendByteArray(unsigned char *data, unsigned int len)
     HAL_SPI_Transmit(&hspi2, data, len, HAL_MAX_DELAY);
 }
 
-#ifdef USE_SPI_DMA
+#ifdef DMA_SPI_ENABLE
 void spi2_dma_Init(void)
 {
 

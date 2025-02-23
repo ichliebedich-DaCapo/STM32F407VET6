@@ -29,7 +29,6 @@
 TIM_HandleTypeDef htim7;
 extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
 
-
 void BaseInit()
 {
     HAL_Init();
@@ -54,7 +53,7 @@ void BaseInit()
 #ifdef GUI_ENABLE
     lcd_init();
     touch_init();
-//    spi_sd_init();
+
 #endif
 
 #ifdef FREERTOS_ENABLE

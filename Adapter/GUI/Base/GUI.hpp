@@ -5,7 +5,6 @@
 #define FURINA_GUI_HPP
 
 #include "GUI_Base.hpp"
-//#define USE_SPI_DMA  //spi lcd isr 都有
 
 #ifdef ARM_MATH_CM4
 #include <project_config.h>
@@ -106,7 +105,7 @@ auto GUI::disp_drv_init() -> void
         flush(area->x1, area->y1, area->x2, area->y2, (const uint16_t *) px_map);
 
         // 只有定义了DMA中断回调才不需要这个函数，那么这就要求DMA中断启用时需要设置相关宏定义
-#if !defined(ARM_MATH_CM4) || !defined(USE_SPI_DMA)
+#if !defined(ARM_MATH_CM4) || !defined(DMA_SPI_ENABLE)
         display_flush_ready();
 #endif
 

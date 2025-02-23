@@ -12,6 +12,7 @@
 
 
 
+
 // -------------与gcc扩展有关--------------
 #ifdef LTO_ENABLE
 #define USED __attribute__((used))

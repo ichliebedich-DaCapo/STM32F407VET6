@@ -26,6 +26,7 @@ set(FREERTOS_DEBUG OFF CACHE INTERNAL "FreeRTOS debug option")
 set(AI_ENABLE OFF CACHE INTERNAL "AI option")
 set(STATIC_LIB_LD OFF CACHE INTERNAL "Independent static library link option")
 set(LTO_ENABLE OFF CACHE INTERNAL "Linker option")
+set(DMA_SPI_ENABLE OFF CACHE INTERNAL "DMI_SPI option")
 
 # 关闭GUI
 macro(options_disable_GUI)
@@ -40,6 +41,11 @@ endmacro()
 # 开启FreeRTOS调试
 macro(options_enable_FreeRTOS_debug)
     set(FREERTOS_DEBUG ON CACHE INTERNAL "FreeRTOS debug option")
+endmacro()
+
+# 开启dma加速spi
+macro(options_enable_DMA_SPI)
+    set(DMA_SPI_ENABLE ON CACHE INTERNAL "DMA SPI option")
 endmacro()
 
 # ------------不在project_config.h.in中---------------

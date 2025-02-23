@@ -14,7 +14,9 @@
 #include "timer.h"
 #include "RNG.h"
 #include "lcd.h"
+#ifdef  GUI_ENABLE
 #include "ui.hpp"
+#endif
 #include "touch.h"
 #include "delay.h"
 #include "key_adapter.hpp"
@@ -22,6 +24,7 @@
 #include "sd_spi.h"
 #include "RCC.h"
 #include "debug.h"
+#include "spi.h"
 
 import async_delay;
 #include <cstdio>
@@ -45,8 +48,8 @@ uint8_t test_id;
 uint8_t FT_ID=0x03;
 
 uint8_t point_number=0;
+SD_Error SD_init_Status=SD_DATA_INIT;
 
-SD_Error SD_init_Status;
 
 // 函数
 
@@ -54,10 +57,10 @@ SD_Error SD_init_Status;
 const uint16_t color[120 * 120]={};
 void app_init()
 {
-    SD_init_Status = spi_sd_init();
     adc1_temperature_sensor_init();
     RNG_Init();
     ITM_Init();
+    SD_init_Status=spi_sd_init();
 }
 
 void key_handler()
@@ -75,16 +78,16 @@ void key_handler()
 //                gui::interface::set_button1_value(((uint16_t)(touch_pos_buf1[0]&0X0F)<<8)+touch_pos_buf1[1]);
 //                gui::interface::set_button2_value(((uint16_t)(touch_pos_buf1[2]&0X0F)<<8)+touch_pos_buf1[3]);
                 //横屏
-                gui::interface::set_x1_value(480 - (((uint16_t) (touch_pos_buf1[2] & 0X0F) << 8) + touch_pos_buf1[3]));
-                gui::interface::set_y1_value(((uint16_t) (touch_pos_buf1[0] & 0X0F) << 8) + touch_pos_buf1[1]);
+//                gui::interface::set_x1_value(480 - (((uint16_t) (touch_pos_buf1[2] & 0X0F) << 8) + touch_pos_buf1[3]));
+//                gui::interface::set_y1_value(((uint16_t) (touch_pos_buf1[0] & 0X0F) << 8) + touch_pos_buf1[1]);
 
                 ft6336_RdReg(touch_press_reg[1], touch_pos_buf2, 4);
                 //竖屏
 //                gui::interface::set_button1_value(((uint16_t)(touch_pos_buf1[0]&0X0F)<<8)+touch_pos_buf1[1]);
 //                gui::interface::set_button2_value(((uint16_t)(touch_pos_buf1[2]&0X0F)<<8)+touch_pos_buf1[3]);
                 //横屏
-                gui::interface::set_x2_value(480 - (((uint16_t) (touch_pos_buf2[2] & 0X0F) << 8) + touch_pos_buf2[3]));
-                gui::interface::set_y2_value(((uint16_t) (touch_pos_buf2[0] & 0X0F) << 8) + touch_pos_buf2[1]);
+//                gui::interface::set_x2_value(480 - (((uint16_t) (touch_pos_buf2[2] & 0X0F) << 8) + touch_pos_buf2[3]));
+//                gui::interface::set_y2_value(((uint16_t) (touch_pos_buf2[0] & 0X0F) << 8) + touch_pos_buf2[1]);
 
 //                touch_state=usr_ScanTouchProcess(&touch_pos);
 
@@ -221,93 +224,6 @@ void usr_touchInit()
     touch_isOK = touch_init();
 }
 
-uint8_t usr_ScanTouchProcess( stru_pos *pPos)
-{
-    uint8_t buf[4];
-    uint8_t i = 0;
-    uint8_t set = FT_FALSE;
-    uint8_t pointNub = 0;
-    static uint8_t cnt = 0;
-
-    if( touch_isOK == FT_FALSE )
-        return set;
-
-    cnt++;
-    if((cnt%10)==0 || cnt<10)
-    {
-        // read number of touch points
-        ft6336_RdReg(FT_REG_NUM_FINGER,&pointNub,1);
-
-        pointNub= pointNub&0x0f;
-        if( pointNub && (pointNub < 3) )
-        {
-            cnt=0;
-            // read the point value
-            pPos->status_bit.tpDown = 1;
-            pPos->status_bit.tpPress = 1;
-            pPos->status_bit.ptNum = pointNub;
-
-            for( i=0; i < CTP_MAX_TOUCH; i++)
-            {
-
-                ft6336_RdReg( touch_press_reg[i], buf, 4 );
-                if( pPos->status_bit.ptNum )
-                {
-                    switch(0)
-                    {
-                        //竖屏1
-                        case 0:
-                            pPos->xpox[i]=((uint16_t)(buf[0]&0X0F)<<8)+buf[1];
-                            pPos->ypox[i]=((uint16_t)(buf[2]&0X0F)<<8)+buf[3];
-                            break;
-                        case 1:
-                            pPos->ypox[i]=320-(((uint16_t)(buf[0]&0X0F)<<8)+buf[1]);
-                            pPos->xpox[i]=((uint16_t)(buf[2]&0X0F)<<8)+buf[3];
-                            break;
-                        case 2:
-                            pPos->xpox[i]=480-(((uint16_t)(buf[0]&0X0F)<<8)+buf[1]);
-                            pPos->ypox[i]=320-(((uint16_t)(buf[2]&0X0F)<<8)+buf[3]);
-                            break;
-                            //横屏1
-                        case 3:
-                            pPos->ypox[i] = ((uint16_t)(buf[0]&0X0F)<<8)+buf[1];
-                            pPos->xpox[i] = 480-(((uint16_t)(buf[2]&0X0F)<<8)+buf[3]);
-                            break;
-                    }
-                    gui::interface::set_counter_value(i);
-                    gui::interface::set_x1_value(pPos->xpox[i]);
-                    gui::interface::set_y1_value(pPos->ypox[i]);
-//                    printf("x[%d]:%d,y[%d]:%d\r\n",i,pPos->xpox[i],i,pPos->ypox[i]);
-                }
-            }
-
-            set = FT_TRUE;
-            if( pPos->xpox[0]==0 && pPos->ypox[0]==0)
-            {
-                pPos->status = 0;
-            }
-        }
-    }
-
-    if( pPos->status_bit.ptNum == 0)
-    {
-        if( pPos->status_bit.tpDown )
-        {
-            pPos->status_bit.tpDown = 0;
-        }
-        else
-        {
-            pPos->xpox[0] = 0xffff;
-            pPos->ypox[0] = 0xffff;
-            pPos->status = 0;
-        }
-    }
-
-    if( cnt>240 )
-        cnt=10;
-
-    return set;
-}
 
 
 
