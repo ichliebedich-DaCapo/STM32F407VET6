@@ -50,7 +50,7 @@ uint8_t FT_ID=0x03;
 uint8_t point_number=0;
 SD_Error SD_init_Status=SD_DATA_INIT;
 
-
+uint32_t SD_SingleBlockTest_Status=168;
 // 函数
 
 // 数组
@@ -111,7 +111,6 @@ void key_handler()
 
 //                write_addr++;
 
-
             }
             break;
         case keyK2:
@@ -125,7 +124,9 @@ void key_handler()
 //            ft6336_WeReg(write_addr,&write_dat,1);
 //            ft6336_RdReg(write_addr,&test_id, 1);
 //            write_addr++;
-//            break;
+
+            SD_SingleBlockTest_Status=SD_SingleBlockTest();
+            break;
 
         case keyK4:
             LCD_Clear(0x1234); // 填充颜色 0x1234
