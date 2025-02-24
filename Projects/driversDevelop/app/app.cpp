@@ -51,6 +51,7 @@ uint8_t point_number=0;
 SD_Error SD_init_Status=SD_DATA_INIT;
 
 uint32_t SD_SingleBlockTest_Status=168;
+uint32_t SD_multiBlockTest_Status=168;
 // 函数
 
 // 数组
@@ -133,7 +134,8 @@ void key_handler()
             break;
 
         case keyK4:
-            LCD_Clear(0x1234); // 填充颜色 0x1234
+//            LCD_Clear(0x1234); // 填充颜色 0x1234
+            SD_multiBlockTest_Status= SD_MultiBlockTest();
             break;
 
         case keyK5:

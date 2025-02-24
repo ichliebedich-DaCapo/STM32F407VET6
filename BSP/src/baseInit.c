@@ -46,10 +46,8 @@ void BaseInit()
 #ifdef BSP_USE_DELAY
     delay_Init();
 #endif
-
-#ifdef LCD_8080_PORT_ENABLE
+//按键和lcd都可能用fsmc，这里不做更改
     fsmc_init();
-#endif
 
 #ifdef USE_FSMC_DMA
     fsmc_dma_init();// 初始化FSMC+DMA
