@@ -60,7 +60,11 @@ void app_init()
     adc1_temperature_sensor_init();
     RNG_Init();
     ITM_Init();
+
+#ifdef SD_SPI_ENABLE
     SD_init_Status=spi_sd_init();
+#endif
+
 }
 
 void key_handler()

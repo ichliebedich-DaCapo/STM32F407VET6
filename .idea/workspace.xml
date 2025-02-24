@@ -33,9 +33,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】common_functions.cmake中加入DMA_SPI_ENABLE的开启函数">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】格式化SD卡后，sd卡初始化、写入和读取块数据都没问题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Base/GUI.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Base/GUI.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/baseInit.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/baseInit.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/lcd.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/lcd.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/spi.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/spi.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/common_config.h.in" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/common_config.h.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/common_functions.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/common_functions.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -564,15 +571,9 @@
       <workItem from="1740110711296" duration="1195000" />
       <workItem from="1740204264965" duration="7529000" />
       <workItem from="1740313844540" duration="4830000" />
-      <workItem from="1740318923740" duration="5922000" />
-    </task>
-    <task id="LOCAL-00070" summary="略微调整了flash_storage模块的编写">
-      <option name="closed" value="true" />
-      <created>1734680719286</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1734680719286</updated>
+      <workItem from="1740318923740" duration="6236000" />
+      <workItem from="1740385684519" duration="4648000" />
+      <workItem from="1740399743788" duration="5535000" />
     </task>
     <task id="LOCAL-00071" summary="略微完善了flash_storage模块，并编写了测试案例">
       <option name="closed" value="true" />
@@ -958,7 +959,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740320130966</updated>
     </task>
-    <option name="localTasksCounter" value="119" />
+    <task id="LOCAL-00119" summary="【驱动开发】格式化SD卡后，sd卡初始化、写入和读取块数据都没问题">
+      <option name="closed" value="true" />
+      <created>1740325326055</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1740325326055</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -993,7 +1002,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】屏幕白屏" />
     <MESSAGE value="【驱动开发】添加roller控件中（半成品）" />
     <MESSAGE value="【驱动开发】roller控件和dropdown控件完善，修复label中init函数无法生成字符问题，新增OnValueChanged值变化事件，准备测试chart" />
     <MESSAGE value="【驱动开发】按键中标签只能显示两个字符，数字没影响" />
@@ -1018,7 +1026,8 @@
     <MESSAGE value="【驱动开发】spi模式用不到hal库里的sd" />
     <MESSAGE value="【驱动开发】sd_spi初始化失败，无反应" />
     <MESSAGE value="【驱动开发】common_functions.cmake中加入DMA_SPI_ENABLE的开启函数" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】common_functions.cmake中加入DMA_SPI_ENABLE的开启函数" />
+    <MESSAGE value="【驱动开发】格式化SD卡后，sd卡初始化、写入和读取块数据都没问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】格式化SD卡后，sd卡初始化、写入和读取块数据都没问题" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -1034,7 +1043,7 @@
         <watch expression="SD_init_Status" language="ObjectiveC" />
         <watch expression="SDCardInfo" language="ObjectiveC" />
         <watch expression="SDCardInfo.SD_csd" />
-        <watch expression="SD_SingleBlockTest_Status" />
+        <watch expression="SD_SingleBlockTest_Status" language="ObjectiveC" />
       </configuration>
     </watches-manager>
   </component>

@@ -28,7 +28,7 @@ extern DMA_HandleTypeDef hdma_spi2_tx ;
 #define delay_ms(ms)   HAL_Delay(ms)
 
 // 使用SPI时
-#if LCD_INTERFACE_TYPE == 1
+#ifdef LCD_SPI_PORT_ENABLE
 // GPIO引脚定义
 #define LCD_RST_PIN GPIO_PIN_15
 #define LCD_RST_PORT GPIOB
@@ -74,7 +74,7 @@ void LCD_WR_DATA(uint8_t data)
  ***********************************************************************/
 void lcd_init(void)
 {
-#if LCD_INTERFACE_TYPE == 0
+#ifdef LCD_8080_PORT_ENABLE
 
 #if LCD_SORTS == 9481
     TFT_RST = 0;
@@ -270,7 +270,7 @@ void lcd_init(void)
 //     LCD_Clear(0xFFFF);  // 清除屏幕，设置为白色
 #endif
 
-#elif LCD_INTERFACE_TYPE == 1
+#elifdef LCD_SPI_PORT_ENABLE
     GPIO_InitTypeDef GPIO_InitStruct = {0};
 
     GPIO_InitStruct.Pin = LCD_RST_PIN;
@@ -282,10 +282,6 @@ void lcd_init(void)
 
     GPIO_InitStruct.Pin = LCD_RS_PIN;
     HAL_GPIO_Init(LCD_RS_PORT, &GPIO_InitStruct);
-#ifdef DMA_SPI_ENABLE
-    spi2_dma_Init();// 初始化SPI+DMA
-#endif
-    spi2_init(); //硬件SPI初始化
 
     //LCD 复位
     delay_ms(30);
@@ -407,7 +403,7 @@ void lcd_init(void)
  */
 void LCD_Set_Window(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey)
 {
-#if LCD_INTERFACE_TYPE == 0
+#ifdef LCD_8080_PORT_ENABLE
     // 设置列地址范围
     LCD_WRITE_CMD(0x002A);
     LCD_WRITE_DATA(sx >> 8);
@@ -424,7 +420,7 @@ void LCD_Set_Window(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey)
 
     // 开始传输数据到LCD
     LCD_WRITE_CMD(0x002C);
-#elif LCD_INTERFACE_TYPE == 1
+#elifdef LCD_SPI_PORT_ENABLE
     LCD_WR_REG(0x2A);
     LCD_WR_DATA(sx >> 8);
     LCD_WR_DATA(0x00FF & sx);
@@ -447,8 +443,8 @@ void LCD_Set_Window(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey)
  */
 void LCD_direction(uint8_t direction)
 {
-#if LCD_INTERFACE_TYPE == 0
-#elif LCD_INTERFACE_TYPE == 1
+#ifdef LCD_8080_PORT_ENABLE
+#elifdef LCD_SPI_PORT_ENABLE
     // 初始为竖屏
     // 定义液晶屏顺时针旋转方向 	0-0度旋转，1-90度旋转，2-180度旋转，3-270度旋转
     LCD_WR_REG(0x36);
@@ -527,13 +523,13 @@ void LCD_direction(uint8_t direction)
 void LCD_Clear(uint16_t color)
 {
 
-#if LCD_INTERFACE_TYPE == 0
+#ifdef LCD_8080_PORT_ENABLE
     LCD_Set_Window(0, 0, 479, 319);
     for (uint32_t i = 0; i < 0x25800; ++i)
     {
         LCD_WRITE_DATA(color);
     }
-#elif LCD_INTERFACE_TYPE == 1
+#elifdef LCD_SPI_PORT_ENABLE
 #ifdef DMA_SPI_ENABLE
 
 /********************SPI DMA轮询式多次传输*********************/
@@ -635,10 +631,10 @@ void LCD_Color_Clean(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_
 void LCD_Set_Pixel(uint16_t x, uint16_t y, uint16_t color)
 {
 
-#if LCD_INTERFACE_TYPE == 0
+#ifdef LCD_8080_PORT_ENABLE
     LCD_Set_Window(x, y, x, y);
     LCD_WRITE_DATA(color);
-#elif LCD_INTERFACE_TYPE == 1
+#elifdef LCD_SPI_PORT_ENABLE
     LCD_Set_Window(x, y, x, y);
     LCD_CS_LOW();
     LCD_RS_HIGH();
@@ -651,7 +647,7 @@ void LCD_Set_Pixel(uint16_t x, uint16_t y, uint16_t color)
 
 void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)
 {
-#if LCD_INTERFACE_TYPE == 0//使用8088
+#ifdef LCD_8080_PORT_ENABLE
 #define USE_FSMC_DMA
 #ifdef USE_FSMC_DMA
 
@@ -661,7 +657,7 @@ void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_
 #else
     LCD_Color_Fill(area->x1, area->y1, area->x2, area->y2, (const uint16_t *)color_p);
 #endif
-#elif LCD_INTERFACE_TYPE == 1//使用SPI
+#elifdef LCD_SPI_PORT_ENABLE
 
 #ifdef DMA_SPI_ENABLE
     if (HAL_DMA_GetState(&hdma_spi2_tx) != HAL_DMA_STATE_READY) return;

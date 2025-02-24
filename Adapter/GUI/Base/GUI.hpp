@@ -13,7 +13,6 @@
 
 // 宏定义
 #define SIMPLE_FPS 1 // 启用简单FPS，减少一点点FPS显示对实际帧率的影响。不严谨地对于某个简单的测试来说，从30ms减少到了21ms
-#define LCD_INTERFACE_TYPE 1 // 0:8080接口 1:SPI接口  lcd.c中的同时修改
 
 /*匿名命名空间，治不了各种函数变量暴露狂*/
 namespace

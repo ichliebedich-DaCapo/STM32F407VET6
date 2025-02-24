@@ -90,7 +90,7 @@ void spi2_init()
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-#ifdef UES_SPI_SD
+#ifdef SD_SPI_ENABLE
     GPIO_InitStruct.Pin = GPIO_PIN_1;
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
@@ -157,10 +157,6 @@ void spi2_init()
 
     HAL_DMA_Init(&hdma_spi2_rx);
 
-#endif
-
-
-#ifdef DMA_SPI_ENABLE
     __HAL_LINKDMA(&hspi2, hdmatx, hdma_spi2_tx);
     __HAL_LINKDMA(&hspi2, hdmarx, hdma_spi2_rx);
 #endif
