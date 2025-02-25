@@ -14,6 +14,7 @@
   </component>
   <component name="CMakeRunConfigurationManager">
     <generated>
+      <config projectName="Furina" targetName="libalgorithm" />
       <config projectName="Furina" targetName="libdata" />
       <config projectName="Furina" targetName="libfreertos" />
       <config projectName="Furina" targetName="liblvgl" />
@@ -32,10 +33,18 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】修正fsmc_init处错误，SD卡多块读写测试返回数据正确">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】去除了FPGA代码">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/lvgl-simulator/.idea/lvgl-simulator.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/bsp_drivers.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/bsp_drivers.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/CPU_RunTime.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/cpu_runtime.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/RCC.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/rcc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/RNG.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/rng.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/CPU_RunTime.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/cpu_runtime.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/RCC.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/rcc.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/RNG.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/rng.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/baseInit.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/baseInit.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +175,7 @@
       </map>
     </option>
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug-w64-i686-arm-none-eabi" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release-w64-i686-arm-none-eabi" />
   <component name="Git.Settings">
     <option name="PUSH_TAGS">
       <GitPushTagMode>
@@ -270,7 +279,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "CMakeSettings",
+    "settings.editor.selected.configurable": "DockerRegistry",
     "structure.view.defaults.are.configured": "true",
     "two.files.diff.last.used.file": "D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c",
     "vue.rearranger.settings.migration": "true"
@@ -288,8 +297,13 @@
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Conf" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
     <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libalgorithm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libalgorithm" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -310,6 +324,10 @@
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="CMake 应用程序.libalgorithm" />
+      <item itemvalue="OpenOCD 下载并运行.OCD Furina" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -561,14 +579,6 @@
       <workItem from="1740410487904" duration="1560000" />
       <workItem from="1740466215723" duration="1205000" />
       <workItem from="1740476730648" duration="586000" />
-    </task>
-    <task id="LOCAL-00073" summary="语音存储与回放可以使用，接下来只要添加各种逻辑即可">
-      <option name="closed" value="true" />
-      <created>1734774212737</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1734774212737</updated>
     </task>
     <task id="LOCAL-00074" summary="【语音存储与回放】完善了播放速度等逻辑">
       <option name="closed" value="true" />
@@ -954,7 +964,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740412043346</updated>
     </task>
-    <option name="localTasksCounter" value="122" />
+    <task id="LOCAL-00122" summary="【驱动开发】去除了FPGA代码">
+      <option name="closed" value="true" />
+      <created>1740488889749</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1740488889749</updated>
+    </task>
+    <option name="localTasksCounter" value="123" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -989,7 +1007,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】按键中标签只能显示两个字符，数字没影响" />
     <MESSAGE value="【驱动开发】bug:按键中标签只能显示两个字符，数字没影响" />
     <MESSAGE value="【驱动开发】chart基本功能完善，光标、标号未测试，用随机函数测试发现还是需要脏数组" />
     <MESSAGE value="【驱动开发】脏数组和双缓冲与lvgl原有的双缓冲和局部渲染机制冲突不起作用" />
@@ -1014,7 +1031,8 @@
     <MESSAGE value="【驱动开发】格式化SD卡后，sd卡初始化、写入和读取块数据都没问题" />
     <MESSAGE value="【驱动开发】把baseinit里的代码逻辑理顺了" />
     <MESSAGE value="【驱动开发】修正fsmc_init处错误，SD卡多块读写测试返回数据正确" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】修正fsmc_init处错误，SD卡多块读写测试返回数据正确" />
+    <MESSAGE value="【驱动开发】去除了FPGA代码" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】去除了FPGA代码" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

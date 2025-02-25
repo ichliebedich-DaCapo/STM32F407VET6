@@ -1,7 +1,7 @@
 //
 // Created by fairy on 2025/1/11 16:19.
 //
-#include "RCC.h"
+#include "rcc.h"
 
 // 头文件
 #include "stm32f4xx_hal.h"

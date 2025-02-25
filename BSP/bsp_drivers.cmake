@@ -1,11 +1,13 @@
 # 驱动注册表（名称:依赖项）
 # 默认包含 gpio
 # 驱动注册表（名称:依赖项）
+# 说明：需要确保注册的名称与实际文件相同，包括大小写。一般建议使用小写加下划线来命名，并且不要包含hal_或者ll_
+#      注册时，把驱动文件写在左边，依赖写在右边
 set(BSP_DRIVERS
-        "default:hal,hal_cortex,hal_gpio,baseinit"
+        "default:hal,hal_cortex,hal_gpio,baseInit"
         # BSP驱动
         "adc:timer,hal_adc,hal_adc_ex"
-        "baseinit:rcc,lcd,hal_tim,key_exit"
+        "baseInit:rcc,lcd,hal_tim,key_exit"
         "cpu_runtime:"
         "dac:hal_dac,timer"
         "debug:"
@@ -21,7 +23,7 @@ set(BSP_DRIVERS
         "rcc:hal_rcc,hal_flash_ex"
         "rng:hal_rng"
         "sdio:"
-        "sd_spi:spi,dma"
+        "sd_spi:spi,hal_dma"
         "spi:hal_spi"
         "tcp:"
         "timer:hal_tim_ex"
@@ -32,32 +34,6 @@ set(BSP_DRIVERS
         "hal_sram:ll_fsmc"
 )
 
-# 驱动源文件映射
-# 这个将来可以简化
-set(adc_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/adc.c)
-set(baseinit_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/baseInit.c)
-set(cpu_runtime_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/CPU_RunTime.c)
-set(dac_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/dac.c)
-set(debug_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/debug.c)
-set(delay_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/delay.c)
-set(esp8266_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/esp8266.c)
-set(fatfs_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/fatfs.c)
-set(fsmc_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/fsmc.c)
-set(i2c_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/i2c.c)
-set(key_exit_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/key_exit.c)
-set(lcd_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/lcd.c)
-set(mqtt_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/mqtt.c)
-set(pwr_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/pwr.c)
-set(rcc_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/RCC.c)
-set(rng_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/RNG.c)
-set(sdio_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/sdio.c)
-set(spi_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/spi.c)
-set(tcp_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/tcp.c)
-set(timer_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/timer.c)
-set(touch_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/touch.c)
-set(usart_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/usart.c)
-set(w25qxx_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/w25qxx.c)
-set(sd_spi_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/sd_spi.c)
 
 # 依赖项文件映射
 include(cmsis_hal.cmake)
