@@ -25,11 +25,15 @@
 #include "RCC.h"
 #include "debug.h"
 #include "spi.h"
+#include "fatfs.h"
 #include "stm32f4xx_hal.h"
 //与FPGA通信
 #define TEST_FPGA_REG (*((volatile unsigned short *)0x60020000))
-volatile static uint32_t read_reg;
-volatile static uint32_t write_reg=0x1234;
+volatile static uint16_t read_reg;
+volatile static uint16_t write_reg;
+uint8_t arr_error_fpga[1000];
+uint16_t error_fpga_count=0;
+float error_fpga_rate=0;
 
 import async_delay;
 #include <cstdio>
@@ -54,7 +58,7 @@ uint8_t FT_ID=0x03;
 
 uint8_t point_number=0;
 SD_Error SD_init_Status=SD_DATA_INIT;
-
+DSTATUS disk_init_Status;
 uint32_t SD_SingleBlockTest_Status=168;
 uint32_t SD_multiBlockTest_Status=168;
 // 函数
@@ -77,7 +81,8 @@ void app_init()
     HAL_GPIO_WritePin(GPIOC,GPIO_PIN_4,GPIO_PIN_SET);
 
 #ifdef SD_SPI_ENABLE
-    SD_init_Status=spi_sd_init();
+//
+    disk_init_Status=fatfs_init(0);
 #endif
 
 }
@@ -154,22 +159,34 @@ void key_handler()
 
         case keyK5:
 //            LCD_Clear(0x5678); // 填充颜色 0x5678
-            write_reg=write_reg-1;
-            TEST_FPGA_REG = write_reg;
+
+            for(uint32_t i=0;i<10000;i++)
+            {
+                write_reg=Get_Random_Number()&0xFFFF;
+                TEST_FPGA_REG=write_reg;
+//                HAL_Delay(5);
+                read_reg=TEST_FPGA_REG;
+                if(write_reg!=read_reg)
+                {
+                    arr_error_fpga[error_fpga_count++]=i;
+                }
+
+            }
+            error_fpga_rate=error_fpga_count/10000.0f;
+            error_fpga_count=0;
             __BKPT(0);
             break;
 
         case keyK6:
 //            LCD_Clear(0x9ABC); // 填充颜色 0x9ABC
-            write_reg=write_reg+1;
-            TEST_FPGA_REG = write_reg;
-            __BKPT(0);
+
+//            __BKPT(0);
             break;
 
         case keyK7:
-            read_reg=TEST_FPGA_REG;
+
 //            LCD_Clear(0xdf10); // 填充颜色 0xDEF0
-            __BKPT(0);
+//            __BKPT(0);
             break;
 
         case keyK8:

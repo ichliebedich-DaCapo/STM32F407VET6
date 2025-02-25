@@ -11,6 +11,7 @@ set(BSP_DRIVERS
         "debug:"
         "delay:timer"
         "esp8266:"
+        "fatfs:sd_spi"
         "fsmc:hal_sram,hal_dma"
         "i2c:hal_i2c"
         "key_exit:"
@@ -40,6 +41,7 @@ set(dac_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/dac.c)
 set(debug_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/debug.c)
 set(delay_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/delay.c)
 set(esp8266_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/esp8266.c)
+set(fatfs_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/fatfs.c)
 set(fsmc_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/fsmc.c)
 set(i2c_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/i2c.c)
 set(key_exit_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/key_exit.c)
