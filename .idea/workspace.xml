@@ -29,22 +29,31 @@
   </component>
   <component name="CMakeSettings">
     <configurations>
-      <configuration PROFILE_NAME="Release-w64-i686-arm-none-eabi" ENABLED="true" CONFIG_NAME="Release" TOOLCHAIN_NAME="w64-i686-arm-none-eabi" />
+      <configuration PROFILE_NAME="Release-MinGW_ARM" ENABLED="true" CONFIG_NAME="Release" TOOLCHAIN_NAME="MinGW_ARM" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】去除了FPGA代码">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】待合并版本5 把未版本管理的修改了一下">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/bsp_drivers.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/bsp_drivers.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/CPU_RunTime.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/cpu_runtime.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/RCC.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/rcc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/inc/RNG.h" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/inc/rng.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/CPU_RunTime.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/cpu_runtime.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/RCC.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/rcc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/RNG.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/rng.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/baseInit.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/baseInit.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/widget.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/widget.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/cmake-build-debug-mingw_nxp/bin/Simulator.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/cmake-build-debug-mingw_nxp/bin/Simulator.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/lv_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/lv_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/_NXP_Logo_RGB565A8_60x34.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/_btn_RGB565A8_65x65.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/font.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/lv_font_SourceHanSerifSC_Regular_16.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/lv_font_arial_11.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/lv_font_arial_34.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/lv_font_arial_40.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/lv_font_montserratMedium_12.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/lv_font_montserratMedium_13.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/lv_font_montserratMedium_16.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/lv_font_montserratMedium_34.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tools/scripts/convert_lvgl.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/scripts/convert_lvgl.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +184,7 @@
       </map>
     </option>
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release-w64-i686-arm-none-eabi" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release-MinGW_ARM" />
   <component name="Git.Settings">
     <option name="PUSH_TAGS">
       <GitPushTagMode>
@@ -263,6 +272,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "OpenOCD 下载并运行.OCD Furina.executor": "Debug",
+    "Python.convert_lvgl.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -271,7 +281,7 @@
     "cf.advertisement.text.has.clang-format": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "ZQ",
+    "git-widget-placeholder": "DV",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "D:/Program/stm32/STM32F407VET6/CMakeLists.txt",
     "node.js.detected.package.eslint": "true",
@@ -279,7 +289,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "DockerRegistry",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
     "structure.view.defaults.are.configured": "true",
     "two.files.diff.last.used.file": "D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c",
     "vue.rearranger.settings.migration": "true"
@@ -298,15 +308,37 @@
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libalgorithm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libalgorithm" CONFIG_NAME="Release-MinGW_ARM">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="libalgorithm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libalgorithm" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
+    <configuration name="convert_lvgl" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Furina" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Tools/scripts" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Tools/scripts/convert_lvgl.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release-MinGW_ARM" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Program\stm32\STM32F407VET6\Tools\configs\stlink.cfg" reset-type="RUN" download-type="ALWAYS">
@@ -327,7 +359,13 @@
     <list>
       <item itemvalue="CMake 应用程序.libalgorithm" />
       <item itemvalue="OpenOCD 下载并运行.OCD Furina" />
+      <item itemvalue="Python.convert_lvgl" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.convert_lvgl" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -579,38 +617,8 @@
       <workItem from="1740410487904" duration="1560000" />
       <workItem from="1740466215723" duration="1205000" />
       <workItem from="1740476730648" duration="586000" />
-    </task>
-    <task id="LOCAL-00074" summary="【语音存储与回放】完善了播放速度等逻辑">
-      <option name="closed" value="true" />
-      <created>1734787622086</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1734787622086</updated>
-    </task>
-    <task id="LOCAL-00075" summary="【简易存储示波器】FPGA的时序正常可以正常读取数值">
-      <option name="closed" value="true" />
-      <created>1734847075458</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1734847075458</updated>
-    </task>
-    <task id="LOCAL-00076" summary="【简易存储示波器】准备合并">
-      <option name="closed" value="true" />
-      <created>1735298176799</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1735298176799</updated>
-    </task>
-    <task id="LOCAL-00077" summary="【简易存储示波器】准备合并UI">
-      <option name="closed" value="true" />
-      <created>1735362893253</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1735362893253</updated>
+      <workItem from="1740477331560" duration="13641000" />
+      <workItem from="1740492017255" duration="5780000" />
     </task>
     <task id="LOCAL-00078" summary="【简易存储示波器】可以设置采样频率">
       <option name="closed" value="true" />
@@ -964,15 +972,47 @@
       <option name="project" value="LOCAL" />
       <updated>1740412043346</updated>
     </task>
-    <task id="LOCAL-00122" summary="【驱动开发】去除了FPGA代码">
+    <task id="LOCAL-00122" summary="【驱动开发】待合并版本">
       <option name="closed" value="true" />
-      <created>1740488889749</created>
+      <created>1740478986825</created>
       <option name="number" value="00122" />
       <option name="presentableId" value="LOCAL-00122" />
       <option name="project" value="LOCAL" />
-      <updated>1740488889749</updated>
+      <updated>1740478986825</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="【驱动开发】待合并版本2">
+      <option name="closed" value="true" />
+      <created>1740486985420</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1740486985420</updated>
+    </task>
+    <task id="LOCAL-00124" summary="【驱动开发】待合并版本3">
+      <option name="closed" value="true" />
+      <created>1740487077578</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1740487077578</updated>
+    </task>
+    <task id="LOCAL-00125" summary="【驱动开发】待合并版本4 把启动DMA FSMC的宏写好了">
+      <option name="closed" value="true" />
+      <created>1740487990879</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1740487990879</updated>
+    </task>
+    <task id="LOCAL-00126" summary="【驱动开发】待合并版本5 把未版本管理的修改了一下">
+      <option name="closed" value="true" />
+      <created>1740488494090</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1740488494090</updated>
+    </task>
+    <option name="localTasksCounter" value="127" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -994,7 +1034,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="DV" />
+                        <option value="origin/ZQ" />
                       </list>
                     </value>
                   </entry>
@@ -1007,10 +1047,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】bug:按键中标签只能显示两个字符，数字没影响" />
-    <MESSAGE value="【驱动开发】chart基本功能完善，光标、标号未测试，用随机函数测试发现还是需要脏数组" />
-    <MESSAGE value="【驱动开发】脏数组和双缓冲与lvgl原有的双缓冲和局部渲染机制冲突不起作用" />
-    <MESSAGE value="【驱动开发】lvgl图表和WaveDraw的对比" />
     <MESSAGE value="【驱动开发】Render新增WaveDraw和BasicDraw,WaveDraw实现模版化，准备把脏区域也做到类里" />
     <MESSAGE value="【驱动开发】WaveDraw模版化,插值算法的特化实现完善（不在依赖.cpp）" />
     <MESSAGE value="【驱动开发】硬件SPI+DMA 存个档" />
@@ -1031,25 +1067,28 @@
     <MESSAGE value="【驱动开发】格式化SD卡后，sd卡初始化、写入和读取块数据都没问题" />
     <MESSAGE value="【驱动开发】把baseinit里的代码逻辑理顺了" />
     <MESSAGE value="【驱动开发】修正fsmc_init处错误，SD卡多块读写测试返回数据正确" />
-    <MESSAGE value="【驱动开发】去除了FPGA代码" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】去除了FPGA代码" />
+    <MESSAGE value="【驱动开发】待合并版本" />
+    <MESSAGE value="【驱动开发】待合并版本2" />
+    <MESSAGE value="【驱动开发】待合并版本3" />
+    <MESSAGE value="【驱动开发】待合并版本4 把启动DMA FSMC的宏写好了" />
+    <MESSAGE value="【驱动开发】待合并版本5 把未版本管理的修改了一下" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】待合并版本5 把未版本管理的修改了一下" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
         <watch expression="touch_isOK" />
-        <watch expression="test_id" />
-        <watch expression="point_number" />
-        <watch expression="dma_buffer" />
-        <watch expression="remaining_pixels" language="ObjectiveC" />
-        <watch expression="dma_test_buf" />
-        <watch expression="dma_test_buf" />
-        <watch expression="flushing" />
         <watch expression="SD_init_Status" language="ObjectiveC" />
         <watch expression="SDCardInfo" language="ObjectiveC" />
         <watch expression="SDCardInfo.SD_csd" />
         <watch expression="SD_SingleBlockTest_Status" language="ObjectiveC" />
         <watch expression="SD_multiBlockTest_Status" />
+        <watch expression="read_reg" />
+        <watch expression="write_reg" />
+        <watch expression="disk_init_Status" />
+        <watch expression="arr_error_fpga" />
+        <watch expression="error_fpga_rate" />
+        <watch expression="error_fpga_count" />
       </configuration>
     </watches-manager>
   </component>

@@ -598,7 +598,7 @@ def convert_style_calls(func_name, args,is_static_cast = False):
         ['text_opa', "255"],
         ['text_font', '', 'font'],
         ['text_line_space', "0"],
-        ['text_align', 'LV_TEXT_ALIGN_CENTER'],
+        ['text_align', 'LV_TEXT_ALIGN_LEFT'],
         ['bg_opa', "255"],
         ['pad_top', "0"],
         ['pad_right', "0"],
@@ -1374,7 +1374,7 @@ class TemplateGenerator:
 # -------------------------------------主函数--------------------------------------------
 def main():
     # 【定位屏幕初始化代码】：定位 setup_scr_* 函数,并获取工程名和函数体
-    c_content = find_c_functions(search_path=r"E:\Program\Embedded\MCU\GUI\GUI\generated",
+    c_content = find_c_functions(search_path=r"D:\Program\GUI-GUIDER\GUI\generated",
                            func_name="setup_scr_*",
                            file_name="setup_scr_*.c")
     # 获取第一个满足条件的函数
@@ -1405,19 +1405,19 @@ def main():
         define_blocks=widgets_define_code,
         init_blocks=widgets_init_code,
         output_path="../../Projects/driversDevelop/ui",
-        is_font_custom=False,
-        mode=GenerateMode.OVERWRITE
+        is_font_custom=True,
+        mode=GenerateMode.MERGE
     )
 
     print("代码生成成功！输出文件：ui.cpp")
 
 
     # 复制所有字体
-    copy_files_by_pattern(source_dir=r"E:\Program\Embedded\MCU\GUI\GUI\generated\guider_fonts",
+    copy_files_by_pattern(source_dir=r"D:\Program\GUI-GUIDER\GUI\generated\guider_customer_fonts",
                           target_dir="../../Projects/driversDevelop/ui",
                           pattern="*.c")
     # 复制所有图片
-    copy_files_by_pattern(source_dir=r"E:\Program\Embedded\MCU\GUI\GUI\generated\images",
+    copy_files_by_pattern(source_dir=r"D:\Program\GUI-GUIDER\GUI\generated\images",
                           target_dir="../../Projects/driversDevelop/ui",
                           pattern="*.c")
 

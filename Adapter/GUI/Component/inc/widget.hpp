@@ -248,6 +248,12 @@ public:
         return static_cast<Derived &>(*this);
     }
 
+    // 设置字体对齐
+    inline Derived &text_align(Align_text align_text, Selector selector = selector_default)
+    {
+        lv_obj_set_style_text_align(obj_, align_text, selector);
+        return static_cast<Derived &>(*this);
+    }
     // 设置字体格式
     inline Derived &font(::Font font, Selector selector = selector_default)
     {
