@@ -101,7 +101,7 @@ void fsmc_init()
 
 
 /*启用FSMC+DMA向LCD传输数据*/
-#ifdef USE_FSMC_DMA
+#ifdef DMA_FSMC_ENABLE
 void fsmc_dma_init()
 {
     __HAL_RCC_DMA2_CLK_ENABLE();

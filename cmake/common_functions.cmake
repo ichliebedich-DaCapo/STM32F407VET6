@@ -27,6 +27,7 @@ set(AI_ENABLE OFF CACHE INTERNAL "AI option")
 set(STATIC_LIB_LD OFF CACHE INTERNAL "Independent static library link option")
 set(LTO_ENABLE OFF CACHE INTERNAL "Linker option")
 set(DMA_SPI_ENABLE OFF CACHE INTERNAL "DMI_SPI option")
+set(DMA_FSMC_ENABLE OFF CACHE INTERNAL "DMI_FSMC option")
 set(SD_SPI_ENABLE OFF CACHE INTERNAL "SD_SPI option")
 set(LCD_8080_PORT_ENABLE OFF CACHE INTERNAL "LCD_8080_PORT option")
 set(LCD_SPI_PORT_ENABLE OFF CACHE INTERNAL "LCD_SPI_PORT option")
@@ -49,6 +50,11 @@ endmacro()
 # 开启dma加速spi
 macro(options_enable_DMA_SPI)
     set(DMA_SPI_ENABLE ON CACHE INTERNAL "DMA SPI option")
+endmacro()
+
+# 开启dma加速fsmc
+macro(options_enable_DMA_FSMC)
+    set(DMA_FSMC_ENABLE ON CACHE INTERNAL "DMA FSMC option")
 endmacro()
 
 # 开启SD卡SPI模式
