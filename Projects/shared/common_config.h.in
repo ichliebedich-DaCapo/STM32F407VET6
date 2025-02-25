@@ -47,6 +47,7 @@
 /*****************************功能宏********************************/
 // ---------配置项-----------
 #cmakedefine DMA_SPI_ENABLE
+#cmakedefine DMA_FSMC_ENABLE
 #cmakedefine SD_SPI_ENABLE
 #cmakedefine LCD_8080_PORT_ENABLE
 #cmakedefine LCD_SPI_PORT_ENABLE

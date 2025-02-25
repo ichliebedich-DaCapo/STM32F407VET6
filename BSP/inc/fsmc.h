@@ -12,9 +12,9 @@ extern "C" {
 
 
 void fsmc_init();
-#ifdef USE_FSMC_DMA
+#ifdef DMA_FSMC_ENABLE
 void fsmc_dma_init();
-#endif // USE_FSMC_DMA
+#endif // DMA_FSMC_ENABLE
 
 
 

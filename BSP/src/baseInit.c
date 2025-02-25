@@ -49,7 +49,7 @@ void BaseInit()
 //按键和lcd都可能用fsmc，这里不做更改
     fsmc_init();
 
-#ifdef USE_FSMC_DMA
+#ifdef DMA_FSMC_ENABLE
     fsmc_dma_init();// 初始化FSMC+DMA
 #endif
 
