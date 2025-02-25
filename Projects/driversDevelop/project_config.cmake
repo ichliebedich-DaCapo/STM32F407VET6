@@ -5,10 +5,16 @@ set_bsp_components(
         adc
         rng
         debug
-
+        sd_spi
+        spi
+        fatfs
 )
 
-#options_disable_GUI()
+options_disable_GUI()
 #options_enable_FreeRTOS()
 #options_enable_LTO()
 #options_enable_static_lib_ld()
+#options_enable_DMA_SPI()
+#options_enable_SD_SPI()
+#options_enable_LCD_8080_PORT()
+#options_enable_LCD_SPI_PORT()

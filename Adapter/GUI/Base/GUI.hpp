@@ -13,14 +13,13 @@
 
 // 宏定义
 #define SIMPLE_FPS 1 // 启用简单FPS，减少一点点FPS显示对实际帧率的影响。不严谨地对于某个简单的测试来说，从30ms减少到了21ms
-#define LCD_INTERFACE_TYPE 1 // 0:8080接口 1:SPI接口  lcd.c中的同时修改
 
 /*匿名命名空间，治不了各种函数变量暴露狂*/
 namespace
 {
     constexpr uint16_t DISP_HOR_RES = 480;
     constexpr uint16_t DISP_VER_RES = 320;
-    constexpr uint16_t DISP_BUF_SIZE = 20;
+    constexpr uint16_t DISP_BUF_SIZE = 20;  //20
     constexpr uint8_t BYTE_PER_PIXEL = (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565));
 }
 
@@ -32,7 +31,7 @@ class GUI
 {
 public:
 
-    template<void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
+    template<void(*lcd_init)(), void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
                                                    const uint16_t *color_p),
             int32_t (*touchpad_read_xy)(int32_t *last_x, int32_t *last_y) = nullptr>
     static auto init() -> void;
@@ -45,8 +44,8 @@ public:
 
     // 获取设备
     static inline auto get_display() -> lv_display_t * { return disp; }
-
     static inline auto get_indev() -> lv_indev_t * { return indev_touchpad; }
+
 
 private:
     static auto resource_init() -> void;// 初始化界面
@@ -63,11 +62,17 @@ private:
 };
 
 
-template<void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
+template<void(*lcd_init)(), void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
                                                const uint16_t *color_p),
         int32_t (*touchpad_read_xy)(int32_t *last_x, int32_t *last_y)>
 auto GUI::init() -> void
 {
+
+    /********初始化LCD*******/
+    if constexpr (lcd_init != nullptr)
+    {
+        lcd_init();
+    }
 
     /********初始化LVGL*******/
     lv_init();
@@ -99,8 +104,12 @@ auto GUI::disp_drv_init() -> void
         flush(area->x1, area->y1, area->x2, area->y2, (const uint16_t *) px_map);
 
         // 只有定义了DMA中断回调才不需要这个函数，那么这就要求DMA中断启用时需要设置相关宏定义
+#if !defined(ARM_MATH_CM4) || !defined(DMA_SPI_ENABLE)
         display_flush_ready();
+#endif
+
     });
+
 
     // 缓冲区  双缓冲明显优于单缓冲
     LV_ATTRIBUTE_MEM_ALIGN

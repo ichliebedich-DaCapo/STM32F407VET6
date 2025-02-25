@@ -8,7 +8,6 @@ set(PROJECT_DIR Projects/driversDevelop)
 
 # 创建test项目目录，其下有ui和app目录，并且各目录下有相应文件
 
-
 # --------------------------------------包含子cmake--------------------------------
 # 对配置项变量进行预处理，包括获取项目名称
 include(cmake/target_project.cmake)
@@ -32,7 +31,10 @@ include(cmake/structure/projects.cmake)
 
 
 # 定义一个可执行文件目标，生成了 ELF 文件
-add_executable(${PROJECT_NAME}.elf ${SOURCES})
+add_executable(${PROJECT_NAME}.elf ${SOURCES}
+        Adapter/GUI/Component/inc/roller.hpp
+        Adapter/GUI/Component/inc/dropdown.hpp
+        Adapter/GUI/Render/WaveDraw.hpp)
 
 
 # 导入模块

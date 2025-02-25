@@ -88,7 +88,7 @@ extern "C" {
 void EXTI0_IRQHandler()
 {
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_0);
-    PlatformKey ::isr_entry(KEY_RAM & 0xF);//获取键值
+    PlatformKey::isr_entry(KEY_RAM & 0xF);//获取键值
 }
 
 
@@ -119,9 +119,34 @@ void DMA2_Stream6_IRQHandler(void)
 //    }
 }
 
+#ifdef DMA_SPI_ENABLE
+extern DMA_HandleTypeDef hdma_spi2_tx;
+extern DMA_HandleTypeDef hdma_spi2_rx;
+extern SPI_HandleTypeDef hspi2;
+void DMA1_Stream4_IRQHandler(void)
+{
+
+    HAL_DMA_IRQHandler(&hdma_spi2_tx);
 
 }
+void DMA1_Stream3_IRQHandler(void)
+{
 
+    HAL_DMA_IRQHandler(&hdma_spi2_rx);
+
+}
+#endif
+}
+//需要一直发送或者接收就在回调里再调用一次接收或读取函数
+void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
+{
+#ifdef DMA_SPI_ENABLE
+    //方法1
+    if(hspi == &hspi2) { // 指定SPI实例
+        GUI::display_flush_ready();
+    }
+#endif
+}
 
 
 /* USER CODE BEGIN Header */
@@ -206,4 +231,11 @@ void UsageFault_Handler(void)
 void DebugMon_Handler(void)
 {
 }
+
+void EXTI9_5_IRQHandler(void)
+{
+    HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_6);
 }
+
+}
+

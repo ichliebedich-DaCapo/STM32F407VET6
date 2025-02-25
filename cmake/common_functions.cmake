@@ -26,6 +26,10 @@ set(FREERTOS_DEBUG OFF CACHE INTERNAL "FreeRTOS debug option")
 set(AI_ENABLE OFF CACHE INTERNAL "AI option")
 set(STATIC_LIB_LD OFF CACHE INTERNAL "Independent static library link option")
 set(LTO_ENABLE OFF CACHE INTERNAL "Linker option")
+set(DMA_SPI_ENABLE OFF CACHE INTERNAL "DMI_SPI option")
+set(SD_SPI_ENABLE OFF CACHE INTERNAL "SD_SPI option")
+set(LCD_8080_PORT_ENABLE OFF CACHE INTERNAL "LCD_8080_PORT option")
+set(LCD_SPI_PORT_ENABLE OFF CACHE INTERNAL "LCD_SPI_PORT option")
 
 # 关闭GUI
 macro(options_disable_GUI)
@@ -40,6 +44,26 @@ endmacro()
 # 开启FreeRTOS调试
 macro(options_enable_FreeRTOS_debug)
     set(FREERTOS_DEBUG ON CACHE INTERNAL "FreeRTOS debug option")
+endmacro()
+
+# 开启dma加速spi
+macro(options_enable_DMA_SPI)
+    set(DMA_SPI_ENABLE ON CACHE INTERNAL "DMA SPI option")
+endmacro()
+
+# 开启SD卡SPI模式
+macro(options_enable_SD_SPI)
+    set(SD_SPI_ENABLE ON CACHE INTERNAL "SD SPI option")
+endmacro()
+
+# 使用LCD 8080接口
+macro(options_enable_LCD_8080_PORT)
+    set(LCD_8080_PORT_ENABLE ON CACHE INTERNAL "LCD 8080 PORT option")
+endmacro()
+
+# 使用LCD SPI接口
+macro(options_enable_LCD_SPI_PORT)
+    set(LCD_SPI_PORT_ENABLE ON CACHE INTERNAL "LCD SPI PORT option")
 endmacro()
 
 # ------------不在project_config.h.in中---------------

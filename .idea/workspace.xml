@@ -1,0 +1,1052 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated>
+      <config projectName="Furina" targetName="libalgorithm" />
+      <config projectName="Furina" targetName="libdata" />
+      <config projectName="Furina" targetName="libfreertos" />
+      <config projectName="Furina" targetName="liblvgl" />
+      <config projectName="Furina" targetName="libmodule" />
+      <config projectName="Furina" targetName="Furina.elf" />
+      <config projectName="Furina" targetName="libdrivers" />
+      <config projectName="Furina" targetName="libbsp" />
+      <config projectName="Furina" targetName="libapp" />
+      <config projectName="Furina" targetName="libdsp" />
+      <config projectName="Furina" targetName="libgui" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Release-MinGW_ARM" ENABLED="true" CONFIG_NAME="Release" TOOLCHAIN_NAME="MinGW_ARM" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】修正fsmc_init处错误，SD卡多块读写测试返回数据正确">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="EmbeddedSvdWindowState">
+    <option name="columnWidths">
+      <list>
+        <option value="212" />
+        <option value="154" />
+        <option value="0" />
+      </list>
+    </option>
+    <option name="columnOrder">
+      <list>
+        <option value="名称" />
+        <option value="值" />
+        <option value="描述" />
+      </list>
+    </option>
+    <option name="loadedFiles">
+      <list>
+        <option value="D:\Program\stm32\STM32F407VET6\Resource\STM32F4_svd\STM32F4_svd_V2.0\STM32F407.svd" />
+      </list>
+    </option>
+    <option name="nodes">
+      <map>
+        <entry key="STM32F407.svd" value="-E" />
+        <entry key="STM32F407.svd|g:DMA" value="-E" />
+        <entry key="STM32F407.svd|g:GPIO" value="-C" />
+        <entry key="STM32F407.svd|g:I2C" value="-C" />
+        <entry key="STM32F407.svd|g:SPI" value="-E" />
+        <entry key="STM32F407.svd|p:DMA1" value="-E" />
+        <entry key="STM32F407.svd|p:DMA1|HIFCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|HISR" value="HE" />
+        <entry key="STM32F407.svd|p:DMA1|LIFCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|LISR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S0CR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S0FCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S0M0AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S0M1AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S0NDTR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S0PAR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S1CR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S1FCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S1M0AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S1M1AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S1NDTR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S1PAR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S2CR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S2FCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S2M0AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S2M1AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S2NDTR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S2PAR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S3CR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S3FCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S3M0AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S3M1AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S3NDTR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S3PAR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S4CR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S4FCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S4M0AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S4M1AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S4NDTR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S4PAR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S5CR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S5FCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S5M0AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S5M1AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S5NDTR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S5PAR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S6CR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S6FCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S6M0AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S6M1AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S6NDTR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S6PAR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S7CR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S7FCR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S7M0AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S7M1AR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S7NDTR" value="HC" />
+        <entry key="STM32F407.svd|p:DMA1|S7PAR" value="HC" />
+        <entry key="STM32F407.svd|p:EXTI" value="-C" />
+        <entry key="STM32F407.svd|p:EXTI|EMR" value="HC" />
+        <entry key="STM32F407.svd|p:EXTI|FTSR" value="HC" />
+        <entry key="STM32F407.svd|p:EXTI|IMR" value="HC" />
+        <entry key="STM32F407.svd|p:EXTI|PR" value="HC" />
+        <entry key="STM32F407.svd|p:EXTI|RTSR" value="HC" />
+        <entry key="STM32F407.svd|p:EXTI|SWIER" value="HC" />
+        <entry key="STM32F407.svd|p:GPIOB" value="-C" />
+        <entry key="STM32F407.svd|p:GPIOB|AFRH" value="HC" />
+        <entry key="STM32F407.svd|p:GPIOB|AFRL" value="HC" />
+        <entry key="STM32F407.svd|p:GPIOB|BSRR" value="HC" />
+        <entry key="STM32F407.svd|p:GPIOB|IDR" value="HC" />
+        <entry key="STM32F407.svd|p:GPIOB|LCKR" value="HC" />
+        <entry key="STM32F407.svd|p:GPIOB|MODER" value="HC" />
+        <entry key="STM32F407.svd|p:GPIOB|ODR" value="HC" />
+        <entry key="STM32F407.svd|p:GPIOB|OSPEEDR" value="HC" />
+        <entry key="STM32F407.svd|p:GPIOB|OTYPER" value="HC" />
+        <entry key="STM32F407.svd|p:GPIOB|PUPDR" value="HC" />
+        <entry key="STM32F407.svd|p:I2C1" value="-C" />
+        <entry key="STM32F407.svd|p:I2C1|CCR" value="HC" />
+        <entry key="STM32F407.svd|p:I2C1|CR1" value="HC" />
+        <entry key="STM32F407.svd|p:I2C1|CR2" value="HC" />
+        <entry key="STM32F407.svd|p:I2C1|DR" value="HC" />
+        <entry key="STM32F407.svd|p:I2C1|OAR1" value="HC" />
+        <entry key="STM32F407.svd|p:I2C1|OAR2" value="HC" />
+        <entry key="STM32F407.svd|p:I2C1|SR1" value="HC" />
+        <entry key="STM32F407.svd|p:I2C1|SR2" value="HC" />
+        <entry key="STM32F407.svd|p:I2C1|TRISE" value="HC" />
+        <entry key="STM32F407.svd|p:SPI2" value="-E" />
+        <entry key="STM32F407.svd|p:SPI2|CR1" value="HC" />
+        <entry key="STM32F407.svd|p:SPI2|CR2" value="HC" />
+        <entry key="STM32F407.svd|p:SPI2|CRCPR" value="HC" />
+        <entry key="STM32F407.svd|p:SPI2|DR" value="HC" />
+        <entry key="STM32F407.svd|p:SPI2|I2SCFGR" value="HC" />
+        <entry key="STM32F407.svd|p:SPI2|I2SPR" value="HC" />
+        <entry key="STM32F407.svd|p:SPI2|RXCRCR" value="HC" />
+        <entry key="STM32F407.svd|p:SPI2|SR" value="HC" />
+        <entry key="STM32F407.svd|p:SPI2|TXCRCR" value="HC" />
+      </map>
+    </option>
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release-MinGW_ARM" />
+  <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="no_dirty_point" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;fumgvsyj&quot;
+  }
+}</component>
+  <component name="GitHubPullRequestState">{
+  &quot;prStates&quot;: [
+    {
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOM1Uexs5-cVLk&quot;,
+        &quot;number&quot;: 1
+      },
+      &quot;lastSeen&quot;: 1728808310381
+    },
+    {
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOM1Uexs5-id6q&quot;,
+        &quot;number&quot;: 2
+      },
+      &quot;lastSeen&quot;: 1728915856324
+    }
+  ]
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6&quot;,
+    &quot;accountId&quot;: &quot;a9ff9cce-f6cd-41c3-bd49-a806fb1abb79&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;ichliebedich-DaCapo&quot;,
+    &quot;repository&quot;: &quot;STM32F407VET6&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Core/startup_stm32f407vetx.s" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/startup_stm32f407xx.s" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="PerforceDirect.Settings">
+    <option name="CHARSET" value="none" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2024" />
+    <option name="minorVersion" value="2.2" />
+    <option name="productBranch" value="Classic" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2mPbm020RJkwfZrRH3JT31atVvv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;OpenOCD 下载并运行.OCD Furina.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
+    &quot;cf.advertisement.text.has.clang-format&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;DV&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Program/stm32/STM32F407VET6/CMakeLists.txt&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
+    &quot;two.files.diff.last.used.file&quot;: &quot;D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Program\stm32\STM32F407VET6\GUI\UI\driversDevelop" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Program\stm32\STM32F407VET6\BSP\src" />
+      <recent name="D:\Embedded\MCU\STM32\Furina\AI\LinearDisplacementSensor\App" />
+      <recent name="D:\Embedded\MCU\STM32\Furina\Application\Base" />
+      <recent name="D:\Embedded\MCU\STM32\Furina\Module" />
+      <recent name="D:\Embedded\MCU\STM32\Furina\Application\Conf" />
+    </key>
+  </component>
+  <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libalgorithm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libalgorithm" CONFIG_NAME="Release-MinGW_ARM">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release-MinGW_ARM" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
+      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Program\stm32\STM32F407VET6\Tools\configs\stlink.cfg" reset-type="RUN" download-type="ALWAYS">
+        <debugger kind="GDB" isBundled="true" />
+      </openocd>
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
+      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Embedded\MCU\STM32\Furina\stlink.cfg" reset-type="RUN" download-type="UPDATED_ONLY">
+        <debugger kind="GDB" isBundled="true" />
+      </openocd>
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake 应用程序.libalgorithm" />
+      <item itemvalue="OpenOCD 下载并运行.OCD Furina" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\34753\AppData\Roaming\Subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="" />
+      <created>1726981313287</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1726981313287</updated>
+      <workItem from="1726981317550" duration="25517000" />
+      <workItem from="1727150928776" duration="35000" />
+      <workItem from="1727150975357" duration="1271000" />
+      <workItem from="1728198309906" duration="1578000" />
+      <workItem from="1728199903608" duration="1550000" />
+      <workItem from="1728201645281" duration="1073000" />
+      <workItem from="1728206483596" duration="4604000" />
+      <workItem from="1728224890826" duration="686000" />
+      <workItem from="1728225598516" duration="5601000" />
+      <workItem from="1728233417189" duration="2025000" />
+      <workItem from="1728268966246" duration="663000" />
+      <workItem from="1728278858739" duration="2955000" />
+      <workItem from="1728281843425" duration="25000" />
+      <workItem from="1728281877254" duration="7166000" />
+      <workItem from="1728299186827" duration="39000" />
+      <workItem from="1728299232375" duration="2302000" />
+      <workItem from="1728348307316" duration="663000" />
+      <workItem from="1728360315760" duration="4143000" />
+      <workItem from="1728368212349" duration="3622000" />
+      <workItem from="1728392343320" duration="978000" />
+      <workItem from="1728395806632" duration="864000" />
+      <workItem from="1728439424819" duration="9408000" />
+      <workItem from="1728461902854" duration="1100000" />
+      <workItem from="1728465515056" duration="2400000" />
+      <workItem from="1728484872227" duration="5779000" />
+      <workItem from="1728535951729" duration="5550000" />
+      <workItem from="1728619272365" duration="2425000" />
+      <workItem from="1728640358157" duration="5162000" />
+      <workItem from="1728659885407" duration="5661000" />
+      <workItem from="1728706006983" duration="1625000" />
+      <workItem from="1728717574536" duration="4969000" />
+      <workItem from="1728737608714" duration="7000" />
+      <workItem from="1728747072867" duration="2956000" />
+      <workItem from="1728788596047" duration="1422000" />
+      <workItem from="1728800247253" duration="157000" />
+      <workItem from="1728801697766" duration="155000" />
+      <workItem from="1728802199352" duration="2108000" />
+      <workItem from="1728804326398" duration="652000" />
+      <workItem from="1728804987016" duration="73000" />
+      <workItem from="1728805066628" duration="306000" />
+      <workItem from="1728805378951" duration="487000" />
+      <workItem from="1728805988882" duration="880000" />
+      <workItem from="1728806882497" duration="175000" />
+      <workItem from="1728807076087" duration="1450000" />
+      <workItem from="1728808729252" duration="1711000" />
+      <workItem from="1728810459059" duration="306000" />
+      <workItem from="1728810962563" duration="517000" />
+      <workItem from="1728811491114" duration="725000" />
+      <workItem from="1728816425398" duration="3314000" />
+      <workItem from="1728827825088" duration="5865000" />
+      <workItem from="1728891905818" duration="79000" />
+      <workItem from="1728891993065" duration="1507000" />
+      <workItem from="1728893517052" duration="6000" />
+      <workItem from="1728894700723" duration="250000" />
+      <workItem from="1728894958860" duration="312000" />
+      <workItem from="1728896325983" duration="97000" />
+      <workItem from="1728896437537" duration="6520000" />
+      <workItem from="1728971468549" duration="14000" />
+      <workItem from="1728971864279" duration="633000" />
+      <workItem from="1728987290487" duration="6134000" />
+      <workItem from="1728994332038" duration="850000" />
+      <workItem from="1729158500316" duration="459000" />
+      <workItem from="1729159843778" duration="901000" />
+      <workItem from="1729162055465" duration="561000" />
+      <workItem from="1729164207205" duration="260000" />
+      <workItem from="1729224638980" duration="1446000" />
+      <workItem from="1729247440193" duration="4000" />
+      <workItem from="1729265952812" duration="2243000" />
+      <workItem from="1729304281094" duration="48000" />
+      <workItem from="1729304338217" duration="8000" />
+      <workItem from="1729326639200" duration="9332000" />
+      <workItem from="1729390413954" duration="43241000" />
+      <workItem from="1729470452058" duration="3386000" />
+      <workItem from="1729483523628" duration="643000" />
+      <workItem from="1729489371453" duration="15000" />
+      <workItem from="1729489764404" duration="19000" />
+      <workItem from="1729490049002" duration="1244000" />
+      <workItem from="1729491918734" duration="297000" />
+      <workItem from="1729492652079" duration="19000" />
+      <workItem from="1729493438473" duration="3000" />
+      <workItem from="1729495118572" duration="5423000" />
+      <workItem from="1729574318885" duration="5836000" />
+      <workItem from="1729585768734" duration="53000" />
+      <workItem from="1729615921017" duration="138000" />
+      <workItem from="1729669960233" duration="2407000" />
+      <workItem from="1729674895308" duration="2884000" />
+      <workItem from="1729689439541" duration="8502000" />
+      <workItem from="1729760111332" duration="717000" />
+      <workItem from="1729821849367" duration="124000" />
+      <workItem from="1729822808246" duration="13000" />
+      <workItem from="1729823212979" duration="322000" />
+      <workItem from="1729946339214" duration="23000" />
+      <workItem from="1730015668951" duration="938000" />
+      <workItem from="1730460938052" duration="891000" />
+      <workItem from="1730461843571" duration="8000" />
+      <workItem from="1730478119422" duration="631000" />
+      <workItem from="1730507124617" duration="21430000" />
+      <workItem from="1730557209426" duration="4229000" />
+      <workItem from="1730595421585" duration="1365000" />
+      <workItem from="1730599802257" duration="25192000" />
+      <workItem from="1730694172834" duration="1511000" />
+      <workItem from="1730697414966" duration="410000" />
+      <workItem from="1730708894404" duration="24726000" />
+      <workItem from="1730781885391" duration="645000" />
+      <workItem from="1730806322740" duration="6000" />
+      <workItem from="1730807606236" duration="116000" />
+      <workItem from="1730814464885" duration="302000" />
+      <workItem from="1730820221150" duration="7579000" />
+      <workItem from="1730859505957" duration="665000" />
+      <workItem from="1730866119606" duration="2559000" />
+      <workItem from="1730877719718" duration="7566000" />
+      <workItem from="1730896865625" duration="5652000" />
+      <workItem from="1730976620977" duration="72000" />
+      <workItem from="1730976866478" duration="19000" />
+      <workItem from="1730990078132" duration="5371000" />
+      <workItem from="1731050563510" duration="13946000" />
+      <workItem from="1731071057537" duration="11664000" />
+      <workItem from="1731126680338" duration="11017000" />
+      <workItem from="1731138557520" duration="3000" />
+      <workItem from="1731146753731" duration="2111000" />
+      <workItem from="1731804432575" duration="1000" />
+      <workItem from="1731804440550" duration="979000" />
+      <workItem from="1731805439362" duration="4437000" />
+      <workItem from="1731832462157" duration="36000" />
+      <workItem from="1731937309645" duration="21000" />
+      <workItem from="1732030432676" duration="5512000" />
+      <workItem from="1732035994900" duration="3928000" />
+      <workItem from="1732070356664" duration="11603000" />
+      <workItem from="1732092031903" duration="2999000" />
+      <workItem from="1732386998477" duration="4232000" />
+      <workItem from="1732428943434" duration="2412000" />
+      <workItem from="1733506190475" duration="319000" />
+      <workItem from="1733532159885" duration="358000" />
+      <workItem from="1733584671219" duration="2096000" />
+      <workItem from="1733628473886" duration="1999000" />
+      <workItem from="1733914853746" duration="34000" />
+      <workItem from="1734251679101" duration="6958000" />
+      <workItem from="1734265209046" duration="8918000" />
+      <workItem from="1734275410126" duration="270000" />
+      <workItem from="1734348601182" duration="4304000" />
+      <workItem from="1734355128333" duration="879000" />
+      <workItem from="1734360489520" duration="215000" />
+      <workItem from="1734413317047" duration="5420000" />
+      <workItem from="1734422338265" duration="212000" />
+      <workItem from="1734422595608" duration="192000" />
+      <workItem from="1734430758139" duration="472000" />
+      <workItem from="1734434237402" duration="460000" />
+      <workItem from="1734438722498" duration="73000" />
+      <workItem from="1734438864311" duration="672000" />
+      <workItem from="1734439793050" duration="82000" />
+      <workItem from="1734440090093" duration="544000" />
+      <workItem from="1734442165612" duration="116000" />
+      <workItem from="1734442401755" duration="1530000" />
+      <workItem from="1734508689897" duration="115000" />
+      <workItem from="1734602853664" duration="44000" />
+      <workItem from="1734679015314" duration="2771000" />
+      <workItem from="1734694068126" duration="626000" />
+      <workItem from="1734743034192" duration="1269000" />
+      <workItem from="1734751179404" duration="23877000" />
+      <workItem from="1734798003845" duration="138000" />
+      <workItem from="1734827827399" duration="3000" />
+      <workItem from="1734839898190" duration="3878000" />
+      <workItem from="1734868155154" duration="103000" />
+      <workItem from="1734928047675" duration="1028000" />
+      <workItem from="1734937647100" duration="1276000" />
+      <workItem from="1734952475359" duration="13706000" />
+      <workItem from="1735005118542" duration="263000" />
+      <workItem from="1735008118805" duration="37000" />
+      <workItem from="1735012998068" duration="7997000" />
+      <workItem from="1735059332454" duration="2128000" />
+      <workItem from="1735092385053" duration="7531000" />
+      <workItem from="1735106466709" duration="10370000" />
+      <workItem from="1735198393536" duration="89000" />
+      <workItem from="1735199719148" duration="2034000" />
+      <workItem from="1735218767740" duration="4379000" />
+      <workItem from="1735294699751" duration="5463000" />
+      <workItem from="1735356713533" duration="9646000" />
+      <workItem from="1735372326963" duration="375000" />
+      <workItem from="1737092601248" duration="6484000" />
+      <workItem from="1737108593506" duration="5000" />
+      <workItem from="1737108610148" duration="12794000" />
+      <workItem from="1737261382653" duration="1000" />
+      <workItem from="1737610574431" duration="1769000" />
+      <workItem from="1737612362424" duration="2828000" />
+      <workItem from="1737907612677" duration="320000" />
+      <workItem from="1737948247451" duration="20366000" />
+      <workItem from="1738038410953" duration="15928000" />
+      <workItem from="1738125150733" duration="3949000" />
+      <workItem from="1738380212721" duration="7811000" />
+      <workItem from="1738388917624" duration="714000" />
+      <workItem from="1738403997124" duration="18152000" />
+      <workItem from="1738494227669" duration="509000" />
+      <workItem from="1738497862615" duration="13084000" />
+      <workItem from="1738556710805" duration="4449000" />
+      <workItem from="1738562291962" duration="13574000" />
+      <workItem from="1738592214569" duration="6035000" />
+      <workItem from="1738635557841" duration="16259000" />
+      <workItem from="1738672778316" duration="8671000" />
+      <workItem from="1738685232812" duration="141000" />
+      <workItem from="1738723713201" duration="6978000" />
+      <workItem from="1738733828371" duration="1481000" />
+      <workItem from="1738757696835" duration="12693000" />
+      <workItem from="1738771923988" duration="1385000" />
+      <workItem from="1738813297930" duration="35853000" />
+      <workItem from="1738854721355" duration="1229000" />
+      <workItem from="1738856545299" duration="3695000" />
+      <workItem from="1738898876577" duration="8849000" />
+      <workItem from="1738910105748" duration="11017000" />
+      <workItem from="1738923296661" duration="2240000" />
+      <workItem from="1738985966081" duration="2000" />
+      <workItem from="1739009555264" duration="5000" />
+      <workItem from="1739155244217" duration="6552000" />
+      <workItem from="1739163331229" duration="17434000" />
+      <workItem from="1739184023009" duration="11939000" />
+      <workItem from="1739243531608" duration="33077000" />
+      <workItem from="1739286833047" duration="2173000" />
+      <workItem from="1739289061793" duration="510000" />
+      <workItem from="1739332917477" duration="39246000" />
+      <workItem from="1739416938058" duration="33229000" />
+      <workItem from="1739505218885" duration="32160000" />
+      <workItem from="1739592115106" duration="4873000" />
+      <workItem from="1739597019600" duration="24720000" />
+      <workItem from="1739622861720" duration="12017000" />
+      <workItem from="1739675443594" duration="25267000" />
+      <workItem from="1739772552290" duration="19981000" />
+      <workItem from="1739849943967" duration="14868000" />
+      <workItem from="1739881956013" duration="2373000" />
+      <workItem from="1739933275590" duration="7198000" />
+      <workItem from="1739942570288" duration="25512000" />
+      <workItem from="1740019048847" duration="14404000" />
+      <workItem from="1740110711296" duration="1195000" />
+      <workItem from="1740204264965" duration="7529000" />
+      <workItem from="1740313844540" duration="4830000" />
+      <workItem from="1740318923740" duration="6236000" />
+      <workItem from="1740385684519" duration="4648000" />
+      <workItem from="1740399743788" duration="9734000" />
+      <workItem from="1740410487904" duration="1560000" />
+      <workItem from="1740466215723" duration="1205000" />
+      <workItem from="1740476730648" duration="586000" />
+    </task>
+    <task id="LOCAL-00073" summary="语音存储与回放可以使用，接下来只要添加各种逻辑即可">
+      <option name="closed" value="true" />
+      <created>1734774212737</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1734774212737</updated>
+    </task>
+    <task id="LOCAL-00074" summary="【语音存储与回放】完善了播放速度等逻辑">
+      <option name="closed" value="true" />
+      <created>1734787622086</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1734787622086</updated>
+    </task>
+    <task id="LOCAL-00075" summary="【简易存储示波器】FPGA的时序正常可以正常读取数值">
+      <option name="closed" value="true" />
+      <created>1734847075458</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1734847075458</updated>
+    </task>
+    <task id="LOCAL-00076" summary="【简易存储示波器】准备合并">
+      <option name="closed" value="true" />
+      <created>1735298176799</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1735298176799</updated>
+    </task>
+    <task id="LOCAL-00077" summary="【简易存储示波器】准备合并UI">
+      <option name="closed" value="true" />
+      <created>1735362893253</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1735362893253</updated>
+    </task>
+    <task id="LOCAL-00078" summary="【简易存储示波器】可以设置采样频率">
+      <option name="closed" value="true" />
+      <created>1735367357110</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1735367357110</updated>
+    </task>
+    <task id="LOCAL-00079" summary="【驱动开发】解决了横屏显示问题，完善了lcd.c中显示方向函数，初始化方向设置为横屏">
+      <option name="closed" value="true" />
+      <created>1738408005104</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1738408005104</updated>
+    </task>
+    <task id="LOCAL-00080" summary="【驱动开发】修复显示原点错误">
+      <option name="closed" value="true" />
+      <created>1738412830784</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1738412830784</updated>
+    </task>
+    <task id="LOCAL-00081" summary="【驱动开发】完成lvgl库与SPI屏幕接口，屏幕显示正常，无触摸">
+      <option name="closed" value="true" />
+      <created>1738510275910</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1738510275910</updated>
+    </task>
+    <task id="LOCAL-00082" summary="【驱动开发】完成lvgl库与SPI屏幕接口，屏幕显示正常，无触摸">
+      <option name="closed" value="true" />
+      <created>1738510971682</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1738510971682</updated>
+    </task>
+    <task id="LOCAL-00083" summary="【与AI对话式制作UI测试】DEEPSEEK写的计数器">
+      <option name="closed" value="true" />
+      <created>1738651663669</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1738651663669</updated>
+    </task>
+    <task id="LOCAL-00084" summary="【驱动开发】i2c.c 完成了I2C1_Init">
+      <option name="closed" value="true" />
+      <created>1738685312939</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1738685312939</updated>
+    </task>
+    <task id="LOCAL-00085" summary="【驱动开发】i2c和touch驱动完成，测试触摸屏，报错：找不到INT">
+      <option name="closed" value="true" />
+      <created>1738759026961</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1738759026961</updated>
+    </task>
+    <task id="LOCAL-00086" summary="【驱动开发】touch_init有问题，无法读取正确ID">
+      <option name="closed" value="true" />
+      <created>1738829778326</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1738829778327</updated>
+    </task>
+    <task id="LOCAL-00087" summary="【驱动开发】touch_init没有问题，测试成功（不要从init里返回值到app.cpp中，直接在key_handler中测试；寄存器0x00到0x0E是坑，不是0xFF）">
+      <option name="closed" value="true" />
+      <created>1738851248385</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1738851248385</updated>
+    </task>
+    <task id="LOCAL-00088" summary="【驱动开发】触碰点数量检测成功">
+      <option name="closed" value="true" />
+      <created>1738853720068</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1738853720069</updated>
+    </task>
+    <task id="LOCAL-00089" summary="【驱动开发】修正复位时序用的延时函数">
+      <option name="closed" value="true" />
+      <created>1738860250227</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1738860250227</updated>
+    </task>
+    <task id="LOCAL-00090" summary="【驱动开发】读取两个触摸点数据成功，但第二个触摸点无法读取左小半边数据&#10;某次测试后，未修改代码，IIC再次抽风，键盘中断和初始化全部失败，touch_isOK报2">
+      <option name="closed" value="true" />
+      <created>1738909897344</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1738909897345</updated>
+    </task>
+    <task id="LOCAL-00091" summary="【驱动开发】增加delay.c，双指触摸功能测试成功">
+      <option name="closed" value="true" />
+      <created>1738925417374</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1738925417374</updated>
+    </task>
+    <task id="LOCAL-00092" summary="【驱动开发】框架改变">
+      <option name="closed" value="true" />
+      <created>1739164332811</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1739164332812</updated>
+    </task>
+    <task id="LOCAL-00093" summary="【驱动开发】屏幕白屏">
+      <option name="closed" value="true" />
+      <created>1739167283385</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1739167283385</updated>
+    </task>
+    <task id="LOCAL-00094" summary="【驱动开发】添加roller控件中（半成品）">
+      <option name="closed" value="true" />
+      <created>1739183744415</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1739183744415</updated>
+    </task>
+    <task id="LOCAL-00095" summary="【驱动开发】roller控件和dropdown控件完善，修复label中init函数无法生成字符问题，新增OnValueChanged值变化事件，准备测试chart">
+      <option name="closed" value="true" />
+      <created>1739251425541</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1739251425542</updated>
+    </task>
+    <task id="LOCAL-00096" summary="【驱动开发】按键中标签只能显示两个字符，数字没影响">
+      <option name="closed" value="true" />
+      <created>1739257355437</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1739257355437</updated>
+    </task>
+    <task id="LOCAL-00097" summary="【驱动开发】bug:按键中标签只能显示两个字符，数字没影响">
+      <option name="closed" value="true" />
+      <created>1739257602155</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1739257602155</updated>
+    </task>
+    <task id="LOCAL-00098" summary="【驱动开发】chart基本功能完善，光标、标号未测试，用随机函数测试发现还是需要脏数组">
+      <option name="closed" value="true" />
+      <created>1739266750758</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1739266750758</updated>
+    </task>
+    <task id="LOCAL-00099" summary="【驱动开发】脏数组和双缓冲与lvgl原有的双缓冲和局部渲染机制冲突不起作用">
+      <option name="closed" value="true" />
+      <created>1739280015227</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1739280015227</updated>
+    </task>
+    <task id="LOCAL-00100" summary="【驱动开发】lvgl图表和WaveDraw的对比">
+      <option name="closed" value="true" />
+      <created>1739350437393</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1739350437393</updated>
+    </task>
+    <task id="LOCAL-00101" summary="【驱动开发】Render新增WaveDraw和BasicDraw,WaveDraw实现模版化，准备把脏区域也做到类里">
+      <option name="closed" value="true" />
+      <created>1739433012841</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1739433012842</updated>
+    </task>
+    <task id="LOCAL-00102" summary="【驱动开发】WaveDraw模版化,插值算法的特化实现完善（不在依赖.cpp）">
+      <option name="closed" value="true" />
+      <created>1739439349711</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1739439349711</updated>
+    </task>
+    <task id="LOCAL-00103" summary="【驱动开发】硬件SPI+DMA 存个档">
+      <option name="closed" value="true" />
+      <created>1739505456973</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1739505456973</updated>
+    </task>
+    <task id="LOCAL-00104" summary="【驱动开发】硬件SPI+DMA 清屏函数成功 提升很大">
+      <option name="closed" value="true" />
+      <created>1739606015670</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1739606015671</updated>
+    </task>
+    <task id="LOCAL-00105" summary="【驱动开发】硬件SPI+DMA 清屏函数成功 修正一点失误 将LCD_CS_LOW();等移到循环外">
+      <option name="closed" value="true" />
+      <created>1739606741244</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1739606741244</updated>
+    </task>
+    <task id="LOCAL-00106" summary="【驱动开发】GUI和LCD间的硬件回调注册接口做好了，同时保证了模拟器正常运行（但lvgl还是用不上DMA）">
+      <option name="closed" value="true" />
+      <created>1739619562601</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1739619562601</updated>
+    </task>
+    <task id="LOCAL-00107" summary="【驱动开发】SPI+DMA的GUI能显示，丝滑但颜色不对；flush会和clear函数抢资源，暂时用互斥锁解决了冲突，但是clear无法清全屏">
+      <option name="closed" value="true" />
+      <created>1739628145847</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1739628145847</updated>
+    </task>
+    <task id="LOCAL-00108" summary="【驱动开发】在lv_conf里找到了帧率LV_USE_PERF_MONITOR和内存占用LV_USE_MEM_MONITOR的开关">
+      <option name="closed" value="true" />
+      <created>1739633173765</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1739633173765</updated>
+    </task>
+    <task id="LOCAL-00109" summary="【驱动开发】硬件SPI+DMA与lvgl对接成功，没想到解决了两个颜色问题全都解决了:LCD_direction中寄存器误操作导致RGB变BGR，lcd_flush中因小端模式（有可能）导致RGB565前八位后八位反了">
+      <option name="closed" value="true" />
+      <created>1739719188883</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1739719188885</updated>
+    </task>
+    <task id="LOCAL-00110" summary="【驱动开发】把回调函数塞在了ISR里，注册机制通通删掉了，GUI与硬件再次隔离开">
+      <option name="closed" value="true" />
+      <created>1739780714674</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1739780714675</updated>
+    </task>
+    <task id="LOCAL-00111" summary="【驱动开发】SPI+DMA帧率再次提升，原先方法2是正解，RGB565前8位后8位颠倒问题存在但影响不大，lcd_init中LCD_Clear不能删（未知）">
+      <option name="closed" value="true" />
+      <created>1739799643133</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1739799643133</updated>
+    </task>
+    <task id="LOCAL-00112" summary="【驱动开发】存个档，解决cmake白屏问题">
+      <option name="closed" value="true" />
+      <created>1739941944793</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1739941944794</updated>
+    </task>
+    <task id="LOCAL-00113" summary="【驱动开发】存个档，解决cmake白屏问题">
+      <option name="closed" value="true" />
+      <created>1739942006665</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1739942006665</updated>
+    </task>
+    <task id="LOCAL-00114" summary="【驱动开发】不白屏了，再试试创建新的BSP">
+      <option name="closed" value="true" />
+      <created>1739942362855</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1739942362855</updated>
+    </task>
+    <task id="LOCAL-00115" summary="【驱动开发】能创建新的BSP了，但是一构建stm32f4xx_hal_conf.h里改的就没了">
+      <option name="closed" value="true" />
+      <created>1739944292891</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1739944292891</updated>
+    </task>
+    <task id="LOCAL-00116" summary="【驱动开发】spi模式用不到hal库里的sd">
+      <option name="closed" value="true" />
+      <created>1739945342561</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1739945342561</updated>
+    </task>
+    <task id="LOCAL-00117" summary="【驱动开发】sd_spi初始化失败，无反应">
+      <option name="closed" value="true" />
+      <created>1739959054134</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1739959054134</updated>
+    </task>
+    <task id="LOCAL-00118" summary="【驱动开发】common_functions.cmake中加入DMA_SPI_ENABLE的开启函数">
+      <option name="closed" value="true" />
+      <created>1740320130964</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1740320130966</updated>
+    </task>
+    <task id="LOCAL-00119" summary="【驱动开发】格式化SD卡后，sd卡初始化、写入和读取块数据都没问题">
+      <option name="closed" value="true" />
+      <created>1740325326055</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1740325326055</updated>
+    </task>
+    <task id="LOCAL-00120" summary="【驱动开发】把baseinit里的代码逻辑理顺了">
+      <option name="closed" value="true" />
+      <created>1740406525063</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1740406525064</updated>
+    </task>
+    <task id="LOCAL-00121" summary="【驱动开发】修正fsmc_init处错误，SD卡多块读写测试返回数据正确">
+      <option name="closed" value="true" />
+      <created>1740412043346</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1740412043346</updated>
+    </task>
+    <option name="localTasksCounter" value="122" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VCPKGProject">
+    <isAutomaticCheckingOnLaunch value="false" />
+    <isAutomaticFoundErrors value="true" />
+    <isAutomaticReloadCMake value="true" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="DV" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="【驱动开发】按键中标签只能显示两个字符，数字没影响" />
+    <MESSAGE value="【驱动开发】bug:按键中标签只能显示两个字符，数字没影响" />
+    <MESSAGE value="【驱动开发】chart基本功能完善，光标、标号未测试，用随机函数测试发现还是需要脏数组" />
+    <MESSAGE value="【驱动开发】脏数组和双缓冲与lvgl原有的双缓冲和局部渲染机制冲突不起作用" />
+    <MESSAGE value="【驱动开发】lvgl图表和WaveDraw的对比" />
+    <MESSAGE value="【驱动开发】Render新增WaveDraw和BasicDraw,WaveDraw实现模版化，准备把脏区域也做到类里" />
+    <MESSAGE value="【驱动开发】WaveDraw模版化,插值算法的特化实现完善（不在依赖.cpp）" />
+    <MESSAGE value="【驱动开发】硬件SPI+DMA 存个档" />
+    <MESSAGE value="【驱动开发】硬件SPI+DMA 清屏函数成功 提升很大" />
+    <MESSAGE value="【驱动开发】硬件SPI+DMA 清屏函数成功 修正一点失误 将LCD_CS_LOW();等移到循环外" />
+    <MESSAGE value="【驱动开发】GUI和LCD间的硬件回调注册接口做好了，同时保证了模拟器正常运行（但lvgl还是用不上DMA）" />
+    <MESSAGE value="【驱动开发】SPI+DMA的GUI能显示，丝滑但颜色不对；flush会和clear函数抢资源，暂时用互斥锁解决了冲突，但是clear无法清全屏" />
+    <MESSAGE value="【驱动开发】在lv_conf里找到了帧率LV_USE_PERF_MONITOR和内存占用LV_USE_MEM_MONITOR的开关" />
+    <MESSAGE value="【驱动开发】硬件SPI+DMA与lvgl对接成功，没想到解决了两个颜色问题全都解决了:LCD_direction中寄存器误操作导致RGB变BGR，lcd_flush中因小端模式（有可能）导致RGB565前八位后八位反了" />
+    <MESSAGE value="【驱动开发】把回调函数塞在了ISR里，注册机制通通删掉了，GUI与硬件再次隔离开" />
+    <MESSAGE value="【驱动开发】SPI+DMA帧率再次提升，原先方法2是正解，RGB565前8位后8位颠倒问题存在但影响不大，lcd_init中LCD_Clear不能删（未知）" />
+    <MESSAGE value="【驱动开发】存个档，解决cmake白屏问题" />
+    <MESSAGE value="【驱动开发】不白屏了，再试试创建新的BSP" />
+    <MESSAGE value="【驱动开发】能创建新的BSP了，但是一构建stm32f4xx_hal_conf.h里改的就没了" />
+    <MESSAGE value="【驱动开发】spi模式用不到hal库里的sd" />
+    <MESSAGE value="【驱动开发】sd_spi初始化失败，无反应" />
+    <MESSAGE value="【驱动开发】common_functions.cmake中加入DMA_SPI_ENABLE的开启函数" />
+    <MESSAGE value="【驱动开发】格式化SD卡后，sd卡初始化、写入和读取块数据都没问题" />
+    <MESSAGE value="【驱动开发】把baseinit里的代码逻辑理顺了" />
+    <MESSAGE value="【驱动开发】修正fsmc_init处错误，SD卡多块读写测试返回数据正确" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】修正fsmc_init处错误，SD卡多块读写测试返回数据正确" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
+        <watch expression="touch_isOK" />
+        <watch expression="test_id" />
+        <watch expression="point_number" />
+        <watch expression="dma_buffer" />
+        <watch expression="remaining_pixels" language="ObjectiveC" />
+        <watch expression="dma_test_buf" />
+        <watch expression="dma_test_buf" />
+        <watch expression="flushing" />
+        <watch expression="SD_init_Status" language="ObjectiveC" />
+        <watch expression="SDCardInfo" language="ObjectiveC" />
+        <watch expression="SDCardInfo.SD_csd" />
+        <watch expression="SD_SingleBlockTest_Status" language="ObjectiveC" />
+        <watch expression="SD_multiBlockTest_Status" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

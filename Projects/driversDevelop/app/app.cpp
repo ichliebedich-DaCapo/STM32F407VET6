@@ -2,11 +2,8 @@
 // Created by fairy on 2025/1/9 13:31.
 //
 #include <project_config.h>
-
 #ifdef GUI_ENABLE
-
 #include "GUI.hpp"
-
 #endif
 #ifdef FREERTOS_ENABLE
 #include "cmsis_os2.h"
@@ -17,13 +14,27 @@
 #include "timer.h"
 #include "RNG.h"
 #include "lcd.h"
+#ifdef  GUI_ENABLE
 #include "ui.hpp"
+#endif
 #include "touch.h"
 #include "delay.h"
 #include "key_adapter.hpp"
 #include "app.hpp"
+#include "sd_spi.h"
 #include "RCC.h"
 #include "debug.h"
+#include "spi.h"
+#include "fatfs.h"
+#include "stm32f4xx_hal.h"
+//与FPGA通信
+#define TEST_FPGA_REG (*((volatile unsigned short *)0x60020000))
+volatile static uint16_t read_reg;
+volatile static uint16_t write_reg;
+uint8_t arr_error_fpga[1000];
+uint16_t error_fpga_count=0;
+float error_fpga_rate=0;
+
 import async_delay;
 #include <cstdio>
 
@@ -31,41 +42,49 @@ using AsyncDelay_HAL = AsyncDelay<HAL_GetTick>;
 AsyncDelay_HAL async_delay(500);
 
 
-#define FT_FALSE                  0
-#define FT_TRUE                   1
-#define FT_REG_NUM_FINGER        0x02         //触摸状态寄存器
-#define FT_TP1_REG               0X03         //第一个触摸点数据地址
-#define FT_TP2_REG               0X09         //第二个触摸点数据地址
-#define FT_ID_G_FOCALTECH_ID     0xA8         //VENDOR ID 默认值为0x11
-
-
-
-const uint16_t touch_press_reg[2] = {FT_TP1_REG, FT_TP2_REG};
-static uint8_t touch_isOK = 6;
+const uint16_t touch_press_reg[2]={FT_TP1_REG,FT_TP2_REG};
+static uint8_t touch_isOK=6;
 
 stru_pos pos;
 uint8_t touch_state;
 uint8_t touch_pos_buf1[4];
 uint8_t touch_pos_buf2[4];
 
-uint8_t write_dat = 0x55;
-uint8_t write_addr = 0x8D;
+uint8_t  write_dat=0x55;
+uint8_t  write_addr=0x8D;
 
 uint8_t test_id;
-uint8_t FT_ID = 0x03;
+uint8_t FT_ID=0x03;
 
-uint8_t point_number = 0;
-
+uint8_t point_number=0;
+SD_Error SD_init_Status=SD_DATA_INIT;
+DSTATUS disk_init_Status;
+uint32_t SD_SingleBlockTest_Status=168;
+uint32_t SD_multiBlockTest_Status=168;
 // 函数
 
 // 数组
-const uint16_t color[120 * 120] = {};
-
+const uint16_t color[120 * 120]={};
 void app_init()
 {
     adc1_temperature_sensor_init();
     RNG_Init();
     ITM_Init();
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+    GPIO_InitStruct.Pin = GPIO_PIN_4;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+    HAL_GPIO_WritePin(GPIOC,GPIO_PIN_4,GPIO_PIN_SET);
+    HAL_Delay(10);
+    HAL_GPIO_WritePin(GPIOC,GPIO_PIN_4,GPIO_PIN_RESET);
+    HAL_Delay(50);
+    HAL_GPIO_WritePin(GPIOC,GPIO_PIN_4,GPIO_PIN_SET);
+
+#ifdef SD_SPI_ENABLE
+//
+    disk_init_Status=fatfs_init(0);
+#endif
+
 }
 
 void key_handler()
@@ -74,28 +93,34 @@ void key_handler()
     {
 
         case keyK0:
-            __BKPT(0);
-            ft6336_RdReg(FT_REG_NUM_FINGER, &point_number, 1);
-            ft6336_RdReg(touch_press_reg[0], touch_pos_buf1, 4);
-            //竖屏
-//                gui::interface::set_button1_value(((uint16_t)(touch_pos_buf1[0]&0X0F)<<8)+touch_pos_buf1[1]);
-//                gui::interface::set_button2_value(((uint16_t)(touch_pos_buf1[2]&0X0F)<<8)+touch_pos_buf1[3]);
-            //横屏
+            if (PlatformKey ::handle_state(KEY_STATE_NONE))
+            {
 
-            ft6336_RdReg(touch_press_reg[1], touch_pos_buf2, 4);
-            //竖屏
+                ft6336_RdReg(FT_REG_NUM_FINGER, &point_number, 1);
+                ft6336_RdReg(touch_press_reg[0], touch_pos_buf1, 4);
+                //竖屏
 //                gui::interface::set_button1_value(((uint16_t)(touch_pos_buf1[0]&0X0F)<<8)+touch_pos_buf1[1]);
 //                gui::interface::set_button2_value(((uint16_t)(touch_pos_buf1[2]&0X0F)<<8)+touch_pos_buf1[3]);
-            //横屏
+                //横屏
+//                gui::interface::set_x1_value(480 - (((uint16_t) (touch_pos_buf1[2] & 0X0F) << 8) + touch_pos_buf1[3]));
+//                gui::interface::set_y1_value(((uint16_t) (touch_pos_buf1[0] & 0X0F) << 8) + touch_pos_buf1[1]);
+
+                ft6336_RdReg(touch_press_reg[1], touch_pos_buf2, 4);
+                //竖屏
+//                gui::interface::set_button1_value(((uint16_t)(touch_pos_buf1[0]&0X0F)<<8)+touch_pos_buf1[1]);
+//                gui::interface::set_button2_value(((uint16_t)(touch_pos_buf1[2]&0X0F)<<8)+touch_pos_buf1[3]);
+                //横屏
+//                gui::interface::set_x2_value(480 - (((uint16_t) (touch_pos_buf2[2] & 0X0F) << 8) + touch_pos_buf2[3]));
+//                gui::interface::set_y2_value(((uint16_t) (touch_pos_buf2[0] & 0X0F) << 8) + touch_pos_buf2[1]);
 
 //                touch_state=usr_ScanTouchProcess(&touch_pos);
 
-
+            }
             break;
 
 
         case keyK1:
-            if (PlatformKey::handle_state(KEY_STATE_NONE))
+            if (PlatformKey ::handle_state(KEY_STATE_NONE))
             {
 //                LCD_Clear(0xffff);
 //                for(uint16_t i=10;i<200;i++) gui::interface::set_button1_value(i);
@@ -105,18 +130,16 @@ void key_handler()
 
 //                ft6336_RdReg(0xA8,&test_id, 1);
 //                __BKPT(0);
+//                gui::interface::set_counter_value(10);
 
-
-                __BKPT(0);
 
 //                write_addr++;
-
 
             }
             break;
         case keyK2:
             LCD_Clear(0xFF36); // 填充颜色 0xFF36
-            lcd_flush(20, 20, 100, 100, color);
+            lcd_flush(20,20,100,100,color);
 //            for(uint16_t i=10;i<200;i++) gui::interface::set_button2_value(i);
             break;
 
@@ -125,23 +148,45 @@ void key_handler()
 //            ft6336_WeReg(write_addr,&write_dat,1);
 //            ft6336_RdReg(write_addr,&test_id, 1);
 //            write_addr++;
-//            break;
+
+            SD_SingleBlockTest_Status=SD_SingleBlockTest();
+            break;
 
         case keyK4:
-            LCD_Clear(0x1234); // 填充颜色 0x1234
+//            LCD_Clear(0x1234); // 填充颜色 0x1234
+            SD_multiBlockTest_Status= SD_MultiBlockTest();
             break;
 
         case keyK5:
-            LCD_Clear(0x5678); // 填充颜色 0x5678
+//            LCD_Clear(0x5678); // 填充颜色 0x5678
+
+            for(uint32_t i=0;i<10000;i++)
+            {
+                write_reg=Get_Random_Number()&0xFFFF;
+                TEST_FPGA_REG=write_reg;
+//                HAL_Delay(5);
+                read_reg=TEST_FPGA_REG;
+                if(write_reg!=read_reg)
+                {
+                    arr_error_fpga[error_fpga_count++]=i;
+                }
+
+            }
+            error_fpga_rate=error_fpga_count/10000.0f;
+            error_fpga_count=0;
+            __BKPT(0);
             break;
 
         case keyK6:
-            LCD_Clear(0x9ABC); // 填充颜色 0x9ABC
+//            LCD_Clear(0x9ABC); // 填充颜色 0x9ABC
+//
+//            __BKPT(0);
             break;
 
         case keyK7:
 
-            LCD_Clear(0xDEF0); // 填充颜色 0xDEF0
+//            LCD_Clear(0xdf10); // 填充颜色 0xDEF0
+//            __BKPT(0);
             break;
 
         case keyK8:
@@ -179,7 +224,7 @@ void key_handler()
         default:
             break;
 
-    }
+}
 }
 /**实现中断服务例程*/
 // 用于采集ADC数据
@@ -191,8 +236,6 @@ void adc1_isr()
 }
 
 float temp;
-uint32_t rand;
-
 void background_handler()
 {
     if (async_delay.is_timeout())
@@ -226,90 +269,6 @@ void usr_touchInit()
     touch_isOK = touch_init();
 }
 
-uint8_t usr_ScanTouchProcess(stru_pos *pPos)
-{
-    uint8_t buf[4];
-    uint8_t i = 0;
-    uint8_t set = FT_FALSE;
-    uint8_t pointNub = 0;
-    static uint8_t cnt = 0;
-
-    if (touch_isOK == FT_FALSE)
-        return set;
-
-    cnt++;
-    if ((cnt % 10) == 0 || cnt < 10)
-    {
-        // read number of touch points
-        ft6336_RdReg(FT_REG_NUM_FINGER, &pointNub, 1);
-
-        pointNub = pointNub & 0x0f;
-        if (pointNub && (pointNub < 3))
-        {
-            cnt = 0;
-            // read the point value
-            pPos->status_bit.tpDown = 1;
-            pPos->status_bit.tpPress = 1;
-            pPos->status_bit.ptNum = pointNub;
-
-            for (i = 0; i < CTP_MAX_TOUCH; i++)
-            {
-
-                ft6336_RdReg(touch_press_reg[i], buf, 4);
-                if (pPos->status_bit.ptNum)
-                {
-                    switch (0)
-                    {
-                        //竖屏1
-                        case 0:
-                            pPos->xpox[i] = ((uint16_t) (buf[0] & 0X0F) << 8) + buf[1];
-                            pPos->ypox[i] = ((uint16_t) (buf[2] & 0X0F) << 8) + buf[3];
-                            break;
-                        case 1:
-                            pPos->ypox[i] = 320 - (((uint16_t) (buf[0] & 0X0F) << 8) + buf[1]);
-                            pPos->xpox[i] = ((uint16_t) (buf[2] & 0X0F) << 8) + buf[3];
-                            break;
-                        case 2:
-                            pPos->xpox[i] = 480 - (((uint16_t) (buf[0] & 0X0F) << 8) + buf[1]);
-                            pPos->ypox[i] = 320 - (((uint16_t) (buf[2] & 0X0F) << 8) + buf[3]);
-                            break;
-                            //横屏1
-                        case 3:
-                            pPos->ypox[i] = ((uint16_t) (buf[0] & 0X0F) << 8) + buf[1];
-                            pPos->xpox[i] = 480 - (((uint16_t) (buf[2] & 0X0F) << 8) + buf[3]);
-                            break;
-                    }
-//                    printf("x[%d]:%d,y[%d]:%d\r\n",i,pPos->xpox[i],i,pPos->ypox[i]);
-                }
-            }
-
-            set = FT_TRUE;
-            if (pPos->xpox[0] == 0 && pPos->ypox[0] == 0)
-            {
-                pPos->status = 0;
-            }
-        }
-    }
-
-    if (pPos->status_bit.ptNum == 0)
-    {
-        if (pPos->status_bit.tpDown)
-        {
-            pPos->status_bit.tpDown = 0;
-        }
-        else
-        {
-            pPos->xpox[0] = 0xffff;
-            pPos->ypox[0] = 0xffff;
-            pPos->status = 0;
-        }
-    }
-
-    if (cnt > 240)
-        cnt = 10;
-
-    return set;
-}
 
 
 

@@ -50,7 +50,7 @@ void I2C_Write(uint8_t DevAddress, uint8_t *pData, uint16_t Size) {
 
 // 从I2C设备读取数据
 void I2C_Read(uint8_t DevAddress, uint8_t *pData, uint16_t Size) {
-     HAL_I2C_Master_Receive(&hi2c1, DevAddress, pData, Size, HAL_MAX_DELAY);
+    HAL_I2C_Master_Receive(&hi2c1, DevAddress, pData, Size, HAL_MAX_DELAY);
 }
 /**
   * @brief  读取I2C设备寄存器数据

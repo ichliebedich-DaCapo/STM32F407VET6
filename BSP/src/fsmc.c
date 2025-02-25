@@ -4,9 +4,8 @@
 
 #include "fsmc.h"
 
+#include "stm32f4xx_hal.h"
 #include "stm32f4xx.h"//内嵌了stm32f4xx_ll_fsmc.h
-
-
 
 SRAM_HandleTypeDef hsram1;//TFT模块
 DMA_HandleTypeDef hdma_memtomem_dma2_stream6;

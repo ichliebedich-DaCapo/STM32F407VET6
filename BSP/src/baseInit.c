@@ -5,6 +5,7 @@
 #include <bsp_config.h>
 #include "baseInit.h"
 #include "fsmc.h"
+#include "spi.h"
 #include "RCC.h"
 
 #ifdef GUI_ENABLE
@@ -14,6 +15,10 @@
 #include "lvgl.h"
 #include "lv_port_disp.h"
 
+#endif
+
+#ifdef SD_SPI_ENABLE
+#include "sd_spi.h"
 #endif
 
 #if defined(FREERTOS_DEBUG) && defined(FREERTOS_ENABLE)
@@ -28,7 +33,6 @@
 TIM_HandleTypeDef htim7;
 extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
 
-
 void BaseInit()
 {
     HAL_Init();
@@ -42,16 +46,28 @@ void BaseInit()
 #ifdef BSP_USE_DELAY
     delay_Init();
 #endif
-
+//按键和lcd都可能用fsmc，这里不做更改
     fsmc_init();
 
 #ifdef USE_FSMC_DMA
     fsmc_dma_init();// 初始化FSMC+DMA
 #endif
 
+#ifdef DMA_SPI_ENABLE
+    spi2_dma_Init();// 初始化SPI+DMA
+#endif
+
+#ifdef LCD_SPI_PORT_ENABLE
+    spi2_init(); //硬件SPI初始化
+#endif
+
 #ifdef GUI_ENABLE
     lcd_init();
     touch_init();
+#endif
+
+#ifdef SD_SPI_ENABLE
+    spi_sd_init();
 #endif
 
 #ifdef FREERTOS_ENABLE

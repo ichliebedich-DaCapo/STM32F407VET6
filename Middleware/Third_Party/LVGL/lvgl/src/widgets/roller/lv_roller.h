@@ -37,7 +37,6 @@ typedef enum {
     LV_ROLLER_MODE_NORMAL,   /**< Normal mode (roller ends at the end of the options). */
     LV_ROLLER_MODE_INFINITE, /**< Infinite mode (roller can be scrolled forever). */
 } lv_roller_mode_t;
-
 #if LV_USE_OBJ_PROPERTY
 enum {
     LV_PROPERTY_ID(ROLLER, OPTIONS,             LV_PROPERTY_TYPE_TEXT,   0),

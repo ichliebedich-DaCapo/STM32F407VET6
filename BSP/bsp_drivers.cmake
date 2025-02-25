@@ -5,12 +5,13 @@ set(BSP_DRIVERS
         "default:hal,hal_cortex,hal_gpio,baseinit"
         # BSP驱动
         "adc:timer,hal_adc,hal_adc_ex"
-        "baseinit:rcc,hal_tim,key_exit"
+        "baseinit:rcc,lcd,hal_tim,key_exit"
         "cpu_runtime:"
         "dac:hal_dac,timer"
         "debug:"
         "delay:timer"
         "esp8266:"
+        "fatfs:sd_spi"
         "fsmc:hal_sram,hal_dma"
         "i2c:hal_i2c"
         "key_exit:"
@@ -20,6 +21,7 @@ set(BSP_DRIVERS
         "rcc:hal_rcc,hal_flash_ex"
         "rng:hal_rng"
         "sdio:"
+        "sd_spi:spi,dma"
         "spi:hal_spi"
         "tcp:"
         "timer:hal_tim_ex"
@@ -39,6 +41,7 @@ set(dac_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/dac.c)
 set(debug_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/debug.c)
 set(delay_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/delay.c)
 set(esp8266_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/esp8266.c)
+set(fatfs_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/fatfs.c)
 set(fsmc_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/fsmc.c)
 set(i2c_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/i2c.c)
 set(key_exit_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/key_exit.c)
@@ -54,7 +57,7 @@ set(timer_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/timer.c)
 set(touch_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/touch.c)
 set(usart_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/usart.c)
 set(w25qxx_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/w25qxx.c)
-
+set(sd_spi_SRC ${CMAKE_CURRENT_SOURCE_DIR}/src/sd_spi.c)
 
 # 依赖项文件映射
 include(cmsis_hal.cmake)
