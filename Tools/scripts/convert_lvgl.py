@@ -603,7 +603,7 @@ def convert_style_calls(func_name, args, is_static_cast=False, is_font_custom=Fa
         ['text_opa', "255"],
         ['text_font', '', 'font'],
         ['text_line_space', "0"],
-        ['text_align', 'LV_TEXT_ALIGN_CENTER'],
+        ['text_align', 'LV_TEXT_ALIGN_LEFT'],
         ['bg_opa', "255"],
         ['pad_top', "0"],
         ['pad_right', "0"],
