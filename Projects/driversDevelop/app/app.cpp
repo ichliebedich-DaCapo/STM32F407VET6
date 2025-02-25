@@ -25,6 +25,11 @@
 #include "RCC.h"
 #include "debug.h"
 #include "spi.h"
+#include "stm32f4xx_hal.h"
+//与FPGA通信
+#define TEST_FPGA_REG (*((volatile unsigned short *)0x60020000))
+volatile static uint32_t read_reg;
+volatile static uint32_t write_reg=0x1234;
 
 import async_delay;
 #include <cstdio>
@@ -61,6 +66,15 @@ void app_init()
     adc1_temperature_sensor_init();
     RNG_Init();
     ITM_Init();
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+    GPIO_InitStruct.Pin = GPIO_PIN_4;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+    HAL_GPIO_WritePin(GPIOC,GPIO_PIN_4,GPIO_PIN_SET);
+    HAL_Delay(10);
+    HAL_GPIO_WritePin(GPIOC,GPIO_PIN_4,GPIO_PIN_RESET);
+    HAL_Delay(50);
+    HAL_GPIO_WritePin(GPIOC,GPIO_PIN_4,GPIO_PIN_SET);
 
 #ifdef SD_SPI_ENABLE
     SD_init_Status=spi_sd_init();
@@ -139,16 +153,23 @@ void key_handler()
             break;
 
         case keyK5:
-            LCD_Clear(0x5678); // 填充颜色 0x5678
+//            LCD_Clear(0x5678); // 填充颜色 0x5678
+            write_reg=write_reg-1;
+            TEST_FPGA_REG = write_reg;
+            __BKPT(0);
             break;
 
         case keyK6:
-            LCD_Clear(0x9ABC); // 填充颜色 0x9ABC
+//            LCD_Clear(0x9ABC); // 填充颜色 0x9ABC
+            write_reg=write_reg+1;
+            TEST_FPGA_REG = write_reg;
+            __BKPT(0);
             break;
 
         case keyK7:
-
-            LCD_Clear(0xdf10); // 填充颜色 0xDEF0
+            read_reg=TEST_FPGA_REG;
+//            LCD_Clear(0xdf10); // 填充颜色 0xDEF0
+            __BKPT(0);
             break;
 
         case keyK8:

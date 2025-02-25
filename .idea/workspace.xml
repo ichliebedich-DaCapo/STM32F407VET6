@@ -33,7 +33,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】把baseinit里的代码逻辑理顺了" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】修正fsmc_init处错误，SD卡多块读写测试返回数据正确">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -564,14 +568,9 @@
       <workItem from="1740318923740" duration="6236000" />
       <workItem from="1740385684519" duration="4648000" />
       <workItem from="1740399743788" duration="9734000" />
-    </task>
-    <task id="LOCAL-00072" summary="flash_storage模块测试完毕">
-      <option name="closed" value="true" />
-      <created>1734755295553</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1734755295553</updated>
+      <workItem from="1740410487904" duration="1560000" />
+      <workItem from="1740466215723" duration="1205000" />
+      <workItem from="1740476730648" duration="586000" />
     </task>
     <task id="LOCAL-00073" summary="语音存储与回放可以使用，接下来只要添加各种逻辑即可">
       <option name="closed" value="true" />
@@ -957,7 +956,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740406525064</updated>
     </task>
-    <option name="localTasksCounter" value="121" />
+    <task id="LOCAL-00121" summary="【驱动开发】修正fsmc_init处错误，SD卡多块读写测试返回数据正确">
+      <option name="closed" value="true" />
+      <created>1740412043346</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1740412043346</updated>
+    </task>
+    <option name="localTasksCounter" value="122" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -992,7 +999,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】roller控件和dropdown控件完善，修复label中init函数无法生成字符问题，新增OnValueChanged值变化事件，准备测试chart" />
     <MESSAGE value="【驱动开发】按键中标签只能显示两个字符，数字没影响" />
     <MESSAGE value="【驱动开发】bug:按键中标签只能显示两个字符，数字没影响" />
     <MESSAGE value="【驱动开发】chart基本功能完善，光标、标号未测试，用随机函数测试发现还是需要脏数组" />
@@ -1017,7 +1023,8 @@
     <MESSAGE value="【驱动开发】common_functions.cmake中加入DMA_SPI_ENABLE的开启函数" />
     <MESSAGE value="【驱动开发】格式化SD卡后，sd卡初始化、写入和读取块数据都没问题" />
     <MESSAGE value="【驱动开发】把baseinit里的代码逻辑理顺了" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】把baseinit里的代码逻辑理顺了" />
+    <MESSAGE value="【驱动开发】修正fsmc_init处错误，SD卡多块读写测试返回数据正确" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】修正fsmc_init处错误，SD卡多块读写测试返回数据正确" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -1034,6 +1041,7 @@
         <watch expression="SDCardInfo" language="ObjectiveC" />
         <watch expression="SDCardInfo.SD_csd" />
         <watch expression="SD_SingleBlockTest_Status" language="ObjectiveC" />
+        <watch expression="SD_multiBlockTest_Status" />
       </configuration>
     </watches-manager>
   </component>
