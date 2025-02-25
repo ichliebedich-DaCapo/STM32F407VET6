@@ -179,7 +179,7 @@ void key_handler()
 
         case keyK6:
 //            LCD_Clear(0x9ABC); // 填充颜色 0x9ABC
-
+//
 //            __BKPT(0);
             break;
 
