@@ -22,8 +22,9 @@ widgets_define = []
 # 资源文件,格式为{'font':[],'image':[]}  fonts和images都是对应的名称
 resources = {
     'font': [],
-    'image':[],
+    'image': [],
 }
+
 
 # --------------------------------预处理------------------------------------
 
@@ -213,6 +214,7 @@ def remove_widget(widget_name):
     removed_count = original_length - len(widgets)
     return removed_count  # 返回已删除项目的数量
 
+
 # --------添加资源---------
 def add_resource(resource_type: str, resource: str) -> None:
     """增强型资源添加函数
@@ -231,6 +233,7 @@ def add_resource(resource_type: str, resource: str) -> None:
     if cleaned not in resources[resource_type]:
         resources[resource_type].append(cleaned)
 
+
 def extract_resource(func_name: str, args: list) -> None:
     """增强型资源提取器
     Args:
@@ -239,10 +242,10 @@ def extract_resource(func_name: str, args: list) -> None:
     """
     resource_map = {
         'lv_obj_set_style_text_font': {
-            'type': 'font',   # 保持与resources键名一致
+            'type': 'font',  # 保持与resources键名一致
             'index': 1
         },
-        'lv_imagebutton_set_src':{
+        'lv_imagebutton_set_src': {
             'type': 'image',
             'index': 2
         },
@@ -253,7 +256,7 @@ def extract_resource(func_name: str, args: list) -> None:
     }
 
     # 查询资源映射
-    if (info := resource_map.get(func_name))  is None:
+    if (info := resource_map.get(func_name)) is None:
         return
 
     # 索引有效性检查
@@ -263,6 +266,7 @@ def extract_resource(func_name: str, args: list) -> None:
 
         # 执行资源添加
     add_resource(info['type'], str(args[info['index']]))
+
 
 # ------------------------------与组件关系有关------------------------
 def add_widget_relations(child_name, child_info=None, parent_name=''):
@@ -375,7 +379,7 @@ function_handlers = {
     },
     # 全缺省不可免去调用
     'lv_obj_align': {
-        'args_map': ['0','0'],
+        'args_map': ['0', '0'],
         'method_map': {
             'index': [1],
             'mapping': {
@@ -583,9 +587,10 @@ def convert_function_args(func_name, args):
 
 
 # 处理样式块,已经包含里样式的正确代码，不用在前面加上组件名
-def convert_style_calls(func_name, args,is_static_cast = False):
+def convert_style_calls(func_name, args, is_static_cast=False, is_font_custom=False):
     """
     转换样式代码
+    :param is_font_custom:
     :param is_static_cast: 是否强制转换（在C++中，两个enum类型做运算会警告）
     :param func_name:
     :param args:
@@ -621,6 +626,7 @@ def convert_style_calls(func_name, args,is_static_cast = False):
             return lst[2]
         except IndexError:
             return default
+
     def add_enum_casts(code):
         """
         自动为形如 LV_XXX | LV_YYY 的枚举组合添加类型转换
@@ -629,10 +635,12 @@ def convert_style_calls(func_name, args,is_static_cast = False):
         """
         # 匹配LV_开头的标识符组合
         pattern = r'\b(LV_[A-Z0-9_]+\b)(?:\s*\|\s*(LV_[A-Z0-9_]+\b))+'
+
         def replace_match(match):
             parts = match.group(0).split('|')
             casted = [f'static_cast<int>({part.strip()})' for part in parts]
             return '|'.join(casted)
+
         return re.sub(pattern, replace_match, code)
 
     # 这里能做到这么简洁是因为lvgl 9.2的所有样式API都只有三个参数，并且前缀相同
@@ -656,8 +664,11 @@ def convert_style_calls(func_name, args,is_static_cast = False):
     if index != -1:
         prop = list_get2(default_config[index], prop)  # 从默认配置里看看有没有第三个元素（简写）
         value = "" if value == default_config[index][1] and state == "" else f"{value}"
+        # 如果是自定义字体，那么就加上字体类型(一般情况下只有第一个参数)
+        if is_font_custom and prop == 'font':
+            value = value.replace("_font", "_customer_font", 1)
+        # 如果都为默认值，那么就跳过这次处理
         if state == "" and value == "":
-            # 如果都为默认值，那么就跳过这次处理
             return None
 
     converted = f".{prop}({value}{state})"
@@ -702,7 +713,7 @@ def process_code_lines(code_lines):
 
 
 # ----------------解析组件信息-------------------
-def iterate_widgets(screen_name):
+def iterate_widgets(screen_name, is_font_custom):
     """遍历组件结构的通用函数
     Note:
         # 1,链式调用需要一张表，组件在前面，然后init后跟父组件,接着不断往后添加到列表里
@@ -711,6 +722,7 @@ def iterate_widgets(screen_name):
         # 3,对widgets_define添加了组件定义的信息，但是没有把里面的代码通过'\n\t'连接
     Args:
         screen_name(string): 项目名称，这里是为了把屏幕名称替换为scr
+        is_font_custom(bool): 自定义字体
     Returns:
         widgets_init_code(list):由一段段组件初始化代码组成,最后是需要通过'\n\t'进行拼接
     """
@@ -726,7 +738,7 @@ def iterate_widgets(screen_name):
         args = scr_func_info[1]
         if 'lv_obj_set_style' in func_name:
             # 如果是样式函数（针对与主屏幕）
-            func_code = convert_style_calls(func_name, args)
+            func_code = convert_style_calls(func_name, args, is_font_custom=is_font_custom)
             if func_code is None:
                 continue
             screen_init_chain.append(func_code)
@@ -735,7 +747,7 @@ def iterate_widgets(screen_name):
     screen_init_chain[-1] += ';'  # 末尾添加分号
     widgets_init_code.append('\n\t\t\t'.join(screen_init_chain))
 
-    # ------处理其他组件-------
+    # ---------------处理其他组件------------
     for widget in widgets:
         widget_name = widget[0]
         function_list = widget[1]
@@ -762,11 +774,11 @@ def iterate_widgets(screen_name):
             # 获得处理过后的C++函数代码
             if 'lv_obj_set_style' in func_name:
                 # 如果是样式函数
-                func_code = convert_style_calls(func_name, args,is_static_cast=True)
+                func_code = convert_style_calls(func_name, args, is_static_cast=True, is_font_custom=is_font_custom)
             else:
-
+                # 如果是普通函数
                 func_code = convert_function_args(func_name, args)
-            extract_resource(func_name, args)# 提取字体、图片资源
+            extract_resource(func_name, args)  # 提取字体、图片资源
 
             # 判断是否跳过调用
             if func_code is None:
@@ -780,9 +792,7 @@ def iterate_widgets(screen_name):
         widgets_init_code.append('\n\t\t\t'.join(widget_init_chain))
     # 给定义组件代码的首元素添加\n
     # widgets_define[0] = '\n' + widgets_define[0]
-    return widgets_init_code,widgets_define
-
-
+    return widgets_init_code, widgets_define
 
 
 # ---------------------------------------文件处理函数-------------------------------------------
@@ -824,11 +834,11 @@ def find_c_functions(func_name: str,
         return (("full_content", [], content),)
 
     # 构建正则表达式模式
-    name_pattern = re.escape(func_name).replace(r'\*',  '.*').replace(r'\?', '.')
+    name_pattern = re.escape(func_name).replace(r'\*', '.*').replace(r'\?', '.')
     func_regex = re.compile(
         r'^\s*((?:[\w_]+\s+)+?)'  # 返回类型 
-        rf'({name_pattern})\s*'     # 函数名 
-        r'\(([^)]*)\)\s*'           # 参数列表 
+        rf'({name_pattern})\s*'  # 函数名 
+        r'\(([^)]*)\)\s*'  # 参数列表 
         r'\{',
         re.MULTILINE
     )
@@ -837,7 +847,7 @@ def find_c_functions(func_name: str,
     for match in func_regex.finditer(content):
         # 提取函数信息
         func_name = match.group(2)
-        params = [p.strip() for p in match.group(3).split(',')  if p.strip()]
+        params = [p.strip() for p in match.group(3).split(',') if p.strip()]
 
         # 提取函数体（去花括号）
         start = match.end()
@@ -845,8 +855,10 @@ def find_c_functions(func_name: str,
         end_pos = None
 
         for i in range(start, len(content)):
-            if content[i] == '{': brace_level +=1
-            elif content[i] == '}': brace_level -=1
+            if content[i] == '{':
+                brace_level += 1
+            elif content[i] == '}':
+                brace_level -= 1
 
             if brace_level == 0:
                 end_pos = i
@@ -859,12 +871,13 @@ def find_c_functions(func_name: str,
         func_body = content[start:end_pos].strip()
         func_body = re.sub(r'^\s*{ |\s*}$', '', func_body, flags=re.DOTALL).strip()
 
-        functions.append((func_name,  params, func_body))
+        functions.append((func_name, params, func_body))
 
     if not functions:
         raise ValueError(f"No functions matching '{func_name}' found")
 
     return tuple(functions)
+
 
 def extract_screen_name(func_name: str) -> str:
     """
@@ -882,6 +895,7 @@ def extract_screen_name(func_name: str) -> str:
 import os
 import glob
 import shutil
+
 
 def copy_files_by_pattern(source_dir, pattern, target_dir):
     """
@@ -932,6 +946,7 @@ def copy_files_by_pattern(source_dir, pattern, target_dir):
 
     return copied_files
 
+
 # ----------------------------------输出结果处理--------------------------------------------
 """
 UI代码转换系统 v2.5 
@@ -945,10 +960,12 @@ UI代码转换系统 v2.5
 5. 分布式文件输出支持 
 """
 
+
 class GenerateMode(Enum):
     """生成模式枚举"""
     OVERWRITE = 1
     MERGE = 2  # 新增融合模式，移除其他模式
+
 
 @dataclass
 class CppCodeTemplate:
@@ -999,7 +1016,6 @@ namespace {ns_name}
 /*!WIDGETS_DEFINE_END!*/
 }}
 using namespace {ns_name};"""
-
 
     init_namespace: str = """\
 namespace {ns_name}
@@ -1090,15 +1106,15 @@ class HookSystem:
     """钩子管理系统"""
 
     HOOK_POINTS = (
-        'pre_define',   # 定义块生成前
+        'pre_define',  # 定义块生成前
         'post_define',  # 定义块生成后
-        'pre_init',     # 初始化块生成前
-        'post_init',    # 初始化块生成后
-        'post_generate'# 全部生成完成后
+        'pre_init',  # 初始化块生成前
+        'post_init',  # 初始化块生成后
+        'post_generate'  # 全部生成完成后
     )
 
     def __init__(self):
-        self.hooks  = {point: [] for point in self.HOOK_POINTS}
+        self.hooks = {point: [] for point in self.HOOK_POINTS}
 
     def add_hook(self, point: str, callback: Callable) -> None:
         """
@@ -1125,10 +1141,10 @@ def _build_load_resources(resources, is_custom=True) -> str:
 
     # 处理字体资源
     font_resources = []
-    for font in resources.get('font',  []):
+    for font in resources.get('font', []):
         # 应用custom前缀规则
         if is_custom:
-            processed_font = font.replace("lv_font",  "lv_customer_font", 1)  # 仅替换第一个匹配项
+            processed_font = font.replace("lv_font", "lv_customer_font", 1)  # 仅替换第一个匹配项
         else:
             processed_font = font
         font_resources.append(f"LV_FONT_DECLARE({processed_font})")
@@ -1139,7 +1155,7 @@ def _build_load_resources(resources, is_custom=True) -> str:
         resources_list.extend(font_resources)
 
         # 处理图片资源
-    img_resources = [f"LV_IMG_DECLARE({img})" for img in resources.get('image',  [])]
+    img_resources = [f"LV_IMG_DECLARE({img})" for img in resources.get('image', [])]
 
     # 添加图片区块
     if img_resources:
@@ -1158,17 +1174,17 @@ class TemplateGenerator:
         """
         Args:
         """
-        self.cpp_template  = CppCodeTemplate()
-        self.hpp_template  = HppCodeTemplate()
-        self.placeholders  = {
+        self.cpp_template = CppCodeTemplate()
+        self.hpp_template = HppCodeTemplate()
+        self.placeholders = {
             'cpp_includes': '#include "ui.hpp"',
             'hpp_includes': '#include "GUI_Base.hpp"',
             'widgets_namespace': 'gui::widgets::main',
             'init_namespace': 'gui::init',
             'func_name': 'screen',
-            'ui_interface':'gui::interface'
+            'ui_interface': 'gui::interface'
         }
-        self.hooks  = HookSystem()
+        self.hooks = HookSystem()
 
     def generate(
             self,
@@ -1198,7 +1214,7 @@ class TemplateGenerator:
         # hpp
         declare_widgets_content = self._build_declare_widgets_content(define_blocks)
         declare_ui_interface = self._build_declare_ui_interface([])
-        load_resources = _build_load_resources(resources,is_font_custom)
+        load_resources = _build_load_resources(resources, is_font_custom)
         # cpp
         define_widgets_content = self._build_define_widgets_content(define_blocks)
         init_content = self._build_init_content(init_blocks, mode)
@@ -1211,13 +1227,13 @@ class TemplateGenerator:
             # 命名空间等
             includes=self.placeholders['hpp_includes'],
             widgets_namespace=declare_widgets_content,
-            ui_interface= declare_ui_interface,
+            ui_interface=declare_ui_interface,
             load_resources=load_resources,
         )
         # cpp
         final_cpp_code = self.cpp_template.framework.format(
             # 一群钩子
-            pre_define = self.hooks.execute_hooks('pre_define'),
+            pre_define=self.hooks.execute_hooks('pre_define'),
             post_define=self.hooks.execute_hooks('post_define'),
             pre_init=self.hooks.execute_hooks('pre_init'),
             post_init=self.hooks.execute_hooks('post_init'),
@@ -1234,23 +1250,23 @@ class TemplateGenerator:
         cpp_path = Path(output_path) / 'ui.cpp'
 
         if mode == GenerateMode.OVERWRITE:
-            hpp_path.write_text(final_hpp_code,  encoding='utf-8')
-            cpp_path.write_text(final_cpp_code,  encoding='utf-8')
+            hpp_path.write_text(final_hpp_code, encoding='utf-8')
+            cpp_path.write_text(final_cpp_code, encoding='utf-8')
         elif mode == GenerateMode.MERGE:
             # 处理hpp文件
             if hpp_path.exists():
                 existing_hpp = hpp_path.read_text(encoding='utf-8')
                 merged_hpp = self._merge_code(existing_hpp, final_hpp_code, 'hpp')
-                hpp_path.write_text(merged_hpp,  encoding='utf-8')
+                hpp_path.write_text(merged_hpp, encoding='utf-8')
             else:
-                hpp_path.write_text(final_hpp_code,  encoding='utf-8')
+                hpp_path.write_text(final_hpp_code, encoding='utf-8')
             # 处理cpp文件
             if cpp_path.exists():
                 existing_cpp = cpp_path.read_text(encoding='utf-8')
                 merged_cpp = self._merge_code(existing_cpp, final_cpp_code, 'cpp')
-                cpp_path.write_text(merged_cpp,  encoding='utf-8')
+                cpp_path.write_text(merged_cpp, encoding='utf-8')
             else:
-                cpp_path.write_text(final_cpp_code,  encoding='utf-8')
+                cpp_path.write_text(final_cpp_code, encoding='utf-8')
         return True
 
     def _build_define_widgets_content(self, blocks: List[str]) -> str:
@@ -1266,7 +1282,7 @@ class TemplateGenerator:
         Note:
             输入的是定义代码块列表
         """
-        declare_list = ['\textern '+ line for line in blocks]
+        declare_list = ['\textern ' + line for line in blocks]
         content = '\n'.join(declare_list)
         return self.hpp_template.widgets_namespace.format(
             ns_name=self.placeholders['widgets_namespace'],
@@ -1278,7 +1294,7 @@ class TemplateGenerator:
         Note:
             输入的列表是外部声明的ui接口
         """
-        ui_interface_declare = ['extern '+ line for line in blocks if line != '']
+        ui_interface_declare = ['extern ' + line for line in blocks if line != '']
         content = '\n'.join(ui_interface_declare)
         return self.hpp_template.ui_interface.format(
             ns_name=self.placeholders['ui_interface'],
@@ -1355,6 +1371,7 @@ class TemplateGenerator:
 
     def _replace_inner_content(self, new_code: str, pattern: str, content: str, keep_markers=False) -> str:
         """替换区域内部内容"""
+
         def replacer(match):
             if keep_markers:
                 return f"{match.group(1)}{content}{match.group(3)}"
@@ -1369,14 +1386,14 @@ class TemplateGenerator:
         )
 
 
-
-
 # -------------------------------------主函数--------------------------------------------
 def main():
+    # 【功能】：自定义字体
+    is_font_custom = True
     # 【定位屏幕初始化代码】：定位 setup_scr_* 函数,并获取工程名和函数体
     c_content = find_c_functions(search_path=r"E:\Program\Embedded\MCU\GUI\GUI\generated",
-                           func_name="setup_scr_*",
-                           file_name="setup_scr_*.c")
+                                 func_name="setup_scr_*",
+                                 file_name="setup_scr_*.c")
     # 获取第一个满足条件的函数
     setup_scr_function = c_content[0]
     # 获取函数体和屏幕名称
@@ -1392,25 +1409,24 @@ def main():
     process_code_lines(code_lines)
 
     # 【解析信息】：把组件信息解析为对应的代码，并输出
-    widgets_init_code,widgets_define_code = iterate_widgets(screen_name)
+    widgets_init_code, widgets_define_code = iterate_widgets(screen_name, is_font_custom=is_font_custom)
 
     # 【输出代码文件】：把组件相关代码信息，按照特定格式写入文件中
     generator = TemplateGenerator()
 
     # 添加版本信息钩子
-    generator.hooks.add_hook('pre_define',  lambda: f"// Generated by Fairy on {datetime.now():%Y-%m-%d  %H:%M}\n")
+    generator.hooks.add_hook('pre_define', lambda: f"// Generated by Fairy on {datetime.now():%Y-%m-%d  %H:%M}\n")
 
     # 执行生成（与工作目录有关）
     generator.generate(
         define_blocks=widgets_define_code,
         init_blocks=widgets_init_code,
         output_path="../../Projects/driversDevelop/ui",
-        is_font_custom=False,
+        is_font_custom=is_font_custom,
         mode=GenerateMode.OVERWRITE
     )
 
     print("代码生成成功！输出文件：ui.cpp")
-
 
     # 复制所有字体
     copy_files_by_pattern(source_dir=r"E:\Program\Embedded\MCU\GUI\GUI\generated\guider_fonts",
@@ -1420,8 +1436,6 @@ def main():
     copy_files_by_pattern(source_dir=r"E:\Program\Embedded\MCU\GUI\GUI\generated\images",
                           target_dir="../../Projects/driversDevelop/ui",
                           pattern="*.c")
-
-
 
 
 if __name__ == "__main__":
