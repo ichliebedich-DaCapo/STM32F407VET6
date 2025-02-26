@@ -7,7 +7,6 @@
 #include <cstdint>
 #include <project_config.h>
 
-constexpr uint8_t KEY_STATE_NONE =0x0;// 无状态,无需使用
 constexpr uint8_t KEY_STATE_TWO =0x2;
 constexpr uint8_t KEY_STATE_THREE =0x3;
 constexpr uint8_t KEY_STATE_FOUR =0x4;

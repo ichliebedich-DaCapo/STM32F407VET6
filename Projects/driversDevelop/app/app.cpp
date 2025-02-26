@@ -84,8 +84,6 @@ void key_handler()
     {
 
         case keyK0:
-            if (PlatformKey::handle_state(KEY_STATE_NONE))
-            {
                 // 测试错误率
                 for (uint32_t i = 0; i < 10000; i++)
                 {
@@ -101,29 +99,28 @@ void key_handler()
                 error_fpga_rate = error_fpga_count / 10000.0f;
                 error_fpga_count = 0;
                 __BKPT(0);
-            }
             break;
 
 
         case keyK1:
             // 测试访问速度
-            pre_tick = get_delay_tick();
+            pre_tick = HAL_GetTick();
             for (uint32_t i = 0; i < 10000; i++)
             {
                 read_reg = TEST_FPGA_REG;
             }
-            current_tick = get_delay_tick();
+            current_tick = HAL_GetTick();
             current_tick = current_tick - pre_tick;// 单位为us
             __BKPT(0);
             break;
         case keyK2:
             // 测试写入速度
-            pre_tick = get_delay_tick();
+            pre_tick = HAL_GetTick();
             for (uint32_t i = 0; i < 10000; i++)
             {
                 TEST_FPGA_REG = write_reg;
             }
-            current_tick = get_delay_tick();
+            current_tick = HAL_GetTick();
             current_tick = current_tick - pre_tick;// 单位为us
             __BKPT(0);
             break;
