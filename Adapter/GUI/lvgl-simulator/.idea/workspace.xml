@@ -28,23 +28,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/lv_font_montserratMedium_12.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Component/inc/widget.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Component/inc/widget.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Component/inc/chart.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Component/inc/chart.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Component/inc/dropdown.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Component/inc/dropdown.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Component/inc/roller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Component/inc/roller.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw_nxp/bin/Simulator.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw_nxp/bin/Simulator.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/lv_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/lv_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Algorithm/src/wave_signal.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Algorithm/src/wave_signal.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Core/Drivers/CMSIS/Include/core_cm4.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Core/Drivers/CMSIS/Include/core_cm4.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Core/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Core/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Core/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Core/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/libs/lz4/lz4.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/libs/lz4/lz4.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/misc/lv_text.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/misc/lv_text.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/others/file_explorer/lv_file_explorer.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/others/file_explorer/lv_file_explorer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/dropdown/lv_dropdown_private.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/widgets/dropdown/lv_dropdown_private.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/project_config.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/_NXP_Logo_RGB565A8_60x34.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/_btn_RGB565A8_65x65.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/font.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/lv_font_SourceHanSerifSC_Regular_16.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/lv_font_arial_11.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/lv_font_arial_34.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/lv_font_arial_40.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/lv_font_montserratMedium_12.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/lv_font_montserratMedium_13.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/lv_font_montserratMedium_16.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/lv_font_montserratMedium_34.c" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Tools/scripts/convert_lvgl.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Tools/scripts/convert_lvgl.py" afterDir="false" />
@@ -87,25 +86,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "CMake 应用程序.Simulator.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "cf.advertisement.text.has.clang-format": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "DV",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "CPPToolchains",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;CMake 应用程序.Simulator.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.advertisement.text.has.clang-format&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;DV&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CPPToolchains&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="CMake 应用程序.Simulator">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
@@ -164,7 +163,9 @@
       <workItem from="1739675418620" duration="1916000" />
       <workItem from="1739772554334" duration="2726000" />
       <workItem from="1739849940894" duration="1203000" />
-      <workItem from="1740492593723" duration="2227000" />
+      <workItem from="1740492593723" duration="2829000" />
+      <workItem from="1740499100972" duration="305000" />
+      <workItem from="1740555940120" duration="3509000" />
     </task>
     <servers />
   </component>

@@ -28,14 +28,14 @@ public:
 //        size(w, h);// 设置图表大小位置
 
         // 配置图表
-        set_type(LV_CHART_TYPE_LINE);// 设置类型:折线 柱形
-        set_point_count(point_cnt);// 设置数据点数量
-        set_update_mode(LV_CHART_UPDATE_MODE_SHIFT);
-        set_range(0, 255, LV_CHART_AXIS_PRIMARY_Y);// 设置Y轴范围
+        type(LV_CHART_TYPE_LINE);// 设置类型:折线 柱形
+        point_count(point_cnt);// 设置数据点数量
+        update_mode(LV_CHART_UPDATE_MODE_SHIFT);
+        range(LV_CHART_AXIS_PRIMARY_Y,0, 255);// 设置Y轴范围
         remove_dot();// 取消折线点样式
 
         // 自定义刻度线和边框
-        set_div_count(0, 0);// 设置刻度线
+        div_count(0, 0);// 设置刻度线
         border(lv_color_hex(0x3f3f3f), 6, 1);
 
 
@@ -46,7 +46,7 @@ public:
     }
 /******************基础图表配置方法**********************/
     // 设置图表类型
-    Chart &set_type(ChartType type)
+    Chart &type(ChartType type)
     {
         lv_chart_set_type(obj_, type);
         return *this;
@@ -54,34 +54,34 @@ public:
 
 
     // 设置图表范围，默认设置y轴的显示范围
-    Chart &set_range(Coord min, Coord max, ChartAxis axis = LV_CHART_AXIS_PRIMARY_Y)
+    Chart &range(ChartAxis axis = LV_CHART_AXIS_PRIMARY_Y,Coord min=0, Coord max=255)
     {
         lv_chart_set_range(obj_, axis, min, max);
         return *this;
     }
 
     // 设置数据点个数
-    Chart &set_point_count(uint16_t point_cnt)
+    Chart &point_count(uint16_t point_cnt)
     {
         lv_chart_set_point_count(obj_, point_cnt);
         return *this;
     }
 
     // 设置显示刷新方式 SHIFT表示每个点都会更新到前一个点，最左侧的点消失；CIRCULAR是循环添加。
-    Chart &set_update_mode(lv_chart_update_mode_t mode)
+    Chart &update_mode(lv_chart_update_mode_t mode)
     {
         lv_chart_set_update_mode(obj_, mode);
         return *this;
     }
 
     // 设置图表的网格线数量
-    Chart &set_div_count(uint8_t hor_div, uint8_t ver_div)
+    Chart &div_count(uint8_t hor_div, uint8_t ver_div)
     {
         lv_chart_set_div_line_count(obj_, hor_div, ver_div);
         return *this;
     }
     // 设置图表网格颜色
-    Chart &set_div_color(Color color)
+    Chart &line_color(Color color)
     {
         lv_obj_set_style_line_color(obj_, color, LV_PART_MAIN);
         return *this;
@@ -93,18 +93,24 @@ public:
         return *this;
     }
     // 设置线宽
-    Chart &set_line_width(uint16_t width)
+    Chart &line_width(uint16_t width)
     {
         lv_obj_set_style_line_width(obj_, width, LV_PART_MAIN);
         return *this;
     }
+    // 设置线的透明度
+    Chart &line_opa(uint8_t opa)
+    {
+        lv_obj_set_style_line_opa(obj_, opa, LV_PART_MAIN);
+        return *this;
+    }
     // 设置系列颜色
-    Chart& set_series_color(ChartSeries_t series, lv_color_t color) {
+    Chart&series_color(ChartSeries_t series, lv_color_t color) {
         lv_chart_set_series_color(obj_, series, color);
         return *this;
     }
     // 设置点的大小 还没搞好
-    Chart &set_dot_size(uint16_t size)
+    Chart &dot_size(uint16_t size)
     {
         lv_obj_set_style_line_width(obj_, size, LV_PART_INDICATOR);
         lv_obj_set_style_height(obj_, size, LV_PART_INDICATOR);
@@ -121,13 +127,13 @@ public:
     //更改标签
     /**************数据系列（Series）相关操作************/
     // 设置下一个值
-    Chart &set_next_value(ChartSeries_t series, Coord value)
+    Chart &next_value(ChartSeries_t series, Coord value)
     {
         lv_chart_set_next_value(obj_, series, value);
         return *this;
     }
     // 设置下一个数据点（X 和 Y 值）
-    Chart &set_next_value_xy(ChartSeries_t series, Coord x, Coord y) {
+    Chart &next_value_xy(ChartSeries_t series, Coord x, Coord y) {
         lv_chart_set_next_value2(obj_, series, x, y);
         return *this;
     }

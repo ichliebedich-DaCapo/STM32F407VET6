@@ -26,7 +26,7 @@ public:
      * 创建基础下拉列表对象，需后续配置位置和样式。
      * 示例：
      * @code
-     * Dropdown().init().pos(100,50).setOptions("A\\nB");
+     * Dropdown().init().pos(100,50).options("A\\nB");
      * @endcode
      */
     Dropdown& init()
@@ -85,7 +85,7 @@ public:
      * 选项会被复制到内部缓冲区，可安全释放原始字符串。
      * 示例：
      * @code
-     * setOptions("Apple\\nBanana\\nOrange");
+     * options("Apple\\nBanana\\nOrange");
      * @endcode
      */
     Dropdown& setOptions(const char* options) {

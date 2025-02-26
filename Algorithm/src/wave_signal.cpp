@@ -14,7 +14,7 @@
  * @brief 设置波形类型
  * @param type 波形类型，分别为 正弦、方波、三角波、锯齿波等
  */
-//auto WaveSignal::set_type(WaveType type) -> void
+//auto WaveSignal::type(WaveType type) -> void
 //{
 //    switch (type)
 //    {

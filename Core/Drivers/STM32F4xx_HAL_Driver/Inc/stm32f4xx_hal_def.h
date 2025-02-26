@@ -164,7 +164,7 @@ typedef enum
    Functions that are executed in RAM should reside in a separate source module.
    Using the 'Options for File' dialog you can simply change the 'Code / Const' 
    area of a module to a memory space in physical RAM.
-   Available memory areas are declared in the 'Target' tab of the 'Options for Target'
+   Available memory areas are declared in the 'Target' tab of the 'options for Target'
    dialog. 
 */
 #define __RAM_FUNC

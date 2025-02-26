@@ -29,14 +29,30 @@
   </component>
   <component name="CMakeSettings">
     <configurations>
-      <configuration PROFILE_NAME="Release-w64-i686-arm-none-eabi" ENABLED="true" CONFIG_NAME="Release" TOOLCHAIN_NAME="w64-i686-arm-none-eabi" />
+      <configuration PROFILE_NAME="Release-MinGW_ARM" ENABLED="true" CONFIG_NAME="Release" TOOLCHAIN_NAME="MinGW_ARM" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】FSMC的访问和写入速度均在556KHz（1.798us一次），甚至不如硬件SPI的37.5Mbits/s，换算成相同的地址和数据的话，为1MHz多一点">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】改了转换样式代码中text_align代码">
+      <change afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/lv_font_montserratMedium_12.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/fsmc.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/fsmc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/chart.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/chart.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/dropdown.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/dropdown.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/roller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/roller.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/cmake-build-debug-mingw_nxp/bin/Simulator.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/cmake-build-debug-mingw_nxp/bin/Simulator.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/src/wave_signal.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/src/wave_signal.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Drivers/CMSIS/Include/core_cm4.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Drivers/CMSIS/Include/core_cm4.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/libs/lz4/lz4.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/libs/lz4/lz4.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/misc/lv_text.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/misc/lv_text.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/others/file_explorer/lv_file_explorer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/others/file_explorer/lv_file_explorer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/widgets/dropdown/lv_dropdown_private.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/widgets/dropdown/lv_dropdown_private.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tools/scripts/convert_lvgl.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/scripts/convert_lvgl.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +183,7 @@
       </map>
     </option>
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release-w64-i686-arm-none-eabi" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release-MinGW_ARM" />
   <component name="Git.Settings">
     <option name="PUSH_TAGS">
       <GitPushTagMode>
@@ -209,8 +225,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6.git&quot;,
-    &quot;accountId&quot;: &quot;a679c97f-91ee-40eb-8ce5-af8a944aaf79&quot;
+    &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6&quot;,
+    &quot;accountId&quot;: &quot;a9ff9cce-f6cd-41c3-bd49-a806fb1abb79&quot;
   },
   &quot;recentNewPullRequestHead&quot;: {
     &quot;server&quot;: {
@@ -252,32 +268,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;OpenOCD 下载并运行.OCD Furina.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.convert_lvgl.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
-    &quot;cf.advertisement.text.has.clang-format&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ZQ&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Program/stm32/STM32F407VET6/CMakeLists.txt&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;DockerRegistry&quot;,
-    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
-    &quot;two.files.diff.last.used.file&quot;: &quot;D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "OpenOCD 下载并运行.OCD Furina.executor": "Run",
+    "Python.convert_lvgl.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.west.config.association.type.startup.service": "true",
+    "cf.advertisement.text.has.clang-format": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "DV",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/Program/stm32/STM32F407VET6/CMakeLists.txt",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "structure.view.defaults.are.configured": "true",
+    "two.files.diff.last.used.file": "D:/Embedded/MCU/STM32/Furina/Library/Third_Party/lvgl/examples/porting/lv_port_disp.c",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Program\stm32\STM32F407VET6\GUI\UI\driversDevelop" />
@@ -290,8 +306,13 @@
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Conf" />
     </key>
   </component>
-  <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
-    <configuration name="libalgorithm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libalgorithm" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
+  <component name="RunManager" selected="Python.convert_lvgl">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libalgorithm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libalgorithm" CONFIG_NAME="Release-MinGW_ARM">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -318,8 +339,8 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release-w64-i686-arm-none-eabi" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
-      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="E:\Program\Embedded\MCU\STM32\Furina\Tools\configs\stlink.cfg" reset-type="RUN" download-type="ALWAYS">
+    <configuration name="OCD Furina" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Release-MinGW_ARM" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
+      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Program\stm32\STM32F407VET6\Tools\configs\stlink.cfg" reset-type="RUN" download-type="ALWAYS">
         <debugger kind="GDB" isBundled="true" />
       </openocd>
       <method v="2">
@@ -595,9 +616,10 @@
       <workItem from="1740410487904" duration="1560000" />
       <workItem from="1740466215723" duration="1205000" />
       <workItem from="1740476730648" duration="586000" />
-      <workItem from="1740539424706" duration="3190000" />
-      <workItem from="1740544226547" duration="1854000" />
-      <workItem from="1740554970504" duration="411000" />
+      <workItem from="1740477331560" duration="13641000" />
+      <workItem from="1740492017255" duration="5895000" />
+      <workItem from="1740499108073" duration="294000" />
+      <workItem from="1740555937920" duration="12848000" />
     </task>
     <task id="LOCAL-00079" summary="【驱动开发】解决了横屏显示问题，完善了lcd.c中显示方向函数，初始化方向设置为横屏">
       <option name="closed" value="true" />
@@ -943,53 +965,53 @@
       <option name="project" value="LOCAL" />
       <updated>1740412043346</updated>
     </task>
-    <task id="LOCAL-00122" summary="【驱动开发】去除了FPGA代码">
+    <task id="LOCAL-00122" summary="【驱动开发】待合并版本">
       <option name="closed" value="true" />
-      <created>1740488889749</created>
+      <created>1740478986825</created>
       <option name="number" value="00122" />
       <option name="presentableId" value="LOCAL-00122" />
       <option name="project" value="LOCAL" />
-      <updated>1740488889749</updated>
+      <updated>1740478986825</updated>
     </task>
-    <task id="LOCAL-00123" summary="【驱动开发】优化了bsp文件映射">
+    <task id="LOCAL-00123" summary="【驱动开发】待合并版本2">
       <option name="closed" value="true" />
-      <created>1740492108121</created>
+      <created>1740486985420</created>
       <option name="number" value="00123" />
       <option name="presentableId" value="LOCAL-00123" />
       <option name="project" value="LOCAL" />
-      <updated>1740492108121</updated>
+      <updated>1740486985420</updated>
     </task>
-    <task id="LOCAL-00124" summary="【驱动开发】修复了样式函数自定义字体">
+    <task id="LOCAL-00124" summary="【驱动开发】待合并版本3">
       <option name="closed" value="true" />
-      <created>1740498550862</created>
+      <created>1740487077578</created>
       <option name="number" value="00124" />
       <option name="presentableId" value="LOCAL-00124" />
       <option name="project" value="LOCAL" />
-      <updated>1740498550862</updated>
+      <updated>1740487077578</updated>
     </task>
-    <task id="LOCAL-00125" summary="【驱动开发】添加了几个FPGA测试方法">
+    <task id="LOCAL-00125" summary="【驱动开发】待合并版本4 把启动DMA FSMC的宏写好了">
       <option name="closed" value="true" />
-      <created>1740541203058</created>
+      <created>1740487990879</created>
       <option name="number" value="00125" />
       <option name="presentableId" value="LOCAL-00125" />
       <option name="project" value="LOCAL" />
-      <updated>1740541203058</updated>
+      <updated>1740487990879</updated>
     </task>
-    <task id="LOCAL-00126" summary="【驱动开发】200MHz下的FSMC通信正常，FPGA可以使用。">
+    <task id="LOCAL-00126" summary="【驱动开发】待合并版本5 把未版本管理的修改了一下">
       <option name="closed" value="true" />
-      <created>1740544166911</created>
+      <created>1740488494090</created>
       <option name="number" value="00126" />
       <option name="presentableId" value="LOCAL-00126" />
       <option name="project" value="LOCAL" />
-      <updated>1740544166911</updated>
+      <updated>1740488494090</updated>
     </task>
-    <task id="LOCAL-00127" summary="【驱动开发】FSMC的访问和写入速度均在556KHz（1.798us一次），甚至不如硬件SPI的37.5Mbits/s，换算成相同的地址和数据的话，为1MHz多一点">
+    <task id="LOCAL-00127" summary="【驱动开发】改了转换样式代码中text_align代码">
       <option name="closed" value="true" />
-      <created>1740544885250</created>
+      <created>1740497915608</created>
       <option name="number" value="00127" />
       <option name="presentableId" value="LOCAL-00127" />
       <option name="project" value="LOCAL" />
-      <updated>1740544885251</updated>
+      <updated>1740497915608</updated>
     </task>
     <option name="localTasksCounter" value="128" />
     <servers />
@@ -1013,7 +1035,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="ZQ" />
+                        <option value="origin/ZQ" />
                       </list>
                     </value>
                   </entry>
@@ -1045,21 +1067,29 @@
     <MESSAGE value="【驱动开发】格式化SD卡后，sd卡初始化、写入和读取块数据都没问题" />
     <MESSAGE value="【驱动开发】把baseinit里的代码逻辑理顺了" />
     <MESSAGE value="【驱动开发】修正fsmc_init处错误，SD卡多块读写测试返回数据正确" />
-    <MESSAGE value="【驱动开发】去除了FPGA代码" />
-    <MESSAGE value="【驱动开发】优化了bsp文件映射" />
-    <MESSAGE value="【驱动开发】修复了样式函数自定义字体" />
-    <MESSAGE value="【驱动开发】添加了几个FPGA测试方法" />
-    <MESSAGE value="【驱动开发】200MHz下的FSMC通信正常，FPGA可以使用。" />
-    <MESSAGE value="【驱动开发】FSMC的访问和写入速度均在556KHz（1.798us一次），甚至不如硬件SPI的37.5Mbits/s，换算成相同的地址和数据的话，为1MHz多一点" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】FSMC的访问和写入速度均在556KHz（1.798us一次），甚至不如硬件SPI的37.5Mbits/s，换算成相同的地址和数据的话，为1MHz多一点" />
+    <MESSAGE value="【驱动开发】待合并版本" />
+    <MESSAGE value="【驱动开发】待合并版本2" />
+    <MESSAGE value="【驱动开发】待合并版本3" />
+    <MESSAGE value="【驱动开发】待合并版本4 把启动DMA FSMC的宏写好了" />
+    <MESSAGE value="【驱动开发】待合并版本5 把未版本管理的修改了一下" />
+    <MESSAGE value="【驱动开发】改了转换样式代码中text_align代码" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】改了转换样式代码中text_align代码" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
-        <watch expression="error_fpga_rate" />
-        <watch expression="write_reg" />
+        <watch expression="touch_isOK" />
+        <watch expression="SD_init_Status" language="ObjectiveC" />
+        <watch expression="SDCardInfo" language="ObjectiveC" />
+        <watch expression="SDCardInfo.SD_csd" />
+        <watch expression="SD_SingleBlockTest_Status" language="ObjectiveC" />
+        <watch expression="SD_multiBlockTest_Status" />
         <watch expression="read_reg" />
+        <watch expression="write_reg" />
+        <watch expression="disk_init_Status" />
         <watch expression="current_tick" />
+        <watch expression="pre_tick" />
+        <watch expression="error_fpga_rate" />
       </configuration>
     </watches-manager>
   </component>
