@@ -33,8 +33,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】添加了几个FPGA测试方法">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】200MHz下的FSMC通信正常，FPGA可以使用。">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,22 +206,22 @@
     }
   ]
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ichliebedich-DaCapo/STM32F407VET6.git",
-    "accountId": "a679c97f-91ee-40eb-8ce5-af8a944aaf79"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6.git&quot;,
+    &quot;accountId&quot;: &quot;a679c97f-91ee-40eb-8ce5-af8a944aaf79&quot;
   },
-  "recentNewPullRequestHead": {
-    "server": {
-      "useHttp": false,
-      "host": "github.com",
-      "port": null,
-      "suffix": null
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
     },
-    "owner": "ichliebedich-DaCapo",
-    "repository": "STM32F407VET6"
+    &quot;owner&quot;: &quot;ichliebedich-DaCapo&quot;,
+    &quot;repository&quot;: &quot;STM32F407VET6&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Core/startup_stm32f407vetx.s" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h" root0="SKIP_INSPECTION" />
@@ -289,11 +290,6 @@
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="libalgorithm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libalgorithm" CONFIG_NAME="Release-w64-i686-arm-none-eabi">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -598,15 +594,8 @@
       <workItem from="1740410487904" duration="1560000" />
       <workItem from="1740466215723" duration="1205000" />
       <workItem from="1740476730648" duration="586000" />
-      <workItem from="1740539424706" duration="2857000" />
-    </task>
-    <task id="LOCAL-00077" summary="【简易存储示波器】准备合并UI">
-      <option name="closed" value="true" />
-      <created>1735362893253</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1735362893253</updated>
+      <workItem from="1740539424706" duration="3190000" />
+      <workItem from="1740544226547" duration="517000" />
     </task>
     <task id="LOCAL-00078" summary="【简易存储示波器】可以设置采样频率">
       <option name="closed" value="true" />
@@ -992,7 +981,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740541203058</updated>
     </task>
-    <option name="localTasksCounter" value="126" />
+    <task id="LOCAL-00126" summary="【驱动开发】200MHz下的FSMC通信正常，FPGA可以使用。">
+      <option name="closed" value="true" />
+      <created>1740544166911</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1740544166911</updated>
+    </task>
+    <option name="localTasksCounter" value="127" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1027,7 +1024,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】lvgl图表和WaveDraw的对比" />
     <MESSAGE value="【驱动开发】Render新增WaveDraw和BasicDraw,WaveDraw实现模版化，准备把脏区域也做到类里" />
     <MESSAGE value="【驱动开发】WaveDraw模版化,插值算法的特化实现完善（不在依赖.cpp）" />
     <MESSAGE value="【驱动开发】硬件SPI+DMA 存个档" />
@@ -1052,24 +1048,16 @@
     <MESSAGE value="【驱动开发】优化了bsp文件映射" />
     <MESSAGE value="【驱动开发】修复了样式函数自定义字体" />
     <MESSAGE value="【驱动开发】添加了几个FPGA测试方法" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】添加了几个FPGA测试方法" />
+    <MESSAGE value="【驱动开发】200MHz下的FSMC通信正常，FPGA可以使用。" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】200MHz下的FSMC通信正常，FPGA可以使用。" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
-        <watch expression="touch_isOK" />
-        <watch expression="test_id" />
-        <watch expression="point_number" />
-        <watch expression="dma_buffer" />
-        <watch expression="remaining_pixels" language="ObjectiveC" />
-        <watch expression="dma_test_buf" />
-        <watch expression="dma_test_buf" />
-        <watch expression="flushing" />
-        <watch expression="SD_init_Status" language="ObjectiveC" />
-        <watch expression="SDCardInfo" language="ObjectiveC" />
-        <watch expression="SDCardInfo.SD_csd" />
-        <watch expression="SD_SingleBlockTest_Status" language="ObjectiveC" />
-        <watch expression="SD_multiBlockTest_Status" />
+        <watch expression="error_fpga_rate" />
+        <watch expression="write_reg" />
+        <watch expression="read_reg" />
+        <watch expression="current_tick" />
       </configuration>
     </watches-manager>
   </component>

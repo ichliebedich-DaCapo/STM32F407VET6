@@ -105,24 +105,17 @@ void key_handler()
         case keyK1:
             // 测试访问速度
             pre_tick = HAL_GetTick();
-            for (uint32_t i = 0; i < 10000; i++)
+            for (uint32_t i = 0; i < 1000000; ++i)
             {
                 read_reg = TEST_FPGA_REG;
             }
             current_tick = HAL_GetTick();
-            current_tick = current_tick - pre_tick;// 单位为us
+            current_tick = current_tick - pre_tick;// 单位为ms
             __BKPT(0);
             break;
+
         case keyK2:
-            // 测试写入速度
-            pre_tick = HAL_GetTick();
-            for (uint32_t i = 0; i < 10000; i++)
-            {
-                TEST_FPGA_REG = write_reg;
-            }
-            current_tick = HAL_GetTick();
-            current_tick = current_tick - pre_tick;// 单位为us
-            __BKPT(0);
+
             break;
 
         case keyK3:
@@ -134,8 +127,16 @@ void key_handler()
             break;
 
         case keyK5:
-
-            __BKPT(0);
+            // 测试写入速度
+            // 1798ms -> 1.798us一次
+            pre_tick = HAL_GetTick();
+            for (uint32_t i = 0; i < 1000000; ++i)
+            {
+                TEST_FPGA_REG = write_reg;
+            }
+            current_tick = HAL_GetTick();
+            current_tick = current_tick - pre_tick;// 单位为ms
+            __BKPT(1);
             break;
 
         case keyK6:
