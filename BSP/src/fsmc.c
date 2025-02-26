@@ -73,14 +73,22 @@ void fsmc_init()
     /************
      *FSMC模式配置
      ************/
+    // LCD的8080并口
+//    Timing.AddressSetupTime = 7;// 实际会多一个HCLK
+//    Timing.AddressHoldTime = 4;
+//    Timing.DataSetupTime = 10;// 实际会多一个HCLK
+//    Timing.BusTurnAroundDuration = 0;// 总线周转时间（异步模式设为0）
+//    Timing.DataLatency = 0;// 异步模式必须为0
+////    Timing.CLKDivision = 2;// 异步模式下无效，因为它是用来设置 FSMC 输出时钟的分频系数
+////    Timing.AccessMode = FSMC_ACCESS_MODE_B;
 
-    Timing.AddressSetupTime = 7;// 实际会多一个HCLK
-    Timing.AddressHoldTime = 4;
-    Timing.DataSetupTime = 10;// 实际会多一个HCLK
+    // FPGA的异步复用FSMC
+    // 各个时钟改了，但是访问和写入速度仍为1.798us/s
+    Timing.AddressSetupTime = 1;// 实际会多一个HCLK
+    Timing.AddressHoldTime = 3;
+    Timing.DataSetupTime = 3;// 实际会多一个HCLK
     Timing.BusTurnAroundDuration = 0;// 总线周转时间（异步模式设为0）
-    Timing.CLKDivision = 2;// 异步模式下无效，因为它是用来设置 FSMC 输出时钟的分频系数
     Timing.DataLatency = 0;// 异步模式必须为0
-    Timing.AccessMode = FSMC_ACCESS_MODE_B;
 
     hsram1.Init.NSBank = FSMC_NORSRAM_BANK1;
     hsram1.Init.DataAddressMux = FSMC_DATA_ADDRESS_MUX_ENABLE;// 地址/数据线复用

@@ -84,21 +84,21 @@ void key_handler()
     {
 
         case keyK0:
-                // 测试错误率
-                for (uint32_t i = 0; i < 10000; i++)
+            // 测试错误率
+            for (uint32_t i = 0; i < 100000; i++)
+            {
+                write_reg = Get_Random_Number() & 0xFFFF;
+                TEST_FPGA_REG = write_reg;
+                read_reg = TEST_FPGA_REG;
+                if (write_reg != read_reg)
                 {
-                    write_reg = Get_Random_Number() & 0xFFFF;
-                    TEST_FPGA_REG = write_reg;
-                    read_reg = TEST_FPGA_REG;
-                    if (write_reg != read_reg)
-                    {
-                        arr_error_fpga[error_fpga_count++] = i;
-                    }
-
+                    arr_error_fpga[error_fpga_count++] = i;
                 }
-                error_fpga_rate = error_fpga_count / 10000.0f;
-                error_fpga_count = 0;
-                __BKPT(0);
+
+            }
+            error_fpga_rate = error_fpga_count / 100000.0f;
+            error_fpga_count = 0;
+            __BKPT(2);
             break;
 
 
