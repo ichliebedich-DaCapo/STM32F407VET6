@@ -74,13 +74,12 @@ void fsmc_init()
      *FSMC模式配置
      ************/
 
-    Timing.AddressSetupTime = 7;
+    Timing.AddressSetupTime = 7;// 实际会多一个HCLK
     Timing.AddressHoldTime = 4;
-    Timing.DataSetupTime = 10;
-    Timing.BusTurnAroundDuration = 0;
-    // Timing.CLKDivision=0;
-    Timing.CLKDivision = 4;
-    Timing.DataLatency = 0;
+    Timing.DataSetupTime = 10;// 实际会多一个HCLK
+    Timing.BusTurnAroundDuration = 0;// 总线周转时间（异步模式设为0）
+    Timing.CLKDivision = 2;// 异步模式下无效，因为它是用来设置 FSMC 输出时钟的分频系数
+    Timing.DataLatency = 0;// 异步模式必须为0
     Timing.AccessMode = FSMC_ACCESS_MODE_B;
 
     hsram1.Init.NSBank = FSMC_NORSRAM_BANK1;

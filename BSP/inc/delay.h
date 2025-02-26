@@ -15,6 +15,7 @@ void delay_Init();
 // 延时微秒函数
 void delay_us(uint16_t us);
 
+uint32_t get_delay_tick();
 
 #ifdef __cplusplus
 }

@@ -29,7 +29,7 @@ void delay_Init()
     TIM_MasterConfigTypeDef sMasterConfig = {0};
 
     htim14.Instance = TIM14;
-    htim14.Init.Prescaler = 84-1;
+    htim14.Init.Prescaler = 84-1;// 1MHz
     htim14.Init.CounterMode = TIM_COUNTERMODE_UP;
     htim14.Init.Period = 0xFFFF;
     htim14.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
@@ -66,4 +66,9 @@ void delay_us(uint16_t us)
     while (TIM14->CNT < final_count);
 
     // 停止定时器
+}
+
+uint32_t get_delay_tick()
+{
+    return TIM14->CNT;
 }
