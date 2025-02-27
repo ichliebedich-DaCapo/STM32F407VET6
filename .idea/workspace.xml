@@ -33,15 +33,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】把roller和chart的脚本代码写好了">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】准备测试一下lv_chart_set_ext_y_array">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/chart.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/chart.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/dropdown.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/dropdown.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/slider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/slider.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/widget.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/widget.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/cmake-build-debug-mingw_nxp/bin/Simulator.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/cmake-build-debug-mingw_nxp/bin/Simulator.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/font.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tools/scripts/convert_lvgl.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/scripts/convert_lvgl.py" afterDir="false" />
@@ -262,7 +258,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "OpenOCD 下载并运行.OCD Furina.executor": "Debug",
+    "OpenOCD 下载并运行.OCD Furina.executor": "Run",
     "Python.convert_lvgl.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
@@ -612,15 +608,7 @@
       <workItem from="1740492017255" duration="5895000" />
       <workItem from="1740499108073" duration="294000" />
       <workItem from="1740555937920" duration="13519000" />
-      <workItem from="1740655378162" duration="6651000" />
-    </task>
-    <task id="LOCAL-00080" summary="【驱动开发】修复显示原点错误">
-      <option name="closed" value="true" />
-      <created>1738412830784</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1738412830784</updated>
+      <workItem from="1740655378162" duration="11280000" />
     </task>
     <task id="LOCAL-00081" summary="【驱动开发】完成lvgl库与SPI屏幕接口，屏幕显示正常，无触摸">
       <option name="closed" value="true" />
@@ -1006,7 +994,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740582537365</updated>
     </task>
-    <option name="localTasksCounter" value="129" />
+    <task id="LOCAL-00129" summary="【驱动开发】准备测试一下lv_chart_set_ext_y_array">
+      <option name="closed" value="true" />
+      <created>1740663567588</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1740663567588</updated>
+    </task>
+    <option name="localTasksCounter" value="130" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1041,7 +1037,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】硬件SPI+DMA 存个档" />
     <MESSAGE value="【驱动开发】硬件SPI+DMA 清屏函数成功 提升很大" />
     <MESSAGE value="【驱动开发】硬件SPI+DMA 清屏函数成功 修正一点失误 将LCD_CS_LOW();等移到循环外" />
     <MESSAGE value="【驱动开发】GUI和LCD间的硬件回调注册接口做好了，同时保证了模拟器正常运行（但lvgl还是用不上DMA）" />
@@ -1066,7 +1061,8 @@
     <MESSAGE value="【驱动开发】待合并版本5 把未版本管理的修改了一下" />
     <MESSAGE value="【驱动开发】改了转换样式代码中text_align代码" />
     <MESSAGE value="【驱动开发】把roller和chart的脚本代码写好了" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】把roller和chart的脚本代码写好了" />
+    <MESSAGE value="【驱动开发】准备测试一下lv_chart_set_ext_y_array" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】准备测试一下lv_chart_set_ext_y_array" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

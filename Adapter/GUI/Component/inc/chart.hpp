@@ -6,6 +6,12 @@
 
 #include "widget.hpp"
 
+/*****使用模版******/
+//series=chart_screen_chart_1.update_mode(LV_CHART_UPDATE_MODE_SHIFT)
+//        .line_color(lv_color_hex(0x34e6ff))
+//        .point_count(128)
+//        .remove_dot()
+//        .add_series(lv_color_hex(0x34e6ff));
 /**
  * @brief 图表类
  */
@@ -161,6 +167,7 @@ public:
     /**************光标（Cursor）操作************/
 
 };
+
 
 
 #endif //SIMULATOR_CHART_HPP

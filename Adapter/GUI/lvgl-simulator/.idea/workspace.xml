@@ -30,12 +30,9 @@
     <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Component/inc/chart.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Component/inc/chart.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Component/inc/dropdown.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Component/inc/dropdown.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Component/inc/slider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Component/inc/slider.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Component/inc/widget.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Component/inc/widget.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw_nxp/bin/Simulator.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw_nxp/bin/Simulator.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/font.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/lv_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/lv_conf.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Tools/scripts/convert_lvgl.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Tools/scripts/convert_lvgl.py" afterDir="false" />
@@ -158,7 +155,7 @@
       <workItem from="1740492593723" duration="2829000" />
       <workItem from="1740499100972" duration="305000" />
       <workItem from="1740555940120" duration="3509000" />
-      <workItem from="1740655384289" duration="5749000" />
+      <workItem from="1740655384289" duration="8487000" />
     </task>
     <servers />
   </component>

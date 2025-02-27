@@ -506,9 +506,9 @@ function_handlers = {
             'handler': None
         }
     },
-    # 不存在缺省参数
+    # 全缺省不可免调用，GUI固定死了是0-100，只能全部缺省了
     'lv_chart_set_range': {
-        'args_map': [],
+        'args_map': ['100','0'],
         'method_map': {
             'index': [],
             'mapping': {},
@@ -1504,7 +1504,7 @@ class TemplateGenerator:
 # -------------------------------------主函数--------------------------------------------
 def main():
     # 【功能】：自定义字体
-    is_font_custom = False
+    is_font_custom = True
     # 【定位屏幕初始化代码】：定位 setup_scr_* 函数,并获取工程名和函数体
     c_content = find_c_functions(search_path=r"D:\Program\GUI-GUIDER\GUI\generated",
                                  func_name="setup_scr_*",
@@ -1538,7 +1538,7 @@ def main():
         init_blocks=widgets_init_code,
         output_path="../../Projects/driversDevelop/ui",
         is_font_custom=is_font_custom,
-        mode=GenerateMode.OVERWRITE
+        mode=GenerateMode.MERGE
     )
 
     print("代码生成成功！输出文件：ui.cpp")
