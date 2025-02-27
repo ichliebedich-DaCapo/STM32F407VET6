@@ -36,26 +36,17 @@ public:
         return *this;
     }
 
-    Slider&value(int32_t value, lv_anim_enable_t anim_en = LV_ANIM_OFF)
+    Slider& value(int32_t value, lv_anim_enable_t anim_en = LV_ANIM_OFF)
     {
         lv_slider_set_value(obj_, value, anim_en);
         return *this;
     }
 
-    Slider& bg_color(Color color, lv_opa_t opa = 50, Selector selector = LV_PART_MAIN)
+    Slider& mode(lv_slider_mode_t mode=LV_SLIDER_MODE_NORMAL)
     {
-        lv_obj_set_style_bg_color(obj_, color, selector);
-        if (opa != 50)
-            lv_obj_set_style_bg_opa(obj_, opa, selector);
+        lv_slider_set_mode(obj_, mode);
         return *this;
     }
-
-    Slider& bg_src(ImageSrc src, Selector selector = LV_PART_KNOB)
-    {
-        lv_obj_set_style_bg_img_src(obj_, src, selector);
-        return *this;
-    }
-
 
 };
 

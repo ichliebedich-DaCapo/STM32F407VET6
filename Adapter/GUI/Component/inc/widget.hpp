@@ -172,7 +172,11 @@ public:
         lv_obj_set_style_bg_grad_dir(obj_, dir, selector);
         return static_cast<Derived &>(*this);
     }
-
+    inline Derived & bg_src(ImageSrc src, Selector selector = selector_default)
+    {
+        lv_obj_set_style_bg_image_src(obj_, src, selector);
+        return static_cast<Derived &>(*this);
+    }
     // 设置边框宽度
     inline Derived &border_width(Coord w, Selector selector = selector_default)
     {
@@ -380,6 +384,12 @@ public:
         return static_cast<Derived &>(*this);
     };
 
+    // 设置轮廓宽度
+    inline Derived &outline_width(Coord w, Selector selector = selector_default)
+    {
+        lv_obj_set_style_outline_width(obj_,w,selector);
+        return static_cast<Derived &>(*this);
+    };
 
     /**
      * @brief 绑定事件

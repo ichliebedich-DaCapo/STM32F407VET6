@@ -57,7 +57,7 @@ public:
         init();
         pos_size(x, y, w, h);
         Dropdown::bg_color(bg_color, opa);
-        setOptions(options);
+        Dropdown::options(options);
         return *this;
     }
 
@@ -88,7 +88,7 @@ public:
      * options("Apple\\nBanana\\nOrange");
      * @endcode
      */
-    Dropdown& setOptions(const char* options) {
+    Dropdown& options(const char* options) {
         lv_dropdown_set_options(obj_, options);
         return *this;
     }

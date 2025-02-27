@@ -33,23 +33,15 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】改了转换样式代码中text_align代码">
-      <change afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/lv_font_montserratMedium_12.c" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】把roller和chart的脚本代码写好了">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/chart.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/chart.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/dropdown.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/dropdown.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/roller.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/roller.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/slider.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/slider.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/widget.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/widget.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/cmake-build-debug-mingw_nxp/bin/Simulator.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/cmake-build-debug-mingw_nxp/bin/Simulator.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/src/wave_signal.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/src/wave_signal.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Drivers/CMSIS/Include/core_cm4.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Drivers/CMSIS/Include/core_cm4.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/libs/lz4/lz4.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/libs/lz4/lz4.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/misc/lv_text.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/misc/lv_text.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/others/file_explorer/lv_file_explorer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/others/file_explorer/lv_file_explorer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/widgets/dropdown/lv_dropdown_private.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/widgets/dropdown/lv_dropdown_private.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/font.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tools/scripts/convert_lvgl.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tools/scripts/convert_lvgl.py" afterDir="false" />
@@ -270,7 +262,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "OpenOCD 下载并运行.OCD Furina.executor": "Run",
+    "OpenOCD 下载并运行.OCD Furina.executor": "Debug",
     "Python.convert_lvgl.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
@@ -306,10 +298,10 @@
       <recent name="D:\Embedded\MCU\STM32\Furina\Application\Conf" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.convert_lvgl">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+  <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="libalgorithm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libalgorithm" CONFIG_NAME="Release-MinGW_ARM">
@@ -619,15 +611,8 @@
       <workItem from="1740477331560" duration="13641000" />
       <workItem from="1740492017255" duration="5895000" />
       <workItem from="1740499108073" duration="294000" />
-      <workItem from="1740555937920" duration="12848000" />
-    </task>
-    <task id="LOCAL-00079" summary="【驱动开发】解决了横屏显示问题，完善了lcd.c中显示方向函数，初始化方向设置为横屏">
-      <option name="closed" value="true" />
-      <created>1738408005104</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1738408005104</updated>
+      <workItem from="1740555937920" duration="13519000" />
+      <workItem from="1740655378162" duration="6651000" />
     </task>
     <task id="LOCAL-00080" summary="【驱动开发】修复显示原点错误">
       <option name="closed" value="true" />
@@ -1013,7 +998,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740497915608</updated>
     </task>
-    <option name="localTasksCounter" value="128" />
+    <task id="LOCAL-00128" summary="【驱动开发】把roller和chart的脚本代码写好了">
+      <option name="closed" value="true" />
+      <created>1740582537365</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1740582537365</updated>
+    </task>
+    <option name="localTasksCounter" value="129" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1048,7 +1041,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】WaveDraw模版化,插值算法的特化实现完善（不在依赖.cpp）" />
     <MESSAGE value="【驱动开发】硬件SPI+DMA 存个档" />
     <MESSAGE value="【驱动开发】硬件SPI+DMA 清屏函数成功 提升很大" />
     <MESSAGE value="【驱动开发】硬件SPI+DMA 清屏函数成功 修正一点失误 将LCD_CS_LOW();等移到循环外" />
@@ -1073,7 +1065,8 @@
     <MESSAGE value="【驱动开发】待合并版本4 把启动DMA FSMC的宏写好了" />
     <MESSAGE value="【驱动开发】待合并版本5 把未版本管理的修改了一下" />
     <MESSAGE value="【驱动开发】改了转换样式代码中text_align代码" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】改了转换样式代码中text_align代码" />
+    <MESSAGE value="【驱动开发】把roller和chart的脚本代码写好了" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】把roller和chart的脚本代码写好了" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

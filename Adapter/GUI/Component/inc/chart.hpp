@@ -137,6 +137,12 @@ public:
         lv_chart_set_next_value2(obj_, series, x, y);
         return *this;
     }
+    // 设置整个图的数据点 未测试
+    Chart &ext_y_array(ChartSeries_t series, Coord array[])
+    {
+        lv_chart_set_ext_y_array(obj_,series,array);
+        return *this;
+    }
     // 添加系列
     /**
      * @brief 添加系列
@@ -153,6 +159,7 @@ public:
 
 
     /**************光标（Cursor）操作************/
+
 };
 
 

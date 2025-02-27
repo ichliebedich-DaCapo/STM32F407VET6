@@ -56,6 +56,8 @@ def get_widget_info(create_line):
         "lv_checkbox_create": ['checkbox', 'CheckBox'],
         "lv_chart_create": ['chart', 'Chart'],
         "lv_roller_create": ['roller', 'Roller'],
+        "lv_slider_create": ['slider', 'Slider'],
+        "lv_dropdown_create": ['dropdown', 'Dropdown'],
     }
     for func, widget_info in widget_map.items():
         if func in create_line:
@@ -537,6 +539,51 @@ function_handlers = {
             'handler': None
         }
     },
+    # 不存在缺省参数
+    'lv_slider_set_range': {
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'range',
+            'handler': None
+        }
+    },
+    # 全缺省可免调用
+    'lv_slider_set_mode': {
+        'args_map': ['LV_SLIDER_MODE_NORMAL'],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': None,
+            'default': 'mode',
+            'handler': None
+        }
+    },
+    # 部分缺省不可免去调用
+    'lv_slider_set_value': {
+        'args_map': ['LV_ANIM_OFF'],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'value',
+            'handler': None
+        }
+    },
+    # 不存在缺省参数
+    'lv_dropdown_set_options': {
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'options',
+            'handler': None
+        }
+    },
+
 }
 
 
