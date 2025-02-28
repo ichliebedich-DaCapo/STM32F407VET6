@@ -7,13 +7,17 @@
 #include "widget.hpp"
 
 /*****使用模版******/
-//series=chart_screen_chart_1.update_mode(LV_CHART_UPDATE_MODE_SHIFT)
-//        .line_color(lv_color_hex(0x34e6ff))
-//        .point_count(128)
-//        .remove_dot()
-//        .add_series(lv_color_hex(0x34e6ff));
+
 /**
  * @brief 图表类
+ * @note 在类中要加像这样的函数 auto Osc::initData() -> void
+    series=chart_screen_chart_1.update_mode(LV_CHART_UPDATE_MODE_SHIFT)  // 改为SHIFT模式\n
+            .line_color(lv_color_hex(0x34e6ff))\n
+            .point_count(128)\n
+            .remove_dot()\n
+            .add_series(lv_color_hex(0x34e6ff));\n
+    cursor=chart_screen_chart_1.add_cursor(lv_color_hex(0xfffb00),LV_DIR_ALL);\n
+ *
  */
 class Chart : public Widget<Chart>
 {
@@ -21,7 +25,7 @@ public:
     // 初始化图表
     inline Chart &init(Obj_t parent = parent_)
     {
-        create_obj(&lv_chart_class,parent);
+        create_obj(&lv_chart_class, parent);
         return *this;
     }
 
@@ -37,7 +41,7 @@ public:
         type(LV_CHART_TYPE_LINE);// 设置类型:折线 柱形
         point_count(point_cnt);// 设置数据点数量
         update_mode(LV_CHART_UPDATE_MODE_SHIFT);
-        range(LV_CHART_AXIS_PRIMARY_Y,0, 255);// 设置Y轴范围
+        range(LV_CHART_AXIS_PRIMARY_Y, 0, 255);// 设置Y轴范围
         remove_dot();// 取消折线点样式
 
         // 自定义刻度线和边框
@@ -60,7 +64,7 @@ public:
 
 
     // 设置图表范围，默认设置y轴的显示范围
-    Chart &range(ChartAxis axis = LV_CHART_AXIS_PRIMARY_Y,Coord min=0, Coord max=255)
+    Chart &range(ChartAxis axis = LV_CHART_AXIS_PRIMARY_Y, Coord min = 0, Coord max = 255)
     {
         lv_chart_set_range(obj_, axis, min, max);
         return *this;
@@ -86,35 +90,42 @@ public:
         lv_chart_set_div_line_count(obj_, hor_div, ver_div);
         return *this;
     }
+
     // 设置图表网格颜色
     Chart &line_color(Color color)
     {
         lv_obj_set_style_line_color(obj_, color, LV_PART_MAIN);
         return *this;
     }
+
     // 移除折线上点的样式
     Chart &remove_dot()
     {
         style_size(0, 0, LV_PART_INDICATOR);
         return *this;
     }
+
     // 设置线宽
     Chart &line_width(uint16_t width)
     {
         lv_obj_set_style_line_width(obj_, width, LV_PART_MAIN);
         return *this;
     }
+
     // 设置线的透明度
     Chart &line_opa(uint8_t opa)
     {
         lv_obj_set_style_line_opa(obj_, opa, LV_PART_MAIN);
         return *this;
     }
+
     // 设置系列颜色
-    Chart&series_color(ChartSeries_t series, lv_color_t color) {
+    Chart &series_color(ChartSeries_t series, lv_color_t color)
+    {
         lv_chart_set_series_color(obj_, series, color);
         return *this;
     }
+
     // 设置点的大小 还没搞好
     Chart &dot_size(uint16_t size)
     {
@@ -122,6 +133,14 @@ public:
         lv_obj_set_style_height(obj_, size, LV_PART_INDICATOR);
         return *this;
     }
+
+    // 获取触摸点id
+    [[nodiscard]] uint32_t get_pressed_point() const
+    {
+        return lv_chart_get_pressed_point(obj_);
+    }
+
+
     /**************记号和标签相关操作********************/
     //设置记号和标签
 //    Chart &set_series_point()
@@ -166,6 +185,70 @@ public:
 
     /**************光标（Cursor）操作************/
 
+    /**
+     *
+     * @param color
+     * @param dir
+     * @return
+     * @note   LV_DIR_HOR:水平光标(显示横线);LV_DIR_VER：垂直光标(显示竖线);LV_DIR_ALL：十字光标
+     */
+
+    ChartCursor_t add_cursor(Color color, lv_dir_t dir=LV_DIR_HOR)
+    {
+        return lv_chart_add_cursor(obj_, color, dir);
+    }
+
+    // 设置光标位置（通过lv_point_t结构体）
+    Chart& set_cursor_pos(ChartCursor_t cursor, const lv_point_t& pos)
+    {
+        lv_chart_set_cursor_pos(obj_, cursor, const_cast<lv_point_t*>(&pos));
+        return *this;
+    }
+
+    // 设置光标位置（通过x,y坐标）
+    Chart& set_cursor_pos(ChartCursor_t cursor, Coord x, Coord y)
+    {
+        lv_point_t pos = {x, y};
+        return set_cursor_pos(cursor, pos);
+    }
+
+    // 绑定光标到指定数据系列的点
+    Chart& set_cursor_point(ChartCursor_t cursor, ChartSeries_t series, uint32_t point_id)
+    {
+        lv_chart_set_cursor_point(obj_, cursor, series, point_id);
+        return *this;
+    }
+
+    // 获取光标的当前位置（返回结构体副本）
+    lv_point_t get_cursor_point(ChartCursor_t cursor) const
+    {
+        return lv_chart_get_cursor_point(obj_, cursor);
+    }
+    // 获取光标所处当前点的y坐标
+    int32_t get_cursor_point_y(ChartCursor_t cursor) const
+    {
+        lv_point_t point;
+        point=lv_chart_get_cursor_point(obj_, cursor);
+        return point.y;
+    }
+    // 获取光标所处当前点的x坐标(id)
+    Coord get_cursor_point_x(ChartCursor_t cursor) const
+    {
+        lv_point_t point;
+        point=lv_chart_get_cursor_point(obj_, cursor);
+        return point.x;
+    }
+    // 触摸时改变光标位置（自己写的函数）
+    Chart& set_cursor_pos_on_pressed(ChartCursor_t& cursor)
+    {
+        uint32_t last_id;
+        last_id = get_pressed_point();  //获取点击对应的线点id
+        if (last_id != LV_CHART_POINT_NONE)
+        {  // 不是CHART点
+            lv_chart_set_cursor_point(obj_, cursor, nullptr, last_id); //设置id对应的CHART上的点的光标线显示
+        }
+        return *this;
+    }
 };
 
 

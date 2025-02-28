@@ -38,13 +38,13 @@ using namespace gui::widgets::main;
 /*!DECLARE_CODE_BEGIN!*/
 // 全局变量定义
 Timer updata_timer;
-ChartSeries_t series; //数据 系列1
+
 uint8_t length = 200;
 uint8_t wave_start_index = 0;
 uint16_t array_length = 400;
 static inline size_t current_index = 0;     // 当前读取位置
 static constexpr size_t RAND_POOL_SIZE = 400; // 预生成池大小
-static inline uint8_t rand_pool[RAND_POOL_SIZE]={111,110,102,109,118,108,114,123,117,121,
+static inline int32_t rand_pool[RAND_POOL_SIZE]={111,110,102,109,118,108,114,123,117,121,
                                                  118,117,109,116,115,117,115,110,112,116,
                                                  113,104,113,122,127,125,117,123,115,115,
                                                  124,129,129,125,115,107,113,115,117,124,
@@ -87,10 +87,98 @@ static inline uint8_t rand_pool[RAND_POOL_SIZE]={111,110,102,109,118,108,114,123
 
 
 }; // 随机数池;
+static inline int32_t rand_pool1[RAND_POOL_SIZE]={76,75,74,84,88,94,102,103,101,99,
+                                                 92,89,97,90,98,104,101,93,86,80,
+                                                 83,91,83,80,82,90,83,90,82,89,
+                                                 97,92,88,98,92,88,95,90,88,94,
+                                                 85,78,87,97,107,105,101,111,115,116,
+                                                 110,101,105,96,91,96,96,106,103,113,
+                                                 109,101,96,90,95,105,108,106,98,94,
+                                                 92,100,108,115,123,130,126,116,115,119,
+                                                 121,115,111,102,92,94,97,98,97,99,
+                                                 91,82,87,84,80,70,65,68,64,57,
+                                                 63,53,56,60,60,67,73,67,76,85,
+                                                 87,88,96,87,95,95,86,89,80,79,
+                                                 70,70,67,65,70,77,71,73,66,70,
+                                                 73,66,75,68,61,62,56,58,63,71,
+                                                 61,53,47,49,57,60,70,65,73,69,
+                                                 64,58,48,44,40,43,36,40,43,35,
+                                                 28,38,37,31,26,16,16,24,20,22,
+                                                 29,30,20,12,18,26,23,28,27,28,
+                                                 35,37,38,36,30,27,17,18,13,14,
+                                                 13,8,4,2,0,0,8,1,0,0,
+                                                 8,0,0,0,0,9,15,15,13,12,
+                                                 20,13,10,9,1,0,0,5,12,17,
+                                                 25,21,15,14,5,1,5,0,0,0,
+                                                 7,7,11,10,15,20,21,25,33,25,
+                                                 29,39,39,38,47,47,52,43,52,51,
+                                                 54,47,45,36,26,32,25,18,28,36,
+                                                 46,56,64,66,71,61,55,52,49,42,
+                                                 40,31,27,30,24,17,13,10,11,4,
+                                                 0,0,1,0,0,8,6,0,0,2,
+                                                 4,14,8,10,13,5,3,1,0,2,
+                                                 1,0,0,0,0,3,8,7,0,0,
+                                                 1,1,3,0,0,5,0,0,0,0,
+                                                 8,1,0,0,0,2,7,10,16,13,
+                                                 10,9,17,14,22,29,37,31,41,41,
+                                                 42,51,61,67,77,71,81,72,71,76,
+                                                 79,85,95,85,87,77,84,94,85,81,
+                                                 82,86,89,82,76,79,79,89,91,84,
+                                                 76,72,77,69,62,52,43,48,56,56,
+                                                 60,69,75,72,67,77,76,75,81,76,
+                                                 73,69,70,64,72,62,63,65,68,69,
+
+
+}; // 随机数池;
+static inline int32_t rand_pool2[RAND_POOL_SIZE]={236,239,249,243,243,238,239,233,238,244,
+                                                  247,252,255,248,255,255,255,255,255,255,
+                                                  255,248,250,255,255,255,254,255,255,252,
+                                                  244,245,254,255,255,254,247,255,250,252,
+                                                  249,253,255,251,241,233,233,226,223,229,
+                                                  235,239,248,239,245,237,238,237,228,221,
+                                                  230,222,227,233,224,233,242,234,233,232,
+                                                  228,223,217,221,220,229,225,232,226,218,
+                                                  213,209,219,211,212,207,204,213,221,215,
+                                                  212,216,212,217,217,224,215,216,219,229,
+                                                  233,243,245,240,241,240,249,248,250,252,
+                                                  255,255,255,246,254,253,254,255,255,252,
+                                                  255,246,239,248,251,255,246,255,245,240,
+                                                  246,250,240,230,228,224,220,225,221,222,
+                                                  221,230,220,223,214,217,212,220,216,214,
+                                                  221,211,204,207,198,208,204,194,201,208,
+                                                  201,196,191,196,203,196,190,195,189,185,
+                                                  192,201,202,208,212,207,205,209,212,206,
+                                                  215,211,215,218,218,220,230,234,230,236,
+                                                  233,234,224,222,226,230,229,234,243,241,
+                                                  234,228,227,229,239,232,229,235,227,226,
+                                                  226,218,213,214,222,227,217,227,226,228,
+                                                  228,218,210,211,208,205,197,187,193,189,
+                                                  191,197,189,180,171,178,171,170,180,175,
+                                                  173,178,173,165,164,159,153,161,164,155,
+                                                  146,144,154,163,167,175,175,170,177,187,
+                                                  184,192,197,190,183,182,183,186,196,193,
+                                                  203,211,219,212,213,207,217,208,211,214,
+                                                  206,216,206,209,207,208,203,204,211,208,
+                                                  211,208,203,201,205,208,198,199,203,195,
+                                                  195,194,187,184,179,169,170,166,168,178,
+                                                  187,184,189,185,186,180,176,168,160,151,
+                                                  144,153,143,140,133,128,122,129,130,124,
+                                                  125,133,130,128,135,131,126,136,137,143,
+                                                  153,157,164,171,172,168,165,171,180,190,
+                                                  182,187,194,195,187,196,187,185,187,188,
+                                                  187,188,181,177,175,167,157,164,155,148,
+                                                  143,138,141,140,149,155,152,152,159,167,
+                                                  167,162,153,159,167,175,168,172,178,171,
+                                                  173,175,172,177,178,176,175,176,180,173,
+
+}; // 随机数池;
+uint8_t count=0;
 // 类声明
 class Osc
 {
 public:
+    static auto initChartComponent() -> void;
+
     // 生成随机数据
     static inline auto generate_data()->void;
 
@@ -102,9 +190,26 @@ public:
             Osc::generate_data();
         }
     }
+public:
+    static inline auto set_cursor_on_press()->void
+    {
+//        chart_screen_chart_1.set_cursor_pos_on_pressed(cursor);  //看来只能在不用显示值的时候用了
+        uint32_t last_id = chart_screen_chart_1.get_pressed_point();  //获取点击对应的线点id
+        if (last_id != LV_CHART_POINT_NONE)
+        {  // 不是CHART点
+            lv_chart_set_cursor_point(chart_screen_chart_1, cursor, nullptr, last_id); //设置id对应的CHART上的点的光标线显示
+        }
+
+//        cursor_point=chart_screen_chart_1.get_cursor_point(cursor); 返回的是坐标，没卵用
+        label_screen_label_1.text("%d", cursor_point.y);
+    }
+
 private:
     // 添加生成状态标志
     static inline bool is_generating = false;
+    static  inline  ChartSeries_t series{}; //数据 系列1
+    static  inline  ChartCursor_t cursor{}; //光标 系列1
+    static  inline  lv_point_t cursor_point{}; //光标 系列1
 };
 /*!DECLARE_CODE_END!*/
 
@@ -297,13 +402,7 @@ namespace gui::init
 			.text_align(LV_TEXT_ALIGN_CENTER)
 			.bg_opa(0);
     /*!INIT_CUSTOM_BEGIN!*/
-
-        series=chart_screen_chart_1.update_mode(LV_CHART_UPDATE_MODE_SHIFT)  // 改为SHIFT模式
-                                   .line_color(lv_color_hex(0x34e6ff))
-                                   .point_count(128)
-                                   .remove_dot()
-                                   .add_series(lv_color_hex(0x34e6ff));
-
+        Osc::initChartComponent();
     /*!INIT_CUSTOM_END!*/
     }
     
@@ -313,6 +412,7 @@ namespace gui::init
         // 绑定 随机生成数据事件
         widgets::main::btn_screen_btn_1.OnClicked<Osc::toggle_generation>();
         updata_timer.create(Osc::timer_cb,20);
+        widgets::main::chart_screen_chart_1.OnPressed<Osc::set_cursor_on_press>();
     /*!EVENTS_CUSTOM_END!*/
     }
 }
@@ -352,15 +452,32 @@ auto Osc::toggle_generation() -> void
 
 auto Osc::generate_data()->void
 {
-// 批量设置128个点
-    for (int i = 0; i < 128; ++i) {
-//         循环访问数组
-        size_t idx = (current_index + i) % RAND_POOL_SIZE;
-        chart_screen_chart_1.next_value(series, rand_pool[idx]);
-    }
-//     更新索引（每次前进1位置）
-    current_index = (current_index + 20) % RAND_POOL_SIZE;
-    if(wave_start_index+length>array_length) wave_start_index=0;
+//// 批量设置128个点
+//    for (int i = 0; i < 128; ++i) {
+////         循环访问数组
+//        size_t idx = (current_index + i) % RAND_POOL_SIZE;
+//        chart_screen_chart_1.next_value(series, rand_pool[idx]);
+//    }
+////     更新索引（每次前进1位置）
+//    current_index = (current_index + 20) % RAND_POOL_SIZE;
+//    if(wave_start_index+length>array_length) wave_start_index=0;
+
+//    if (count == 0)
+        chart_screen_chart_1.ext_y_array(series, rand_pool);
+//    if (count == 1) chart_screen_chart_1.ext_y_array(series, rand_pool1);
+//    if (count == 2) chart_screen_chart_1.ext_y_array(series, rand_pool2);
+//    count++;
+//    if(count==3) count=0;
+}
+
+auto Osc::initChartComponent() -> void
+{
+    series=chart_screen_chart_1.update_mode(LV_CHART_UPDATE_MODE_SHIFT)  // 改为SHIFT模式
+            .line_color(lv_color_hex(0x34e6ff))
+            .point_count(128)
+            .remove_dot()
+            .add_series(lv_color_hex(0x34e6ff));
+    cursor=chart_screen_chart_1.add_cursor(lv_color_hex(0xfffb00),LV_DIR_ALL);
 
 }
 /*!DEFINE_CODE_END!*/

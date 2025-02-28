@@ -30,12 +30,10 @@
     <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Component/inc/chart.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Component/inc/chart.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Component/inc/widget.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Component/inc/widget.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw_nxp/bin/Simulator.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw_nxp/bin/Simulator.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/lv_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/lv_conf.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Tools/scripts/convert_lvgl.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Tools/scripts/convert_lvgl.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,11 +98,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="drivers" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Simulator" TARGET_NAME="drivers" CONFIG_NAME="Debug-MinGW_NXP">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -155,7 +148,8 @@
       <workItem from="1740492593723" duration="2829000" />
       <workItem from="1740499100972" duration="305000" />
       <workItem from="1740555940120" duration="3509000" />
-      <workItem from="1740655384289" duration="8487000" />
+      <workItem from="1740655384289" duration="10571000" />
+      <workItem from="1740742019486" duration="4232000" />
     </task>
     <servers />
   </component>
