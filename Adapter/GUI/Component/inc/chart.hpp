@@ -224,20 +224,7 @@ public:
     {
         return lv_chart_get_cursor_point(obj_, cursor);
     }
-    // 获取光标所处当前点的y坐标
-    int32_t get_cursor_point_y(ChartCursor_t cursor) const
-    {
-        lv_point_t point;
-        point=lv_chart_get_cursor_point(obj_, cursor);
-        return point.y;
-    }
-    // 获取光标所处当前点的x坐标(id)
-    Coord get_cursor_point_x(ChartCursor_t cursor) const
-    {
-        lv_point_t point;
-        point=lv_chart_get_cursor_point(obj_, cursor);
-        return point.x;
-    }
+
     // 触摸时改变光标位置（自己写的函数）
     Chart& set_cursor_pos_on_pressed(ChartCursor_t& cursor)
     {
@@ -248,6 +235,15 @@ public:
             lv_chart_set_cursor_point(obj_, cursor, nullptr, last_id); //设置id对应的CHART上的点的光标线显示
         }
         return *this;
+    }
+    // 获取光标对应的点值
+    Coord& get_cursor_point_y(ChartSeries_t& series)
+    {
+
+        uint32_t last_id;
+        last_id = get_pressed_point();  //获取点击对应的线点id
+        lv_coord_t* data_array = lv_chart_get_y_array(obj_, series); // 获取ser点对应的y轴值集合
+        return  data_array[last_id];   //获取id对应的点值
     }
 };
 

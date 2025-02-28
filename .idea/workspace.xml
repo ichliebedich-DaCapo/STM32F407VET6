@@ -33,12 +33,14 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】用next_value画图的示波器完成">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】移植了chart的光标">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/chart.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/chart.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/widget.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/widget.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/label.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/label.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/cmake-build-debug-mingw_nxp/bin/Simulator.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/cmake-build-debug-mingw_nxp/bin/Simulator.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/widgets/chart/lv_chart.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/widgets/chart/lv_chart.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/widgets/chart/lv_chart.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/widgets/chart/lv_chart.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -257,7 +259,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "OpenOCD 下载并运行.OCD Furina.executor": "Run",
+    "OpenOCD 下载并运行.OCD Furina.executor": "Debug",
     "Python.convert_lvgl.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
@@ -603,15 +605,7 @@
       <workItem from="1740499108073" duration="294000" />
       <workItem from="1740555937920" duration="13519000" />
       <workItem from="1740655378162" duration="13950000" />
-      <workItem from="1740742018200" duration="8485000" />
-    </task>
-    <task id="LOCAL-00082" summary="【驱动开发】完成lvgl库与SPI屏幕接口，屏幕显示正常，无触摸">
-      <option name="closed" value="true" />
-      <created>1738510971682</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1738510971682</updated>
+      <workItem from="1740742018200" duration="15826000" />
     </task>
     <task id="LOCAL-00083" summary="【与AI对话式制作UI测试】DEEPSEEK写的计数器">
       <option name="closed" value="true" />
@@ -997,7 +991,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740669121508</updated>
     </task>
-    <option name="localTasksCounter" value="131" />
+    <task id="LOCAL-00131" summary="【驱动开发】移植了chart的光标">
+      <option name="closed" value="true" />
+      <created>1740750579979</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1740750579981</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1032,7 +1034,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】硬件SPI+DMA 清屏函数成功 修正一点失误 将LCD_CS_LOW();等移到循环外" />
     <MESSAGE value="【驱动开发】GUI和LCD间的硬件回调注册接口做好了，同时保证了模拟器正常运行（但lvgl还是用不上DMA）" />
     <MESSAGE value="【驱动开发】SPI+DMA的GUI能显示，丝滑但颜色不对；flush会和clear函数抢资源，暂时用互斥锁解决了冲突，但是clear无法清全屏" />
     <MESSAGE value="【驱动开发】在lv_conf里找到了帧率LV_USE_PERF_MONITOR和内存占用LV_USE_MEM_MONITOR的开关" />
@@ -1057,7 +1058,8 @@
     <MESSAGE value="【驱动开发】把roller和chart的脚本代码写好了" />
     <MESSAGE value="【驱动开发】准备测试一下lv_chart_set_ext_y_array" />
     <MESSAGE value="【驱动开发】用next_value画图的示波器完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】用next_value画图的示波器完成" />
+    <MESSAGE value="【驱动开发】移植了chart的光标" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】移植了chart的光标" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -1074,6 +1076,7 @@
         <watch expression="current_tick" />
         <watch expression="pre_tick" />
         <watch expression="error_fpga_rate" />
+        <watch expression="last_id" />
       </configuration>
     </watches-manager>
   </component>

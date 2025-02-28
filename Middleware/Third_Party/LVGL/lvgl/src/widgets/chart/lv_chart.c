@@ -45,6 +45,9 @@ static uint32_t get_index_from_x(lv_obj_t * obj, int32_t x);
 static void invalidate_point(lv_obj_t * obj, uint32_t i);
 static void new_points_alloc(lv_obj_t * obj, lv_chart_series_t * ser, uint32_t cnt, int32_t ** a);
 
+
+
+
 /**********************
  *  STATIC VARIABLES
  **********************/
@@ -1356,5 +1359,10 @@ static void new_points_alloc(lv_obj_t * obj, lv_chart_series_t * ser, uint32_t c
         }
     }
 }
+
+
+
+
+
 
 #endif

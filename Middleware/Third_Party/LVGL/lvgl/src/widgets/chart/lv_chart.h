@@ -345,6 +345,7 @@ uint32_t lv_chart_get_pressed_point(const lv_obj_t * obj);
  */
 int32_t lv_chart_get_first_point_center_offset(lv_obj_t * obj);
 
+
 /**********************
  *      MACROS
  **********************/

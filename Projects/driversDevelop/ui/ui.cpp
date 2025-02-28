@@ -193,17 +193,15 @@ public:
 public:
     static inline auto set_cursor_on_press()->void
     {
-//        chart_screen_chart_1.set_cursor_pos_on_pressed(cursor);  //看来只能在不用显示值的时候用了
-        uint32_t last_id = chart_screen_chart_1.get_pressed_point();  //获取点击对应的线点id
-        if (last_id != LV_CHART_POINT_NONE)
-        {  // 不是CHART点
-            lv_chart_set_cursor_point(chart_screen_chart_1, cursor, nullptr, last_id); //设置id对应的CHART上的点的光标线显示
+        chart_screen_chart_1.set_cursor_pos_on_pressed(cursor);
+        if(had_generated)
+        {
+        char buf[10];
+        lv_snprintf(buf, sizeof(buf), "%d %d",chart_screen_chart_1.get_pressed_point(), chart_screen_chart_1.get_cursor_point_y(series));//格式化点数值成字符串
+        label_screen_label_1.text(buf);
         }
-
-//        cursor_point=chart_screen_chart_1.get_cursor_point(cursor); 返回的是坐标，没卵用
-        label_screen_label_1.text("%d", cursor_point.y);
     }
-
+    static inline bool had_generated = false;
 private:
     // 添加生成状态标志
     static inline bool is_generating = false;
@@ -435,7 +433,7 @@ namespace gui::interface {
 auto Osc::toggle_generation() -> void
 {
     is_generating = !is_generating;
-
+    had_generated=true;
 
     // 更新按钮文本
     label_screen_btn_1_label.text(is_generating  ? "BB" : "LL");
