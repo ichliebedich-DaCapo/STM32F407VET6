@@ -32,6 +32,7 @@ set(SD_SPI_ENABLE OFF CACHE INTERNAL "SD_SPI option")
 set(LCD_8080_PORT_ENABLE OFF CACHE INTERNAL "LCD_8080_PORT option")
 set(LCD_SPI_PORT_ENABLE OFF CACHE INTERNAL "LCD_SPI_PORT option")
 
+# 写完项目宏还要写 功能宏，在common_config.h.in和project_config.h.in中定义
 # 关闭GUI
 macro(options_disable_GUI)
     set(GUI_ENABLE OFF CACHE INTERNAL "GUI option")

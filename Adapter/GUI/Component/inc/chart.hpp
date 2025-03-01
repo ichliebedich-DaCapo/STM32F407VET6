@@ -17,6 +17,7 @@
             .remove_dot()\n
             .add_series(lv_color_hex(0x34e6ff));\n
     cursor=chart_screen_chart_1.add_cursor(lv_color_hex(0xfffb00),LV_DIR_ALL);\n
+    scale_screen_scale_1.border_opa(0)   //如果有标尺的话  \n
  *
  */
 class Chart : public Widget<Chart>

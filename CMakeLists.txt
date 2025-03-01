@@ -34,7 +34,9 @@ include(cmake/structure/projects.cmake)
 add_executable(${PROJECT_NAME}.elf ${SOURCES}
         Adapter/GUI/Component/inc/roller.hpp
         Adapter/GUI/Component/inc/dropdown.hpp
-        Adapter/GUI/Render/WaveDraw.hpp)
+        Adapter/GUI/Render/WaveDraw.hpp
+        Adapter/GUI/Component/inc/scale.hpp
+        Adapter/GUI/Component/src/scale.cpp)
 
 
 # 导入模块

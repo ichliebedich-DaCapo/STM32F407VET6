@@ -58,6 +58,7 @@ def get_widget_info(create_line):
         "lv_roller_create": ['roller', 'Roller'],
         "lv_slider_create": ['slider', 'Slider'],
         "lv_dropdown_create": ['dropdown', 'Dropdown'],
+        "lv_scale_create": ['scale', 'Scale'],
     }
     for func, widget_info in widget_map.items():
         if func in create_line:
@@ -583,7 +584,72 @@ function_handlers = {
             'handler': None
         }
     },
-
+    # 不存在缺省参数
+    'lv_scale_set_mode': {
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'mode',
+            'handler': None
+        }
+    },
+    # 不存在缺省参数
+    'lv_scale_set_total_tick_count': {
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'total_tick_count',
+            'handler': None
+        }
+    },
+    # 不存在缺省参数
+    'lv_scale_set_major_tick_every': {
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'major_tick_every',
+            'handler': None
+        }
+    },
+    # 全缺省可免调用
+    'lv_scale_set_label_show': {
+        'args_map': ['true'],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': None,
+            'default': 'label_show',
+            'handler': None
+        }
+    },
+    # 不存在缺省参数
+    'lv_scale_set_range': {
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'range',
+            'handler': None
+        }
+    },
+    # 全缺省可免调用
+    'lv_scale_set_post_draw': {
+        'args_map': ['true'],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': None,
+            'default': 'post_draw',
+            'handler': None
+        }
+    },
 }
 
 
@@ -719,6 +785,8 @@ def convert_style_calls(func_name, args, is_static_cast=False, is_font_custom=Fa
         ['text_font', '', 'font'],
         ['text_line_space', "0"],
         ['text_align', 'LV_TEXT_ALIGN_LEFT'],
+        ['line_opa', "255"],
+        ['line_rounded', "true"],
         ['bg_opa', "255"],
         ['pad_top', "0"],
         ['pad_right', "0"],
