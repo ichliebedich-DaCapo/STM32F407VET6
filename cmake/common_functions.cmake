@@ -58,6 +58,11 @@ macro(options_enable_DMA_FSMC)
     set(DMA_FSMC_ENABLE ON CACHE INTERNAL "DMA FSMC option")
 endmacro()
 
+# 开启dma加速usart
+macro(options_enable_DMA_USART)
+    set(DMA_USART_ENABLE ON CACHE INTERNAL "DMA USART option")
+endmacro()
+
 # 开启SD卡SPI模式
 macro(options_enable_SD_SPI)
     set(SD_SPI_ENABLE ON CACHE INTERNAL "SD SPI option")

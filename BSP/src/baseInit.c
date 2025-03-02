@@ -6,6 +6,7 @@
 #include "baseInit.h"
 #include "fsmc.h"
 #include "spi.h"
+#include "usart.h"
 #include "rcc.h"
 
 #ifdef GUI_ENABLE
@@ -53,6 +54,8 @@ void BaseInit()
     fsmc_dma_init();// 初始化FSMC+DMA
 #endif
 
+
+    usart1_init();
 #ifdef DMA_SPI_ENABLE
     spi2_dma_Init();// 初始化SPI+DMA
 #endif

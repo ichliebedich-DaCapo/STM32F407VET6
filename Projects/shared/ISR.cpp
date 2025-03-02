@@ -147,7 +147,39 @@ void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
     }
 #endif
 }
+extern UART_HandleTypeDef  huart1;
+extern uint8_t UartRxData;
+extern uint8_t UartRxFlag;
+extern uint8_t UartIntRxbuf[500];
+extern uint8_t UartRxIndex;
+extern  void UART_RecvDealwith();
+//串口1在1字节接收完成回调函数
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
 
+    if(huart==&huart1)//判断是否串口1
+    {
+        UartRxFlag=0x55;//接收标志置位
+        UartIntRxbuf[UartRxIndex]=UartRxData;//数据写入缓冲区
+        UartRxIndex++;//记载数目加1
+        if(UartRxIndex>=500)//缓冲区是500字节，如果存满，归零
+        {
+            UartRxIndex=0;
+        }
+        HAL_UART_Receive_IT(&huart1,(unsigned char*)&UartRxData,1);//继续接收下一字节
+    }
+
+}
+void SysTick_Handler(void)
+{
+    /* USER CODE BEGIN SysTick_IRQn 0 */
+
+    /* USER CODE END SysTick_IRQn 0 */
+    HAL_IncTick();
+    /* USER CODE BEGIN SysTick_IRQn 1 */
+    UART_RecvDealwith();
+    /* USER CODE END SysTick_IRQn 1 */
+}
 
 /* USER CODE BEGIN Header */
 /**

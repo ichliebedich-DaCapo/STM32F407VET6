@@ -13,6 +13,7 @@ set(BSP_DRIVERS
         "debug:"
         "delay:timer"
         "esp8266:"
+        "esp_8266:"
         "fatfs:sd_spi"
         "fsmc:hal_sram,hal_dma"
         "i2c:hal_i2c"

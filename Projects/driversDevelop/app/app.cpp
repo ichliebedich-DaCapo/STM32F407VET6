@@ -27,7 +27,11 @@
 #include "debug.h"
 #include "spi.h"
 #include "fatfs.h"
+#include "esp8266.h"
+#include "usart.h"
+#include "tcp.h"
 #include "stm32f4xx_hal.h"
+
 import async_delay;
 #include <cstdio>
 
@@ -54,12 +58,20 @@ uint32_t SD_multiBlockTest_Status = 168;
 
 const uint16_t color[120 * 120] = {};
 
+// tcp测试变量
+extern UART_HandleTypeDef  huart1;
+volatile uint8_t UartRxData;
+
+
 void app_init()
 {
     adc1_temperature_sensor_init();
     RNG_Init();
     ITM_Init();
     delay_Init();
+
+    HAL_UART_Receive_IT(&huart1,(unsigned char*)&UartRxData,1);//串口接收
+    ESP8266_Init();
 
     GPIO_InitTypeDef GPIO_InitStruct = {0};
     GPIO_InitStruct.Pin = GPIO_PIN_4;
@@ -72,7 +84,6 @@ void app_init()
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
 
 #ifdef SD_SPI_ENABLE
-    //
         disk_init_Status=fatfs_init(0);
 #endif
 
@@ -140,6 +151,10 @@ void key_handler()
             break;
 
         case keyK6:
+
+                ESP8266_STA_TCPClient_Test();//测试TCP通讯
+            __BKPT(1);
+
             break;
 
         case keyK7:
