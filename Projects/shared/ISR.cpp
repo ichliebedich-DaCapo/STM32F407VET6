@@ -151,7 +151,7 @@ extern UART_HandleTypeDef  huart1;
 extern uint8_t UartRxData;
 extern uint8_t UartRxFlag;
 extern uint8_t UartIntRxbuf[500];
-extern uint8_t UartRxIndex;
+extern uint16_t UartRxIndex;
 extern  void UART_RecvDealwith();
 //串口1在1字节接收完成回调函数
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
@@ -177,7 +177,7 @@ void SysTick_Handler(void)
     /* USER CODE END SysTick_IRQn 0 */
     HAL_IncTick();
     /* USER CODE BEGIN SysTick_IRQn 1 */
-    UART_RecvDealwith();
+//    UART_RecvDealwith();
     /* USER CODE END SysTick_IRQn 1 */
 }
 

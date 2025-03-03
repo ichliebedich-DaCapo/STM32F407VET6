@@ -67,21 +67,21 @@ void app_init()
 {
     adc1_temperature_sensor_init();
     RNG_Init();
-    ITM_Init();
     delay_Init();
-
+    usart1_init();
     HAL_UART_Receive_IT(&huart1,(unsigned char*)&UartRxData,1);//串口接收
-    ESP8266_Init();
+//    ESP8266_Init();
 
-    GPIO_InitTypeDef GPIO_InitStruct = {0};
-    GPIO_InitStruct.Pin = GPIO_PIN_4;
-    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
-    HAL_Delay(10);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
-    HAL_Delay(50);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
+//    与FPGA通信代码
+//    GPIO_InitTypeDef GPIO_InitStruct = {0};
+//    GPIO_InitStruct.Pin = GPIO_PIN_4;
+//    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+//    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+//    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
+//    HAL_Delay(10);
+//    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
+//    HAL_Delay(50);
+//    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
 
 #ifdef SD_SPI_ENABLE
         disk_init_Status=fatfs_init(0);
@@ -151,9 +151,11 @@ void key_handler()
             break;
 
         case keyK6:
-
+            while (1)
+            {
                 ESP8266_STA_TCPClient_Test();//测试TCP通讯
-            __BKPT(1);
+            }
+            __BKPT(6);
 
             break;
 

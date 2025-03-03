@@ -4,7 +4,6 @@ set_bsp_components(
         delay
         adc
         rng
-        debug
         sd_spi
         spi
         fatfs

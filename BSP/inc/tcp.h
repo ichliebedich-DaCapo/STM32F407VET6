@@ -8,8 +8,8 @@ extern "C" {
 *以下参数需要用户自行修改才能测试用过
 */
 
-#define User_ESP8266_SSID     "CMCC-DAX7"          //wifi名
-#define User_ESP8266_PWD      "13588084246"      //wifi密码
+#define User_ESP8266_SSID     "WWW"          //wifi名
+#define User_ESP8266_PWD      "66666666"      //wifi密码
 
 #define User_ESP8266_TCPServer_IP     "192.168.203.1"     //服务器IP
 #define User_ESP8266_TCPServer_PORT   "8888"      //服务器端口号

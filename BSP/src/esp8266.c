@@ -11,7 +11,7 @@ extern UART_HandleTypeDef huart1;
 uint8_t UartTxbuf[500]={1,2,3,4,5,6,7,8,9,10};
 uint8_t UartRxFlag;
 uint8_t UartIntRxbuf[500];
-uint8_t UartRxIndex=0;
+uint16_t UartRxIndex=0;
 uint8_t UartRxOKFlag;
 uint8_t UartIntRxLen;
 uint8_t UartRxTimer;
@@ -56,14 +56,15 @@ void ESP8266_Init(void)
 //返回1发送成功， 0失败
 bool ESP8266_Send_AT_Cmd(char *cmd,char *ack1,char *ack2,u32 time)
 {
-//    UartRecv_Clear(); //重新接收新的数据包
-    ESP8266_USART("%s\r\n", cmd);
+//重新接收新的数据包
+    printf("%s\r\n", cmd);
     if(ack1==0&&ack2==0)     //不需要接收数据
     {
         return true;
     }
     HAL_Delay(time);   //延时
     HAL_Delay(2000);
+
     if(Uart_RecvFlag()==1)
     {
         UartRxbuf[UartRxLen]='\0';
@@ -97,7 +98,7 @@ void ESP8266_AT_Test(void)
 {
     char count=0;
     HAL_Delay(1000);
-    while(count < 10)
+    while(count < 5)
     {
         if(ESP8266_Send_AT_Cmd("AT+RESTORE","OK",NULL,500))
         {
@@ -509,7 +510,8 @@ uint8_t Uart_RecvFlag(void)
         return 1;
     }
     return 0;
-}//1ms调用一次，用来判断是否收完一帧
+}
+//1ms调用一次，用来判断是否收完一帧
 void UART_RecvDealwith(void)
 {
     if(UartRxFlag==0x55)

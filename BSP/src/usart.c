@@ -180,6 +180,31 @@ void USART1_IRQHandler(void)
     HAL_UART_IRQHandler(&huart1);
 
 }
+
+
+
+// gcc专用重定向
+#ifdef __GNUC__
+
+int _write(int fd, char *ptr, int len)
+{
+  HAL_UART_Transmit(&huart1, (uint8_t*)ptr, len, 0xFFFF);
+    return len;
+}
+#else
+int fputc(int ch, FILE *f)
+
+{
+    while(1){}
+      HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xffff);
+//    while( __HAL_UART_GET_FLAG(&huart1, UART_FLAG_TXE)==RESET);
+//    huart1.Instance->DR=ch;
+
+  return ch;
+
+}
+
+#endif
 //void USART2_IRQHandler(void)
 //{
 //
@@ -200,28 +225,7 @@ void USART1_IRQHandler(void)
 //
 //}
 //
-////int fputc(int ch, FILE *f)
-////
-////{
-////    while(1){}
-////      HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xffff);
-//////    while( __HAL_UART_GET_FLAG(&huart1, UART_FLAG_TXE)==RESET);
-//////    huart1.Instance->DR=ch;
-////
-////  return ch;
-////
-////}
-//
-//// gcc专用重定向
-////#ifdef __GNUC__
-////
-////int _write(int fd, char *ptr, int len)
-////{
-////  HAL_UART_Transmit(&huart1, (uint8_t*)ptr, len, 0xFFFF);
-////    return len;
-////}
-////
-////#endif
+
 //
 //
 //#define USB_Huart huart1			//修改为所用串口
@@ -258,18 +262,18 @@ void USART1_IRQHandler(void)
 //
 //}
 //
-////到USARTx_IRQHandler中添加，如:
-////void USART1_IRQHandler(void)
-////{
-////  /* USER CODE BEGIN USART1_IRQn 0 */
-////  if(__HAL_UART_GET_FLAG(&USB_Huart,UART_FLAG_IDLE))
-////  {
-////	  HAL_UART_IdleCallback(&USB_Huart);
-////  }
-////
-////  /* USER CODE END USART1_IRQn 0 */
-////  HAL_UART_IRQHandler(&huartx);
-////}
+//到USARTx_IRQHandler中添加，如:
+//void USART1_IRQHandler(void)
+//{
+//  /* USER CODE BEGIN USART1_IRQn 0 */
+//  if(__HAL_UART_GET_FLAG(&USB_Huart,UART_FLAG_IDLE))
+//  {
+//	  HAL_UART_IdleCallback(&USB_Huart);
+//  }
+//
+//  /* USER CODE END USART1_IRQn 0 */
+//  HAL_UART_IRQHandler(&huartx);
+//}
 //void HAL_UART_IdleCallback(UART_HandleTypeDef *huart)
 //{
 //    __HAL_UART_CLEAR_IDLEFLAG(huart);
