@@ -8,12 +8,15 @@ extern uint8_t Uart_RecvFlag(void);
 
 void ESP8266_STA_TCPClient_Test(void)
 {
-    unsigned char res;
+//    ESP8266_Send_AT_Cmd ( "ATE1", "OK", "no change", 2500);
+//    ESP8266_Send_AT_Cmd ( "AT", "OK", "no change", 2500);
 
+
+    unsigned char res;
     char str[100]={0};
     ESP8266_AT_Test();
-//    ESP8266_Send_AT_Cmd("AT+RESTORE","OK",NULL,500);
     HAL_Delay(1000);
+    ESP8266_Send_AT_Cmd("ATE1", "OK", "no change", 2500);
     ESP8266_Net_Mode_Choose(STA);
     while(!ESP8266_JoinAP(User_ESP8266_SSID, User_ESP8266_PWD));//运行到这就连上热点了
 

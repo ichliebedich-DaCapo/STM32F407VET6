@@ -70,7 +70,7 @@ void app_init()
     delay_Init();
     usart1_init();
     HAL_UART_Receive_IT(&huart1,(unsigned char*)&UartRxData,1);//串口接收
-//    ESP8266_Init();
+    ESP8266_Init();
 
 //    与FPGA通信代码
 //    GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -160,6 +160,7 @@ void key_handler()
             break;
 
         case keyK7:
+            ESP8266_Rst();
             break;
 
         case keyK8:

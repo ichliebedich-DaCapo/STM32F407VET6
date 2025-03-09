@@ -30,14 +30,11 @@
     <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../BSP/inc/tcp.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/inc/tcp.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../BSP/src/baseInit.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/baseInit.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../BSP/src/esp8266.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/esp8266.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../BSP/src/tcp.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/tcp.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../BSP/src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/usart.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/app/app.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/project_config.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,6 +154,9 @@
       <workItem from="1740834057368" duration="4749000" />
       <workItem from="1740902603893" duration="1805000" />
       <workItem from="1741006105422" duration="596000" />
+      <workItem from="1741097305794" duration="9000" />
+      <workItem from="1741433857133" duration="607000" />
+      <workItem from="1741489173717" duration="2000" />
     </task>
     <servers />
   </component>
