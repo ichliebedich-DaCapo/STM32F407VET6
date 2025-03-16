@@ -33,14 +33,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】 可以连接热点，但esp8266一直向tcp发送数据">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】 准备做电赛练习，存个档">
+      <change afterPath="$PROJECT_DIR$/Projects/SignalDistortionMeasurement/project_config.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/tcp.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/tcp.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/usart.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/inc/fft.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/inc/fft.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1676,7 +1674,7 @@
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;DV&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Program/stm32/STM32F407VET6/Resource/STM32F4_svd/STM32F4_svd_V2.0/STM32F407.svd&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Program/stm32/STM32F407VET6/Projects/SignalDistortionMeasurement&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -1690,6 +1688,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Program\stm32\STM32F407VET6\Projects\SignalDistortionMeasurement" />
       <recent name="D:\Program\stm32\STM32F407VET6\GUI\UI\driversDevelop" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -1746,8 +1745,8 @@
     </configuration>
     <list>
       <item itemvalue="CMake 应用程序.libalgorithm" />
-      <item itemvalue="Python.convert_lvgl" />
       <item itemvalue="OpenOCD 下载并运行.OCD Furina" />
+      <item itemvalue="Python.convert_lvgl" />
     </list>
     <recent_temporary>
       <list>
@@ -2018,15 +2017,8 @@
       <workItem from="1741006101640" duration="12116000" />
       <workItem from="1741097292007" duration="7553000" />
       <workItem from="1741433844970" duration="1373000" />
-      <workItem from="1741489187328" duration="1000" />
-    </task>
-    <task id="LOCAL-00087" summary="【驱动开发】touch_init没有问题，测试成功（不要从init里返回值到app.cpp中，直接在key_handler中测试；寄存器0x00到0x0E是坑，不是0xFF）">
-      <option name="closed" value="true" />
-      <created>1738851248385</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1738851248385</updated>
+      <workItem from="1741489187328" duration="4127000" />
+      <workItem from="1742089531816" duration="5921000" />
     </task>
     <task id="LOCAL-00088" summary="【驱动开发】触碰点数量检测成功">
       <option name="closed" value="true" />
@@ -2412,7 +2404,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741018377853</updated>
     </task>
-    <option name="localTasksCounter" value="136" />
+    <task id="LOCAL-00136" summary="【驱动开发】 准备做电赛练习，存个档">
+      <option name="closed" value="true" />
+      <created>1741489274714</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1741489274715</updated>
+    </task>
+    <option name="localTasksCounter" value="137" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2447,7 +2447,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】把回调函数塞在了ISR里，注册机制通通删掉了，GUI与硬件再次隔离开" />
     <MESSAGE value="【驱动开发】SPI+DMA帧率再次提升，原先方法2是正解，RGB565前8位后8位颠倒问题存在但影响不大，lcd_init中LCD_Clear不能删（未知）" />
     <MESSAGE value="【驱动开发】存个档，解决cmake白屏问题" />
     <MESSAGE value="【驱动开发】不白屏了，再试试创建新的BSP" />
@@ -2472,7 +2471,8 @@
     <MESSAGE value="【驱动开发】新增scale坐标系，只有y轴情况下又降了一帧，也许可以想个办法单纯画个坐标轴,不占用资源" />
     <MESSAGE value="【驱动开发】 完善tcp和esp8266 测试失败" />
     <MESSAGE value="【驱动开发】 可以连接热点，但esp8266一直向tcp发送数据" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】 可以连接热点，但esp8266一直向tcp发送数据" />
+    <MESSAGE value="【驱动开发】 准备做电赛练习，存个档" />
+    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】 准备做电赛练习，存个档" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

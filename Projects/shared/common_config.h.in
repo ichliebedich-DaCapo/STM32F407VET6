@@ -52,6 +52,7 @@
 #cmakedefine SD_SPI_ENABLE
 #cmakedefine LCD_8080_PORT_ENABLE
 #cmakedefine LCD_SPI_PORT_ENABLE
+#cmakedefine FFT_ENABLE
 
 #define SECTION(name) __attribute__((section(name)))
 

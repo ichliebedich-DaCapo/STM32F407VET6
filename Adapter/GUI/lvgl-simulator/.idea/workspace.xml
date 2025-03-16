@@ -28,13 +28,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../Projects/SignalDistortionMeasurement/project_config.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../BSP/src/tcp.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/tcp.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../BSP/src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/usart.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/app/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/project_config.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Algorithm/inc/fft.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Algorithm/inc/fft.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../CMakeLists.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +154,8 @@
       <workItem from="1741006105422" duration="596000" />
       <workItem from="1741097305794" duration="9000" />
       <workItem from="1741433857133" duration="607000" />
-      <workItem from="1741489173717" duration="2000" />
+      <workItem from="1741489173717" duration="610000" />
+      <workItem from="1742089535455" duration="596000" />
     </task>
     <servers />
   </component>

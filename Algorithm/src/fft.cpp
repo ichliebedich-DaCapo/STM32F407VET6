@@ -5,7 +5,7 @@
 #include "fft.hpp"
 
 
-#ifdef USE_FFT
+#ifdef FFT_ENABLE
 
 //auto FFT_Calculation::FFT_Calculate(float *DATA, int num, int N) -> float
 //{
@@ -16,22 +16,22 @@
 ////    arm_cmplx_mag_f32(inputArray, outputArray, NUM_SAMPLES / 2);
 ////    return array_arm_cmplx_mag[N];
 //}
-//
-//
+
+
 ////计算失真度
 //void THD() {
-////    thd_basic = fft_outputbuf[10];
-////
-////    u[0] = fft_outputbuf[20];
-////    u[1] = fft_outputbuf[30];
-////    u[2] = fft_outputbuf[40];
-////    u[3] = fft_outputbuf[50];
-////    u[4] = fft_outputbuf[60];
-////
-////    arm_power_f32(u, 4, &sum);
-////    arm_sqrt_f32(sum, &thd_high);
-////
-////    thd = thd_high / thd_basic;
+//    thd_basic = fft_outputbuf[10];
+//
+//    u[0] = fft_outputbuf[20];
+//    u[1] = fft_outputbuf[30];
+//    u[2] = fft_outputbuf[40];
+//    u[3] = fft_outputbuf[50];
+//    u[4] = fft_outputbuf[60];
+//
+//    arm_power_f32(u, 4, &sum);
+//    arm_sqrt_f32(sum, &thd_high);
+//
+//    thd = thd_high / thd_basic;
 //}
 
 #endif

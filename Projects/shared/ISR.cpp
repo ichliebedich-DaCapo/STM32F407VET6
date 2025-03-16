@@ -147,6 +147,7 @@ void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
     }
 #endif
 }
+#ifdef DMA_USART_ENABLE
 extern UART_HandleTypeDef  huart1;
 extern uint8_t UartRxData;
 extern uint8_t UartRxFlag;
@@ -170,6 +171,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     }
 
 }
+#endif
 void SysTick_Handler(void)
 {
     /* USER CODE BEGIN SysTick_IRQn 0 */
