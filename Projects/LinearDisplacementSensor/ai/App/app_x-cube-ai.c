@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -31,7 +31,7 @@
   *       [1] %X_CUBE_AI_DIR%/Documentation/index.html
   *
   *   X_CUBE_AI_DIR indicates the location where the X-CUBE-AI pack is installed
-  *   typical : C:\Users\<user_name>\STM32Cube\Repository\STMicroelectronics\X-CUBE-AI\7.1.0
+  *   typical : C:\Users\[user_name]\STM32Cube\Repository\STMicroelectronics\X-CUBE-AI\7.1.0
   */
 
 #ifdef __cplusplus
@@ -52,7 +52,7 @@
 #include <string.h>
 
 #include "app_x-cube-ai.h"
-
+#include "main.h"
 #include "ai_datatypes_defines.h"
 #include "network.h"
 #include "network_data.h"
@@ -198,14 +198,39 @@ int post_process(ai_i8* data[])
 
 void MX_X_CUBE_AI_Init(void)
 {
-    ai_boostrap(data_activations0);
+    /* USER CODE BEGIN 5 */
+  printf("\r\nTEMPLATE - initialization\r\n");
+
+  ai_boostrap(data_activations0);
+    /* USER CODE END 5 */
 }
 
-float process_data_float(float input)
+void MX_X_CUBE_AI_Process(void)
 {
-    *(float *)data_ins[0]=input;
-    ai_run();
-    return *(float *)data_outs[0];
+    /* USER CODE BEGIN 6 */
+  int res = -1;
+
+  printf("TEMPLATE - run - main loop\r\n");
+
+  if (network) {
+
+    do {
+      /* 1 - acquire and pre-process input data */
+      res = acquire_and_process_data(data_ins);
+      /* 2 - process the data - call inference engine */
+      if (res == 0)
+        res = ai_run();
+      /* 3- post-process the predictions */
+      if (res == 0)
+        res = post_process(data_outs);
+    } while (res==0);
+  }
+
+  if (res) {
+    ai_error err = {AI_ERROR_INVALID_STATE, AI_ERROR_CODE_NETWORK};
+    ai_log_err(err, "Process has FAILED");
+  }
+    /* USER CODE END 6 */
 }
 #ifdef __cplusplus
 }

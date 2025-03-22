@@ -2,12 +2,12 @@
   ******************************************************************************
   * @file    network.h
   * @author  AST Embedded Analytics Research Platform
-  * @date    2024-11-20T13:59:46+0800
+  * @date    2025-03-22T22:08:44+0800
   * @brief   AI Tool Automatic Code Generator for Embedded NN computing
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -23,7 +23,7 @@
 
 /******************************************************************************/
 #define AI_NETWORK_MODEL_NAME          "network"
-#define AI_NETWORK_ORIGIN_MODEL_NAME   "stm32_model"
+#define AI_NETWORK_ORIGIN_MODEL_NAME   "number_classifier"
 
 /******************************************************************************/
 #define AI_NETWORK_ACTIVATIONS_ALIGNMENT   (4)
@@ -67,7 +67,7 @@ AI_DEPRECATED
 #define AI_NETWORK_OUT_1_SIZE_BYTES  (4)
 
 /******************************************************************************/
-#define AI_NETWORK_N_NODES (6)
+#define AI_NETWORK_N_NODES (8)
 
 
 AI_API_DECLARE_BEGIN

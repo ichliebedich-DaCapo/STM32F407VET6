@@ -13,7 +13,7 @@ extern "C" {
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -32,4 +32,4 @@ void MX_X_CUBE_AI_Process(void);
 #ifdef __cplusplus
 }
 #endif
-#endif /*__STMicroelectronics_X-CUBE-AI_9_1_0_H */
+#endif /*__STMicroelectronics_X-CUBE-AI_10_0_0_H */
