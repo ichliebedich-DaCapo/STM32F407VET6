@@ -14,57 +14,68 @@
 #include<app_x-cube-ai.h>
 extern UART_HandleTypeDef huart1;
 uint8_t rxBuffer[1];
+#include<debug.h>
 void app_init()
 {
-   adc1_init(ADC_CHANNEL_0);
-   timer2_init(FREQ_84M_to_200);
-   usart1_init();
-   HAL_UART_Receive_IT(&huart1, rxBuffer, 1);
+    // adc1_init(ADC_CHANNEL_0);
+    // timer2_init(FREQ_84M_to_200);
+    // usart1_init();
+    // HAL_UART_Receive_IT(&huart1, rxBuffer, 1);
+    ITM_Init();
 
     // AI初始化
     MX_X_CUBE_AI_Init();
+
 }
 
 void key_handler()
 {
-    static float temp =0;
-    volatile static float temp_out[10];
     switch (PlatformKey::getCode())
     {
         case keyK0:
-            for (int i=0;i<10;++i)
-            {
-                temp_out[i] = ai_process_data(temp);
-                temp +=0.3;
-            }
+
             break;
 
         case keyK1:
+
             break;
         default:
             break;
-
     }
 }
+
+static float temp;
+void background_handler()
+{
+    temp += 0.6;
+    HAL_Delay(100);
+    const float out = ai_process_data(temp);
+    printf("in:%f\tout:%f\r\n",temp, out);
+    if (temp>=100)
+        temp = 0;
+
+}
+
 /**实现中断服务例程*/
 // 用于采集ADC数据
-void adc1_isr() {
+void adc1_isr()
+{
     // 获取ADC值
     uint16_t adcValue = get_ADC1_value(ADC_CHANNEL_0);
     // 打印ADC值
     //printf("%f\r\n", (4095-adcValue) / 4095.0f * 3.3 * 5 / 3.3);//方案1：传输给单片机处理 真实电压*电压密度=长度
-//    printf("%d\r\n", adcValue);//方案2：传输给上位机处理
+    //    printf("%d\r\n", adcValue);//方案2：传输给上位机处理
     printf("%f\r\n", adcValue / 4095.0f * 3.3);
 }
 
 /*实现串口的接收完成中断回调函数*/
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-    if (huart->Instance == USART1)
-    {
-        // 启动接收中断
-        HAL_UART_Transmit(&huart1, rxBuffer, 1, 100);
-        //重新开始
-        HAL_UART_Receive_IT(&huart1, rxBuffer, 1);
-    }
-}
+// void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+// {
+//     if (huart->Instance == USART1)
+//     {
+//         // 启动接收中断
+//         HAL_UART_Transmit(&huart1, rxBuffer, 1, 100);
+//         //重新开始
+//         HAL_UART_Receive_IT(&huart1, rxBuffer, 1);
+//     }
+// }

@@ -1,8 +1,8 @@
 set_bsp_components(
         adc
         dac
-        usart
         delay
+        debug
 )
 
 options_disable_GUI()
