@@ -33,12 +33,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【驱动开发】 准备做电赛练习，存个档">
-      <change afterPath="$PROJECT_DIR$/Projects/SignalDistortionMeasurement/project_config.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【THD测量仪】 完善算法中的fft模块中">
       <change beforePath="$PROJECT_DIR$/Algorithm/inc/fft.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/inc/fft.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/src/fft.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/src/fft.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1700,6 +1697,11 @@
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="libalgorithm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libalgorithm" CONFIG_NAME="Release-MinGW_ARM">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -2019,14 +2021,7 @@
       <workItem from="1741433844970" duration="1373000" />
       <workItem from="1741489187328" duration="4127000" />
       <workItem from="1742089531816" duration="5921000" />
-    </task>
-    <task id="LOCAL-00088" summary="【驱动开发】触碰点数量检测成功">
-      <option name="closed" value="true" />
-      <created>1738853720068</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1738853720069</updated>
+      <workItem from="1742095500887" duration="8232000" />
     </task>
     <task id="LOCAL-00089" summary="【驱动开发】修正复位时序用的延时函数">
       <option name="closed" value="true" />
@@ -2412,7 +2407,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741489274715</updated>
     </task>
-    <option name="localTasksCounter" value="137" />
+    <task id="LOCAL-00137" summary="【THD测量仪】 完善算法中的fft模块中">
+      <option name="closed" value="true" />
+      <created>1742114115215</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL-00137" />
+      <option name="project" value="LOCAL" />
+      <updated>1742114115215</updated>
+    </task>
+    <option name="localTasksCounter" value="138" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2434,7 +2437,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/ZQ" />
+                        <option value="DV" />
                       </list>
                     </value>
                   </entry>
@@ -2447,7 +2450,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】SPI+DMA帧率再次提升，原先方法2是正解，RGB565前8位后8位颠倒问题存在但影响不大，lcd_init中LCD_Clear不能删（未知）" />
     <MESSAGE value="【驱动开发】存个档，解决cmake白屏问题" />
     <MESSAGE value="【驱动开发】不白屏了，再试试创建新的BSP" />
     <MESSAGE value="【驱动开发】能创建新的BSP了，但是一构建stm32f4xx_hal_conf.h里改的就没了" />
@@ -2472,7 +2474,8 @@
     <MESSAGE value="【驱动开发】 完善tcp和esp8266 测试失败" />
     <MESSAGE value="【驱动开发】 可以连接热点，但esp8266一直向tcp发送数据" />
     <MESSAGE value="【驱动开发】 准备做电赛练习，存个档" />
-    <option name="LAST_COMMIT_MESSAGE" value="【驱动开发】 准备做电赛练习，存个档" />
+    <MESSAGE value="【THD测量仪】 完善算法中的fft模块中" />
+    <option name="LAST_COMMIT_MESSAGE" value="【THD测量仪】 完善算法中的fft模块中" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

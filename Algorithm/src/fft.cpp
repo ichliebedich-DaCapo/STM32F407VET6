@@ -17,7 +17,6 @@
 ////    return array_arm_cmplx_mag[N];
 //}
 
-
 ////计算失真度
 //void THD() {
 //    thd_basic = fft_outputbuf[10];

@@ -28,11 +28,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/../../../Projects/SignalDistortionMeasurement/project_config.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Algorithm/inc/fft.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Algorithm/inc/fft.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Algorithm/src/fft.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Algorithm/src/fft.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,7 +153,8 @@
       <workItem from="1741097305794" duration="9000" />
       <workItem from="1741433857133" duration="607000" />
       <workItem from="1741489173717" duration="610000" />
-      <workItem from="1742089535455" duration="596000" />
+      <workItem from="1742089535455" duration="635000" />
+      <workItem from="1742657068395" duration="2000" />
     </task>
     <servers />
   </component>
