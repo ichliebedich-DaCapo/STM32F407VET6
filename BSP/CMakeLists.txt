@@ -110,4 +110,4 @@ configure_file(
         ${DRIVERS_DIR}/stm32f4xx_hal_conf.h
 )
 
-message(STATUS "BSP_SRCS--:${BSP_SRCS}")
+#message(STATUS "BSP_SRCS--:${BSP_SRCS}")

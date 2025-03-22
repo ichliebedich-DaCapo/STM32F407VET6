@@ -1,10 +1,6 @@
 
 # -------------------------------Projects层--------------------------------
-# ---------------------App--------------------
-file(GLOB_RECURSE APP_SRCS "${APP_DIR}/*.cpp" "${PROJECTS_DIR}/shared/*.cpp")
-set(APP_INC_DIRS ${APP_DIR} ${PROJECTS_DIR}/shared)
-
-
+# ------------------------生成配置文件--------------------------
 # 生成公共宏定义配置头文件
 configure_file(
         ${PROJECTS_DIR}/shared/common_config.h.in
@@ -16,23 +12,12 @@ configure_file(
         ${INC_DIR}/project_config.h
 )
 
+# ---------------------App--------------------
+set(APP_INC_DIRS ${APP_DIR} ${PROJECTS_DIR}/shared ${AI_DIR} ${AI_DIR}/App)
 
-# ----------------------------------app库-------------------------
-add_library(libapp STATIC ${APP_SRCS})
-target_include_directories(libapp PUBLIC ${APP_INC_DIRS})
-# ----------------Adapter层-----------------
-if (GUI_ENABLE)
-    target_link_libraries(libapp PUBLIC libgui)
-endif ()
-if (AI_ENABLE)
-    target_link_libraries(libapp PUBLIC libai)
-endif ()
-# ------------------Middle层------------------
-# 部分算法库不需要给Adapter作适配
-target_link_libraries(libapp PUBLIC libdata libdsp)
-# -----------------Algorithm层-----------------
-target_link_libraries(libapp PUBLIC libbsp libalgorithm)
-set_target_properties(libapp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+file(GLOB_RECURSE APP_SRCS "${TARGET_PROJECT_DIR}/*.cpp" "${TARGET_PROJECT_DIR}/*.c" "${PROJECTS_DIR}/shared/*.cpp")
+
+
 
 
 # ----------------------------包含所有目录和资源文件--------------------------
@@ -70,6 +55,7 @@ set(ALL_SRCS
 
 # 静态库的设计思路应是不常改的给封装为库，其他文件全部添加到ALL_SRCS
 if (STATIC_LIB_LD)
+
     set(SOURCES ${CORE_SRCS})
     include_directories(${INC_DIR})
 else ()
@@ -77,5 +63,22 @@ else ()
     include_directories(${ALL_INC_DIRS})
     set(SOURCES ${ALL_SRCS})
 endif ()
-message(STATUS "SOURCES: ${SOURCES}")
+
+
+## ----------------------------------app库-------------------------
+#add_library(libapp STATIC ${APP_SRCS})
+#target_include_directories(libapp PUBLIC ${APP_INC_DIRS})
+## ----------------Adapter层-----------------
+#if (GUI_ENABLE)
+#    target_link_libraries(libapp PUBLIC libgui)
+#endif ()
+#
+#
+#
+## ------------------Middle层------------------
+## 算法库不需要给Adapter作适配
+#target_link_libraries(libapp PUBLIC libdata libdsp)
+## -----------------Algorithm层-----------------
+#target_link_libraries(libapp PUBLIC libbsp libalgorithm)
+#set_target_properties(libapp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 

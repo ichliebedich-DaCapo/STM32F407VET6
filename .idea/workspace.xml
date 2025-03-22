@@ -1,188 +1,180 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BackendCodeEditorMiscSettings">
     <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexRemoved" />
+    <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="260" type="long" />
+  </component>
+  <component name="CMakePresetLoader"><![CDATA[{
+  "useNewFormat": true
+}]]></component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated>
+      <config projectName="Furina" targetName="libalgorithm" />
+      <config projectName="Furina" targetName="libdata" />
+      <config projectName="Furina" targetName="Furina.elf" />
+      <config projectName="Furina" targetName="libbsp" />
+      <config projectName="Furina" targetName="libdsp" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug-w64-i686-arm-none-eabi" ENABLED="true" CONFIG_NAME="Debug" TOOLCHAIN_NAME="w64-i686-arm-none-eabi" BUILD_OPTIONS="-j 16" />
+    </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08356910-3f46-4dc6-93d8-c2f53fcead6c" name="更改" comment="">
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_common_config.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_common_config.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_datatypes.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_datatypes.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_datatypes_defines.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_datatypes_defines.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_datatypes_format.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_datatypes_format.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_datatypes_internal.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_datatypes_internal.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_layer_custom_interface.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_layer_custom_interface.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_lite.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_lite.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_lite_inspect.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_lite_inspect.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_lite_interface.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_lite_interface.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_lite_math_helpers.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_lite_math_helpers.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_math_helpers.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_math_helpers.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_platform.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_platform.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_platform_interface.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/ai_platform_interface.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/core_assert.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/core_assert.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/core_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/core_common.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/core_convert.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/core_convert.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/core_datatypes.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/core_datatypes.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/core_log.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/core_log.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/core_net_inspect.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/core_net_inspect.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/core_net_inspect_interface.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/core_net_inspect_interface.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/core_private.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/core_private.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/datatypes_network.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/datatypes_network.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/formats_list.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/formats_list.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_argminmax.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_argminmax.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_common.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_conv2d.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_conv2d.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_conv2d_dqnn.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_conv2d_dqnn.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_custom.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_custom.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_dense.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_dense.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_dense_dqnn.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_dense_dqnn.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_formats_converters.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_formats_converters.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_generic.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_generic.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_generic_dqnn.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_generic_dqnn.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_list.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_list.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_lite_graph.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_lite_graph.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_ml.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_ml.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_ml_iforest.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_ml_iforest.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_ml_linearclassifier.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_ml_linearclassifier.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_ml_svc.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_ml_svc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_ml_svmregressor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_ml_svmregressor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_ml_treeensembleclassifier.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_ml_treeensembleclassifier.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_ml_treeensembleregressor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_ml_treeensembleregressor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_nl.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_nl.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_norm.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_norm.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_pad_dqnn.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_pad_dqnn.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_pad_generic.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_pad_generic.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_pool.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_pool.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_pool_dqnn.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_pool_dqnn.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_resize.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_resize.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_rnn.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_rnn.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_sm.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_sm.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_upsample.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_upsample.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_upsample_generic.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/layers_upsample_generic.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_argminmax.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_argminmax.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_bn_f32.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_bn_f32.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_bn_integer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_bn_integer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_conv2d.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_conv2d.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_conv2d_dqnn.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_conv2d_dqnn.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_conv2d_sssa8_ch.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_conv2d_sssa8_ch.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_convert_dqnn.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_convert_dqnn.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_dense_if32.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_dense_if32.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_dense_is1.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_dense_is1.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_dense_is1ws1.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_dense_is1ws1.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_dense_is8os1ws1.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_dense_is8os1ws1.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_dense_is8os8ws8.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_dense_is8os8ws8.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_dense_ws1.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_dense_ws1.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_dw.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_dw.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_dw_dqnn.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_dw_dqnn.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_generic_float.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_generic_float.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_gru_f32.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_gru_f32.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_internal_apis.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_internal_apis.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_lstm.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_lstm.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_maxpool_dqnn.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_maxpool_dqnn.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_nl_generic_integer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_nl_generic_integer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_nl_list.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_nl_list.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_norm_f32.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_norm_f32.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_operators.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_operators.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_pad_dqnn.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_pad_dqnn.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_pad_generic.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_pad_generic.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_pool_f32.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_pool_f32.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_pool_is8os8.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_pool_is8os8.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_pw.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_pw.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_pw_dqnn.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_pw_dqnn.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_resize.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_resize.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_upsample.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_upsample.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_upsample_generic.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/lite_upsample_generic.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/stai.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/stai.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/stai_debug.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/stai_debug.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Inc/stai_events.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/Inc/stai_events.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/ST/AI/LICENSE.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/ST/AI/Lib/NetworkRuntime910_CM4_GCC.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Drivers/stm32f4xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Drivers/stm32f4xx_hal_conf.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/app_x-cube-ai.c" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/app_x-cube-ai.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/app_x-cube-ai.h" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/app_x-cube-ai.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/network.c" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/network.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/network.h" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/network.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/network_config.h" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/network_config.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/network_data.c" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/network_data.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/network_data.h" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/network_data.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/network_data_params.c" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/network_data_params.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/network_data_params.h" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/network_data_params.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/network_generate_report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/network_generate_report.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/LICENSE.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/constants_ai.h" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/constants_ai.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/app/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/project_config.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/common_functions.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/common_functions.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/structure/adapter.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/adapter.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/structure/middleware.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/middleware.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/structure/projects.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/projects.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/target_project.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/target_project.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug-w64-i686-arm-none-eabi" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;ichliebedich-DaCapo&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "ichliebedich-DaCapo"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6.git&quot;,
-    &quot;accountId&quot;: &quot;a679c97f-91ee-40eb-8ce5-af8a944aaf79&quot;
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ichliebedich-DaCapo/STM32F407VET6.git",
+    "accountId": "a679c97f-91ee-40eb-8ce5-af8a944aaf79"
   }
-}</component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 8
-}</component>
-  <component name="ProjectId" id="2ug0pT9zzE76MoKfY1kfNqkOODb" />
+}]]></component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2024" />
+    <option name="minorVersion" value="3.4" />
+    <option name="productBranch" value="Classic" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="2ug2KZveHbKlFHJ727AcZzeazyr" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;com.jetbrains.cidr.cpp.cmake.workspace.CMakeCacheInvalidator.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ZQ&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;CMakeSettings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.west.config.association.type.startup.service": "true",
+    "cf.advertisement.text.has.clang-format": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "ZQ",
+    "last_opened_file_path": "E:/Program/Embedded/MCU/STM32",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "E:/Program/Embedded/MCU/STM32/Furina/main.cpp",
+    "settings.editor.selected.configurable": "CMakeSettings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager">
-    <configuration name="未命名" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" nameIsGenerated="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" version="1">
-      <openocd version="1" gdb-port="3333" telnet-port="4444" reset-type="INIT" download-type="UPDATED_ONLY">
+}]]></component>
+  <component name="RunManager" selected="OpenOCD 下载并运行.Furina.elf">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-w64-i686-arm-none-eabi" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libalgorithm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libalgorithm" CONFIG_NAME="Debug-w64-i686-arm-none-eabi">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libbsp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libbsp" CONFIG_NAME="Debug-w64-i686-arm-none-eabi">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libdata" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdata" CONFIG_NAME="Debug-w64-i686-arm-none-eabi">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libdsp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdsp" CONFIG_NAME="Debug-w64-i686-arm-none-eabi">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Furina.elf" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" nameIsGenerated="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-w64-i686-arm-none-eabi" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
+      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="E:\Program\Embedded\MCU\STM32\Furina\Tools\configs\stlink.cfg" reset-type="INIT" download-type="UPDATED_ONLY">
         <debugger kind="GDB" isBundled="true" />
       </openocd>
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="CMake 应用程序.Furina.elf" />
+      <item itemvalue="CMake 应用程序.libalgorithm" />
+      <item itemvalue="CMake 应用程序.libbsp" />
+      <item itemvalue="CMake 应用程序.libdata" />
+      <item itemvalue="CMake 应用程序.libdsp" />
+      <item itemvalue="OpenOCD 下载并运行.Furina.elf" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
-      <changelist id="08356910-3f46-4dc6-93d8-c2f53fcead6c" name="更改" comment="" />
-      <created>1742655094568</created>
+      <changelist id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="" />
+      <created>1742655834702</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1742655094568</updated>
-      <workItem from="1742655097238" duration="26000" />
-      <workItem from="1742655142356" duration="144000" />
+      <updated>1742655834702</updated>
+      <workItem from="1742655838407" duration="9578000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VCPKGProject">
+    <isAutomaticCheckingOnLaunch value="false" />
+    <isAutomaticFoundErrors value="true" />
+    <isAutomaticReloadCMake value="true" />
   </component>
 </project>

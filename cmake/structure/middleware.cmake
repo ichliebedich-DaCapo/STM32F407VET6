@@ -8,7 +8,7 @@ set(THIRD_PARTY_DIR ${MIDDLEWARE_DIR}/Third_Party)
 # 设置ARM_MATH子目录
 set(DSP_DIR ${ARM_MATH_DIR}/DSP)
 # 设置ST子目录
-set(AI_DIR ${ST_DIR}/AI)
+
 # 设置第三方库子目录
 set(FREERTOS_DIR ${THIRD_PARTY_DIR}/FreeRTOS)
 set(LVGL_DIR ${THIRD_PARTY_DIR}/LVGL)
@@ -72,6 +72,7 @@ add_library(libdsp STATIC ${DSP_SRCS})
 target_include_directories(libdsp PUBLIC ${DSP_INC_DIRS})
 # 设置静态库的输出目录
 set_target_properties(libdsp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+
 
 
 # -------------------------------Middleware层------------------------------

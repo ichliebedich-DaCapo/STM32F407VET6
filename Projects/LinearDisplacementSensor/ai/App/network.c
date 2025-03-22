@@ -29,6 +29,10 @@
 
 #include "layers.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 
 #undef AI_NET_OBJ_INSTANCE
@@ -700,7 +704,9 @@ ai_i32 ai_network_forward(ai_handle network, const ai_buffer* input)
   return ai_platform_network_process(network, input, NULL);
 }
 
-
+#ifdef __cplusplus
+}
+#endif
 
 #undef AI_NETWORK_MODEL_SIGNATURE
 #undef AI_NET_OBJ_INSTANCE

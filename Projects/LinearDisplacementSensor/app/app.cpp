@@ -11,7 +11,7 @@
 #include "adc.h"
 #include "key_adapter.hpp"
 #include "usart.h"
-
+#include<app_x-cube-ai.h>
 extern UART_HandleTypeDef huart1;
 uint8_t rxBuffer[1];
 void app_init()
@@ -20,40 +20,27 @@ void app_init()
    timer2_init(FREQ_84M_to_200);
    usart1_init();
    HAL_UART_Receive_IT(&huart1, rxBuffer, 1);
+
+    // AI初始化
+    MX_X_CUBE_AI_Init();
 }
 
 void key_handler()
 {
+    static float temp =0;
+    volatile static float temp_out[10];
     switch (PlatformKey::getCode())
     {
-        case keyK0://开始采集数据
-            if (PlatformKey::handle_state(KEY_STATE_NONE))
+        case keyK0:
+            for (int i=0;i<10;++i)
             {
-                adc1_start_it();
+                temp_out[i] = ai_process_data(temp);
+                temp +=0.3;
             }
-
-//            } else
-//            {
-//                   adc1_stop_it();
-//
-//            }
-
-            break;
-        case keyK1://开始采集数据
-            if (PlatformKey::handle_state(KEY_STATE_NONE))
-            {
-                adc1_stop_it();
-
-            }
-
             break;
 
-
-        case keyK2://开始采集数据
-
-
+        case keyK1:
             break;
-
         default:
             break;
 

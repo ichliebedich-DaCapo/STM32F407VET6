@@ -31,6 +31,7 @@ set(DMA_FSMC_ENABLE OFF CACHE INTERNAL "DMI_FSMC option")
 set(SD_SPI_ENABLE OFF CACHE INTERNAL "SD_SPI option")
 set(LCD_8080_PORT_ENABLE OFF CACHE INTERNAL "LCD_8080_PORT option")
 set(LCD_SPI_PORT_ENABLE OFF CACHE INTERNAL "LCD_SPI_PORT option")
+set(AI_ENABLE OFF CACHE INTERNAL "AI option")
 
 # 关闭GUI
 macro(options_disable_GUI)
@@ -70,6 +71,11 @@ endmacro()
 # 使用LCD SPI接口
 macro(options_enable_LCD_SPI_PORT)
     set(LCD_SPI_PORT_ENABLE ON CACHE INTERNAL "LCD SPI PORT option")
+endmacro()
+
+# 启用AI
+macro(options_enable_AI)
+    set(AI_ENABLE ON CACHE INTERNAL "AI option")
 endmacro()
 
 # ------------不在project_config.h.in中---------------

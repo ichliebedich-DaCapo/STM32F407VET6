@@ -5,7 +5,7 @@ project(Furina LANGUAGES C CXX ASM)
 # --------------------------------------选择你的项目--------------------------------
 # 如果你是在CLion里，那么可以直接在斜杆后面输入首字母，会自动弹出相关项目选项
 
-set(PROJECT_DIR Projects/driversDevelop)
+set(TARGET_PROJECT_DIR Projects/LinearDisplacementSensor)
 
 # 创建test项目目录，其下有ui和app目录，并且各目录下有相应文件
 
@@ -21,7 +21,7 @@ include(cmake/stm32f4xx.cmake)
 include(cmake/structure/core.cmake)
 # 包含HAL驱动库
 include(cmake/structure/bsp.cmake)
-# 包含算法
+# 包含算法层
 include(cmake/structure/algorithm.cmake)
 # 包含中间件
 include(cmake/structure/middleware.cmake)
@@ -32,17 +32,14 @@ include(cmake/structure/projects.cmake)
 
 
 # 定义一个可执行文件目标，生成了 ELF 文件
-add_executable(${PROJECT_NAME}.elf ${SOURCES}
-        Adapter/GUI/Component/inc/roller.hpp
-        Adapter/GUI/Component/inc/dropdown.hpp
-        Adapter/GUI/Render/WaveDraw.hpp)
+add_executable(${PROJECT_NAME}.elf ${SOURCES})
 
 
 # 导入模块
 if (STATIC_LIB_LD)
-        target_sources(libalgorithm PUBLIC
-                FILE_SET CXX_MODULES FILES
-                ${cxx_modules})
+    target_sources(libalgorithm PUBLIC
+            FILE_SET CXX_MODULES FILES
+            ${cxx_modules})
 else ()
     target_sources(${PROJECT_NAME}.elf PUBLIC
             FILE_SET CXX_MODULES FILES
@@ -52,13 +49,16 @@ endif ()
 
 # 是否链接静态库
 if (STATIC_LIB_LD)
+    message(STATUS "[STATIC_LIB]:ON")
     target_link_libraries(${PROJECT_NAME}.elf PRIVATE libapp)
     set_target_properties(${PROJECT_NAME}.elf PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
 endif ()
 
-if (${AI_ENABLE})
-    target_link_libraries(${PROJECT_NAME}.elf INTERFACE :NetworkRuntime910_CM4_GCC.a)
-    target_link_directories(${PROJECT_NAME}.elf INTERFACE Library/ST/AI/Lib)
+if (AI_ENABLE)
+    message(STATUS "[AI]:ON")
+    target_link_directories(${PROJECT_NAME}.elf PRIVATE Middleware/ST/AI/Lib)
+    target_include_directories(${PROJECT_NAME}.elf PUBLIC Middleware/ST/AI/Inc)
+    target_link_libraries(${PROJECT_NAME}.elf PRIVATE :NetworkRuntime1000_CM4_GCC.a)
 endif ()
 
 # 定义hex和bin文件
