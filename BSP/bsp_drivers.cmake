@@ -9,6 +9,7 @@ set(BSP_DRIVERS
         "adc:timer,hal_adc,hal_adc_ex"
         "baseInit:rcc,lcd,hal_tim,key_exit"
         "cpu_runtime:"
+        "crc:hal_crc"
         "dac:hal_dac,timer"
         "debug:"
         "delay:timer"

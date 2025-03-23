@@ -3,6 +3,7 @@ set_bsp_components(
         dac
         delay
         debug
+        crc
 )
 
 options_disable_GUI()

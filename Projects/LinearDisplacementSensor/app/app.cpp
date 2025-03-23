@@ -15,19 +15,31 @@
 extern UART_HandleTypeDef huart1;
 uint8_t rxBuffer[1];
 #include<debug.h>
+#include<crc.h>
 void app_init()
 {
     // adc1_init(ADC_CHANNEL_0);
     // timer2_init(FREQ_84M_to_200);
     // usart1_init();
     // HAL_UART_Receive_IT(&huart1, rxBuffer, 1);
-    ITM_Init();
+    ITM_Init();// ITM调试
 
     // AI初始化
+    MX_CRC_Init();
     MX_X_CUBE_AI_Init();
-
 }
 
+static float temp;
+void background_handler()
+{
+    temp += 1;
+    HAL_Delay(100);
+    const float out = ai_process_data(temp);
+    printf("in:%3f\tout:%3f\r\n",temp, out);
+    if (temp>=10000)
+        temp = 0;
+
+}
 void key_handler()
 {
     switch (PlatformKey::getCode())
@@ -44,17 +56,7 @@ void key_handler()
     }
 }
 
-static float temp;
-void background_handler()
-{
-    temp += 0.6;
-    HAL_Delay(100);
-    const float out = ai_process_data(temp);
-    printf("in:%f\tout:%f\r\n",temp, out);
-    if (temp>=100)
-        temp = 0;
 
-}
 
 /**实现中断服务例程*/
 // 用于采集ADC数据

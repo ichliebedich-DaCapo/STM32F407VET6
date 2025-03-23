@@ -1,15 +1,9 @@
-
-/* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __APP_AI_H
-#define __APP_AI_H
-#ifdef __cplusplus
-extern "C" {
-#endif
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    app_x-cube-ai.h
-  * @author  X-CUBE-AI C code generator
-  * @brief   AI entry function definitions
+  * @file    crc.h
+  * @brief   This file contains all the function prototypes for
+  *          the crc.c file
   ******************************************************************************
   * @attention
   *
@@ -22,15 +16,38 @@ extern "C" {
   *
   ******************************************************************************
   */
-/* Includes ------------------------------------------------------------------*/
-#include "ai_platform.h"
+/* USER CODE END Header */
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __CRC_H__
+#define __CRC_H__
 
-void MX_X_CUBE_AI_Init(void);
-void MX_X_CUBE_AI_Process(void);
-float ai_process_data(float data);
-/* USER CODE BEGIN includes */
-/* USER CODE END includes */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* Includes ------------------------------------------------------------------*/
+#include <bsp_config.h>
+
+
+/* USER CODE BEGIN Includes */
+
+/* USER CODE END Includes */
+
+extern CRC_HandleTypeDef hcrc;
+
+/* USER CODE BEGIN Private defines */
+
+/* USER CODE END Private defines */
+
+void MX_CRC_Init(void);
+
+/* USER CODE BEGIN Prototypes */
+
+/* USER CODE END Prototypes */
+
 #ifdef __cplusplus
 }
 #endif
-#endif /*__STMicroelectronics_X-CUBE-AI_10_0_0_H */
+
+#endif /* __CRC_H__ */
+
