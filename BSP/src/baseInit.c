@@ -38,6 +38,10 @@ void BaseInit()
     HAL_Init();
     SystemClock_DefaultConfig();// 系统时钟初始化
 
+    __HAL_RCC_GPIOC_CLK_ENABLE();
+    __HAL_RCC_GPIOH_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+
     // 开启FreeRTOS的运行时统计信息
 #if defined(FREERTOS_DEBUG) && defined(FREERTOS_ENABLE)
     ConfigureTimerForRunTimeStats();

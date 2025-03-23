@@ -18,5 +18,5 @@ $writer.WriteLine($ocdCommands)
 $writer.Flush()
 
 # 步骤2：启动独立 ITM 数据监听（需提前安装 Telnet 客户端）
-Start-Sleep -Milliseconds 500  # 等待配置生效
+Start-Sleep -Milliseconds 300  # 等待配置生效
 Start-Process cmd.exe -ArgumentList "/k telnet localhost $itmPort"
