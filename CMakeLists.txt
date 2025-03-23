@@ -31,13 +31,11 @@ include(cmake/structure/projects.cmake)
 
 
 # 定义一个可执行文件目标，生成了 ELF 文件
-add_executable(${PROJECT_NAME}.elf ${SOURCES}
-        Adapter/GUI/Component/inc/roller.hpp
-        Adapter/GUI/Component/inc/dropdown.hpp
-        Adapter/GUI/Render/WaveDraw.hpp
-        Adapter/GUI/Component/inc/scale.hpp)
+add_executable(${PROJECT_NAME}.elf ${SOURCES} )
 
 
+add_subdirectory(${DSP_DIR}/Source)
+target_link_libraries(${PROJECT_NAME}.elf PRIVATE CMSISDSP)
 # 导入模块
 if (STATIC_LIB_LD)
         target_sources(libalgorithm PUBLIC

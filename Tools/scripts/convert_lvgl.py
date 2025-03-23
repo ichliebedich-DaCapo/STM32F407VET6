@@ -1572,7 +1572,7 @@ class TemplateGenerator:
 # -------------------------------------主函数--------------------------------------------
 def main():
     # 【功能】：自定义字体
-    is_font_custom = True
+    is_font_custom = False
     # 【定位屏幕初始化代码】：定位 setup_scr_* 函数,并获取工程名和函数体
     c_content = find_c_functions(search_path=r"D:\Program\GUI-GUIDER\GUI\generated",
                                  func_name="setup_scr_*",
@@ -1604,7 +1604,7 @@ def main():
     generator.generate(
         define_blocks=widgets_define_code,
         init_blocks=widgets_init_code,
-        output_path="../../Projects/driversDevelop/ui",
+        output_path="../../Projects/SignalDistortionMeasurement/ui",
         is_font_custom=is_font_custom,
         mode=GenerateMode.MERGE
     )
@@ -1613,11 +1613,11 @@ def main():
 
     # 复制所有字体
     copy_files_by_pattern(source_dir=r"D:\Program\GUI-GUIDER\GUI\generated\guider_fonts",
-                          target_dir="../../Projects/driversDevelop/ui",
+                          target_dir="../../Projects/SignalDistortionMeasurement/ui",
                           pattern="*.c")
     # 复制所有图片
     copy_files_by_pattern(source_dir=r"D:\Program\GUI-GUIDER\GUI\generated\images",
-                          target_dir="../../Projects/driversDevelop/ui",
+                          target_dir="../../Projects/SignalDistortionMeasurement/ui",
                           pattern="*.c")
 
 

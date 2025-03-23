@@ -88,11 +88,11 @@ public:
         // 分辨率=fs（采样频率）/N（采样点数）  output输出数组，索引*分辨率=频率成分
         arm_cmplx_mag_f32(fft_inputBuff, fft_outputbuf, NUM_SAMPLES / 2);
     }
-    void ADCdataToSpectrum(const int16_t ADCdata[]){
+    void ADCdataToSpectrum(const int32_t ADCdata[]){
         /**将实数序列转为复数序列*/
         for (uint32_t i = 0; i < NUM_SAMPLES; ++i)
         {
-            fft_inputBuff[i * 2] = (float) (ADCdata[i] * 3.3 / (4095 * AV));//转为实际电压，单位为V
+            fft_inputBuff[i * 2] = (float) (ADCdata[i] * 3.3 / (255 * AV));//转为实际电压，单位为V
             fft_inputBuff[i * 2 + 1] = 0;                                   //虚部为零
         }
         arm_cfft_f32(&arm_cfft_sR_f32_len1024, fft_inputBuff, IFFTFLAG, BITREVERSE);
@@ -109,6 +109,13 @@ public:
         }
         sum /= (fft_outputbuf[peaks[1]] * fft_outputbuf[peaks[1]]);//除以1次谐波的平方
         return thd = sqrtf(sum) * 100;//计算出失真度
+    }
+
+    float_t* get_fft_output_normalized() {
+        return fft_output_normalized;  // 返回指针
+    }
+    float_t get_thd() {
+        return thd;  // 返回指针
     }
 
 private:
