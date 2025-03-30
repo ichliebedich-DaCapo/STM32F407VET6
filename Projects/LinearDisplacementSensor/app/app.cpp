@@ -30,16 +30,20 @@ void app_init()
 }
 
 static float temp;
+static float out;
 void background_handler()
 {
-    temp += 1;
-    HAL_Delay(100);
-    const float out = ai_process_data(temp);
-    printf("in:%3f\tout:%3f\r\n",temp, out);
-    if (temp>=10000)
+    // 测试AI
+    temp += 0.3;
+    if (temp>=100)
         temp = 0;
+    HAL_Delay(100);
 
+    out = ai_process_data(temp);// 进行推理
+
+    printf("in:%3f\tout:%3f\r\n",temp, out);// 显示输入与输出
 }
+
 void key_handler()
 {
     switch (PlatformKey::getCode())

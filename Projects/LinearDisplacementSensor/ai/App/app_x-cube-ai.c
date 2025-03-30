@@ -231,19 +231,19 @@ void MX_X_CUBE_AI_Process(void)
   }
     /* USER CODE END 6 */
 }
-   // 推理数据的代码
+// 推理数据的代码
 float ai_process_data(const float data)
 {
   // 数据输入
   // *(float *)data_ins[0] = data;
-  *(float *)ai_input[0].data=data;
+  *(float *)data_ins[0] = (data - 24.5f) / 5.0f;// 复现标准化
+
 
   // 进行ai推理
   ai_run();
 
   // 数据输出
-  // return *(float *)data_outs[0];
-  return *(float *)ai_output[0].data;
+  return *(float *)data_outs[0];
 }
 
 #ifdef __cplusplus

@@ -15,8 +15,15 @@ configure_file(
 # ---------------------App--------------------
 set(APP_INC_DIRS ${APP_DIR} ${PROJECTS_DIR}/shared ${AI_DIR} ${AI_DIR}/App)
 
-file(GLOB_RECURSE APP_SRCS "${TARGET_PROJECT_DIR}/*.cpp" "${TARGET_PROJECT_DIR}/*.c" "${PROJECTS_DIR}/shared/*.cpp")
-
+file(GLOB_RECURSE APP_SRCS "${TARGET_PROJECT_DIR}/app/*.cpp" "${TARGET_PROJECT_DIR}/app/*.c" "${PROJECTS_DIR}/shared/*.cpp")
+if(GUI_ENABLE)
+    file(GLOB_RECURSE UI_SRCS "${TARGET_PROJECT_DIR}/ui/*.cpp" "${TARGET_PROJECT_DIR}/ui/*.c")
+    list(APPEND APP_SRCS ${UI_SRCS})
+endif ()
+if(AI_ENABLE)
+    file(GLOB_RECURSE AI_SRCS "${TARGET_PROJECT_DIR}/ai/*.cpp" "${TARGET_PROJECT_DIR}/ai/*.c")
+    list(APPEND APP_SRCS ${AI_SRCS})
+endif ()
 
 
 

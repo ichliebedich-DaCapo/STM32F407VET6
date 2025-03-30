@@ -34,7 +34,16 @@ import async_delay;
 using AsyncDelay_HAL = AsyncDelay<HAL_GetTick>;
 AsyncDelay_HAL async_delay(500);
 
-#define TEST_FPGA_REG (*((volatile unsigned short *)0x60020000))
+typedef struct
+{
+    uint16_t div;
+    uint16_t gain;
+    uint32_t period;
+}WaveInfo;
+#define FPGA_INFO_REG (*((volatile WaveInfo *)0x60020000))
+#define FPGA_BUFFER_REG (*((volatile unsigned short *)0x60000000))
+#define FPGA_READ_REG (*((volatile unsigned short *)0x60008000))
+
 volatile static uint16_t read_reg;
 volatile static uint16_t write_reg;
 volatile static uint32_t pre_tick;
@@ -52,7 +61,7 @@ uint32_t SD_multiBlockTest_Status = 168;
 
 // 数组
 
-const uint16_t color[120 * 120] = {};
+uint16_t color[120 * 120] = {};
 
 void app_init()
 {
@@ -61,15 +70,15 @@ void app_init()
     ITM_Init();
     delay_Init();
 
-    GPIO_InitTypeDef GPIO_InitStruct = {0};
-    GPIO_InitStruct.Pin = GPIO_PIN_4;
+    GPIO_InitTypeDef GPIO_InitStruct = {};
+    GPIO_InitStruct.Pin = GPIO_PIN_5;
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET);
     HAL_Delay(10);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);
     HAL_Delay(50);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET);
 
 #ifdef SD_SPI_ENABLE
     //
@@ -85,33 +94,12 @@ void key_handler()
 
         case keyK0:
             // 测试错误率
-            for (uint32_t i = 0; i < 100000; i++)
-            {
-                write_reg = Get_Random_Number() & 0xFFFF;
-                TEST_FPGA_REG = write_reg;
-                read_reg = TEST_FPGA_REG;
-                if (write_reg != read_reg)
-                {
-                    arr_error_fpga[error_fpga_count++] = i;
-                }
-
-            }
-            error_fpga_rate = error_fpga_count / 100000.0f;
-            error_fpga_count = 0;
-            __BKPT(2);
             break;
 
 
         case keyK1:
             // 测试访问速度
-            pre_tick = HAL_GetTick();
-            for (uint32_t i = 0; i < 1000000; ++i)
-            {
-                read_reg = TEST_FPGA_REG;
-            }
-            current_tick = HAL_GetTick();
-            current_tick = current_tick - pre_tick;// 单位为ms
-            __BKPT(0);
+
             break;
 
         case keyK2:
@@ -119,24 +107,14 @@ void key_handler()
             break;
 
         case keyK3:
-            SD_SingleBlockTest_Status = SD_SingleBlockTest();
+
             break;
 
         case keyK4:
-            SD_multiBlockTest_Status = SD_MultiBlockTest();
             break;
 
         case keyK5:
             // 测试写入速度
-            // 1798ms -> 1.798us一次
-            pre_tick = HAL_GetTick();
-            for (uint32_t i = 0; i < 1000000; ++i)
-            {
-                TEST_FPGA_REG = write_reg;
-            }
-            current_tick = HAL_GetTick();
-            current_tick = current_tick - pre_tick;// 单位为ms
-            __BKPT(1);
             break;
 
         case keyK6:
@@ -187,7 +165,9 @@ void background_handler()
 {
     if (async_delay.is_timeout())
     {
-        printf("%f\r\n", get_adc1_temperature());
+        // printf("%f\r\n", get_adc1_temperature());
+        const uint32_t period = FPGA_INFO_REG.period;
+        printf("div:%d gain:%d period:%d freq:%d read:%d\r\n",FPGA_INFO_REG.div,FPGA_INFO_REG.gain,period,200000000/period,FPGA_READ_REG);
     }
 }
 
