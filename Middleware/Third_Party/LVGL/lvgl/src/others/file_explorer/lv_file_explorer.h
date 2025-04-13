@@ -80,7 +80,7 @@ void lv_file_explorer_set_sort(lv_obj_t * obj, lv_file_explorer_sort_t sort);
  *====================*/
 
 /**
- * Get file explorer Selected file
+ * Get file explorer selected file
  * @param obj   pointer to a file explorer object
  * @return      pointer to the file explorer selected file name
  */

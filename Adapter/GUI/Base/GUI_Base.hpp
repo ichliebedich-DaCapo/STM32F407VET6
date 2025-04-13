@@ -23,6 +23,7 @@
 #include "checkBox.hpp"
 #include "roller.hpp"
 #include "dropdown.hpp"
+#include "scale.hpp"
 
 
 namespace gui

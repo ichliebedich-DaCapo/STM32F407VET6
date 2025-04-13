@@ -103,12 +103,9 @@ public:
      * @note 不使用auto来简化，因为会导致二进制膨胀
      * @return
      */
-    Label &text(Strings fmt, ...)
+    Label &text(Strings text)
     {
-        va_list args;
-        va_start(args, fmt);
-        lv_label_set_text_fmt(obj_, fmt, args);
-        va_end(args);
+        lv_label_set_text(obj_, text);
         return *this;
     }
 

@@ -6,6 +6,7 @@
 #include "baseInit.h"
 #include "fsmc.h"
 #include "spi.h"
+#include "usart.h"
 #include "rcc.h"
 
 #ifdef GUI_ENABLE

@@ -123,7 +123,7 @@
 
 
 /*-************************************
-*  Compiler Options
+*  Compiler options
 **************************************/
 #if defined(_MSC_VER) && (_MSC_VER >= 1400)  /* Visual Studio 2005+ */
 #  include <intrin.h>               /* only present in VS2005+ */

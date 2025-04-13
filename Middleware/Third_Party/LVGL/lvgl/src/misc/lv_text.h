@@ -32,7 +32,7 @@ extern "C" {
  **********************/
 
 /**
- * Options for text rendering.
+ * options for text rendering.
  */
 
 typedef enum {

@@ -58,32 +58,32 @@ set(FREERTOS_INC_DIRS
 
 
 # ------DSP库------
-file(GLOB_RECURSE DSP_SRCS
-        "${DSP_DIR}/Source/TransformFunctions/arm_cfft_f32.c"
-        "${DSP_DIR}/Source/TransformFunctions/arm_cfft_init_f32.c"
-        "${DSP_DIR}/Source/ComplexMathFunctions/arm_cmplx_mag_f32.c"
-)
-set(DSP_INC_DIRS
-        ${CMSIS_DIR}/Include
-        ${DSP_DIR}/Include
-        ${DSP_DIR}/PrivateInclude
-)
-add_library(libdsp STATIC ${DSP_SRCS})
-target_include_directories(libdsp PUBLIC ${DSP_INC_DIRS})
-# 设置静态库的输出目录
-set_target_properties(libdsp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+#file(GLOB_RECURSE DSP_SRCS
+#        "${DSP_DIR}/Source/TransformFunctions/arm_cfft_f32.c"
+#        "${DSP_DIR}/Source/TransformFunctions/arm_cfft_init_f32.c"
+#        "${DSP_DIR}/Source/ComplexMathFunctions/arm_cmplx_mag_f32.c"
+#)
+#set(DSP_INC_DIRS
+#        ${CMSIS_DIR}/Include
+#        ${DSP_DIR}/Include
+#        ${DSP_DIR}/PrivateInclude
+#)
+#add_library(libdsp STATIC ${DSP_SRCS})
+#target_include_directories(libdsp PUBLIC ${DSP_INC_DIRS})
+## 设置静态库的输出目录
+#set_target_properties(libdsp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 
 
 
 # -------------------------------Middleware层------------------------------
 set(MIDDLEWARE_INC_DIRS
         ${DATA_INC_DIRS}
-        ${DSP_INC_DIRS}
+#        ${DSP_INC_DIRS}
 )
 
 set(MIDDLEWARE_SRCS
         ${DATA_SRCS}
-        ${DSP_SRCS}
+#        ${DSP_SRCS}
 )
 
 if (GUI_ENABLE)

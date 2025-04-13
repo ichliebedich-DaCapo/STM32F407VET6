@@ -53,7 +53,12 @@ def get_widget_info(create_line):
         "lv_label_create": ["label", 'Label'],
         "lv_image_create": ["img", 'Image'],
         "lv_button_create": ["btn", 'Button'],
-        "lv_checkbox_create": ['chekcbox', 'CheckBox'],
+        "lv_checkbox_create": ['checkbox', 'CheckBox'],
+        "lv_chart_create": ['chart', 'Chart'],
+        "lv_roller_create": ['roller', 'Roller'],
+        "lv_slider_create": ['slider', 'Slider'],
+        "lv_dropdown_create": ['dropdown', 'Dropdown'],
+        "lv_scale_create": ['scale', 'Scale'],
     }
     for func, widget_info in widget_map.items():
         if func in create_line:
@@ -469,6 +474,182 @@ function_handlers = {
             'handler': None
         }
     },
+    # 全缺省可免调用
+    'lv_chart_set_type': {
+        'args_map': ['LV_CHART_TYPE_LINE'],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': None,
+            'default': 'type',
+            'handler': None
+        }
+    },
+    # 不存在缺省参数
+    'lv_chart_set_div_line_count': {
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'div_count',
+            'handler': None
+        }
+    },
+    # 不存在缺省参数
+    'lv_chart_set_point_count': {
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'point_count',
+            'handler': None
+        }
+    },
+    # 全缺省不可免调用，GUI固定死了是0-100，只能全部缺省了
+    'lv_chart_set_range': {
+        'args_map': ['100','0'],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'range',
+            'handler': None
+        }
+    },
+    # 不存在缺省参数
+    'lv_roller_set_options': {
+        'args_map': ['LV_ROLLER_MODE_INFINITE'],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'options',
+            'handler': None
+        }
+    },
+    # 不存在缺省参数
+    'lv_roller_set_visible_row_count': {
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'VisibleRowCount',
+            'handler': None
+        }
+    },
+    # 不存在缺省参数
+    'lv_slider_set_range': {
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'range',
+            'handler': None
+        }
+    },
+    # 全缺省可免调用
+    'lv_slider_set_mode': {
+        'args_map': ['LV_SLIDER_MODE_NORMAL'],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': None,
+            'default': 'mode',
+            'handler': None
+        }
+    },
+    # 部分缺省不可免去调用
+    'lv_slider_set_value': {
+        'args_map': ['LV_ANIM_OFF'],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'value',
+            'handler': None
+        }
+    },
+    # 不存在缺省参数
+    'lv_dropdown_set_options': {
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'options',
+            'handler': None
+        }
+    },
+    # 不存在缺省参数
+    'lv_scale_set_mode': {
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'mode',
+            'handler': None
+        }
+    },
+    # 不存在缺省参数
+    'lv_scale_set_total_tick_count': {
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'total_tick_count',
+            'handler': None
+        }
+    },
+    # 不存在缺省参数
+    'lv_scale_set_major_tick_every': {
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'major_tick_every',
+            'handler': None
+        }
+    },
+    # 全缺省可免调用
+    'lv_scale_set_label_show': {
+        'args_map': ['true'],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': None,
+            'default': 'label_show',
+            'handler': None
+        }
+    },
+    # 不存在缺省参数
+    'lv_scale_set_range': {
+        'args_map': [],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': '',
+            'default': 'range',
+            'handler': None
+        }
+    },
+    # 全缺省可免调用
+    'lv_scale_set_post_draw': {
+        'args_map': ['true'],
+        'method_map': {
+            'index': [],
+            'mapping': {},
+            'type': None,
+            'default': 'post_draw',
+            'handler': None
+        }
+    },
 }
 
 
@@ -604,6 +785,8 @@ def convert_style_calls(func_name, args, is_static_cast=False, is_font_custom=Fa
         ['text_font', '', 'font'],
         ['text_line_space', "0"],
         ['text_align', 'LV_TEXT_ALIGN_LEFT'],
+        ['line_opa', "255"],
+        ['line_rounded', "true"],
         ['bg_opa', "255"],
         ['pad_top', "0"],
         ['pad_right', "0"],
@@ -1389,9 +1572,9 @@ class TemplateGenerator:
 # -------------------------------------主函数--------------------------------------------
 def main():
     # 【功能】：自定义字体
-    is_font_custom = True
+    is_font_custom = False
     # 【定位屏幕初始化代码】：定位 setup_scr_* 函数,并获取工程名和函数体
-    c_content = find_c_functions(search_path=r"E:\Program\Embedded\MCU\GUI\GUI\generated",
+    c_content = find_c_functions(search_path=r"D:\Program\GUI-GUIDER\GUI\generated",
                                  func_name="setup_scr_*",
                                  file_name="setup_scr_*.c")
     # 获取第一个满足条件的函数
@@ -1421,20 +1604,20 @@ def main():
     generator.generate(
         define_blocks=widgets_define_code,
         init_blocks=widgets_init_code,
-        output_path="../../Projects/driversDevelop/ui",
+        output_path="../../Projects/SignalDistortionMeasurement/ui",
         is_font_custom=is_font_custom,
-        mode=GenerateMode.OVERWRITE
+        mode=GenerateMode.MERGE
     )
 
     print("代码生成成功！输出文件：ui.cpp")
 
     # 复制所有字体
-    copy_files_by_pattern(source_dir=r"E:\Program\Embedded\MCU\GUI\GUI\generated\guider_fonts",
-                          target_dir="../../Projects/driversDevelop/ui",
+    copy_files_by_pattern(source_dir=r"D:\Program\GUI-GUIDER\GUI\generated\guider_fonts",
+                          target_dir="../../Projects/SignalDistortionMeasurement/ui",
                           pattern="*.c")
     # 复制所有图片
-    copy_files_by_pattern(source_dir=r"E:\Program\Embedded\MCU\GUI\GUI\generated\images",
-                          target_dir="../../Projects/driversDevelop/ui",
+    copy_files_by_pattern(source_dir=r"D:\Program\GUI-GUIDER\GUI\generated\images",
+                          target_dir="../../Projects/SignalDistortionMeasurement/ui",
                           pattern="*.c")
 
 

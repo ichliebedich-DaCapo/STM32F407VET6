@@ -25,9 +25,14 @@ using ImageSrc_t = const lv_img_dsc_t;
 using ChartAxis = lv_chart_axis_t;// 图表坐标
 using ChartSeries = lv_chart_series_t *&;
 using ChartSeries_t = lv_chart_series_t *;
+using ChartCursor = lv_chart_cursor_t *&;
+using ChartCursor_t = lv_chart_cursor_t *;
 using Scrollbar_mode =lv_scrollbar_mode_t;
 using ImageButton_State = lv_imagebutton_state_t;
 using ChartType = lv_chart_type_t;
+using ScareMode = lv_scale_mode_t;
+using ScareSection = lv_scale_section_t;
+using ScareSection_t = lv_scale_section_t *;
 using AnimExecCallback = lv_anim_exec_xcb_t;// 动画执行事件回调
 using AnimCompletedCallback = lv_anim_completed_cb_t;// 动画执行完毕事件回调
 using Anim = lv_anim_t &;
@@ -172,7 +177,11 @@ public:
         lv_obj_set_style_bg_grad_dir(obj_, dir, selector);
         return static_cast<Derived &>(*this);
     }
-
+    inline Derived & bg_src(ImageSrc src, Selector selector = selector_default)
+    {
+        lv_obj_set_style_bg_image_src(obj_, src, selector);
+        return static_cast<Derived &>(*this);
+    }
     // 设置边框宽度
     inline Derived &border_width(Coord w, Selector selector = selector_default)
     {
@@ -212,6 +221,30 @@ public:
     inline Derived &line_width(Coord w, Selector selector = selector_default)
     {
         lv_obj_set_style_border_width(obj_, w, selector);
+        return static_cast<Derived &>(*this);
+    }
+    // 设置线条颜色
+    inline Derived &line_color(Color color, Selector selector = selector_default)
+    {
+        lv_obj_set_style_line_color(obj_, color, selector);
+        return static_cast<Derived &>(*this);
+    }
+    // 设置线条透明度
+    inline Derived& line_opa(uint8_t opa=255, Selector selector = selector_default)
+    {
+        lv_obj_set_style_line_opa(obj_, opa, selector);
+        return static_cast<Derived &>(*this);
+    }
+    // 设置线条是否圆角
+    inline Derived &line_rounded(bool value, Selector selector = selector_default)
+    {
+        lv_obj_set_style_line_rounded(obj_, value, selector);
+        return static_cast<Derived &>(*this);
+    }
+    // 设置线条长度
+    inline Derived &length(int32_t value, Selector selector = selector_default)
+    {
+        lv_obj_set_style_length(obj_, value, selector);
         return static_cast<Derived &>(*this);
     }
 
@@ -267,6 +300,7 @@ public:
         lv_obj_set_style_text_opa(obj_, opa, selector);
         return static_cast<Derived &>(*this);
     }
+
 
     /**
     * @brief 设置背景渐变
@@ -380,6 +414,12 @@ public:
         return static_cast<Derived &>(*this);
     };
 
+    // 设置轮廓宽度
+    inline Derived &outline_width(Coord w, Selector selector = selector_default)
+    {
+        lv_obj_set_style_outline_width(obj_,w,selector);
+        return static_cast<Derived &>(*this);
+    };
 
     /**
      * @brief 绑定事件
