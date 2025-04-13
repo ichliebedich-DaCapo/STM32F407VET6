@@ -1,6 +1,5 @@
 #include "esp8266.h"
 #include "usart.h"
-#include "usart.h"
 #include <stdarg.h>
 #include "string.h"
 

@@ -22,6 +22,10 @@ UART_HandleTypeDef huart1;
 //DMA_HandleTypeDef hdma_usart2_rx;
 //DMA_HandleTypeDef hdma_usart2_tx;
 
+uint8_t UartIntRxbuf[500]={};
+uint16_t UartRxIndex=0;
+uint8_t UartRxData;
+
 // 函数
 void usart1_init()
 {
@@ -29,8 +33,6 @@ void usart1_init()
     GPIO_InitTypeDef GPIO_InitStruct = {0};
     __HAL_RCC_USART1_CLK_ENABLE();
     __HAL_RCC_GPIOA_CLK_ENABLE();
-
-
 
     /**USART1 GPIO Configuration
     PA9     ------> USART1_TX
@@ -44,7 +46,8 @@ void usart1_init()
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
     huart1.Instance = USART1;
-    huart1.Init.BaudRate = 115200;
+    huart1.Init.BaudRate = 9600;
+//    huart1.Init.BaudRate = 115200;
 //    huart1.Init.BaudRate = 74880;
     huart1.Init.WordLength = UART_WORDLENGTH_8B;
     huart1.Init.StopBits = UART_STOPBITS_1;

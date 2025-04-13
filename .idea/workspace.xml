@@ -1695,11 +1695,6 @@
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="CMSISDSP" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="CMSISDSP" CONFIG_NAME="Release-MinGW_ARM">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -1749,8 +1744,8 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="CMake 应用程序.libalgorithm" />
       <item itemvalue="CMake 应用程序.CMSISDSP" />
+      <item itemvalue="CMake 应用程序.libalgorithm" />
       <item itemvalue="OpenOCD 下载并运行.OCD Furina" />
       <item itemvalue="Python.convert_lvgl" />
     </list>
@@ -2028,6 +2023,14 @@
       <workItem from="1742095500887" duration="8232000" />
       <workItem from="1742657090729" duration="7128000" />
       <workItem from="1742692813465" duration="11088000" />
+      <workItem from="1743140117260" duration="16653000" />
+      <workItem from="1743381716807" duration="310000" />
+      <workItem from="1743834076294" duration="1221000" />
+      <workItem from="1744509197873" duration="912000" />
+      <workItem from="1744510233279" duration="885000" />
+      <workItem from="1744511131807" duration="8512000" />
+      <workItem from="1744542755625" duration="32000" />
+      <workItem from="1744542985038" duration="646000" />
     </task>
     <task id="LOCAL-00090" summary="【驱动开发】读取两个触摸点数据成功，但第二个触摸点无法读取左小半边数据&#10;某次测试后，未修改代码，IIC再次抽风，键盘中断和初始化全部失败，touch_isOK报2">
       <option name="closed" value="true" />
@@ -2484,6 +2487,15 @@
     <option name="LAST_COMMIT_MESSAGE" value="【THD测量仪】 fft算法大概写好了" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Projects/SignalDistortionMeasurement/app/app.cpp</url>
+          <line>144</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
         <watch expression="touch_isOK" />
@@ -2500,7 +2512,12 @@
         <watch expression="error_fpga_rate" />
         <watch expression="last_id" />
         <watch expression="UartIntRxbuf" language="ObjectiveC" />
-        <watch expression="fft" />
+        <watch expression="fft" language="ObjectiveC" />
+        <watch expression="is_generating" />
+        <watch expression="FPGA_DIV_REG" />
+        <watch expression="ADC_Data" />
+        <watch expression="temp_arr [i]" />
+        <watch expression="temp_arr" />
       </configuration>
     </watches-manager>
   </component>

@@ -92,7 +92,7 @@ public:
         /**将实数序列转为复数序列*/
         for (uint32_t i = 0; i < NUM_SAMPLES; ++i)
         {
-            fft_inputBuff[i * 2] = (float) (ADCdata[i] * 3.3 / (255 * AV));//转为实际电压，单位为V
+            fft_inputBuff[i * 2] = (float) (ADCdata[i]* AV);//转为实际电压，单位为V
             fft_inputBuff[i * 2 + 1] = 0;                                   //虚部为零
         }
         arm_cfft_f32(&arm_cfft_sR_f32_len1024, fft_inputBuff, IFFTFLAG, BITREVERSE);

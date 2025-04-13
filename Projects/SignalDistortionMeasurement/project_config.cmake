@@ -5,9 +5,10 @@ set_bsp_components(
         rng
         spi
         adc
-        esp8266
-        usart
+#        usart
         tcp
+        blue_tooth
+        debug
 )
 
 #options_disable_GUI()

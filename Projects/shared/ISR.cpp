@@ -150,6 +150,7 @@ void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
     }
 #endif
 }
+//DMA_USART_ENABLE 里封印着ESP8266的中断回调函数
 #ifdef DMA_USART_ENABLE
 extern UART_HandleTypeDef  huart1;
 extern uint8_t UartRxData;
@@ -175,6 +176,25 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
 }
 #endif
+extern UART_HandleTypeDef  huart1;
+extern uint8_t UartIntRxbuf[500];
+extern uint16_t UartRxIndex;
+extern uint8_t UartRxData;
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+
+    if(huart==&huart1)//判断是否串口1
+    {
+        UartIntRxbuf[UartRxIndex]=UartRxData;//数据写入缓冲区
+        UartRxIndex++;//记载数目加1
+        if(UartRxIndex>=500)//缓冲区是500字节，如果存满，归零
+        {
+            UartRxIndex=0;
+        }
+        HAL_UART_Receive_IT(&huart1,(unsigned char*)&UartRxData,1);//继续接收下一字节
+    }
+
+}
 void SysTick_Handler(void)
 {
     /* USER CODE BEGIN SysTick_IRQn 0 */
