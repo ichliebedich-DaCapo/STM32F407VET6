@@ -32,9 +32,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】调试FPGA模块">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【备份】准备查看THD引发的FSMC读取问题">
+      <change beforePath="$PROJECT_DIR$/cmake/common_functions.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/common_functions.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +66,8 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Projects/driversDevelop/app/app.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Projects/driversDevelop/app/app.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectApplicationVersion">
@@ -178,7 +179,7 @@
       <workItem from="1744455130448" duration="370000" />
       <workItem from="1744460187560" duration="5732000" />
       <workItem from="1744470622405" duration="3536000" />
-      <workItem from="1744541701746" duration="1511000" />
+      <workItem from="1744541701746" duration="1794000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -212,7 +213,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743318918636</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="【备份】准备查看THD引发的FSMC读取问题">
+      <option name="closed" value="true" />
+      <created>1744543685001</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1744543685001</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,12 +232,36 @@
     <isAutomaticFoundErrors value="true" />
     <isAutomaticReloadCMake value="true" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/DV" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="【开发】准备测试AI代码" />
     <MESSAGE value="【开发】AI无法正确推理，固定输出0" />
     <MESSAGE value="【开发】使用一个终端脚本，成功简化ITM调试的启动" />
     <MESSAGE value="【开发】调试FPGA模块" />
-    <option name="LAST_COMMIT_MESSAGE" value="【开发】调试FPGA模块" />
+    <MESSAGE value="【备份】准备查看THD引发的FSMC读取问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="【备份】准备查看THD引发的FSMC读取问题" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
