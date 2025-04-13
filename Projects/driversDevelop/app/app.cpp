@@ -39,29 +39,15 @@ typedef struct
     uint16_t div;
     uint16_t gain;
     uint32_t period;
-}WaveInfo;
-#define FPGA_INFO_REG (*((volatile WaveInfo *)0x60020000))
+} WaveInfo;
+
+// 556KHz
 #define FPGA_BUFFER_REG (*((volatile unsigned short *)0x60000000))
-#define FPGA_READ_REG (*((volatile unsigned short *)0x60008000))
+#define FPGA_READ_REG (*((volatile unsigned short *)0x60000800))
+#define FPGA_DIV_REG (*((volatile unsigned short *)0x60000802))
+#define FPGA_INFO_REG (*((volatile WaveInfo *)0x60020000))
+#define FPGA_REGS ((volatile uint16_t  *)0x60000000)
 
-volatile static uint16_t read_reg;
-volatile static uint16_t write_reg;
-volatile static uint32_t pre_tick;
-volatile static uint32_t current_tick;
-uint8_t arr_error_fpga[1000];
-uint16_t error_fpga_count = 0;
-float error_fpga_rate = 0;
-
-// 变量
-SD_Error SD_init_Status = SD_DATA_INIT;
-DSTATUS disk_init_Status;
-uint32_t SD_SingleBlockTest_Status = 168;
-uint32_t SD_multiBlockTest_Status = 168;
-// 函数
-
-// 数组
-
-uint16_t color[120 * 120] = {};
 
 void app_init()
 {
@@ -84,25 +70,44 @@ void app_init()
     //
         disk_init_Status=fatfs_init(0);
 #endif
-
 }
 
+
+uint16_t adc_data[1024];
+uint16_t div;
+uint32_t period;
 void key_handler()
 {
     switch (PlatformKey::getCode())
     {
-
         case keyK0:
-            // 测试错误率
+            // 测试速度
+            for (int j = 0; j < 1024; ++j)
+                adc_data[j] = FPGA_REGS[j];
+            __BKPT(4);
             break;
 
 
         case keyK1:
-            // 测试访问速度
+            if (FPGA_READ_REG)
+            {
+                FPGA_READ_REG = 1;
+                div = FPGA_DIV_REG;
+                for (int j = 0; j < 1024; ++j)
+                    adc_data[j] = FPGA_REGS[j];
+                FPGA_READ_REG = 0;
+                __BKPT(3);
+            }
+            else
+            {
+                period = FPGA_INFO_REG.period;
+                __BKPT(6);
+            }
 
             break;
 
         case keyK2:
+
 
             break;
 
@@ -111,47 +116,12 @@ void key_handler()
             break;
 
         case keyK4:
-            break;
 
-        case keyK5:
-            // 测试写入速度
             break;
-
-        case keyK6:
-            break;
-
-        case keyK7:
-            break;
-
-        case keyK8:
-            break;
-
-        case keyK9:
-            break;
-
-        case keyKA:
-            break;
-
-        case keyKB:
-            break;
-
-        case keyKC:
-            break;
-
-        case keyKD:
-            break;
-
-        case keyKE:
-            break;
-
-        case keyKF:
-            break;
-
-        default:
-            break;
-
+        default: ;
     }
 }
+
 /**实现中断服务例程*/
 // 用于采集ADC数据
 void adc1_isr()
@@ -159,7 +129,9 @@ void adc1_isr()
     // 获取ADC值
 }
 
-float temp;
+// float temp;
+uint32_t temp_period[10];
+uint16_t per_index;
 
 void background_handler()
 {
@@ -167,13 +139,25 @@ void background_handler()
     {
         // printf("%f\r\n", get_adc1_temperature());
         const uint32_t period = FPGA_INFO_REG.period;
-        printf("div:%d gain:%d period:%d freq:%d read:%d\r\n",FPGA_INFO_REG.div,FPGA_INFO_REG.gain,period,200000000/period,FPGA_READ_REG);
+        printf("div:%d gain:%d period:%d freq:%d read:%d\r\n",FPGA_INFO_REG.div,FPGA_INFO_REG.gain, period,
+               250000000 / period,FPGA_READ_REG);
+
+        // min = 0xFFFFFFFF;
+        // max = 0;
+        // temp_period[per_index] = FPGA_PERIOD;
+        // per_index = (per_index + 1) % 6;
+        // if (per_index == 0)
+        // {
+        //     printf("period:");
+        //     for (const unsigned long i: temp_period)
+        //     {
+        //         printf("%lu ", i);
+        //         if (i > max)
+        //             max = i;
+        //         if (i < min && i != 0)
+        //             min = i;
+        //     }
+        //     printf("max:%lu min:%lu\r\n",max,min);
+        // }
     }
 }
-
-
-
-
-
-
-

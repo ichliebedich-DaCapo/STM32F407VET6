@@ -32,15 +32,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】准备切换AI模板">
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】调试FPGA模块">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/crc.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/crc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Drivers/stm32f4xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Drivers/stm32f4xx_hal_conf.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/app_x-cube-ai.c" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/ai/App/app_x-cube-ai.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/LinearDisplacementSensor/app/app.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/structure/projects.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/projects.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +61,8 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -103,6 +99,7 @@
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;ZQ&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;E:/Program/Embedded/MCU/STM32&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -110,7 +107,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;E:/Program/Embedded/MCU/STM32/Furina/main.cpp&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.cidr.cpp.execution.gdbserver.debugtargets.NamedDebugTargetConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -169,7 +166,19 @@
       <workItem from="1742692383646" duration="6675000" />
       <workItem from="1742870950137" duration="11000" />
       <workItem from="1743230315282" duration="7711000" />
-      <workItem from="1743318881698" duration="3000" />
+      <workItem from="1743318881698" duration="44000" />
+      <workItem from="1743835102247" duration="1215000" />
+      <workItem from="1743838613084" duration="4597000" />
+      <workItem from="1743907584304" duration="971000" />
+      <workItem from="1743915767870" duration="4836000" />
+      <workItem from="1743925981372" duration="4543000" />
+      <workItem from="1743983216433" duration="9000" />
+      <workItem from="1744297790499" duration="4270000" />
+      <workItem from="1744448050479" duration="605000" />
+      <workItem from="1744455130448" duration="370000" />
+      <workItem from="1744460187560" duration="5732000" />
+      <workItem from="1744470622405" duration="3536000" />
+      <workItem from="1744541701746" duration="1511000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -195,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742698409257</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="【开发】调试FPGA模块">
+      <option name="closed" value="true" />
+      <created>1743318918636</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1743318918636</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,12 +227,15 @@
     <MESSAGE value="【开发】准备测试AI代码" />
     <MESSAGE value="【开发】AI无法正确推理，固定输出0" />
     <MESSAGE value="【开发】使用一个终端脚本，成功简化ITM调试的启动" />
-    <option name="LAST_COMMIT_MESSAGE" value="【开发】使用一个终端脚本，成功简化ITM调试的启动" />
+    <MESSAGE value="【开发】调试FPGA模块" />
+    <option name="LAST_COMMIT_MESSAGE" value="【开发】调试FPGA模块" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
-        <watch expression="@ ALREADY PREPROCESSED @ai_output" />
+        <watch expression="@ ALREADY PREPROCESSED @temp_period" />
+        <watch expression="@ ALREADY PREPROCESSED @adc_data" />
+        <watch expression="@ ALREADY PREPROCESSED @div" />
       </configuration>
     </watches-manager>
   </component>
