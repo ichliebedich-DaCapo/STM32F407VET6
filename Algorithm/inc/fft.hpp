@@ -137,7 +137,7 @@ public:
     }
 private:
     static constexpr const int NUM_SAMPLES=1024;  //采样点
-    static constexpr const int NUM_PEAKS=9;       //取9-1个基波谐波成分
+    static constexpr const int NUM_PEAKS=10;       //取10-1个基波谐波成分
     static constexpr const int IFFTFLAG=0;        //正变换
     static constexpr const int BITREVERSE=1;      //逆序排列
     float32_t fft_inputBuff[NUM_SAMPLES * 2]={};     //存储复数的数组

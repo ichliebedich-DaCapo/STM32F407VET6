@@ -5,10 +5,10 @@ set_bsp_components(
         rng
         spi
         adc
-#        usart
+        usart
         tcp
         blue_tooth
-        debug
+#        debug
 )
 
 #options_disable_GUI()

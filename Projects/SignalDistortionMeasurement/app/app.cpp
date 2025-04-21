@@ -71,6 +71,7 @@ int32_t fft_output_lvgl[128]={};
 extern UART_HandleTypeDef  huart1;
 extern uint8_t UartRxData;
 uint32_t start_tick;
+
 //复位FPGA
 void FPGA_RESET()
 {
@@ -89,10 +90,8 @@ void FPGA_RESET()
 // 函数
 void app_init()
 {
-//    usart1_init();
-    ITM_Init();
-//    HAL_UART_Receive_IT(&huart1,(unsigned char*)&UartRxData,1);//串口接收
-//    HC05_Init();
+    usart1_init();
+    HAL_UART_Receive_IT(&huart1,(unsigned char*)&UartRxData,1);//串口接收
     async_delay.set_delay_tick(1000);
     async_delay.reset();
 
@@ -103,6 +102,7 @@ void app_init()
     FPGA_RESET();
 
     start_tick = HAL_GetTick();
+
 }
 
 
@@ -153,10 +153,12 @@ void background_handler()
     // 超时检测（自动处理32位溢出）
     if (HAL_GetTick() - start_tick > TIMEOUT_MS)
     {
+        using namespace gui::interface::ui;
         gui::interface::ui::gui_clear_text_data();
         memset(ADC_Data_lvgl,0,sizeof(ADC_Data_lvgl)); //第三个变量一定要是size_t，用sizeof()函数比较好
         gui::interface::ui::gui_generate_chart_data(ADC_Data_lvgl);
     }
+
     // 判断是否可读取
     if (FPGA_INFO_REG->full)
     {
@@ -194,7 +196,11 @@ void background_handler()
 
             fft.normalize_to_fundamental(NUM_PEAKS);
 
-            float temp_freq = 200000000 * 11.0 / FPGA_INFO_REG->period;
+            float freq = 200000000 * 11.0 / FPGA_INFO_REG->period;
+            float sampling_rate=200000000 / (data_div + 1) / 2;
+
+            //蓝牙模块通信
+            send_bluetooth_data(fft.get_thd(),freq,sampling_rate,FPGA_INFO_REG->gain,ADC_Data_lvgl,fft.get_fft_output_normalized());
 
             if(gui::interface::ui::gui_get_chart_type()==0)
             {
@@ -209,17 +215,7 @@ void background_handler()
             }
             //gui显示失真度、THD、频率等文本内容
             gui::interface::ui::gui_generate_text_data(fft.get_fft_output_normalized(), fft.get_thd(),
-                                                       200000000 / (data_div + 1) / 2, temp_freq);
-//        printf("AT+NAME=DV_bluetooth\r\n");
-//        printf("AT+ROLE=0\r\n");
-//        printf("AT+CMODE=1\r\n");
-//        printf("AT+UART=9600,0,0\r\n");
-//        printf("AT+PSWD=1234\r\n");
-//        printf("AT+RESET\r\n");
-//
-//        gui::interface::ui::stop_fft();
-//        __BKPT(0);
-
+                                                       sampling_rate, freq);
 
         }
         start_tick = HAL_GetTick();
