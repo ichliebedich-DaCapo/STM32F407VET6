@@ -335,6 +335,7 @@ void draw_dividers_with_dirty_points(uint16_t x, uint16_t y, uint16_t width, uin
     }
 }
 
+
 // 绘制虚线
 void draw_dashed_line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color, uint16_t dash_length, uint16_t gap_length) {
     int dx = abs(x2 - x1), sx = x1 < x2 ? 1 : -1;

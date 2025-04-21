@@ -1572,7 +1572,7 @@ class TemplateGenerator:
 # -------------------------------------主函数--------------------------------------------
 def main():
     # 【功能】：自定义字体
-    is_font_custom = False
+    is_font_custom = True
     # 【定位屏幕初始化代码】：定位 setup_scr_* 函数,并获取工程名和函数体
     c_content = find_c_functions(search_path=r"D:\Program\GUI-GUIDER\GUI\generated",
                                  func_name="setup_scr_*",

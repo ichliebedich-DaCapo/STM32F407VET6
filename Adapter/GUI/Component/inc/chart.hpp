@@ -182,6 +182,20 @@ public:
         return  lv_chart_add_series(obj_,color, axis);
         //        lv_chart_add_series(series, color, axis);
     }
+    /**
+     * @brief 清除关于系列的一切
+     * @param series
+     * @param refresh
+     * @return
+     */
+    Chart& clear_series(ChartSeries_t series = nullptr, bool refresh = true) {
+        lv_chart_remove_series(obj_, series);  // 清除数据
+
+        if (refresh) {
+            lv_chart_refresh(obj_);  // 立即刷新显示
+        }
+        return *this;
+    }
 
 
     /**************光标（Cursor）操作************/
