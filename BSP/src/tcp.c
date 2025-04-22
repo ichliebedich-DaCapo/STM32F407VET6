@@ -12,13 +12,6 @@ void ESP8266_STA_TCPClient_Test(void)
 //    ESP8266_Send_AT_Cmd ( "AT", "OK", "no change", 2500);
 
 
-    unsigned char res;
-    char str[100]={0};
-    ESP8266_AT_Test();
-    HAL_Delay(1000);
-    ESP8266_Send_AT_Cmd("ATE1", "OK", "no change", 2500);
-    ESP8266_Net_Mode_Choose(STA);
-    while(!ESP8266_JoinAP(User_ESP8266_SSID, User_ESP8266_PWD));//运行到这就连上热点了
 
 //    ESP8266_Enable_MultipleId ( DISABLE );
 //    while(!ESP8266_Link_Server(enumTCP, User_ESP8266_TCPServer_IP, User_ESP8266_TCPServer_PORT, Single_ID_0));

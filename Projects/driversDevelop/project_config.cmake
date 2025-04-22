@@ -7,7 +7,6 @@ set_bsp_components(
         sd_spi
         spi
         fatfs
-        esp8266
         usart
         tcp
         blue_tooth

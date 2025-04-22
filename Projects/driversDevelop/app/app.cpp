@@ -63,7 +63,7 @@ const uint16_t color[120 * 120] = {};
 // tcp测试变量
 extern UART_HandleTypeDef  huart1;
 extern UART_HandleTypeDef hdma_usart1_tx;
-volatile uint8_t UartRxData;
+
 
 
 void app_init()
@@ -163,7 +163,6 @@ void key_handler()
             break;
 
         case keyK7:
-            ESP8266_Rst();
             break;
 
         case keyK8:

@@ -12,7 +12,6 @@ set(TARGET_PROJECT_DIR Projects/driversDevelop)
 # --------------------------------------包含子cmake--------------------------------
 # 对配置项变量进行预处理，包括获取项目名称
 include(cmake/target_project.cmake)
-add_subdirectory(BSP)
 # 包含编译器的设置及相关标志的传递
 include(cmake/arm-gcc.cmake)
 # 与stm32相关的一些宏，同时指定链接脚本

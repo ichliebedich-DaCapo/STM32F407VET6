@@ -63,11 +63,11 @@ set(FREERTOS_INC_DIRS
 #        "${DSP_DIR}/Source/TransformFunctions/arm_cfft_init_f32.c"
 #        "${DSP_DIR}/Source/ComplexMathFunctions/arm_cmplx_mag_f32.c"
 #)
-#set(DSP_INC_DIRS
-#        ${CMSIS_DIR}/Include
-#        ${DSP_DIR}/Include
-#        ${DSP_DIR}/PrivateInclude
-#)
+set(DSP_INC_DIRS
+        ${CMSIS_DIR}/Include
+        ${DSP_DIR}/Include
+        ${DSP_DIR}/PrivateInclude
+)
 #add_library(libdsp STATIC ${DSP_SRCS})
 #target_include_directories(libdsp PUBLIC ${DSP_INC_DIRS})
 ## 设置静态库的输出目录
@@ -78,7 +78,7 @@ set(FREERTOS_INC_DIRS
 # -------------------------------Middleware层------------------------------
 set(MIDDLEWARE_INC_DIRS
         ${DATA_INC_DIRS}
-#        ${DSP_INC_DIRS}
+        ${DSP_INC_DIRS}
 )
 
 set(MIDDLEWARE_SRCS

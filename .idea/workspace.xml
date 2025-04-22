@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="BackendCodeEditorMiscSettings">
-    <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
-    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
     <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="260" type="long" />
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+    <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
   </component>
   <component name="CMakePresetLoader">{
   &quot;useNewFormat&quot;: true
@@ -23,7 +23,6 @@
       <config projectName="Furina" targetName="libdata" />
       <config projectName="Furina" targetName="Furina.elf" />
       <config projectName="Furina" targetName="libbsp" />
-      <config projectName="Furina" targetName="libdsp" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -32,8 +31,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【备份】准备查看THD引发的FSMC读取问题">
-      <change beforePath="$PROJECT_DIR$/cmake/common_functions.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/common_functions.cmake" afterDir="false" />
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【？？】并未发现FSMC相关问题">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/ISR.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/structure/middleware.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/middleware.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,14 +63,9 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Projects/driversDevelop/app/app.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Projects/driversDevelop/app/app.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Adapter/GUI/Component/inc/widget.hpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Algorithm/inc/fft.hpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectApplicationVersion">
@@ -133,11 +131,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="libdsp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdsp" CONFIG_NAME="Debug-w64-i686-arm-none-eabi">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Furina.elf" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" nameIsGenerated="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-w64-i686-arm-none-eabi" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="E:\Program\Embedded\MCU\STM32\Furina\Tools\configs\stlink.cfg" reset-type="INIT" download-type="UPDATED_ONLY">
         <debugger kind="GDB" isBundled="true" />
@@ -151,7 +144,6 @@
       <item itemvalue="CMake 应用程序.libalgorithm" />
       <item itemvalue="CMake 应用程序.libbsp" />
       <item itemvalue="CMake 应用程序.libdata" />
-      <item itemvalue="CMake 应用程序.libdsp" />
       <item itemvalue="OpenOCD 下载并运行.Furina.elf" />
     </list>
   </component>
@@ -179,7 +171,12 @@
       <workItem from="1744455130448" duration="370000" />
       <workItem from="1744460187560" duration="5732000" />
       <workItem from="1744470622405" duration="3536000" />
-      <workItem from="1744541701746" duration="1794000" />
+      <workItem from="1744541701746" duration="2577000" />
+      <workItem from="1744589088644" duration="20000" />
+      <workItem from="1744950006225" duration="3214000" />
+      <workItem from="1744956587136" duration="62000" />
+      <workItem from="1745115576770" duration="35000" />
+      <workItem from="1745194194440" duration="10000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -221,7 +218,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744543685001</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="【？？】并未发现FSMC相关问题">
+      <option name="closed" value="true" />
+      <created>1744543951439</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1744543951439</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,7 +248,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/DV" />
+                        <option value="ZQ" />
                       </list>
                     </value>
                   </entry>
@@ -261,7 +266,8 @@
     <MESSAGE value="【开发】使用一个终端脚本，成功简化ITM调试的启动" />
     <MESSAGE value="【开发】调试FPGA模块" />
     <MESSAGE value="【备份】准备查看THD引发的FSMC读取问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="【备份】准备查看THD引发的FSMC读取问题" />
+    <MESSAGE value="【？？】并未发现FSMC相关问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="【？？】并未发现FSMC相关问题" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
