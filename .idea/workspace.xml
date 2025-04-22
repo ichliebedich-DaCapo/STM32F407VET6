@@ -31,38 +31,23 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】修复了一些小问题，关于App的组织">
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【备份】准备编写Utils层">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/inc/AsyncDelay.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/inc/Flags.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/inc/cpu_temperature.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/inc/fft.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/inc/flash_storage.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/inc/key.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/inc/player.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/inc/wave_signal.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/src/cpu_temperature.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/src/fft.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/src/flash_storage.cppm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/src/key.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/src/player.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/src/wave_signal.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/app.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/app.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/bin/auto_OPA.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Toolkit/bin/auto_OPA.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/configs/stlink.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/Toolkit/configs/stlink.cfg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/powershell/tpiu_itm.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/Toolkit/powershell/tpiu_itm.ps1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/scripts/convert_lvgl.py" beforeDir="false" afterPath="$PROJECT_DIR$/Toolkit/scripts/convert_lvgl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/scripts/tpiu_itm.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/Toolkit/scripts/tpiu_itm.ps1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/templates/app.cpp.in" beforeDir="false" afterPath="$PROJECT_DIR$/Toolkit/templates/app.cpp.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/templates/bsp_component.c.in" beforeDir="false" afterPath="$PROJECT_DIR$/Toolkit/templates/bsp_component.c.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/templates/bsp_component.h.in" beforeDir="false" afterPath="$PROJECT_DIR$/Toolkit/templates/bsp_component.h.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/templates/ui.cpp.in" beforeDir="false" afterPath="$PROJECT_DIR$/Toolkit/templates/ui.cpp.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/templates/ui.hpp.in" beforeDir="false" afterPath="$PROJECT_DIR$/Toolkit/templates/ui.hpp.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tools/tpiu_itm_commands.gdb" beforeDir="false" afterPath="$PROJECT_DIR$/Toolkit/tpiu_itm_commands.gdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/structure/algorithm.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/utils.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/AsyncDelay.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/async_delay.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/Flags.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/flags.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/cpu_temperature.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/cpu_temperature.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/fft.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/fft.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/fft.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/flash_storage.cppm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/flash_storage.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/flash_storage.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/key.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/key.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/key.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/player.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/player.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/wave_signal.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/wave_signal.hpp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,7 +203,7 @@
       <workItem from="1744956587136" duration="62000" />
       <workItem from="1745115576770" duration="35000" />
       <workItem from="1745194194440" duration="10000" />
-      <workItem from="1745319255734" duration="25096000" />
+      <workItem from="1745319255734" duration="25999000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -308,7 +293,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745343055931</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="【备份】准备编写Utils层">
+      <option name="closed" value="true" />
+      <created>1745344482424</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1745344482424</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -354,7 +347,8 @@
     <MESSAGE value="【开发】将bsp里的所有文件都改为了ixx文件，并删除了无关文件。同时修改了bsp的包含逻辑" />
     <MESSAGE value="【开发】可以正常编译了" />
     <MESSAGE value="【开发】修复了一些小问题，关于App的组织" />
-    <option name="LAST_COMMIT_MESSAGE" value="【开发】修复了一些小问题，关于App的组织" />
+    <MESSAGE value="【备份】准备编写Utils层" />
+    <option name="LAST_COMMIT_MESSAGE" value="【备份】准备编写Utils层" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

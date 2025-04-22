@@ -1,5 +1,5 @@
 #pragma once
-
+#include <project_config.h>
 namespace app
 {
     class Control

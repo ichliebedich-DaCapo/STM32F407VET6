@@ -1,11 +1,14 @@
 //
 // Created by fairy on 2024/12/30 23:43.
 //
+module;
 export module Flags;
 
-export
-{
 #include <cstdint>
+
+export namespace utils
+{
+
 
     /**
      * @brief 标志类
@@ -44,8 +47,7 @@ export
         // 辅助函数：检查指定标志，返回为true的同时会清除标志位
         static bool check_flag(enum_type flag)
         {
-            bool flag_result = get_flag(flag);
-            if(flag_result)
+            if(bool flag_result = get_flag(flag))
             {
                 clear_flag(flag);
                 return true;

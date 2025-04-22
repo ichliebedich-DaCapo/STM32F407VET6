@@ -14,7 +14,7 @@
 #endif
 // 头文件
 
-#include "key.hpp"
+
 #include "key_adapter.hpp"
 
 import async_delay;
@@ -22,8 +22,11 @@ import delay;
 import adc;
 import rng;
 import usart;
+import key;
 
-using AsyncDelay_HAL = AsyncDelay<HAL_GetTick>;
+using namespace utils;// 使用工具函数集合
+
+using AsyncDelay_HAL = async_delay<HAL_GetTick>;
 AsyncDelay_HAL async_delay(500);
 
 #define TEST_FPGA_REG (*((volatile unsigned short *)0x60020000))
