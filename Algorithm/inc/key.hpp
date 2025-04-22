@@ -28,11 +28,9 @@ constexpr uint8_t keyKD = 0xD;
 constexpr uint8_t keyKE = 0xE;
 constexpr uint8_t keyKF = 0xF;
 
-extern void key_handler();// 按键处理函数
-
-
 class Key {
 public:
+    static void handler();
 
     // 平台适配接口（通过模板参数注入）
     template<typename Adapter>
@@ -56,7 +54,7 @@ public:
         // 主循环处理
         static inline void poll() {
             if (Adapter::acquire()) {
-               key_handler();
+               handler();
             }
         }
 

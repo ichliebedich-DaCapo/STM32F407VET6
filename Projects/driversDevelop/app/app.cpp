@@ -1,8 +1,8 @@
 //
 // Created by fairy on 2025/1/9 13:31.
 //
-#include <project_config.h>
 
+#include <app.hpp>
 #ifdef GUI_ENABLE
 
 #include "GUI.hpp"
@@ -17,11 +17,9 @@
 #include "key.hpp"
 #include "key_adapter.hpp"
 
-#include "stm32f4xx_hal.h"
-
 
 import async_delay;
-#include <cstdio>
+import delay;
 
 using AsyncDelay_HAL = AsyncDelay<HAL_GetTick>;
 AsyncDelay_HAL async_delay(500);
@@ -49,9 +47,8 @@ const uint16_t color[120 * 120] = {};
 extern UART_HandleTypeDef  huart1;
 extern UART_HandleTypeDef hdma_usart1_tx;
 
-import delay;
 
-void app_init()
+void App::init()
 {
     // adc1_temperature_sensor_init();
     // RNG_Init();
@@ -64,7 +61,7 @@ void app_init()
 
 }
 
-void key_handler()
+void Key::handler()
 {
     switch (PlatformKey::getCode())
     {
@@ -164,14 +161,17 @@ void adc1_isr()
 
 float temp;
 
-void background_handler()
+
+void App::background_process()
 {
-//    if (async_delay.is_timeout())
-//    {
-//        printf("%f\r\n", get_adc1_temperature());
-//    }
+    //    if (async_delay.is_timeout())
+    //    {
+    //        printf("%f\r\n", get_adc1_temperature());
+    //    }
     //    等待上一次的数据发送完毕
 }
+
+
 
 
 

@@ -32,13 +32,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】将bsp里的所有文件都改为了ixx文件，并删除了无关文件。同时修改了bsp的包含逻辑">
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】可以正常编译了">
+      <change afterPath="$PROJECT_DIR$/Projects/shared/app.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/timer.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/timer.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.hpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/ISR.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/project_config.h.in" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/project_config.h.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/common_functions.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/common_functions.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,7 +200,7 @@
       <workItem from="1744956587136" duration="62000" />
       <workItem from="1745115576770" duration="35000" />
       <workItem from="1745194194440" duration="10000" />
-      <workItem from="1745319255734" duration="20912000" />
+      <workItem from="1745319255734" duration="23442000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -274,7 +274,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745338022745</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="【开发】可以正常编译了">
+      <option name="closed" value="true" />
+      <created>1745340524394</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1745340524394</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -318,7 +326,8 @@
     <MESSAGE value="【开发】更改了bsp的包含逻辑" />
     <MESSAGE value="【备份】准备尝试module特性" />
     <MESSAGE value="【开发】将bsp里的所有文件都改为了ixx文件，并删除了无关文件。同时修改了bsp的包含逻辑" />
-    <option name="LAST_COMMIT_MESSAGE" value="【开发】将bsp里的所有文件都改为了ixx文件，并删除了无关文件。同时修改了bsp的包含逻辑" />
+    <MESSAGE value="【开发】可以正常编译了" />
+    <option name="LAST_COMMIT_MESSAGE" value="【开发】可以正常编译了" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

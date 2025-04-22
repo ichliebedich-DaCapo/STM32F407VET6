@@ -1,7 +1,7 @@
 import baseInit;
 #include "key_adapter.hpp"
 import key_exit;
-
+#include <app.hpp>
 #ifdef GUI_ENABLE
 
 #include "lcd.h"
@@ -16,12 +16,6 @@ import key_exit;
 
 #endif
 
-extern void app_init();// 应用程序初始化函数,强制定义
-extern void background_handler();// 后台处理函数
-__attribute__((weak)) void background_handler() {}
-
-
-
 int main()
 {
     /*基础初始化*/
@@ -33,7 +27,7 @@ int main()
     GUI::init<lcd_init,lcd_flush, touch_read_single_point>();
 #endif
 
-    app_init();
+    App::init();
 
     /*主事件循环或调度器*/
 #ifdef FREERTOS_ENABLE
@@ -89,7 +83,7 @@ int main()
         GUI::handler();
 #endif
         PlatformKey::poll();
-        background_handler();
+        App::background_process();
     }
 #endif
 }
