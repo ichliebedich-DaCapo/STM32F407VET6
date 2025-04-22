@@ -4,10 +4,9 @@
 module;
 // ================== 包含头文件 ====================
 #include <project_config.h>
-#include <type_traits>
 // ================== 包含头文件 ====================
 export module timer;
-
+#include <type_traits>
 // ================== 硬件抽象层 ==================
 export namespace bsp::timer
 {

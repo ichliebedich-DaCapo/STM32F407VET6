@@ -5,10 +5,26 @@
 
 // ---------配置项-----------
 // 与启用中间库和一些工程的编译有关
-#cmakedefine GUI_ENABLE
-#cmakedefine FREERTOS_ENABLE
-#cmakedefine FREERTOS_DEBUG
-#cmakedefine LTO_ENABLE
+/*-------------------------------- 系统功能配置 --------------------------------*/
+#cmakedefine GUI_ENABLE             /* 图形用户界面支持 */
+#cmakedefine FREERTOS_ENABLE        /* FreeRTOS实时系统支持 */
+#cmakedefine FREERTOS_DEBUG         /* FreeRTOS调试模式 */
+#cmakedefine AI_ENABLE              /* 人工智能算法支持 */
+
+/*-------------------------------- 编译优化配置 --------------------------------*/
+#cmakedefine STATIC_LIB_LD          /* 独立静态库链接方式 */
+#cmakedefine LTO_ENABLE             /* 链接时优化(LTO)支持 */
+
+/*-------------------------------- 外设驱动配置 --------------------------------*/
+#cmakedefine DMA_SPI_ENABLE         /* SPI DMA传输支持 */
+#cmakedefine DMA_FSMC_ENABLE        /* FSMC DMA传输支持 */
+#cmakedefine SD_SPI_ENABLE          /* SD卡SPI模式支持 */
+#cmakedefine LCD_8080_PORT_ENABLE  /* 8080并行LCD接口支持 */
+#cmakedefine LCD_SPI_PORT_ENABLE   /* SPI LCD接口支持 */
+#cmakedefine DMA_USART_ENABLE      /* USART DMA传输支持 */
+
+/*-------------------------------- 算法库配置 --------------------------------*/
+#cmakedefine FFT_ENABLE             /* 快速傅里叶变换支持 */
 
 
 

@@ -33,7 +33,7 @@ set(LCD_8080_PORT_ENABLE OFF CACHE INTERNAL "LCD_8080_PORT option")
 set(LCD_SPI_PORT_ENABLE OFF CACHE INTERNAL "LCD_SPI_PORT option")
 set(DMA_USART_ENABLE OFF CACHE INTERNAL "DMA_USART_PORT option")
 set(FFT_ENABLE OFF CACHE INTERNAL "FFT option")
-set(AI_ENABLE OFF CACHE INTERNAL "AI option")
+
 
 # 写完项目宏还要写 功能宏，在common_config.h.in和project_config.h.in中定义
 # 关闭GUI

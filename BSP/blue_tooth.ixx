@@ -143,9 +143,10 @@ bool bsp::bluetooth::is_busy() noexcept {
 }
 
 // ================== 中断处理 ==================
-extern "C" void HAL_UART_TxCpltCallback(const UART_HandleTypeDef *huart) {
-    if(huart == bt_controller.uart) {
-        bt_controller.tx_status = 0;
+extern "C" void HAL_UART_TxCpltCallback(const UART_HandleTypeDef *huart)
+{
+    if (huart == &bsp::usart::huart1) {
+        HAL_UART_DMAStop(&bsp::usart::huart1);		//传输完成以后关闭串口DMA,缺了这一句会死机
     }
 }
 

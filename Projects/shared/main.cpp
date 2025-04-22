@@ -1,4 +1,3 @@
-#include <project_config.h>
 import baseInit;
 #include "key_adapter.hpp"
 import key_exit;

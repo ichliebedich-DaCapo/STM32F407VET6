@@ -148,18 +148,17 @@ void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
 }
 //DMA_USART_ENABLE 里封印着ESP8266的中断回调函数
 #ifdef DMA_USART_ENABLE
-extern UART_HandleTypeDef  huart1;
-extern DMA_HandleTypeDef hdma_usart1_tx;
-extern uint8_t UartRxData;
-extern uint8_t UartRxFlag;
-extern uint8_t UartIntRxbuf[500];
-extern uint16_t UartRxIndex;
-extern  void UART_RecvDealwith();
+DMA_HandleTypeDef hdma_usart1_tx;
+uint8_t UartRxData;
+uint8_t UartRxFlag;
+uint8_t UartIntRxbuf[500];
+uint16_t UartRxIndex;
+
 //串口1在1字节接收完成回调函数
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 
-    if(huart==&huart1)//判断是否串口1
+    if(huart==&bsp::usart::huart1)//判断是否串口1
     {
 //        UartRxFlag=0x55;//接收标志置位
         UartIntRxbuf[UartRxIndex]=UartRxData;//数据写入缓冲区
@@ -168,20 +167,12 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
         {
             UartRxIndex=0;
         }
-        HAL_UART_Receive_IT(&huart1,(unsigned char*)&UartRxData,1);//继续接收下一字节
+        HAL_UART_Receive_IT(&bsp::usart::huart1,(unsigned char*)&UartRxData,1);//继续接收下一字节
     }
 
 }
 // UART发送完成中断调用。 UART_DMATransmitCplt  和 UART_EndTransmit_IT 调用
-void HAL_UART_TxCpltCallback(const UART_HandleTypeDef *huart)
-{
-    if (huart == &huart1) {
-        // 在此处重新启用 DMA 或执行其他操作
-//        __HAL_DMA_ENABLE(&hdma_usart1_tx);
-//        __HAL_DMA_CLEAR_FLAG(&hdma_usart1_tx, DMA_FLAG_TC4); //清除DMA2_Steam7传输完成标志
-        HAL_UART_DMAStop(&huart1);		//传输完成以后关闭串口DMA,缺了这一句会死机
-    }
-}
+
 
 #else
 uint8_t UartIntRxbuf[500];
@@ -203,34 +194,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
 }
 #endif
-void SysTick_Handler(void)
+void SysTick_Handler()
 {
-    /* USER CODE BEGIN SysTick_IRQn 0 */
-
-    /* USER CODE END SysTick_IRQn 0 */
     HAL_IncTick();
-    /* USER CODE BEGIN SysTick_IRQn 1 */
-//    UART_RecvDealwith();
-    /* USER CODE END SysTick_IRQn 1 */
 }
 
-/* USER CODE BEGIN Header */
-/**
-  ******************************************************************************
-  * @file    stm32f4xx_it.c
-  * @brief   Interrupt Service Routines.
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2024 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
 
 
 extern "C" {
