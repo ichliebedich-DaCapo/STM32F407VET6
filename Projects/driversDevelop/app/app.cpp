@@ -24,29 +24,22 @@ import rng;
 import usart;
 import key;
 
-using namespace utils;// 使用工具函数集合
 
-using AsyncDelay_HAL = async_delay<HAL_GetTick>;
+using AsyncDelay_HAL = utils::async_delay<HAL_GetTick>;
 AsyncDelay_HAL async_delay(500);
 
 #define TEST_FPGA_REG (*((volatile unsigned short *)0x60020000))
 
 namespace
 {
-    volatile static uint16_t read_reg;
-    volatile static uint16_t write_reg;
-    volatile static uint32_t pre_tick;
-    volatile static uint32_t current_tick;
+    volatile uint16_t read_reg;
+    volatile uint16_t write_reg;
+    volatile uint32_t pre_tick;
+    volatile uint32_t current_tick;
     uint8_t arr_error_fpga[1000];
     uint16_t error_fpga_count = 0;
     float error_fpga_rate = 0;
-    char test_data[] = "aaa_DMA\r\n";
-    // 变量
 
-    uint32_t SD_SingleBlockTest_Status = 168;
-    uint32_t SD_multiBlockTest_Status = 168;
-
-    const uint16_t color[120 * 120] = {};
 }
 
 
@@ -72,94 +65,67 @@ namespace app
 }
 
 
-void Key::handler()
+
+namespace utils
 {
-    switch (PlatformKey::getCode())
+    void Key::handler()
     {
-        case keyK0:
-            // 测试错误率
-            for (uint32_t i = 0; i < 100000; i++)
-            {
-                // write_reg = Get_Random_Number() & 0xFFFF;
-                TEST_FPGA_REG = write_reg;
-                read_reg = TEST_FPGA_REG;
-                if (write_reg != read_reg)
+        switch (PlatformKey::getCode())
+        {
+            case keyK0:
+                // 测试错误率
+                for (uint32_t i = 0; i < 100000; i++)
                 {
-                    arr_error_fpga[error_fpga_count++] = i;
+                    // write_reg = Get_Random_Number() & 0xFFFF;
+                    TEST_FPGA_REG = write_reg;
+                    read_reg = TEST_FPGA_REG;
+                    if (write_reg != read_reg)
+                    {
+                        arr_error_fpga[error_fpga_count++] = i;
+                    }
                 }
-            }
-            error_fpga_rate = error_fpga_count / 100000.0f;
-            error_fpga_count = 0;
-            __BKPT(2);
-            break;
+                error_fpga_rate = error_fpga_count / 100000.0f;
+                error_fpga_count = 0;
+                __BKPT(2);
+                break;
 
 
-        case keyK1:
-            // 测试访问速度
-            pre_tick = HAL_GetTick();
-            for (uint32_t i = 0; i < 1000000; ++i)
-            {
-                read_reg = TEST_FPGA_REG;
-            }
-            current_tick = HAL_GetTick();
-            current_tick = current_tick - pre_tick; // 单位为ms
-            __BKPT(0);
-            break;
+            case keyK1:
+                // 测试访问速度
+                pre_tick = HAL_GetTick();
+                for (uint32_t i = 0; i < 1000000; ++i)
+                {
+                    read_reg = TEST_FPGA_REG;
+                }
+                current_tick = HAL_GetTick();
+                current_tick = current_tick - pre_tick; // 单位为ms
+                __BKPT(0);
+                break;
 
-        case keyK2:
+            case keyK2:
 
-            break;
+                break;
 
-        case keyK5:
-            // 测试写入速度
-            // 1798ms -> 1.798us一次
-            pre_tick = HAL_GetTick();
-            for (uint32_t i = 0; i < 1000000; ++i)
-            {
-                TEST_FPGA_REG = write_reg;
-            }
-            current_tick = HAL_GetTick();
-            current_tick = current_tick - pre_tick; // 单位为ms
-            __BKPT(1);
-            break;
+            case keyK5:
+                // 测试写入速度
+                // 1798ms -> 1.798us一次
+                pre_tick = HAL_GetTick();
+                for (uint32_t i = 0; i < 1000000; ++i)
+                {
+                    TEST_FPGA_REG = write_reg;
+                }
+                current_tick = HAL_GetTick();
+                current_tick = current_tick - pre_tick; // 单位为ms
+                __BKPT(1);
+                break;
 
-        case keyK6:
-            __BKPT(6);
-
-            break;
-
-        case keyK7:
-            break;
-
-        case keyK8:
-
-            break;
-
-        case keyK9:
-            break;
-
-        case keyKA:
-            break;
-
-        case keyKB:
-            break;
-
-        case keyKC:
-            break;
-
-        case keyKD:
-            break;
-
-        case keyKE:
-            break;
-
-        case keyKF:
-            break;
-
-        default:
-            break;
+            default:
+                break;
+        }
     }
 }
+
+
 
 /**实现中断服务例程*/
 // 用于采集ADC数据
