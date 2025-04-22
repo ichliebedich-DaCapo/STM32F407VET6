@@ -28,18 +28,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="界面完成">
-      <change afterPath="$PROJECT_DIR$/../../../Projects/SignalDistortionMeasurement/ui/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../Projects/SignalDistortionMeasurement/ui/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Component/inc/chart.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Component/inc/chart.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Component/inc/dropdown.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Component/inc/dropdown.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Component/inc/widget.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Component/inc/widget.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw_nxp/bin/Simulator.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw_nxp/bin/Simulator.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Algorithm/inc/fft.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Algorithm/inc/fft.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/StorageOscilloscope/ui/Draw_wave.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/StorageOscilloscope/ui/Draw_wave.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Tools/scripts/convert_lvgl.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Tools/scripts/convert_lvgl.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,6 +170,7 @@
       <workItem from="1745114281512" duration="1701000" />
       <workItem from="1745130116510" duration="7240000" />
       <workItem from="1745238472601" duration="597000" />
+      <workItem from="1745297339712" duration="710000" />
     </task>
     <task id="LOCAL-00001" summary="界面完成">
       <option name="closed" value="true" />
