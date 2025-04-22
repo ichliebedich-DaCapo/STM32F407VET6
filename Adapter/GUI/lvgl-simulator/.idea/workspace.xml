@@ -28,16 +28,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="界面完成">
-      <change afterPath="$PROJECT_DIR$/../../../Projects/SignalDistortionMeasurement/ui/ui_interface.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../Projects/SignalDistortionMeasurement/ui/ui_interface.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Algorithm/inc/fft.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Algorithm/inc/fft.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../BSP/src/esp8266.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/esp8266.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/src/blue_tooth.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/blue_tooth.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../BSP/src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/usart.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Projects/SignalDistortionMeasurement/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/SignalDistortionMeasurement/project_config.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/shared/common_config.h.in" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/shared/common_config.h.in" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +75,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;CMake 应用程序.Simulator.executor&quot;: &quot;Debug&quot;,
+    &quot;CMake 应用程序.Simulator.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
@@ -93,6 +89,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;CPPToolchains&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -173,6 +170,11 @@
       <workItem from="1744510237582" duration="1205000" />
       <workItem from="1744542715982" duration="72000" />
       <workItem from="1744542883346" duration="691000" />
+      <workItem from="1744594953362" duration="597000" />
+      <workItem from="1745114281512" duration="1701000" />
+      <workItem from="1745130116510" duration="7240000" />
+      <workItem from="1745238472601" duration="597000" />
+      <workItem from="1745297339712" duration="710000" />
     </task>
     <task id="LOCAL-00001" summary="界面完成">
       <option name="closed" value="true" />

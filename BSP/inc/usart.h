@@ -18,6 +18,7 @@ void usart2_init() ;
 void uart2_printf(char *fmt, ...);
 
 
+
 ///*
 // *  辅助函数
 // */

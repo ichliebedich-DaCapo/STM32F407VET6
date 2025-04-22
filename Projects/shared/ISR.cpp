@@ -153,6 +153,7 @@ void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
 //DMA_USART_ENABLE 里封印着ESP8266的中断回调函数
 #ifdef DMA_USART_ENABLE
 extern UART_HandleTypeDef  huart1;
+extern DMA_HandleTypeDef hdma_usart1_tx;
 extern uint8_t UartRxData;
 extern uint8_t UartRxFlag;
 extern uint8_t UartIntRxbuf[500];
@@ -164,7 +165,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
     if(huart==&huart1)//判断是否串口1
     {
-        UartRxFlag=0x55;//接收标志置位
+//        UartRxFlag=0x55;//接收标志置位
         UartIntRxbuf[UartRxIndex]=UartRxData;//数据写入缓冲区
         UartRxIndex++;//记载数目加1
         if(UartRxIndex>=500)//缓冲区是500字节，如果存满，归零
@@ -175,7 +176,18 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     }
 
 }
-#endif
+// UART发送完成中断调用。 UART_DMATransmitCplt  和 UART_EndTransmit_IT 调用
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if (huart == &huart1) {
+        // 在此处重新启用 DMA 或执行其他操作
+//        __HAL_DMA_ENABLE(&hdma_usart1_tx);
+//        __HAL_DMA_CLEAR_FLAG(&hdma_usart1_tx, DMA_FLAG_TC4); //清除DMA2_Steam7传输完成标志
+        HAL_UART_DMAStop(&huart1);		//传输完成以后关闭串口DMA,缺了这一句会死机
+    }
+}
+
+#else
 extern UART_HandleTypeDef  huart1;
 extern uint8_t UartIntRxbuf[500];
 extern uint16_t UartRxIndex;
@@ -195,6 +207,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     }
 
 }
+#endif
 void SysTick_Handler(void)
 {
     /* USER CODE BEGIN SysTick_IRQn 0 */

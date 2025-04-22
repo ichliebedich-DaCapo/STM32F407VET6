@@ -27,101 +27,175 @@
 #include "debug.h"
 #include "spi.h"
 #include "fatfs.h"
+#include "esp8266.h"
+#include "usart.h"
+#include "tcp.h"
 #include "stm32f4xx_hal.h"
+#include "blue_tooth.h"
+
+
 import async_delay;
 #include <cstdio>
 
 using AsyncDelay_HAL = AsyncDelay<HAL_GetTick>;
 AsyncDelay_HAL async_delay(500);
 
-typedef struct
-{
-    uint16_t div;
-    uint16_t gain;
-    uint32_t period;
-} WaveInfo;
+#define TEST_FPGA_REG (*((volatile unsigned short *)0x60020000))
+volatile static uint16_t read_reg;
+volatile static uint16_t write_reg;
+volatile static uint32_t pre_tick;
+volatile static uint32_t current_tick;
+uint8_t arr_error_fpga[1000];
+uint16_t error_fpga_count = 0;
+float error_fpga_rate = 0;
+char test_data[] = "aaa_DMA\r\n";
+// 变量
+SD_Error SD_init_Status = SD_DATA_INIT;
+DSTATUS disk_init_Status;
+uint32_t SD_SingleBlockTest_Status = 168;
+uint32_t SD_multiBlockTest_Status = 168;
+// 函数
 
-// 556KHz
-#define FPGA_BUFFER_REG (*((volatile unsigned short *)0x60000000))
-#define FPGA_READ_REG (*((volatile unsigned short *)0x60000800))
-#define FPGA_DIV_REG (*((volatile unsigned short *)0x60000802))
-#define FPGA_INFO_REG (*((volatile WaveInfo *)0x60020000))
-#define FPGA_REGS ((volatile uint16_t  *)0x60000000)
+// 数组
+
+const uint16_t color[120 * 120] = {};
+
+// tcp测试变量
+extern UART_HandleTypeDef  huart1;
+extern UART_HandleTypeDef hdma_usart1_tx;
+volatile uint8_t UartRxData;
 
 
 void app_init()
 {
     adc1_temperature_sensor_init();
     RNG_Init();
-    ITM_Init();
     delay_Init();
+    usart1_init();
+//    HAL_UART_Receive_IT(&huart1,(unsigned char*)&UartRxData,1);//串口接收
+//    ESP8266_Init();
 
-    GPIO_InitTypeDef GPIO_InitStruct = {};
-    GPIO_InitStruct.Pin = GPIO_PIN_5;
-    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET);
-    HAL_Delay(10);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);
-    HAL_Delay(50);
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET);
+//    与FPGA通信代码
+//    GPIO_InitTypeDef GPIO_InitStruct = {0};
+//    GPIO_InitStruct.Pin = GPIO_PIN_4;
+//    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+//    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+//    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
+//    HAL_Delay(10);
+//    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
+//    HAL_Delay(50);
+//    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_SET);
 
 #ifdef SD_SPI_ENABLE
-    //
         disk_init_Status=fatfs_init(0);
 #endif
+
 }
 
-
-uint16_t adc_data[1024];
-uint16_t div;
-uint32_t period;
 void key_handler()
 {
     switch (PlatformKey::getCode())
     {
+
         case keyK0:
-            // 测试速度
-            for (int j = 0; j < 1024; ++j)
-                adc_data[j] = FPGA_REGS[j];
-            __BKPT(4);
+            // 测试错误率
+            for (uint32_t i = 0; i < 100000; i++)
+            {
+                write_reg = Get_Random_Number() & 0xFFFF;
+                TEST_FPGA_REG = write_reg;
+                read_reg = TEST_FPGA_REG;
+                if (write_reg != read_reg)
+                {
+                    arr_error_fpga[error_fpga_count++] = i;
+                }
+
+            }
+            error_fpga_rate = error_fpga_count / 100000.0f;
+            error_fpga_count = 0;
+            __BKPT(2);
             break;
 
 
         case keyK1:
-            if (FPGA_READ_REG)
+            // 测试访问速度
+            pre_tick = HAL_GetTick();
+            for (uint32_t i = 0; i < 1000000; ++i)
             {
-                FPGA_READ_REG = 1;
-                div = FPGA_DIV_REG;
-                for (int j = 0; j < 1024; ++j)
-                    adc_data[j] = FPGA_REGS[j];
-                FPGA_READ_REG = 0;
-                __BKPT(3);
+                read_reg = TEST_FPGA_REG;
             }
-            else
-            {
-                period = FPGA_INFO_REG.period;
-                __BKPT(6);
-            }
-
+            current_tick = HAL_GetTick();
+            current_tick = current_tick - pre_tick;// 单位为ms
+            __BKPT(0);
             break;
 
         case keyK2:
 
-
             break;
 
         case keyK3:
-
+            SD_SingleBlockTest_Status = SD_SingleBlockTest();
             break;
 
         case keyK4:
+            SD_multiBlockTest_Status = SD_MultiBlockTest();
+            break;
+
+        case keyK5:
+            // 测试写入速度
+            // 1798ms -> 1.798us一次
+            pre_tick = HAL_GetTick();
+            for (uint32_t i = 0; i < 1000000; ++i)
+            {
+                TEST_FPGA_REG = write_reg;
+            }
+            current_tick = HAL_GetTick();
+            current_tick = current_tick - pre_tick;// 单位为ms
+            __BKPT(1);
+            break;
+
+        case keyK6:
+            while (1)
+            {
+                ESP8266_STA_TCPClient_Test();//测试TCP通讯
+            }
+            __BKPT(6);
 
             break;
-        default: ;
+
+        case keyK7:
+            ESP8266_Rst();
+            break;
+
+        case keyK8:
+
+            break;
+
+        case keyK9:
+            break;
+
+        case keyKA:
+            break;
+
+        case keyKB:
+            break;
+
+        case keyKC:
+            break;
+
+        case keyKD:
+            break;
+
+        case keyKE:
+            break;
+
+        case keyKF:
+            break;
+
+        default:
+            break;
+
     }
 }
-
 /**实现中断服务例程*/
 // 用于采集ADC数据
 void adc1_isr()
@@ -129,35 +203,26 @@ void adc1_isr()
     // 获取ADC值
 }
 
-// float temp;
-uint32_t temp_period[10];
-uint16_t per_index;
+float temp;
 
 void background_handler()
 {
-    if (async_delay.is_timeout())
+//    if (async_delay.is_timeout())
+//    {
+//        printf("%f\r\n", get_adc1_temperature());
+//    }
+    //    等待上一次的数据发送完毕
+    if (HAL_UART_GetState(&huart1) & HAL_UART_STATE_BUSY_TX)
     {
-        // printf("%f\r\n", get_adc1_temperature());
-        const uint32_t period = FPGA_INFO_REG.period;
-        printf("div:%d gain:%d period:%d freq:%d read:%d\r\n",FPGA_INFO_REG.div,FPGA_INFO_REG.gain, period,
-               250000000 / period,FPGA_READ_REG);
-
-        // min = 0xFFFFFFFF;
-        // max = 0;
-        // temp_period[per_index] = FPGA_PERIOD;
-        // per_index = (per_index + 1) % 6;
-        // if (per_index == 0)
-        // {
-        //     printf("period:");
-        //     for (const unsigned long i: temp_period)
-        //     {
-        //         printf("%lu ", i);
-        //         if (i > max)
-        //             max = i;
-        //         if (i < min && i != 0)
-        //             min = i;
-        //     }
-        //     printf("max:%lu min:%lu\r\n",max,min);
-        // }
+        // 启动DMA传输
+        HAL_UART_Transmit_DMA(&huart1, (uint8_t *) test_data, strlen(test_data));
+        HAL_Delay(1000);
     }
 }
+
+
+
+
+
+
+

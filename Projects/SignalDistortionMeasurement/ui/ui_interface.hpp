@@ -5,7 +5,8 @@
 #ifndef FURINA_UI_INTERFACE_HPP
 #define FURINA_UI_INTERFACE_HPP
 
-#include <bsp_config.h>
+//#include <bsp_config.h>
+
 //
 namespace gui::interface::bsp {
 

@@ -85,7 +85,7 @@ public:
      * 选项会被复制到内部缓冲区，可安全释放原始字符串。
      * 示例：
      * @code
-     * options("Apple\\nBanana\\nOrange");
+     * options("Apple\nBanana\nOrange");
      * @endcode
      */
     Dropdown& options(const char* options) {

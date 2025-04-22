@@ -336,6 +336,7 @@ public:
         return static_cast<Derived &>(*this);
     }
 
+
     // 将对象移动到背景层
     inline Derived &to_background()
     {
@@ -499,6 +500,29 @@ public:
     inline Derived &OnClicked()
     {
         bind_event<handler, LV_EVENT_CLICKED>();
+        return static_cast<Derived &>(*this);
+    }
+
+    // 绑定点击事件
+    template<void(*handler)() = nullptr>
+    inline Derived &OnValueChanged(Event_Handler lambda_handler = nullptr)
+    {
+
+        if constexpr (handler != nullptr)
+        {
+            bind_event<[](Event_t e)
+            {
+                if (lv_event_get_code(e) == LV_EVENT_VALUE_CHANGED)
+                {
+                    handler();
+                }
+            }, LV_EVENT_VALUE_CHANGED>();
+        }
+        else
+        {
+            bind_event<nullptr, LV_EVENT_VALUE_CHANGED>(lambda_handler);
+        }
+
         return static_cast<Derived &>(*this);
     }
 
