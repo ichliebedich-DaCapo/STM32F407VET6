@@ -30,6 +30,10 @@
     <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="界面完成">
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/src/blue_tooth.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/blue_tooth.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/src/usart.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/SignalDistortionMeasurement/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/SignalDistortionMeasurement/project_config.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

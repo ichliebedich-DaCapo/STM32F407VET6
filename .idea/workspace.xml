@@ -34,9 +34,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【THD测量仪】 THD测量仪加上了蓝牙通信功能，暂停时波形图切换存在bug">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【THD测量仪】 THD测量仪 备份">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/blue_tooth.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/blue_tooth.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/usart.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/SignalDistortionMeasurement/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/SignalDistortionMeasurement/project_config.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/ISR.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1703,6 +1707,11 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="libalgorithm" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libalgorithm" CONFIG_NAME="Release-MinGW_ARM">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -2038,15 +2047,7 @@
       <workItem from="1745114277888" duration="1080000" />
       <workItem from="1745130113853" duration="15106000" />
       <workItem from="1745238468142" duration="15049000" />
-      <workItem from="1745297335114" duration="711000" />
-    </task>
-    <task id="LOCAL-00092" summary="【驱动开发】框架改变">
-      <option name="closed" value="true" />
-      <created>1739164332811</created>
-      <option name="number" value="00092" />
-      <option name="presentableId" value="LOCAL-00092" />
-      <option name="project" value="LOCAL" />
-      <updated>1739164332812</updated>
+      <workItem from="1745297335114" duration="4973000" />
     </task>
     <task id="LOCAL-00093" summary="【驱动开发】屏幕白屏">
       <option name="closed" value="true" />
@@ -2432,7 +2433,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745253535576</updated>
     </task>
-    <option name="localTasksCounter" value="141" />
+    <task id="LOCAL-00141" summary="【THD测量仪】 THD测量仪 备份">
+      <option name="closed" value="true" />
+      <created>1745301226585</created>
+      <option name="number" value="00141" />
+      <option name="presentableId" value="LOCAL-00141" />
+      <option name="project" value="LOCAL" />
+      <updated>1745301226586</updated>
+    </task>
+    <option name="localTasksCounter" value="142" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2467,7 +2476,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】spi模式用不到hal库里的sd" />
     <MESSAGE value="【驱动开发】sd_spi初始化失败，无反应" />
     <MESSAGE value="【驱动开发】common_functions.cmake中加入DMA_SPI_ENABLE的开启函数" />
     <MESSAGE value="【驱动开发】格式化SD卡后，sd卡初始化、写入和读取块数据都没问题" />
@@ -2492,7 +2500,8 @@
     <MESSAGE value="【THD测量仪】 fft算法大概写好了" />
     <MESSAGE value="【THD测量仪】 THD测量仪基本完成（除蓝牙通信），图像可在频谱仪和示波器间切换，与FPGA通信正常，程控正常，烧录时有引脚跳变bug" />
     <MESSAGE value="【THD测量仪】 THD测量仪加上了蓝牙通信功能，暂停时波形图切换存在bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="【THD测量仪】 THD测量仪加上了蓝牙通信功能，暂停时波形图切换存在bug" />
+    <MESSAGE value="【THD测量仪】 THD测量仪 备份" />
+    <option name="LAST_COMMIT_MESSAGE" value="【THD测量仪】 THD测量仪 备份" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -2518,6 +2527,7 @@
         <watch expression="temp_arr [i]" />
         <watch expression="temp_arr" />
         <watch expression="fft_outputbuf" />
+        <watch expression="ADC_Data_lvgl" />
       </configuration>
     </watches-manager>
   </component>

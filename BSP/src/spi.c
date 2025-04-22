@@ -184,7 +184,7 @@ void spi2_sendByteArray(unsigned char *data, unsigned int len)
 }
 
 #ifdef DMA_SPI_ENABLE
-void spi2_dma_Init(void)
+void spi2_dma_init(void)
 {
 
     /* DMA controller clock enable */

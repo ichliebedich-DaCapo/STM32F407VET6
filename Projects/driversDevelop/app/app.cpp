@@ -31,6 +31,8 @@
 #include "usart.h"
 #include "tcp.h"
 #include "stm32f4xx_hal.h"
+#include "blue_tooth.h"
+
 
 import async_delay;
 #include <cstdio>
@@ -46,7 +48,7 @@ volatile static uint32_t current_tick;
 uint8_t arr_error_fpga[1000];
 uint16_t error_fpga_count = 0;
 float error_fpga_rate = 0;
-
+char test_data[] = "aaa_DMA\r\n";
 // 变量
 SD_Error SD_init_Status = SD_DATA_INIT;
 DSTATUS disk_init_Status;
@@ -60,6 +62,7 @@ const uint16_t color[120 * 120] = {};
 
 // tcp测试变量
 extern UART_HandleTypeDef  huart1;
+extern UART_HandleTypeDef hdma_usart1_tx;
 volatile uint8_t UartRxData;
 
 
@@ -69,8 +72,8 @@ void app_init()
     RNG_Init();
     delay_Init();
     usart1_init();
-    HAL_UART_Receive_IT(&huart1,(unsigned char*)&UartRxData,1);//串口接收
-    ESP8266_Init();
+//    HAL_UART_Receive_IT(&huart1,(unsigned char*)&UartRxData,1);//串口接收
+//    ESP8266_Init();
 
 //    与FPGA通信代码
 //    GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -164,6 +167,7 @@ void key_handler()
             break;
 
         case keyK8:
+
             break;
 
         case keyK9:
@@ -203,9 +207,16 @@ float temp;
 
 void background_handler()
 {
-    if (async_delay.is_timeout())
+//    if (async_delay.is_timeout())
+//    {
+//        printf("%f\r\n", get_adc1_temperature());
+//    }
+    //    等待上一次的数据发送完毕
+    if (HAL_UART_GetState(&huart1) & HAL_UART_STATE_BUSY_TX)
     {
-        printf("%f\r\n", get_adc1_temperature());
+        // 启动DMA传输
+        HAL_UART_Transmit_DMA(&huart1, (uint8_t *) test_data, strlen(test_data));
+        HAL_Delay(1000);
     }
 }
 

@@ -55,7 +55,7 @@ void BaseInit()
 #endif
 
 #ifdef DMA_SPI_ENABLE
-    spi2_dma_Init();// 初始化SPI+DMA
+    spi2_dma_init();// 初始化SPI+DMA
 #endif
 
 #ifdef LCD_SPI_PORT_ENABLE

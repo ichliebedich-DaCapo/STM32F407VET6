@@ -1,8 +1,9 @@
 #include "blue_tooth.h"
 #include "usart.h"
 
-
 extern UART_HandleTypeDef huart1;
+extern DMA_HandleTypeDef hdma_usart1_tx;
+extern DMA_HandleTypeDef hdma_usart1_rx;
 #pragma pack(push, 1)
 typedef struct {
     uint8_t header;     // 0xA5
@@ -39,7 +40,7 @@ void send_bluetooth_data(float thd,float freq,float sampling_rate,float gain, in
     }
     for(int i=0;i<10;++i)
     {
-        packet.harmonics[i]=normalized[i+1 ];
+        packet.harmonics[i]=normalized[i+1];
     }
 
     // 计算校验和（需包含所有数据）
@@ -49,8 +50,23 @@ void send_bluetooth_data(float thd,float freq,float sampling_rate,float gain, in
         packet.checksum ^= p[i];
     }
 
+    // 已经正确实现USART DMA传输（无需修改）
+#ifdef DMA_USART_ENABLE
+
+
+//    等待上一次的数据发送完毕
+    if(HAL_DMA_GetState(&hdma_usart1_tx) == HAL_DMA_STATE_READY)
+    {
+        __HAL_DMA_DISABLE(&hdma_usart1_tx);
+//        开始发送数据
+        HAL_UART_Transmit_DMA(&huart1, (uint8_t*)&packet, sizeof(packet));
+    }
+
+#else
     // 发送完整数据包
     HAL_UART_Transmit(&huart1, (uint8_t*)&packet, sizeof(packet), 0xFFFF);
+#endif
+
 }
 
 
