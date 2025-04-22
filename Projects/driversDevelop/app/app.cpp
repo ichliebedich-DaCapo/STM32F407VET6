@@ -13,25 +13,11 @@
 #include "cmsis_os2.h"
 #endif
 // 头文件
-#include "adc.h"
+
 #include "key.hpp"
-#include "timer.h"
-#include "rng.h"
-#include "lcd.h"
-#include "touch.h"
-#include "delay.h"
 #include "key_adapter.hpp"
-#include "app.hpp"
-#include "sd_spi.h"
-#include "rcc.h"
-#include "debug.h"
-#include "spi.h"
-#include "fatfs.h"
-#include "esp8266.h"
-#include "usart.h"
-#include "tcp.h"
+
 #include "stm32f4xx_hal.h"
-#include "blue_tooth.h"
 
 
 import async_delay;
@@ -50,8 +36,7 @@ uint16_t error_fpga_count = 0;
 float error_fpga_rate = 0;
 char test_data[] = "aaa_DMA\r\n";
 // 变量
-SD_Error SD_init_Status = SD_DATA_INIT;
-DSTATUS disk_init_Status;
+
 uint32_t SD_SingleBlockTest_Status = 168;
 uint32_t SD_multiBlockTest_Status = 168;
 // 函数
@@ -64,14 +49,14 @@ const uint16_t color[120 * 120] = {};
 extern UART_HandleTypeDef  huart1;
 extern UART_HandleTypeDef hdma_usart1_tx;
 
-
+import delay;
 
 void app_init()
 {
-    adc1_temperature_sensor_init();
-    RNG_Init();
-    delay_Init();
-    usart1_init();
+    // adc1_temperature_sensor_init();
+    // RNG_Init();
+    // BSP::Delay::init();
+    // usart1_init();
 
 #ifdef SD_SPI_ENABLE
         disk_init_Status=fatfs_init(0);
@@ -88,7 +73,7 @@ void key_handler()
             // 测试错误率
             for (uint32_t i = 0; i < 100000; i++)
             {
-                write_reg = Get_Random_Number() & 0xFFFF;
+                // write_reg = Get_Random_Number() & 0xFFFF;
                 TEST_FPGA_REG = write_reg;
                 read_reg = TEST_FPGA_REG;
                 if (write_reg != read_reg)
@@ -119,14 +104,6 @@ void key_handler()
 
             break;
 
-        case keyK3:
-            SD_SingleBlockTest_Status = SD_SingleBlockTest();
-            break;
-
-        case keyK4:
-            SD_multiBlockTest_Status = SD_MultiBlockTest();
-            break;
-
         case keyK5:
             // 测试写入速度
             // 1798ms -> 1.798us一次
@@ -141,10 +118,6 @@ void key_handler()
             break;
 
         case keyK6:
-            while (1)
-            {
-                ESP8266_STA_TCPClient_Test();//测试TCP通讯
-            }
             __BKPT(6);
 
             break;
@@ -198,12 +171,6 @@ void background_handler()
 //        printf("%f\r\n", get_adc1_temperature());
 //    }
     //    等待上一次的数据发送完毕
-    if (HAL_UART_GetState(&huart1) & HAL_UART_STATE_BUSY_TX)
-    {
-        // 启动DMA传输
-        HAL_UART_Transmit_DMA(&huart1, (uint8_t *) test_data, strlen(test_data));
-        HAL_Delay(1000);
-    }
 }
 
 

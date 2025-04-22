@@ -42,7 +42,7 @@ if (STATIC_LIB_LD)
 else ()
     target_sources(${PROJECT_NAME}.elf PUBLIC
             FILE_SET CXX_MODULES FILES
-            ${cxx_modules})
+            ${cxx_modules} ${bsp_modules})
 endif ()
 
 

@@ -6,6 +6,7 @@
   <component name="BackendCodeEditorMiscSettings">
     <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="260" type="long" />
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue" value="CppFormatterOtherPage" type="string" />
     <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
   </component>
   <component name="CMakePresetLoader">{
@@ -31,11 +32,75 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】更改了bsp的包含逻辑">
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【备份】准备尝试module特性">
+      <change afterPath="$PROJECT_DIR$/BSP/delay.ixx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BSP/registers.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/usart.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/adc.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/baseInit.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/blue_tooth.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/cpu_runtime.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/crc.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/dac.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/debug.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/delay.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/esp8266.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/esp_8266.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/fatfs.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/fsmc.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/i2c.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/key_exit.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/lcd.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/mqtt.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/pwr.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/rcc.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/rng.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/sd_spi.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/sdio.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/spi.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/tcp.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/timer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/touch.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/usart.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/inc/w25qxx.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/adc.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/baseInit.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/blue_tooth.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/cpu_runtime.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/crc.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/dac.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/debug.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/delay.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/esp8266.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/esp_8266.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/fatfs.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/fsmc.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/i2c.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/key_exit.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/lcd.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/mqtt.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/pwr.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/rcc.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/rng.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/sd_spi.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/sdio.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/spi.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/tcp.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/timer.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/touch.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/usart.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/src/w25qxx.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/ISR.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/common_config.h.in" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/common_config.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/project_config.h.in" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/project_config.h.in" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake/structure/bsp.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/bsp.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/structure/projects.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/projects.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +129,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Adapter/GUI/Component/inc/widget.hpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Algorithm/inc/fft.hpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BSP/baseInit.ixx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -111,10 +177,16 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Program\Embedded\MCU\STM32\Furina\BSP" />
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\cmake\structure" />
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.Furina.elf">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-w64-i686-arm-none-eabi" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -181,7 +253,7 @@
       <workItem from="1744956587136" duration="62000" />
       <workItem from="1745115576770" duration="35000" />
       <workItem from="1745194194440" duration="10000" />
-      <workItem from="1745319255734" duration="2000" />
+      <workItem from="1745319255734" duration="18115000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -239,7 +311,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745318139183</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="【备份】准备尝试module特性">
+      <option name="closed" value="true" />
+      <created>1745319818768</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1745319818768</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -281,7 +361,8 @@
     <MESSAGE value="【备份】准备查看THD引发的FSMC读取问题" />
     <MESSAGE value="【？？】并未发现FSMC相关问题" />
     <MESSAGE value="【开发】更改了bsp的包含逻辑" />
-    <option name="LAST_COMMIT_MESSAGE" value="【开发】更改了bsp的包含逻辑" />
+    <MESSAGE value="【备份】准备尝试module特性" />
+    <option name="LAST_COMMIT_MESSAGE" value="【备份】准备尝试module特性" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

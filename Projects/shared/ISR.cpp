@@ -12,13 +12,9 @@
  *      而是和启动文件一样，作为资源文件一起链接其他静态库
 */
 
-#include <stm32f4xx_hal.h>
 #include <project_config.h>
-#include <bsp_config.h>
-#include "timer.h"
-#include "adc.h"
 #include "key_adapter.hpp"
-#include "usart.h"
+import usart;
 
 
 #ifdef GUI_ENABLE
@@ -27,7 +23,7 @@
 #ifdef FreeRTOS_ENABLE
 #include "cmsis_os2.h"
 #endif
-#include "fsmc.h"
+
 
 
 
@@ -177,7 +173,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
 }
 // UART发送完成中断调用。 UART_DMATransmitCplt  和 UART_EndTransmit_IT 调用
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+void HAL_UART_TxCpltCallback(const UART_HandleTypeDef *huart)
 {
     if (huart == &huart1) {
         // 在此处重新启用 DMA 或执行其他操作
@@ -188,14 +184,13 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 }
 
 #else
-extern UART_HandleTypeDef  huart1;
-extern uint8_t UartIntRxbuf[500];
-extern uint16_t UartRxIndex;
-extern uint8_t UartRxData;
+uint8_t UartIntRxbuf[500];
+uint16_t UartRxIndex;
+ uint8_t UartRxData;
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 
-    if(huart==&huart1)//判断是否串口1
+    if(huart==&bsp::usart::huart1)//判断是否串口1
     {
         UartIntRxbuf[UartRxIndex]=UartRxData;//数据写入缓冲区
         UartRxIndex++;//记载数目加1
@@ -203,7 +198,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
         {
             UartRxIndex=0;
         }
-        HAL_UART_Receive_IT(&huart1,(unsigned char*)&UartRxData,1);//继续接收下一字节
+        HAL_UART_Receive_IT(&bsp::usart::huart1,(unsigned char*)&UartRxData,1);//继续接收下一字节
     }
 
 }

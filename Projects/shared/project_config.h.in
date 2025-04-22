@@ -1,7 +1,7 @@
 #ifndef PROJECT_CONFIG_H
 #define PROJECT_CONFIG_H
 #include<common_config.h>
-
+#include<stm32f4xx_hal.h>
 
 // ---------配置项-----------
 // 与启用中间库和一些工程的编译有关

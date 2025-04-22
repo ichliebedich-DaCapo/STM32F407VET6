@@ -1,8 +1,7 @@
 #include <project_config.h>
-#include <bsp_config.h>
-#include "baseInit.h"
+import baseInit;
 #include "key_adapter.hpp"
-#include "key_exit.h"
+import key_exit;
 
 #ifdef GUI_ENABLE
 
@@ -27,9 +26,9 @@ __attribute__((weak)) void background_handler() {}
 int main()
 {
     /*基础初始化*/
-    BaseInit(); // 基础驱动初始化
+    bsp::baseInit::init(); // 基础驱动初始化
 
-    PlatformKey::init<key_exti_init>();// 初始化按键
+    PlatformKey::init<bsp::key_exit::init>();// 初始化按键
 
 #ifdef GUI_ENABLE
     GUI::init<lcd_init,lcd_flush, touch_read_single_point>();

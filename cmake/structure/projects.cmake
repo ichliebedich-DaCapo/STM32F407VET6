@@ -1,11 +1,5 @@
 
 # -------------------------------Projects层--------------------------------
-# ------------------------生成配置文件--------------------------
-# 生成公共宏定义配置头文件
-configure_file(
-        ${PROJECTS_DIR}/shared/common_config.h.in
-        ${INC_DIR}/common_config.h
-)
 # 生成PROJECT配置头文件
 configure_file(
         ${PROJECTS_DIR}/shared/project_config.h.in

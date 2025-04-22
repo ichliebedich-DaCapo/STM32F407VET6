@@ -4,11 +4,8 @@ set_bsp_components(
         delay
         adc
         rng
-        sd_spi
         spi
-        fatfs
         usart
-        tcp
         blue_tooth
 )
 

@@ -16,19 +16,16 @@ set(BSP_DRIVERS
         "delay:timer"
         "esp8266:"
         "esp_8266:"
-        "fatfs:sd_spi"
         "fsmc:hal_sram,hal_dma"
         "i2c:hal_i2c"
         "key_exit:"
-        "lcd:fsmc,spi"
+        "lcd:fsmc,spi,registers"
         "mqtt:"
         "pwr:hal_pwr"
         "rcc:hal_rcc,hal_flash_ex"
         "rng:hal_rng"
         "sdio:"
-        "sd_spi:spi,hal_dma"
         "spi:hal_spi"
-        "tcp:"
         "timer:hal_tim_ex"
         "touch:delay,i2c"
         "usart:hal_uart"
@@ -173,7 +170,7 @@ endif ()
 set(ADDED_COMPONENTS "" CACHE INTERNAL "List of added components")
 set(BSP_SRCS "" CACHE INTERNAL "List of BSP source files")
 set(BSP_INC_DIRS "${DRIVERS_INC_DIRS}" CACHE INTERNAL "List of BSP header dirs")
-#message(STATUS "BSP:${BSP_INC_DIRS}")
+set(bsp_modules "" CACHE INTERNAL "List of BSP module files")
 
 
 # 递归解析依赖
@@ -200,10 +197,8 @@ function(add_driver_component comp)
             string(REGEX REPLACE "^ll_" "" LL_COMP ${comp})
             string(TOUPPER ${LL_COMP} LL_COMP_UPPER)
             set(LL_USE_${LL_COMP_UPPER} ON CACHE INTERNAL "Enable LL component ${LL_COMP}")
-        else()
-            # BSP组件：设置BSP_USE_<COMPONENT>
-            set(BSP_USE_${COMP_UPPER} ON CACHE INTERNAL "Enable BSP component ${comp}")
-        endif()
+        else ()
+        endif ()
 
         # 查找依赖项
         foreach (driver ${BSP_DRIVERS})
@@ -225,17 +220,24 @@ function(add_driver_component comp)
         # 添加源文件
         string(FIND "${comp}" "hal_" HAL_POSITION)
         string(FIND "${comp}" "ll_" LL_POSITION)
-        if(HAL_POSITION GREATER -1 OR LL_POSITION GREATER -1 OR "${comp}" STREQUAL "hal")
+        if (HAL_POSITION GREATER -1 OR LL_POSITION GREATER -1 OR "${comp}" STREQUAL "hal" OR "${comp}" STREQUAL "default")
             # 包含hal
             if (${comp}_SRC)
                 list(APPEND BSP_SRCS ${${comp}_SRC})
             endif ()
+            # 修改后的代码段：
         else ()
-            set(bsp_src "${BSP_DIR}/src/${comp}.c")
-            if (EXISTS "${bsp_src}")
-                list(APPEND BSP_SRCS ${bsp_src})
+            set(bsp_src "${BSP_DIR}/${comp}.ixx")
+            if (EXISTS ${bsp_src})
+                get_property(current_modules CACHE bsp_modules PROPERTY VALUE)
+                # 检查是否已存在
+                list(FIND current_modules ${bsp_src} idx)
+                if (idx EQUAL -1)
+                    list(APPEND current_modules ${bsp_src})
+                    set(bsp_modules "${current_modules}" CACHE INTERNAL "List of BSP module files")
+                endif()
             else ()
-                message(STATUS "|ignore|:${comp}")
+                message(WARNING "|ignore|:${comp}")
             endif ()
         endif ()
         set(BSP_SRCS "${BSP_SRCS}" CACHE INTERNAL "List of BSP source files")
@@ -248,10 +250,11 @@ endfunction()
 list(APPEND BSP_COMPONENTS "default")
 foreach (comp ${BSP_COMPONENTS})
     add_driver_component(${comp})
+    message(STATUS "[added]:${comp}  ")
 endforeach ()
 # ------------------------BSP库-----------------------------
 # BSP_SRCS有BSP下的CMakeLists传递进来
-list(APPEND BSP_INC_DIRS "${BSP_DIR}/inc")
+list(APPEND BSP_INC_DIRS "${BSP_DIR}")
 add_library(libbsp STATIC ${BSP_SRCS})
 target_include_directories(libbsp PUBLIC ${BSP_INC_DIRS})
 # 设置静态库的输出目录
