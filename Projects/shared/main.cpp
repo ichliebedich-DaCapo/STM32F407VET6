@@ -27,7 +27,7 @@ int main()
     GUI::init<lcd_init,lcd_flush, touch_read_single_point>();
 #endif
 
-    App::init();
+    app::Control::init();
 
     /*主事件循环或调度器*/
 #ifdef FREERTOS_ENABLE
@@ -83,7 +83,7 @@ int main()
         GUI::handler();
 #endif
         PlatformKey::poll();
-        App::background_process();
+        app::Control::background_process();
     }
 #endif
 }

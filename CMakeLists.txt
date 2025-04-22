@@ -21,7 +21,7 @@ include(cmake/structure/core.cmake)
 # 包含HAL驱动库
 include(cmake/structure/bsp.cmake)
 # 包含算法层
-include(cmake/structure/algorithm.cmake)
+include(cmake/structure/utils.cmake)
 # 包含中间件
 include(cmake/structure/middleware.cmake)
 # 包含适配层

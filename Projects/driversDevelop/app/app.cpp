@@ -17,55 +17,62 @@
 #include "key.hpp"
 #include "key_adapter.hpp"
 
-
 import async_delay;
 import delay;
+import adc;
+import rng;
+import usart;
 
 using AsyncDelay_HAL = AsyncDelay<HAL_GetTick>;
 AsyncDelay_HAL async_delay(500);
 
 #define TEST_FPGA_REG (*((volatile unsigned short *)0x60020000))
-volatile static uint16_t read_reg;
-volatile static uint16_t write_reg;
-volatile static uint32_t pre_tick;
-volatile static uint32_t current_tick;
-uint8_t arr_error_fpga[1000];
-uint16_t error_fpga_count = 0;
-float error_fpga_rate = 0;
-char test_data[] = "aaa_DMA\r\n";
-// 变量
 
-uint32_t SD_SingleBlockTest_Status = 168;
-uint32_t SD_multiBlockTest_Status = 168;
-// 函数
-
-// 数组
-
-const uint16_t color[120 * 120] = {};
-
-// tcp测试变量
-extern UART_HandleTypeDef  huart1;
-extern UART_HandleTypeDef hdma_usart1_tx;
-
-
-void App::init()
+namespace
 {
-    // adc1_temperature_sensor_init();
-    // RNG_Init();
-    // BSP::Delay::init();
-    // usart1_init();
+    volatile static uint16_t read_reg;
+    volatile static uint16_t write_reg;
+    volatile static uint32_t pre_tick;
+    volatile static uint32_t current_tick;
+    uint8_t arr_error_fpga[1000];
+    uint16_t error_fpga_count = 0;
+    float error_fpga_rate = 0;
+    char test_data[] = "aaa_DMA\r\n";
+    // 变量
 
-#ifdef SD_SPI_ENABLE
-        disk_init_Status=fatfs_init(0);
-#endif
+    uint32_t SD_SingleBlockTest_Status = 168;
+    uint32_t SD_multiBlockTest_Status = 168;
 
+    const uint16_t color[120 * 120] = {};
 }
+
+
+namespace app
+{
+    void Control::init()
+    {
+        using namespace bsp;
+        adc::init_temperature_sensor();
+        rng::init();
+        delay::init();
+        usart::init();
+    }
+
+    void Control::background_process()
+    {
+        //    if (async_delay.is_timeout())
+        //    {
+        //        printf("%f\r\n", get_adc1_temperature());
+        //    }
+        //    等待上一次的数据发送完毕
+    }
+}
+
 
 void Key::handler()
 {
     switch (PlatformKey::getCode())
     {
-
         case keyK0:
             // 测试错误率
             for (uint32_t i = 0; i < 100000; i++)
@@ -77,7 +84,6 @@ void Key::handler()
                 {
                     arr_error_fpga[error_fpga_count++] = i;
                 }
-
             }
             error_fpga_rate = error_fpga_count / 100000.0f;
             error_fpga_count = 0;
@@ -93,7 +99,7 @@ void Key::handler()
                 read_reg = TEST_FPGA_REG;
             }
             current_tick = HAL_GetTick();
-            current_tick = current_tick - pre_tick;// 单位为ms
+            current_tick = current_tick - pre_tick; // 单位为ms
             __BKPT(0);
             break;
 
@@ -110,7 +116,7 @@ void Key::handler()
                 TEST_FPGA_REG = write_reg;
             }
             current_tick = HAL_GetTick();
-            current_tick = current_tick - pre_tick;// 单位为ms
+            current_tick = current_tick - pre_tick; // 单位为ms
             __BKPT(1);
             break;
 
@@ -149,9 +155,9 @@ void Key::handler()
 
         default:
             break;
-
     }
 }
+
 /**实现中断服务例程*/
 // 用于采集ADC数据
 void adc1_isr()
@@ -160,22 +166,3 @@ void adc1_isr()
 }
 
 float temp;
-
-
-void App::background_process()
-{
-    //    if (async_delay.is_timeout())
-    //    {
-    //        printf("%f\r\n", get_adc1_temperature());
-    //    }
-    //    等待上一次的数据发送完毕
-}
-
-
-
-
-
-
-
-
-

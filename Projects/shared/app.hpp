@@ -1,10 +1,13 @@
 #pragma once
-class App
+
+namespace app
 {
-public:
-     static void init();// 应用初始化函数
+    class Control
+    {
+    public:
+        static void init();// 应用初始化函数
 
-     static void background_process();// 后台
-};
-
+        static void background_process();// 后台
+    };
+}
 
