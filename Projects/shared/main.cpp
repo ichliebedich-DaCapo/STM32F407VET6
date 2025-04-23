@@ -1,7 +1,7 @@
 import baseInit;
-#include "key_adapter.hpp"
+import key_adapter;
 import key_exit;
-#include <app.hpp>
+import app;
 #ifdef GUI_ENABLE
 
 #include "lcd.h"

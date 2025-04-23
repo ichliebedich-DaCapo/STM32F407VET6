@@ -7,6 +7,7 @@
     <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="260" type="long" />
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
     <option name="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue" value="CppFormatterOtherPage" type="string" />
+    <option name="/Default/Housekeeping/RefactoringsMru/CppRenameRefactoring/DoRenameRelatedFiles/@EntryValue" value="false" type="bool" />
     <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
   </component>
   <component name="CMakePresetLoader">{
@@ -31,23 +32,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【备份】准备编写Utils层">
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【暂缓】准备构思UI层逻辑">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/AsyncDelay.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/async_delay.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/Flags.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/flags.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/cpu_temperature.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/cpu_temperature.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/fft.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/fft.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/fft.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/flash_storage.cppm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/flash_storage.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/flash_storage.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/key.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/key.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/key.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/player.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/player.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/wave_signal.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/wave_signal.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/ISR.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/app.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/app.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/key_adapter.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/key_adapter.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/structure/projects.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/projects.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/structure/utils.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/utils.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,9 +132,9 @@
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.Furina.elf">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
     <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-w64-i686-arm-none-eabi" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
@@ -203,7 +197,8 @@
       <workItem from="1744956587136" duration="62000" />
       <workItem from="1745115576770" duration="35000" />
       <workItem from="1745194194440" duration="10000" />
-      <workItem from="1745319255734" duration="25999000" />
+      <workItem from="1745319255734" duration="26930000" />
+      <workItem from="1745376373466" duration="1447000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -301,7 +296,23 @@
       <option name="project" value="LOCAL" />
       <updated>1745344482424</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="【开发】Utils层编写完毕">
+      <option name="closed" value="true" />
+      <created>1745346012052</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1745346012052</updated>
+    </task>
+    <task id="LOCAL-00014" summary="【暂缓】准备构思UI层逻辑">
+      <option name="closed" value="true" />
+      <created>1745346253456</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1745346253456</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -348,7 +359,9 @@
     <MESSAGE value="【开发】可以正常编译了" />
     <MESSAGE value="【开发】修复了一些小问题，关于App的组织" />
     <MESSAGE value="【备份】准备编写Utils层" />
-    <option name="LAST_COMMIT_MESSAGE" value="【备份】准备编写Utils层" />
+    <MESSAGE value="【开发】Utils层编写完毕" />
+    <MESSAGE value="【暂缓】准备构思UI层逻辑" />
+    <option name="LAST_COMMIT_MESSAGE" value="【暂缓】准备构思UI层逻辑" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

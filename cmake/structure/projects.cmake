@@ -67,19 +67,9 @@ endif ()
 
 
 ## ----------------------------------app库-------------------------
-#add_library(libapp STATIC ${APP_SRCS})
-#target_include_directories(libapp PUBLIC ${APP_INC_DIRS})
-## ----------------Adapter层-----------------
-#if (GUI_ENABLE)
-#    target_link_libraries(libapp PUBLIC libgui)
-#endif ()
-#
-#
-#
-## ------------------Middle层------------------
-## 算法库不需要给Adapter作适配
-#target_link_libraries(libapp PUBLIC libdata libdsp)
-## -----------------Algorithm层-----------------
-#target_link_libraries(libapp PUBLIC libbsp libalgorithm)
-#set_target_properties(libapp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+file(GLOB_RECURSE project_modules "${PROJECTS_DIR}/shared/*.ixx")
+
+
+# ------------------------- 合并所有模块文件 ---------------------------
+set(cxx_modules ${bsp_modules} ${utils_modules} ${project_modules})
 

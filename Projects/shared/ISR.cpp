@@ -13,7 +13,7 @@
 */
 
 #include <project_config.h>
-#include "key_adapter.hpp"
+import key_adapter;
 import usart;
 
 

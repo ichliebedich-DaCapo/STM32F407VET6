@@ -1,11 +1,18 @@
-// key_rtos_adapter.hpp （FreeRTOS专用适配）
-#pragma once
-#include <cstdint>
-import key;
-
+module;
 
 #ifdef FREERTOS_ENABLE
 #include "cmsis_os2.h"
+#endif
+
+export module key_adapter;
+import key;
+
+#include <cstdint>
+
+export
+
+#ifdef FREERTOS_ENABLE
+
     /**
      * @brief FreeRTOS按键适配器
      */
@@ -61,9 +68,12 @@ import key;
     };
 #endif
 
+
+export
 #ifdef FREERTOS_ENABLE
 // 使用别名简化
 using PlatformKey = Key::Core<KeyAdapter<FreeRTOS>>;// RTOS下的按键
 #else
-using PlatformKey = utils::Key::Core<utils::KeyAdapter<Bare>>;// 裸机下的按键
+    using PlatformKey = utils::Key::Core<utils::KeyAdapter<Bare> >; // 裸机下的按键
 #endif
+

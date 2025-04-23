@@ -1,8 +1,8 @@
 //
 // Created by fairy on 2025/1/9 13:31.
 //
-
-#include <app.hpp>
+#include <project_config.h>
+import app;
 #ifdef GUI_ENABLE
 
 #include "GUI.hpp"
@@ -15,7 +15,7 @@
 // 头文件
 
 
-#include "key_adapter.hpp"
+import key_adapter;
 
 import async_delay;
 import delay;
@@ -23,6 +23,7 @@ import adc;
 import rng;
 import usart;
 import key;
+
 
 
 using AsyncDelay_HAL = utils::async_delay<HAL_GetTick>;
@@ -43,6 +44,9 @@ namespace
 }
 
 
+
+
+
 namespace app
 {
     void Control::init()
@@ -52,6 +56,8 @@ namespace app
         rng::init();
         delay::init();
         usart::init();
+
+
     }
 
     void Control::background_process()
