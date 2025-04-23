@@ -6,7 +6,7 @@
 #define SIMULATOR_BASICDRAW_HPP
 #ifdef ARM_MATH_CM4
 
-#include "lcd.h"
+
 #include "stdint.h"
 #else
 #include "simulator.hpp"

@@ -71,5 +71,5 @@ file(GLOB_RECURSE project_modules "${PROJECTS_DIR}/shared/*.ixx")
 
 
 # ------------------------- 合并所有模块文件 ---------------------------
-set(cxx_modules ${bsp_modules} ${utils_modules} ${project_modules})
+set(cxx_modules ${adapter_modules} ${bsp_modules} ${utils_modules} ${project_modules})
 

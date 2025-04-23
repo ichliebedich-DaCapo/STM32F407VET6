@@ -22,8 +22,10 @@
   <component name="CMakeRunConfigurationManager">
     <generated>
       <config projectName="Furina" targetName="libdata" />
+      <config projectName="Furina" targetName="liblvgl" />
       <config projectName="Furina" targetName="Furina.elf" />
       <config projectName="Furina" targetName="libbsp" />
+      <config projectName="Furina" targetName="libgui" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -32,16 +34,54 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【暂缓】准备构思UI层逻辑">
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【备份】准备开始搞GUI">
+      <change afterPath="$PROJECT_DIR$/Adapter/GUI/Compose/gui.ixx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Adapter/GUI/Compose/widgets.ixx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/gui.ui.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Base/GUI.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Base/GUI.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Base/GUI_Base.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Base/GUI_Base.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/CPU.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/FPS.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/anim.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/button.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/chart.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/checkBox.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/component.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/dropdown.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/image.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/imageButton.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/label.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/roller.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/scale.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/slider.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/timer.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/widget.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inspiration.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/src/CPU.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/src/anim.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/src/button.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/src/chart.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/src/component.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/src/dropdown.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/src/image.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/src/imageButton.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/src/label.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/src/roller.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/src/scale.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/src/slider.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/src/timer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Render/BasicDraw.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Render/BasicDraw.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/baseInit.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/baseInit.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/project_config.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cppxx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.hpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/ISR.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/app.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/app.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/key_adapter.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/key_adapter.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/structure/adapter.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/adapter.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake/structure/projects.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/projects.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/structure/utils.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/utils.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,20 +108,9 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Adapter/GUI/Component/inc/widget.hpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Algorithm/inc/fft.hpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/adc.ixx" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BSP/baseInit.ixx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/baseInit.ixx" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/blue_tooth.ixx" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/cpu_runtime.ixx" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/crc.ixx" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/dac.ixx" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/debug.ixx" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/delay.ixx" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Projects/shared/ISR.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cppxx" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -100,33 +129,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;OpenOCD 下载并运行.Furina.elf.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
-    &quot;cf.advertisement.text.has.clang-format&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ZQ&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Program/Embedded/MCU/STM32&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;E:/Program/Embedded/MCU/STM32/Furina/main.cpp&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.C/C++&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "OpenOCD 下载并运行.Furina.elf.executor": "Debug",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.west.config.association.type.startup.service": "true",
+    "cf.advertisement.text.has.clang-format": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "ZQ",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "E:/Program/Embedded/MCU/STM32",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "E:/Program/Embedded/MCU/STM32/Furina/main.cpp",
+    "settings.editor.selected.configurable": "Errors",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Program\Embedded\MCU\STM32\Furina\Adapter\GUI\Compose" />
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\BSP" />
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\cmake\structure" />
     </key>
@@ -152,6 +182,16 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="libgui" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libgui" CONFIG_NAME="Debug-w64-i686-arm-none-eabi">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="liblvgl" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="liblvgl" CONFIG_NAME="Debug-w64-i686-arm-none-eabi">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Furina.elf" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" nameIsGenerated="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-w64-i686-arm-none-eabi" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="E:\Program\Embedded\MCU\STM32\Furina\Tools\configs\stlink.cfg" reset-type="INIT" download-type="UPDATED_ONLY">
         <debugger kind="GDB" isBundled="true" />
@@ -162,8 +202,10 @@
     </configuration>
     <list>
       <item itemvalue="CMake 应用程序.Furina.elf" />
+      <item itemvalue="CMake 应用程序.libgui" />
       <item itemvalue="CMake 应用程序.libbsp" />
       <item itemvalue="CMake 应用程序.libdata" />
+      <item itemvalue="CMake 应用程序.liblvgl" />
       <item itemvalue="OpenOCD 下载并运行.Furina.elf" />
     </list>
   </component>
@@ -198,7 +240,7 @@
       <workItem from="1745115576770" duration="35000" />
       <workItem from="1745194194440" duration="10000" />
       <workItem from="1745319255734" duration="26930000" />
-      <workItem from="1745376373466" duration="1447000" />
+      <workItem from="1745376373466" duration="8557000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -312,7 +354,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745346253456</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="【备份】准备开始搞GUI">
+      <option name="closed" value="true" />
+      <created>1745378472563</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1745378472563</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -361,7 +411,8 @@
     <MESSAGE value="【备份】准备编写Utils层" />
     <MESSAGE value="【开发】Utils层编写完毕" />
     <MESSAGE value="【暂缓】准备构思UI层逻辑" />
-    <option name="LAST_COMMIT_MESSAGE" value="【暂缓】准备构思UI层逻辑" />
+    <MESSAGE value="【备份】准备开始搞GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="【备份】准备开始搞GUI" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

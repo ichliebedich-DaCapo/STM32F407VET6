@@ -5,8 +5,7 @@
 import app;
 #ifdef GUI_ENABLE
 
-#include "GUI.hpp"
-#include "ui.hpp"
+import gui;
 
 #endif
 #ifdef FREERTOS_ENABLE

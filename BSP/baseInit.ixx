@@ -3,34 +3,37 @@
 //
 module;
 #include <project_config.h>
+#ifdef GUI_ENABLE
+#include "lvgl.h"
+#include "lv_port_disp.h"
+#endif
+
 export module baseInit;
 
 import fsmc;
 import rcc;
 import spi;
 import usart;
+// GUI
+#ifdef GUI_ENABLE
+import lcd;
+import touch;
+#endif
+
+// cpu运行时
+#if defined(FREERTOS_DEBUG) && defined(FREERTOS_ENABLE)
+import cpu_runtime;
+#endif
+
 
 export namespace bsp::baseInit
 {
     void init();
 }
 
-#ifdef GUI_ENABLE
 
-#include "lcd.h"
-#include "touch.h"
-#include "lvgl.h"
-#include "lv_port_disp.h"
 
-#endif
 
-#ifdef SD_SPI_ENABLE
-#include "sd_spi.h"
-#endif
-
-#if defined(FREERTOS_DEBUG) && defined(FREERTOS_ENABLE)
-#include "CPU_RunTime.h"
-#endif
 
 
 TIM_HandleTypeDef htim7;
@@ -69,8 +72,8 @@ void bsp::baseInit::init()
 #endif
 
 #ifdef GUI_ENABLE
-    lcd_init();
-    touch_init();
+    lcd::init();
+    touch::init();
 #endif
 
 #ifdef SD_SPI_ENABLE

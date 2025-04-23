@@ -2,10 +2,6 @@ set(GUI_DIR ${ADAPTER_DIR}/GUI)
 
 # -------------------GUI库-------------------
 file(GLOB_RECURSE GUI_SRCS
-        # GUI组件
-        "${GUI_DIR}/Base/*.cpp"
-        "${GUI_DIR}/Component/src/*.cpp"
-        "${GUI_DIR}/Render/*.cpp"
         # GUI衍生物
         "${UI_DIR}/*.cpp"
         "${UI_DIR}/*.c"
@@ -13,9 +9,7 @@ file(GLOB_RECURSE GUI_SRCS
 
 set(GUI_INC_DIRS
         # GUI组件
-        ${GUI_DIR}/Base
-        ${GUI_DIR}/Component/inc
-        ${GUI_DIR}/Render
+        ${GUI_DIR}/Component
         # GUI衍生物
         ${UI_DIR}
 )
@@ -37,6 +31,11 @@ if (GUI_ENABLE)
     target_link_libraries(libgui PUBLIC liblvgl libbsp)
     # 设置静态库的输出目录
     set_target_properties(libgui PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
+
+    file(GLOB_RECURSE adapter_modules
+            "${GUI_DIR}/Compose/*.ixx"
+            "${UI_DIR}/*.ixx"
+    )
 endif ()
 
 

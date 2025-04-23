@@ -18,7 +18,7 @@ import usart;
 
 
 #ifdef GUI_ENABLE
-#include "GUI.hpp"
+import gui;
 #endif
 #ifdef FreeRTOS_ENABLE
 #include "cmsis_os2.h"
