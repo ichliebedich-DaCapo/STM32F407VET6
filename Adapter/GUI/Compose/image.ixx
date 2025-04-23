@@ -1,5 +1,5 @@
 module;
-#include "widgets/image/lv_image.h"
+#include <lvgl.h>
 export module image;
 
 import widget;

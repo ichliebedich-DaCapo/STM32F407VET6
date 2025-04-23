@@ -5,6 +5,7 @@ export import :render;
 // 导入其他资源
 /*!USER_DECLARE_BEGIN!*/
 import ui_data;
+
 /*!USER_DECLARE_END!*/
 
 // ---------------- 导出并加载资源 ----------------
@@ -51,7 +52,7 @@ export namespace gui::widgets::main
     inline Label label_screen_label_3;
     inline Scale scale_screen_scale_1;
     /*!USER_DECLARE_BEGIN!*/
-    Timer updata_timer;
+    inline Timer updata_timer;
     /*!USER_DECLARE_END!*/
 }
 
@@ -95,7 +96,6 @@ export namespace gui::ui
             }
         }
 
-    public:
         static inline auto set_cursor_on_press() -> void
         {
             chart_screen_chart_1.set_cursor_pos_on_pressed(cursor);

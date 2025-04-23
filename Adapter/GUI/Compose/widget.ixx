@@ -52,12 +52,13 @@ export namespace gui::compose
 }
 
 
+// ================== 导出类 ==================
 
-/**
- * @brief 控件基类的数据模型，为了防止实例化多个静态变量而设计的 可以不导出
- */
-namespace gui::compose
+export namespace gui::compose
 {
+    /**
+     * @brief 控件基类的数据模型，为了防止实例化多个静态变量而设计的 可以不导出
+     */
     class WidgetModel
     {
     protected:
@@ -65,12 +66,7 @@ namespace gui::compose
         // 方便获取父对象，因为一般而言定义多个组件时往往只有一个公共父对象
         static inline Obj_t parent_ = nullptr;
     };
-}
 
-
-// ================== 导出类 ==================
-export namespace gui::compose
-{
     /**
      * @brief 控件基类，采用元编程+CRTP模式
      * @tparam Derived

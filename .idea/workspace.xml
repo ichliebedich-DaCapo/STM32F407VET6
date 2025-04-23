@@ -34,11 +34,17 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】UI层可以正确编译了">
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/label.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Compose/label.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/lcd.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/lcd.ixx" afterDir="false" />
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】成功编译ui工程，接下来可以考虑细化ui层">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/image.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Compose/image.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/widget.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Compose/widget.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/cmake-build-debug-mingw_nxp/bin/Simulator.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/gui.ui.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/gui.ui.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +204,7 @@
       <workItem from="1745194194440" duration="10000" />
       <workItem from="1745319255734" duration="26930000" />
       <workItem from="1745376373466" duration="8679000" />
-      <workItem from="1745385092658" duration="3255000" />
+      <workItem from="1745385092658" duration="7203000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -336,7 +342,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745387756952</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="【开发】成功编译ui工程，接下来可以考虑细化ui层">
+      <option name="closed" value="true" />
+      <created>1745388612801</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1745388612801</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -388,7 +402,8 @@
     <MESSAGE value="【备份】准备开始搞GUI" />
     <MESSAGE value="【开发】对UI层的划分已经有了初步进展" />
     <MESSAGE value="【开发】UI层可以正确编译了" />
-    <option name="LAST_COMMIT_MESSAGE" value="【开发】UI层可以正确编译了" />
+    <MESSAGE value="【开发】成功编译ui工程，接下来可以考虑细化ui层" />
+    <option name="LAST_COMMIT_MESSAGE" value="【开发】成功编译ui工程，接下来可以考虑细化ui层" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

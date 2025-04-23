@@ -5,8 +5,7 @@
 
 #include <cmath>
 #include <unistd.h>
-#include "GUI.hpp"
-#include "ui.hpp"
+import gui;
 #include "simulator.hpp"
 #include "WaveCurve.hpp"
 #include <SDL2/SDL.h>
@@ -25,6 +24,7 @@ class KeyboardInput
 public:
     // 构造函数
     KeyboardInput() = default;
+    ~KeyboardInput() = default;
 
     // 添加按键检测
     void addKeyCheck(char key, std::function<void()> callback)

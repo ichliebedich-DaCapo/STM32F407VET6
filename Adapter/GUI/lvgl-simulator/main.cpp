@@ -2,7 +2,7 @@
 #include <SDL2/SDL.h>
 #include "simulator.hpp"
 #include "lvgl.h"
-#include "GUI.hpp"
+import gui;
 
 int lv_tick_thread(void *data);
 extern int keyboard_thread(void *data);
@@ -13,7 +13,7 @@ extern int keyboard_thread(void *data);
 int main(int argc, char *argv[])
 {
     // GUI初始化
-    GUI::init<simulator_init,LCD_Color_Fill,touchpad_read_xy>();
+    gui::Render::init<simulator_init,LCD_Color_Fill,touchpad_read_xy>();
 
     SDL_CreateThread(lv_tick_thread, "lv_tick", nullptr);// lv_tick线程
     SDL_CreateThread(keyboard_thread, "keyboard", nullptr);// 键盘线程
@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     while (simulator_is_running())
     {
         simulator_event_Handler();// 模拟器事件处理
-        GUI::handler();// lvgl事件处理
+        gui::Render::handler();// lvgl事件处理
 
         SDL_Delay(10);// 短暂休眠
 
