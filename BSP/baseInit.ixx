@@ -14,6 +14,7 @@ import fsmc;
 import rcc;
 import spi;
 import usart;
+import delay;
 // GUI
 #ifdef GUI_ENABLE
 import lcd;
@@ -53,9 +54,9 @@ void bsp::baseInit::init()
     ConfigureTimerForRunTimeStats();
 #endif
 
-#ifdef BSP_USE_DELAY
-    // delay_Init();
-#endif
+//#ifdef BSP_USE_DELAY
+    delay::init();
+//#endif
     //按键和lcd都可能用fsmc，这里不做更改
     fsmc::init();
 
@@ -63,12 +64,8 @@ void bsp::baseInit::init()
     fsmc_dma_init();// 初始化FSMC+DMA
 #endif
 
-#ifdef DMA_SPI_ENABLE
-    spi2_dma_init();// 初始化SPI+DMA
-#endif
-
 #ifdef LCD_SPI_PORT_ENABLE
-    spi2_init(); //硬件SPI初始化
+    spi::init_spi2(); //硬件SPI初始化
 #endif
 
 #ifdef GUI_ENABLE

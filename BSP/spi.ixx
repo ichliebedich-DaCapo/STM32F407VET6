@@ -133,6 +133,14 @@ void bsp::spi::init_spi2() noexcept
     }
 
 #ifdef DMA_SPI_ENABLE
+    __HAL_RCC_DMA1_CLK_ENABLE();
+
+    HAL_NVIC_SetPriority(DMA1_Stream3_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(DMA1_Stream3_IRQn);
+
+    HAL_NVIC_SetPriority(DMA1_Stream4_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(DMA1_Stream4_IRQn);
+
     // DMA发送配置
     hdma_spi2_tx.Instance = DMA1_Stream4;
     hdma_spi2_tx.Init = {
@@ -140,8 +148,8 @@ void bsp::spi::init_spi2() noexcept
         .Direction = DMA_MEMORY_TO_PERIPH,
         .PeriphInc = DMA_PINC_DISABLE,
         .MemInc = DMA_MINC_ENABLE,
-        .PeriphDataAlignment = DMA_PDATAALIGN_BYTE,
-        .MemDataAlignment = DMA_MDATAALIGN_BYTE,
+        .PeriphDataAlignment = DMA_PDATAALIGN_BYTE,// 接收半字
+        .MemDataAlignment = DMA_MDATAALIGN_BYTE,// 跟字节序有关
         .Mode = DMA_NORMAL,
         .Priority = DMA_PRIORITY_HIGH,
         .FIFOMode = DMA_FIFOMODE_DISABLE
@@ -155,8 +163,8 @@ void bsp::spi::init_spi2() noexcept
         .Direction = DMA_PERIPH_TO_MEMORY,
         .PeriphInc = DMA_PINC_DISABLE,
         .MemInc = DMA_MINC_ENABLE,
-        .PeriphDataAlignment = DMA_PDATAALIGN_BYTE,
-        .MemDataAlignment = DMA_MDATAALIGN_BYTE,
+        .PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD,// 接收半字
+        .MemDataAlignment = DMA_MDATAALIGN_HALFWORD,
         .Mode = DMA_NORMAL,
         .Priority = DMA_PRIORITY_MEDIUM,
         .FIFOMode = DMA_FIFOMODE_DISABLE
@@ -165,7 +173,14 @@ void bsp::spi::init_spi2() noexcept
 
     __HAL_LINKDMA(&hspi2, hdmatx, hdma_spi2_tx);
     __HAL_LINKDMA(&hspi2, hdmarx, hdma_spi2_rx);
+
+//    dma_init();
+    __HAL_SPI_DISABLE_IT(&hspi2, SPI_IT_TXE);
+    __HAL_DMA_ENABLE_IT(&hdma_spi2_rx, DMA_IT_TC);
+
 #endif
+
+
 }
 
 /**
@@ -225,6 +240,7 @@ extern "C"
 /**
  * @brief DMA接收流中断服务函数
  */
+#ifdef DMA_SPI_ENABLE
 void DMA1_Stream3_IRQHandler()
 {
     HAL_DMA_IRQHandler(&bsp::spi::hdma_spi2_rx);
@@ -237,4 +253,5 @@ void DMA1_Stream4_IRQHandler()
 {
     HAL_DMA_IRQHandler(&bsp::spi::hdma_spi2_tx);
 }
+#endif
 }

@@ -29,30 +29,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="【模拟器】成功使用MSVC完成模拟器的开发">
-      <change afterPath="$PROJECT_DIR$/../Compose/gui_compose.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Compose/anim.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Compose/button.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Compose/chart.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Compose/checkBox.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Compose/component.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Compose/cpu.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Compose/dropdown.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Compose/gui.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Compose/gui.render.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Compose/image.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Compose/imageButton.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Compose/label.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Compose/roller.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Compose/scale.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Compose/slider.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Compose/timer.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Compose/widget.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Compose/widgets.ixx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/baseInit.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/baseInit.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../BSP/lcd.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/lcd.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/shared/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/shared/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/spi.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/spi.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/app/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/project_config.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,8 +58,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
-    "url": "https://github.com/ichliebedich-DaCapo/STM32F407VET6.git",
-    "accountId": "a679c97f-91ee-40eb-8ce5-af8a944aaf79"
+    "url": "https://github.com/ichliebedich-DaCapo/STM32F407VET6",
+    "accountId": "a9ff9cce-f6cd-41c3-bd49-a806fb1abb79"
   }
 }]]></component>
   <component name="HighlightingSettingsPerFile">
@@ -116,7 +100,7 @@
     "cf.advertisement.text.has.clang-format": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "ZQ",
+    "git-widget-placeholder": "bsp",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -133,11 +117,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Simulator" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Simulator" TARGET_NAME="Simulator" CONFIG_NAME="Debug-Visual Studio" RUN_TARGET_PROJECT_NAME="Simulator" RUN_TARGET_NAME="Simulator">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -193,6 +172,7 @@
       <workItem from="1745238472601" duration="597000" />
       <workItem from="1745297339712" duration="710000" />
       <workItem from="1745390196011" duration="14322000" />
+      <workItem from="1745419002939" duration="42000" />
     </task>
     <task id="LOCAL-00001" summary="界面完成">
       <option name="closed" value="true" />

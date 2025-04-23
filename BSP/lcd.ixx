@@ -10,6 +10,17 @@ export namespace bsp::lcd
 {
     void init();// 初始化
     void flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p);// 涂块
+
+    void CS_LOW()
+    {
+        bsp::spi::cs_low();
+    }
+
+    void CS_HIGH()
+    {
+        bsp::spi::cs_high();
+    }
+
 }
 
 /*预编译*/
@@ -38,11 +49,16 @@ inline uint16_t dma_buf[BUF_SIZE] __attribute__((aligned(4))); // 4字节对齐
 #endif
 
 // ==================== 函数声明 ====================
-void LCD_direction(uint8_t direction);
-void LCD_Clear(uint16_t color);
-// ==================== 内联函数 ====================
-namespace
+namespace bsp::lcd
 {
+    void LCD_direction(uint8_t direction);
+
+    void LCD_Clear(uint16_t color);
+
+
+
+// ==================== 内联函数 ====================
+
 #ifdef LCD_SPI_PORT_ENABLE
     void LCD_RST_LOW()
     {
@@ -64,30 +80,22 @@ namespace
         HAL_GPIO_WritePin(LCD_RS_PORT, LCD_RS_PIN, GPIO_PIN_SET);
     }
 
-    void LCD_CS_LOW()
-    {
-        bsp::spi::cs_low();
-    }
 
-    void LCD_CS_HIGH()
-    {
-        bsp::spi::cs_high();
-    }
 
     void LCD_WR_REG(uint8_t data)
     {
-        LCD_CS_LOW();
+        CS_LOW();
         LCD_RS_LOW();// 低电平发送命令
         bsp::spi::send_byte(data);
-        LCD_CS_HIGH();
+        CS_HIGH();
     }
 
     void LCD_WR_DATA(uint8_t data)
     {
-        LCD_CS_LOW();
+        CS_LOW();
         LCD_RS_HIGH();// 高电平发送数据
         bsp::spi::send_byte(data);
-        LCD_CS_HIGH();
+        CS_HIGH();
     }
 #endif
 }
@@ -411,15 +419,22 @@ void bsp::lcd::init()
     delay_ms(120);
     LCD_WR_REG(0x21);
     LCD_WR_REG(0x29);
-    LCD_direction(0);//下两句被封装为此句，默认显示方向为横屏 切记：切换屏幕方向，LCD_Clear函数内要交互x,y
+    bsp::lcd::LCD_direction(0);//下两句被封装为此句，默认显示方向为横屏 切记：切换屏幕方向，LCD_Clear函数内要交互x,y
 //    LCD_WR_REG(0x36);
 //    LCD_WR_DATA(0x60);
-    LCD_Clear(0xffff); //删了，方法2的gui直接不显示，方法1没有关系
+#ifdef DMA_SPI_ENABLE
+    while(HAL_SPI_GetState(&bsp::spi::hspi2) != HAL_SPI_STATE_READY);
+    HAL_SPI_Transmit_DMA(&bsp::spi::hspi2, (uint8_t*)dma_buf, 2);
+    while(HAL_SPI_GetState(&bsp::spi::hspi2) != HAL_SPI_STATE_READY);
+#endif
+
+
 #else
 #endif
 }
 
 
+namespace bsp::lcd {
 
 /**********************************绘制接口*********************************************/
 /**
@@ -466,6 +481,74 @@ void LCD_Set_Window(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey)
     LCD_WR_REG(0x2C);//开始写入GRAM
 #endif
 }
+
+    void flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)
+    {
+#ifdef LCD_8080_PORT_ENABLE
+        #ifdef DMA_FSMC_ENABLE
+
+    LCD_Set_Window(x1, y1, x2, y2);//设置LCD屏幕的扫描区域
+    HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream6, (uint32_t) color_p, TFT_DATA_ADDR,
+                     ((x2 + 1) - x1) * ((y2 + 1) - y1));
+#else
+    LCD_Color_Fill(area->x1, area->y1, area->x2, area->y2, (const uint16_t *)color_p);
+#endif
+#elifdef LCD_SPI_PORT_ENABLE
+
+#ifdef DMA_SPI_ENABLE
+        while (HAL_DMA_GetState(&spi::hdma_spi2_tx) != HAL_DMA_STATE_READY);
+
+        LCD_Set_Window(x1, y1, x2, y2);
+        uint32_t pixel_count = (x2 - x1 + 1) * (y2 - y1 + 1);
+        uint32_t byte_count = pixel_count <<1;
+
+        CS_LOW();
+        LCD_RS_HIGH();
+
+        auto *p = (uint32_t*)color_p;
+        uint32_t pairs = pixel_count >>1;
+        while(pairs--) {
+            *p = __REV16(*p); // 同时处理两个16位元素
+            p++;
+        }
+        // 处理剩余单个元素（如有）
+        if(pixel_count & 1 ) {
+            auto *last = (uint16_t*)p;
+            *last = __REV16(*last);
+        }
+//        auto *buffer = (uint16_t*)color_p;
+//        for(int i=0; i<pixel_count; i++) {
+//            buffer[i] = __REV16(buffer[i]); // 字节交换
+//        }
+
+
+//        HAL_SPI_Transmit_DMA(&spi::hspi2,(uint8_t*) color_p, byte_count);
+        HAL_DMA_Start_IT(
+                &spi::hdma_spi2_tx,
+                (uint32_t)color_p, // 直接使用uint16_t*地址
+                (uint32_t)&spi::hspi2.Instance->DR, // SPI数据寄存器地址
+                byte_count
+        );
+#else
+        LCD_Set_Window(x1, y1, x2, y2); // 设置LCD屏幕的扫描区域
+    CS_LOW(); // 使能LCD片选
+    LCD_RS_HIGH(); // 设置为数据模式
+
+    uint32_t pixel_count = (x2 - x1 + 1) * (y2 - y1 + 1); // 计算像素数量
+    for (uint32_t i = 0; i < pixel_count; ++i)
+    {
+        bsp::spi::send_byte(color_p[i] >> 8); // 发送高字节
+        bsp::spi::send_byte(color_p[i] & 0xFF); // 发送低字节
+    }
+
+    CS_HIGH(); // 禁用LCD片选
+
+#endif
+#endif
+    }
+
+
+
 /**
  * 设置LCD显示方向
  * 该函数用于设置LCD的显示方向，通过指定显示方向参数来确定LCD的显示方式
@@ -566,7 +649,7 @@ void LCD_Clear(uint16_t color)
 /*****8位传输，颜色有问题******/
 // 1. 设置局部窗口
     //一层互斥锁，防止和flush冲突
-    if (HAL_DMA_GetState(&hdma_spi2_tx) != HAL_DMA_STATE_READY) return;
+    if (HAL_DMA_GetState(&bsp::spi::hdma_spi2_tx) != HAL_DMA_STATE_READY) return;
     LCD_Set_Window(0, 0,480- 1,320- 1);
     for(int i=0; i<BUF_SIZE; i++){
         dma_buf[i] = __REV16(color); // 直接存储16位颜色值
@@ -574,7 +657,7 @@ void LCD_Clear(uint16_t color)
     uint32_t total_pixels = 480 * 320;
     uint32_t transferred = 0;
 
-    LCD_CS_LOW();
+    CS_LOW();
     LCD_RS_HIGH(); // 进入GRAM数据模式
     while(transferred < total_pixels) {
 
@@ -584,12 +667,12 @@ void LCD_Clear(uint16_t color)
         // 更新缓冲区内容（可选）
         // for(int i=0; i<chunk; i++) dma_test_buf[i] = color;
 
-        HAL_SPI_Transmit_DMA(&hspi2, (uint8_t*)dma_buf, chunk * 2);
-        while(HAL_SPI_GetState(&hspi2) != HAL_SPI_STATE_READY);
+        HAL_SPI_Transmit_DMA(&bsp::spi::hspi2, (uint8_t*)dma_buf, chunk * 2);
+        while(HAL_SPI_GetState(&bsp::spi::hspi2) != HAL_SPI_STATE_READY);
         transferred += chunk;
 
     }
-    LCD_CS_HIGH();
+    CS_HIGH();
 
 
 
@@ -597,14 +680,14 @@ void LCD_Clear(uint16_t color)
 #else
     LCD_Set_Window(0, 0, 479, 319);//横屏
 //    LCD_Set_Window(0, 0, 319, 479);//竖屏
-    LCD_CS_LOW();
+    CS_LOW();
     LCD_RS_HIGH();
     for (uint32_t i = 0; i < 480 * 320; ++i)
     {
         bsp::spi::send_byte(color >> 8);
         bsp::spi::send_byte(color & 0xFF);
     }
-    LCD_CS_HIGH();
+    CS_HIGH();
 #endif
 #endif
 }
@@ -665,71 +748,16 @@ void LCD_Set_Pixel(uint16_t x, uint16_t y, uint16_t color)
     LCD_WRITE_DATA(color);
 #elifdef LCD_SPI_PORT_ENABLE
     LCD_Set_Window(x, y, x, y);
-    LCD_CS_LOW();
+    CS_LOW();
     LCD_RS_HIGH();
     bsp::spi::send_byte(color >> 8);
     bsp::spi::send_byte(color & 0xFF);
-    LCD_CS_HIGH();
+    CS_HIGH();
 #endif
 
 }
 
-void bsp::lcd::flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)
-{
-#ifdef LCD_8080_PORT_ENABLE
-#ifdef DMA_FSMC_ENABLE
-
-    LCD_Set_Window(x1, y1, x2, y2);//设置LCD屏幕的扫描区域
-    HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream6, (uint32_t) color_p, TFT_DATA_ADDR,
-                     ((x2 + 1) - x1) * ((y2 + 1) - y1));
-#else
-    LCD_Color_Fill(area->x1, area->y1, area->x2, area->y2, (const uint16_t *)color_p);
-#endif
-#elifdef LCD_SPI_PORT_ENABLE
-
-#ifdef DMA_SPI_ENABLE
-    if (HAL_DMA_GetState(&hdma_spi2_tx) != HAL_DMA_STATE_READY) return;
-
-    LCD_Set_Window(x1, y1, x2, y2);
-    uint32_t pixel_count = (x2 - x1 + 1) * (y2 - y1 + 1);
-    uint32_t byte_count = pixel_count * 2;
-
-    LCD_CS_LOW();
-    LCD_RS_HIGH();
-    uint16_t *buffer = (uint16_t*)color_p;
-    for(int i=0; i<pixel_count; i++) {
-        buffer[i] = __REV16(buffer[i]); // 字节交换
-    }
-// 启动DMA传输
-    HAL_DMA_Start_IT(
-            &hdma_spi2_tx,
-            (uint32_t)buffer, // 直接使用uint16_t*地址
-            (uint32_t)&hspi2.Instance->DR, // SPI数据寄存器地址
-            byte_count
-    );
-// 启用SPI TX DMA
-    SET_BIT(hspi2.Instance->CR2, SPI_CR2_TXDMAEN);
-// 启动SPI传输（需确认SPI已使能）
-    SET_BIT(hspi2.Instance->CR1, SPI_CR1_SPE);
 
 
-#else
-    LCD_Set_Window(x1, y1, x2, y2); // 设置LCD屏幕的扫描区域
-    LCD_CS_LOW(); // 使能LCD片选
-    LCD_RS_HIGH(); // 设置为数据模式
-
-    uint32_t pixel_count = (x2 - x1 + 1) * (y2 - y1 + 1); // 计算像素数量
-    for (uint32_t i = 0; i < pixel_count; ++i)
-    {
-        bsp::spi::send_byte(color_p[i] >> 8); // 发送高字节
-        bsp::spi::send_byte(color_p[i] & 0xFF); // 发送低字节
-    }
-
-    LCD_CS_HIGH(); // 禁用LCD片选
-
-#endif
-#endif
 }
-
-
 

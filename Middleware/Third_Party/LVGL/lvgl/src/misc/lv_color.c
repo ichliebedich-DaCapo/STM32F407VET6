@@ -8,6 +8,8 @@
  *********************/
 #include "lv_color.h"
 #include "lv_log.h"
+#include "cmsis_gcc.h"
+
 
 /*********************
  *      DEFINES
@@ -265,9 +267,12 @@ bool lv_color32_eq(lv_color32_t c1, lv_color32_t c2)
 lv_color_t lv_color_hex(uint32_t c)
 {
     lv_color_t ret;
+
+    // RGB 565 先发送高字节，再发送低字节
     ret.red = (c >> 16) & 0xff;
     ret.green = (c >> 8) & 0xff;
     ret.blue = (c >> 0) & 0xff;
+
     return ret;
 }
 
