@@ -34,6 +34,7 @@ if (GUI_ENABLE)
 
     file(GLOB_RECURSE adapter_modules
             "${GUI_DIR}/Compose/*.ixx"
+            "${GUI_DIR}/*.ixx"
             "${UI_DIR}/*.ixx"
     )
 endif ()

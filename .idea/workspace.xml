@@ -30,35 +30,14 @@
   </component>
   <component name="CMakeSettings">
     <configurations>
-      <configuration PROFILE_NAME="Debug-w64-i686-arm-none-eabi" ENABLED="true" CONFIG_NAME="Debug" TOOLCHAIN_NAME="w64-i686-arm-none-eabi" BUILD_OPTIONS="-j 16" />
+      <configuration PROFILE_NAME="Debug-MinGW_ARM" ENABLED="true" CONFIG_NAME="Debug" TOOLCHAIN_NAME="MinGW_ARM" BUILD_OPTIONS="-j 16" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】成功编译ui工程，接下来可以考虑细化ui层">
-      <change afterPath="$PROJECT_DIR$/Adapter/GUI/Compose/gui_compose.ixx" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【THD测量仪】 THD">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/anim.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/button.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/chart.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/checkBox.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/component.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/cpu.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/dropdown.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/gui.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/gui.render.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/image.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/imageButton.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/label.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/roller.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/scale.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/slider.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/timer.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/widget.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/widgets.ixx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/lcd.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/lcd.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Drivers/stm32f4xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Drivers/stm32f4xx_hal_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/structure/adapter.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/adapter.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,9 +47,21 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug-w64-i686-arm-none-eabi" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug-MinGW_ARM" />
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="DV_BAK" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -90,6 +81,9 @@
     <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Projects/shared/ISR.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Projects/shared/ISR.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
+  <component name="PerforceDirect.Settings">
+    <option name="CHARSET" value="none" />
+  </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
     <option name="majorVersion" value="2024" />
@@ -100,38 +94,38 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2ug2KZveHbKlFHJ727AcZzeazyr" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;OpenOCD 下载并运行.Furina.elf.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
-    &quot;cf.advertisement.text.has.clang-format&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ZQ&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Program/Embedded/MCU/STM32&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;E:/Program/Embedded/MCU/STM32/Furina/main.cpp&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "OpenOCD 下载并运行.Furina.elf.executor": "Debug",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.west.config.association.type.startup.service": "true",
+    "cf.advertisement.text.has.clang-format": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "bsp",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "E:/Program/Embedded/MCU/STM32",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "E:/Program/Embedded/MCU/STM32/Furina/main.cpp",
+    "settings.editor.selected.configurable": "CMakeSettings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\Adapter\GUI\Compose" />
@@ -140,32 +134,32 @@
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.Furina.elf">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-MinGW_ARM" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-w64-i686-arm-none-eabi" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
+    <configuration name="libbsp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libbsp" CONFIG_NAME="Debug-MinGW_ARM">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="libbsp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libbsp" CONFIG_NAME="Debug-w64-i686-arm-none-eabi">
+    <configuration name="libdata" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdata" CONFIG_NAME="Debug-MinGW_ARM">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="libdata" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdata" CONFIG_NAME="Debug-w64-i686-arm-none-eabi">
+    <configuration name="libgui" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libgui" CONFIG_NAME="Debug-MinGW_ARM">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="libgui" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libgui" CONFIG_NAME="Debug-w64-i686-arm-none-eabi">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="liblvgl" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="liblvgl" CONFIG_NAME="Debug-w64-i686-arm-none-eabi">
+    <configuration name="liblvgl" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="liblvgl" CONFIG_NAME="Debug-MinGW_ARM">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -190,182 +184,676 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
-      <changelist id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="" />
-      <created>1742655834702</created>
+      <changelist id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="" />
+      <created>1726981313287</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1742655834702</updated>
-      <workItem from="1742655838407" duration="13301000" />
-      <workItem from="1742692383646" duration="6675000" />
-      <workItem from="1742870950137" duration="11000" />
-      <workItem from="1743230315282" duration="7711000" />
-      <workItem from="1743318881698" duration="44000" />
-      <workItem from="1743835102247" duration="1215000" />
-      <workItem from="1743838613084" duration="4597000" />
-      <workItem from="1743907584304" duration="971000" />
-      <workItem from="1743915767870" duration="4836000" />
-      <workItem from="1743925981372" duration="4543000" />
-      <workItem from="1743983216433" duration="9000" />
-      <workItem from="1744297790499" duration="4270000" />
-      <workItem from="1744448050479" duration="605000" />
-      <workItem from="1744455130448" duration="370000" />
-      <workItem from="1744460187560" duration="5732000" />
-      <workItem from="1744470622405" duration="3536000" />
-      <workItem from="1744541701746" duration="2577000" />
-      <workItem from="1744589088644" duration="20000" />
-      <workItem from="1744950006225" duration="3214000" />
-      <workItem from="1744956587136" duration="62000" />
-      <workItem from="1745115576770" duration="35000" />
-      <workItem from="1745194194440" duration="10000" />
-      <workItem from="1745319255734" duration="26930000" />
-      <workItem from="1745376373466" duration="8679000" />
-      <workItem from="1745385092658" duration="10557000" />
+      <updated>1726981313287</updated>
+      <workItem from="1726981317550" duration="25517000" />
+      <workItem from="1727150928776" duration="35000" />
+      <workItem from="1727150975357" duration="1271000" />
+      <workItem from="1728198309906" duration="1578000" />
+      <workItem from="1728199903608" duration="1550000" />
+      <workItem from="1728201645281" duration="1073000" />
+      <workItem from="1728206483596" duration="4604000" />
+      <workItem from="1728224890826" duration="686000" />
+      <workItem from="1728225598516" duration="5601000" />
+      <workItem from="1728233417189" duration="2025000" />
+      <workItem from="1728268966246" duration="663000" />
+      <workItem from="1728278858739" duration="2955000" />
+      <workItem from="1728281843425" duration="25000" />
+      <workItem from="1728281877254" duration="7166000" />
+      <workItem from="1728299186827" duration="39000" />
+      <workItem from="1728299232375" duration="2302000" />
+      <workItem from="1728348307316" duration="663000" />
+      <workItem from="1728360315760" duration="4143000" />
+      <workItem from="1728368212349" duration="3622000" />
+      <workItem from="1728392343320" duration="978000" />
+      <workItem from="1728395806632" duration="864000" />
+      <workItem from="1728439424819" duration="9408000" />
+      <workItem from="1728461902854" duration="1100000" />
+      <workItem from="1728465515056" duration="2400000" />
+      <workItem from="1728484872227" duration="5779000" />
+      <workItem from="1728535951729" duration="5550000" />
+      <workItem from="1728619272365" duration="2425000" />
+      <workItem from="1728640358157" duration="5162000" />
+      <workItem from="1728659885407" duration="5661000" />
+      <workItem from="1728706006983" duration="1625000" />
+      <workItem from="1728717574536" duration="4969000" />
+      <workItem from="1728737608714" duration="7000" />
+      <workItem from="1728747072867" duration="2956000" />
+      <workItem from="1728788596047" duration="1422000" />
+      <workItem from="1728800247253" duration="157000" />
+      <workItem from="1728801697766" duration="155000" />
+      <workItem from="1728802199352" duration="2108000" />
+      <workItem from="1728804326398" duration="652000" />
+      <workItem from="1728804987016" duration="73000" />
+      <workItem from="1728805066628" duration="306000" />
+      <workItem from="1728805378951" duration="487000" />
+      <workItem from="1728805988882" duration="880000" />
+      <workItem from="1728806882497" duration="175000" />
+      <workItem from="1728807076087" duration="1450000" />
+      <workItem from="1728808729252" duration="1711000" />
+      <workItem from="1728810459059" duration="306000" />
+      <workItem from="1728810962563" duration="517000" />
+      <workItem from="1728811491114" duration="725000" />
+      <workItem from="1728816425398" duration="3314000" />
+      <workItem from="1728827825088" duration="5865000" />
+      <workItem from="1728891905818" duration="79000" />
+      <workItem from="1728891993065" duration="1507000" />
+      <workItem from="1728893517052" duration="6000" />
+      <workItem from="1728894700723" duration="250000" />
+      <workItem from="1728894958860" duration="312000" />
+      <workItem from="1728896325983" duration="97000" />
+      <workItem from="1728896437537" duration="6520000" />
+      <workItem from="1728971468549" duration="14000" />
+      <workItem from="1728971864279" duration="633000" />
+      <workItem from="1728987290487" duration="6134000" />
+      <workItem from="1728994332038" duration="850000" />
+      <workItem from="1729158500316" duration="459000" />
+      <workItem from="1729159843778" duration="901000" />
+      <workItem from="1729162055465" duration="561000" />
+      <workItem from="1729164207205" duration="260000" />
+      <workItem from="1729224638980" duration="1446000" />
+      <workItem from="1729247440193" duration="4000" />
+      <workItem from="1729265952812" duration="2243000" />
+      <workItem from="1729304281094" duration="48000" />
+      <workItem from="1729304338217" duration="8000" />
+      <workItem from="1729326639200" duration="9332000" />
+      <workItem from="1729390413954" duration="43241000" />
+      <workItem from="1729470452058" duration="3386000" />
+      <workItem from="1729483523628" duration="643000" />
+      <workItem from="1729489371453" duration="15000" />
+      <workItem from="1729489764404" duration="19000" />
+      <workItem from="1729490049002" duration="1244000" />
+      <workItem from="1729491918734" duration="297000" />
+      <workItem from="1729492652079" duration="19000" />
+      <workItem from="1729493438473" duration="3000" />
+      <workItem from="1729495118572" duration="5423000" />
+      <workItem from="1729574318885" duration="5836000" />
+      <workItem from="1729585768734" duration="53000" />
+      <workItem from="1729615921017" duration="138000" />
+      <workItem from="1729669960233" duration="2407000" />
+      <workItem from="1729674895308" duration="2884000" />
+      <workItem from="1729689439541" duration="8502000" />
+      <workItem from="1729760111332" duration="717000" />
+      <workItem from="1729821849367" duration="124000" />
+      <workItem from="1729822808246" duration="13000" />
+      <workItem from="1729823212979" duration="322000" />
+      <workItem from="1729946339214" duration="23000" />
+      <workItem from="1730015668951" duration="938000" />
+      <workItem from="1730460938052" duration="891000" />
+      <workItem from="1730461843571" duration="8000" />
+      <workItem from="1730478119422" duration="631000" />
+      <workItem from="1730507124617" duration="21430000" />
+      <workItem from="1730557209426" duration="4229000" />
+      <workItem from="1730595421585" duration="1365000" />
+      <workItem from="1730599802257" duration="25192000" />
+      <workItem from="1730694172834" duration="1511000" />
+      <workItem from="1730697414966" duration="410000" />
+      <workItem from="1730708894404" duration="24726000" />
+      <workItem from="1730781885391" duration="645000" />
+      <workItem from="1730806322740" duration="6000" />
+      <workItem from="1730807606236" duration="116000" />
+      <workItem from="1730814464885" duration="302000" />
+      <workItem from="1730820221150" duration="7579000" />
+      <workItem from="1730859505957" duration="665000" />
+      <workItem from="1730866119606" duration="2559000" />
+      <workItem from="1730877719718" duration="7566000" />
+      <workItem from="1730896865625" duration="5652000" />
+      <workItem from="1730976620977" duration="72000" />
+      <workItem from="1730976866478" duration="19000" />
+      <workItem from="1730990078132" duration="5371000" />
+      <workItem from="1731050563510" duration="13946000" />
+      <workItem from="1731071057537" duration="11664000" />
+      <workItem from="1731126680338" duration="11017000" />
+      <workItem from="1731138557520" duration="3000" />
+      <workItem from="1731146753731" duration="2111000" />
+      <workItem from="1731804432575" duration="1000" />
+      <workItem from="1731804440550" duration="979000" />
+      <workItem from="1731805439362" duration="4437000" />
+      <workItem from="1731832462157" duration="36000" />
+      <workItem from="1731937309645" duration="21000" />
+      <workItem from="1732030432676" duration="5512000" />
+      <workItem from="1732035994900" duration="3928000" />
+      <workItem from="1732070356664" duration="11603000" />
+      <workItem from="1732092031903" duration="2999000" />
+      <workItem from="1732386998477" duration="4232000" />
+      <workItem from="1732428943434" duration="2412000" />
+      <workItem from="1733506190475" duration="319000" />
+      <workItem from="1733532159885" duration="358000" />
+      <workItem from="1733584671219" duration="2096000" />
+      <workItem from="1733628473886" duration="1999000" />
+      <workItem from="1733914853746" duration="34000" />
+      <workItem from="1734251679101" duration="6958000" />
+      <workItem from="1734265209046" duration="8918000" />
+      <workItem from="1734275410126" duration="270000" />
+      <workItem from="1734348601182" duration="4304000" />
+      <workItem from="1734355128333" duration="879000" />
+      <workItem from="1734360489520" duration="215000" />
+      <workItem from="1734413317047" duration="5420000" />
+      <workItem from="1734422338265" duration="212000" />
+      <workItem from="1734422595608" duration="192000" />
+      <workItem from="1734430758139" duration="472000" />
+      <workItem from="1734434237402" duration="460000" />
+      <workItem from="1734438722498" duration="73000" />
+      <workItem from="1734438864311" duration="672000" />
+      <workItem from="1734439793050" duration="82000" />
+      <workItem from="1734440090093" duration="544000" />
+      <workItem from="1734442165612" duration="116000" />
+      <workItem from="1734442401755" duration="1530000" />
+      <workItem from="1734508689897" duration="115000" />
+      <workItem from="1734602853664" duration="44000" />
+      <workItem from="1734679015314" duration="2771000" />
+      <workItem from="1734694068126" duration="626000" />
+      <workItem from="1734743034192" duration="1269000" />
+      <workItem from="1734751179404" duration="23877000" />
+      <workItem from="1734798003845" duration="138000" />
+      <workItem from="1734827827399" duration="3000" />
+      <workItem from="1734839898190" duration="3878000" />
+      <workItem from="1734868155154" duration="103000" />
+      <workItem from="1734928047675" duration="1028000" />
+      <workItem from="1734937647100" duration="1276000" />
+      <workItem from="1734952475359" duration="13706000" />
+      <workItem from="1735005118542" duration="263000" />
+      <workItem from="1735008118805" duration="37000" />
+      <workItem from="1735012998068" duration="7997000" />
+      <workItem from="1735059332454" duration="2128000" />
+      <workItem from="1735092385053" duration="7531000" />
+      <workItem from="1735106466709" duration="10370000" />
+      <workItem from="1735198393536" duration="89000" />
+      <workItem from="1735199719148" duration="2034000" />
+      <workItem from="1735218767740" duration="4379000" />
+      <workItem from="1735294699751" duration="5463000" />
+      <workItem from="1735356713533" duration="9646000" />
+      <workItem from="1735372326963" duration="375000" />
+      <workItem from="1737092601248" duration="6484000" />
+      <workItem from="1737108593506" duration="5000" />
+      <workItem from="1737108610148" duration="12794000" />
+      <workItem from="1737261382653" duration="1000" />
+      <workItem from="1737610574431" duration="1769000" />
+      <workItem from="1737612362424" duration="2828000" />
+      <workItem from="1737907612677" duration="320000" />
+      <workItem from="1737948247451" duration="20366000" />
+      <workItem from="1738038410953" duration="15928000" />
+      <workItem from="1738125150733" duration="3949000" />
+      <workItem from="1738380212721" duration="7811000" />
+      <workItem from="1738388917624" duration="714000" />
+      <workItem from="1738403997124" duration="18152000" />
+      <workItem from="1738494227669" duration="509000" />
+      <workItem from="1738497862615" duration="13084000" />
+      <workItem from="1738556710805" duration="4449000" />
+      <workItem from="1738562291962" duration="13574000" />
+      <workItem from="1738592214569" duration="6035000" />
+      <workItem from="1738635557841" duration="16259000" />
+      <workItem from="1738672778316" duration="8671000" />
+      <workItem from="1738685232812" duration="141000" />
+      <workItem from="1738723713201" duration="6978000" />
+      <workItem from="1738733828371" duration="1481000" />
+      <workItem from="1738757696835" duration="12693000" />
+      <workItem from="1738771923988" duration="1385000" />
+      <workItem from="1738813297930" duration="35853000" />
+      <workItem from="1738854721355" duration="1229000" />
+      <workItem from="1738856545299" duration="3695000" />
+      <workItem from="1738898876577" duration="8849000" />
+      <workItem from="1738910105748" duration="11017000" />
+      <workItem from="1738923296661" duration="2240000" />
+      <workItem from="1738985966081" duration="2000" />
+      <workItem from="1739009555264" duration="5000" />
+      <workItem from="1739155244217" duration="6552000" />
+      <workItem from="1739163331229" duration="17434000" />
+      <workItem from="1739184023009" duration="11939000" />
+      <workItem from="1739243531608" duration="33077000" />
+      <workItem from="1739286833047" duration="2173000" />
+      <workItem from="1739289061793" duration="510000" />
+      <workItem from="1739332917477" duration="39246000" />
+      <workItem from="1739416938058" duration="33229000" />
+      <workItem from="1739505218885" duration="32160000" />
+      <workItem from="1739592115106" duration="4873000" />
+      <workItem from="1739597019600" duration="24720000" />
+      <workItem from="1739622861720" duration="12017000" />
+      <workItem from="1739675443594" duration="25267000" />
+      <workItem from="1739772552290" duration="19981000" />
+      <workItem from="1739849943967" duration="14868000" />
+      <workItem from="1739881956013" duration="2373000" />
+      <workItem from="1739933275590" duration="7198000" />
+      <workItem from="1739942570288" duration="25512000" />
+      <workItem from="1740019048847" duration="14404000" />
+      <workItem from="1740110711296" duration="1195000" />
+      <workItem from="1740204264965" duration="7529000" />
+      <workItem from="1740313844540" duration="4830000" />
+      <workItem from="1740318923740" duration="6236000" />
+      <workItem from="1740385684519" duration="4648000" />
+      <workItem from="1740399743788" duration="9734000" />
+      <workItem from="1740410487904" duration="1560000" />
+      <workItem from="1740466215723" duration="1205000" />
+      <workItem from="1740476730648" duration="586000" />
+      <workItem from="1740477331560" duration="13641000" />
+      <workItem from="1740492017255" duration="5895000" />
+      <workItem from="1740499108073" duration="294000" />
+      <workItem from="1740555937920" duration="13519000" />
+      <workItem from="1740655378162" duration="13950000" />
+      <workItem from="1740742018200" duration="17047000" />
+      <workItem from="1740834054253" duration="8767000" />
+      <workItem from="1740902607209" duration="19703000" />
+      <workItem from="1740925956126" duration="5298000" />
+      <workItem from="1740932154870" duration="989000" />
+      <workItem from="1741006101640" duration="12116000" />
+      <workItem from="1741097292007" duration="7553000" />
+      <workItem from="1741433844970" duration="1373000" />
+      <workItem from="1741489187328" duration="4127000" />
+      <workItem from="1742089531816" duration="5921000" />
+      <workItem from="1742095500887" duration="8232000" />
+      <workItem from="1742657090729" duration="7128000" />
+      <workItem from="1742692813465" duration="11088000" />
+      <workItem from="1743140117260" duration="16653000" />
+      <workItem from="1743381716807" duration="310000" />
+      <workItem from="1743834076294" duration="1221000" />
+      <workItem from="1744509197873" duration="912000" />
+      <workItem from="1744510233279" duration="885000" />
+      <workItem from="1744511131807" duration="8512000" />
+      <workItem from="1744542755625" duration="32000" />
+      <workItem from="1744542985038" duration="646000" />
+      <workItem from="1744594956924" duration="1808000" />
+      <workItem from="1745114277888" duration="1080000" />
+      <workItem from="1745130113853" duration="15106000" />
+      <workItem from="1745238468142" duration="15049000" />
+      <workItem from="1745297335114" duration="22102000" />
+      <workItem from="1745411854699" duration="376000" />
     </task>
-    <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
+    <task id="LOCAL-00095" summary="【驱动开发】roller控件和dropdown控件完善，修复label中init函数无法生成字符问题，新增OnValueChanged值变化事件，准备测试chart">
       <option name="closed" value="true" />
-      <created>1742667795010</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
+      <created>1739251425541</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
       <option name="project" value="LOCAL" />
-      <updated>1742667795010</updated>
+      <updated>1739251425542</updated>
     </task>
-    <task id="LOCAL-00002" summary="【开发】AI无法正确推理，固定输出0">
+    <task id="LOCAL-00096" summary="【驱动开发】按键中标签只能显示两个字符，数字没影响">
       <option name="closed" value="true" />
-      <created>1742670595594</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
+      <created>1739257355437</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
       <option name="project" value="LOCAL" />
-      <updated>1742670595594</updated>
+      <updated>1739257355437</updated>
     </task>
-    <task id="LOCAL-00003" summary="【开发】使用一个终端脚本，成功简化ITM调试的启动">
+    <task id="LOCAL-00097" summary="【驱动开发】bug:按键中标签只能显示两个字符，数字没影响">
       <option name="closed" value="true" />
-      <created>1742698409257</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
+      <created>1739257602155</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
       <option name="project" value="LOCAL" />
-      <updated>1742698409257</updated>
+      <updated>1739257602155</updated>
     </task>
-    <task id="LOCAL-00004" summary="【开发】调试FPGA模块">
+    <task id="LOCAL-00098" summary="【驱动开发】chart基本功能完善，光标、标号未测试，用随机函数测试发现还是需要脏数组">
       <option name="closed" value="true" />
-      <created>1743318918636</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
+      <created>1739266750758</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
       <option name="project" value="LOCAL" />
-      <updated>1743318918636</updated>
+      <updated>1739266750758</updated>
     </task>
-    <task id="LOCAL-00005" summary="【备份】准备查看THD引发的FSMC读取问题">
+    <task id="LOCAL-00099" summary="【驱动开发】脏数组和双缓冲与lvgl原有的双缓冲和局部渲染机制冲突不起作用">
       <option name="closed" value="true" />
-      <created>1744543685001</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
+      <created>1739280015227</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
       <option name="project" value="LOCAL" />
-      <updated>1744543685001</updated>
+      <updated>1739280015227</updated>
     </task>
-    <task id="LOCAL-00006" summary="【？？】并未发现FSMC相关问题">
+    <task id="LOCAL-00100" summary="【驱动开发】lvgl图表和WaveDraw的对比">
       <option name="closed" value="true" />
-      <created>1744543951439</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
+      <created>1739350437393</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
       <option name="project" value="LOCAL" />
-      <updated>1744543951439</updated>
+      <updated>1739350437393</updated>
     </task>
-    <task id="LOCAL-00007" summary="【开发】更改了bsp的包含逻辑">
+    <task id="LOCAL-00101" summary="【驱动开发】Render新增WaveDraw和BasicDraw,WaveDraw实现模版化，准备把脏区域也做到类里">
       <option name="closed" value="true" />
-      <created>1745318139183</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
+      <created>1739433012841</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
       <option name="project" value="LOCAL" />
-      <updated>1745318139183</updated>
+      <updated>1739433012842</updated>
     </task>
-    <task id="LOCAL-00008" summary="【备份】准备尝试module特性">
+    <task id="LOCAL-00102" summary="【驱动开发】WaveDraw模版化,插值算法的特化实现完善（不在依赖.cpp）">
       <option name="closed" value="true" />
-      <created>1745319818768</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
+      <created>1739439349711</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
       <option name="project" value="LOCAL" />
-      <updated>1745319818768</updated>
+      <updated>1739439349711</updated>
     </task>
-    <task id="LOCAL-00009" summary="【开发】将bsp里的所有文件都改为了ixx文件，并删除了无关文件。同时修改了bsp的包含逻辑">
+    <task id="LOCAL-00103" summary="【驱动开发】硬件SPI+DMA 存个档">
       <option name="closed" value="true" />
-      <created>1745338022745</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
+      <created>1739505456973</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
       <option name="project" value="LOCAL" />
-      <updated>1745338022745</updated>
+      <updated>1739505456973</updated>
     </task>
-    <task id="LOCAL-00010" summary="【开发】可以正常编译了">
+    <task id="LOCAL-00104" summary="【驱动开发】硬件SPI+DMA 清屏函数成功 提升很大">
       <option name="closed" value="true" />
-      <created>1745340524394</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
+      <created>1739606015670</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
       <option name="project" value="LOCAL" />
-      <updated>1745340524394</updated>
+      <updated>1739606015671</updated>
     </task>
-    <task id="LOCAL-00011" summary="【开发】修复了一些小问题，关于App的组织">
+    <task id="LOCAL-00105" summary="【驱动开发】硬件SPI+DMA 清屏函数成功 修正一点失误 将LCD_CS_LOW();等移到循环外">
       <option name="closed" value="true" />
-      <created>1745343055931</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
+      <created>1739606741244</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
       <option name="project" value="LOCAL" />
-      <updated>1745343055931</updated>
+      <updated>1739606741244</updated>
     </task>
-    <task id="LOCAL-00012" summary="【备份】准备编写Utils层">
+    <task id="LOCAL-00106" summary="【驱动开发】GUI和LCD间的硬件回调注册接口做好了，同时保证了模拟器正常运行（但lvgl还是用不上DMA）">
       <option name="closed" value="true" />
-      <created>1745344482424</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
+      <created>1739619562601</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
       <option name="project" value="LOCAL" />
-      <updated>1745344482424</updated>
+      <updated>1739619562601</updated>
     </task>
-    <task id="LOCAL-00013" summary="【开发】Utils层编写完毕">
+    <task id="LOCAL-00107" summary="【驱动开发】SPI+DMA的GUI能显示，丝滑但颜色不对；flush会和clear函数抢资源，暂时用互斥锁解决了冲突，但是clear无法清全屏">
       <option name="closed" value="true" />
-      <created>1745346012052</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
+      <created>1739628145847</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
       <option name="project" value="LOCAL" />
-      <updated>1745346012052</updated>
+      <updated>1739628145847</updated>
     </task>
-    <task id="LOCAL-00014" summary="【暂缓】准备构思UI层逻辑">
+    <task id="LOCAL-00108" summary="【驱动开发】在lv_conf里找到了帧率LV_USE_PERF_MONITOR和内存占用LV_USE_MEM_MONITOR的开关">
       <option name="closed" value="true" />
-      <created>1745346253456</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
+      <created>1739633173765</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
       <option name="project" value="LOCAL" />
-      <updated>1745346253456</updated>
+      <updated>1739633173765</updated>
     </task>
-    <task id="LOCAL-00015" summary="【备份】准备开始搞GUI">
+    <task id="LOCAL-00109" summary="【驱动开发】硬件SPI+DMA与lvgl对接成功，没想到解决了两个颜色问题全都解决了:LCD_direction中寄存器误操作导致RGB变BGR，lcd_flush中因小端模式（有可能）导致RGB565前八位后八位反了">
       <option name="closed" value="true" />
-      <created>1745378472563</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
+      <created>1739719188883</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
       <option name="project" value="LOCAL" />
-      <updated>1745378472563</updated>
+      <updated>1739719188885</updated>
     </task>
-    <task id="LOCAL-00016" summary="【开发】对UI层的划分已经有了初步进展">
+    <task id="LOCAL-00110" summary="【驱动开发】把回调函数塞在了ISR里，注册机制通通删掉了，GUI与硬件再次隔离开">
       <option name="closed" value="true" />
-      <created>1745385074723</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
+      <created>1739780714674</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
       <option name="project" value="LOCAL" />
-      <updated>1745385074723</updated>
+      <updated>1739780714675</updated>
     </task>
-    <task id="LOCAL-00017" summary="【开发】UI层可以正确编译了">
+    <task id="LOCAL-00111" summary="【驱动开发】SPI+DMA帧率再次提升，原先方法2是正解，RGB565前8位后8位颠倒问题存在但影响不大，lcd_init中LCD_Clear不能删（未知）">
       <option name="closed" value="true" />
-      <created>1745387756952</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
+      <created>1739799643133</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
       <option name="project" value="LOCAL" />
-      <updated>1745387756952</updated>
+      <updated>1739799643133</updated>
     </task>
-    <task id="LOCAL-00018" summary="【开发】成功编译ui工程，接下来可以考虑细化ui层">
+    <task id="LOCAL-00112" summary="【驱动开发】存个档，解决cmake白屏问题">
       <option name="closed" value="true" />
-      <created>1745388612801</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
+      <created>1739941944793</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
       <option name="project" value="LOCAL" />
-      <updated>1745388612801</updated>
+      <updated>1739941944794</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00113" summary="【驱动开发】存个档，解决cmake白屏问题">
+      <option name="closed" value="true" />
+      <created>1739942006665</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1739942006665</updated>
+    </task>
+    <task id="LOCAL-00114" summary="【驱动开发】不白屏了，再试试创建新的BSP">
+      <option name="closed" value="true" />
+      <created>1739942362855</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1739942362855</updated>
+    </task>
+    <task id="LOCAL-00115" summary="【驱动开发】能创建新的BSP了，但是一构建stm32f4xx_hal_conf.h里改的就没了">
+      <option name="closed" value="true" />
+      <created>1739944292891</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1739944292891</updated>
+    </task>
+    <task id="LOCAL-00116" summary="【驱动开发】spi模式用不到hal库里的sd">
+      <option name="closed" value="true" />
+      <created>1739945342561</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1739945342561</updated>
+    </task>
+    <task id="LOCAL-00117" summary="【驱动开发】sd_spi初始化失败，无反应">
+      <option name="closed" value="true" />
+      <created>1739959054134</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1739959054134</updated>
+    </task>
+    <task id="LOCAL-00118" summary="【驱动开发】common_functions.cmake中加入DMA_SPI_ENABLE的开启函数">
+      <option name="closed" value="true" />
+      <created>1740320130964</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1740320130966</updated>
+    </task>
+    <task id="LOCAL-00119" summary="【驱动开发】格式化SD卡后，sd卡初始化、写入和读取块数据都没问题">
+      <option name="closed" value="true" />
+      <created>1740325326055</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1740325326055</updated>
+    </task>
+    <task id="LOCAL-00120" summary="【驱动开发】把baseinit里的代码逻辑理顺了">
+      <option name="closed" value="true" />
+      <created>1740406525063</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1740406525064</updated>
+    </task>
+    <task id="LOCAL-00121" summary="【驱动开发】修正fsmc_init处错误，SD卡多块读写测试返回数据正确">
+      <option name="closed" value="true" />
+      <created>1740412043346</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1740412043346</updated>
+    </task>
+    <task id="LOCAL-00122" summary="【驱动开发】待合并版本">
+      <option name="closed" value="true" />
+      <created>1740478986825</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1740478986825</updated>
+    </task>
+    <task id="LOCAL-00123" summary="【驱动开发】待合并版本2">
+      <option name="closed" value="true" />
+      <created>1740486985420</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1740486985420</updated>
+    </task>
+    <task id="LOCAL-00124" summary="【驱动开发】待合并版本3">
+      <option name="closed" value="true" />
+      <created>1740487077578</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1740487077578</updated>
+    </task>
+    <task id="LOCAL-00125" summary="【驱动开发】待合并版本4 把启动DMA FSMC的宏写好了">
+      <option name="closed" value="true" />
+      <created>1740487990879</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1740487990879</updated>
+    </task>
+    <task id="LOCAL-00126" summary="【驱动开发】待合并版本5 把未版本管理的修改了一下">
+      <option name="closed" value="true" />
+      <created>1740488494090</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1740488494090</updated>
+    </task>
+    <task id="LOCAL-00127" summary="【驱动开发】改了转换样式代码中text_align代码">
+      <option name="closed" value="true" />
+      <created>1740497915608</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1740497915608</updated>
+    </task>
+    <task id="LOCAL-00128" summary="【驱动开发】把roller和chart的脚本代码写好了">
+      <option name="closed" value="true" />
+      <created>1740582537365</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1740582537365</updated>
+    </task>
+    <task id="LOCAL-00129" summary="【驱动开发】准备测试一下lv_chart_set_ext_y_array">
+      <option name="closed" value="true" />
+      <created>1740663567588</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1740663567588</updated>
+    </task>
+    <task id="LOCAL-00130" summary="【驱动开发】用next_value画图的示波器完成">
+      <option name="closed" value="true" />
+      <created>1740669121508</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1740669121508</updated>
+    </task>
+    <task id="LOCAL-00131" summary="【驱动开发】移植了chart的光标">
+      <option name="closed" value="true" />
+      <created>1740750579979</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1740750579981</updated>
+    </task>
+    <task id="LOCAL-00132" summary="【驱动开发】示波器光标已完善，chart新增获取当前光标所处点y值函数">
+      <option name="closed" value="true" />
+      <created>1740758000884</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1740758000885</updated>
+    </task>
+    <task id="LOCAL-00133" summary="【驱动开发】新增scale坐标系，只有y轴情况下又降了一帧，也许可以想个办法单纯画个坐标轴,不占用资源">
+      <option name="closed" value="true" />
+      <created>1740843581158</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1740843581158</updated>
+    </task>
+    <task id="LOCAL-00134" summary="【驱动开发】 完善tcp和esp8266 测试失败">
+      <option name="closed" value="true" />
+      <created>1740933123312</created>
+      <option name="number" value="00134" />
+      <option name="presentableId" value="LOCAL-00134" />
+      <option name="project" value="LOCAL" />
+      <updated>1740933123312</updated>
+    </task>
+    <task id="LOCAL-00135" summary="【驱动开发】 可以连接热点，但esp8266一直向tcp发送数据">
+      <option name="closed" value="true" />
+      <created>1741018377853</created>
+      <option name="number" value="00135" />
+      <option name="presentableId" value="LOCAL-00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1741018377853</updated>
+    </task>
+    <task id="LOCAL-00136" summary="【驱动开发】 准备做电赛练习，存个档">
+      <option name="closed" value="true" />
+      <created>1741489274714</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1741489274715</updated>
+    </task>
+    <task id="LOCAL-00137" summary="【THD测量仪】 完善算法中的fft模块中">
+      <option name="closed" value="true" />
+      <created>1742114115215</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL-00137" />
+      <option name="project" value="LOCAL" />
+      <updated>1742114115215</updated>
+    </task>
+    <task id="LOCAL-00138" summary="【THD测量仪】 fft算法大概写好了">
+      <option name="closed" value="true" />
+      <created>1742661402947</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1742661402948</updated>
+    </task>
+    <task id="LOCAL-00139" summary="【THD测量仪】 THD测量仪基本完成（除蓝牙通信），图像可在频谱仪和示波器间切换，与FPGA通信正常，程控正常，烧录时有引脚跳变bug">
+      <option name="closed" value="true" />
+      <created>1745247552257</created>
+      <option name="number" value="00139" />
+      <option name="presentableId" value="LOCAL-00139" />
+      <option name="project" value="LOCAL" />
+      <updated>1745247552258</updated>
+    </task>
+    <task id="LOCAL-00140" summary="【THD测量仪】 THD测量仪加上了蓝牙通信功能，暂停时波形图切换存在bug">
+      <option name="closed" value="true" />
+      <created>1745253535576</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1745253535576</updated>
+    </task>
+    <task id="LOCAL-00141" summary="【THD测量仪】 THD测量仪 备份">
+      <option name="closed" value="true" />
+      <created>1745301226585</created>
+      <option name="number" value="00141" />
+      <option name="presentableId" value="LOCAL-00141" />
+      <option name="project" value="LOCAL" />
+      <updated>1745301226586</updated>
+    </task>
+    <task id="LOCAL-00142" summary="【THD测量仪】 THD测量仪 DMA传输数据包异常，能正常传输字符">
+      <option name="closed" value="true" />
+      <created>1745317332249</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1745317332249</updated>
+    </task>
+    <task id="LOCAL-00143" summary="【THD测量仪】 THD">
+      <option name="closed" value="true" />
+      <created>1745411918737</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1745411918737</updated>
+    </task>
+    <option name="localTasksCounter" value="144" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -387,7 +875,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/DV" />
+                        <option value="origin/ZQ" />
                       </list>
                     </value>
                   </entry>
