@@ -4,7 +4,7 @@
  */
 
 #include <cmath>
-#include <unistd.h>
+
 import gui;
 #include "simulator.hpp"
 #include "WaveCurve.hpp"

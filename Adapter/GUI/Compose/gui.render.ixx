@@ -7,14 +7,6 @@ export module gui:render;// 自动包含所有组件模块
 
 export import widgets;
 
-/*匿名命名空间，治不了各种函数变量暴露狂*/
-namespace gui
-{
-    constexpr uint16_t DISP_HOR_RES = 480;
-    constexpr uint16_t DISP_VER_RES = 320;
-    constexpr uint16_t DISP_BUF_SIZE = 20; //20
-    constexpr uint8_t BYTE_PER_PIXEL = (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565));
-}
 
 export namespace gui::widgets::main
 {
@@ -25,8 +17,14 @@ export namespace gui::widgets::main
 
 
 
+
 export namespace gui
 {
+    constexpr uint16_t DISP_HOR_RES = 480;
+    constexpr uint16_t DISP_VER_RES = 320;
+    constexpr uint16_t DISP_BUF_SIZE = 20; //20
+    constexpr uint8_t BYTE_PER_PIXEL = (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565));
+
     /**
      * @brief Render类
      * @note 渲染类，用于初始化GUI和运行GUI

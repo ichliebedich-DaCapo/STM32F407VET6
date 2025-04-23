@@ -133,7 +133,12 @@ void lv_mem_monitor(lv_mem_monitor_t * mon_p);
 /**********************
  *      MACROS
  **********************/
-
+ // 在GCC中要定位段，在MSVC不用
+#if defined(__GNUC__)
+#define LV_SECTION(name) __attribute__((section(name)))
+#else
+#define LV_SECTION(name)
+#endif
 #ifdef __cplusplus
 } /*extern "C"*/
 #endif
