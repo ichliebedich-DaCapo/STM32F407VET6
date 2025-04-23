@@ -1,13 +1,12 @@
+#include <project_config.h>
 import baseInit;
 import key_adapter;
 import key_exit;
 import app;
 #ifdef GUI_ENABLE
-
-#include "lcd.h"
-#include "GUI.hpp"
-#include "touch.h"
-
+import lcd;
+import touch;
+import gui;
 #endif
 
 #ifdef FREERTOS_ENABLE
@@ -24,13 +23,14 @@ int main()
     PlatformKey::init<bsp::key_exit::init>();// 初始化按键
 
 #ifdef GUI_ENABLE
-    GUI::init<lcd_init,lcd_flush, touch_read_single_point>();
+    gui::Render::init<bsp::lcd::init,bsp::lcd::lcd_flush,bsp::touch::read_single_point>();
 #endif
 
     app::Control::init();
 
-    /*主事件循环或调度器*/
+
 #ifdef FREERTOS_ENABLE
+    /*主事件循环或调度器*/
     // 创建按键线程
     const osThreadAttr_t keyTask_attributes = {
             .name = "keyTask",
@@ -80,7 +80,7 @@ int main()
     for (;;)
     {
 #ifdef GUI_ENABLE
-        GUI::handler();
+        gui::Render::handler();
 #endif
         PlatformKey::poll();
         app::Control::background_process();

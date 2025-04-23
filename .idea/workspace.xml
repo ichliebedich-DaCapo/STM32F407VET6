@@ -34,14 +34,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】对UI层的划分已经有了初步进展">
-      <change afterPath="$PROJECT_DIR$/Adapter/GUI/Compose/gui.render.ixx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui_data.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/gui.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Compose/gui.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/widgets.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Compose/widgets.ixx" afterDir="false" />
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】UI层可以正确编译了">
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/label.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Compose/label.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/lcd.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/lcd.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/gui.ui.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/gui.ui.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cppxx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,7 +198,7 @@
       <workItem from="1745194194440" duration="10000" />
       <workItem from="1745319255734" duration="26930000" />
       <workItem from="1745376373466" duration="8679000" />
-      <workItem from="1745385092658" duration="2421000" />
+      <workItem from="1745385092658" duration="3255000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -331,7 +328,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745385074723</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="【开发】UI层可以正确编译了">
+      <option name="closed" value="true" />
+      <created>1745387756952</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1745387756952</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -382,7 +387,8 @@
     <MESSAGE value="【暂缓】准备构思UI层逻辑" />
     <MESSAGE value="【备份】准备开始搞GUI" />
     <MESSAGE value="【开发】对UI层的划分已经有了初步进展" />
-    <option name="LAST_COMMIT_MESSAGE" value="【开发】对UI层的划分已经有了初步进展" />
+    <MESSAGE value="【开发】UI层可以正确编译了" />
+    <option name="LAST_COMMIT_MESSAGE" value="【开发】UI层可以正确编译了" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

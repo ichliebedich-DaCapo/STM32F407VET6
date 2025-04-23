@@ -18,7 +18,7 @@ export namespace gui::compose
         inline Label &init(Obj_t parent = parent_)
         {
             create_obj(&lv_label_class, parent);
-            Label::text_color(lv_color_black());// 设置文本颜色为黑色
+            text_color(lv_color_black());// 设置文本颜色为黑色
             return *this;
         }
 

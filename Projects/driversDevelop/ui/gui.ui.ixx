@@ -8,7 +8,7 @@ import ui_data;
 /*!USER_DECLARE_END!*/
 
 // ---------------- 导出并加载资源 ----------------
-export namespace gui::ui::resource
+extern "C"
 {
     //  字体资源
     LV_FONT_DECLARE(lv_customer_font_SourceHanSerifSC_Regular_13)
@@ -22,6 +22,7 @@ export namespace gui::ui::resource
     /*!USER_DECLARE_BEGIN!*/
     /*!USER_DECLARE_END!*/
 }
+
 
 // ---------------- 导出并定义组件 ----------------
 export namespace gui::widgets::main
@@ -88,9 +89,9 @@ export namespace gui::ui
         // 新增定时器回调函数
         static void timer_cb(lv_timer_t *timer)
         {
-            if (Osc::is_generating)
+            if (is_generating)
             {
-                Osc::generate_data();
+                generate_data();
             }
         }
 
@@ -127,7 +128,6 @@ export namespace gui
     void Render::screenInit()
     {
         using namespace gui::widgets::main; // 使用组件命名空间
-        using namespace gui::ui::resource; // 使用ui资源
 
         scr.bg_color(lv_color_hex(0xffffff))
                 .bg_grad_dir(LV_GRAD_DIR_NONE);
