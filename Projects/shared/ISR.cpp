@@ -181,8 +181,6 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 {
     if (huart == &huart1) {
         // 在此处重新启用 DMA 或执行其他操作
-//        __HAL_DMA_ENABLE(&hdma_usart1_tx);
-//        __HAL_DMA_CLEAR_FLAG(&hdma_usart1_tx, DMA_FLAG_TC4); //清除DMA2_Steam7传输完成标志
         HAL_UART_DMAStop(&huart1);		//传输完成以后关闭串口DMA,缺了这一句会死机
     }
 }

@@ -111,32 +111,7 @@ void key_handler()
     switch (PlatformKey::getCode())
     {
         case keyK0:
-//            if (PlatformKey::handle_state(KEY_STATE_TWO))
-//            {
-////            while (waitFPGAData_Flag);
-////            waitFPGAData_Flag = true;
-//                for (int i = 0; i < 1024; ++i)
-//                {
-//                    ADC_Data[i] = FSMC_MAP(FPGA_BUFFER_BASE+i)*2.0/4095;
-//                }
-//                fft.ADCdataToSpectrum(ADC_Data);//将ADC数据经FFT 转为频谱
-//                //20000/400000*1024=51
-//                //波形一次谐波频率=51*400000/1024
-//                fft.Amplitude_Convert();//转为幅值谱
-//
-//                fft.find_peaks(NUM_PEAKS, 41);//寻找极大值点
-//
-//                fft.voltageAmplitude_Convert();//把频率谱转为电压幅值谱（可以不用加，因为交流成分彼此成齐次性）
-//
-//                fft.signalDistortionDegree(NUM_PEAKS);//计算出失真度
-//
-//                fft.normalize_to_fundamental(NUM_PEAKS);
-//
-//                gui::interface::ui::gui_generate_chart_data(ADC_Data);
-//                gui::interface::ui::gui_generate_text_data(fft.get_fft_output_normalized(), fft.get_thd());
-//
-//                __BKPT(0);
-//            }
+
         break;
 
 

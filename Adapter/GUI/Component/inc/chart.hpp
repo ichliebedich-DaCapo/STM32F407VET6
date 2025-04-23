@@ -251,7 +251,7 @@ public:
         }
         return *this;
     }
-    // 获取光标对应的点值
+    // 获取光标对应的点值,get_pressed_point() 函数就可以获得point_x了，所以没有必要再写一个函数了
     Coord& get_cursor_point_y(ChartSeries_t& series)
     {
 

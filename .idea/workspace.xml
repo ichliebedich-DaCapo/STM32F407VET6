@@ -34,12 +34,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【THD测量仪】 THD测量仪 备份">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【THD测量仪】 THD测量仪">
+      <change afterPath="$PROJECT_DIR$/Projects/SignalDistortionMeasurement/ui/font.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Component/inc/chart.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Component/inc/chart.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/src/blue_tooth.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/blue_tooth.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/src/usart.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/SignalDistortionMeasurement/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/SignalDistortionMeasurement/project_config.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/SignalDistortionMeasurement/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/SignalDistortionMeasurement/app/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/SignalDistortionMeasurement/ui/lv_customer_font_SourceHanSerifSC_Regular_13.c" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/SignalDistortionMeasurement/ui/lv_customer_font_SourceHanSerifSC_Regular_13.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/SignalDistortionMeasurement/ui/ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/SignalDistortionMeasurement/ui/ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/SignalDistortionMeasurement/ui/ui.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/SignalDistortionMeasurement/ui/ui.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/ISR.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -1676,7 +1680,7 @@
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;DV&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Program/stm32/STM32F407VET6/Projects/SignalDistortionMeasurement&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Program/stm32/STM32F407VET6/Projects/SignalDistortionMeasurement/ui&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -1690,6 +1694,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Program\stm32\STM32F407VET6\Projects\SignalDistortionMeasurement\ui" />
       <recent name="D:\Program\stm32\STM32F407VET6\Projects\SignalDistortionMeasurement" />
       <recent name="D:\Program\stm32\STM32F407VET6\GUI\UI\driversDevelop" />
     </key>
@@ -1703,11 +1708,6 @@
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.OCD Furina">
     <configuration name="CMSISDSP" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="CMSISDSP" CONFIG_NAME="Release-MinGW_ARM">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -1758,8 +1758,8 @@
     <list>
       <item itemvalue="CMake 应用程序.CMSISDSP" />
       <item itemvalue="CMake 应用程序.libalgorithm" />
-      <item itemvalue="OpenOCD 下载并运行.OCD Furina" />
       <item itemvalue="Python.convert_lvgl" />
+      <item itemvalue="OpenOCD 下载并运行.OCD Furina" />
     </list>
     <recent_temporary>
       <list>
@@ -2047,15 +2047,8 @@
       <workItem from="1745114277888" duration="1080000" />
       <workItem from="1745130113853" duration="15106000" />
       <workItem from="1745238468142" duration="15049000" />
-      <workItem from="1745297335114" duration="4973000" />
-    </task>
-    <task id="LOCAL-00093" summary="【驱动开发】屏幕白屏">
-      <option name="closed" value="true" />
-      <created>1739167283385</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1739167283385</updated>
+      <workItem from="1745297335114" duration="22102000" />
+      <workItem from="1745411854699" duration="4000" />
     </task>
     <task id="LOCAL-00094" summary="【驱动开发】添加roller控件中（半成品）">
       <option name="closed" value="true" />
@@ -2441,7 +2434,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745301226586</updated>
     </task>
-    <option name="localTasksCounter" value="142" />
+    <task id="LOCAL-00142" summary="【THD测量仪】 THD测量仪 DMA传输数据包异常，能正常传输字符">
+      <option name="closed" value="true" />
+      <created>1745317332249</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1745317332249</updated>
+    </task>
+    <option name="localTasksCounter" value="143" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2476,7 +2477,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【驱动开发】sd_spi初始化失败，无反应" />
     <MESSAGE value="【驱动开发】common_functions.cmake中加入DMA_SPI_ENABLE的开启函数" />
     <MESSAGE value="【驱动开发】格式化SD卡后，sd卡初始化、写入和读取块数据都没问题" />
     <MESSAGE value="【驱动开发】把baseinit里的代码逻辑理顺了" />
@@ -2501,7 +2501,8 @@
     <MESSAGE value="【THD测量仪】 THD测量仪基本完成（除蓝牙通信），图像可在频谱仪和示波器间切换，与FPGA通信正常，程控正常，烧录时有引脚跳变bug" />
     <MESSAGE value="【THD测量仪】 THD测量仪加上了蓝牙通信功能，暂停时波形图切换存在bug" />
     <MESSAGE value="【THD测量仪】 THD测量仪 备份" />
-    <option name="LAST_COMMIT_MESSAGE" value="【THD测量仪】 THD测量仪 备份" />
+    <MESSAGE value="【THD测量仪】 THD测量仪 DMA传输数据包异常，能正常传输字符" />
+    <option name="LAST_COMMIT_MESSAGE" value="【THD测量仪】 THD测量仪 DMA传输数据包异常，能正常传输字符" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

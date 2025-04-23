@@ -76,7 +76,7 @@ void usart1_init()
     hdma_usart1_tx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
     hdma_usart1_tx.Init.Mode = DMA_NORMAL;
     hdma_usart1_tx.Init.Priority = DMA_PRIORITY_LOW;
-    hdma_usart1_tx.Init.FIFOMode = DMA_FIFOMODE_ENABLE;
+//    hdma_usart1_tx.Init.FIFOMode = DMA_FIFOMODE_ENABLE;
     HAL_DMA_Init(&hdma_usart1_tx);
     __HAL_LINKDMA(&huart1,hdmatx,hdma_usart1_tx);
 
