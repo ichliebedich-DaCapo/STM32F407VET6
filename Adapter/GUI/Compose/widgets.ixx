@@ -18,4 +18,4 @@ export import label;
 export import roller;
 export import scale;
 export import slider;
-export import timer;
+export import gui_timer;
