@@ -1,9 +1,9 @@
 module;
 #include <lvgl.h>
-export module roller;
+export module gui_compose:roller;
 
 
-import widget;
+import :widget;
 
 export namespace gui::compose
 {

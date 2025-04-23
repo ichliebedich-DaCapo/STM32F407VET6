@@ -3,9 +3,8 @@
 //
 module;
 #include "lvgl.h"
-export module gui:render;// 自动包含所有组件模块
-
-export import widgets;
+export module gui:render;
+export import gui_compose;// 包含所有组件模块并导出
 
 
 export namespace gui::widgets::main

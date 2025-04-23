@@ -35,13 +35,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】成功编译ui工程，接下来可以考虑细化ui层">
+      <change afterPath="$PROJECT_DIR$/Adapter/GUI/Compose/gui_compose.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/gui.render.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/Compose/gui.render.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/anim.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/button.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/chart.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/checkBox.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/component.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/cpu.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/dropdown.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/gui.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/gui.render.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/image.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/imageButton.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/label.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/roller.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/scale.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/slider.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/timer.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/widget.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/Compose/widgets.ixx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/test.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/stdlib/lv_mem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Middleware/Third_Party/LVGL/lvgl/src/stdlib/lv_mem.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/lcd.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/lcd.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +87,8 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/BSP/baseInit.ixx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Projects/driversDevelop/ui/ui.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Projects/shared/ISR.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Projects/shared/ISR.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -201,7 +219,7 @@
       <workItem from="1745194194440" duration="10000" />
       <workItem from="1745319255734" duration="26930000" />
       <workItem from="1745376373466" duration="8679000" />
-      <workItem from="1745385092658" duration="7672000" />
+      <workItem from="1745385092658" duration="10557000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -369,7 +387,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="ZQ" />
+                        <option value="origin/DV" />
                       </list>
                     </value>
                   </entry>

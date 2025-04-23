@@ -1,7 +1,7 @@
 module;
 #include <lvgl.h>
-export module gui_timer;
-import widget;
+export module gui_compose:timer;
+import :widget;
 
 
 export namespace gui::compose

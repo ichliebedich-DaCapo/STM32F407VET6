@@ -28,14 +28,31 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="【模拟器】MinGW GCC14.2对inline和module特性的支持似乎有问题">
+    <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="【模拟器】成功使用MSVC完成模拟器的开发">
+      <change afterPath="$PROJECT_DIR$/../Compose/gui_compose.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Compose/gui.render.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../Compose/gui.render.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Compose/anim.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Compose/button.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Compose/chart.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Compose/checkBox.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Compose/component.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Compose/cpu.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Compose/dropdown.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Compose/gui.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Compose/gui.render.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Compose/image.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Compose/imageButton.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Compose/label.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Compose/roller.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Compose/scale.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Compose/slider.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Compose/timer.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Compose/widget.ixx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Compose/widgets.ixx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/stdlib/lv_mem.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/stdlib/lv_mem.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/lcd.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/lcd.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/shared/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/shared/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,6 +97,9 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2spqnKSV2Z7pwptcKZcK3qHTDHb" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -102,11 +122,16 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "CMakeSettings",
+    "settings.editor.selected.configurable": "CPPToolchains",
     "structure.view.defaults.are.configured": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Program\Embedded\MCU\STM32\Furina\Adapter\GUI" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
@@ -167,7 +192,7 @@
       <workItem from="1745130116510" duration="7240000" />
       <workItem from="1745238472601" duration="597000" />
       <workItem from="1745297339712" duration="710000" />
-      <workItem from="1745390196011" duration="8085000" />
+      <workItem from="1745390196011" duration="14322000" />
     </task>
     <task id="LOCAL-00001" summary="界面完成">
       <option name="closed" value="true" />
@@ -185,7 +210,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745395993185</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="【模拟器】成功使用MSVC完成模拟器的开发">
+      <option name="closed" value="true" />
+      <created>1745400683755</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1745400683755</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,10 +229,22 @@
     <isAutomaticFoundErrors value="true" />
     <isAutomaticReloadCMake value="true" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="界面完成" />
     <MESSAGE value="【模拟器】MinGW GCC14.2对inline和module特性的支持似乎有问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="【模拟器】MinGW GCC14.2对inline和module特性的支持似乎有问题" />
+    <MESSAGE value="【模拟器】成功使用MSVC完成模拟器的开发" />
+    <option name="LAST_COMMIT_MESSAGE" value="【模拟器】成功使用MSVC完成模拟器的开发" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

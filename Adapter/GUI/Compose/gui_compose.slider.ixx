@@ -1,8 +1,8 @@
 module;
 #include <lvgl.h>
-export module slider;
+export module gui_compose:slider;
 
-import widget;
+import :widget;
 
 
 export namespace gui::compose

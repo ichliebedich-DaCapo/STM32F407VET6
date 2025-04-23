@@ -1,9 +1,7 @@
 module;
 #include <lvgl.h>
 // 色彩
-
-
-export module widget;
+export module gui_compose:widget;
 
 export namespace gui::compose
 {

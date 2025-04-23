@@ -1,8 +1,8 @@
 module;
 #include <lvgl.h>
-export module checkBox;
+export module gui_compose:checkBox;
 
-import widget;
+import :widget;
 
 export namespace gui::compose
 {

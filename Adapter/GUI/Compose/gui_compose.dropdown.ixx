@@ -1,8 +1,8 @@
 module;
 #include <lvgl.h>
-export module dropdown;
+export module gui_compose:dropdown;
 
-import widget;
+import :widget;
 
 
 export namespace gui::compose

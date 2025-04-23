@@ -23,7 +23,7 @@ int main()
     PlatformKey::init<bsp::key_exit::init>();// 初始化按键
 
 #ifdef GUI_ENABLE
-    gui::Render::init<bsp::lcd::init,bsp::lcd::lcd_flush,bsp::touch::read_single_point>();
+    gui::Render::init<bsp::lcd::init,bsp::lcd::flush,bsp::touch::read_single_point>();
 #endif
 
     app::Control::init();

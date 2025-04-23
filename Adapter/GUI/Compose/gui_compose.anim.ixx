@@ -1,7 +1,7 @@
 module;
 #include <lvgl.h>
-export module anim;
-import widget;
+export module gui_compose:anim;
+import :widget;
 
 export namespace gui::compose
 {

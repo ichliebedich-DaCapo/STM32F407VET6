@@ -1,10 +1,10 @@
 module;
 #include <cstdio>
 #include <lvgl.h>
-export module cpu;
+export module gui_compose:cpu;
 
-import widget;
-import label;
+import :widget;
+import :label;
 
 
 export namespace gui::compose

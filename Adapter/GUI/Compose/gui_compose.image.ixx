@@ -1,8 +1,8 @@
 module;
 #include <lvgl.h>
-export module image;
+export module gui_compose:image;
 
-import widget;
+import :widget;
 
 
 export namespace gui::compose

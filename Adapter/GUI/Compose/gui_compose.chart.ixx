@@ -1,7 +1,7 @@
 module;
 #include <lvgl.h>
-export module chart;
-import widget;
+export module gui_compose:chart;
+import :widget;
 
 
 

@@ -1,9 +1,5 @@
-//
-// Created by fairy on 2024/9/22.
-//
 module;
 #include <project_config.h>
-#include <cstring>
 export module lcd;
 
 import spi;
@@ -12,20 +8,15 @@ import hw_registers;// 硬件抽象寄存器
 
 export namespace bsp::lcd
 {
-    void init();
-    void lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p);
+    void init();// 初始化
+    void flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p);// 涂块
 }
-
 
 /*预编译*/
 #define LCD_SORTS 9488
 #define LCD_INTERFACE_TYPE 1 // 0:8080接口 1:SPI接口 GUI.c中的同时修改
 #define delay_ms(ms)   HAL_Delay(ms)
 
-// *****************************************
-// #define  LCD_SPI_PORT_ENABLE
-
-// 使用SPI时
 // ==================== 属性 ====================
 // 寄存器
 using TFT_CMD = Register<0x60060000>;// TFT命令寄存器片选地址
@@ -683,7 +674,7 @@ void LCD_Set_Pixel(uint16_t x, uint16_t y, uint16_t color)
 
 }
 
-void bsp::lcd::lcd_flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)
+void bsp::lcd::flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)
 {
 #ifdef LCD_8080_PORT_ENABLE
 #ifdef DMA_FSMC_ENABLE

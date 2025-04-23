@@ -1,8 +1,8 @@
 module;
 #include <lvgl.h>
-export module scale;
+export module gui_compose:scale;
 
-import widget;
+import :widget;
 
 export namespace gui::compose
 {
