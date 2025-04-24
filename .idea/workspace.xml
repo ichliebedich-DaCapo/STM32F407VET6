@@ -34,11 +34,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】编写了新的LCD模板类，不出所料，一编写就出错">
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】可以编译成功，也能烧录，但是图像很奇怪">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/lcd.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/lcd.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -326,7 +324,7 @@
       <workItem from="1745385092658" duration="11742000" />
       <workItem from="1745460243560" duration="9884000" />
       <workItem from="1745472420316" duration="89000" />
-      <workItem from="1745484800122" duration="22064000" />
+      <workItem from="1745484800122" duration="25294000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -520,7 +518,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745500634256</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="【开发】可以编译成功，也能烧录，但是图像很奇怪">
+      <option name="closed" value="true" />
+      <created>1745510420871</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1745510420871</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -579,7 +585,8 @@
     <MESSAGE value="【优化】编写的gpio类可以正常使用" />
     <MESSAGE value="【优化】有了基本的优化框架" />
     <MESSAGE value="【开发】编写了新的LCD模板类，不出所料，一编写就出错" />
-    <option name="LAST_COMMIT_MESSAGE" value="【开发】编写了新的LCD模板类，不出所料，一编写就出错" />
+    <MESSAGE value="【开发】可以编译成功，也能烧录，但是图像很奇怪" />
+    <option name="LAST_COMMIT_MESSAGE" value="【开发】可以编译成功，也能烧录，但是图像很奇怪" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

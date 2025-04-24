@@ -96,18 +96,21 @@ namespace bsp::lcd::detail
             spi::cs_high();
         }
 
-        template<size_t N>
-        static inline void send_sequence(const std::array<InitCommand, N> &cmds)
+        template<const auto& Cmds, size_t... I> // 关键修改：Cmds作为第一个模板参数
+        static inline void send_sequence_impl(std::index_sequence<I...>)
         {
-            for (const auto &cmd: cmds)
-            {
+            (([&]{
+                constexpr auto& cmd = Cmds[I]; // 编译期访问
                 write_cmd(cmd.cmd);
-                for (auto d: cmd.data)
-                {
-                    spi::send_byte(d);
-                }
-                if  (cmd.delay_ms) HAL_Delay(cmd.delay_ms);
-            }
+                for (auto d : cmd.data) spi::send_byte(d);
+                if constexpr (cmd.delay_ms != 0) HAL_Delay(cmd.delay_ms);
+            }()), ...);
+        }
+
+        template<const auto& Cmds> // 只需要传递数组引用
+        static inline void send_sequence()
+        {
+            send_sequence_impl<Cmds>(std::make_index_sequence<Cmds.size()>{});
         }
     };
 
@@ -136,84 +139,89 @@ namespace bsp::lcd::detail
     };
 
     // =========== LCD初始化特化 ===========
-    template<DeviceType T>
-    constexpr auto get_init_sequence()
+        template<DeviceType T>
+    struct InitSequence;
+
+    template<>
+struct InitSequence<DeviceType::ILI9488>
     {
-        if constexpr (T == DeviceType::ILI9488)
-        {
-            return std::array{
-                // ILI9488初始化命令与参数
-                InitCommand{0x11, {}, 5}, // 退出睡眠模式
-                InitCommand{0xD0, {0x07, 0x47, 0x19}}, // 电源控制命令
-                InitCommand{0xD1, {0x00, 0x36, 0x1F}}, // 电源控制命令
-                InitCommand{0xD2, {0x01, 0x11}}, // 电源控制命令
-                InitCommand{0xE4, {0xA0}}, // 驱动模式设置
-                InitCommand{0xF3, {0x00, 0x2A}}, // 帧速率控制
-                InitCommand{0xC0, {0x10, 0x3B, 0x00, 0x02, 0x11}}, // MV偏压控制
-                InitCommand{0xC5, {0x03}}, // VCOM控制
-                InitCommand{0xC8, {0x00, 0x35, 0x23, 0x07, 0x00, 0x04, 0x45, 0x53, 0x77, 0x70, 0x00, 0x04}}, // Gamma设置
-                InitCommand{0x36, {0xE9}}, // 显示行列设置
-                InitCommand{0x3A, {0x55}}, // RGB信号格式设置
-                InitCommand{0x20, {}, 0}, // RAM写入控制
-                InitCommand{0x2A, {0x00, 0x00, 0x01, 0xDF}}, // 水平地址设置
-                InitCommand{0x2B, {0x00, 0x00, 0x01, 0x3F}, 5}, // 垂直地址设置
-                InitCommand{0x29, {}}, // 唤醒命令
-                InitCommand{0x2C, {}, 5} // 写入RAM命令
-            };
-        }
-        else if constexpr (T == DeviceType::ILI9481)
-        {
-            return std::array{
-                // ILI9481初始化命令与参数
-                InitCommand{0x11, {}, 5}, // 退出睡眠模式
-                InitCommand{0xD0, {0x07, 0x41, 0x18}}, // 电源控制1 (注意参数与ILI9488不同)
-                InitCommand{0xD1, {0x00, 0x0A, 0x10}}, // 电源控制2 (0x000a转换为0x0A)
-                InitCommand{0xD2, {0x01, 0x11}}, // 电源控制3
-                InitCommand{0xC0, {0x10, 0x3B, 0x00, 0x02, 0x11}}, // 面板驱动控制
-                InitCommand{0xC1, {0x10, 0x13, 0x88}}, // 时序控制1
-                InitCommand{0xC5, {0x02}}, // VCOM控制 (电压与ILI9488不同)
-                InitCommand{0xC8, {0x00, 0x37, 0x25, 0x06, 0x04, 0x1E, 0x26, 0x42, 0x77, 0x44, 0x0F, 0x12}}, // Gamma设置
-                InitCommand{0xF3, {0x40, 0x0A}}, // 帧速率控制 (参数格式不同)
-                InitCommand{0xF6, {0x80}}, // 接口控制
-                InitCommand{0xF7, {0x80}}, // 面板控制
-                InitCommand{0x36, {0x2F}}, // 屏幕旋转180度 (0x2F方向参数)
-                InitCommand{0x3A, {0x55}}, // RGB565格式
-                InitCommand{0x20, {}}, // 显存写入模式
-                InitCommand{0x2A, {0x00, 0x00, 0x01, 0x3F}}, // 水平地址设置 (X方向分辨率)
-                InitCommand{0x2B, {0x00, 0x00, 0x01, 0xDF}}, // 垂直地址设置 (Y方向分辨率)
-                InitCommand{0xC1, {0x00, 0x10, 0x22}, 5}, // 时序控制2 + 5ms延迟
-                InitCommand{0x29, {}, 5}, // 唤醒命令 + 5ms延迟
-                InitCommand{0x2C, {}, 20} // 显存写入命令
-            };
-        }
-        else if constexpr (T == DeviceType::ST7796)
-        {
-            return std::array{
-                // ST7796初始化命令与参数
-                InitCommand{0x11, {}, 120}, // 退出睡眠模式
-                InitCommand{0x36, {0x48}}, // 屏幕方向设置（1<<6|1<<3）
-                InitCommand{0x3A, {0x55}}, // RGB565接口格式
-                InitCommand{0xF0, {0xC3}}, // 命令集控制1
-                InitCommand{0xF0, {0x96}}, // 命令集控制2
-                InitCommand{0xB4, {0x01}}, // 显示反转控制
-                InitCommand{0xB7, {0xC6}}, // 门驱动控制
-                InitCommand{0xC0, {0x80, 0x45}}, // 电源控制1（AVDD/VCL升压电压）
-                InitCommand{0xC1, {0x13}}, // 电源控制2（VGH/VGL电压）
-                InitCommand{0xC2, {0xA7}}, // 电源控制3（VCOM偏移）
-                InitCommand{0xC5, {0x0A}}, // VCOM控制（0x0A电压值）
-                InitCommand{0xE8, {0x40, 0x8A, 0x00, 0x00, 0x29, 0x19, 0xA5, 0x33}}, // 面板配置
-                InitCommand{0xE0, {0xD0, 0x08, 0x0F, 0x06, 0x06, 0x33, 0x30, 0x33, 0x47, 0x17, 0x13, 0x13, 0x2B, 0x31}},
-                // 正伽马校正
-                InitCommand{0xE1, {0xD0, 0x0A, 0x11, 0x0B, 0x09, 0x07, 0x2F, 0x33, 0x47, 0x38, 0x15, 0x16, 0x2C, 0x32}},
-                // 负伽马校正
-                InitCommand{0xF0, {0x3C}}, // 命令集控制3
-                InitCommand{0xF0, {0x69}, 120}, // 命令集控制4 + 120ms延迟
-                InitCommand{0x21, {}}, // 反色关闭
-                InitCommand{0x29, {}}, // 显示开启
-                InitCommand{0x36, {0xE8},20} // 最终显示方向（封装set_direction(0)）
-            };
-        }
-    }
+        static inline constexpr auto value = std::array{
+            // ILI9488初始化命令与参数
+            InitCommand{0x11, {}, 5}, // 退出睡眠模式
+            InitCommand{0xD0, {0x07, 0x47, 0x19}}, // 电源控制命令
+            InitCommand{0xD1, {0x00, 0x36, 0x1F}}, // 电源控制命令
+            InitCommand{0xD2, {0x01, 0x11}}, // 电源控制命令
+            InitCommand{0xE4, {0xA0}}, // 驱动模式设置
+            InitCommand{0xF3, {0x00, 0x2A}}, // 帧速率控制
+            InitCommand{0xC0, {0x10, 0x3B, 0x00, 0x02, 0x11}}, // MV偏压控制
+            InitCommand{0xC5, {0x03}}, // VCOM控制
+            InitCommand{0xC8, {0x00, 0x35, 0x23, 0x07, 0x00, 0x04, 0x45, 0x53, 0x77, 0x70, 0x00, 0x04}}, // Gamma设置
+            InitCommand{0x36, {0xE9}}, // 显示行列设置
+            InitCommand{0x3A, {0x55}}, // RGB信号格式设置
+            InitCommand{0x20, {}, 0}, // RAM写入控制
+            InitCommand{0x2A, {0x00, 0x00, 0x01, 0xDF}}, // 水平地址设置
+            InitCommand{0x2B, {0x00, 0x00, 0x01, 0x3F}, 5}, // 垂直地址设置
+            InitCommand{0x29, {}}, // 唤醒命令
+            InitCommand{0x2C, {}, 5} // 写入RAM命令
+        };
+    };
+
+    template<>
+struct InitSequence<DeviceType::ILI9481>
+    {
+        static inline constexpr auto value = std::array{
+            // ILI9481初始化命令与参数
+            InitCommand{0x11, {}, 5}, // 退出睡眠模式
+            InitCommand{0xD0, {0x07, 0x41, 0x18}}, // 电源控制1 (注意参数与ILI9488不同)
+            InitCommand{0xD1, {0x00, 0x0A, 0x10}}, // 电源控制2 (0x000a转换为0x0A)
+            InitCommand{0xD2, {0x01, 0x11}}, // 电源控制3
+            InitCommand{0xC0, {0x10, 0x3B, 0x00, 0x02, 0x11}}, // 面板驱动控制
+            InitCommand{0xC1, {0x10, 0x13, 0x88}}, // 时序控制1
+            InitCommand{0xC5, {0x02}}, // VCOM控制 (电压与ILI9488不同)
+            InitCommand{0xC8, {0x00, 0x37, 0x25, 0x06, 0x04, 0x1E, 0x26, 0x42, 0x77, 0x44, 0x0F, 0x12}}, // Gamma设置
+            InitCommand{0xF3, {0x40, 0x0A}}, // 帧速率控制 (参数格式不同)
+            InitCommand{0xF6, {0x80}}, // 接口控制
+            InitCommand{0xF7, {0x80}}, // 面板控制
+            InitCommand{0x36, {0x2F}}, // 屏幕旋转180度 (0x2F方向参数)
+            InitCommand{0x3A, {0x55}}, // RGB565格式
+            InitCommand{0x20, {}}, // 显存写入模式
+            InitCommand{0x2A, {0x00, 0x00, 0x01, 0x3F}}, // 水平地址设置 (X方向分辨率)
+            InitCommand{0x2B, {0x00, 0x00, 0x01, 0xDF}}, // 垂直地址设置 (Y方向分辨率)
+            InitCommand{0xC1, {0x00, 0x10, 0x22}, 5}, // 时序控制2 + 5ms延迟
+            InitCommand{0x29, {}, 5}, // 唤醒命令 + 5ms延迟
+            InitCommand{0x2C, {}, 20} // 显存写入命令
+        };
+    };
+
+    template<>
+struct InitSequence<DeviceType::ST7796>
+    {
+        static inline constexpr auto value = std::array{
+            // ST7796初始化命令与参数
+            InitCommand{0x11, {}, 120}, // 退出睡眠模式
+            InitCommand{0x36, {0x48}}, // 屏幕方向设置（1<<6|1<<3）
+            InitCommand{0x3A, {0x55}}, // RGB565接口格式
+            InitCommand{0xF0, {0xC3}}, // 命令集控制1
+            InitCommand{0xF0, {0x96}}, // 命令集控制2
+            InitCommand{0xB4, {0x01}}, // 显示反转控制
+            InitCommand{0xB7, {0xC6}}, // 门驱动控制
+            InitCommand{0xC0, {0x80, 0x45}}, // 电源控制1（AVDD/VCL升压电压）
+            InitCommand{0xC1, {0x13}}, // 电源控制2（VGH/VGL电压）
+            InitCommand{0xC2, {0xA7}}, // 电源控制3（VCOM偏移）
+            InitCommand{0xC5, {0x0A}}, // VCOM控制（0x0A电压值）
+            InitCommand{0xE8, {0x40, 0x8A, 0x00, 0x00, 0x29, 0x19, 0xA5, 0x33}}, // 面板配置
+            InitCommand{0xE0, {0xD0, 0x08, 0x0F, 0x06, 0x06, 0x33, 0x30, 0x33, 0x47, 0x17, 0x13, 0x13, 0x2B, 0x31}},
+            // 正伽马校正
+            InitCommand{0xE1, {0xD0, 0x0A, 0x11, 0x0B, 0x09, 0x07, 0x2F, 0x33, 0x47, 0x38, 0x15, 0x16, 0x2C, 0x32}},
+            // 负伽马校正
+            InitCommand{0xF0, {0x3C}}, // 命令集控制3
+            InitCommand{0xF0, {0x69}, 120}, // 命令集控制4 + 120ms延迟
+            InitCommand{0x21, {}}, // 反色关闭
+            InitCommand{0x29, {}}, // 显示开启
+            InitCommand{0x36, {0xE8}, 20} // 最终显示方向（封装set_direction(0)）
+        };
+    };
+
 
     // =========== 方向控制模板 ===========
     template<DeviceType T>
@@ -255,7 +263,6 @@ export namespace bsp::lcd
     class LCDController
     {
         using Policy = detail::InterfacePolicy<Interface>;
-        static constexpr auto init_seq = detail::get_init_sequence<Type>(); // 编译期初始化
 
     public:
         static void init()
@@ -291,7 +298,9 @@ export namespace bsp::lcd
             }
 
             // 获取初始化序列并发送
-            Policy::template send_sequence(init_seq); // 零开销调用
+            // 修改调用方式为模板参数传递
+            Policy::template send_sequence<detail::InitSequence<Type>::value>();
+
 
             if constexpr (Interface == InterfaceType::Parallel8080)
             {
@@ -373,8 +382,9 @@ export namespace bsp::lcd
                     //     auto *last = reinterpret_cast<uint16_t *>(p);
                     //     *last = __REV16(*last);
                     // }
-                    auto* p = reinterpret_cast<uint16_t*>(colors);
-                    for (uint32_t i = 0; i < pixel_count; ++i) {
+                    auto *p = reinterpret_cast<uint16_t *>(colors);
+                    for (uint32_t i = 0; i < pixel_count; ++i)
+                    {
                         p[i] = __REV16(p[i]);
                     }
 
