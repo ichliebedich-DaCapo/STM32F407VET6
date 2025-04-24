@@ -34,10 +34,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【优化】有了基本的优化框架">
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】编写了新的LCD模板类，不出所料，一编写就出错">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/gui.render.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/gui.render.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/lcd.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/lcd.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,10 +88,31 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BSP/baseInit.ixx" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/lcd.ixx" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/lcd.ixx" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/lcd.ixx" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/lcd.ixx" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/lcd.ixx" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/lcd.ixx" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Projects/shared/ISR.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Projects/shared/ISR.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Projects/shared/main.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -111,7 +133,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "OpenOCD 下载并运行.Furina.elf.executor": "Run",
+    "OpenOCD 下载并运行.Furina.elf.executor": "Debug",
     "RunOnceActivity.RadMigrateCodeStyle": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
@@ -304,7 +326,7 @@
       <workItem from="1745385092658" duration="11742000" />
       <workItem from="1745460243560" duration="9884000" />
       <workItem from="1745472420316" duration="89000" />
-      <workItem from="1745484800122" duration="14890000" />
+      <workItem from="1745484800122" duration="22064000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -490,7 +512,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745494088658</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="【开发】编写了新的LCD模板类，不出所料，一编写就出错">
+      <option name="closed" value="true" />
+      <created>1745500634256</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1745500634256</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -512,7 +542,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/bsp" />
+                        <option value="ZQ" />
                       </list>
                     </value>
                   </entry>
@@ -548,7 +578,8 @@
     <MESSAGE value="【备份】准备尝试LCD的优化" />
     <MESSAGE value="【优化】编写的gpio类可以正常使用" />
     <MESSAGE value="【优化】有了基本的优化框架" />
-    <option name="LAST_COMMIT_MESSAGE" value="【优化】有了基本的优化框架" />
+    <MESSAGE value="【开发】编写了新的LCD模板类，不出所料，一编写就出错" />
+    <option name="LAST_COMMIT_MESSAGE" value="【开发】编写了新的LCD模板类，不出所料，一编写就出错" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

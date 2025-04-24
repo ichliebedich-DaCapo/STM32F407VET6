@@ -55,8 +55,6 @@ namespace app
         delay::init();
         usart::init();
 
-
-
     }
 
     void Control::background_process()

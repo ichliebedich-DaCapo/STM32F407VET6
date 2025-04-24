@@ -23,8 +23,9 @@ int main()
 
 #ifdef GUI_ENABLE
     using ST7796TFT = bsp::lcd::LCDController<HAL_Delay,bsp::lcd::DeviceType::ST7796,bsp::lcd::InterfaceType::SPI,bsp::lcd::DMAConfigType::enable>;
-    // gui::Render::init<bsp::lcd::init,bsp::lcd::flush,bsp::touch::read_single_point>();
     gui::Render::init<ST7796TFT::init,ST7796TFT::flush,bsp::touch::read_single_point>();
+    // gui::Render::init<bsp::lcd::init,bsp::lcd::flush,bsp::touch::read_single_point>();
+
 #endif
 
     app::Control::init();

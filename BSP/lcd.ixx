@@ -1,6 +1,6 @@
 module;
-#include <etl/vector.h>
-#include "etl/span.h"
+
+#include <array>
 #include <project_config.h>
 
 export module lcd;
@@ -56,9 +56,20 @@ namespace bsp::lcd::detail
     // =========== 初始化命令结构 ===========
     struct InitCommand
     {
-        uint8_t cmd;// 命令
-        etl::vector<uint8_t, 16> data;// 参数
-        uint16_t delay_ms = 0;// 延时
+        uint8_t cmd; // 命令
+        std::array<uint8_t, 16> data; // 参数
+        uint8_t data_size; // 实际参数数量
+        uint16_t delay_ms = 0; // 延时
+
+        // 支持编译期构造的 constexpr 构造函数
+        constexpr InitCommand(
+            const uint8_t cmd,
+            const std::initializer_list<uint8_t> args,
+            const uint16_t delay = 0
+        ) : cmd(cmd), data{}, data_size(args.size()), delay_ms(delay)
+        {
+            std::copy(args.begin(), args.end(), data.begin());
+        }
     };
 
     // =========== 接口策略模板 ===========
@@ -86,7 +97,7 @@ namespace bsp::lcd::detail
         }
 
         template<size_t N>
-        static inline void send_sequence(const etl::vector<InitCommand, N> &cmds)
+        static inline void send_sequence(const std::array<InitCommand, N> &cmds)
         {
             for (const auto &cmd: cmds)
             {
@@ -95,7 +106,7 @@ namespace bsp::lcd::detail
                 {
                     spi::send_byte(d);
                 }
-                if (cmd.delay_ms) HAL_Delay(cmd.delay_ms);
+                if  (cmd.delay_ms) HAL_Delay(cmd.delay_ms);
             }
         }
     };
@@ -109,111 +120,121 @@ namespace bsp::lcd::detail
         static inline void write_data(const uint16_t data) { TFT_DATA::write(data); }
 
         template<size_t N>
-        static void send_sequence(const etl::vector<InitCommand, N> &cmds)
+        static void send_sequence(const std::array<InitCommand, N> &cmds)
         {
             for (const auto &cmd: cmds)
             {
                 write_cmd(cmd.cmd);
-                for (auto d: cmd.data)
+                // 只发送有效数据（根据 data_size）
+                for (size_t i = 0; i < cmd.data_size; ++i)
                 {
-                    write_data(d);
+                    TFT_DATA::write(cmd.data[i]);
                 }
-                if (cmd.delay_ms) HAL_Delay(cmd.delay_ms);
+                if constexpr (cmd.delay_ms) HAL_Delay(cmd.delay_ms);
             }
         }
     };
 
     // =========== LCD初始化特化 ===========
-    template <DeviceType T>
-    constexpr auto get_init_sequence() {
-        if constexpr (T == DeviceType::ILI9488) {
-            return etl::vector<InitCommand, 16>{
-                // ILI9488初始化命令与参数
-                    {0x11, {}, 5},// 退出睡眠模式
-                    {0xD0, {0x07, 0x47, 0x19}}, // 电源控制命令
-                    {0xD1, {0x00, 0x36, 0x1F}}, // 电源控制命令
-                    {0xD2, {0x01, 0x11}},// 电源控制命令
-                    {0xE4, {0xA0}},// 驱动模式设置
-                    {0xF3, {0x00, 0x2A}},// 帧速率控制
-                    {0xC0, {0x10, 0x3B, 0x00, 0x02, 0x11}},// MV偏压控制
-                    {0xC5, {0x03}},// VCOM控制
-                    {0xC8, {0x00, 0x35, 0x23, 0x07, 0x00, 0x04, 0x45, 0x53, 0x77, 0x70, 0x00, 0x04}},// Gamma设置
-                    {0x36, {0xE9}},// 显示行列设置
-                    {0x3A, {0x55}}, // RGB信号格式设置
-                    {0x20,{},0},// RAM写入控制
-                    {0x2A, {0x00, 0x00, 0x01, 0xDF}},// 水平地址设置
-                    {0x2B, {0x00, 0x00, 0x01, 0x3F},5},// 垂直地址设置
-                    {0x29, {}},// 唤醒命令
-                    {0x2C, {}, 5}// 写入RAM命令
-            };
-        }
-        else if constexpr(T == DeviceType::ILI9481)
+    template<DeviceType T>
+    constexpr auto get_init_sequence()
+    {
+        if constexpr (T == DeviceType::ILI9488)
         {
-            return etl::vector<InitCommand,19>{
-                    // ILI9481初始化命令与参数
-                    {0x11, {}, 5},       // 退出睡眠模式
-                    {0xD0, {0x07, 0x41, 0x18}}, // 电源控制1 (注意参数与ILI9488不同)
-                    {0xD1, {0x00, 0x0A, 0x10}}, // 电源控制2 (0x000a转换为0x0A)
-                    {0xD2, {0x01, 0x11}},      // 电源控制3
-                    {0xC0, {0x10, 0x3B, 0x00, 0x02, 0x11}}, // 面板驱动控制
-                    {0xC1, {0x10, 0x13, 0x88}},      // 时序控制1
-                    {0xC5, {0x02}},            // VCOM控制 (电压与ILI9488不同)
-                    {0xC8, {0x00, 0x37, 0x25, 0x06, 0x04, 0x1E, 0x26, 0x42, 0x77, 0x44, 0x0F, 0x12}}, // Gamma设置
-                    {0xF3, {0x40, 0x0A}},      // 帧速率控制 (参数格式不同)
-                    {0xF6, {0x80}},            // 接口控制
-                    {0xF7, {0x80}},            // 面板控制
-                    {0x36, {0x2F}},           // 屏幕旋转180度 (0x2F方向参数)
-                    {0x3A, {0x55}},           // RGB565格式
-                    {0x20, {}},              // 显存写入模式
-                    {0x2A, {0x00, 0x00, 0x01, 0x3F}}, // 水平地址设置 (X方向分辨率)
-                    {0x2B, {0x00, 0x00, 0x01, 0xDF}}, // 垂直地址设置 (Y方向分辨率)
-                    {0xC1, {0x00, 0x10, 0x22}, 5}, // 时序控制2 + 5ms延迟
-                    {0x29, {}, 5},            // 唤醒命令 + 5ms延迟
-                    {0x2C, {},20}               // 显存写入命令
+            return std::array{
+                // ILI9488初始化命令与参数
+                InitCommand{0x11, {}, 5}, // 退出睡眠模式
+                InitCommand{0xD0, {0x07, 0x47, 0x19}}, // 电源控制命令
+                InitCommand{0xD1, {0x00, 0x36, 0x1F}}, // 电源控制命令
+                InitCommand{0xD2, {0x01, 0x11}}, // 电源控制命令
+                InitCommand{0xE4, {0xA0}}, // 驱动模式设置
+                InitCommand{0xF3, {0x00, 0x2A}}, // 帧速率控制
+                InitCommand{0xC0, {0x10, 0x3B, 0x00, 0x02, 0x11}}, // MV偏压控制
+                InitCommand{0xC5, {0x03}}, // VCOM控制
+                InitCommand{0xC8, {0x00, 0x35, 0x23, 0x07, 0x00, 0x04, 0x45, 0x53, 0x77, 0x70, 0x00, 0x04}}, // Gamma设置
+                InitCommand{0x36, {0xE9}}, // 显示行列设置
+                InitCommand{0x3A, {0x55}}, // RGB信号格式设置
+                InitCommand{0x20, {}, 0}, // RAM写入控制
+                InitCommand{0x2A, {0x00, 0x00, 0x01, 0xDF}}, // 水平地址设置
+                InitCommand{0x2B, {0x00, 0x00, 0x01, 0x3F}, 5}, // 垂直地址设置
+                InitCommand{0x29, {}}, // 唤醒命令
+                InitCommand{0x2C, {}, 5} // 写入RAM命令
             };
         }
-        else if constexpr (T == DeviceType::ST7796) {
-            return etl::vector<InitCommand, 19>{
-                    // ST7796初始化命令与参数
-                    {0x11, {}, 120},          // 退出睡眠模式
-                    {0x36, {0x48}},           // 屏幕方向设置（1<<6|1<<3）
-                    {0x3A, {0x55}},           // RGB565接口格式
-                    {0xF0, {0xC3}},           // 命令集控制1
-                    {0xF0, {0x96}},           // 命令集控制2
-                    {0xB4, {0x01}},           // 显示反转控制
-                    {0xB7, {0xC6}},           // 门驱动控制
-                    {0xC0, {0x80, 0x45}},     // 电源控制1（AVDD/VCL升压电压）
-                    {0xC1, {0x13}},           // 电源控制2（VGH/VGL电压）
-                    {0xC2, {0xA7}},           // 电源控制3（VCOM偏移）
-                    {0xC5, {0x0A}},           // VCOM控制（0x0A电压值）
-                    {0xE8, {0x40, 0x8A, 0x00, 0x00, 0x29, 0x19, 0xA5, 0x33}}, // 面板配置
-                    {0xE0, {0xD0, 0x08, 0x0F, 0x06, 0x06, 0x33, 0x30, 0x33, 0x47, 0x17, 0x13, 0x13, 0x2B, 0x31}}, // 正伽马校正
-                    {0xE1, {0xD0, 0x0A, 0x11, 0x0B, 0x09, 0x07, 0x2F, 0x33, 0x47, 0x38, 0x15, 0x16, 0x2C, 0x32}}, // 负伽马校正
-                    {0xF0, {0x3C}},           // 命令集控制3
-                    {0xF0, {0x69}, 120},      // 命令集控制4 + 120ms延迟
-                    {0x21, {}},               // 反色关闭
-                    {0x29, {}},               // 显示开启
-                    {0x36, {0x60}}            // 最终显示方向（封装set_direction(0)）
+        else if constexpr (T == DeviceType::ILI9481)
+        {
+            return std::array{
+                // ILI9481初始化命令与参数
+                InitCommand{0x11, {}, 5}, // 退出睡眠模式
+                InitCommand{0xD0, {0x07, 0x41, 0x18}}, // 电源控制1 (注意参数与ILI9488不同)
+                InitCommand{0xD1, {0x00, 0x0A, 0x10}}, // 电源控制2 (0x000a转换为0x0A)
+                InitCommand{0xD2, {0x01, 0x11}}, // 电源控制3
+                InitCommand{0xC0, {0x10, 0x3B, 0x00, 0x02, 0x11}}, // 面板驱动控制
+                InitCommand{0xC1, {0x10, 0x13, 0x88}}, // 时序控制1
+                InitCommand{0xC5, {0x02}}, // VCOM控制 (电压与ILI9488不同)
+                InitCommand{0xC8, {0x00, 0x37, 0x25, 0x06, 0x04, 0x1E, 0x26, 0x42, 0x77, 0x44, 0x0F, 0x12}}, // Gamma设置
+                InitCommand{0xF3, {0x40, 0x0A}}, // 帧速率控制 (参数格式不同)
+                InitCommand{0xF6, {0x80}}, // 接口控制
+                InitCommand{0xF7, {0x80}}, // 面板控制
+                InitCommand{0x36, {0x2F}}, // 屏幕旋转180度 (0x2F方向参数)
+                InitCommand{0x3A, {0x55}}, // RGB565格式
+                InitCommand{0x20, {}}, // 显存写入模式
+                InitCommand{0x2A, {0x00, 0x00, 0x01, 0x3F}}, // 水平地址设置 (X方向分辨率)
+                InitCommand{0x2B, {0x00, 0x00, 0x01, 0xDF}}, // 垂直地址设置 (Y方向分辨率)
+                InitCommand{0xC1, {0x00, 0x10, 0x22}, 5}, // 时序控制2 + 5ms延迟
+                InitCommand{0x29, {}, 5}, // 唤醒命令 + 5ms延迟
+                InitCommand{0x2C, {}, 20} // 显存写入命令
+            };
+        }
+        else if constexpr (T == DeviceType::ST7796)
+        {
+            return std::array{
+                // ST7796初始化命令与参数
+                InitCommand{0x11, {}, 120}, // 退出睡眠模式
+                InitCommand{0x36, {0x48}}, // 屏幕方向设置（1<<6|1<<3）
+                InitCommand{0x3A, {0x55}}, // RGB565接口格式
+                InitCommand{0xF0, {0xC3}}, // 命令集控制1
+                InitCommand{0xF0, {0x96}}, // 命令集控制2
+                InitCommand{0xB4, {0x01}}, // 显示反转控制
+                InitCommand{0xB7, {0xC6}}, // 门驱动控制
+                InitCommand{0xC0, {0x80, 0x45}}, // 电源控制1（AVDD/VCL升压电压）
+                InitCommand{0xC1, {0x13}}, // 电源控制2（VGH/VGL电压）
+                InitCommand{0xC2, {0xA7}}, // 电源控制3（VCOM偏移）
+                InitCommand{0xC5, {0x0A}}, // VCOM控制（0x0A电压值）
+                InitCommand{0xE8, {0x40, 0x8A, 0x00, 0x00, 0x29, 0x19, 0xA5, 0x33}}, // 面板配置
+                InitCommand{0xE0, {0xD0, 0x08, 0x0F, 0x06, 0x06, 0x33, 0x30, 0x33, 0x47, 0x17, 0x13, 0x13, 0x2B, 0x31}},
+                // 正伽马校正
+                InitCommand{0xE1, {0xD0, 0x0A, 0x11, 0x0B, 0x09, 0x07, 0x2F, 0x33, 0x47, 0x38, 0x15, 0x16, 0x2C, 0x32}},
+                // 负伽马校正
+                InitCommand{0xF0, {0x3C}}, // 命令集控制3
+                InitCommand{0xF0, {0x69}, 120}, // 命令集控制4 + 120ms延迟
+                InitCommand{0x21, {}}, // 反色关闭
+                InitCommand{0x29, {}}, // 显示开启
+                InitCommand{0x36, {0xE8},20} // 最终显示方向（封装set_direction(0)）
             };
         }
     }
 
     // =========== 方向控制模板 ===========
-    template <DeviceType T>
+    template<DeviceType T>
     struct RotationControl;
 
-    template <>
-    struct RotationControl<DeviceType::ILI9488> {
-        static void set(Rotation rot) {
+    template<>
+    struct RotationControl<DeviceType::ILI9488>
+    {
+        static void set(Rotation rot)
+        {
             constexpr uint8_t params[] = {0xE9, 0x29, 0x69, 0xA9};
             InterfacePolicy<InterfaceType::Parallel8080>::write_cmd(0x36);
             InterfacePolicy<InterfaceType::Parallel8080>::write_data(params[static_cast<int>(rot)]);
         }
     };
 
-    template <>
-    struct RotationControl<DeviceType::ST7796> {
-        static void set(Rotation rot) {
+    template<>
+    struct RotationControl<DeviceType::ST7796>
+    {
+        static void set(Rotation rot)
+        {
             constexpr uint8_t params[] = {0x48, 0x88, 0x28, 0xE8};
             InterfacePolicy<InterfaceType::SPI>::write_cmd(0x36);
             InterfacePolicy<InterfaceType::SPI>::write_data(params[static_cast<int>(rot)] | 0x08);
@@ -226,29 +247,32 @@ namespace bsp::lcd::detail
 export namespace bsp::lcd
 {
     void init(); // 初始化
-    void flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,  uint8_t *color_p); // 涂块
+    void flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint8_t *color_p); // 涂块
 
 
-    template <void(*delay_ms)(uint32_t),DeviceType Type, InterfaceType Interface = InterfaceType::Parallel8080,DMAConfigType DMAConfig = DMAConfigType::disable>
-    class LCDController {
+    template<void(*delay_ms)(uint32_t), DeviceType Type, InterfaceType Interface = InterfaceType::Parallel8080,
+        DMAConfigType DMAConfig = DMAConfigType::disable>
+    class LCDController
+    {
         using Policy = detail::InterfacePolicy<Interface>;
-        static constexpr auto init_seq = detail::get_init_sequence<Type>();
+        static constexpr auto init_seq = detail::get_init_sequence<Type>(); // 编译期初始化
 
     public:
-        static void init() {
+        static void init()
+        {
             // 硬件复位
             if constexpr (Interface == InterfaceType::Parallel8080)
             {
                 // 复位TFT显示屏
-                TFT_LED::write(0);// 关闭背光LED
-                TFT_RST::write(1);// 将TFT复位引脚设为高电平
-                delay_ms(5);// 等待100毫秒
-                TFT_RST::write(0);  // 将TFT复位引脚设为低电平
-                delay_ms(5);// 等待100毫秒
-                TFT_RST::write(1);  // 将TFT复位引脚设为高电平，完成复位操作
-                delay_ms(5);// 等待100毫秒
-
-            }else if (Interface == InterfaceType::SPI)
+                TFT_LED::write(0); // 关闭背光LED
+                TFT_RST::write(1); // 将TFT复位引脚设为高电平
+                delay_ms(5); // 等待100毫秒
+                TFT_RST::write(0); // 将TFT复位引脚设为低电平
+                delay_ms(5); // 等待100毫秒
+                TFT_RST::write(1); // 将TFT复位引脚设为高电平，完成复位操作
+                delay_ms(5); // 等待100毫秒
+            }
+            else if constexpr (Interface == InterfaceType::SPI)
             {
                 GPIO_InitTypeDef config = {};
                 config.Mode = GPIO_MODE_OUTPUT_PP;
@@ -266,12 +290,12 @@ export namespace bsp::lcd
                 delay_ms(50);
             }
 
-            // 发送初始化序列
-            Policy::template send_sequence(init_seq);
+            // 获取初始化序列并发送
+            Policy::template send_sequence(init_seq); // 零开销调用
 
             if constexpr (Interface == InterfaceType::Parallel8080)
             {
-                TFT_LED::write(1);// 开启背光LCD
+                TFT_LED::write(1); // 开启背光LCD
             }
 
             // // 设置默认方向
@@ -279,101 +303,124 @@ export namespace bsp::lcd
             // delay_ms(20);
         }
 
-        static void set_rotation(Rotation rot) {
+        static void set_rotation(Rotation rot)
+        {
             detail::RotationControl<Type>::set(rot);
         }
 
-        static void flush(const uint16_t x1, const uint16_t y1, const uint16_t x2, const uint16_t y2,uint8_t *colors)
+        static void flush(const uint16_t x1, const uint16_t y1, const uint16_t x2, const uint16_t y2, uint8_t *colors)
         {
+            if constexpr (Interface == InterfaceType::SPI && DMAConfig == DMAConfigType::enable)
+            {
+                // 使用DMA的情况
+                while (HAL_DMA_GetState(&spi::hdma_spi2_tx) != HAL_DMA_STATE_READY) {}
+            }
+
             set_window(x1, y1, x2, y2);
-            Policy::write_cmd(0x2C);// 开始传输数据到LCD
+            Policy::write_cmd(0x2C); // 开始传输数据到LCD
             const uint32_t pixel_count = (x2 - x1 + 1) * (y2 - y1 + 1); // 计算像素数量
-            if constexpr (Interface == InterfaceType::SPI) {
-                // ====================== SPI接口 ======================
-                if constexpr(DMAConfig == DMAConfigType::enable)
+
+            if constexpr (Interface == InterfaceType::Parallel8080)
+            {
+                // ====================== 8080并口接口 ======================
+                if constexpr (DMAConfig == DMAConfigType::disable)
                 {
-                    // 使用DMA的情况
-                    while (HAL_DMA_GetState(&spi::hdma_spi2_tx) != HAL_DMA_STATE_READY){}
+                    // 不使用DMA
+                    for (uint32_t i = 0; i < pixel_count; ++i)
+                    {
+                        TFT_DATA::write(colors[i]);
+                    }
                 }
+                else
+                {
+                    // 使用DMA传输数据到LCD
+                    // HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream6, (uint32_t) color_p, TFT_DATA_ADDR,
+                    //      ((x2 + 1) - x1) * ((y2 + 1) - y1));
+                }
+            }
+            else if constexpr (Interface == InterfaceType::SPI)
+            {
+                // ====================== SPI接口 ======================
+
 
                 LCD_RS::high();
                 spi::cs_low();
 
                 if constexpr (DMAConfig == DMAConfigType::disable)
                 {
-                    for (uint32_t i = 0; i < pixel_count; ++i) {
-                        spi::send_byte(colors[i] >> 8);// 发送高字节
-                        spi::send_byte(colors[i] & 0xFF);// 发送低字节
+                    for (uint32_t i = 0; i < pixel_count; ++i)
+                    {
+                        spi::send_byte(colors[i] >> 8); // 发送高字节
+                        spi::send_byte(colors[i] & 0xFF); // 发送低字节
                     }
-                    spi::cs_high();// 禁用LCD片选
-                }else
+                    spi::cs_high(); // 禁用LCD片选
+                }
+                else
                 {
                     // ====== 使用DMA =====
 
-                    // 交换颜色数据高低字节
-                    auto *p = reinterpret_cast<uint32_t *>(colors);
-                    uint32_t pairs = pixel_count >> 1;
-                    while (pairs--)
-                    {
-                        *p = __REV16(*p); // 同时处理两个16位元素
-                        p++;
-                    }
-                    // 处理剩余单个元素（如有）
-                    if (pixel_count & 1)
-                    {
-                        auto *last = reinterpret_cast<uint16_t *>(p);
-                        *last = __REV16(*last);
+                    // // 交换颜色数据高低字节
+                    // auto *p = reinterpret_cast<uint32_t *>(colors);
+                    // uint32_t pairs = pixel_count >> 1;
+                    // while (pairs--)
+                    // {
+                    //     *p = __REV16(*p); // 同时处理两个16位元素
+                    //     p++;
+                    // }
+                    // // 处理剩余单个元素（如有）
+                    // if (pixel_count & 1)
+                    // {
+                    //     auto *last = reinterpret_cast<uint16_t *>(p);
+                    //     *last = __REV16(*last);
+                    // }
+                    auto* p = reinterpret_cast<uint16_t*>(colors);
+                    for (uint32_t i = 0; i < pixel_count; ++i) {
+                        p[i] = __REV16(p[i]);
                     }
 
                     HAL_DMA_Start_IT(&spi::hdma_spi2_tx,
-                 reinterpret_cast<uint32_t>(colors), // 直接使用uint16_t*地址
-                 reinterpret_cast<uint32_t>(&spi::hspi2.Instance->DR), // SPI数据寄存器地址
-                 pixel_count << 1
-);
-                    __HAL_DMA_ENABLE_IT(&bsp::spi::hdma_spi2_rx, DMA_IT_TC);// SPI2向DMA发出请求
-                }
-            }
-            else if constexpr (Interface == InterfaceType::Parallel8080) {
-                // ====================== 8080并口接口 ======================
-                if constexpr(DMAConfig == DMAConfigType::disable)
-                {
-                    // 不使用DMA
-                    for (uint32_t i = 0; i < pixel_count; ++i) {
-                        TFT_DATA::write(colors[i]);
-                    }
-                } else
-                {
+                                     reinterpret_cast<uint32_t>(colors), // 直接使用uint16_t*地址
+                                     reinterpret_cast<uint32_t>(&spi::hspi2.Instance->DR), // SPI数据寄存器地址
+                                     pixel_count << 1);
 
-                    // 使用DMA传输数据到LCD
-                    // HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream6, (uint32_t) color_p, TFT_DATA_ADDR,
-                    //      ((x2 + 1) - x1) * ((y2 + 1) - y1));
+                    __HAL_DMA_ENABLE_IT(&bsp::spi::hdma_spi2_rx, DMA_IT_TC); // SPI2向DMA发出请求
                 }
             }
         }
 
     private:
-        static void set_window(const uint16_t x1, const uint16_t y1, const uint16_t x2, const uint16_t y2) {
-            if constexpr (Interface == InterfaceType::Parallel8080) {
+        static void set_window(const uint16_t x1, const uint16_t y1, const uint16_t x2, const uint16_t y2)
+        {
+            if constexpr (Interface == InterfaceType::Parallel8080)
+            {
                 TFT_CMD::write(0x2A); // 设置列地址范围
-                TFT_DATA::write(x1 >> 8); TFT_DATA::write(x1 & 0xFF);
-                TFT_DATA::write(x2 >> 8); TFT_DATA::write(x2 & 0xFF);
+                TFT_DATA::write(x1 >> 8);
+                TFT_DATA::write(x1 & 0xFF);
+                TFT_DATA::write(x2 >> 8);
+                TFT_DATA::write(x2 & 0xFF);
 
-                TFT_CMD::write(0x2B);// 设置行地址范围
-                TFT_DATA::write(y1 >> 8); TFT_DATA::write(y1 & 0xFF);
-                TFT_DATA::write(y2 >> 8); TFT_DATA::write(y2 & 0xFF);
+                TFT_CMD::write(0x2B); // 设置行地址范围
+                TFT_DATA::write(y1 >> 8);
+                TFT_DATA::write(y1 & 0xFF);
+                TFT_DATA::write(y2 >> 8);
+                TFT_DATA::write(y2 & 0xFF);
             }
-            else {
+            else if constexpr (Interface == InterfaceType::SPI)
+            {
                 Policy::write_cmd(0x2A);
-                Policy::write_data(x1 >> 8); Policy::write_data(x1 & 0xFF);
-                Policy::write_data(x2 >> 8); Policy::write_data(x2 & 0xFF);
+                Policy::write_data(x1 >> 8);
+                Policy::write_data(x1 & 0xFF);
+                Policy::write_data(x2 >> 8);
+                Policy::write_data(x2 & 0xFF);
 
                 Policy::write_cmd(0x2B);
-                Policy::write_data(y1 >> 8); Policy::write_data(y1 & 0xFF);
-                Policy::write_data(y2 >> 8); Policy::write_data(y2 & 0xFF);
+                Policy::write_data(y1 >> 8);
+                Policy::write_data(y1 & 0xFF);
+                Policy::write_data(y2 >> 8);
+                Policy::write_data(y2 & 0xFF);
             }
         }
     };
-
 }
 
 
@@ -789,7 +836,7 @@ namespace bsp::lcd
 #endif
     }
 
-    void flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,  uint8_t *color_p)
+    void flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint8_t *color_p)
     {
 #ifdef LCD_8080_PORT_ENABLE
 #ifdef DMA_FSMC_ENABLE
