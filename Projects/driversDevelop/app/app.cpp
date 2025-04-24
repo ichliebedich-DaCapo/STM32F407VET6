@@ -1,8 +1,8 @@
 //
 // Created by fairy on 2025/1/9 13:31.
 //
-#include <project_config.h>
-import app;
+#include <etl/array.h>
+#include <app.hpp>
 #ifdef GUI_ENABLE
 
 import gui;
@@ -43,10 +43,10 @@ namespace
 }
 
 
+
+
 namespace app
 {
-
-
     void Control::init()
     {
         using namespace bsp;
@@ -54,6 +54,7 @@ namespace app
         rng::init();
         delay::init();
         usart::init();
+
 
 
     }

@@ -3,6 +3,7 @@
 //
 module;
 #include "lvgl.h"
+#include <etl/array.h>
 export module gui:render;
 export import gui_compose;// 包含所有组件模块并导出
 
@@ -36,21 +37,17 @@ export namespace gui
             int32_t (*touchpad_read_xy)(int32_t *last_x, int32_t *last_y) = nullptr>
         static auto init() -> void
         {
-            /********初始化LCD*******/
-            if constexpr (lcd_init != nullptr)
-            {
-                lcd_init();
-            }
-
             /********初始化LVGL*******/
             lv_init();
+
+            /********初始化LCD*******/
+            if constexpr (lcd_init != nullptr){lcd_init();}
 
             /******初始化显示设备******/
             if constexpr (disp_flush != nullptr) { disp_drv_init<disp_flush>(); }
 
             /*****初始化触摸屏******/
             if constexpr (touchpad_read_xy != nullptr) { touchpad_init<touchpad_read_xy>(); }
-
 
             /*****初始化GUI组件*****/
             resource_init();
@@ -108,10 +105,10 @@ export namespace gui
 
             // 缓冲区  双缓冲明显优于单缓冲
             LV_ATTRIBUTE_MEM_ALIGN
-            static uint8_t buf_2_1[DISP_HOR_RES * DISP_BUF_SIZE * BYTE_PER_PIXEL];
+            static etl::array<uint8_t,DISP_HOR_RES * DISP_BUF_SIZE * BYTE_PER_PIXEL> buf_2_1;
             LV_ATTRIBUTE_MEM_ALIGN
-            static uint8_t buf_2_2[DISP_HOR_RES * DISP_BUF_SIZE * BYTE_PER_PIXEL];
-            lv_display_set_buffers(disp, buf_2_1, buf_2_2, sizeof(buf_2_1), LV_DISPLAY_RENDER_MODE_PARTIAL);
+            static etl::array<uint8_t,DISP_HOR_RES * DISP_BUF_SIZE * BYTE_PER_PIXEL> buf_2_2;
+            lv_display_set_buffers(disp, buf_2_1.data(), buf_2_2.data(), buf_2_1.size(), LV_DISPLAY_RENDER_MODE_PARTIAL);
         }
 
         /**

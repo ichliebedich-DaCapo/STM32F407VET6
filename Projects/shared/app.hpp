@@ -1,5 +1,6 @@
-export module app;
-export namespace app
+#pragma once
+#include <project_config.h>
+namespace app
 {
     class Control
     {

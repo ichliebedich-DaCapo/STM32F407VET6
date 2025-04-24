@@ -1,8 +1,7 @@
-#include <project_config.h>
+#include <app.hpp>
 import baseInit;
 import key_adapter;
 import key_exit;
-import app;
 #ifdef GUI_ENABLE
 import lcd;
 import touch;

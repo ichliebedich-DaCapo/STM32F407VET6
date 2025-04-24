@@ -31,8 +31,9 @@ include(cmake/structure/projects.cmake)
 
 
 # 定义一个可执行文件目标，生成了 ELF 文件
+add_subdirectory(Middleware/Third_Party/etl)
 add_executable(${PROJECT_NAME}.elf ${SOURCES})
-
+target_link_libraries(${PROJECT_NAME}.elf PUBLIC etl::etl)
 
 # 导入模块
 if (STATIC_LIB_LD)

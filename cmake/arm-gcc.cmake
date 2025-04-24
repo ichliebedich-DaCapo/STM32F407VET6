@@ -11,8 +11,8 @@ set(CMAKE_SIZE arm-none-eabi-size)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_C_STANDARD 11)
 
-# 添加编译器选项，使得支持Module特性
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts")
+# 添加编译器选项，使得支持Module特性 关闭运行时错误处理(可以降低一些ROM占用)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts -fno-rtti")
 
 #--------------------------编译选项----------------------------
 # -m 选项通常用于控制目标架构、指令集和硬件特性。
@@ -65,11 +65,9 @@ endif ()
 #-finline-limit=n：设置内联函数的最大复杂度，默认值为225。你可以根据需要调整这个值。
 #-Winline-function-return-type：对返回类型不一致的内联函数发出警告。
 add_compile_options(-finline-functions)
-
 # 关闭异常处理
 add_compile_options(-fno-exceptions)
-# 关闭运行时错误处理(可以降低一些ROM占用)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
+
 
 # ----------------------调试选项--------------------------
 # 开启内联警告，当函数内联失败时，编译器会发出警告。

@@ -94,7 +94,6 @@ void EXTI0_IRQHandler()
 #ifdef DMA_SPI_ENABLE
  void DMA1_Stream4_IRQHandler()
 {
-#if 1
     /* 使用HAL库预定义宏检测标志 */
     if(__HAL_DMA_GET_FLAG(&bsp::spi::hdma_spi2_tx, __HAL_DMA_GET_TC_FLAG_INDEX(&bsp::spi::hdma_spi2_tx)))
     {
@@ -110,10 +109,6 @@ void EXTI0_IRQHandler()
         gui::Render::display_flush_ready();
 
     }
-#else
-    HAL_DMA_IRQHandler(&bsp::spi::hdma_spi2_tx);
-#endif
-
 }
 #endif
 
