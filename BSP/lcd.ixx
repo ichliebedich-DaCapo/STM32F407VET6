@@ -419,12 +419,12 @@ void bsp::lcd::init()
     delay_ms(120);
     LCD_WR_REG(0x21);
     LCD_WR_REG(0x29);
-    bsp::lcd::LCD_direction(0);//下两句被封装为此句，默认显示方向为横屏 切记：切换屏幕方向，LCD_Clear函数内要交互x,y
+    LCD_direction(0);//下两句被封装为此句，默认显示方向为横屏 切记：切换屏幕方向，LCD_Clear函数内要交互x,y
 //    LCD_WR_REG(0x36);
 //    LCD_WR_DATA(0x60);
 #ifdef DMA_SPI_ENABLE
     while(HAL_SPI_GetState(&bsp::spi::hspi2) != HAL_SPI_STATE_READY);
-    HAL_SPI_Transmit_DMA(&bsp::spi::hspi2, (uint8_t*)dma_buf, 2);
+    HAL_SPI_Transmit_DMA(&bsp::spi::hspi2, reinterpret_cast<uint8_t *>(dma_buf), 2);
     while(HAL_SPI_GetState(&bsp::spi::hspi2) != HAL_SPI_STATE_READY);
 #endif
 
