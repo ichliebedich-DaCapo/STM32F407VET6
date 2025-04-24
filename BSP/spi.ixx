@@ -174,12 +174,14 @@ void bsp::spi::init_spi2() noexcept
     __HAL_LINKDMA(&hspi2, hdmatx, hdma_spi2_tx);
     __HAL_LINKDMA(&hspi2, hdmarx, hdma_spi2_rx);
 
-//    dma_init();
+    // 禁用其他不必要的中断（提升性能）
     __HAL_SPI_DISABLE_IT(&hspi2, SPI_IT_TXE);
-    __HAL_DMA_ENABLE_IT(&hdma_spi2_rx, DMA_IT_TC);
+    __HAL_DMA_DISABLE_IT(&hdma_spi2_tx, DMA_IT_HT);  // 禁用半传输中断
+    __HAL_DMA_DISABLE_IT(&hdma_spi2_tx, DMA_IT_FE);  // 禁用FIFO错误中断
 
+    __HAL_DMA_ENABLE_IT(&hdma_spi2_rx, DMA_IT_TC);   // 使能传输完成中断
+    SET_BIT(bsp::spi::hspi2.Instance->CR2, SPI_CR2_TXDMAEN); // 使能DMA传输
 #endif
-
 
 }
 
@@ -246,12 +248,13 @@ void DMA1_Stream3_IRQHandler()
     HAL_DMA_IRQHandler(&bsp::spi::hdma_spi2_rx);
 }
 
+    // 放到ISR.cpp里了，因为觉得不够高效
 /**
  * @brief DMA发送流中断服务函数
  */
-void DMA1_Stream4_IRQHandler()
-{
-    HAL_DMA_IRQHandler(&bsp::spi::hdma_spi2_tx);
-}
+// void DMA1_Stream4_IRQHandler()
+// {
+//     HAL_DMA_IRQHandler(&bsp::spi::hdma_spi2_tx);
+// }
 #endif
 }

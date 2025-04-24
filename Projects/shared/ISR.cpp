@@ -91,6 +91,33 @@ void EXTI0_IRQHandler()
     PlatformKey::isr_entry(KEY_RAM & 0xF);//获取键值
 }
 
+#ifdef DMA_SPI_ENABLE
+ void DMA1_Stream4_IRQHandler()
+{
+#if 1
+    /* 使用HAL库预定义宏检测标志 */
+    if(__HAL_DMA_GET_FLAG(&bsp::spi::hdma_spi2_tx, __HAL_DMA_GET_TC_FLAG_INDEX(&bsp::spi::hdma_spi2_tx)))
+    {
+        // 清除传输完成标志
+        __HAL_DMA_CLEAR_FLAG(&bsp::spi::hdma_spi2_tx, __HAL_DMA_GET_TC_FLAG_INDEX(&bsp::spi::hdma_spi2_tx));
+
+        // 更新HAL状态机（关键！否则下次传输无法启动）
+        bsp::spi::hdma_spi2_tx.State = HAL_DMA_STATE_READY;
+        __HAL_UNLOCK(&bsp::spi::hdma_spi2_tx);
+
+        // 直接执行后续操作（示例：关闭片选+通知渲染完成）
+        bsp::lcd::CS_HIGH();
+        gui::Render::display_flush_ready();
+
+    }
+#else
+    HAL_DMA_IRQHandler(&bsp::spi::hdma_spi2_tx);
+#endif
+
+}
+#endif
+
+
 
 /**
  * @brief DMA中断
@@ -128,8 +155,7 @@ void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
     if(hspi == &bsp::spi::hspi2) { // 指定SPI实例
         bsp::lcd::CS_HIGH();
         gui::Render::display_flush_ready();
-        SET_BIT(bsp::spi::hspi2.Instance->CR2, SPI_CR2_TXDMAEN);
-//        __HAL_DMA_ENABLE_IT(&bsp::spi::hdma_spi2_rx, DMA_IT_TC);
+
     }
 #endif
 }

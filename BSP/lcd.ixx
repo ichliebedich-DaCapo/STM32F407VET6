@@ -8,19 +8,12 @@ import hw_registers;// 硬件抽象寄存器
 
 export namespace bsp::lcd
 {
-    void init();// 初始化
-    void flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p);// 涂块
+    void init(); // 初始化
+    void flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p); // 涂块
 
-    void CS_LOW()
-    {
-        bsp::spi::cs_low();
-    }
+    void CS_LOW() { spi::cs_low(); }
 
-    void CS_HIGH()
-    {
-        bsp::spi::cs_high();
-    }
-
+    void CS_HIGH() { spi::cs_high(); }
 }
 
 /*预编译*/
@@ -30,14 +23,14 @@ export namespace bsp::lcd
 
 // ==================== 属性 ====================
 // 寄存器
-using TFT_CMD = Register<0x60060000>;// TFT命令寄存器片选地址
-using TFT_DATA =Register<0x60060002>;// TFT数据寄存器片选地址
-using TFT_RST = Register<0x60060004>;// TFT复位寄存器地址
-using TFT_LED = Register<0x60060008>;// TFT背光寄存器地址
+using TFT_CMD = Register<0x60060000>; // TFT命令寄存器片选地址
+using TFT_DATA = Register<0x60060002>; // TFT数据寄存器片选地址
+using TFT_RST = Register<0x60060004>; // TFT复位寄存器地址
+using TFT_LED = Register<0x60060008>; // TFT背光寄存器地址
 constexpr uint32_t TFT_DATA_ADDR = 0x60060002U;
 constexpr uint16_t BUF_SIZE = 512; // 缓冲区大小（像素数）
 // GPIO引脚定义
-constexpr uint16_t LCD_RST_PIN =GPIO_PIN_15;
+constexpr uint16_t LCD_RST_PIN = GPIO_PIN_15;
 constexpr uint16_t LCD_RS_PIN = GPIO_PIN_13;
 #define LCD_RST_PORT  GPIOB
 #define LCD_RS_PORT   GPIOB
@@ -56,8 +49,7 @@ namespace bsp::lcd
     void LCD_Clear(uint16_t color);
 
 
-
-// ==================== 内联函数 ====================
+    // ==================== 内联函数 ====================
 
 #ifdef LCD_SPI_PORT_ENABLE
     void LCD_RST_LOW()
@@ -67,12 +59,12 @@ namespace bsp::lcd
 
     void LCD_RST_HIGH()
     {
-        HAL_GPIO_WritePin(LCD_RST_PORT, LCD_RST_PIN, GPIO_PIN_SET);// 低电平发送命令
+        HAL_GPIO_WritePin(LCD_RST_PORT, LCD_RST_PIN, GPIO_PIN_SET); // 低电平发送命令
     }
 
     void LCD_RS_LOW()
     {
-        HAL_GPIO_WritePin(LCD_RS_PORT, LCD_RS_PIN, GPIO_PIN_RESET);// 高电平发送数据
+        HAL_GPIO_WritePin(LCD_RS_PORT, LCD_RS_PIN, GPIO_PIN_RESET); // 高电平发送数据
     }
 
     void LCD_RS_HIGH()
@@ -81,11 +73,10 @@ namespace bsp::lcd
     }
 
 
-
     void LCD_WR_REG(uint8_t data)
     {
         CS_LOW();
-        LCD_RS_LOW();// 低电平发送命令
+        LCD_RS_LOW(); // 低电平发送命令
         bsp::spi::send_byte(data);
         CS_HIGH();
     }
@@ -93,15 +84,12 @@ namespace bsp::lcd
     void LCD_WR_DATA(uint8_t data)
     {
         CS_LOW();
-        LCD_RS_HIGH();// 高电平发送数据
-        bsp::spi::send_byte(data);
+        LCD_RS_HIGH(); // 高电平发送数据
+        spi::send_byte(data);
         CS_HIGH();
     }
 #endif
 }
-
-
-
 
 
 /********************************************************************
@@ -328,18 +316,18 @@ void bsp::lcd::init()
     LCD_RST_HIGH();
     delay_ms(50);
 
-//*************3.5 ST7796S IPS初始化**********//
+    //*************3.5 ST7796S IPS初始化**********//
     LCD_WR_REG(0x11);
 
-    delay_ms(120);                //Delay 120ms
+    delay_ms(120); //Delay 120ms
 
-    LCD_WR_REG(0x36);     // Memory Data Access Control MY,MX~~
-    LCD_WR_DATA(0x48);// (1<<6|1<<3)
+    LCD_WR_REG(0x36); // Memory Data Access Control MY,MX~~
+    LCD_WR_DATA(0x48); // (1<<6|1<<3)
 
     LCD_WR_REG(0x3A);
-    LCD_WR_DATA(0x55);   //LCD_WR_DATA(0x66);
+    LCD_WR_DATA(0x55); //LCD_WR_DATA(0x66);
 
-    LCD_WR_REG(0xF0);     // Command Set Control
+    LCD_WR_REG(0xF0); // Command Set Control
     LCD_WR_DATA(0xC3);
 
     LCD_WR_REG(0xF0);
@@ -360,7 +348,7 @@ void bsp::lcd::init()
     LCD_WR_DATA(0x45);
 
     LCD_WR_REG(0xC1);
-    LCD_WR_DATA(0x13);   //18  //00
+    LCD_WR_DATA(0x13); //18  //00
 
     LCD_WR_REG(0xC2);
     LCD_WR_DATA(0xA7);
@@ -419,35 +407,33 @@ void bsp::lcd::init()
     delay_ms(120);
     LCD_WR_REG(0x21);
     LCD_WR_REG(0x29);
-    LCD_direction(0);//下两句被封装为此句，默认显示方向为横屏 切记：切换屏幕方向，LCD_Clear函数内要交互x,y
-//    LCD_WR_REG(0x36);
-//    LCD_WR_DATA(0x60);
-#ifdef DMA_SPI_ENABLE
-    while(HAL_SPI_GetState(&bsp::spi::hspi2) != HAL_SPI_STATE_READY);
-    HAL_SPI_Transmit_DMA(&bsp::spi::hspi2, reinterpret_cast<uint8_t *>(dma_buf), 2);
-    while(HAL_SPI_GetState(&bsp::spi::hspi2) != HAL_SPI_STATE_READY);
-#endif
+    LCD_direction(0); //下两句被封装为此句，默认显示方向为横屏 切记：切换屏幕方向，LCD_Clear函数内要交互x,y
+    //    LCD_WR_REG(0x36);
+    //    LCD_WR_DATA(0x60);
 
+#ifdef DMA_SPI_ENABLE
+
+#endif
 
 #else
 #endif
 }
 
 
-namespace bsp::lcd {
-
-/**********************************绘制接口*********************************************/
-/**
- * 设置LCD显示窗口
- * 该函数用于配置LCD的显示区域，通过指定窗口的起始和结束坐标
- *
- * @param sx 窗口起始点的X坐标
- * @param sy 窗口起始点的Y坐标
- * @param ex 窗口结束点的X坐标
- * @param ey 窗口结束点的Y坐标
- */
-void LCD_Set_Window(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey)
+namespace bsp::lcd
 {
+    /**********************************绘制接口*********************************************/
+    /**
+     * 设置LCD显示窗口
+     * 该函数用于配置LCD的显示区域，通过指定窗口的起始和结束坐标
+     *
+     * @param sx 窗口起始点的X坐标
+     * @param sy 窗口起始点的Y坐标
+     * @param ex 窗口结束点的X坐标
+     * @param ey 窗口结束点的Y坐标
+     */
+    void LCD_Set_Window(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey)
+    {
 #ifdef LCD_8080_PORT_ENABLE
     // 设置列地址范围
     LCD_WRITE_CMD(0x002A);
@@ -466,26 +452,26 @@ void LCD_Set_Window(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey)
     // 开始传输数据到LCD
     LCD_WRITE_CMD(0x002C);
 #elifdef LCD_SPI_PORT_ENABLE
-    LCD_WR_REG(0x2A);
-    LCD_WR_DATA(sx >> 8);
-    LCD_WR_DATA(0x00FF & sx);
-    LCD_WR_DATA(ex >> 8);
-    LCD_WR_DATA(0x00FF & ex);
+        LCD_WR_REG(0x2A);
+        LCD_WR_DATA(sx >> 8);
+        LCD_WR_DATA(0x00FF & sx);
+        LCD_WR_DATA(ex >> 8);
+        LCD_WR_DATA(0x00FF & ex);
 
-    LCD_WR_REG(0x2B);
-    LCD_WR_DATA(sy >> 8);
-    LCD_WR_DATA(0x00FF & sy);
-    LCD_WR_DATA(ey >> 8);
-    LCD_WR_DATA(0x00FF & ey);
+        LCD_WR_REG(0x2B);
+        LCD_WR_DATA(sy >> 8);
+        LCD_WR_DATA(0x00FF & sy);
+        LCD_WR_DATA(ey >> 8);
+        LCD_WR_DATA(0x00FF & ey);
 
-    LCD_WR_REG(0x2C);//开始写入GRAM
+        LCD_WR_REG(0x2C); //开始写入GRAM
 #endif
-}
+    }
 
     void flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)
     {
 #ifdef LCD_8080_PORT_ENABLE
-        #ifdef DMA_FSMC_ENABLE
+#ifdef DMA_FSMC_ENABLE
 
     LCD_Set_Window(x1, y1, x2, y2);//设置LCD屏幕的扫描区域
     HAL_DMA_Start_IT(&hdma_memtomem_dma2_stream6, (uint32_t) color_p, TFT_DATA_ADDR,
@@ -500,35 +486,31 @@ void LCD_Set_Window(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey)
 
         LCD_Set_Window(x1, y1, x2, y2);
         uint32_t pixel_count = (x2 - x1 + 1) * (y2 - y1 + 1);
-        uint32_t byte_count = pixel_count <<1;
 
         CS_LOW();
         LCD_RS_HIGH();
 
-        auto *p = (uint32_t*)color_p;
-        uint32_t pairs = pixel_count >>1;
-        while(pairs--) {
+        // =====交换颜色数据高低字节=====
+        auto *p = (uint32_t *) color_p;
+        uint32_t pairs = pixel_count >> 1;
+        while (pairs--)
+        {
             *p = __REV16(*p); // 同时处理两个16位元素
             p++;
         }
         // 处理剩余单个元素（如有）
-        if(pixel_count & 1 ) {
-            auto *last = (uint16_t*)p;
+        if (pixel_count & 1)
+        {
+            auto *last = reinterpret_cast<uint16_t *>(p);
             *last = __REV16(*last);
         }
-//        auto *buffer = (uint16_t*)color_p;
-//        for(int i=0; i<pixel_count; i++) {
-//            buffer[i] = __REV16(buffer[i]); // 字节交换
-//        }
 
-
-//        HAL_SPI_Transmit_DMA(&spi::hspi2,(uint8_t*) color_p, byte_count);
-        HAL_DMA_Start_IT(
-                &spi::hdma_spi2_tx,
-                (uint32_t)color_p, // 直接使用uint16_t*地址
-                (uint32_t)&spi::hspi2.Instance->DR, // SPI数据寄存器地址
-                byte_count
+        HAL_DMA_Start_IT(&spi::hdma_spi2_tx,
+                         reinterpret_cast<uint32_t>(color_p), // 直接使用uint16_t*地址
+                         reinterpret_cast<uint32_t>(&spi::hspi2.Instance->DR), // SPI数据寄存器地址
+                         pixel_count << 1
         );
+        __HAL_DMA_ENABLE_IT(&bsp::spi::hdma_spi2_rx, DMA_IT_TC);
 #else
         LCD_Set_Window(x1, y1, x2, y2); // 设置LCD屏幕的扫描区域
     CS_LOW(); // 使能LCD片选
@@ -548,94 +530,92 @@ void LCD_Set_Window(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey)
     }
 
 
-
-/**
- * 设置LCD显示方向
- * 该函数用于设置LCD的显示方向，通过指定显示方向参数来确定LCD的显示方式
- * @param direction 显示方向参数，取值范围为0~3，分别表示0度、90度、180度、270度
- */
-void LCD_direction(uint8_t direction)
-{
+    /**
+     * 设置LCD显示方向
+     * 该函数用于设置LCD的显示方向，通过指定显示方向参数来确定LCD的显示方式
+     * @param direction 显示方向参数，取值范围为0~3，分别表示0度、90度、180度、270度
+     */
+    void LCD_direction(uint8_t direction)
+    {
 #ifdef LCD_8080_PORT_ENABLE
 #elifdef LCD_SPI_PORT_ENABLE
-    // 初始为竖屏
-    // 定义液晶屏顺时针旋转方向 	0-0度旋转，1-90度旋转，2-180度旋转，3-270度旋转
-    LCD_WR_REG(0x36);
-//注意：原始方向为竖屏
-//    位	名称	描述
-//    7	    MY	垂直方向镜像（1：镜像，0：正常）
-//    6	    MX	水平方向镜像（1：镜像，0：正常）
-//    5	    MV	行列交换（1：交换，0：不交换）
-//    4   	ML	垂直刷新顺序（1：反向，0：正常）
-//    3 	BGR	RGB/BGR 顺序（1：BGR，0：RGB）
-//    2 	MH	水平刷新顺序（1：反向，0：正常）
-//    1 	-	保留位
-//    0 	-	保留位
-    switch (direction)
-    {
-        case 0:
-//            lcddev.width=LCD_W;
-//            lcddev.height=LCD_H;
+        // 初始为竖屏
+        // 定义液晶屏顺时针旋转方向 	0-0度旋转，1-90度旋转，2-180度旋转，3-270度旋转
+        LCD_WR_REG(0x36);
+        //注意：原始方向为竖屏
+        //    位	名称	描述
+        //    7	    MY	垂直方向镜像（1：镜像，0：正常）
+        //    6	    MX	水平方向镜像（1：镜像，0：正常）
+        //    5	    MV	行列交换（1：交换，0：不交换）
+        //    4   	ML	垂直刷新顺序（1：反向，0：正常）
+        //    3 	BGR	RGB/BGR 顺序（1：BGR，0：RGB）
+        //    2 	MH	水平刷新顺序（1：反向，0：正常）
+        //    1 	-	保留位
+        //    0 	-	保留位
+        switch (direction)
+        {
+            case 0:
+                //            lcddev.width=LCD_W;
+                //            lcddev.height=LCD_H;
 
-            LCD_WR_DATA((1<<5)|(1<<6)|(1<<7)|(1<<3));// 横屏1; 0度
-//            LCD_WR_DATA((1<<5)|(1<<6));// 横屏1; 0度
-            break;
-        case 1:
+                LCD_WR_DATA((1 << 5) | (1 << 6) | (1 << 7) | (1 << 3)); // 横屏1; 0度
+            //            LCD_WR_DATA((1<<5)|(1<<6));// 横屏1; 0度
+                break;
+            case 1:
 
-//            lcddev.width=LCD_H;
-//            lcddev.height=LCD_W;
-            LCD_WR_DATA((1<<6)|(1<<3));// 竖屏1; 90度
-//            LCD_WR_DATA(0);// 竖屏1; 90度
+                //            lcddev.width=LCD_H;
+                //            lcddev.height=LCD_W;
+                LCD_WR_DATA((1 << 6) | (1 << 3)); // 竖屏1; 90度
+            //            LCD_WR_DATA(0);// 竖屏1; 90度
 
 
-            break;
-        case 2:
-//            lcddev.width=LCD_W;
-//            lcddev.height=LCD_H;
-            LCD_WR_DATA((1<<5)|(1<<3));// 横屏2; 180度
-//            LCD_WR_DATA((1<<5)|(1<<7));// 横屏2; 180度
-            break;
-        case 3:
-//            lcddev.width=LCD_H;
-//            lcddev.height=LCD_W;
-            LCD_WR_DATA((1<<7)|(1<<3));// 竖屏2; 270度
-//            LCD_WR_DATA((1<<6)|(1<<7));// 竖屏2; 270度
-            break;
+                break;
+            case 2:
+                //            lcddev.width=LCD_W;
+                //            lcddev.height=LCD_H;
+                LCD_WR_DATA((1 << 5) | (1 << 3)); // 横屏2; 180度
+            //            LCD_WR_DATA((1<<5)|(1<<7));// 横屏2; 180度
+                break;
+            case 3:
+                //            lcddev.width=LCD_H;
+                //            lcddev.height=LCD_W;
+                LCD_WR_DATA((1 << 7) | (1 << 3)); // 竖屏2; 270度
+            //            LCD_WR_DATA((1<<6)|(1<<7));// 竖屏2; 270度
+                break;
 
-//        case 8:
-//            LCD_WR_DATA(0);// 原始方向;
-//            break;
-//        case 9:
-//            LCD_WR_DATA(1<<7);// 垂直方向镜像 ;
-//            break;
-//        case 10:
-//            LCD_WR_DATA(1<<6);// 水平方向镜像;
-//            break;
-//        case 11:
-//            LCD_WR_DATA((1<<6)|(1<<7));// 垂直方向镜像 水平方向镜像;
-//            break;
-//        case 12:
-//            LCD_WR_DATA(1<<5);// 行列交换;
-//            break;
-//        case 13:
-//            LCD_WR_DATA((1<<5)|(1<<7));// 行列交换 垂直方向镜像;
-//            break;
-//        case 14:
-//            LCD_WR_DATA((1<<5)|(1<<6));// 行列交换 水平方向镜像;
-//            break;
-//        case 15:
-//            LCD_WR_DATA((1 << 5) | (1 << 6) | (1 << 7));// 行列交换 水平方向镜像 垂直方向镜像;
-//            break;
-        default:
-            break;
-    }
+            //        case 8:
+            //            LCD_WR_DATA(0);// 原始方向;
+            //            break;
+            //        case 9:
+            //            LCD_WR_DATA(1<<7);// 垂直方向镜像 ;
+            //            break;
+            //        case 10:
+            //            LCD_WR_DATA(1<<6);// 水平方向镜像;
+            //            break;
+            //        case 11:
+            //            LCD_WR_DATA((1<<6)|(1<<7));// 垂直方向镜像 水平方向镜像;
+            //            break;
+            //        case 12:
+            //            LCD_WR_DATA(1<<5);// 行列交换;
+            //            break;
+            //        case 13:
+            //            LCD_WR_DATA((1<<5)|(1<<7));// 行列交换 垂直方向镜像;
+            //            break;
+            //        case 14:
+            //            LCD_WR_DATA((1<<5)|(1<<6));// 行列交换 水平方向镜像;
+            //            break;
+            //        case 15:
+            //            LCD_WR_DATA((1 << 5) | (1 << 6) | (1 << 7));// 行列交换 水平方向镜像 垂直方向镜像;
+            //            break;
+            default:
+                break;
+        }
 #endif
-}
+    }
 
-//切记：切换屏幕方向，LCD_Clear函数内要交互x,y
-void LCD_Clear(uint16_t color)
-{
-
+    //切记：切换屏幕方向，LCD_Clear函数内要交互x,y
+    void LCD_Clear(uint16_t color)
+    {
 #ifdef LCD_8080_PORT_ENABLE
     LCD_Set_Window(0, 0, 479, 319);
     for (uint32_t i = 0; i < 0x25800; ++i)
@@ -643,121 +623,79 @@ void LCD_Clear(uint16_t color)
         LCD_WRITE_DATA(color);
     }
 #elifdef LCD_SPI_PORT_ENABLE
-#ifdef DMA_SPI_ENABLE
-
-/********************SPI DMA轮询式多次传输*********************/
-/*****8位传输，颜色有问题******/
-// 1. 设置局部窗口
-    //一层互斥锁，防止和flush冲突
-    if (HAL_DMA_GetState(&bsp::spi::hdma_spi2_tx) != HAL_DMA_STATE_READY) return;
-    LCD_Set_Window(0, 0,480- 1,320- 1);
-    for(int i=0; i<BUF_SIZE; i++){
-        dma_buf[i] = __REV16(color); // 直接存储16位颜色值
-    }
-    uint32_t total_pixels = 480 * 320;
-    uint32_t transferred = 0;
-
-    CS_LOW();
-    LCD_RS_HIGH(); // 进入GRAM数据模式
-    while(transferred < total_pixels) {
-
-        uint32_t chunk = (total_pixels - transferred > BUF_SIZE)
-                         ? BUF_SIZE : (total_pixels - transferred);
-
-        // 更新缓冲区内容（可选）
-        // for(int i=0; i<chunk; i++) dma_test_buf[i] = color;
-
-        HAL_SPI_Transmit_DMA(&bsp::spi::hspi2, (uint8_t*)dma_buf, chunk * 2);
-        while(HAL_SPI_GetState(&bsp::spi::hspi2) != HAL_SPI_STATE_READY);
-        transferred += chunk;
-
-    }
-    CS_HIGH();
-
-
-
-/********************SPI 无DMA*************************/
-#else
+    // 默认是用阻塞式刷屏，不使用DMA刷屏
     LCD_Set_Window(0, 0, 479, 319);//横屏
-//    LCD_Set_Window(0, 0, 319, 479);//竖屏
+    //    LCD_Set_Window(0, 0, 319, 479);//竖屏
     CS_LOW();
     LCD_RS_HIGH();
     for (uint32_t i = 0; i < 480 * 320; ++i)
     {
-        bsp::spi::send_byte(color >> 8);
-        bsp::spi::send_byte(color & 0xFF);
+        spi::send_byte(color >> 8);
+        spi::send_byte(color & 0xFF);
     }
     CS_HIGH();
 #endif
-#endif
-}
+    }
 
 
-/**
- * @brief 填充矩形区域
- * @param sx
- * @param sy
- * @param ex
- * @param ey
- * @param color
- * @note
- */
-void LCD_Color_Fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, const uint16_t *color)
-{
-    const uint16_t length = ex - sx + 1;// 矩形区域的长度
-    const uint16_t width = ey - sy + 1; // 矩形区域的宽度
-    LCD_Set_Window(sx, sy, ex, ey);
-    // 遍历矩形区域的每一行
-    for (int j = 0; j < width; ++j)
+    /**
+     * @brief 填充矩形区域
+     * @param sx
+     * @param sy
+     * @param ex
+     * @param ey
+     * @param color
+     * @note
+     */
+    void LCD_Color_Fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, const uint16_t *color)
     {
-        for (int i = 0; i < length; ++i)
+        const uint16_t length = ex - sx + 1; // 矩形区域的长度
+        const uint16_t width = ey - sy + 1; // 矩形区域的宽度
+        LCD_Set_Window(sx, sy, ex, ey);
+        // 遍历矩形区域的每一行
+        for (int j = 0; j < width; ++j)
         {
-            TFT_DATA::write(color[i + length * j]);// 一次性写入整行的颜色数据
+            for (int i = 0; i < length; ++i)
+            {
+                TFT_DATA::write(color[i + length * j]); // 一次性写入整行的颜色数据
+            }
         }
     }
-}
 
-/**
- * @brief 清除矩形区域
- * @param sx
- * @param sy
- * @param ex
- * @param ey
- * @param color
- */
-void LCD_Color_Clean(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t color)
-{
-    const uint16_t length = ex - sx + 1;// 矩形区域的长度
-    const uint16_t width = ey - sy + 1; // 矩形区域的宽度
-    LCD_Set_Window(sx, sy, ex, ey);
-    // 遍历矩形区域的每一行
-    int total = length * width;
-    for (int j = 0; j < total; ++j)
+    /**
+     * @brief 清除矩形区域
+     * @param sx
+     * @param sy
+     * @param ex
+     * @param ey
+     * @param color
+     */
+    void LCD_Color_Clean(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t color)
     {
-        TFT_DATA::write(color);// 一次性写入整行的颜色数据
-
+        const uint16_t length = ex - sx + 1; // 矩形区域的长度
+        const uint16_t width = ey - sy + 1; // 矩形区域的宽度
+        LCD_Set_Window(sx, sy, ex, ey);
+        // 遍历矩形区域的每一行
+        int total = length * width;
+        for (int j = 0; j < total; ++j)
+        {
+            TFT_DATA::write(color); // 一次性写入整行的颜色数据
+        }
     }
-}
 
-/// 设置一个像素
-void LCD_Set_Pixel(uint16_t x, uint16_t y, uint16_t color)
-{
-
+    /// 设置一个像素
+    void LCD_Set_Pixel(uint16_t x, uint16_t y, uint16_t color)
+    {
 #ifdef LCD_8080_PORT_ENABLE
     LCD_Set_Window(x, y, x, y);
     LCD_WRITE_DATA(color);
 #elifdef LCD_SPI_PORT_ENABLE
-    LCD_Set_Window(x, y, x, y);
-    CS_LOW();
-    LCD_RS_HIGH();
-    bsp::spi::send_byte(color >> 8);
-    bsp::spi::send_byte(color & 0xFF);
-    CS_HIGH();
+        LCD_Set_Window(x, y, x, y);
+        CS_LOW();
+        LCD_RS_HIGH();
+        bsp::spi::send_byte(color >> 8);
+        bsp::spi::send_byte(color & 0xFF);
+        CS_HIGH();
 #endif
-
+    }
 }
-
-
-
-}
-

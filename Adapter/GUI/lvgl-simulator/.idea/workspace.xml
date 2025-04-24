@@ -29,10 +29,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="【模拟器】重新组织了gui模块组织">
-      <change afterPath="$PROJECT_DIR$/../../../Toolkit/scripts/convert_lvgl2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../Toolkit/scripts/extract_info.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/lcd.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/lcd.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/spi.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/spi.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/misc/lv_color.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/misc/lv_color.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
