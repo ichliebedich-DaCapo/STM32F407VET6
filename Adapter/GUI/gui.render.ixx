@@ -32,8 +32,7 @@ export namespace gui
     class Render
     {
     public:
-        template<void(*lcd_init)(), void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
-                                                       const uint16_t *color_p),
+        template<void(*lcd_init)(), void (*disp_flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,uint8_t *color_p),
             int32_t (*touchpad_read_xy)(int32_t *last_x, int32_t *last_y) = nullptr>
         static auto init() -> void
         {
@@ -86,7 +85,7 @@ export namespace gui
          * @tparam flush 涂色函数，有LCD驱动提供
          * @note 为了让lambda表达式可以不用捕获外部函数，只能使用函数模板。如果使用函数指针来传递就必须要显示捕获
          */
-        template<void (*flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p)>
+        template<void (*flush)(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint8_t *color_p)>
         static inline auto disp_drv_init() -> void
         {
             disp = lv_display_create(DISP_HOR_RES, DISP_VER_RES);
@@ -94,7 +93,7 @@ export namespace gui
             // 刷新回调
             lv_display_set_flush_cb(disp, [](lv_display_t *disp_drv, const lv_area_t *area, uint8_t *px_map)
             {
-                flush(area->x1, area->y1, area->x2, area->y2, reinterpret_cast<const uint16_t *>(px_map));
+                flush(area->x1, area->y1, area->x2, area->y2, px_map);
 
                 // 只有定义了DMA中断回调才不需要这个函数，那么这就要求DMA中断启用时需要设置相关宏定义
 #if !defined(ARM_MATH_CM4) || !defined(DMA_SPI_ENABLE)
