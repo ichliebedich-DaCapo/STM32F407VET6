@@ -5,9 +5,35 @@ export module lcd;
 import spi;
 import fsmc;
 import hw_registers;// 硬件抽象寄存器
+import gpio;
+
+using LCD_RST = bsp::gpio<GPIOB_BASE,GPIO_PIN_15>;
+using LCD_RS  = bsp::gpio<GPIOB_BASE,GPIO_PIN_13>;
+
+
+// =========== 配置信息 ============
+export namespace bsp::lcd
+{
+    // 接口类型
+    enum class interfaceType
+    {
+        Parallel8080,// 8080并口
+        SPI,// SPI接口
+        SPI_DMA// SPI接口+DMA
+    };
+
+    enum class deviceType{
+        ILI9481,// 实验平台上的那块，只能8080并口
+        ILI9488,// 实验平台上的那块，只能8080并口
+        ST7796//  自己买的，外接的触摸屏，只能SPI
+    };
+}
+
 
 export namespace bsp::lcd
 {
+
+
     void init(); // 初始化
     void flush(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, const uint16_t *color_p); // 涂块
 
@@ -35,11 +61,6 @@ constexpr uint16_t LCD_RS_PIN = GPIO_PIN_13;
 #define LCD_RST_PORT  GPIOB
 #define LCD_RS_PORT   GPIOB
 
-// ==================== 变量 ====================
-#ifdef LCD_SPI_PORT_ENABLE
-// 添加全局变量控制传输过程
-inline uint16_t dma_buf[BUF_SIZE] __attribute__((aligned(4))); // 4字节对齐
-#endif
 
 // ==================== 函数声明 ====================
 namespace bsp::lcd
@@ -297,17 +318,18 @@ void bsp::lcd::init()
 #endif
 
 #elifdef LCD_SPI_PORT_ENABLE
-    GPIO_InitTypeDef GPIO_InitStruct = {0};
 
-    GPIO_InitStruct.Pin = LCD_RST_PIN;
-    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    HAL_GPIO_Init(LCD_RST_PORT, &GPIO_InitStruct);
-    LCD_RST_HIGH();
+    GPIO_InitTypeDef config = {};
+    config.Mode = GPIO_MODE_OUTPUT_PP;
+    config.Pull = GPIO_NOPULL;
+    config.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    LCD_RST::init(config);
 
-    GPIO_InitStruct.Pin = LCD_RS_PIN;
-    HAL_GPIO_Init(LCD_RS_PORT, &GPIO_InitStruct);
+    LCD_RST::high();
+
+    // GPIO_InitStruct.Pin = LCD_RS_PIN;
+    // HAL_GPIO_Init(LCD_RS_PORT, &GPIO_InitStruct);
+    LCD_RS::init(config);
 
     //LCD 复位
     delay_ms(30);
