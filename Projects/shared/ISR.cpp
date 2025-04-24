@@ -105,9 +105,8 @@ void EXTI0_IRQHandler()
         __HAL_UNLOCK(&bsp::spi::hdma_spi2_tx);
 
         // 直接执行后续操作（示例：关闭片选+通知渲染完成）
-        bsp::lcd::CS_HIGH();
+        bsp::spi::cs_high();
         gui::Render::display_flush_ready();
-
     }
 }
 #endif
@@ -142,18 +141,9 @@ void DMA2_Stream6_IRQHandler(void)
 }
 
 }
-//需要一直发送或者接收就在回调里再调用一次接收或读取函数
-void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
-{
-#ifdef DMA_SPI_ENABLE
-    //方法1
-    if(hspi == &bsp::spi::hspi2) { // 指定SPI实例
-        bsp::lcd::CS_HIGH();
-        gui::Render::display_flush_ready();
 
-    }
-#endif
-}
+
+
 //DMA_USART_ENABLE 里封印着ESP8266的中断回调函数
 #ifdef DMA_USART_ENABLE
 DMA_HandleTypeDef hdma_usart1_tx;
