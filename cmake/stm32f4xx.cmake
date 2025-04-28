@@ -5,6 +5,7 @@ add_compile_definitions(ARM_MATH_CM4
         ARM_MATH_ROUNDING
         DEBUG
         USE_HAL_DRIVER
+        USE_FULL_LL_DRIVER
         STM32F407xx
 )
 
