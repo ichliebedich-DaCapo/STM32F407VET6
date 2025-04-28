@@ -22,6 +22,13 @@ constexpr uint32_t TFT_DATA_ADDR = 0x60060002U;
 using LCD_RST = bsp::gpio<GPIOB_BASE,GPIO_PIN_15>; // 复位引脚
 using LCD_RS = bsp::gpio<GPIOB_BASE,GPIO_PIN_13>; // 命令数据引脚 高电平为数据
 
+namespace bsp::lcd
+{
+    void set_direction(uint8_t direction);
+
+    void clear(uint16_t color);
+}
+
 
 // =========== 配置信息 ============
 export namespace bsp::lcd
@@ -96,21 +103,34 @@ namespace bsp::lcd::detail
             spi::cs_high();
         }
 
-        template<const auto& Cmds, size_t... I> // 关键修改：Cmds作为第一个模板参数
-        static inline void send_sequence_impl(std::index_sequence<I...>)
-        {
-            (([&]{
-                constexpr auto& cmd = Cmds[I]; // 编译期访问
-                write_cmd(cmd.cmd);
-                for (auto d : cmd.data) spi::send_byte(d);
-                if constexpr (cmd.delay_ms != 0) HAL_Delay(cmd.delay_ms);
-            }()), ...);
+        // template<size_t... Ds>
+        // constexpr void write_data(const std::array<uint8_t, 16>& data, std::index_sequence<Ds...>) {
+        //             (wr_data(data[Ds]), ...);
+        //         }
+
+        template<size_t DataSize>
+        constexpr void write_data(const std::array<uint8_t, 16>& data) {
+            write_data(data, std::make_index_sequence<DataSize>{});
         }
 
-        template<const auto& Cmds> // 只需要传递数组引用
-        static inline void send_sequence()
+        template<void(*delay_ms)(uint32_t),const InitCommand& Cmd>
+        constexpr void process_command() {
+            write_cmd(Cmd.cmd);
+            write_data<Cmd.data_size>(Cmd.data);
+            if constexpr (Cmd.delay_ms > 0) {
+                delay_ms(Cmd.delay_ms);
+            }
+        }
+
+        template<void(*delay_ms)(uint32_t),const auto& Arr, size_t... Is>
+        constexpr void send_sequence_impl(std::index_sequence<Is...>) {
+            (process_command<delay_ms,Arr[Is]>(), ...);
+        }
+
+        template<void(*delay_ms)(uint32_t),const auto& Commands>
+        static void send_sequence()
         {
-            send_sequence_impl<Cmds>(std::make_index_sequence<Cmds.size()>{});
+            send_sequence_impl<delay_ms,Commands>(std::make_index_sequence<Commands.size()>{});
         }
     };
 
@@ -122,18 +142,17 @@ namespace bsp::lcd::detail
 
         static inline void write_data(const uint16_t data) { TFT_DATA::write(data); }
 
-        template<size_t N>
+        template<void(*delay_ms)(uint32_t),size_t N>
         static void send_sequence(const std::array<InitCommand, N> &cmds)
         {
             for (const auto &cmd: cmds)
             {
                 write_cmd(cmd.cmd);
-                // 只发送有效数据（根据 data_size）
-                for (size_t i = 0; i < cmd.data_size; ++i)
+                for (auto d : cmd.data)
                 {
-                    TFT_DATA::write(cmd.data[i]);
+                    write_data(d);
                 }
-                if constexpr (cmd.delay_ms) HAL_Delay(cmd.delay_ms);
+                delay_ms(cmd.delay_ms);
             }
         }
     };
@@ -217,8 +236,9 @@ struct InitSequence<DeviceType::ST7796>
             InitCommand{0xF0, {0x3C}}, // 命令集控制3
             InitCommand{0xF0, {0x69}, 120}, // 命令集控制4 + 120ms延迟
             InitCommand{0x21, {}}, // 反色关闭
-            InitCommand{0x29, {}}, // 显示开启
-            InitCommand{0x36, {0xE8}, 20} // 最终显示方向（封装set_direction(0)）
+            InitCommand{0x29, {},20}, // 显示开启
+            InitCommand{0x36, {0xE8}, 20} ,// 最终显示方向（封装set_direction(0)）
+
         };
     };
 
@@ -286,10 +306,11 @@ export namespace bsp::lcd
                 config.Pull = GPIO_NOPULL;
                 config.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
                 LCD_RST::init(config);
+                LCD_RST::high();
                 LCD_RS::init(config);
 
                 //LCD 复位
-                LCD_RST::high();
+
                 delay_ms(30);
                 LCD_RST::low();
                 delay_ms(100);
@@ -298,14 +319,16 @@ export namespace bsp::lcd
             }
 
             // 获取初始化序列并发送
-            // 修改调用方式为模板参数传递
-            Policy::template send_sequence<detail::InitSequence<Type>::value>();
+            Policy::template send_sequence<delay_ms>(detail::InitSequence<Type>::value);
 
 
             if constexpr (Interface == InterfaceType::Parallel8080)
             {
                 TFT_LED::write(1); // 开启背光LCD
             }
+
+
+            set_direction(0);
 
             // // 设置默认方向
             // set_rotation(Rotation::Deg0);
@@ -350,8 +373,6 @@ export namespace bsp::lcd
             else if constexpr (Interface == InterfaceType::SPI)
             {
                 // ====================== SPI接口 ======================
-
-
                 LCD_RS::high();
                 spi::cs_low();
 
@@ -443,16 +464,14 @@ export namespace bsp::lcd
 // ==================== 函数声明 ====================
 namespace bsp::lcd
 {
-    void set_direction(uint8_t direction);
 
-    void LCD_Clear(uint16_t color);
 
 
     // ==================== 内联函数 ====================
 
 #ifdef LCD_SPI_PORT_ENABLE
 
-    void wr_reg(uint8_t data)
+    void wr_reg(const uint8_t data)
     {
         spi::cs_low();
         LCD_RS::low(); // 低电平发送命令
@@ -460,7 +479,7 @@ namespace bsp::lcd
         spi::cs_high();
     }
 
-    void wr_data(uint8_t data)
+    void wr_data(const uint8_t data)
     {
         spi::cs_low();
         LCD_RS::high(); // 高电平发送数据
@@ -574,7 +593,7 @@ void bsp::lcd::init()
     TFT_CMD::write(0x002C);
     TFTLED = 0x01;
     HAL_Delay(20);
-//    LCD_Clear(BLACK);
+//    clear(BLACK);
 #endif
 
 #if LCD_SORTS == 9488
@@ -672,7 +691,7 @@ void bsp::lcd::init()
     /*我觉得没必要清屏函数*/
     HAL_Delay(20);
 
-//     LCD_Clear(0xFFFF);  // 清除屏幕，设置为白色
+//     clear(0xFFFF);  // 清除屏幕，设置为白色
 #endif
 
 #elifdef LCD_SPI_PORT_ENABLE
@@ -785,7 +804,7 @@ void bsp::lcd::init()
     delay_ms(120);
     wr_reg(0x21);
     wr_reg(0x29);
-    set_direction(0); //下两句被封装为此句，默认显示方向为横屏 切记：切换屏幕方向，LCD_Clear函数内要交互x,y
+    set_direction(0); //下两句被封装为此句，默认显示方向为横屏 切记：切换屏幕方向，clear函数内要交互x,y
     //    wr_reg(0x36);
     //    wr_data(0x60);
 
@@ -949,8 +968,8 @@ namespace bsp::lcd
 #endif
     }
 
-    //切记：切换屏幕方向，LCD_Clear函数内要交互x,y
-    void LCD_Clear(uint16_t color)
+    //切记：切换屏幕方向，clear函数内要交互x,y
+    void clear(uint16_t color)
     {
 #ifdef LCD_8080_PORT_ENABLE
     set_window(0, 0, 479, 319);

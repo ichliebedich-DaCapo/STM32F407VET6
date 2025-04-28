@@ -81,6 +81,14 @@ void bsp::spi::init_spi2() noexcept
     __HAL_RCC_GPIOB_CLK_ENABLE();
     __HAL_RCC_GPIOC_CLK_ENABLE();
 
+    /**SPI2 GPIO Configuration
+    PC2     ------> SPI2_MISO
+    PC3     ------> SPI2_MOSI
+    PB10     ------> SPI2_SCK
+    PB12     ------> SPI2_NSS
+    */
+
+
     // SPI2数据线配置
     GPIO_InitTypeDef spi2_data_gpio = {
         .Pin = GPIO_PIN_2 | GPIO_PIN_3,
