@@ -9,7 +9,7 @@ add_compile_definitions(ARM_MATH_CM4
 )
 
 # 设置链接脚本（用于指定内存布局）
-set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/Core/system/linker/STM32F407VETX_FLASH.ld)
+set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/Firmware/system/linker/STM32F407VETX_FLASH.ld)
 add_link_options(-T ${LINKER_SCRIPT})
 
 
