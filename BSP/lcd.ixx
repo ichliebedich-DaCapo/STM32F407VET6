@@ -9,7 +9,7 @@ import spi;
 import fsmc;
 import hw_registers;// 硬件抽象寄存器
 import gpio;
-
+import delay;
 
 // ==================== 属性 ====================
 // 寄存器
@@ -458,8 +458,7 @@ export namespace bsp::lcd
 /*预编译*/
 #define LCD_SORTS 9488
 #define LCD_INTERFACE_TYPE 1 // 0:8080接口 1:SPI接口 GUI.c中的同时修改
-#define delay_ms(ms)   HAL_Delay(ms)
-
+#define delay_ms(ms_)   bsp::delay::ms(ms_)
 
 // ==================== 函数声明 ====================
 namespace bsp::lcd
@@ -502,11 +501,11 @@ void bsp::lcd::init()
 
 #if LCD_SORTS == 9481
     TFT_RST = 0;
-    HAL_Delay(5);
+    bsp::delay::ms(5);
     TFT_RST = 1;
 
     TFT_CMD::write(0x0011);
-    HAL_Delay(5);
+    bsp::delay::ms(5);
     TFT_CMD::write(0x00D0);
     TFT_DATA::write(0x0007);
     TFT_DATA::write(0x0041);
@@ -587,27 +586,27 @@ void bsp::lcd::init()
     TFT_DATA::write(0x0010);
     TFT_DATA::write(0x0022);
 
-    HAL_Delay(5);
+    bsp::delay::ms(5);
     TFT_CMD::write(0x0029);
-    HAL_Delay(5);
+    bsp::delay::ms(5);
     TFT_CMD::write(0x002C);
     TFTLED = 0x01;
-    HAL_Delay(20);
+    bsp::delay::ms(20);
 //    clear(BLACK);
 #endif
 
 #if LCD_SORTS == 9488
     // 复位TFT显示屏
     TFT_RST = 1;  // 将TFT复位引脚设为高电平
-    HAL_Delay(5);// 等待100毫秒
+    bsp::delay::ms(5);// 等待100毫秒
     TFT_RST = 0;  // 将TFT复位引脚设为低电平
-    HAL_Delay(5);// 等待100毫秒
+    bsp::delay::ms(5);// 等待100毫秒
     TFT_RST = 1;  // 将TFT复位引脚设为高电平，完成复位操作
-    HAL_Delay(5);// 等待100毫秒
+    bsp::delay::ms(5);// 等待100毫秒
 
     // 向LCD发送命令退出睡眠模式
     TFT_CMD::write(0x11);// 退出睡眠模式
-    HAL_Delay(5);      // 等待100毫秒，确保命令执行完毕
+    bsp::delay::ms(5);      // 等待100毫秒，确保命令执行完毕
 
     // 设置LCD电源控制
     TFT_CMD::write(0xd0); // 电源控制命令
@@ -682,14 +681,14 @@ void bsp::lcd::init()
     TFT_DATA::write(0x01);// 设置参数
     TFT_DATA::write(0x3F);// 设置参数
 
-    HAL_Delay(5);      // 等待100毫秒
+    bsp::delay::ms(5);      // 等待100毫秒
     TFT_CMD::write(0x29);// 唤醒命令
     TFT_CMD::write(0x2c);// 写入RAM命令
-    HAL_Delay(5);      // 等待100毫秒
+    bsp::delay::ms(5);      // 等待100毫秒
     TFTLED = 0x01;      // 背光寄存器初始化
 
     /*我觉得没必要清屏函数*/
-    HAL_Delay(20);
+    bsp::delay::ms(20);
 
 //     clear(0xFFFF);  // 清除屏幕，设置为白色
 #endif

@@ -52,7 +52,6 @@ namespace app
         using namespace bsp;
         adc::init_temperature_sensor();
         rng::init();
-        delay::init();
         usart::init();
 
     }

@@ -309,10 +309,10 @@ __weak HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
   *      implementations in user file.
   * @retval None
   */
-__weak void HAL_IncTick(void)
-{
-  uwTick += uwTickFreq;
-}
+// __weak void HAL_IncTick(void)
+// {
+//   uwTick += uwTickFreq;
+// }
 
 /**
   * @brief Provides a tick value in millisecond.

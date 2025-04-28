@@ -73,7 +73,7 @@ namespace
         FT_RST_L();
         bsp::delay::us(10);
         FT_RST_H();
-        bsp::delay::us(50000);
+        bsp::delay::ms(50);
     }
 
     uint8_t ft6336_WeReg(uint16_t regAdd, uint8_t *pData, uint16_t Size)

@@ -26,13 +26,8 @@ import lcd;
 #endif
 
 
-
-
 #define KEY_RAM (*((volatile unsigned short *)0x6006000C)) // 键盘接口地址
 //extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
-
-
-
 
 
 /** TIM中断回调函数
@@ -40,16 +35,18 @@ import lcd;
  * */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-//    if (htim->Instance == TIM6)
-//    {
-////        timer6_isr();
-//    }
+    //    if (htim->Instance == TIM6)
+    //    {
+    ////        timer6_isr();
+    //    }
 }
 
 
 /*ADC中断回调函数*/
 extern void adc1_isr();
+
 __weak void adc1_isr() {}
+
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
     if (hadc->Instance == ADC1)
@@ -84,18 +81,19 @@ void HAL_PWR_PVDCallback(void)
 
 /*******************************中断服务例程**************************************/
 
-extern "C" {
+extern "C"
+{
 void EXTI0_IRQHandler()
 {
     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_0);
-    PlatformKey::isr_entry(KEY_RAM & 0xF);//获取键值
+    PlatformKey::isr_entry(KEY_RAM & 0xF); //获取键值
 }
 
 #ifdef DMA_SPI_ENABLE
- void DMA1_Stream4_IRQHandler()
+void DMA1_Stream4_IRQHandler()
 {
     /* 使用HAL库预定义宏检测标志 */
-    if(__HAL_DMA_GET_FLAG(&bsp::spi::hdma_spi2_tx, __HAL_DMA_GET_TC_FLAG_INDEX(&bsp::spi::hdma_spi2_tx)))
+    if (__HAL_DMA_GET_FLAG(&bsp::spi::hdma_spi2_tx, __HAL_DMA_GET_TC_FLAG_INDEX(&bsp::spi::hdma_spi2_tx)))
     {
         // 清除传输完成标志
         __HAL_DMA_CLEAR_FLAG(&bsp::spi::hdma_spi2_tx, __HAL_DMA_GET_TC_FLAG_INDEX(&bsp::spi::hdma_spi2_tx));
@@ -112,7 +110,6 @@ void EXTI0_IRQHandler()
 #endif
 
 
-
 /**
  * @brief DMA中断
 */
@@ -121,27 +118,25 @@ void EXTI0_IRQHandler()
 // DMA中断,里面他宝贝的真啰嗦
 void DMA2_Stream6_IRQHandler(void)
 {
-//    /*  检查传输完成标志（TCIF）是否被设置，即是否传输完成标志位*/
-//    if (DMA2->HISR & 0x1 << 21)
-//    {
-//        DMA2->HISR &= ~(0x1 << 21);// 清除标志位
-//        // 检查中断使能标志位
-//        if (DMA2_S6CR & (DMA_IT_TC))
-//        {
-//            DMA2_S6CR &= ~(DMA_IT_TC);// 清除标志位
-//            /* Change the DMA state */
-//            hdma_memtomem_dma2_stream6.State = HAL_DMA_STATE_READY;// 不能少,因为Start_IT里需要靠它来开启
-//            /* Process Unlocked */
-//            __HAL_UNLOCK(&hdma_memtomem_dma2_stream6);// 不能少
-//        }
-//#ifndef GUI_ENABLE
-//      GUI::display_flush_ready();
-//#endif
-//    }
+    //    /*  检查传输完成标志（TCIF）是否被设置，即是否传输完成标志位*/
+    //    if (DMA2->HISR & 0x1 << 21)
+    //    {
+    //        DMA2->HISR &= ~(0x1 << 21);// 清除标志位
+    //        // 检查中断使能标志位
+    //        if (DMA2_S6CR & (DMA_IT_TC))
+    //        {
+    //            DMA2_S6CR &= ~(DMA_IT_TC);// 清除标志位
+    //            /* Change the DMA state */
+    //            hdma_memtomem_dma2_stream6.State = HAL_DMA_STATE_READY;// 不能少,因为Start_IT里需要靠它来开启
+    //            /* Process Unlocked */
+    //            __HAL_UNLOCK(&hdma_memtomem_dma2_stream6);// 不能少
+    //        }
+    //#ifndef GUI_ENABLE
+    //      GUI::display_flush_ready();
+    //#endif
+    //    }
 }
-
 }
-
 
 
 //DMA_USART_ENABLE 里封印着ESP8266的中断回调函数
@@ -155,20 +150,19 @@ uint16_t UartRxIndex;
 //串口1在1字节接收完成回调函数
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-
-    if(huart==&bsp::usart::huart1)//判断是否串口1
+    if (huart == &bsp::usart::huart1) //判断是否串口1
     {
-//        UartRxFlag=0x55;//接收标志置位
-        UartIntRxbuf[UartRxIndex]=UartRxData;//数据写入缓冲区
-        UartRxIndex++;//记载数目加1
-        if(UartRxIndex>=500)//缓冲区是500字节，如果存满，归零
+        //        UartRxFlag=0x55;//接收标志置位
+        UartIntRxbuf[UartRxIndex] = UartRxData; //数据写入缓冲区
+        UartRxIndex++; //记载数目加1
+        if (UartRxIndex >= 500) //缓冲区是500字节，如果存满，归零
         {
-            UartRxIndex=0;
+            UartRxIndex = 0;
         }
-        HAL_UART_Receive_IT(&bsp::usart::huart1,(unsigned char*)&UartRxData,1);//继续接收下一字节
+        HAL_UART_Receive_IT(&bsp::usart::huart1, (unsigned char *) &UartRxData, 1); //继续接收下一字节
     }
-
 }
+
 // UART发送完成中断调用。 UART_DMATransmitCplt  和 UART_EndTransmit_IT 调用
 
 
@@ -198,16 +192,14 @@ void SysTick_Handler()
 }
 
 
-
-extern "C" {
+extern "C"
+{
 /**
   * @brief This function handles Non maskable interrupt.
   */
 void NMI_Handler(void)
 {
-    while (1)
-    {
-    }
+    while (1) {}
 }
 
 /**
@@ -226,9 +218,7 @@ void HardFault_Handler(void)
   */
 void MemManage_Handler(void)
 {
-    while (1)
-    {
-    }
+    while (1) {}
 }
 
 /**
@@ -236,9 +226,7 @@ void MemManage_Handler(void)
   */
 void BusFault_Handler(void)
 {
-    while (1)
-    {
-    }
+    while (1) {}
 }
 
 /**
@@ -246,22 +234,16 @@ void BusFault_Handler(void)
   */
 void UsageFault_Handler(void)
 {
-    while (1)
-    {
-    }
+    while (1) {}
 }
 
 /**
   * @brief This function handles Debug monitor.
   */
-void DebugMon_Handler(void)
-{
-}
+void DebugMon_Handler(void) {}
 
 void EXTI9_5_IRQHandler(void)
 {
     HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_6);
 }
-
 }
-

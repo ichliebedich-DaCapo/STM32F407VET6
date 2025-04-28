@@ -34,12 +34,17 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【迁移】把Drivers目录从Core移出来了，并创建Firmware目录">
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】时钟使用LL可以正常使用">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/baseInit.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/baseInit.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/delay.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/delay.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/lcd.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/lcd.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/rcc.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/rcc.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/stm32f4xx.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/stm32f4xx.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/structure/bsp.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/bsp.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/structure/core.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/core.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/touch.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/touch.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/ISR.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +78,8 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -326,7 +333,7 @@
       <workItem from="1745515623728" duration="24000" />
       <workItem from="1745817483869" duration="4745000" />
       <workItem from="1745843957724" duration="1074000" />
-      <workItem from="1745845272181" duration="7989000" />
+      <workItem from="1745845272181" duration="11895000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -552,7 +559,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745851667703</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="【开发】时钟使用LL可以正常使用">
+      <option name="closed" value="true" />
+      <created>1745855918351</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1745855918351</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -587,7 +602,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【开发】调试FPGA模块" />
     <MESSAGE value="【备份】准备查看THD引发的FSMC读取问题" />
     <MESSAGE value="【？？】并未发现FSMC相关问题" />
     <MESSAGE value="【开发】更改了bsp的包含逻辑" />
@@ -612,7 +626,8 @@
     <MESSAGE value="【开发】错误在初始化，需要仔细排除" />
     <MESSAGE value="【开发】准备开发延时" />
     <MESSAGE value="【迁移】把Drivers目录从Core移出来了，并创建Firmware目录" />
-    <option name="LAST_COMMIT_MESSAGE" value="【迁移】把Drivers目录从Core移出来了，并创建Firmware目录" />
+    <MESSAGE value="【开发】时钟使用LL可以正常使用" />
+    <option name="LAST_COMMIT_MESSAGE" value="【开发】时钟使用LL可以正常使用" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
