@@ -9,7 +9,7 @@ module;
 export module touch;
 import i2c;
 import delay;
-
+import gpio;
 
 
 
@@ -64,36 +64,8 @@ namespace
     PB5     ------> CTP_RST
     PB6     ------> CTP_INT
     */
-    constexpr uint16_t TOUCH_RST_Pin = GPIO_PIN_5;
-    constexpr uint16_t TOUCH_INT_Pin = GPIO_PIN_6;
-    #define TOUCH_RST_GPIO_Port GPIOB
-    #define TOUCH_INT_GPIO_Port GPIOB
+    using TOUCH_RST = bsp::gpio<GPIOB_BASE,GPIO_PIN_5>;// 触摸屏复位引脚
 
-    void FT_RST_L() { HAL_GPIO_WritePin(TOUCH_RST_GPIO_Port, TOUCH_RST_Pin, GPIO_PIN_RESET); }
-    void FT_RST_H() { HAL_GPIO_WritePin(TOUCH_RST_GPIO_Port, TOUCH_RST_Pin, GPIO_PIN_SET); }
-
-    void ft6336_rest()
-    {
-        FT_RST_L();
-        bsp::delay::us(10);
-        FT_RST_H();
-        bsp::delay::ms(50);
-    }
-
-    // uint8_t ft6336_WeReg(uint16_t regAdd, uint8_t *pData, uint16_t Size)
-    // {
-    //     bsp::i2c1::write(FT6336_ADDR, regAdd, pData, Size);
-    //     if (const HAL_StatusTypeDef status = bsp::i2c::writeRegister(FT6336_ADDR, regAdd, pData, Size);
-    //         status == HAL_OK)
-    //         return FT6336_OK;
-    //     return FT6336_ERROR;
-    // }
-    //
-    // uint8_t ft6336_RdReg(uint16_t regAdd, uint8_t *pData, uint16_t Size)
-    // {
-    //     const HAL_StatusTypeDef status = bsp::i2c::readRegister(FT6336_ADDR, regAdd, pData, Size);
-    //     return (status == HAL_OK) ? FT6336_OK : FT6336_ERROR;
-    // }
 }
 
 
@@ -102,26 +74,19 @@ uint8_t bsp::touch::init()
 {
     // 初始化i2c1
     i2c1::init();
+
     //配置GPIO
-    GPIO_InitTypeDef GPIO_InitStruct = {0};
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-    HAL_GPIO_WritePin(TOUCH_RST_GPIO_Port, TOUCH_RST_Pin, GPIO_PIN_RESET);
-    GPIO_InitStruct.Pin = TOUCH_RST_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_InitStruct.Pull = GPIO_PULLUP;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    HAL_GPIO_Init(TOUCH_RST_GPIO_Port, &GPIO_InitStruct);
+    GPIO_InitTypeDef config = {};
+    config.Mode = GPIO_MODE_OUTPUT_PP;
+    config.Pull = GPIO_PULLUP;
+    config.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+   TOUCH_RST::init(config);
 
-    //配置外部中断 可以放在BSP\key_exit中
-    GPIO_InitStruct.Pin = TOUCH_INT_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
-    GPIO_InitStruct.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(TOUCH_INT_GPIO_Port, &GPIO_InitStruct);
-
-    HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
-
-    ft6336_rest();
+    // 重置
+    TOUCH_RST::low();
+    delay::us(10);
+    TOUCH_RST::high();
+    delay::ms(50);
 
     std::array<uint8_t,1> id_reg{100};
 
@@ -136,11 +101,11 @@ uint8_t bsp::touch::init()
     return id_reg[0];
 }
 
-std::array<uint8_t,1> point_number{};
-std::array<uint8_t,4> touch_pos{};
+
 int32_t bsp::touch::read_single_point(int32_t *last_x, int32_t *last_y)
 {
-
+    std::array<uint8_t,1> point_number{};
+    std::array<uint8_t,4> touch_pos{};
 
     // 读取触摸点的数量
     i2c1::readMemory(FT6336_ADDR,FT_REG_NUM_FINGER,point_number);//读点数

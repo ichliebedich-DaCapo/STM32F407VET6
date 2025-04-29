@@ -33,7 +33,7 @@ export namespace bsp::i2c
 
         static void init()
         {
-            LL_GPIO_InitTypeDef config = {};
+            GPIO_InitTypeDef config = {};
             config.Mode = GPIO_MODE_AF_OD;
             config.Pull = GPIO_NOPULL;
             config.Speed = GPIO_SPEED_FREQ_VERY_HIGH;

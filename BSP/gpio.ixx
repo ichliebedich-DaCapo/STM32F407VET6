@@ -3,9 +3,6 @@
 //
 module;
 #include <stm32f4xx_hal.h>
-#include "stm32f4xx_ll_rcc.h"
-#include "stm32f4xx_ll_bus.h"
-#include "stm32f4xx_ll_gpio.h"
 export module gpio;
 
 
@@ -23,15 +20,15 @@ static void enable_clock() { RCC_ENR; } \
 };
 
     // 定义所有GPIO端口的特性（根据具体型号调整）
-    DEFINE_GPIO_TRAITS(GPIOA_BASE, LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA))
-    DEFINE_GPIO_TRAITS(GPIOB_BASE, LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOB))
-    DEFINE_GPIO_TRAITS(GPIOC_BASE, LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC))
-    DEFINE_GPIO_TRAITS(GPIOD_BASE, LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOD))
-    DEFINE_GPIO_TRAITS(GPIOE_BASE, LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOE))
-    DEFINE_GPIO_TRAITS(GPIOF_BASE, LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOF))
-    DEFINE_GPIO_TRAITS(GPIOG_BASE, LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOG))
-    DEFINE_GPIO_TRAITS(GPIOH_BASE, LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOH))
-    DEFINE_GPIO_TRAITS(GPIOI_BASE, LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOI))
+    DEFINE_GPIO_TRAITS(GPIOA_BASE, __HAL_RCC_GPIOA_CLK_ENABLE())
+    DEFINE_GPIO_TRAITS(GPIOB_BASE, __HAL_RCC_GPIOB_CLK_ENABLE())
+    DEFINE_GPIO_TRAITS(GPIOC_BASE, __HAL_RCC_GPIOC_CLK_ENABLE())
+    DEFINE_GPIO_TRAITS(GPIOD_BASE, __HAL_RCC_GPIOD_CLK_ENABLE())
+    DEFINE_GPIO_TRAITS(GPIOE_BASE, __HAL_RCC_GPIOE_CLK_ENABLE())
+    DEFINE_GPIO_TRAITS(GPIOF_BASE, __HAL_RCC_GPIOF_CLK_ENABLE())
+    DEFINE_GPIO_TRAITS(GPIOG_BASE, __HAL_RCC_GPIOG_CLK_ENABLE())
+    DEFINE_GPIO_TRAITS(GPIOH_BASE, __HAL_RCC_GPIOH_CLK_ENABLE())
+    DEFINE_GPIO_TRAITS(GPIOI_BASE, __HAL_RCC_GPIOI_CLK_ENABLE())
 
 }
 
@@ -50,11 +47,11 @@ export namespace bsp
         using traits = gpio_port_traits<PortBase>;
 
         // 初始化/重新配置 仅需配置outPut、pull和speed即可
-        static inline void init(LL_GPIO_InitTypeDef& config)
+        static inline void init(GPIO_InitTypeDef& config)
         {
             traits::enable_clock();// 启用时钟
             config.Pin = Pin;
-            LL_GPIO_Init(port(), &config);
+            HAL_GPIO_Init(port(), &config);
         }
 
         // 模式切换API ---------------------------------------------------
@@ -62,7 +59,7 @@ export namespace bsp
         // 设置为输出模式
         static inline void setOutput(const uint32_t Pull = GPIO_NOPULL, const uint32_t Speed = GPIO_SPEED_FREQ_LOW)
         {
-            LL_GPIO_InitTypeDef config{};
+            GPIO_InitTypeDef config{};
             config.Mode = GPIO_MODE_OUTPUT_PP;
             config.Pull = Pull;
             config.Speed = Speed;
@@ -72,7 +69,7 @@ export namespace bsp
         // 设置为输入模式
         static void setInput(const uint32_t Pull = GPIO_NOPULL, const uint32_t Speed = GPIO_SPEED_FREQ_LOW)
         {
-            LL_GPIO_InitTypeDef config{};
+            GPIO_InitTypeDef config{};
             config.Mode = GPIO_MODE_INPUT;
             config.Pull = Pull;
             config.Speed = Speed;

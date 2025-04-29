@@ -302,7 +302,7 @@ export namespace bsp::lcd
             }
             else if constexpr (Interface == InterfaceType::SPI)
             {
-                LL_GPIO_InitTypeDef config = {};
+                GPIO_InitTypeDef config = {};
                 config.Mode = GPIO_MODE_OUTPUT_PP;
                 config.Pull = GPIO_NOPULL;
                 config.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -696,7 +696,7 @@ void bsp::lcd::init()
 
 #elifdef LCD_SPI_PORT_ENABLE
 
-    LL_GPIO_InitTypeDef config = {};
+    GPIO_InitTypeDef config = {};
     config.Mode = GPIO_MODE_OUTPUT_PP;
     config.Pull = GPIO_NOPULL;
     config.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
