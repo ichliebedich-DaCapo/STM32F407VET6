@@ -2,7 +2,8 @@ module;
 
 #include <array>
 #include <project_config.h>
-
+#include "stm32f4xx_ll_rcc.h"
+#include "stm32f4xx_ll_gpio.h"
 export module lcd;
 
 import spi;
@@ -301,7 +302,7 @@ export namespace bsp::lcd
             }
             else if constexpr (Interface == InterfaceType::SPI)
             {
-                GPIO_InitTypeDef config = {};
+                LL_GPIO_InitTypeDef config = {};
                 config.Mode = GPIO_MODE_OUTPUT_PP;
                 config.Pull = GPIO_NOPULL;
                 config.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -695,7 +696,7 @@ void bsp::lcd::init()
 
 #elifdef LCD_SPI_PORT_ENABLE
 
-    GPIO_InitTypeDef config = {};
+    LL_GPIO_InitTypeDef config = {};
     config.Mode = GPIO_MODE_OUTPUT_PP;
     config.Pull = GPIO_NOPULL;
     config.Speed = GPIO_SPEED_FREQ_VERY_HIGH;

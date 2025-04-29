@@ -3,6 +3,15 @@
 //
 module;
 #include <project_config.h>
+#include "stm32f4xx_ll_rcc.h"
+#include "stm32f4xx_ll_bus.h"
+#include "stm32f4xx_ll_system.h"
+#include "stm32f4xx_ll_exti.h"
+#include "stm32f4xx_ll_cortex.h"
+#include "stm32f4xx_ll_utils.h"
+#include "stm32f4xx_ll_pwr.h"
+#include "stm32f4xx_ll_dma.h"
+#include "stm32f4xx_ll_gpio.h"
 #ifdef GUI_ENABLE
 #include "lvgl.h"
 #include "lv_port_disp.h"
@@ -93,9 +102,9 @@ export extern "C"
         __HAL_RCC_PWR_CLK_ENABLE();
 
         // 启用基础GPIO时钟
-        __HAL_RCC_GPIOC_CLK_ENABLE();
-        __HAL_RCC_GPIOH_CLK_ENABLE();
-        __HAL_RCC_GPIOA_CLK_ENABLE();
+        LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC);
+        LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOH);
+        LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
 
         HAL_NVIC_SetPriority(PendSV_IRQn, 15, 0);
     }

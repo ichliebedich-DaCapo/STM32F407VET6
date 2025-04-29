@@ -34,17 +34,19 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】时钟使用LL可以正常使用">
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】延时系统已经确定，但未确定us是否正常">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/baseInit.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/baseInit.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/delay.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/delay.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/gpio.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/gpio.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/i2c.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/i2c.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/lcd.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/lcd.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/rcc.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/rcc.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/touch.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/touch.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/ISR.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/arm-gcc.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/arm-gcc.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/structure/bsp.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/bsp.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,14 +106,14 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BSP/baseInit.ixx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/i2c.ixx" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/i2c.ixx" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/touch.ixx" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/touch.ixx" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/touch.ixx" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Projects/driversDevelop/app/app.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Projects/driversDevelop/app/app.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -164,9 +166,9 @@
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.Furina.elf">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-w64-i686-arm-none-eabi" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
@@ -333,7 +335,8 @@
       <workItem from="1745515623728" duration="24000" />
       <workItem from="1745817483869" duration="4745000" />
       <workItem from="1745843957724" duration="1074000" />
-      <workItem from="1745845272181" duration="11895000" />
+      <workItem from="1745845272181" duration="15769000" />
+      <workItem from="1745903843932" duration="14085000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -567,7 +570,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745855918351</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="【开发】延时系统已经确定，但未确定us是否正常">
+      <option name="closed" value="true" />
+      <created>1745860653981</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1745860653981</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -602,7 +613,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【备份】准备查看THD引发的FSMC读取问题" />
     <MESSAGE value="【？？】并未发现FSMC相关问题" />
     <MESSAGE value="【开发】更改了bsp的包含逻辑" />
     <MESSAGE value="【备份】准备尝试module特性" />
@@ -627,7 +637,8 @@
     <MESSAGE value="【开发】准备开发延时" />
     <MESSAGE value="【迁移】把Drivers目录从Core移出来了，并创建Firmware目录" />
     <MESSAGE value="【开发】时钟使用LL可以正常使用" />
-    <option name="LAST_COMMIT_MESSAGE" value="【开发】时钟使用LL可以正常使用" />
+    <MESSAGE value="【开发】延时系统已经确定，但未确定us是否正常" />
+    <option name="LAST_COMMIT_MESSAGE" value="【开发】延时系统已经确定，但未确定us是否正常" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

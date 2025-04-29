@@ -5029,15 +5029,15 @@ void HAL_I2C_ER_IRQHandler(I2C_HandleTypeDef *hi2c)
   *                the configuration information for the specified I2C.
   * @retval None
   */
-__weak void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
-{
-  /* Prevent unused argument(s) compilation warning */
-  UNUSED(hi2c);
-
-  /* NOTE : This function should not be modified, when the callback is needed,
-            the HAL_I2C_MasterTxCpltCallback could be implemented in the user file
-   */
-}
+// __weak void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
+// {
+//   /* Prevent unused argument(s) compilation warning */
+//   UNUSED(hi2c);
+//
+//   /* NOTE : This function should not be modified, when the callback is needed,
+//             the HAL_I2C_MasterTxCpltCallback could be implemented in the user file
+//    */
+// }
 
 /**
   * @brief  Master Rx Transfer completed callback.

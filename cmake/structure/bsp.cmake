@@ -25,10 +25,10 @@ set(BSP_DIR ${CMAKE_SOURCE_DIR}/BSP)
 # 说明：需要确保注册的名称与实际文件相同，包括大小写。一般建议使用小写加下划线来命名，并且不要包含hal_或者ll_
 #      注册时，把驱动文件写在左边，依赖写在右边
 set(BSP_DRIVERS
-        "default:hal,hal_cortex,hal_gpio,baseInit,gpio,ll_utils"
+        "default:hal,hal_cortex,baseInit,gpio,ll_utils"
         # BSP驱动
         "adc:timer,hal_adc,hal_adc_ex"
-        "baseInit:rcc,lcd,hal_tim,key_exit"
+        "baseInit:rcc,lcd,hal_tim,key_exit,ll_rcc"
         "cpu_runtime:"
         "crc:hal_crc"
         "dac:hal_dac,timer"
@@ -36,9 +36,9 @@ set(BSP_DRIVERS
         "delay:timer"
         "esp8266:"
         "esp_8266:"
-        "fsmc:hal_sram,hal_dma"
-        "gpio:"
-        "i2c:hal_i2c"
+        "fsmc:hal_sram,hal_dma,ll_dma"
+        "gpio:hal_gpio,ll_gpio"
+        "i2c:hal_i2c,ll_i2c"
         "key_exit:"
         "lcd:fsmc,spi,registers"
         "mqtt:"

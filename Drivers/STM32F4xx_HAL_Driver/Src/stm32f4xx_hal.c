@@ -91,7 +91,7 @@
 /** @addtogroup HAL_Private_Variables
   * @{
   */
-__IO uint32_t uwTick;
+__IO uint32_t uwTick=0;
 uint32_t uwTickPrio   = (1UL << __NVIC_PRIO_BITS); /* Invalid PRIO */
 HAL_TickFreqTypeDef uwTickFreq = HAL_TICK_FREQ_DEFAULT;  /* 1KHz */
 /**
@@ -320,10 +320,10 @@ __weak HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
   *       implementations in user file.
   * @retval tick value
   */
-__weak uint32_t HAL_GetTick(void)
-{
-  return uwTick;
-}
+// __weak uint32_t HAL_GetTick(void)
+// {
+//   return uwTick;
+// }
 
 /**
   * @brief This function returns a tick priority.
