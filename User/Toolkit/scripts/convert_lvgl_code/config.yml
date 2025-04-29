@@ -1,0 +1,20 @@
+config:
+  strict_mode: false  # 未匹配规则时是否报错（true=严格模式，false=保留原代码）
+
+mappings:
+  # 变量类型映射（C类型 → C++类型）
+  variable_types:
+    "lv_obj_create": BaseWidget
+    "lv_label_create": Label
+    "lv_btn_create": Button
+
+  # 函数调用映射（普通映射）
+  function_calls:
+    "lv_obj_set_pos":
+      name: "pos"   # 重新映射后的方法名
+      naming_rule:
+        source_arg: 0  # 取第几个参数，索引从0开始
+        pattern:    # 根据不同的参数映射为不同的名称
+          "100": "pos_big"
+      optional: true # 是否允许省略调用（如果参数均为默认值），不填或者添false表示不允许
+      defaults: # 为空表示无默认值，不可缺省
