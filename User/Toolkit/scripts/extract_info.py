@@ -1,32 +1,69 @@
 import os
 import glob
+import re
 from typing import Dict, List
 from dataclasses import dataclass
+
 
 @dataclass
 class FunctionCall:
     name: str
     params: List[str]
-    source_file: str  # 新增来源文件信息
+    source_file: str  # 文件来源信息,便于后面对多屏幕进行处理（如果我做的话）
+
 
 @dataclass
 class VariableAssignment:
-    target: str
-    value: str
-    var_type: str
+    target: str # 变量名
+    value: str  # 值
+    var_type: str # 变量类型
     source_file: str
 
-class CodeExtractor:
-    def __init__(self):
-        self.func_pattern = re.compile(
-            r"(?P<func>\w+)$(?P<params>.*?)$\s*;?$"
-        )
-        self.var_pattern = re.compile(
-            r"^(?:(\w+)\s*=\s*)?((?:ui->\w+)\s*=\s*.+)$"
-        )
 
+def extract_function_call(text):
+    # Step 1: 找到函数名与括号开始位置
+    match_func_name = re.match(r'^\s*(\w+)\s*\(', text)
+    if not match_func_name:
+        return None, []
+
+    function_name = match_func_name.group(1)
+
+    # Step 2: 手动追踪括号嵌套层级，找到匹配的右括号
+    depth = 0
+    start_idx = len(match_func_name.group(0)) - 1  # 起始于 '(' 的位置
+    args_str = ""
+    for i in range(start_idx, len(text)):
+        char = text[i]
+        if char == '(' and depth >= 0:
+            depth += 1
+        elif char == ')' and depth > 0:
+            depth -= 1
+        elif char == ')' and depth == 0:
+            break
+        elif depth > 0:
+            args_str += char
+
+    # Step 3: 分割参数，支持引号内逗号
+    args = []
+    in_quotes = False
+    current_arg = ""
+    for c in args_str:
+        if c == '"':
+            in_quotes = not in_quotes
+            current_arg += c
+        elif c == ',' and not in_quotes:
+            args.append(current_arg.strip())
+            current_arg = ""
+        else:
+            current_arg += c
+    if current_arg.strip():
+        args.append(current_arg.strip())
+
+    return function_name, args
+
+class CodeExtractor:
     def extract(self, root_path: str, file_pattern: str) -> Dict[str, dict]:
-        """
+        r"""
         增强参数处理的核心方法
 
         参数:
@@ -34,110 +71,121 @@ class CodeExtractor:
             file_pattern: 文件名匹配模式(如"setup_scr_*.c")
         """
         # 安全拼接路径
-        search_path = self._safe_path_join(root_path, file_pattern)
+        normalized_root = os.path.normpath(root_path)  # 统一转换路径分隔符
+        clean_pattern = file_pattern.lstrip(os.sep)  # 防止双通配符问题
+        search_path = os.path.join(normalized_root, clean_pattern)
 
-        results = {}
-        for file_path in glob.glob(search_path, recursive=True):
-            file_data = self._process_single_file(file_path)
+        all_results = {}
+        for single_file_path in glob.glob(search_path, recursive=True):
+            file_data = self._process_single_file(single_file_path)
             if file_data:
-                results[file_path] = file_data
-        return results
-
-    def _safe_path_join(self, root: str, pattern: str) -> str:
-        """处理跨平台路径问题"""
-        # 统一转换路径分隔符
-        normalized_root = os.path.normpath(root)
-        # 防止双通配符问题
-        clean_pattern = pattern.lstrip(os.sep)
-        return os.path.join(normalized_root, clean_pattern)
+                all_results[single_file_path] = file_data
+        return all_results
 
     def _process_single_file(self, file_path: str) -> dict:
-        """处理单个文件"""
+        """
+        处理单个C代码文件，提取特定函数的代码行
+        Args:
+            file_path: C代码文件路径
+        Returns:
+            dict: 分析结果
+        """
         with open(file_path, 'r', encoding='utf-8') as f:
-            content = self._preprocess(f.read())
-            return self._analyze(content, file_path)
+            # 预处理阶段
+            content = f.read()
+            # 查找第一个符合条件的函数：void setup_scr_<identifier>(lv_ui *ui)
+            # 正则表达式解释：
+            # \b\w+ : 匹配返回类型（如 void, int 等）
+            # \s+ : 至少一个空白字符
+            # setup_scr\w+ : 匹配函数名（如 setup_scr_screen）
+            # $$[^)]*$$ : 匹配参数列表（假设在单行中）
+            # \s*{ : 匹配函数体起始的大括号
+            # (.*?) : 非贪婪匹配函数体内容（包括换行）
+            # } : 匹配闭合的大括号
+            pattern = r'void setup_scr_(\w+)\(lv_ui \*ui\)\s*{([^}]+)}'
+            match = re.search(pattern, content, re.DOTALL)
+            if match:
+                function_body = match.group(2).strip()
+            else:
+                print(f"No Function")
+                return {}
 
-    def _preprocess(self, content: str) -> List[str]:
-        """预处理阶段"""
-        # 移除注释并标准化
-        content = re.sub(r'/\*.*?\*/', '', content, flags=re.DOTALL)
-        content = re.sub(r'//.*', '', content)
-        return [
-            line.strip().rstrip(';')
-            for line in content.split('\n')
-            if line.strip()
-        ]
+            # 清洗代码行
+            code_lines = []
+            for line in function_body.split('\n'):
+                # 去除行内注释
+                line = re.sub(r'//.*$', '', line)
+                # 去除末尾分号和首尾空格
+                clean_line = line.rstrip(';').strip()
+                if clean_line:
+                    code_lines.append(clean_line)
+
+            # 分析阶段
+            return self._analyze(code_lines, file_path)
 
     def _analyze(self, lines: List[str], filename: str) -> dict:
         """核心分析逻辑"""
         calls = []
         variables = []
 
-        for line in lines:
-            # 函数调用解析
-            if (func_match := self.func_pattern.search(line)):
-                name, params = self._parse_function(func_match)
-                calls.append(FunctionCall(name, params, filename))
+        declaration_re = re.compile(
+            r'^\s*(\S[\s\S]*?)$',
+            re.DOTALL
+        )
+        function_call_re = re.compile(
+            r'^\s*(\w+)\s*$$(.*?)$$',
+            re.DOTALL
+        )
 
-            # 变量赋值解析
-            elif (var_match := self.var_pattern.search(line)):
-                var_info = self._parse_variable(var_match)
-                variables.append(VariableAssignment(
-                    var_info['target'],
-                    var_info['value'],
-                    var_info['type'],
-                    filename
-                ))
+        for line in lines:
+            # 处理变量赋值
+            if '=' in line:
+            # 使用正则表达式进行匹配
+                pattern = r'^((\w+\s*\*+)\s+)?(\w+(?:->\w+)*)\s*=\s*(.*?);?$'
+                match = re.match(pattern, line)
+                if match:
+                    type_part = match.group(2) if match.group(1) else None  # 类型部分（可选）
+                    target = match.group(3)
+                    value = match.group(4)
+                    variables.append(
+                        VariableAssignment(
+                            target=target,# 变量名
+                            value=value,# 值
+                            var_type=type_part,
+                            source_file=filename
+                        )
+                    )
+
+
+            # 处理函数调用
+            elif '(' in line and ')' in line:
+                func, args = extract_function_call(line)
+                calls.append(FunctionCall(name=func, params=args,source_file=filename))
+
+
+            # 处理纯变量声明
+            else:
+                pattern = r'(\w+)\*\s+(\w+)'
+                match = re.match(pattern, line)
+                if match:
+                    type_name = match.group(1) + '*'  # 拼接类型名和星号
+                    variable_name = match.group(2)
+                    variables.append(
+                        VariableAssignment(
+                            target=variable_name,
+                            value="",
+                            var_type=type_name,
+                            source_file=filename
+                        )
+                    )
 
         return {
             "calls": [c.__dict__ for c in calls],
             "variables": [v.__dict__ for v in variables]
         }
 
-    def _parse_function(self, match: re.Match) -> tuple:
-        """解析函数调用细节"""
-        name = match.group('func')
-        params = self._split_params(match.group('params'))
-        return name, params
 
-    def _split_params(self, param_str: str) -> List[str]:
-        """安全分割参数"""
-        # 处理含嵌套括号的情况
-        params = []
-        current = []
-        stack = 0
 
-        for char in param_str + ',':  # 确保处理最后一个参数
-            if char == '(': stack += 1
-            elif char == ')': stack -= 1
-
-            if char == ',' and stack == 0:
-                params.append(''.join(current).strip())
-                current = []
-            else:
-                current.append(char)
-
-        return params
-
-    def _parse_variable(self, match: re.Match) -> dict:
-        """解析变量赋值细节"""
-        # 结构体成员的特殊处理
-        if 'ui->' in match.group(2):
-            target, value = match.group(2).split('=', 1)
-            return {
-                'target': target.strip(),
-                'value': value.strip(),
-                'type': 'struct_member'
-            }
-        # 常规变量声明
-        else:
-            type_part = match.group(1) or ''
-            target, value = match.group(2).split('=', 1)
-            return {
-                'target': target.strip(),
-                'value': value.strip(),
-                'type': type_part.strip()
-            }
 
 # 使用示例
 if __name__ == "__main__":
@@ -149,13 +197,13 @@ if __name__ == "__main__":
 
     # 打印结果
     for file_path, data in results.items():
-        print(f"\n=== 文件: {os.path.basename(file_path)} ===")
+        print(f"\r\n=== 文件: {os.path.basename(file_path)} ===")
         print(f"路径: {file_path}")
 
-        print("\n函数调用:")
+        print("\r\n函数调用:")
         for call in data['calls']:
-            print(f"  {call['name']}({', '.join(call['params'])})")
+            print(f"    {call['name']}    {', '.join(call['params'])}")
 
-        print("\n变量赋值:")
+        print("\r\n变量赋值:")
         for var in data['variables']:
-            print(f"  {var['target']} ({var['var_type']}) = {var['value']}")
+            print(f"---->  [{var['target']}]  |  [({var['var_type']})]  |  [{var['value']}]")

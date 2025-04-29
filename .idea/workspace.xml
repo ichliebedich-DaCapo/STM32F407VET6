@@ -34,10 +34,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】i2c出现问题2">
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【备份】准备开发解析器">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/i2c.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/i2c.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/touch.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/touch.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/extract_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/extract_info.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -242,6 +241,8 @@
     <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/baseInit.ixx" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/gpio.ixx" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/gpio.ixx" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/gpio.ixx" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/i2c.ixx" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/i2c.ixx" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/i2c.ixx" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/i2c.ixx" root0="SKIP_HIGHLIGHTING" />
@@ -257,6 +258,8 @@
     <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/i2c.ixx" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/lcd.ixx" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/lcd.ixx" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/lcd.ixx" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/touch.ixx" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/touch.ixx" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/touch.ixx" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/BSP/touch.ixx" root0="SKIP_HIGHLIGHTING" />
@@ -756,7 +759,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745921737011</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="【备份】准备开发解析器">
+      <option name="closed" value="true" />
+      <created>1745924669599</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1745924669599</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -791,7 +802,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【备份】准备尝试module特性" />
     <MESSAGE value="【开发】将bsp里的所有文件都改为了ixx文件，并删除了无关文件。同时修改了bsp的包含逻辑" />
     <MESSAGE value="【开发】可以正常编译了" />
     <MESSAGE value="【开发】修复了一些小问题，关于App的组织" />
@@ -816,6 +826,7 @@
     <MESSAGE value="【开发】延时系统已经确定，但未确定us是否正常" />
     <MESSAGE value="【开发】i2c出现问题" />
     <MESSAGE value="【开发】i2c出现问题2" />
-    <option name="LAST_COMMIT_MESSAGE" value="【开发】i2c出现问题2" />
+    <MESSAGE value="【备份】准备开发解析器" />
+    <option name="LAST_COMMIT_MESSAGE" value="【备份】准备开发解析器" />
   </component>
 </project>
