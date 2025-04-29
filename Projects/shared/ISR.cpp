@@ -20,11 +20,11 @@ import spi;
 #ifdef GUI_ENABLE
 import gui;
 import lcd;
-import i2c;
 #endif
 #ifdef FreeRTOS_ENABLE
 #include "cmsis_os2.h"
 #endif
+
 
 #define KEY_RAM (*((volatile unsigned short *)0x6006000C)) // 键盘接口地址
 //extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
@@ -41,22 +41,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     //    }
 }
 
-void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
-{
-    // 通过基地址查找实例
-    if (const auto base = reinterpret_cast<uint32_t>(hi2c->Instance); base == I2C1_BASE)
-    {
-        bsp::i2c::I2C<I2C1_BASE>::handleTxComplete();
-    }
-    else if (base == I2C2_BASE)
-    {
-        bsp::i2c::I2C<I2C2_BASE>::handleTxComplete();
-    }
-}
 
 /*ADC中断回调函数*/
 extern void adc1_isr();
+
 __weak void adc1_isr() {}
+
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
     if (hadc->Instance == ADC1)

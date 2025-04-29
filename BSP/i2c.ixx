@@ -174,8 +174,19 @@ export namespace bsp::i2c
         static HAL_StatusTypeDef read(const uint16_t devAddr, std::span<uint8_t> buffer)
         {
             return HAL_I2C_Master_Receive(&hi2c, devAddr,
-                                        buffer.data(), buffer.size(),
-                                        HAL_MAX_DELAY);
+                                          buffer.data(), buffer.size(),
+                                          HAL_MAX_DELAY);
+        }
+
+        // 带寄存器的存储器操作
+        // enum class MemAddrSize { _8BIT = I2C_MEMADD_SIZE_8BIT, _16BIT = I2C_MEMADD_SIZE_16BIT };
+
+
+        // 与read函数用法差不多
+        static HAL_StatusTypeDef  readMemory(const uint16_t devAddr, const uint16_t memAddr, std::span<uint8_t> buffer)
+        {
+            return HAL_I2C_Mem_Read(&hi2c, devAddr, memAddr, I2C_MEMADD_SIZE_8BIT,
+                                    buffer.data(), buffer.size(),HAL_MAX_DELAY);
         }
 
         // 零拷贝传输
@@ -186,29 +197,13 @@ export namespace bsp::i2c
             return write(devAddr, std::span{reinterpret_cast<const uint8_t *>(&data), sizeof(T)});
         }
 
-        // 带寄存器的存储器操作
-        enum class MemAddrSize { _8BIT = I2C_MEMADD_SIZE_8BIT, _16BIT = I2C_MEMADD_SIZE_16BIT };
 
         template<typename T>
             requires std::same_as<T, uint8_t>
-        HAL_StatusTypeDef readMemory(const uint16_t devAddr7bit, const uint16_t memAddr, std::span<T> buffer,
-                                     MemAddrSize addrSize = MemAddrSize::_8BIT)
+        static HAL_StatusTypeDef writeMemory(const uint16_t devAddr7bit, const uint16_t memAddr, std::span<T> buffer)
         {
-            return HAL_I2C_Mem_Read(&hi2c, devAddr7bit << 1, memAddr,
-                                    static_cast<uint16_t>(addrSize),
-                                    buffer.data(), buffer.size(),
-                                    HAL_MAX_DELAY);
-        }
-
-        template<typename T>
-            requires std::same_as<T, uint8_t>
-        HAL_StatusTypeDef writeMemory(const uint16_t devAddr7bit, const uint16_t memAddr, std::span<T> buffer,
-                                      MemAddrSize addrSize = MemAddrSize::_8BIT)
-        {
-            return HAL_I2C_Mem_Write(&hi2c, devAddr7bit << 1, memAddr,
-                                     static_cast<uint16_t>(addrSize),
-                                     buffer.data(), buffer.size(),
-                                     HAL_MAX_DELAY);
+            return HAL_I2C_Mem_Write(&hi2c, devAddr7bit << 1, memAddr,I2C_MEMADD_SIZE_8BIT,
+                                     buffer.data(), buffer.size(),HAL_MAX_DELAY);
         }
 
 
