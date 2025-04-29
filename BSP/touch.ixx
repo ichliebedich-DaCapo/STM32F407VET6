@@ -12,7 +12,6 @@ import delay;
 import gpio;
 
 
-
 export namespace bsp::touch
 {
     uint8_t init();
@@ -64,8 +63,7 @@ namespace
     PB5     ------> CTP_RST
     PB6     ------> CTP_INT
     */
-    using TOUCH_RST = bsp::gpio<GPIOB_BASE,GPIO_PIN_5>;// 触摸屏复位引脚
-
+    using TOUCH_RST = bsp::gpio<GPIOB_BASE,GPIO_PIN_5>; // 触摸屏复位引脚
 }
 
 
@@ -80,7 +78,7 @@ uint8_t bsp::touch::init()
     config.Mode = GPIO_MODE_OUTPUT_PP;
     config.Pull = GPIO_PULLUP;
     config.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-   TOUCH_RST::init(config);
+    TOUCH_RST::init(config);
 
     // 重置
     TOUCH_RST::low();
@@ -88,9 +86,9 @@ uint8_t bsp::touch::init()
     TOUCH_RST::high();
     delay::ms(50);
 
-    std::array<uint8_t,1> id_reg{100};
+    std::array<uint8_t, 1> id_reg{100};
 
-    if (const HAL_StatusTypeDef status =i2c1::readMemory(FT6336_ADDR,FT_ID_G_FOCALTECH_ID,id_reg); !status)
+    if (const HAL_StatusTypeDef status = i2c1::readMemory(FT6336_ADDR, FT_ID_G_FOCALTECH_ID, id_reg); !status)
     {
         return FT_FALSE1; //I2C通信故障
     }
@@ -104,20 +102,20 @@ uint8_t bsp::touch::init()
 
 int32_t bsp::touch::read_single_point(int32_t *last_x, int32_t *last_y)
 {
-    std::array<uint8_t,1> point_number{};
-    std::array<uint8_t,4> touch_pos{};
+    std::array<uint8_t, 1> point_number{};
+    std::array<uint8_t, 4> touch_pos{};
 
     // 读取触摸点的数量
-    i2c1::readMemory(FT6336_ADDR,FT_REG_NUM_FINGER,point_number);//读点数
+    i2c1::readMemory(FT6336_ADDR, FT_REG_NUM_FINGER, point_number); //读点数
 
     // 如果没有触摸点，返回0
-    if (point_number[0]==0)
+    if (point_number[0] == 0)
     {
         return 0;
     }
 
     // 读取第一个触摸点的坐标
-    i2c1::readMemory(FT6336_ADDR,FT_TP1_REG,touch_pos);//读坐标
+    i2c1::readMemory(FT6336_ADDR, FT_TP1_REG, touch_pos); //读坐标
 
     // 解析触摸点的坐标 横屏
     *last_x = 480 - ((static_cast<uint16_t>(touch_pos[2] & 0x0F) << 8) + touch_pos[3]);

@@ -31,6 +31,7 @@ export namespace bsp::i2c
     public:
         I2C() { instance = this; }
 
+        // 目前由于使用I2C的场景并非是大量数据传输，因此用DMA的效率反而更低一些
         static void init()
         {
             GPIO_InitTypeDef config = {};
@@ -103,7 +104,7 @@ export namespace bsp::i2c
             // __HAL_LINKDMA(&hi2c, hdmarx, hdma_i2c_rx);
 
             hi2c.Instance = reinterpret_cast<I2C_TypeDef *>(I2C_Base);
-            hi2c.Init.ClockSpeed = 100000;
+            hi2c.Init.ClockSpeed = 400000;
             hi2c.Init.DutyCycle = I2C_DUTYCYCLE_2;
             hi2c.Init.OwnAddress1 = 0;
             hi2c.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
@@ -178,10 +179,6 @@ export namespace bsp::i2c
                                           HAL_MAX_DELAY);
         }
 
-        // 带寄存器的存储器操作
-        // enum class MemAddrSize { _8BIT = I2C_MEMADD_SIZE_8BIT, _16BIT = I2C_MEMADD_SIZE_16BIT };
-
-
         // 与read函数用法差不多
         static HAL_StatusTypeDef  readMemory(const uint16_t devAddr, const uint16_t memAddr, std::span<uint8_t> buffer)
         {
@@ -212,9 +209,7 @@ export namespace bsp::i2c
             requires std::same_as<T, uint8_t>
         static HAL_StatusTypeDef writeAsync(const uint16_t devAddr7bit, std::span<const T> data)
         {
-            return HAL_I2C_Master_Transmit_DMA(&hi2c, devAddr7bit << 1,
-                                               const_cast<uint8_t *>(data.data()),
-                                               data.size());
+            return HAL_I2C_Master_Transmit_DMA(&hi2c, devAddr7bit << 1,const_cast<uint8_t *>(data.data()),data.size());
         }
 
         // 状态检查

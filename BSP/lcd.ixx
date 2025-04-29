@@ -390,25 +390,25 @@ export namespace bsp::lcd
                 {
                     // ====== 使用DMA =====
 
-                    // // 交换颜色数据高低字节
-                    // auto *p = reinterpret_cast<uint32_t *>(colors);
-                    // uint32_t pairs = pixel_count >> 1;
-                    // while (pairs--)
-                    // {
-                    //     *p = __REV16(*p); // 同时处理两个16位元素
-                    //     p++;
-                    // }
-                    // // 处理剩余单个元素（如有）
-                    // if (pixel_count & 1)
-                    // {
-                    //     auto *last = reinterpret_cast<uint16_t *>(p);
-                    //     *last = __REV16(*last);
-                    // }
-                    auto *p = reinterpret_cast<uint16_t *>(colors);
-                    for (uint32_t i = 0; i < pixel_count; ++i)
+                    // 交换颜色数据高低字节
+                    auto *p = reinterpret_cast<uint32_t *>(colors);
+                    uint32_t pairs = pixel_count >> 1;
+                    while (pairs--)
                     {
-                        p[i] = __REV16(p[i]);
+                        *p = __REV16(*p); // 同时处理两个16位元素
+                        p++;
                     }
+                    // 处理剩余单个元素（如有）
+                    if (pixel_count & 1)
+                    {
+                        auto *last = reinterpret_cast<uint16_t *>(p);
+                        *last = __REV16(*last);
+                    }
+                    // auto *p = reinterpret_cast<uint16_t *>(colors);
+                    // for (uint32_t i = 0; i < pixel_count; ++i)
+                    // {
+                    //     p[i] = __REV16(p[i]);
+                    // }
 
                     HAL_DMA_Start_IT(&spi::hdma_spi2_tx,
                                      reinterpret_cast<uint32_t>(colors), // 直接使用uint16_t*地址

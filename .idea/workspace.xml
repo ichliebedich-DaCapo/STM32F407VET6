@@ -36,9 +36,7 @@
   <component name="ChangeListManager">
     <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【开发】i2c出现问题2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/gpio.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/gpio.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/i2c.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/i2c.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/lcd.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/lcd.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/touch.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/touch.ixx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -308,7 +306,7 @@
     "cf.advertisement.text.has.clang-format": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "ZQ__touch",
+    "git-widget-placeholder": "ZQ",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "E:/Program/Embedded/MCU/STM32",
     "node.js.detected.package.eslint": "true",
