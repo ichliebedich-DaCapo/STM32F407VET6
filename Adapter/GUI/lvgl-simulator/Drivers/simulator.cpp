@@ -168,7 +168,7 @@ void LCD_Set_Pixel(uint16_t x, uint16_t y, uint16_t color)
 }
 
 
-void LCD_Color_Fill(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend, const uint16_t *color)
+void LCD_Color_Fill(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend, uint8_t *color)
 {
     uint16_t width = xend - xsta + 1;
 
@@ -176,7 +176,7 @@ void LCD_Color_Fill(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend, 
     for (uint16_t y = ysta; y <= yend; y++)
     {
         uint16_t *gram_row = TFT_GRAM[y] + xsta;
-        const uint16_t *color_row = color + (y - ysta) * width;// 计算起始位置
+        const unsigned char *color_row = color + (y - ysta) * width;// 计算起始位置
 
         memcpy(gram_row, color_row, width * sizeof(uint16_t));
     }

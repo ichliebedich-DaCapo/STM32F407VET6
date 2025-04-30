@@ -24,8 +24,7 @@ extern "C" {
 // ---------------- 组件定义 ----------------
 export namespace gui::widgets::main {
     using namespace gui::compose;
-    inline Component screen;
-	inline Component screen_img_1;
+    inline Component screen_img_1;
 	inline Component screen_chart_1;
 	inline Component screen_btn_3;
 	inline Label screen_btn_3_label;
@@ -192,8 +191,8 @@ export namespace gui {
 			.size(52,19)
 			.text_align(LV_TEXT_ALIGN_CENTER)
 			.bg_opa(0);
-		lv_label_set_text(screen_label_freq,"采样率");
-		lv_obj_set_style_text_font(screen_label_freq,&lv_font_SourceHanSerifSC_Regular_13,selector_default);
+		// lv_label_set_text(screen_label_freq,"采样率");
+		// lv_obj_set_style_text_font(screen_label_freq,&lv_font_SourceHanSerifSC_Regular_13,selector_default);
 
 		screen_label_freq_data.init(screen)
 			.pos(408,102)

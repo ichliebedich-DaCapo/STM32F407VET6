@@ -153,9 +153,9 @@ def parser(info):
                 else:
                     widget_type = 'Component'
 
-                # 添加变量定义
-
-                variables.append(f'inline {widget_type} {widget_name};')
+                # 添加变量定义(跳过screen的定义）
+                if widget_name != 'screen':
+                    variables.append(f'inline {widget_type} {widget_name};')
 
                 # 添加变量初始化语句
                 calls[widget_name]['chain'].append(f'{widget_name}.init({parent_name})')

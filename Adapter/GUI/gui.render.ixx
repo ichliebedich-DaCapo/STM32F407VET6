@@ -14,7 +14,7 @@ export namespace gui::widgets::main
 {
     using namespace gui::compose;// 使用命名空间
 
-    inline Component scr;// 主屏幕，由于会与init里的screen函数重名，所以就简化了名称
+    inline Component screen;// 主屏幕，由于会与init里的screen函数重名，所以就简化了名称
 }
 
 
@@ -73,12 +73,12 @@ export namespace gui
         // 初始化界面
         static auto resource_init() -> void
         {
-            widgets::main::scr.init().size(DISP_HOR_RES, DISP_VER_RES);// 默认父对象为nullpter
-            compose::Component::parent(widgets::main::scr);// 默认主屏幕为父对象
+            // widgets::main::scr.init().size(DISP_HOR_RES, DISP_VER_RES);// 默认父对象为nullpter
+            // compose::Component::parent(widgets::main::scr);// 默认主屏幕为父对象
             screenInit();// 初始化屏幕
-            lv_obj_update_layout(widgets::main::scr);// 更新布局
+            lv_obj_update_layout(widgets::main::screen);// 更新布局
             eventInit();// 初始化事件
-            lv_scr_load(widgets::main::scr);// 加载主屏幕
+            lv_scr_load(widgets::main::screen);// 加载主屏幕
         }
 
 

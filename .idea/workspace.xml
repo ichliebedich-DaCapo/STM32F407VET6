@@ -34,9 +34,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【脚本开发：规则表】添加了函数调用次缺省规则">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【脚本开发：词法解析】修复了样式函数无法正常解析的问题" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -77,6 +75,7 @@
     <setting file="file://$PROJECT_DIR$/BSP/baseInit.ixx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Projects/driversDevelop/ui/_dianzisheji_RGB565A8_61x42.c" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Projects/driversDevelop/ui/gui.ui.ixx" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Projects/driversDevelop/ui/gui.ui.ixx" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectApplicationVersion">
@@ -134,7 +133,7 @@
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\cmake\structure" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.convert">
+  <component name="RunManager" selected="CMake 应用程序.Furina.elf">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
@@ -355,7 +354,7 @@
       <workItem from="1745843957724" duration="1074000" />
       <workItem from="1745845272181" duration="15769000" />
       <workItem from="1745903843932" duration="18323000" />
-      <workItem from="1745989945366" duration="38319000" />
+      <workItem from="1745989945366" duration="43621000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -725,7 +724,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746029192278</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="【脚本开发：词法解析】修复了样式函数无法正常解析的问题">
+      <option name="closed" value="true" />
+      <created>1746036107840</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1746036107840</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -760,7 +767,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【优化】编写的gpio类可以正常使用" />
     <MESSAGE value="【优化】有了基本的优化框架" />
     <MESSAGE value="【开发】编写了新的LCD模板类，不出所料，一编写就出错" />
     <MESSAGE value="【开发】可以编译成功，也能烧录，但是图像很奇怪" />
@@ -785,6 +791,7 @@
     <MESSAGE value="【脚本开发：词法解析】修复了属性不添加则会默认不做的bug" />
     <MESSAGE value="【脚本开发：规则表】添加了一个跳过规则" />
     <MESSAGE value="【脚本开发：规则表】添加了函数调用次缺省规则" />
-    <option name="LAST_COMMIT_MESSAGE" value="【脚本开发：规则表】添加了函数调用次缺省规则" />
+    <MESSAGE value="【脚本开发：词法解析】修复了样式函数无法正常解析的问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="【脚本开发：词法解析】修复了样式函数无法正常解析的问题" />
   </component>
 </project>
