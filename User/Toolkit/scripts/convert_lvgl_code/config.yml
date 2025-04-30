@@ -55,6 +55,7 @@ mappings:
       name: "chart_range"
       optional: true
       defaults: ["LV_CHART_AXIS_PRIMARY_Y","0","100"] # 不止一个参数为默认值，后面可以扩展
+      defaults2: ["LV_CHART_AXIS_SECONDARY_Y","0","100"]# 次缺省表，只有当前面的失效后才会生效
 
     lv_obj_align:
       name: "align"

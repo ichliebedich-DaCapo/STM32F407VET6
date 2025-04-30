@@ -80,9 +80,6 @@ export namespace gui {
 		lv_obj_add_flag(screen_img_1,LV_OBJ_FLAG_CLICKABLE);
 		lv_image_set_src(screen_img_1,&_dianzisheji_RGB565A8_83x55);
 		lv_image_set_pivot(screen_img_1,50,50);
-		lv_image_set_rotation(screen_img_1,0);
-		lv_obj_set_style_image_recolor_opa(screen_img_1,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_image_opa(screen_img_1,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 
 		screen_chart_1.init(screen)
 			.pos(2,79)
@@ -93,8 +90,6 @@ export namespace gui {
 		lv_chart_set_type(screen_chart_1,LV_CHART_TYPE_LINE);
 		lv_chart_set_div_line_count(screen_chart_1,11,15);
 		lv_chart_set_point_count(screen_chart_1,5);
-		lv_chart_set_range(screen_chart_1,LV_CHART_AXIS_PRIMARY_Y,0,100);
-		lv_chart_set_range(screen_chart_1,LV_CHART_AXIS_SECONDARY_Y,0,100);
 		lv_obj_set_style_bg_color(screen_chart_1,lv_color_hex(0xffffff),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_bg_grad_dir(screen_chart_1,LV_GRAD_DIR_NONE,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_border_opa(screen_chart_1,255,LV_PART_MAIN|LV_STATE_DEFAULT);

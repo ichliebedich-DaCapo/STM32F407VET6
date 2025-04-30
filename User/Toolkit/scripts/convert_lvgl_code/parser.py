@@ -231,9 +231,22 @@ def parser(info):
 
                     # ================== 函数形参缺省规则 ================
                     remaining_params = [x for x in call['params']] # 剩余形参表里剩下的参数
+                    optional = False
                     if is_field_valid(cfg_call_name,'defaults'):
                         defaults = cfg_call_name['defaults']
                         remaining_params,optional = validate_params(call['params'],defaults,arg_index)
+
+                    # 第二套缺省规则
+                    if not optional:
+                        if is_field_valid(cfg_call_name,'defaults2'):
+                            defaults = cfg_call_name['defaults2']
+                            remaining_params2,optional2 = validate_params(call['params'],defaults,arg_index)
+                            # 实施纠偏
+                            if optional2:
+                                remaining_params = remaining_params2
+                                optional = optional2
+
+
 
                     # 是否去除索引处
                     if rename_flag:
