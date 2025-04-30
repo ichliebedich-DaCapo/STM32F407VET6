@@ -59,6 +59,7 @@ def parser(info):
         ValueError("配置文件缺少 'variables' 或 'calls' 字段")
     cfg_variables = cfg_mappings['variable_types']
     cfg_calls = cfg_mappings['function_calls']
+    cfg_style_calls = cfg_mappings['style_calls']
 
     combin_info = {}
     # ======================= 组合信息 ==================
@@ -169,9 +170,7 @@ def parser(info):
                     }
                 """
                 if 'text_font' in call['name']:
-                    print(f'1font: {call}')
                     font = call['params'][1].replace("&", "")
-                    print(f'2font: {font}')
                     if font not in resource['fonts']:  # 检查是否已存在
                         resource['fonts'].append(font)
 
@@ -179,8 +178,27 @@ def parser(info):
                     img = call['params'][1].replace("&", "")
                     if img not in resource['img']:  # 检查是否已存在
                         resource['img'].append(img)
+                # ============= 样式函数映射 ============
+                if 'lv_obj_set_style_' in call['name']:
+                    match = re.match(r"lv_obj_set_style_([a-zA-Z_]+)", call['name'])
+                    if match:
+                        method_name = match.group(1)  # 捕获函数名
+                    if is_field_valid(cfg_style_calls, method_name):
+                        # 默认形参
+                        remaining_params = call['params'][1:]
+                        print(f"remaining_params: {remaining_params}")
+                        if "LV_PART_MAIN|LV_STATE_DEFAULT" in call['params'][2]:
+                            remaining_params.pop(1)
+                            if cfg_style_calls[method_name] in call['params'][1]:
+                                remaining_params.pop(0)
+                        if not remaining_params:
+                            continue
+                        # 添加样式设置语句
+                        params = ','.join(remaining_params)
+                        widget_calls['chain'].append(f'.{method_name}({params})')
+                        continue
 
-                # ============= 函数名映射 ============
+                # ============= 普通函数映射 ============
                 if is_field_valid(cfg_calls, call['name']):
                     cfg_call_name = cfg_calls[call['name']]
                     if not is_field_valid(cfg_call_name, 'name'):
@@ -270,6 +288,10 @@ if __name__ == "__main__":
                     'name': 'lv_image_set_src',
                     'params': ['ui->press', '&_dianzisheji_RGB565A8_83x55']
                 },
+                {
+                    'name': 'lv_obj_set_style_bg_opa',
+                    'params':['ui->press', 'lv_color_hex(0xffffff)','LV_PART_MAIN|LV_STATE_DEFAULT']
+                }
             ],
         },
     }
