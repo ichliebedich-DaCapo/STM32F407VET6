@@ -34,10 +34,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【脚本开发：词法解析】组合信息和变量部分已经完成">
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【脚本开发：词法解析】基本完成">
+      <change afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/convert.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/generate_code.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/code_generate.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -298,33 +300,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;OpenOCD 下载并运行.Furina.elf.executor&quot;: &quot;Run&quot;,
-    &quot;Python.extract_info.executor&quot;: &quot;Run&quot;,
-    &quot;Python.parser.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
-    &quot;cf.advertisement.text.has.clang-format&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ZQ&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Program/Embedded/MCU/STM32&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;E:/Program/Embedded/MCU/STM32/Furina/main.cpp&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;CMakeSettings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "OpenOCD 下载并运行.Furina.elf.executor": "Run",
+    "Python.extract_info.executor": "Run",
+    "Python.generate_code.executor": "Run",
+    "Python.parser.executor": "Run",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.west.config.association.type.startup.service": "true",
+    "cf.advertisement.text.has.clang-format": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "ZQ",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "E:/Program/Embedded/MCU/STM32",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "E:/Program/Embedded/MCU/STM32/Furina/main.cpp",
+    "settings.editor.selected.configurable": "CMakeSettings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\User\Toolkit\scripts\convert_lvgl_code" />
@@ -334,7 +337,7 @@
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\cmake\structure" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.parser">
+  <component name="RunManager" selected="Python.generate_code">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
@@ -436,6 +439,29 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="generate_code" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Furina" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.8 (Furina)" />
+      <option name="WORKING_DIRECTORY" value="$FileDir$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/generate_code.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="parser" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Furina" />
       <option name="ENV_FILES" value="" />
@@ -485,6 +511,7 @@
       <item itemvalue="Python.convert_lvgl2" />
       <item itemvalue="Python.extract_info" />
       <item itemvalue="Python.parser" />
+      <item itemvalue="Python.generate_code" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
@@ -531,7 +558,7 @@
       <workItem from="1745843957724" duration="1074000" />
       <workItem from="1745845272181" duration="15769000" />
       <workItem from="1745903843932" duration="18323000" />
-      <workItem from="1745989945366" duration="14182000" />
+      <workItem from="1745989945366" duration="17847000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -821,7 +848,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745998954988</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="【脚本开发：词法解析】基本完成">
+      <option name="closed" value="true" />
+      <created>1746005782228</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1746005782228</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -843,7 +878,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="ZQ_touch" />
+                        <option value="ZQ" />
                       </list>
                     </value>
                   </entry>
@@ -856,7 +891,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【备份】准备编写Utils层" />
     <MESSAGE value="【开发】Utils层编写完毕" />
     <MESSAGE value="【暂缓】准备构思UI层逻辑" />
     <MESSAGE value="【备份】准备开始搞GUI" />
@@ -881,6 +915,7 @@
     <MESSAGE value="【脚本开发】可以正常提取出想要的信息" />
     <MESSAGE value="【脚本开发：词法解析】变量定义已完成" />
     <MESSAGE value="【脚本开发：词法解析】组合信息和变量部分已经完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="【脚本开发：词法解析】组合信息和变量部分已经完成" />
+    <MESSAGE value="【脚本开发：词法解析】基本完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="【脚本开发：词法解析】基本完成" />
   </component>
 </project>
