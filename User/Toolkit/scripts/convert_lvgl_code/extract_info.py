@@ -19,46 +19,50 @@ class VariableAssignment:
     var_type: str # 变量类型
 
 
-def extract_function_call(text):
-    # Step 1: 找到函数名与括号开始位置
-    match_func_name = re.match(r'^\s*(\w+)\s*\(', text)
-    if not match_func_name:
+def extract_function_info(s):
+    # 提取函数名
+    start = s.find('(')
+    if start == -1:
         return None, []
+    func_name = s[:start].strip()
 
-    function_name = match_func_name.group(1)
+    # 提取参数部分的字符串
+    params_str = s[start+1:]
+    end_pos = None
+    count = 1
+    for i, char in enumerate(params_str):
+        if char == '(':
+            count += 1
+        elif char == ')':
+            count -= 1
+            if count == 0:
+                end_pos = i
+                break
+    if end_pos is None:
+        return func_name, []
+    params_part = params_str[:end_pos].strip()
 
-    # Step 2: 手动追踪括号嵌套层级，找到匹配的右括号
-    depth = 0
-    start_idx = len(match_func_name.group(0)) - 1  # 起始于 '(' 的位置
-    args_str = ""
-    for i in range(start_idx, len(text)):
-        char = text[i]
-        if char == '(' and depth >= 0:
-            depth += 1
-        elif char == ')' and depth > 0:
-            depth -= 1
-        elif char == ')' and depth == 0:
-            break
-        elif depth > 0:
-            args_str += char
-
-    # Step 3: 分割参数，支持引号内逗号
-    args = []
-    in_quotes = False
-    current_arg = ""
-    for c in args_str:
-        if c == '"':
-            in_quotes = not in_quotes
-            current_arg += c
-        elif c == ',' and not in_quotes:
-            args.append(current_arg.strip())
-            current_arg = ""
+    # 分割参数
+    params = []
+    current_param = []
+    current_level = 0
+    for char in params_part:
+        if char == ',' and current_level == 0:
+            param = ''.join(current_param).strip()
+            params.append(param)
+            current_param = []
         else:
-            current_arg += c
-    if current_arg.strip():
-        args.append(current_arg.strip())
+            if char == '(':
+                current_level += 1
+            elif char == ')':
+                current_level -= 1
+            current_param.append(char)
+    # 处理最后一个参数
+    if current_param:
+        param = ''.join(current_param).strip()
+        params.append(param)
 
-    return function_name, args
+    return func_name, params
 
 
 def extract( root_path: str, file_pattern: str) -> Dict[str, dict]:
@@ -148,7 +152,7 @@ def _analyze(lines: List[str], filename: str) -> dict:
 
         # 处理函数调用
         elif '(' in line and ')' in line:
-            func, args = extract_function_call(line)
+            func, args = extract_function_info(line)
             calls.append(FunctionCall(name=func, params=args))
 
 

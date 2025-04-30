@@ -71,7 +71,7 @@ export namespace gui {
 			.bg_opa(255);
 		lv_obj_set_size(screen,480,320);
 		lv_obj_set_scrollbar_mode(screen,LV_SCROLLBAR_MODE_OFF);
-		lv_obj_set_style_bg_color(screen,lv_color_hex0xffffff,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_bg_color(screen,lv_color_hex(0xffffff),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_bg_grad_dir(screen,LV_GRAD_DIR_NONE,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_update_layout(screen);
 
@@ -95,16 +95,16 @@ export namespace gui {
 		lv_chart_set_point_count(screen_chart_1,5);
 		lv_chart_set_range(screen_chart_1,LV_CHART_AXIS_PRIMARY_Y,0,100);
 		lv_chart_set_range(screen_chart_1,LV_CHART_AXIS_SECONDARY_Y,0,100);
-		lv_obj_set_style_bg_color(screen_chart_1,lv_color_hex0xffffff,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_bg_color(screen_chart_1,lv_color_hex(0xffffff),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_bg_grad_dir(screen_chart_1,LV_GRAD_DIR_NONE,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_border_width(screen_chart_1,1,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_border_opa(screen_chart_1,255,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_border_color(screen_chart_1,lv_color_hex0xFFFFFF,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_border_color(screen_chart_1,lv_color_hex(0xFFFFFF),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_border_side(screen_chart_1,LV_BORDER_SIDE_FULL,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_chart_1,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_shadow_width(screen_chart_1,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_line_width(screen_chart_1,2,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_line_color(screen_chart_1,lv_color_hex0xe8e8e8,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_line_color(screen_chart_1,lv_color_hex(0xe8e8e8),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_line_opa(screen_chart_1,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 
 		screen_btn_3.init(screen)
@@ -112,12 +112,12 @@ export namespace gui {
 			.bg_opa(255);
 		lv_obj_set_size(screen_btn_3,51,32);
 		lv_obj_set_style_pad_all(screen_btn_3,0,LV_STATE_DEFAULT);
-		lv_obj_set_style_bg_color(screen_btn_3,lv_color_hex0x2195f6,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_bg_color(screen_btn_3,lv_color_hex(0x2195f6),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_bg_grad_dir(screen_btn_3,LV_GRAD_DIR_NONE,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_border_width(screen_btn_3,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_btn_3,5,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_shadow_width(screen_btn_3,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_text_color(screen_btn_3,lv_color_hex0xffffff,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_text_color(screen_btn_3,lv_color_hex(0xffffff),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_font(screen_btn_3,&lv_font_SourceHanSerifSC_Regular_13,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_opa(screen_btn_3,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_align(screen_btn_3,LV_TEXT_ALIGN_CENTER,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -126,7 +126,7 @@ export namespace gui {
 		lv_label_set_text(screen_btn_3_label,"测量");
 		lv_label_set_long_mode(screen_btn_3_label,LV_LABEL_LONG_WRAP);
 		lv_obj_align(screen_btn_3_label,LV_ALIGN_CENTER,0,0);
-		lv_obj_set_width(screen_btn_3_label,LV_PCT100);
+		lv_obj_set_width(screen_btn_3_label,LV_PCT(100));
 
 		screen_label_h2_data.init(screen)
 			.pos(418,193)
@@ -136,7 +136,7 @@ export namespace gui {
 		lv_label_set_long_mode(screen_label_h2_data,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h2_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_label_h2_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_text_color(screen_label_h2_data,lv_color_hex0x000000,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_text_color(screen_label_h2_data,lv_color_hex(0x000000),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_font(screen_label_h2_data,&lv_font_SourceHanSerifSC_Regular_13,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_opa(screen_label_h2_data,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_letter_space(screen_label_h2_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -156,7 +156,7 @@ export namespace gui {
 		lv_label_set_long_mode(screen_label_h2,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h2,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_label_h2,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_text_color(screen_label_h2,lv_color_hex0x000000,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_text_color(screen_label_h2,lv_color_hex(0x000000),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_font(screen_label_h2,&lv_font_SourceHanSerifSC_Regular_13,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_opa(screen_label_h2,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_letter_space(screen_label_h2,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -176,7 +176,7 @@ export namespace gui {
 		lv_label_set_long_mode(screen_label_h3,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h3,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_label_h3,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_text_color(screen_label_h3,lv_color_hex0x000000,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_text_color(screen_label_h3,lv_color_hex(0x000000),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_font(screen_label_h3,&lv_font_SourceHanSerifSC_Regular_13,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_opa(screen_label_h3,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_letter_space(screen_label_h3,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -196,7 +196,7 @@ export namespace gui {
 		lv_label_set_long_mode(screen_label_h3_data,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h3_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_label_h3_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_text_color(screen_label_h3_data,lv_color_hex0x000000,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_text_color(screen_label_h3_data,lv_color_hex(0x000000),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_font(screen_label_h3_data,&lv_font_SourceHanSerifSC_Regular_13,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_opa(screen_label_h3_data,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_letter_space(screen_label_h3_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -216,7 +216,7 @@ export namespace gui {
 		lv_label_set_long_mode(screen_label_h4,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h4,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_label_h4,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_text_color(screen_label_h4,lv_color_hex0x000000,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_text_color(screen_label_h4,lv_color_hex(0x000000),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_font(screen_label_h4,&lv_font_SourceHanSerifSC_Regular_13,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_opa(screen_label_h4,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_letter_space(screen_label_h4,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -236,7 +236,7 @@ export namespace gui {
 		lv_label_set_long_mode(screen_label_h4_data,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h4_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_label_h4_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_text_color(screen_label_h4_data,lv_color_hex0x000000,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_text_color(screen_label_h4_data,lv_color_hex(0x000000),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_font(screen_label_h4_data,&lv_font_SourceHanSerifSC_Regular_13,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_opa(screen_label_h4_data,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_letter_space(screen_label_h4_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -256,7 +256,7 @@ export namespace gui {
 		lv_label_set_long_mode(screen_label_thd,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_thd,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_label_thd,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_text_color(screen_label_thd,lv_color_hex0x000000,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_text_color(screen_label_thd,lv_color_hex(0x000000),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_font(screen_label_thd,&lv_font_SourceHanSerifSC_Regular_13,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_opa(screen_label_thd,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_letter_space(screen_label_thd,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -276,7 +276,7 @@ export namespace gui {
 		lv_label_set_long_mode(screen_label_thd_data,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_thd_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_label_thd_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_text_color(screen_label_thd_data,lv_color_hex0x000000,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_text_color(screen_label_thd_data,lv_color_hex(0x000000),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_font(screen_label_thd_data,&lv_font_SourceHanSerifSC_Regular_13,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_opa(screen_label_thd_data,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_letter_space(screen_label_thd_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -296,7 +296,7 @@ export namespace gui {
 		lv_label_set_long_mode(screen_label_h5,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h5,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_label_h5,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_text_color(screen_label_h5,lv_color_hex0x000000,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_text_color(screen_label_h5,lv_color_hex(0x000000),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_font(screen_label_h5,&lv_font_SourceHanSerifSC_Regular_13,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_opa(screen_label_h5,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_letter_space(screen_label_h5,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -316,7 +316,7 @@ export namespace gui {
 		lv_label_set_long_mode(screen_label_h5_data,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h5_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_label_h5_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_text_color(screen_label_h5_data,lv_color_hex0x000000,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_text_color(screen_label_h5_data,lv_color_hex(0x000000),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_font(screen_label_h5_data,&lv_font_SourceHanSerifSC_Regular_13,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_opa(screen_label_h5_data,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_letter_space(screen_label_h5_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -336,7 +336,7 @@ export namespace gui {
 		lv_label_set_long_mode(screen_label_freq,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_freq,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_label_freq,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_text_color(screen_label_freq,lv_color_hex0x000000,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_text_color(screen_label_freq,lv_color_hex(0x000000),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_font(screen_label_freq,&lv_font_SourceHanSerifSC_Regular_13,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_opa(screen_label_freq,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_letter_space(screen_label_freq,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -356,7 +356,7 @@ export namespace gui {
 		lv_label_set_long_mode(screen_label_freq_data,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_freq_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_label_freq_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_text_color(screen_label_freq_data,lv_color_hex0x000000,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_text_color(screen_label_freq_data,lv_color_hex(0x000000),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_font(screen_label_freq_data,&lv_font_SourceHanSerifSC_Regular_13,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_opa(screen_label_freq_data,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_letter_space(screen_label_freq_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -376,7 +376,7 @@ export namespace gui {
 		lv_label_set_long_mode(screen_label_h1,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h1,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_label_h1,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_text_color(screen_label_h1,lv_color_hex0x000000,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_text_color(screen_label_h1,lv_color_hex(0x000000),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_font(screen_label_h1,&lv_font_SourceHanSerifSC_Regular_13,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_opa(screen_label_h1,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_letter_space(screen_label_h1,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -396,7 +396,7 @@ export namespace gui {
 		lv_label_set_long_mode(screen_label_h1_data,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h1_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_label_h1_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_text_color(screen_label_h1_data,lv_color_hex0x000000,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_text_color(screen_label_h1_data,lv_color_hex(0x000000),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_font(screen_label_h1_data,&lv_font_SourceHanSerifSC_Regular_13,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_opa(screen_label_h1_data,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_letter_space(screen_label_h1_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -416,7 +416,7 @@ export namespace gui {
 		lv_label_set_long_mode(screen_label_x,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_x,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_label_x,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_text_color(screen_label_x,lv_color_hex0x000000,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_text_color(screen_label_x,lv_color_hex(0x000000),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_font(screen_label_x,&lv_font_SourceHanSerifSC_Regular_13,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_opa(screen_label_x,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_letter_space(screen_label_x,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -436,7 +436,7 @@ export namespace gui {
 		lv_label_set_long_mode(screen_label_x_data,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_x_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_label_x_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_text_color(screen_label_x_data,lv_color_hex0x000000,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_text_color(screen_label_x_data,lv_color_hex(0x000000),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_font(screen_label_x_data,&lv_font_SourceHanSerifSC_Regular_13,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_opa(screen_label_x_data,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_letter_space(screen_label_x_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -456,7 +456,7 @@ export namespace gui {
 		lv_label_set_long_mode(screen_label_y,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_y,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_label_y,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_text_color(screen_label_y,lv_color_hex0x000000,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_text_color(screen_label_y,lv_color_hex(0x000000),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_font(screen_label_y,&lv_font_SourceHanSerifSC_Regular_13,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_opa(screen_label_y,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_letter_space(screen_label_y,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -476,7 +476,7 @@ export namespace gui {
 		lv_label_set_long_mode(screen_label_y_data,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_y_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_radius(screen_label_y_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
-		lv_obj_set_style_text_color(screen_label_y_data,lv_color_hex0x000000,LV_PART_MAIN|LV_STATE_DEFAULT);
+		lv_obj_set_style_text_color(screen_label_y_data,lv_color_hex(0x000000),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_font(screen_label_y_data,&lv_font_SourceHanSerifSC_Regular_13,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_opa(screen_label_y_data,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_letter_space(screen_label_y_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
