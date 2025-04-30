@@ -112,6 +112,10 @@ def parser(info):
             'chain': [],
             'lvgl': []
         })
+        resource =  {
+            'fonts': [],
+            'img': []
+        }
         parent_name = '' # 父组件名称
         merge_name = '' # 变量的合成名
 
@@ -157,6 +161,25 @@ def parser(info):
             widget_calls = calls[widget_name]
             for call in widget_info['calls']:
                 method_name = ''
+                # ============= 资源获取 ============
+                """
+                resource:{
+                        'fonts':[]
+                        'img':[]
+                    }
+                """
+                if 'text_font' in call['name']:
+                    print(f'1font: {call}')
+                    font = call['params'][1].replace("&", "")
+                    print(f'2font: {font}')
+                    if font not in resource['fonts']:  # 检查是否已存在
+                        resource['fonts'].append(font)
+
+                if 'image_set_src' in call['name']:
+                    img = call['params'][1].replace("&", "")
+                    if img not in resource['img']:  # 检查是否已存在
+                        resource['img'].append(img)
+
                 # ============= 函数名映射 ============
                 if is_field_valid(cfg_calls, call['name']):
                     cfg_call_name = cfg_calls[call['name']]
@@ -210,7 +233,8 @@ def parser(info):
         # ========== 组合信息 ==========
         process_results[file_path] ={
             'variables':variables,# 变量定义部分
-            'calls':calls# 函数调用部分
+            'calls':calls,# 函数调用部分
+            'resource':resource,# 资源声明部分
         }
     return process_results
 
@@ -237,6 +261,14 @@ if __name__ == "__main__":
                 {
                     'name': 'lv_obj_set_text_size',
                     'params': ['ui->press', '100','20']
+                },
+                {
+                    'name': 'lv_obj_set_text_font',
+                    'params': ['ui->press', '&lv_font_SourceHanSerifSC_Regular_13','LV_PART_MAIN|LV_STATE_DEFAULT']
+                },
+                {
+                    'name': 'lv_image_set_src',
+                    'params': ['ui->press', '&_dianzisheji_RGB565A8_83x55']
                 },
             ],
         },

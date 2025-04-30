@@ -34,12 +34,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【脚本开发：词法解析】基本完成">
-      <change afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/convert.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/generate_code.py" afterDir="false" />
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【脚本开发：代码生成】：基本框架已成，接下来准备解决lvgl样式函数和资源声明">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/code_generate.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/generate_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/generate_code.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/parser.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -558,7 +556,7 @@
       <workItem from="1745843957724" duration="1074000" />
       <workItem from="1745845272181" duration="15769000" />
       <workItem from="1745903843932" duration="18323000" />
-      <workItem from="1745989945366" duration="17847000" />
+      <workItem from="1745989945366" duration="19809000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -856,7 +854,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746005782228</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="【脚本开发：代码生成】：基本框架已成，接下来准备解决lvgl样式函数和资源声明">
+      <option name="closed" value="true" />
+      <created>1746009280137</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1746009280137</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -891,7 +897,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【开发】Utils层编写完毕" />
     <MESSAGE value="【暂缓】准备构思UI层逻辑" />
     <MESSAGE value="【备份】准备开始搞GUI" />
     <MESSAGE value="【开发】对UI层的划分已经有了初步进展" />
@@ -916,6 +921,7 @@
     <MESSAGE value="【脚本开发：词法解析】变量定义已完成" />
     <MESSAGE value="【脚本开发：词法解析】组合信息和变量部分已经完成" />
     <MESSAGE value="【脚本开发：词法解析】基本完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="【脚本开发：词法解析】基本完成" />
+    <MESSAGE value="【脚本开发：代码生成】：基本框架已成，接下来准备解决lvgl样式函数和资源声明" />
+    <option name="LAST_COMMIT_MESSAGE" value="【脚本开发：代码生成】：基本框架已成，接下来准备解决lvgl样式函数和资源声明" />
   </component>
 </project>

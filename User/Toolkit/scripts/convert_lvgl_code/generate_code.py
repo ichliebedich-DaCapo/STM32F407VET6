@@ -21,109 +21,29 @@
 #   }
 # }
 # 遍历并组织字典的信息，把它变成这样的代码形式，最后写入到gui.ui.ixx文件里
-# gui.ui.ixx文件可能存在，如果存在的话，就根据全局变量config_mode是否为true来决定是否覆写，如果不覆写的话，那么除了USER_DECLARE注释块内的其余全部刷新
-# module;
-# #include <lvgl.h>
-# export module gui:ui;
-# export import :render;
-# // 导入其他资源
-# /*!USER_DECLARE_BEGIN!*/
-# import ui_data;
-#
-# /*!USER_DECLARE_END!*/
-#
-# // ---------------- 导出并加载资源 ----------------
-# extern "C"
-# {
-# //  字体资源
-# LV_FONT_DECLARE(lv_customer_font_SourceHanSerifSC_Regular_13)
-# /*!USER_DECLARE_BEGIN!*/
-#
-# /*!USER_DECLARE_END!*/
-# //  图片资源
-# LV_IMG_DECLARE(_dianzisheji_RGB565A8_61x42)
-# /*!USER_DECLARE_BEGIN!*/
-#
-# /*!USER_DECLARE_END!*/
-# // 其他
-# /*!USER_DECLARE_BEGIN!*/
-#
-# /*!USER_DECLARE_END!*/
-# }
-#
-#
-# // ---------------- 导出并定义组件 ----------------
-# export namespace gui::widgets::main
-# {
-#     using namespace gui::compose;
-#     【变量定义】
-# /*!USER_DECLARE_BEGIN!*/
-#
-# /*!USER_DECLARE_END!*/
-# }
-#
-# // ======================= 用户空间 =======================
-# /*!USER_DECLARE_BEGIN!*/
-#
-# /*!USER_DECLARE_END!*/
-# // ======================= 用户空间 =======================
-#
-#
-# // ---------------- 导出用户接口 ----------------
-# export namespace gui::ui
-# {
-#     using namespace gui::widgets::main; // 使用组件命名空间
-#
-#     /*!USER_DECLARE_BEGIN!*/
-#
-#     /*!USER_DECLARE_END!*/
-# }
-#
-#
-# // ---------------- 初始化UI和事件 ----------------
-# export namespace gui
-# {
-#     void Render::screenInit()
-#     {
-#         using namespace gui::widgets::main; // 使用组件命名空间
-#
-#         【链式调用信息1】
-#
-#         【链式调用信息2】
-#
-#     /*!USER_DECLARE_BEGIN!*/
-#
-#     /*!USER_DECLARE_END!*/
-#
-#     }
-#
-#     void Render::eventInit()
-#     {
-#         using namespace gui::widgets::main; // 使用组件命名空间
-#         /*!USER_DECLARE_BEGIN!*/
-#
-#         /*!USER_DECLARE_END!*/
-#     }
-# }
-#
-#
-# // ---------------- 模块内部实现 ----------------
-# /*!USER_DECLARE_BEGIN!*/
-#
-# /*!USER_DECLARE_END!*/
+# gui.ui.ixx文件可能存在，如果存在的话，就根据全局变量overwrite是否为true来决定是否覆写，如果不覆写的话，那么除了USER_DECLARE注释块内的其余全部刷新
+
 
 import os
 import re
 
-def generate_gui_ui_ixx(data, config_mode):
+def generate_code(data, overwrite):
     # 收集所有变量和调用信息
     variables = []
+    fonts_lines = []
+    img_lines = []
     code_lines = []
 
 
     for file_info in data.values():
         # 收集变量定义
         variables.extend(file_info.get('variables', []))
+
+        # 收集资源声明
+        fonts_lines = file_info['resource'].get('fonts', [] )
+        fonts_lines =  [f"LV_FONT_DECLARE({item})" for item in fonts_lines] # 添加声明语句
+        img_lines = file_info['resource'].get('img', [] )
+        img_lines =  [f"LV_IMG_DECLARE({item})" for item in img_lines] # 添加声明语句
 
         # 收集链式调用和LVGL调用
         for widget_name,widget_info in file_info['calls'].items():
@@ -134,6 +54,8 @@ def generate_gui_ui_ixx(data, config_mode):
 
     # 生成代码段落
     variables_section = '\n\t'.join(variables)
+    fonts_section = '\n\t'.join(fonts_lines)
+    img_section = '\n\t'.join(img_lines)
     code_section = '\n\t\t'.join(code_lines) if code_lines else '// 代码段'
 
     # 构造新文件内容模板
@@ -147,11 +69,15 @@ export import :render;
 
 // ---------------- 资源声明 ----------------
 extern "C" {{
-    LV_FONT_DECLARE(lv_customer_font_SourceHanSerifSC_Regular_13)
+    // 字体声明
+    {fonts_section}
     /*!USER_DECLARE_BEGIN!*/
     /*!USER_DECLARE_END!*/
-    LV_IMG_DECLARE(_dianzisheji_RGB565A8_61x42)
-    
+    // 图片声明
+    {img_section}
+    /*!USER_DECLARE_BEGIN!*/
+    /*!USER_DECLARE_END!*/
+    // 其他
     /*!USER_DECLARE_BEGIN!*/
     /*!USER_DECLARE_END!*/
 }}
@@ -181,7 +107,6 @@ export namespace gui {{
         using namespace gui::widgets::main;
         
         {code_section}
-        
         /*!USER_DECLARE_BEGIN!*/
         /*!USER_DECLARE_END!*/
     }}
@@ -199,7 +124,7 @@ export namespace gui {{
 
     # 文件处理逻辑
     file_path = "gui.ui.ixx"
-    if not os.path.exists(file_path) or config_mode:
+    if not os.path.exists(file_path) or overwrite:
         with open(file_path, "w", encoding='utf-8') as f:
             f.write(new_content)
         return
@@ -245,9 +170,17 @@ if __name__ == "__main__":
                         "lv_obj_set_text_size(btn_release,100,20);"
                     ]
                 },
+            },
+            'resource':{
+                "fonts": [
+                    "lv_font_SourceHanSerifSC_Regular_13"
+                ],
+                "img": [
+                    "_dianzisheji_RGB565A8_83x55"
+                ]
             }
         }
     }
 
-    # 生成或更新文件（config_mode=True表示强制覆盖）
-    generate_gui_ui_ixx(sample_data, config_mode=False)
+    # 生成或更新文件（overwrite=True表示强制覆盖）
+    generate_code(sample_data, overwrite=False)
