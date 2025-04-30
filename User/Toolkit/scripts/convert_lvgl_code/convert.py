@@ -11,10 +11,7 @@ if __name__ == "__main__":
     target_path =r"../../../../Projects/driversDevelop/ui"
 
     # ====== 提取代码信息 ======
-    results = extract_info.extract(
-        root_path=root_path,
-        file_pattern="setup_scr_*.c"
-    )
+    results = extract_info.extract(root_path=root_path,file_pattern="setup_scr_*.c")
     # ====== 解析代码信息 ======
     results = parser.parser(results)
     # ====== 生成代码 ======
@@ -22,10 +19,6 @@ if __name__ == "__main__":
     generate_code.generate_code(file_path=target_path,data=results, overwrite=True)
 
     # ====== 复制所有字体 ======
-    copy_files.copy_files_by_pattern(source_dir=f"{root_path}\guider_fonts",
-                          target_dir=target_path,
-                          pattern="*.c")
+    copy_files.copy_files_by_pattern(source_dir=f"{root_path}\guider_fonts",target_dir=target_path,pattern="*.c")
     # ====== 复制所有图片 ======
-    copy_files.copy_files_by_pattern(source_dir=f"{root_path}\images",
-                          target_dir=target_path,
-                          pattern="*.c")
+    copy_files.copy_files_by_pattern(source_dir=f"{root_path}\images",target_dir=target_path,pattern="*.c")

@@ -20,6 +20,18 @@ mappings:
         pattern:    # 根据不同的参数映射为不同的名称
           "100": "pos_big"
 
+    lv_obj_set_size:
+      name: "size"
+
+    lv_obj_align:
+      name: "align"
+      defaults: [0,0]
+      naming_rule:
+        source_arg: 1
+        pattern:
+          "LV_ALIGN_CENTER": "center"
+
+
   # 样式函数映射（特殊映射）
   style_calls:
     bg_opa: "lv_color_hex(0xffffff)" # 默认缺省表，如果满足，则省略调用

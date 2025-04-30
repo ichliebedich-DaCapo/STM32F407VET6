@@ -222,8 +222,7 @@ def parser(info):
                                 method_name = cfg_calls_name_pattern[call['params'][arg_index]]
 
                     # ================== 函数形参缺省规则 ================
-                    optional = False # 默认形参表是否为空
-                    remaining_params = [] # 剩余形参表里剩下的参数
+                    remaining_params = [x for x in call['params']] # 剩余形参表里剩下的参数
                     if is_field_valid(cfg_call_name,'defaults'):
                         defaults = cfg_call_name['defaults']
                         remaining_params,optional = validate_params(call['params'],defaults,arg_index)
@@ -231,14 +230,17 @@ def parser(info):
                     # 是否去除索引处
                     if rename_flag:
                         remaining_params.pop(arg_index) #  去掉索引处
-                    remaining_params.pop(0) # 去掉第一个参数
+                    if remaining_params:
+                        remaining_params.pop(0) # 去掉第一个参数
 
                     # 判断为空是否可以省略
-                    if remaining_params == [] and cfg_call_name['optional']:
-                        print(f'[ignore] {widget_name}--{method_name}--{remaining_params}')
-                    else:
-                        params = ','.join(remaining_params)
-                        widget_calls['chain'].append(f'.{method_name}({params})')
+                    if not remaining_params:
+                        if is_field_valid(cfg_call_name, 'optional'):
+                            if cfg_call_name['optional']:
+                                print(f'[ignore] {widget_name}--{method_name}--{remaining_params}')
+                                continue
+                    params = ','.join(remaining_params)
+                    widget_calls['chain'].append(f'.{method_name}({params})')
 
                 else:
                     # ============ 怎么来的就怎么回去，使用原装lvgl函数 ============

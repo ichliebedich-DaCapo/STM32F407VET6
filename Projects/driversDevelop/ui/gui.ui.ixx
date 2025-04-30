@@ -68,16 +68,16 @@ export namespace gui {
         using namespace gui::widgets::main;
         
         screen.init(nullptr)
+			.size(480,320)
 			.bg_opa(255);
-		lv_obj_set_size(screen,480,320);
 		lv_obj_set_scrollbar_mode(screen,LV_SCROLLBAR_MODE_OFF);
 		lv_obj_set_style_bg_color(screen,lv_color_hex(0xffffff),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_bg_grad_dir(screen,LV_GRAD_DIR_NONE,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_update_layout(screen);
 
 		screen_img_1.init(screen)
-			.pos(389,7);
-		lv_obj_set_size(screen_img_1,83,55);
+			.pos(389,7)
+			.size(83,55);
 		lv_obj_add_flag(screen_img_1,LV_OBJ_FLAG_CLICKABLE);
 		lv_image_set_src(screen_img_1,&_dianzisheji_RGB565A8_83x55);
 		lv_image_set_pivot(screen_img_1,50,50);
@@ -87,8 +87,8 @@ export namespace gui {
 
 		screen_chart_1.init(screen)
 			.pos(2,79)
+			.size(341,236)
 			.bg_opa(255);
-		lv_obj_set_size(screen_chart_1,341,236);
 		lv_obj_set_scrollbar_mode(screen_chart_1,LV_SCROLLBAR_MODE_OFF);
 		lv_chart_set_type(screen_chart_1,LV_CHART_TYPE_LINE);
 		lv_chart_set_div_line_count(screen_chart_1,11,15);
@@ -109,8 +109,8 @@ export namespace gui {
 
 		screen_btn_3.init(screen)
 			.pos(29,29)
+			.size(51,32)
 			.bg_opa(255);
-		lv_obj_set_size(screen_btn_3,51,32);
 		lv_obj_set_style_pad_all(screen_btn_3,0,LV_STATE_DEFAULT);
 		lv_obj_set_style_bg_color(screen_btn_3,lv_color_hex(0x2195f6),LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_bg_grad_dir(screen_btn_3,LV_GRAD_DIR_NONE,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -122,16 +122,16 @@ export namespace gui {
 		lv_obj_set_style_text_opa(screen_btn_3,255,LV_PART_MAIN|LV_STATE_DEFAULT);
 		lv_obj_set_style_text_align(screen_btn_3,LV_TEXT_ALIGN_CENTER,LV_PART_MAIN|LV_STATE_DEFAULT);
 
-		screen_btn_3_label.init(screen_btn_3);
+		screen_btn_3_label.init(screen_btn_3)
+			.center(0,0);
 		lv_label_set_text(screen_btn_3_label,"测量");
 		lv_label_set_long_mode(screen_btn_3_label,LV_LABEL_LONG_WRAP);
-		lv_obj_align(screen_btn_3_label,LV_ALIGN_CENTER,0,0);
 		lv_obj_set_width(screen_btn_3_label,LV_PCT(100));
 
 		screen_label_h2_data.init(screen)
 			.pos(418,193)
+			.size(49,19)
 			.bg_opa(0);
-		lv_obj_set_size(screen_label_h2_data,49,19);
 		lv_label_set_text(screen_label_h2_data,"0");
 		lv_label_set_long_mode(screen_label_h2_data,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h2_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -150,8 +150,8 @@ export namespace gui {
 
 		screen_label_h2.init(screen)
 			.pos(354,193)
+			.size(49,19)
 			.bg_opa(0);
-		lv_obj_set_size(screen_label_h2,49,19);
 		lv_label_set_text(screen_label_h2,"H2/H1");
 		lv_label_set_long_mode(screen_label_h2,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h2,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -170,8 +170,8 @@ export namespace gui {
 
 		screen_label_h3.init(screen)
 			.pos(354,223)
+			.size(49,19)
 			.bg_opa(0);
-		lv_obj_set_size(screen_label_h3,49,19);
 		lv_label_set_text(screen_label_h3,"H3/H1");
 		lv_label_set_long_mode(screen_label_h3,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h3,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -190,8 +190,8 @@ export namespace gui {
 
 		screen_label_h3_data.init(screen)
 			.pos(418,223)
+			.size(49,19)
 			.bg_opa(0);
-		lv_obj_set_size(screen_label_h3_data,49,19);
 		lv_label_set_text(screen_label_h3_data,"0");
 		lv_label_set_long_mode(screen_label_h3_data,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h3_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -210,8 +210,8 @@ export namespace gui {
 
 		screen_label_h4.init(screen)
 			.pos(354,253)
+			.size(49,19)
 			.bg_opa(0);
-		lv_obj_set_size(screen_label_h4,49,19);
 		lv_label_set_text(screen_label_h4,"H4/H1");
 		lv_label_set_long_mode(screen_label_h4,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h4,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -230,8 +230,8 @@ export namespace gui {
 
 		screen_label_h4_data.init(screen)
 			.pos(418,253)
+			.size(49,19)
 			.bg_opa(0);
-		lv_obj_set_size(screen_label_h4_data,49,19);
 		lv_label_set_text(screen_label_h4_data,"0");
 		lv_label_set_long_mode(screen_label_h4_data,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h4_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -250,8 +250,8 @@ export namespace gui {
 
 		screen_label_thd.init(screen)
 			.pos(354,163)
+			.size(49,19)
 			.bg_opa(0);
-		lv_obj_set_size(screen_label_thd,49,19);
 		lv_label_set_text(screen_label_thd,"THD");
 		lv_label_set_long_mode(screen_label_thd,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_thd,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -270,8 +270,8 @@ export namespace gui {
 
 		screen_label_thd_data.init(screen)
 			.pos(418,163)
+			.size(49,19)
 			.bg_opa(0);
-		lv_obj_set_size(screen_label_thd_data,49,19);
 		lv_label_set_text(screen_label_thd_data,"0");
 		lv_label_set_long_mode(screen_label_thd_data,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_thd_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -290,8 +290,8 @@ export namespace gui {
 
 		screen_label_h5.init(screen)
 			.pos(354,283)
+			.size(49,19)
 			.bg_opa(0);
-		lv_obj_set_size(screen_label_h5,49,19);
 		lv_label_set_text(screen_label_h5,"H5/H1");
 		lv_label_set_long_mode(screen_label_h5,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h5,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -310,8 +310,8 @@ export namespace gui {
 
 		screen_label_h5_data.init(screen)
 			.pos(418,283)
+			.size(49,19)
 			.bg_opa(0);
-		lv_obj_set_size(screen_label_h5_data,49,19);
 		lv_label_set_text(screen_label_h5_data,"0");
 		lv_label_set_long_mode(screen_label_h5_data,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h5_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -330,8 +330,8 @@ export namespace gui {
 
 		screen_label_freq.init(screen)
 			.pos(354,102)
+			.size(52,19)
 			.bg_opa(0);
-		lv_obj_set_size(screen_label_freq,52,19);
 		lv_label_set_text(screen_label_freq,"采样率");
 		lv_label_set_long_mode(screen_label_freq,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_freq,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -350,8 +350,8 @@ export namespace gui {
 
 		screen_label_freq_data.init(screen)
 			.pos(408,102)
+			.size(68,19)
 			.bg_opa(0);
-		lv_obj_set_size(screen_label_freq_data,68,19);
 		lv_label_set_text(screen_label_freq_data,"0");
 		lv_label_set_long_mode(screen_label_freq_data,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_freq_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -370,8 +370,8 @@ export namespace gui {
 
 		screen_label_h1.init(screen)
 			.pos(354,132)
+			.size(52,19)
 			.bg_opa(0);
-		lv_obj_set_size(screen_label_h1,52,19);
 		lv_label_set_text(screen_label_h1,"频率");
 		lv_label_set_long_mode(screen_label_h1,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h1,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -390,8 +390,8 @@ export namespace gui {
 
 		screen_label_h1_data.init(screen)
 			.pos(418,135)
+			.size(49,19)
 			.bg_opa(0);
-		lv_obj_set_size(screen_label_h1_data,49,19);
 		lv_label_set_text(screen_label_h1_data,"0");
 		lv_label_set_long_mode(screen_label_h1_data,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_h1_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -410,8 +410,8 @@ export namespace gui {
 
 		screen_label_x.init(screen)
 			.pos(255,19)
+			.size(13,19)
 			.bg_opa(0);
-		lv_obj_set_size(screen_label_x,13,19);
 		lv_label_set_text(screen_label_x,"X:");
 		lv_label_set_long_mode(screen_label_x,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_x,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -430,8 +430,8 @@ export namespace gui {
 
 		screen_label_x_data.init(screen)
 			.pos(274,19)
+			.size(71,19)
 			.bg_opa(0);
-		lv_obj_set_size(screen_label_x_data,71,19);
 		lv_label_set_text(screen_label_x_data,"0");
 		lv_label_set_long_mode(screen_label_x_data,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_x_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -450,8 +450,8 @@ export namespace gui {
 
 		screen_label_y.init(screen)
 			.pos(255,48)
+			.size(13,19)
 			.bg_opa(0);
-		lv_obj_set_size(screen_label_y,13,19);
 		lv_label_set_text(screen_label_y,"Y:");
 		lv_label_set_long_mode(screen_label_y,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_y,0,LV_PART_MAIN|LV_STATE_DEFAULT);
@@ -470,8 +470,8 @@ export namespace gui {
 
 		screen_label_y_data.init(screen)
 			.pos(274,48)
+			.size(77,19)
 			.bg_opa(0);
-		lv_obj_set_size(screen_label_y_data,77,19);
 		lv_label_set_text(screen_label_y_data,"0");
 		lv_label_set_long_mode(screen_label_y_data,LV_LABEL_LONG_WRAP);
 		lv_obj_set_style_border_width(screen_label_y_data,0,LV_PART_MAIN|LV_STATE_DEFAULT);
