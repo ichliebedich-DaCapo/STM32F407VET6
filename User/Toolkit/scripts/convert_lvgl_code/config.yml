@@ -23,6 +23,7 @@ mappings:
     text_letter_space: "0"
     text_line_space: "0"
     bg_opa: "lv_color_hex(0xffffff)" # 默认缺省表，如果满足，则省略调用
+    bg_color: "lv_color_hex(0xffffff)"
     pad_top: "0"
     pad_right:  "0"
     pad_bottom: "0"
@@ -30,6 +31,16 @@ mappings:
     shadow_width: "0"
     image_recolor_opa: "0"
     image_opa: "255"
+    border_side: "LV_BORDER_SIDE_FULL"
+    line_width: "0"
+    line_opa: "255"
+    bg_grad_dir: "LV_GRAD_DIR_NONE"
+    border_opa: "255"
+    # 没有默认值
+    text_align: None
+    line_color: None
+    border_color: None
+
 
 
 
@@ -56,6 +67,11 @@ mappings:
       optional: true
       defaults: ["LV_CHART_AXIS_PRIMARY_Y","0","100"] # 不止一个参数为默认值，后面可以扩展
       defaults2: ["LV_CHART_AXIS_SECONDARY_Y","0","100"]# 次缺省表，只有当前面的失效后才会生效
+
+    lv_obj_set_scrollbar_mode:
+      name: "scrollbar_mode"
+      optional: true
+      defaults: ["LV_SCROLLBAR_MODE_OFF"]
 
     lv_obj_align:
       name: "align"

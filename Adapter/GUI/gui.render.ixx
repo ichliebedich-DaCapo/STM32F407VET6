@@ -3,7 +3,9 @@
 //
 module;
 #include "lvgl.h"
-#include <etl/array.h>
+//
+// #include <etl/array.h>
+#include <array>
 export module gui:render;
 export import gui_compose;// 包含所有组件模块并导出
 
@@ -104,9 +106,9 @@ export namespace gui
 
             // 缓冲区  双缓冲明显优于单缓冲
             LV_ATTRIBUTE_MEM_ALIGN
-            static etl::array<uint8_t,DISP_HOR_RES * DISP_BUF_SIZE * BYTE_PER_PIXEL> buf_2_1;
+            static std::array<uint8_t,DISP_HOR_RES * DISP_BUF_SIZE * BYTE_PER_PIXEL> buf_2_1;
             LV_ATTRIBUTE_MEM_ALIGN
-            static etl::array<uint8_t,DISP_HOR_RES * DISP_BUF_SIZE * BYTE_PER_PIXEL> buf_2_2;
+            static std::array<uint8_t,DISP_HOR_RES * DISP_BUF_SIZE * BYTE_PER_PIXEL> buf_2_2;
             lv_display_set_buffers(disp, buf_2_1.data(), buf_2_2.data(), buf_2_1.size(), LV_DISPLAY_RENDER_MODE_PARTIAL);
         }
 

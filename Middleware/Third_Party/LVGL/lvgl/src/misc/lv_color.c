@@ -8,7 +8,9 @@
  *********************/
 #include "lv_color.h"
 #include "lv_log.h"
+#ifdef ARM_MATH_CM4
 #include "cmsis_gcc.h"
+#endif
 
 
 /*********************

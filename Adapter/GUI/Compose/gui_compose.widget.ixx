@@ -44,8 +44,7 @@ export namespace gui::compose
     using Timer_t = lv_timer_t *;
 
     // 定义常量
-    constexpr const Selector selector_default = (static_cast<uint32_t >(LV_PART_MAIN) |
-                                                 static_cast<uint32_t >(LV_STATE_DEFAULT));
+    constexpr const Selector selector_default = (static_cast<uint32_t >(LV_PART_MAIN)|static_cast<uint32_t >(LV_STATE_DEFAULT));
     constexpr const Selector selector_ticks = (static_cast<uint32_t >(LV_STATE_DEFAULT));
 }
 

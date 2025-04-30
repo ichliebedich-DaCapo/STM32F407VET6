@@ -191,14 +191,15 @@ def parser(info):
                     match = re.match(r"lv_obj_set_style_([a-zA-Z_]+)", call['name'])
                     if match:
                         method_name = match.group(1)  # 捕获函数名
+
+                    temp_params = call['params'][1]
                     if is_field_valid(cfg_style_calls, method_name):
-                        # 默认形参
-                        remaining_params = call['params'][1:]
-                        if "LV_PART_MAIN|LV_STATE_DEFAULT" in call['params'][2]:
+                        remaining_params = call['params'][1:]# 默认形参
+                        if "LV_PART_MAIN|LV_STATE_DEFAULT" == call['params'][2]:
                             remaining_params.pop(1)
-                            if cfg_style_calls[method_name] in call['params'][1]:
+                            if cfg_style_calls[method_name] == call['params'][1]:
                                 remaining_params.pop(0)
-                                print(f'[ignore] {widget_name}  {method_name}')
+                                print(f'[ignore] style: {widget_name}  {method_name}')
                                 continue
 
                         # 添加样式设置语句
@@ -264,9 +265,12 @@ def parser(info):
                     widget_calls['chain'].append(f'.{method_name}({params})')
 
                 else:
-                    # ============ 怎么来的就怎么回去，使用原装lvgl函数 ============
                     method_name = call['name']
                     temp_params = call['params']
+                    if 'lv_obj_set_style_' in call['name']:
+                        if 'LV_PART_MAIN|LV_STATE_DEFAULT'== temp_params[2]:
+                            temp_params[2] = 'selector_default'
+                    # ============ 怎么来的就怎么回去，使用原装lvgl函数 ============
                     temp_params[0] = widget_name # 替换组件名
                     params = ','.join(temp_params)
                     widget_calls['lvgl'].append(f'{method_name}({params});')
