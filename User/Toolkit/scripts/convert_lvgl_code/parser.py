@@ -11,8 +11,10 @@
 #       根据函数名来确定转换后的函数名，压入一个列表里，作为函数调用
 #   组合信息：
 #       定义一个字典，保存var（去除ui->）、变量定义和函数定义
+import json
 import os
 import re
+from collections import defaultdict
 
 import yaml
 from pathlib import Path
@@ -31,6 +33,21 @@ def load_config():
     return config
 cfg = load_config()
 
+def validate_params(params, defaults, arg_index):
+    # 复制一份 params 避免修改原列表
+    params = list(params)
+    j = len(defaults) - 1  # 从右往左遍历 defaults
+    all_matched = True     # 标记是否全部匹配成功
+
+    while j >= 0 and len(params) > arg_index + 1:
+        if params[-1] == defaults[j]:
+            params.pop()  # 移除匹配项
+            j -= 1
+        else:
+            all_matched = False  # 遇到不匹配项，终止
+            break
+
+    return params, all_matched
 
 def parser(info):
     # 检查配置文件的完整性
@@ -80,11 +97,21 @@ def parser(info):
         print(f"\r\n处理文件: {os.path.basename(file_path)}")
         """
         calls = {
-                    'widget':['call' 'call' '']
+                    'widget':{
+                        chain:['call' 'call' ''],
+                        lvgl: ['call' 'call' '']
+                    },
+                    'widget':{
+                        chain:['call' 'call' ''],
+                        lvgl: ['call' 'call' '']
+                    }
                 }
         """
         variables = []
-        calls = {}
+        calls = defaultdict(lambda: {
+            'chain': [],
+            'lvgl': []
+        })
         parent_name = '' # 父组件名称
         merge_name = '' # 变量的合成名
 
@@ -123,49 +150,69 @@ def parser(info):
                 variables.append(f'inline {widget_type} {merge_name};')
 
                 # 添加变量初始化语句
-                calls[widget_name]=f'{merge_name}.init({parent_name})'
+                calls[widget_name]['chain'].append(f'{merge_name}.init({parent_name})')
 
 
-        # # ================== 函数调用 ==================
-        # for call in data['calls']:
-        #     method_name =''
-        #     # 先看看能不能匹配到函数名
-        #     if is_field_valid(cfg_calls, call['name']):
-        #         if not is_field_valid(cfg_calls[call['name']], 'name'):
-        #             # 配置文件缺少 'name' 字段
-        #             ValueError(f"Please 补充 'name' 字段到 'calls' 配置文件中")
-        #
-        #         method_name = cfg_calls[call['name']]['name']# 默认函数名
-        #         rename_flag = False
-        #         # ========= 参数名称映射规则 ==========
-        #         if is_field_valid(cfg_calls,'naming_rule'):
-        #             cfg_naming_rules = cfg_calls['naming_rule']
-        #             # 判断里面有没有规则
-        #             if is_field_valid(cfg_naming_rules, 'source_arg') and is_field_valid(cfg_naming_rules, 'pattern'):
-        #                 # 提取参数映射名称
-        #                 arg_index = cfg_naming_rules['source_arg']
-        #                 cfg_calls_name_pattern = cfg_naming_rules['pattern']
-        #                 if is_field_valid(cfg_calls_name_pattern,call['params'][arg_index]):
-        #                     # 找到就更替名称，同时留下标志，让后面缺省时可以知道
-        #                     rename_flag = True
-        #                     method_name = cfg_calls_name_pattern[call['params'][arg_index]]
-        #
-        #         # ========= 函数形参缺省规则 ==========
-        #
-        #     # 怎么来的就怎么回去，使用原装lvgl函数
-        #     else:
-        #         method_name = call['name']
-        #         params = ','.join(call['params'])
-        #         calls.append(f'{method_name}({params});')
+            # # ================== 函数调用 ==================
+            widget_calls = calls[widget_name]
+            for call in widget_info['calls']:
+                method_name = ''
+                # ============= 函数名映射 ============
+                if is_field_valid(cfg_calls, call['name']):
+                    cfg_call_name = cfg_calls[call['name']]
+                    if not is_field_valid(cfg_call_name, 'name'):
+                        # 配置文件缺少 'name' 字段
+                        ValueError(f"Please 补充 'name' 字段到 'calls' 配置文件中")
 
+                    method_name = cfg_call_name['name'] # 默认函数名
+                    rename_flag = False
+                    arg_index = 0 # 默认为0，表示没有参数名称映射规则
+                    # ========= 参数名称映射规则 ==========
+                    if is_field_valid(cfg_call_name,'naming_rule'):
+                        cfg_naming_rules = cfg_call_name['naming_rule']
+                        # 判断里面有没有规则
+                        if is_field_valid(cfg_naming_rules, 'source_arg') and is_field_valid(cfg_naming_rules, 'pattern'):
+                            # 提取参数映射名称
+                            arg_index = cfg_naming_rules['source_arg']
+                            cfg_calls_name_pattern = cfg_naming_rules['pattern']
+                            if is_field_valid(cfg_calls_name_pattern,call['params'][arg_index]):
+                                # 找到就更替名称，同时留下标志，让后面缺省时可以知道
+                                rename_flag = True
+                                method_name = cfg_calls_name_pattern[call['params'][arg_index]]
 
+                    # ================== 函数形参缺省规则 ================
+                    optional = False # 默认形参表是否为空
+                    remaining_params = [] # 剩余形参表里剩下的参数
+                    if is_field_valid(cfg_call_name,'defaults'):
+                        defaults = cfg_call_name['defaults']
+                        remaining_params,optional = validate_params(call['params'],defaults,arg_index)
 
-    #     # ========== 组合信息 ==========
-    #     process_results[file_path] ={
-    #         'variables':variables,# 变量定义部分
-    #         'calls':calls# 函数调用部分
-    #     }
-    # return process_results
+                    # 是否去除索引处
+                    if rename_flag:
+                        remaining_params.pop(arg_index) #  去掉索引处
+                    remaining_params.pop(0) # 去掉第一个参数
+
+                    # 判断为空是否可以省略
+                    if remaining_params == [] and cfg_call_name['optional']:
+                        print(f'[ignore] {merge_name}--{method_name}--{remaining_params}')
+                    else:
+                        params = ','.join(remaining_params)
+                        widget_calls['chain'].append(f'.{method_name}({params})')
+
+                else:
+                    # ============ 怎么来的就怎么回去，使用原装lvgl函数 ============
+                    method_name = call['name']
+                    temp_params = call['params']
+                    temp_params[0] = merge_name # 替换组件名
+                    params = ','.join(temp_params)
+                    calls[widget_name]['lvgl'].append(f'{method_name}({params});')
+
+        # ========== 组合信息 ==========
+        process_results[file_path] ={
+            'variables':variables,# 变量定义部分
+            'calls':calls# 函数调用部分
+        }
+    return process_results
 
 # 使用示例
 if __name__ == "__main__":
@@ -181,7 +228,7 @@ if __name__ == "__main__":
             "calls": [
                 {
                     'name': 'lv_obj_set_pos',
-                    'params': ['ui->press', '100','20']
+                    'params': ['ui->press', '100','120']
                 },
                 {
                     'name': 'lv_obj_set_size',
@@ -194,6 +241,6 @@ if __name__ == "__main__":
             ],
         },
     }
-
-    parser(results)
+    results = parser(results)
+    print(json.dumps(results, indent=2))
 

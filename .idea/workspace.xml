@@ -34,10 +34,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【脚本开发：词法解析】变量定义已完成">
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【脚本开发：词法解析】组合信息和变量部分已经完成">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/extract_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/extract_info.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/parser.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -336,6 +335,11 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.parser">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-w64-i686-arm-none-eabi" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -527,7 +531,7 @@
       <workItem from="1745843957724" duration="1074000" />
       <workItem from="1745845272181" duration="15769000" />
       <workItem from="1745903843932" duration="18323000" />
-      <workItem from="1745989945366" duration="6291000" />
+      <workItem from="1745989945366" duration="14182000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -809,7 +813,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745954189077</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="【脚本开发：词法解析】组合信息和变量部分已经完成">
+      <option name="closed" value="true" />
+      <created>1745998954988</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1745998954988</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -844,7 +856,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【开发】修复了一些小问题，关于App的组织" />
     <MESSAGE value="【备份】准备编写Utils层" />
     <MESSAGE value="【开发】Utils层编写完毕" />
     <MESSAGE value="【暂缓】准备构思UI层逻辑" />
@@ -869,6 +880,7 @@
     <MESSAGE value="【备份】准备开发解析器" />
     <MESSAGE value="【脚本开发】可以正常提取出想要的信息" />
     <MESSAGE value="【脚本开发：词法解析】变量定义已完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="【脚本开发：词法解析】变量定义已完成" />
+    <MESSAGE value="【脚本开发：词法解析】组合信息和变量部分已经完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="【脚本开发：词法解析】组合信息和变量部分已经完成" />
   </component>
 </project>

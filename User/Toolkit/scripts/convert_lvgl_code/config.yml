@@ -14,8 +14,9 @@ mappings:
       name: "pos"   # 重新映射后的方法名
       optional: true # 是否允许省略调用（如果参数均为默认值），不填或者添false表示不允许
       defaults: # 为空表示无默认值，不可缺省
+        - '120'
       naming_rule:
-        source_arg: 0  # 取第几个参数，索引从0开始
+        source_arg: 1  # 取第几个参数，索引从0开始，索引0是组件名，不用考虑
         pattern:    # 根据不同的参数映射为不同的名称
           "100": "pos_big"
 
