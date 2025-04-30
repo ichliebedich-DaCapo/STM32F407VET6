@@ -34,9 +34,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【脚本开发：代码生成】：资源声明已经完成">
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【脚本开发：词法解析】：样式函数已经完成">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/convert.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/convert.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/extract_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/extract_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/generate_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/generate_code.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/parser.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -301,6 +304,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "OpenOCD 下载并运行.Furina.elf.executor": "Run",
+    "Python.convert.executor": "Run",
     "Python.extract_info.executor": "Run",
     "Python.generate_code.executor": "Run",
     "Python.parser.executor": "Run",
@@ -335,7 +339,7 @@
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\cmake\structure" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.parser">
+  <component name="RunManager" selected="Python.convert">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
@@ -391,7 +395,7 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="convert_lvgl2" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+    <configuration name="convert" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Furina" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -400,12 +404,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (Furina)" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="SDK_NAME" value="Python 3.8 (Furina)" />
+      <option name="WORKING_DIRECTORY" value="$FileDir$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Toolkit/scripts/convert_lvgl2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/convert.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -506,8 +510,8 @@
       <item itemvalue="CMake 应用程序.libgui" />
       <item itemvalue="CMake 应用程序.liblvgl" />
       <item itemvalue="OpenOCD 下载并运行.Furina.elf" />
-      <item itemvalue="Python.convert_lvgl2" />
       <item itemvalue="Python.extract_info" />
+      <item itemvalue="Python.convert" />
       <item itemvalue="Python.parser" />
       <item itemvalue="Python.generate_code" />
     </list>
@@ -556,7 +560,7 @@
       <workItem from="1745843957724" duration="1074000" />
       <workItem from="1745845272181" duration="15769000" />
       <workItem from="1745903843932" duration="18323000" />
-      <workItem from="1745989945366" duration="21926000" />
+      <workItem from="1745989945366" duration="25213000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -870,7 +874,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746011225388</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="【脚本开发：词法解析】：样式函数已经完成">
+      <option name="closed" value="true" />
+      <created>1746013298864</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1746013298864</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -905,7 +917,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【备份】准备开始搞GUI" />
     <MESSAGE value="【开发】对UI层的划分已经有了初步进展" />
     <MESSAGE value="【开发】UI层可以正确编译了" />
     <MESSAGE value="【开发】成功编译ui工程，接下来可以考虑细化ui层" />
@@ -930,6 +941,7 @@
     <MESSAGE value="【脚本开发：词法解析】基本完成" />
     <MESSAGE value="【脚本开发：代码生成】：基本框架已成，接下来准备解决lvgl样式函数和资源声明" />
     <MESSAGE value="【脚本开发：代码生成】：资源声明已经完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="【脚本开发：代码生成】：资源声明已经完成" />
+    <MESSAGE value="【脚本开发：词法解析】：样式函数已经完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="【脚本开发：词法解析】：样式函数已经完成" />
   </component>
 </project>

@@ -4,7 +4,7 @@ config:
 mappings:
   # 变量类型映射（C类型 → C++类型）
   variable_types:
-    lv_obj_create: BaseWidget
+    lv_obj_create: Component
     lv_label_create: Label
     lv_btn_create: Button
 

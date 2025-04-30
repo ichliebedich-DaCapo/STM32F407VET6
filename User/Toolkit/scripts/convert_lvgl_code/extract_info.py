@@ -1,3 +1,4 @@
+import json
 import os
 import glob
 import re
@@ -167,8 +168,8 @@ def _analyze(lines: List[str], filename: str) -> dict:
                 )
 
     return {
+        "variables": [v.__dict__ for v in variables],
         "calls": [c.__dict__ for c in calls],
-        "variables": [v.__dict__ for v in variables]
     }
 
 
@@ -182,14 +183,4 @@ if __name__ == "__main__":
     )
 
     # 打印结果
-    for file_path, data in results.items():
-        print(f"\r\n=== 文件: {os.path.basename(file_path)} ===")
-        print(f"路径: {file_path}")
-
-        print("\r\n函数调用:")
-        for call in data['calls']:
-            print(f"    {call['name']}    {', '.join(call['params'])}")
-
-        print("\r\n变量赋值:")
-        for var in data['variables']:
-            print(f"---->  [{var['name']}]  |  [({var['var_type']})]  |  [{var['value']}]")
+    print(json.dumps(results, indent=2))

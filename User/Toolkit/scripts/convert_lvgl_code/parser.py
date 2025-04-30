@@ -76,21 +76,20 @@ def parser(info):
         # 以变量名为键
         combin_info[file_path] = {}# 添加文件信息
         for var in data['variables']:
-            # 去除变量名
+            var_name = var['name'].replace('ui->','')
+            # 去除变量名后的字典
             clean_variable = {k: v for k, v in var.items() if k != 'name'}
-            # 添加变量信息
-            if is_field_valid(combin_info[file_path],  var['name']):
-                combin_info[file_path][var['name']]['variables'].append(clean_variable)
+            # 添加变量信息,
+            if is_field_valid(combin_info[file_path],  var_name):
+                combin_info[file_path][var_name]['variables'].append(clean_variable)
             else:
-                combin_info[file_path][var['name']] = {'variables': [clean_variable], 'calls': []}
+                combin_info[file_path][var_name] = {'variables': [clean_variable], 'calls': []}
 
             # 添加函数调用信息
             for call in data['calls']:
-                if var['name'] in call['params'][0]:
-                    combin_info[file_path][var['name']]['calls'].append(call)
+                if var['name'] == call['params'][0]:
+                    combin_info[file_path][var_name]['calls'].append(call)
 
-
-        print(combin_info)
 
     # ======================= 词法解析 ==================
     process_results ={}
@@ -130,17 +129,21 @@ def parser(info):
                 func_name  = '' # 组件创建的函数名
 
                 # === 获取组件创建的函数名和父组件名 ===
-                pattern = r"(\w+)\(\s*.*?ui->(\w+)"
+                pattern = r"(\w+)\(\s*.*?(\w+)" # 我踏马找疯了才找到是你的问题
                 match = re.search(pattern, value)
+                print(f'{widget_name} -- {value}')
                 if match:
                     func_name = match.group(1)
-                    parent_name = match.group(2)
+                    parent_name = match.group(2).replace('ui->', '')
                     # 获得合成名的前缀
                     pattern  = r'lv_(\w+)_create'
                     match = re.search(pattern, func_name)
                     if match:
                         prefix = match.group(1)
                         merge_name = f'{prefix}_{widget_name}'
+
+                    else:
+                        ValueError(f"无法解析变量定义: {value}")
                 else:
                     # 变量赋值出现了不该出现的，比如定义样式，需要打个补丁来处理
                     ValueError(f"无法解析变量定义: {value}")
@@ -152,6 +155,7 @@ def parser(info):
                     widget_type = 'Component'
 
                 # 添加变量定义
+
                 variables.append(f'inline {widget_type} {merge_name};')
 
                 # 添加变量初始化语句
@@ -186,7 +190,6 @@ def parser(info):
                     if is_field_valid(cfg_style_calls, method_name):
                         # 默认形参
                         remaining_params = call['params'][1:]
-                        print(f"remaining_params: {remaining_params}")
                         if "LV_PART_MAIN|LV_STATE_DEFAULT" in call['params'][2]:
                             remaining_params.pop(1)
                             if cfg_style_calls[method_name] in call['params'][1]:
@@ -246,7 +249,7 @@ def parser(info):
                     temp_params = call['params']
                     temp_params[0] = merge_name # 替换组件名
                     params = ','.join(temp_params)
-                    calls[widget_name]['lvgl'].append(f'{method_name}({params});')
+                    widget_calls['lvgl'].append(f'{method_name}({params});')
 
         # ========== 组合信息 ==========
         process_results[file_path] ={
@@ -262,7 +265,7 @@ if __name__ == "__main__":
         "/path/to/file1.c":{
             "variables": [
                 {
-                    'name': 'press',
+                    'name': 'ui->screen',
                     'value': 'lv_btn_create(ui->screen)',
                     'var_type': 'lv_obj_t*'
                 }

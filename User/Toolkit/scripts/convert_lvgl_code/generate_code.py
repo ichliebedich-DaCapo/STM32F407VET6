@@ -27,7 +27,7 @@
 import os
 import re
 
-def generate_code(data, overwrite):
+def generate_code(file_path,data, overwrite):
     # 收集所有变量和调用信息
     variables = []
     fonts_lines = []
@@ -123,14 +123,14 @@ export namespace gui {{
 """
 
     # 文件处理逻辑
-    file_path = "gui.ui.ixx"
-    if not os.path.exists(file_path) or overwrite:
-        with open(file_path, "w", encoding='utf-8') as f:
+    final_file_path = os.path.normpath(f"{file_path}/gui.ui.ixx")
+    if not os.path.exists(final_file_path) or overwrite:
+        with open(final_file_path, "w", encoding='utf-8') as f:
             f.write(new_content)
         return
 
     # 保留用户声明内容
-    with open(file_path, "r", encoding='utf-8') as f:
+    with open(final_file_path, "r", encoding='utf-8') as f:
         old_content = f.read()
 
     # 使用正则表达式匹配所有用户声明块
@@ -147,7 +147,7 @@ export namespace gui {{
     updated_content = user_block_pattern.sub(replace_blocks, new_content)
 
     # 写入更新后的内容
-    with open(file_path, "w", encoding='utf-8') as f:
+    with open(final_file_path, "w", encoding='utf-8') as f:
         f.write(updated_content)
 
 # 示例使用
