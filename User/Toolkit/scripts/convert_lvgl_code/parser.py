@@ -117,7 +117,6 @@ def parser(info):
             'img': []
         }
         parent_name = '' # 父组件名称
-        merge_name = '' # 变量的合成名
 
         # ======== 对每个组件进行处理 ========
         for widget_name,widget_info in data.items():
@@ -129,19 +128,17 @@ def parser(info):
                 func_name  = '' # 组件创建的函数名
 
                 # === 获取组件创建的函数名和父组件名 ===
-                pattern = r"(\w+)\(\s*.*?(\w+)" # 我踏马找疯了才找到是你的问题
+                pattern = r'(\w+)\(([^)]+)'  # 我踏马找疯了才找到是你的问题
                 match = re.search(pattern, value)
-                print(f'{widget_name} -- {value}')
                 if match:
                     func_name = match.group(1)
-                    parent_name = match.group(2).replace('ui->', '')
+                    parent_name = match.group(2).replace('ui->', '').replace("NULL", "nullptr")
                     # 获得合成名的前缀
                     pattern  = r'lv_(\w+)_create'
                     match = re.search(pattern, func_name)
                     if match:
                         prefix = match.group(1)
-                        merge_name = f'{prefix}_{widget_name}'
-
+                        # 加前缀是个吃力不讨好的事情，已经剔除
                     else:
                         ValueError(f"无法解析变量定义: {value}")
                 else:
@@ -156,10 +153,10 @@ def parser(info):
 
                 # 添加变量定义
 
-                variables.append(f'inline {widget_type} {merge_name};')
+                variables.append(f'inline {widget_type} {widget_name};')
 
                 # 添加变量初始化语句
-                calls[widget_name]['chain'].append(f'{merge_name}.init({parent_name})')
+                calls[widget_name]['chain'].append(f'{widget_name}.init({parent_name})')
 
 
             # # ================== 函数调用 ==================
@@ -238,7 +235,7 @@ def parser(info):
 
                     # 判断为空是否可以省略
                     if remaining_params == [] and cfg_call_name['optional']:
-                        print(f'[ignore] {merge_name}--{method_name}--{remaining_params}')
+                        print(f'[ignore] {widget_name}--{method_name}--{remaining_params}')
                     else:
                         params = ','.join(remaining_params)
                         widget_calls['chain'].append(f'.{method_name}({params})')
@@ -247,7 +244,7 @@ def parser(info):
                     # ============ 怎么来的就怎么回去，使用原装lvgl函数 ============
                     method_name = call['name']
                     temp_params = call['params']
-                    temp_params[0] = merge_name # 替换组件名
+                    temp_params[0] = widget_name # 替换组件名
                     params = ','.join(temp_params)
                     widget_calls['lvgl'].append(f'{method_name}({params});')
 

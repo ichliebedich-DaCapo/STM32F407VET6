@@ -34,12 +34,15 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【脚本开发：词法解析】：样式函数已经完成">
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【脚本开发：转换】：基本功能已经完善">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/_dianzisheji_RGB565A8_124x75.c" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/_dianzisheji_RGB565A8_124x75.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/_dianzisheji_RGB565A8_61x42.c" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/_dianzisheji_RGB565A8_61x42.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/gui.ui.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/gui.ui.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/lv_font_SourceHanSerifSC_Regular_13.c" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/lv_font_SourceHanSerifSC_Regular_13.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/lv_font_montserratMedium_12.c" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/lv_font_montserratMedium_12.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/lv_font_montserratMedium_16.c" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/lv_font_montserratMedium_16.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/convert.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/convert.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/extract_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/extract_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/generate_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/generate_code.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/parser.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -560,7 +563,7 @@
       <workItem from="1745843957724" duration="1074000" />
       <workItem from="1745845272181" duration="15769000" />
       <workItem from="1745903843932" duration="18323000" />
-      <workItem from="1745989945366" duration="25213000" />
+      <workItem from="1745989945366" duration="26347000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -882,7 +885,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746013298864</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="【脚本开发：转换】：基本功能已经完善">
+      <option name="closed" value="true" />
+      <created>1746016609756</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1746016609756</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -917,7 +928,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【开发】对UI层的划分已经有了初步进展" />
     <MESSAGE value="【开发】UI层可以正确编译了" />
     <MESSAGE value="【开发】成功编译ui工程，接下来可以考虑细化ui层" />
     <MESSAGE value="【备份】准备进行优化" />
@@ -942,6 +952,7 @@
     <MESSAGE value="【脚本开发：代码生成】：基本框架已成，接下来准备解决lvgl样式函数和资源声明" />
     <MESSAGE value="【脚本开发：代码生成】：资源声明已经完成" />
     <MESSAGE value="【脚本开发：词法解析】：样式函数已经完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="【脚本开发：词法解析】：样式函数已经完成" />
+    <MESSAGE value="【脚本开发：转换】：基本功能已经完善" />
+    <option name="LAST_COMMIT_MESSAGE" value="【脚本开发：转换】：基本功能已经完善" />
   </component>
 </project>
