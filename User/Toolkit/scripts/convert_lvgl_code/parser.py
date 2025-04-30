@@ -43,77 +43,155 @@ def parser(info):
     cfg_variables = cfg_mappings['variable_types']
     cfg_calls = cfg_mappings['function_calls']
 
-    process_results ={}
-    for file_path, data in info.items():
-        print(f"\r\n处理文件: {os.path.basename(file_path)}")
-        variables = []
-        calls = []
-        parent_name = '' # 父组件名称
-
-        # 组件定义
-        for var in data['variables']:
-            var_type = ''
-            func_name  = '' # 组件创建的函数名
-            merge_name = '' # 变量的合成名
-
-            # 获取组件创建的函数名和父组件名
-            pattern = r"(\w+)\(\s*.*?ui->(\w+)"
-            match = re.search(pattern, var['value'])
-            if match:
-                func_name = match.group(1)
-                parent_name = match.group(2)
-                # 获得合成名的前缀
-                pattern  = r'lv_(\w+)_create'
-                match = re.search(pattern, func_name)
-                if match:
-                    prefix = match.group(1)
-                    var_name = var['name']
-                    merge_name = f'{prefix}_{var_name}'
-            else:
-                # 变量赋值出现了不该出现的，比如定义样式
-                ValueError(f"无法解析变量定义: {var['value']}")
-
-            # 确定变量的组件类型
-            if is_field_valid(cfg_variables, func_name):
-                var_type = cfg_variables[func_name]
-            else:
-                var_type = 'Component'
-
-            # 添加变量定义
-            variables.append(f'inline {var_type} {merge_name};')
-
-
-        # 函数调用
-        for call in data['calls']:
-            print(f"    {call['name']}    {', '.join(call['params'])}")
-
-
-        process_results[file_path] ={
-            'variables':variables,
-            'calls':calls
+    combin_info = {}
+    # ======================= 组合信息 ==================
+    """
+        {
+        'widget':{
+                'variables':[xxx]
+                'calls':[xxx]
+            },
+            ……
         }
+    """
+    for file_path, data in info.items():
+        # 以变量名为键
+        combin_info[file_path] = {}# 添加文件信息
+        for var in data['variables']:
+            # 去除变量名
+            clean_variable = {k: v for k, v in var.items() if k != 'name'}
+            # 添加变量信息
+            if is_field_valid(combin_info[file_path],  var['name']):
+                combin_info[file_path][var['name']]['variables'].append(clean_variable)
+            else:
+                combin_info[file_path][var['name']] = {'variables': [clean_variable], 'calls': []}
 
-    return process_results
+            # 添加函数调用信息
+            for call in data['calls']:
+                if var['name'] in call['params'][0]:
+                    combin_info[file_path][var['name']]['calls'].append(call)
+
+
+        print(combin_info)
+
+    # ======================= 词法解析 ==================
+    process_results ={}
+    for file_path,data in combin_info.items():
+        print(f"\r\n处理文件: {os.path.basename(file_path)}")
+        """
+        calls = {
+                    'widget':['call' 'call' '']
+                }
+        """
+        variables = []
+        calls = {}
+        parent_name = '' # 父组件名称
+        merge_name = '' # 变量的合成名
+
+        # ======== 对每个组件进行处理 ========
+        for widget_name,widget_info in data.items():
+            # ================== 组件定义 ==================
+            for var in widget_info['variables']:
+                # 对于每个变量定义
+                value = var['value']
+                var_type = var['var_type'] # 不是给变量定义用的
+                func_name  = '' # 组件创建的函数名
+
+                # === 获取组件创建的函数名和父组件名 ===
+                pattern = r"(\w+)\(\s*.*?ui->(\w+)"
+                match = re.search(pattern, value)
+                if match:
+                    func_name = match.group(1)
+                    parent_name = match.group(2)
+                    # 获得合成名的前缀
+                    pattern  = r'lv_(\w+)_create'
+                    match = re.search(pattern, func_name)
+                    if match:
+                        prefix = match.group(1)
+                        merge_name = f'{prefix}_{widget_name}'
+                else:
+                    # 变量赋值出现了不该出现的，比如定义样式，需要打个补丁来处理
+                    ValueError(f"无法解析变量定义: {value}")
+
+                # 确定变量的组件类型
+                if is_field_valid(cfg_variables, func_name):
+                    widget_type = cfg_variables[func_name]
+                else:
+                    widget_type = 'Component'
+
+                # 添加变量定义
+                variables.append(f'inline {widget_type} {merge_name};')
+
+                # 添加变量初始化语句
+                calls[widget_name]=f'{merge_name}.init({parent_name})'
+
+
+        # # ================== 函数调用 ==================
+        # for call in data['calls']:
+        #     method_name =''
+        #     # 先看看能不能匹配到函数名
+        #     if is_field_valid(cfg_calls, call['name']):
+        #         if not is_field_valid(cfg_calls[call['name']], 'name'):
+        #             # 配置文件缺少 'name' 字段
+        #             ValueError(f"Please 补充 'name' 字段到 'calls' 配置文件中")
+        #
+        #         method_name = cfg_calls[call['name']]['name']# 默认函数名
+        #         rename_flag = False
+        #         # ========= 参数名称映射规则 ==========
+        #         if is_field_valid(cfg_calls,'naming_rule'):
+        #             cfg_naming_rules = cfg_calls['naming_rule']
+        #             # 判断里面有没有规则
+        #             if is_field_valid(cfg_naming_rules, 'source_arg') and is_field_valid(cfg_naming_rules, 'pattern'):
+        #                 # 提取参数映射名称
+        #                 arg_index = cfg_naming_rules['source_arg']
+        #                 cfg_calls_name_pattern = cfg_naming_rules['pattern']
+        #                 if is_field_valid(cfg_calls_name_pattern,call['params'][arg_index]):
+        #                     # 找到就更替名称，同时留下标志，让后面缺省时可以知道
+        #                     rename_flag = True
+        #                     method_name = cfg_calls_name_pattern[call['params'][arg_index]]
+        #
+        #         # ========= 函数形参缺省规则 ==========
+        #
+        #     # 怎么来的就怎么回去，使用原装lvgl函数
+        #     else:
+        #         method_name = call['name']
+        #         params = ','.join(call['params'])
+        #         calls.append(f'{method_name}({params});')
+
+
+
+    #     # ========== 组合信息 ==========
+    #     process_results[file_path] ={
+    #         'variables':variables,# 变量定义部分
+    #         'calls':calls# 函数调用部分
+    #     }
+    # return process_results
 
 # 使用示例
 if __name__ == "__main__":
     results = {
         "/path/to/file1.c":{
-            "calls": [
-                {
-                    'name': 'lv_btn_create',
-                    'params': ['ui->screen', '100'],
-                    'source_file': '/path/to/file.c'
-                }
-            ],
             "variables": [
                 {
                     'name': 'press',
                     'value': 'lv_btn_create(ui->screen)',
-                    'var_type': 'lv_obj_t*',
-                    'source_file': '/path/to/file.c'
+                    'var_type': 'lv_obj_t*'
                 }
-            ]
+            ],
+            "calls": [
+                {
+                    'name': 'lv_obj_set_pos',
+                    'params': ['ui->press', '100','20']
+                },
+                {
+                    'name': 'lv_obj_set_size',
+                    'params': ['ui->press', '100','20']
+                },
+                {
+                    'name': 'lv_obj_set_text_size',
+                    'params': ['ui->press', '100','20']
+                },
+            ],
         },
     }
 

@@ -9,7 +9,6 @@ from dataclasses import dataclass
 class FunctionCall:
     name: str
     params: List[str]
-    source_file: str  # 文件来源信息,便于后面对多屏幕进行处理（如果我做的话）
 
 
 @dataclass
@@ -17,7 +16,6 @@ class VariableAssignment:
     name: str # 变量名
     value: str  # 值
     var_type: str # 变量类型
-    source_file: str
 
 
 def extract_function_call(text):
@@ -142,8 +140,7 @@ def _analyze(lines: List[str], filename: str) -> dict:
                     VariableAssignment(
                         name=name,# 变量名
                         value=value,# 值
-                        var_type=type_part,
-                        source_file=filename
+                        var_type=type_part
                     )
                 )
 
@@ -151,7 +148,7 @@ def _analyze(lines: List[str], filename: str) -> dict:
         # 处理函数调用
         elif '(' in line and ')' in line:
             func, args = extract_function_call(line)
-            calls.append(FunctionCall(name=func, params=args,source_file=filename))
+            calls.append(FunctionCall(name=func, params=args))
 
 
         # 处理纯变量声明
@@ -165,8 +162,7 @@ def _analyze(lines: List[str], filename: str) -> dict:
                     VariableAssignment(
                         name=variable_name,
                         value="",
-                        var_type=type_name,
-                        source_file=filename
+                        var_type=type_name
                     )
                 )
 
