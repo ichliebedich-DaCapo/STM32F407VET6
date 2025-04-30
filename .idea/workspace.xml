@@ -34,11 +34,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【脚本开发：转换】新脚本基本完成，补充yaml即可">
+    <list default="true" id="00d0ba34-c334-4c18-887b-4c04c0367504" name="更改" comment="【脚本开发：词法解析】修复了属性不添加则会默认不做的bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/gui.ui.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/gui.ui.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/convert.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/convert.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/parser.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -359,7 +358,7 @@
       <workItem from="1745843957724" duration="1074000" />
       <workItem from="1745845272181" duration="15769000" />
       <workItem from="1745903843932" duration="18323000" />
-      <workItem from="1745989945366" duration="29844000" />
+      <workItem from="1745989945366" duration="33198000" />
     </task>
     <task id="LOCAL-00001" summary="【开发】准备测试AI代码">
       <option name="closed" value="true" />
@@ -705,7 +704,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746019934108</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="【脚本开发：词法解析】修复了属性不添加则会默认不做的bug">
+      <option name="closed" value="true" />
+      <created>1746021154528</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1746021154528</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -740,7 +747,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【备份】准备进行优化" />
     <MESSAGE value="【优化】SPI传输速度到极限了，无法进一步优化了" />
     <MESSAGE value="【备份】准备尝试LCD的优化" />
     <MESSAGE value="【优化】编写的gpio类可以正常使用" />
@@ -765,6 +771,7 @@
     <MESSAGE value="【脚本开发：转换】：基本功能已经完善" />
     <MESSAGE value="【脚本开发：转换】提取代码信息时，带括号的参数无法正常处理" />
     <MESSAGE value="【脚本开发：转换】新脚本基本完成，补充yaml即可" />
-    <option name="LAST_COMMIT_MESSAGE" value="【脚本开发：转换】新脚本基本完成，补充yaml即可" />
+    <MESSAGE value="【脚本开发：词法解析】修复了属性不添加则会默认不做的bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="【脚本开发：词法解析】修复了属性不添加则会默认不做的bug" />
   </component>
 </project>

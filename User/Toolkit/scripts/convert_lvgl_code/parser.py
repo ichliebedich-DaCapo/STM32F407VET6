@@ -54,12 +54,14 @@ def parser(info):
     if not is_field_valid(cfg, 'mappings'):
         ValueError("配置文件缺少 'mappings' 字段")
     cfg_mappings = cfg['mappings']
+    cfg_skip_rules = cfg['skip_rules']
 
     if not is_field_valid(cfg_mappings, 'variable_types') or not is_field_valid(cfg_mappings, 'function_calls'):
         ValueError("配置文件缺少 'variables' 或 'calls' 字段")
     cfg_variables = cfg_mappings['variable_types']
     cfg_calls = cfg_mappings['function_calls']
     cfg_style_calls = cfg_mappings['style_calls']
+
 
     combin_info = {}
     # ======================= 组合信息 ==================
@@ -179,6 +181,11 @@ def parser(info):
                     img = call['params'][1].replace("&", "")
                     if img not in resource['img']:  # 检查是否已存在
                         resource['img'].append(img)
+
+                # ============= 跳过规则 ============
+                if call['name'] in cfg_skip_rules['calls']:
+                    continue
+
                 # ============= 样式函数映射 ============
                 if 'lv_obj_set_style_' in call['name']:
                     match = re.match(r"lv_obj_set_style_([a-zA-Z_]+)", call['name'])
@@ -191,8 +198,9 @@ def parser(info):
                             remaining_params.pop(1)
                             if cfg_style_calls[method_name] in call['params'][1]:
                                 remaining_params.pop(0)
-                        if not remaining_params:
-                            continue
+                                print(f'[ignore] {widget_name}  {method_name}')
+                                continue
+
                         # 添加样式设置语句
                         params = ','.join(remaining_params)
                         widget_calls['chain'].append(f'.{method_name}({params})')
@@ -237,7 +245,7 @@ def parser(info):
                     if not remaining_params:
                         if is_field_valid(cfg_call_name, 'optional'):
                             if cfg_call_name['optional']:
-                                print(f'[ignore] {widget_name}--{method_name}--{remaining_params}')
+                                print(f'[ignore] {widget_name}  {method_name}')
                                 continue
                     params = ','.join(remaining_params)
                     widget_calls['chain'].append(f'.{method_name}({params})')
