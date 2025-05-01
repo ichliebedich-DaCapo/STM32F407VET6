@@ -409,7 +409,6 @@ export namespace bsp::lcd
                     // {
                     //     p[i] = __REV16(p[i]);
                     // }
-
                     HAL_DMA_Start_IT(&spi::hdma_spi2_tx,
                                      reinterpret_cast<uint32_t>(colors), // 直接使用uint16_t*地址
                                      reinterpret_cast<uint32_t>(&spi::hspi2.Instance->DR), // SPI数据寄存器地址
