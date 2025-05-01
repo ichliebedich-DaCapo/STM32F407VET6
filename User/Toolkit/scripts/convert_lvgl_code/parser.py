@@ -152,6 +152,8 @@ def parser(info):
                     widget_type = cfg_variables[func_name]
                 else:
                     widget_type = 'Component'
+                    # 暂时不做原lvgl函数转换，后续再扩展
+                    ValueError(f"组件定义需补充: {value}")
 
                 # 添加变量定义(跳过screen的定义）
                 if widget_name != 'screen':

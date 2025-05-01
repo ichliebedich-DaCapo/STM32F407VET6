@@ -176,8 +176,7 @@ void LCD_Color_Fill(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend, 
     for (uint16_t y = ysta; y <= yend; y++)
     {
         uint16_t *gram_row = TFT_GRAM[y] + xsta;
-        const unsigned char *color_row = color + (y - ysta) * width;// 计算起始位置
-
+        const uint16_t *color_row = reinterpret_cast<uint16_t *>(color) + (y - ysta) * width;// 计算起始位置
         memcpy(gram_row, color_row, width * sizeof(uint16_t));
     }
 }
