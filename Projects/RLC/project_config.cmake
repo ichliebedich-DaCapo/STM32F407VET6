@@ -9,7 +9,7 @@ set_bsp_components(
         blue_tooth
 )
 
-options_disable_GUI()
+#options_disable_GUI()
 #options_enable_DMA_SPI()
 #options_enable_LCD_SPI_PORT()
 

@@ -29,9 +29,15 @@ export namespace gui::compose
          * Dropdown().init().pos(100,50).options("A\\nB");
          * @endcode
          */
-        Dropdown& init()
+//        Dropdown& init()
+//        {
+//            create_obj(&lv_dropdown_class);
+//            return *this;
+//        }
+        // 初始化文本框，默认为黑色字体
+        Dropdown &init(Obj_t parent = parent_)
         {
-            create_obj(&lv_dropdown_class);
+            create_obj(&lv_dropdown_class, parent);
             return *this;
         }
 

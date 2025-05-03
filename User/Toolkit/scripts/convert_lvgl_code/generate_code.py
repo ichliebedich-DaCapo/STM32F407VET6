@@ -41,14 +41,18 @@ def generate_code(file_path,data, overwrite):
 
         # 收集资源声明
         fonts_lines = file_info['resource'].get('fonts', [] )
-        fonts_lines =  [f"LV_FONT_DECLARE({item})" for item in fonts_lines] # 添加声明语句
+        fonts_lines =  [f"LV_FONT_DECLARE({item.replace('lv_font_', 'lv_customer_font_')})" for item in fonts_lines] # 添加声明语句
         img_lines = file_info['resource'].get('img', [] )
         img_lines =  [f"LV_IMG_DECLARE({item})" for item in img_lines] # 添加声明语句
 
         # 收集链式调用和LVGL调用
         for widget_name,widget_info in file_info['calls'].items():
             chain_section = '\n\t\t\t'.join(widget_info['chain'])+';'
-            lvgl_section = '\n\t\t'.join(widget_info['lvgl'])
+            lvgl_section = '\n\t\t'.join([
+                line.replace("lv_font_", "lv_customer_font_")  # 替换字体前缀
+                for line in widget_info['lvgl']
+            ])
+
             code_lines.append(chain_section + '\n\t\t' + lvgl_section+'\n')
 
 

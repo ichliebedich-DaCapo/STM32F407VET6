@@ -15,6 +15,7 @@ mappings:
     lv_button_create: Button
     lv_image_create: Image
     lv_chart_create: Chart
+    lv_dropdown_create: Dropdown
 
   # 样式函数映射（特殊映射）
   style_calls:

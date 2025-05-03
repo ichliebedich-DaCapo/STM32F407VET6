@@ -9,7 +9,7 @@ export import :render;
 // ---------------- 资源声明 ----------------
 extern "C" {
     // 字体声明
-    LV_FONT_DECLARE(lv_font_SourceHanSerifSC_Regular_13)
+    LV_FONT_DECLARE(lv_customer_font_SourceHanSerifSC_Regular_13)
     /*!USER_DECLARE_BEGIN!*/
     /*!USER_DECLARE_END!*/
     // 图片声明
@@ -97,7 +97,7 @@ export namespace gui {
 			.text_color(lv_color_hex(0xffffff))
 			.text_align(LV_TEXT_ALIGN_CENTER);
 		lv_obj_set_style_pad_all(screen_btn_3,0,LV_STATE_DEFAULT);
-		lv_obj_set_style_text_font(screen_btn_3,&lv_font_SourceHanSerifSC_Regular_13,selector_default);
+		lv_obj_set_style_text_font(screen_btn_3,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 		screen_btn_3_label.init(screen_btn_3)
 			.center(0,0);
@@ -110,7 +110,7 @@ export namespace gui {
 			.bg_opa(0)
 			.text_align(LV_TEXT_ALIGN_CENTER);
 		lv_label_set_text(screen_label_Vi_data,"0");
-		lv_obj_set_style_text_font(screen_label_Vi_data,&lv_font_SourceHanSerifSC_Regular_13,selector_default);
+		lv_obj_set_style_text_font(screen_label_Vi_data,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 		screen_label_Vi.init(screen)
 			.pos(354,230)
@@ -118,7 +118,7 @@ export namespace gui {
 			.text_align(LV_TEXT_ALIGN_CENTER)
 			.bg_opa(0);
 		lv_label_set_text(screen_label_Vi,"Vi:");
-		lv_obj_set_style_text_font(screen_label_Vi,&lv_font_SourceHanSerifSC_Regular_13,selector_default);
+		lv_obj_set_style_text_font(screen_label_Vi,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 		screen_label_Vq.init(screen)
 			.pos(354,260)
@@ -126,7 +126,7 @@ export namespace gui {
 			.text_align(LV_TEXT_ALIGN_CENTER)
 			.bg_opa(0);
 		lv_label_set_text(screen_label_Vq,"Vq:");
-		lv_obj_set_style_text_font(screen_label_Vq,&lv_font_SourceHanSerifSC_Regular_13,selector_default);
+		lv_obj_set_style_text_font(screen_label_Vq,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 		screen_label_Vq_data.init(screen)
 			.pos(418,260)
@@ -134,7 +134,7 @@ export namespace gui {
 			.text_align(LV_TEXT_ALIGN_CENTER)
 			.bg_opa(0);
 		lv_label_set_text(screen_label_Vq_data,"0");
-		lv_obj_set_style_text_font(screen_label_Vq_data,&lv_font_SourceHanSerifSC_Regular_13,selector_default);
+		lv_obj_set_style_text_font(screen_label_Vq_data,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 		screen_label_C.init(screen)
 			.pos(354,200)
@@ -142,7 +142,7 @@ export namespace gui {
 			.text_align(LV_TEXT_ALIGN_CENTER)
 			.bg_opa(0);
 		lv_label_set_text(screen_label_C,"C:");
-		lv_obj_set_style_text_font(screen_label_C,&lv_font_SourceHanSerifSC_Regular_13,selector_default);
+		lv_obj_set_style_text_font(screen_label_C,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 		screen_label_C_data.init(screen)
 			.pos(418,200)
@@ -150,7 +150,7 @@ export namespace gui {
 			.text_align(LV_TEXT_ALIGN_CENTER)
 			.bg_opa(0);
 		lv_label_set_text(screen_label_C_data,"0");
-		lv_obj_set_style_text_font(screen_label_C_data,&lv_font_SourceHanSerifSC_Regular_13,selector_default);
+		lv_obj_set_style_text_font(screen_label_C_data,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 		screen_label_R.init(screen)
 			.pos(354,140)
@@ -158,7 +158,7 @@ export namespace gui {
 			.text_align(LV_TEXT_ALIGN_CENTER)
 			.bg_opa(0);
 		lv_label_set_text(screen_label_R,"R:");
-		lv_obj_set_style_text_font(screen_label_R,&lv_font_SourceHanSerifSC_Regular_13,selector_default);
+		lv_obj_set_style_text_font(screen_label_R,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 		screen_label_R_data.init(screen)
 			.pos(418,170)
@@ -166,7 +166,7 @@ export namespace gui {
 			.text_align(LV_TEXT_ALIGN_CENTER)
 			.bg_opa(0);
 		lv_label_set_text(screen_label_R_data,"0");
-		lv_obj_set_style_text_font(screen_label_R_data,&lv_font_SourceHanSerifSC_Regular_13,selector_default);
+		lv_obj_set_style_text_font(screen_label_R_data,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 		screen_label_L.init(screen)
 			.pos(354,170)
@@ -174,7 +174,7 @@ export namespace gui {
 			.text_align(LV_TEXT_ALIGN_CENTER)
 			.bg_opa(0);
 		lv_label_set_text(screen_label_L,"L:");
-		lv_obj_set_style_text_font(screen_label_L,&lv_font_SourceHanSerifSC_Regular_13,selector_default);
+		lv_obj_set_style_text_font(screen_label_L,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 		screen_label_L_data.init(screen)
 			.pos(418,140)
@@ -182,7 +182,7 @@ export namespace gui {
 			.text_align(LV_TEXT_ALIGN_CENTER)
 			.bg_opa(0);
 		lv_label_set_text(screen_label_L_data,"0");
-		lv_obj_set_style_text_font(screen_label_L_data,&lv_font_SourceHanSerifSC_Regular_13,selector_default);
+		lv_obj_set_style_text_font(screen_label_L_data,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 		screen_label_x.init(screen)
 			.pos(16,13)
@@ -190,7 +190,7 @@ export namespace gui {
 			.text_align(LV_TEXT_ALIGN_CENTER)
 			.bg_opa(0);
 		lv_label_set_text(screen_label_x,"X:");
-		lv_obj_set_style_text_font(screen_label_x,&lv_font_SourceHanSerifSC_Regular_13,selector_default);
+		lv_obj_set_style_text_font(screen_label_x,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 		screen_label_x_data.init(screen)
 			.pos(40,13)
@@ -198,7 +198,7 @@ export namespace gui {
 			.text_align(LV_TEXT_ALIGN_LEFT)
 			.bg_opa(0);
 		lv_label_set_text(screen_label_x_data,"0");
-		lv_obj_set_style_text_font(screen_label_x_data,&lv_font_SourceHanSerifSC_Regular_13,selector_default);
+		lv_obj_set_style_text_font(screen_label_x_data,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 		screen_label_y.init(screen)
 			.pos(13,40)
@@ -206,7 +206,7 @@ export namespace gui {
 			.text_align(LV_TEXT_ALIGN_CENTER)
 			.bg_opa(0);
 		lv_label_set_text(screen_label_y,"Y1:");
-		lv_obj_set_style_text_font(screen_label_y,&lv_font_SourceHanSerifSC_Regular_13,selector_default);
+		lv_obj_set_style_text_font(screen_label_y,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 		screen_label_y_data.init(screen)
 			.pos(40,40)
@@ -214,7 +214,7 @@ export namespace gui {
 			.text_align(LV_TEXT_ALIGN_LEFT)
 			.bg_opa(0);
 		lv_label_set_text(screen_label_y_data,"0");
-		lv_obj_set_style_text_font(screen_label_y_data,&lv_font_SourceHanSerifSC_Regular_13,selector_default);
+		lv_obj_set_style_text_font(screen_label_y_data,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 		screen_label_1.init(screen)
 			.pos(78,40)
@@ -222,7 +222,7 @@ export namespace gui {
 			.text_align(LV_TEXT_ALIGN_CENTER)
 			.bg_opa(0);
 		lv_label_set_text(screen_label_1,"Y2:");
-		lv_obj_set_style_text_font(screen_label_1,&lv_font_SourceHanSerifSC_Regular_13,selector_default);
+		lv_obj_set_style_text_font(screen_label_1,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 		screen_label_2.init(screen)
 			.pos(105,40)
@@ -230,7 +230,7 @@ export namespace gui {
 			.text_align(LV_TEXT_ALIGN_LEFT)
 			.bg_opa(0);
 		lv_label_set_text(screen_label_2,"0");
-		lv_obj_set_style_text_font(screen_label_2,&lv_font_SourceHanSerifSC_Regular_13,selector_default);
+		lv_obj_set_style_text_font(screen_label_2,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
         /*!USER_DECLARE_BEGIN!*/
         /*!USER_DECLARE_END!*/

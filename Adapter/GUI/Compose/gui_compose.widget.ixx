@@ -296,6 +296,26 @@ export namespace gui::compose
             return static_cast<Derived &>(*this);
         }
 
+        // 设置内边距（上）
+        inline Derived &pad_top(lv_coord_t top, Selector selector = selector_default)
+        {
+            lv_obj_set_style_pad_top(obj_, top, selector);
+            return static_cast<Derived &>(*this);
+        }
+        // 设置内边距（左）
+        inline Derived &pad_left(lv_coord_t left, Selector selector = selector_default)
+        {
+            lv_obj_set_style_pad_left(obj_, left, selector);
+            return static_cast<Derived &>(*this);
+        }
+
+        // 设置内边距（右）
+        inline Derived &pad_right(lv_coord_t right, Selector selector = selector_default)
+        {
+            lv_obj_set_style_pad_right(obj_, right, selector);
+            return static_cast<Derived &>(*this);
+        }
+
 
         /**
         * @brief 设置背景渐变

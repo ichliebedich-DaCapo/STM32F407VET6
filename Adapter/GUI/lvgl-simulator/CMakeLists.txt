@@ -3,7 +3,7 @@ project(Simulator LANGUAGES C CXX)
 include(common_functions.cmake)
 
 # ------------------------ 配置选项 ------------------------
-set(PROJECT_DIR ../../../Projects/driversDevelop)
+set(PROJECT_DIR ../../../Projects/RLC)
 set(PROJECT_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/..")
 set(THIRD_PARTY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../../Middleware/Third_Party")
 

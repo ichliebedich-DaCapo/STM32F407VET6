@@ -1,5 +1,5 @@
 module;
-#include<project_config.h>
+//#include<project_config.h>
 export module gui;
 
 

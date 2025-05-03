@@ -279,6 +279,7 @@ lv_color_t lv_color_hex(uint32_t c)
     return ret;
 }
 
+
 lv_color_t lv_color_make(uint8_t r, uint8_t g, uint8_t b)
 {
     lv_color_t ret;
