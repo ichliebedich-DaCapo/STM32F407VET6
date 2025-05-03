@@ -28,12 +28,8 @@ AsyncDelay_HAL async_delay(500);
 
 
 #define FREQ_WORD (*((volatile unsigned int *)(0x60000000)))
-namespace
-{
 
-}
-
-
+namespace {}
 
 
 namespace app
@@ -46,25 +42,22 @@ namespace app
         usart::init();
 
         // 第一阶段：复位信号激活（低电平有效时省略此步）
-        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET);  // 释放复位
-        HAL_Delay(10);  // 保证稳定
+        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET); // 释放复位
+        HAL_Delay(10); // 保证稳定
 
         // 正式复位脉冲
         HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET); // 拉低复位
-        HAL_Delay(50);  // 维持复位状态时间（典型值20-100ms）
+        HAL_Delay(50); // 维持复位状态时间（典型值20-100ms）
 
         // 结束复位
-        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET);  // 释放复位
-
+        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET); // 释放复位
     }
 
-    void Control::background_process()
-    {
-
-    }
+    void Control::background_process() {}
 }
 
 
+static volatile uint32_t temp;
 
 namespace utils
 {
@@ -106,12 +99,15 @@ namespace utils
                 FREQ_WORD = 17180;
                 break;
 
+            case keyKF:
+                temp = FREQ_WORD;
+                __BKPT(0);
+                break;
             default:
                 break;
         }
     }
 }
-
 
 
 /**实现中断服务例程*/
@@ -120,4 +116,3 @@ void adc1_isr()
 {
     // 获取ADC值
 }
-

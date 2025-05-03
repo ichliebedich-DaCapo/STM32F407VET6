@@ -5,8 +5,8 @@
 cmake_minimum_required(VERSION 3.29)
 
 # 注意：Windows 路径需使用反斜杠并转义空格
+#set(TOOLCHAIN_DIR "D:/Tools/Working_tools/Toolskits/ARM_Toolchain/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin")
 set(TOOLCHAIN_DIR "E:/Tools/Develop/ToolsKits/ARM/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/bin")
-
 # 指定编译器绝对路径
 set(CMAKE_C_COMPILER "${TOOLCHAIN_DIR}/arm-none-eabi-gcc.exe")
 set(CMAKE_CXX_COMPILER "${TOOLCHAIN_DIR}/arm-none-eabi-g++.exe")
