@@ -27,16 +27,10 @@ using AsyncDelay_HAL = utils::async_delay<HAL_GetTick>;
 AsyncDelay_HAL async_delay(500);
 
 
-
+#define FREQ_WORD (*((volatile unsigned int *)(0x60000000)))
 namespace
 {
-    volatile uint16_t read_reg;
-    volatile uint16_t write_reg;
-    volatile uint32_t pre_tick;
-    volatile uint32_t current_tick;
-    uint8_t arr_error_fpga[1000];
-    uint16_t error_fpga_count = 0;
-    float error_fpga_rate = 0;
+
 }
 
 
@@ -50,6 +44,17 @@ namespace app
         adc::init_temperature_sensor();
         rng::init();
         usart::init();
+
+        // 第一阶段：复位信号激活（低电平有效时省略此步）
+        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET);  // 释放复位
+        HAL_Delay(10);  // 保证稳定
+
+        // 正式复位脉冲
+        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET); // 拉低复位
+        HAL_Delay(50);  // 维持复位状态时间（典型值20-100ms）
+
+        // 结束复位
+        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET);  // 释放复位
 
     }
 
@@ -68,19 +73,37 @@ namespace utils
         switch (PlatformKey::getCode())
         {
             case keyK0:
-                // 测试错误率
-
+                // 1K
+                FREQ_WORD = 171799;
                 break;
 
 
             case keyK1:
+                // 10K
+                FREQ_WORD = 1717987;
                 break;
 
             case keyK2:
+                // 100K
+                FREQ_WORD = 17179869;
+                break;
 
+            case keyK3:
+                // 1M
+                FREQ_WORD = 171798692;
                 break;
 
             case keyK5:
+                break;
+
+            case keyK8:
+                // 10
+                FREQ_WORD = 1718;
+                break;
+
+            case keyK7:
+                // 100
+                FREQ_WORD = 17180;
                 break;
 
             default:

@@ -1,5 +1,7 @@
 module;
+#ifdef STM32F407xx
 #include<project_config.h>
+#endif
 export module gui;
 
 

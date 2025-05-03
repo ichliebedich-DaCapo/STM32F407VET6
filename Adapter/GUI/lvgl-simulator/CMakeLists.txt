@@ -3,7 +3,7 @@ project(Simulator LANGUAGES C CXX)
 include(common_functions.cmake)
 
 # ------------------------ 配置选项 ------------------------
-set(PROJECT_DIR ../../../Projects/driversDevelop)
+set(PROJECT_DIR ../../../Projects/RLC)
 set(PROJECT_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/..")
 set(THIRD_PARTY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../../Middleware/Third_Party")
 
@@ -97,6 +97,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/Drivers
         ${SDL2_ROOT}/include
         ${PROJECT_ROOT_DIR}/Render
+#        ${PROJECT_DIR}/../shared
 )
 
 # ------------------------ 依赖配置 ------------------------
