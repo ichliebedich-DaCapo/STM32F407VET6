@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="BackendCodeEditorMiscSettings">
-    <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="260" type="long" />
+    <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="261" type="long" />
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
     <option name="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue" value="CppFormatterOtherPage" type="string" />
     <option name="/Default/Housekeeping/RefactoringsMru/CppRenameRefactoring/DoRenameRelatedFiles/@EntryValue" value="false" type="bool" />
@@ -33,21 +33,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【备份】准备开发RLC">
-      <change afterPath="$PROJECT_DIR$/Temp/temp.c" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【开发】FPGA通信出现问题，需要重新解决">
+      <change afterPath="$PROJECT_DIR$/BSP/ads1115.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/gui.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/gui.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/baseInit.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/baseInit.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/fsmc.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/fsmc.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/rcc.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/rcc.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/i2c.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/i2c.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/registers.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/registers.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/RLC/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/RLC/app/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/driversDevelop/ui/gui.ui.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/driversDevelop/ui/gui.ui.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/convert.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/convert.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/tpiu_itm.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/ITM/tpiu_itm.ps1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/structure/projects.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/structure/projects.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/RLC/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/RLC/project_config.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +59,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="DV" />
+        <entry key="$PROJECT_DIR$" value="bsp" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -86,6 +78,30 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Adapter/GUI/Compose/gui_compose.component.ixx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Adapter/GUI/Compose/gui_compose.widget.ixx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Adapter/GUI/gui.ixx" root0="FORCE_HIGHLIGHTING" />
@@ -569,14 +585,11 @@
       <workItem from="1746258814209" duration="2607000" />
       <workItem from="1746262681083" duration="1106000" />
       <workItem from="1746279121430" duration="3000" />
-    </task>
-    <task id="LOCAL-00096" summary="【驱动开发】按键中标签只能显示两个字符，数字没影响">
-      <option name="closed" value="true" />
-      <created>1739257355437</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1739257355437</updated>
+      <workItem from="1746340487281" duration="4321000" />
+      <workItem from="1746422666818" duration="6296000" />
+      <workItem from="1746447846848" duration="233000" />
+      <workItem from="1746528985522" duration="50000" />
+      <workItem from="1746929239033" duration="3000" />
     </task>
     <task id="LOCAL-00097" summary="【驱动开发】bug:按键中标签只能显示两个字符，数字没影响">
       <option name="closed" value="true" />
@@ -962,7 +975,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746070969911</updated>
     </task>
-    <option name="localTasksCounter" value="145" />
+    <task id="LOCAL-00145" summary="【开发】FPGA通信出现问题，需要重新解决">
+      <option name="closed" value="true" />
+      <created>1746284310174</created>
+      <option name="number" value="00145" />
+      <option name="presentableId" value="LOCAL-00145" />
+      <option name="project" value="LOCAL" />
+      <updated>1746284310174</updated>
+    </task>
+    <option name="localTasksCounter" value="146" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -997,7 +1018,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【开发】可以编译成功，也能烧录，但是图像很奇怪" />
     <MESSAGE value="【开发】错误在初始化，需要仔细排除" />
     <MESSAGE value="【开发】准备开发延时" />
     <MESSAGE value="【迁移】把Drivers目录从Core移出来了，并创建Firmware目录" />
@@ -1022,6 +1042,15 @@
     <MESSAGE value="【脚本开发：词法解析】修复了样式函数无法正常解析的问题" />
     <MESSAGE value="【脚本开发：规则表】补充了变量定义，为不识别的变量警报" />
     <MESSAGE value="【备份】准备开发RLC" />
-    <option name="LAST_COMMIT_MESSAGE" value="【备份】准备开发RLC" />
+    <MESSAGE value="【开发】FPGA通信出现问题，需要重新解决" />
+    <option name="LAST_COMMIT_MESSAGE" value="【开发】FPGA通信出现问题，需要重新解决" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
+        <watch expression="@ ALREADY PREPROCESSED @temp" />
+        <watch expression="@ ALREADY PREPROCESSED @error_rate" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

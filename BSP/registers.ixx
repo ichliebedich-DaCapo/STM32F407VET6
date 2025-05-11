@@ -54,5 +54,5 @@ export namespace bsp::hw
     };
 }
 
-export template<unsigned int Address>
-using Register = bsp::hw::Register<Address>;
+export template<unsigned int Address,typename RegisterWidth = unsigned int>
+using Register = bsp::hw::Register<Address,RegisterWidth>;

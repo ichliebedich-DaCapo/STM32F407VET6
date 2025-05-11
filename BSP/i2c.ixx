@@ -120,14 +120,11 @@ export namespace bsp::i2c
 
 
         // 阻塞式传输
-        template<typename T>
-            requires std::same_as<T, uint8_t>
-        static HAL_StatusTypeDef write(const uint16_t devAddr, std::span<const T> data)
+        static HAL_StatusTypeDef write(const uint16_t devAddr, std::span<uint8_t> data)
         {
-            return HAL_I2C_Master_Transmit(&hi2c, devAddr,
-                                           const_cast<uint8_t *>(data.data()),
-                                           data.size(), HAL_MAX_DELAY);
+            return HAL_I2C_Master_Transmit(&hi2c, devAddr,data.data(),data.size(), HAL_MAX_DELAY);
         }
+
 
         // 编译期切片快捷方法（C++20）
         template<size_t Offset, size_t Count = std::dynamic_extent>
@@ -186,13 +183,6 @@ export namespace bsp::i2c
                                     buffer.data(), buffer.size(),HAL_MAX_DELAY);
         }
 
-        // 零拷贝传输
-        template<typename T>
-            requires std::is_trivially_copyable_v<T>
-        HAL_StatusTypeDef sendStruct(uint16_t devAddr, const T &data)
-        {
-            return write(devAddr, std::span{reinterpret_cast<const uint8_t *>(&data), sizeof(T)});
-        }
 
 
         template<typename T>

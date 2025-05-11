@@ -22,15 +22,23 @@ import adc;
 import rng;
 import usart;
 import key;
+import hw_registers;
+import ads1115;
 
 using AsyncDelay_HAL = utils::async_delay<HAL_GetTick>;
 AsyncDelay_HAL async_delay(500);
+namespace FPGA
+{
+    constexpr uint32_t FREQ_10 = 429;
+    constexpr uint32_t FREQ_100 = 4295;
+    constexpr uint32_t FREQ_1K = 42950;
+    constexpr uint32_t FREQ_10K = 429497;
+    constexpr uint32_t FREQ_100K = 4294967;
+    constexpr uint32_t FREQ_1M = 42949673;
+}
 
 
-#define FREQ_WORD (*((volatile unsigned int *)(0x60000000)))
-
-namespace {}
-
+using FREQ_WORD = Register<0x60000000>;
 
 namespace app
 {
@@ -40,6 +48,12 @@ namespace app
         adc::init_temperature_sensor();
         rng::init();
         usart::init();
+        adc::ADS1115::init();
+
+        GPIO_InitTypeDef GPIO_InitStruct = {};
+        GPIO_InitStruct.Pin = GPIO_PIN_5;
+        GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+        HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
         // 第一阶段：复位信号激活（低电平有效时省略此步）
         HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET); // 释放复位
@@ -57,7 +71,7 @@ namespace app
 }
 
 
-static volatile uint32_t temp;
+static volatile uint16_t adc_value = 0;
 
 namespace utils
 {
@@ -67,41 +81,33 @@ namespace utils
         {
             case keyK0:
                 // 1K
-                FREQ_WORD = 171799;
+                FREQ_WORD::write(FPGA::FREQ_1K);
                 break;
 
 
             case keyK1:
                 // 10K
-                FREQ_WORD = 1717987;
+                FREQ_WORD::write(FPGA::FREQ_10K);
                 break;
 
             case keyK2:
                 // 100K
-                FREQ_WORD = 17179869;
+                FREQ_WORD::write(FPGA::FREQ_100K);
                 break;
 
             case keyK3:
                 // 1M
-                FREQ_WORD = 171798692;
+                FREQ_WORD::write(FPGA::FREQ_1M);
                 break;
 
             case keyK5:
+                adc_value = bsp::adc::ADS1115::read();
                 break;
 
-            case keyK8:
-                // 10
-                FREQ_WORD = 1718;
-                break;
-
-            case keyK7:
-                // 100
-                FREQ_WORD = 17180;
+            case keyKD:
                 break;
 
             case keyKF:
-                temp = FREQ_WORD;
-                __BKPT(0);
                 break;
             default:
                 break;
