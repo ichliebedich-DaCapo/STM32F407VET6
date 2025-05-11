@@ -11,8 +11,8 @@ set_bsp_components(
 )
 
 #options_disable_GUI()
-#options_enable_DMA_SPI()
-#options_enable_LCD_SPI_PORT()
+options_enable_DMA_SPI()
+options_enable_LCD_SPI_PORT()
 
 #options_enable_FreeRTOS()
 #options_enable_LTO()

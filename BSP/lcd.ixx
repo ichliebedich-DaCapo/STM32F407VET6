@@ -21,7 +21,7 @@ using TFT_LED = Register<0x60060008>; // TFT背光寄存器地址
 constexpr uint32_t TFT_DATA_ADDR = 0x60060002U;
 // 引脚
 using LCD_RST = bsp::gpio<GPIOB_BASE,GPIO_PIN_15>; // 复位引脚
-using LCD_RS = bsp::gpio<GPIOB_BASE,GPIO_PIN_13>; // 命令数据引脚 高电平为数据
+using LCD_RS = bsp::gpio<GPIOC_BASE,GPIO_PIN_0>; // 命令数据引脚 高电平为数据
 
 namespace bsp::lcd
 {

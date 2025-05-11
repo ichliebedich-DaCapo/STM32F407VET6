@@ -31,8 +31,6 @@ export namespace bsp::adc
 }
 
 
-
-
 namespace bsp::adc::detail
 {
     // 硬件常量（替代原宏）

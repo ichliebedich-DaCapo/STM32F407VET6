@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="BackendCodeEditorMiscSettings">
-    <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="261" type="long" />
+    <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="260" type="long" />
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
     <option name="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue" value="CppFormatterOtherPage" type="string" />
     <option name="/Default/Housekeeping/RefactoringsMru/CppRenameRefactoring/DoRenameRelatedFiles/@EntryValue" value="false" type="bool" />
@@ -29,17 +29,25 @@
   </component>
   <component name="CMakeSettings">
     <configurations>
-      <configuration PROFILE_NAME="Debug-w64-i686-arm-none-eabi" ENABLED="true" CONFIG_NAME="Debug" TOOLCHAIN_NAME="w64-i686-arm-none-eabi" BUILD_OPTIONS="-j 16" />
+      <configuration PROFILE_NAME="Debug-MinGW_ARM" ENABLED="true" CONFIG_NAME="Debug" TOOLCHAIN_NAME="MinGW_ARM" BUILD_OPTIONS="-j 16" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【开发】FPGA通信出现问题，需要重新解决">
-      <change afterPath="$PROJECT_DIR$/BSP/ads1115.ixx" afterDir="false" />
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【THD测量仪】颜色正常">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/i2c.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/i2c.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/registers.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/registers.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/adc.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/adc.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/ads1115.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/ads1115.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/lcd.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/lcd.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/spi.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/spi.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/RLC/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/RLC/app/app.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/RLC/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/RLC/project_config.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/RLC/ui/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/RLC/ui/font.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/RLC/ui/gui.ui.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/RLC/ui/gui.ui.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/RLC/ui/lv_customer_font_SourceHanSerifSC_Regular_13.c" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/RLC/ui/lv_customer_font_SourceHanSerifSC_Regular_13.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/project_config.h" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/project_config.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/convert.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/convert.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/generate_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/generate_code.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +57,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug-w64-i686-arm-none-eabi" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug-MinGW_ARM" />
   <component name="Git.Settings">
     <option name="PUSH_TAGS">
       <GitPushTagMode>
@@ -59,7 +67,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="bsp" />
+        <entry key="$PROJECT_DIR$" value="DV_BAK" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -73,41 +81,15 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6.git&quot;,
-    &quot;accountId&quot;: &quot;a679c97f-91ee-40eb-8ce5-af8a944aaf79&quot;
+    &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6&quot;,
+    &quot;accountId&quot;: &quot;a9ff9cce-f6cd-41c3-bd49-a806fb1abb79&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Adapter/GUI/Compose/gui_compose.component.ixx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Adapter/GUI/Compose/gui_compose.widget.ixx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Adapter/GUI/gui.ixx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Adapter/GUI/gui.render.ixx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BSP/baseInit.ixx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Projects/driversDevelop/app/app.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Projects/shared/ISR.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/Program/Embedded/MCU/STM32/Furina/Projects/shared/ISR.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="PerforceDirect.Settings">
     <option name="CHARSET" value="none" />
@@ -129,61 +111,94 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;OpenOCD 下载并运行.Furina.elf.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.convert.executor&quot;: &quot;Run&quot;,
-    &quot;Python.extract_info.executor&quot;: &quot;Run&quot;,
-    &quot;Python.generate_code.executor&quot;: &quot;Run&quot;,
-    &quot;Python.parser.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
-    &quot;cf.advertisement.text.has.clang-format&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ZQ&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Program/Embedded/MCU/STM32&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;E:/Program/Embedded/MCU/STM32/Furina/main.cpp&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;CPPToolchains&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "OpenOCD 下载并运行.Furina.elf.executor": "Debug",
+    "Python.convert.executor": "Run",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.west.config.association.type.startup.service": "true",
+    "cf.advertisement.text.has.clang-format": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "bsp",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/Program/stm32/STM32F407VET6/Projects/RLC/ui",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "E:/Program/Embedded/MCU/STM32/Furina/main.cpp",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Program\stm32\STM32F407VET6\Projects\RLC\ui" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\Program\Embedded\MCU\STM32\Furina\User\Toolkit\scripts\ITM" />
-      <recent name="E:\Program\Embedded\MCU\STM32\Furina\User\Toolkit\scripts\convert_lvgl_code" />
-      <recent name="E:\Program\Embedded\MCU\STM32\Furina\User" />
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\Adapter\GUI\Compose" />
       <recent name="E:\Program\Embedded\MCU\STM32\Furina\BSP" />
+      <recent name="E:\Program\Embedded\MCU\STM32\Furina\cmake\structure" />
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.Furina.elf">
-    <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-w64-i686-arm-none-eabi" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="libbsp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libbsp" CONFIG_NAME="Debug-w64-i686-arm-none-eabi">
+    <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-MinGW_ARM" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="libdata" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdata" CONFIG_NAME="Debug-w64-i686-arm-none-eabi">
+    <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-MinGW_ARM" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="convert" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+    <configuration name="libbsp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libbsp" CONFIG_NAME="Debug-MinGW_ARM">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libbsp" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libbsp" CONFIG_NAME="Debug-MinGW_ARM">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libdata" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdata" CONFIG_NAME="Debug-MinGW_ARM">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libdata" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libdata" CONFIG_NAME="Debug-MinGW_ARM">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="libgui" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libgui" CONFIG_NAME="Debug-MinGW_ARM">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="liblvgl" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="liblvgl" CONFIG_NAME="Debug-MinGW_ARM">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="liblvgl" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="liblvgl" CONFIG_NAME="Debug-MinGW_ARM">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="convert" type="PythonConfigurationType" factoryName="Python">
       <module name="Furina" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -192,8 +207,8 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.8 (Furina)" />
-      <option name="WORKING_DIRECTORY" value="$ProjectFileDir$/User/Toolkit/scripts/convert_lvgl_code" />
+      <option name="SDK_NAME" value="Python 3.13" />
+      <option name="WORKING_DIRECTORY" value="$FileDir$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -206,85 +221,16 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="extract_info" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="Furina" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (Furina)" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/extract_info.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="generate_code" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="Furina" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.8 (Furina)" />
-      <option name="WORKING_DIRECTORY" value="$FileDir$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/generate_code.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="parser" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="Furina" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.8 (Furina)" />
-      <option name="WORKING_DIRECTORY" value="$FileDir$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/User/Toolkit/scripts/convert_lvgl_code/parser.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Furina.elf" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" nameIsGenerated="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-w64-i686-arm-none-eabi" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
-      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="E:\Program\Embedded\MCU\STM32\Furina\User\Toolkit\configs\stlink.cfg" reset-type="INIT" download-type="UPDATED_ONLY">
+    <configuration name="Furina.elf" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" nameIsGenerated="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-MinGW_ARM" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
+      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Program\stm32\STM32F407VET6\User\Toolkit\configs\stlink.cfg" reset-type="INIT" download-type="UPDATED_ONLY">
         <debugger kind="GDB" isBundled="true" />
       </openocd>
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Furina.elf" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" nameIsGenerated="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-w64-i686-arm-none-eabi" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
-      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="E:\Program\Embedded\MCU\STM32\Furina\Toolkit\configs\stlink.cfg" reset-type="INIT" download-type="UPDATED_ONLY">
+    <configuration name="Furina.elf" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" nameIsGenerated="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-MinGW_ARM" version="1" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
+      <openocd version="1" gdb-port="3333" telnet-port="4444" board-config="D:\Program\stm32\STM32F407VET6\Toolkit\configs\stlink.cfg" reset-type="INIT" download-type="UPDATED_ONLY">
         <debugger kind="GDB" isBundled="true" />
       </openocd>
       <method v="2">
@@ -292,14 +238,13 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="CMake 应用程序.libgui" />
       <item itemvalue="CMake 应用程序.Furina.elf" />
       <item itemvalue="CMake 应用程序.libbsp" />
       <item itemvalue="CMake 应用程序.libdata" />
-      <item itemvalue="Python.convert" />
-      <item itemvalue="Python.extract_info" />
-      <item itemvalue="Python.generate_code" />
-      <item itemvalue="Python.parser" />
+      <item itemvalue="CMake 应用程序.liblvgl" />
       <item itemvalue="OpenOCD 下载并运行.Furina.elf" />
+      <item itemvalue="Python.convert" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
@@ -580,16 +525,21 @@
       <workItem from="1745130113853" duration="15106000" />
       <workItem from="1745238468142" duration="15049000" />
       <workItem from="1745297335114" duration="22102000" />
-      <workItem from="1745411854699" duration="4000" />
-      <workItem from="1746076705195" duration="4601000" />
-      <workItem from="1746258814209" duration="2607000" />
-      <workItem from="1746262681083" duration="1106000" />
-      <workItem from="1746279121430" duration="3000" />
-      <workItem from="1746340487281" duration="4321000" />
-      <workItem from="1746422666818" duration="6296000" />
-      <workItem from="1746447846848" duration="233000" />
-      <workItem from="1746528985522" duration="50000" />
-      <workItem from="1746929239033" duration="3000" />
+      <workItem from="1745411854699" duration="1090000" />
+      <workItem from="1745414088446" duration="13600000" />
+      <workItem from="1745460890949" duration="9000" />
+      <workItem from="1745561991838" duration="2497000" />
+      <workItem from="1745756517192" duration="3652000" />
+      <workItem from="1745769678221" duration="248000" />
+      <workItem from="1745771902981" duration="26000" />
+      <workItem from="1745939987396" duration="119000" />
+      <workItem from="1746024346173" duration="4789000" />
+      <workItem from="1746067778776" duration="11053000" />
+      <workItem from="1746155478395" duration="466000" />
+      <workItem from="1746234909607" duration="1112000" />
+      <workItem from="1746273082670" duration="9000000" />
+      <workItem from="1746925494023" duration="4960000" />
+      <workItem from="1746957303064" duration="15245000" />
     </task>
     <task id="LOCAL-00097" summary="【驱动开发】bug:按键中标签只能显示两个字符，数字没影响">
       <option name="closed" value="true" />
@@ -959,29 +909,29 @@
       <option name="project" value="LOCAL" />
       <updated>1745317332249</updated>
     </task>
-    <task id="LOCAL-00143" summary="【脚本开发：规则表】补充了变量定义，为不识别的变量警报">
+    <task id="LOCAL-00143" summary="【THD测量仪】 THD">
       <option name="closed" value="true" />
-      <created>1746066392168</created>
+      <created>1745411918737</created>
       <option name="number" value="00143" />
       <option name="presentableId" value="LOCAL-00143" />
       <option name="project" value="LOCAL" />
-      <updated>1746066392168</updated>
+      <updated>1745411918737</updated>
     </task>
-    <task id="LOCAL-00144" summary="【备份】准备开发RLC">
+    <task id="LOCAL-00144" summary="【THD测量仪】 修复了cmake中模块缺失错误">
       <option name="closed" value="true" />
-      <created>1746070969911</created>
+      <created>1745412265941</created>
       <option name="number" value="00144" />
       <option name="presentableId" value="LOCAL-00144" />
       <option name="project" value="LOCAL" />
-      <updated>1746070969911</updated>
+      <updated>1745412265941</updated>
     </task>
-    <task id="LOCAL-00145" summary="【开发】FPGA通信出现问题，需要重新解决">
+    <task id="LOCAL-00145" summary="【THD测量仪】颜色正常">
       <option name="closed" value="true" />
-      <created>1746284310174</created>
+      <created>1745428041809</created>
       <option name="number" value="00145" />
       <option name="presentableId" value="LOCAL-00145" />
       <option name="project" value="LOCAL" />
-      <updated>1746284310174</updated>
+      <updated>1745428041810</updated>
     </task>
     <option name="localTasksCounter" value="146" />
     <servers />
@@ -1005,7 +955,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="ZQ" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -1018,38 +968,48 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【开发】错误在初始化，需要仔细排除" />
-    <MESSAGE value="【开发】准备开发延时" />
-    <MESSAGE value="【迁移】把Drivers目录从Core移出来了，并创建Firmware目录" />
-    <MESSAGE value="【开发】时钟使用LL可以正常使用" />
-    <MESSAGE value="【开发】延时系统已经确定，但未确定us是否正常" />
-    <MESSAGE value="【开发】i2c出现问题" />
-    <MESSAGE value="【开发】i2c出现问题2" />
-    <MESSAGE value="【备份】准备开发解析器" />
-    <MESSAGE value="【脚本开发】可以正常提取出想要的信息" />
-    <MESSAGE value="【脚本开发：词法解析】变量定义已完成" />
-    <MESSAGE value="【脚本开发：词法解析】组合信息和变量部分已经完成" />
-    <MESSAGE value="【脚本开发：词法解析】基本完成" />
-    <MESSAGE value="【脚本开发：代码生成】：基本框架已成，接下来准备解决lvgl样式函数和资源声明" />
-    <MESSAGE value="【脚本开发：代码生成】：资源声明已经完成" />
-    <MESSAGE value="【脚本开发：词法解析】：样式函数已经完成" />
-    <MESSAGE value="【脚本开发：转换】：基本功能已经完善" />
-    <MESSAGE value="【脚本开发：转换】提取代码信息时，带括号的参数无法正常处理" />
-    <MESSAGE value="【脚本开发：转换】新脚本基本完成，补充yaml即可" />
-    <MESSAGE value="【脚本开发：词法解析】修复了属性不添加则会默认不做的bug" />
-    <MESSAGE value="【脚本开发：规则表】添加了一个跳过规则" />
-    <MESSAGE value="【脚本开发：规则表】添加了函数调用次缺省规则" />
-    <MESSAGE value="【脚本开发：词法解析】修复了样式函数无法正常解析的问题" />
-    <MESSAGE value="【脚本开发：规则表】补充了变量定义，为不识别的变量警报" />
-    <MESSAGE value="【备份】准备开发RLC" />
-    <MESSAGE value="【开发】FPGA通信出现问题，需要重新解决" />
-    <option name="LAST_COMMIT_MESSAGE" value="【开发】FPGA通信出现问题，需要重新解决" />
+    <MESSAGE value="【开发】准备测试AI代码" />
+    <MESSAGE value="【开发】AI无法正确推理，固定输出0" />
+    <MESSAGE value="【开发】使用一个终端脚本，成功简化ITM调试的启动" />
+    <MESSAGE value="【开发】调试FPGA模块" />
+    <MESSAGE value="【备份】准备查看THD引发的FSMC读取问题" />
+    <MESSAGE value="【？？】并未发现FSMC相关问题" />
+    <MESSAGE value="【开发】更改了bsp的包含逻辑" />
+    <MESSAGE value="【备份】准备尝试module特性" />
+    <MESSAGE value="【开发】将bsp里的所有文件都改为了ixx文件，并删除了无关文件。同时修改了bsp的包含逻辑" />
+    <MESSAGE value="【开发】可以正常编译了" />
+    <MESSAGE value="【开发】修复了一些小问题，关于App的组织" />
+    <MESSAGE value="【备份】准备编写Utils层" />
+    <MESSAGE value="【开发】Utils层编写完毕" />
+    <MESSAGE value="【暂缓】准备构思UI层逻辑" />
+    <MESSAGE value="【备份】准备开始搞GUI" />
+    <MESSAGE value="【开发】对UI层的划分已经有了初步进展" />
+    <MESSAGE value="【开发】UI层可以正确编译了" />
+    <MESSAGE value="【开发】成功编译ui工程，接下来可以考虑细化ui层" />
+    <MESSAGE value="【THD测量仪】 修复了cmake中模块缺失错误" />
+    <MESSAGE value="【THD测量仪】颜色正常" />
+    <option name="LAST_COMMIT_MESSAGE" value="【THD测量仪】颜色正常" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Projects/StorageOscilloscope/app/app.cpp</url>
+          <line>347</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Projects/RLC/app/app.cpp</url>
+          <line>73</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
-        <watch expression="@ ALREADY PREPROCESSED @temp" />
-        <watch expression="@ ALREADY PREPROCESSED @error_rate" />
+        <watch expression="bsp::lcd::test" />
+        <watch expression="adc_value" />
+        <watch expression="adc_mv" />
       </configuration>
     </watches-manager>
   </component>

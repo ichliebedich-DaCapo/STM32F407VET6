@@ -84,7 +84,7 @@ void bsp::spi::init_spi2() noexcept
     /**SPI2 GPIO Configuration
     PC2     ------> SPI2_MISO
     PC3     ------> SPI2_MOSI
-    PB10     ------> SPI2_SCK
+    PB13     ------> SPI2_SCK
     PB12     ------> SPI2_NSS
     */
 
@@ -101,7 +101,7 @@ void bsp::spi::init_spi2() noexcept
 
     // SPI2时钟线配置
     GPIO_InitTypeDef spi2_clk_gpio = {
-        .Pin = GPIO_PIN_10,
+        .Pin = GPIO_PIN_13,
         .Mode = GPIO_MODE_AF_PP,
         .Pull = GPIO_NOPULL,
         .Speed = GPIO_SPEED_FREQ_VERY_HIGH,

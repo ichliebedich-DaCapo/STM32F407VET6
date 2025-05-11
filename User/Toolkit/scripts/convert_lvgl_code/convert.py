@@ -17,7 +17,7 @@ if __name__ == "__main__":
     results = parser.parser(results)
     # ====== 生成代码 ======
     # 默认不覆写，输入输出路径
-    generate_code.generate_code(file_path=target_path,data=results, overwrite=True)
+    generate_code.generate_code(file_path=target_path,data=results, overwrite=False)
 
     # ====== 复制所有字体 ======
     copy_files.copy_files_by_pattern(source_dir=f"{root_path}/guider_customer_fonts",target_dir=target_path,pattern="*.c")

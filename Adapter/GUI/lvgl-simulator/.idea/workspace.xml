@@ -28,18 +28,21 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="【模拟器】重新组织了gui模块组织">
-      <change afterPath="$PROJECT_DIR$/../../../Temp/temp.c" afterDir="false" />
+    <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="【模拟器】字体改成自定义出bug了">
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gui.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../gui.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/adc.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/adc.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/ads1115.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/ads1115.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/lcd.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/lcd.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/spi.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/spi.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Projects/RLC/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/RLC/app/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/gui.ui.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/gui.ui.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../User/Toolkit/scripts/convert_lvgl.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/RLC/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/RLC/project_config.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/RLC/ui/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/RLC/ui/font.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/RLC/ui/gui.ui.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/RLC/ui/gui.ui.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/RLC/ui/lv_customer_font_SourceHanSerifSC_Regular_13.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/RLC/ui/lv_customer_font_SourceHanSerifSC_Regular_13.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/shared/project_config.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/shared/project_config.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../User/Toolkit/scripts/convert_lvgl_code/convert.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../User/Toolkit/scripts/convert_lvgl_code/convert.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../User/Toolkit/scripts/tpiu_itm.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/../../../User/Toolkit/scripts/ITM/tpiu_itm.ps1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cmake/structure/projects.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cmake/structure/projects.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../User/Toolkit/scripts/convert_lvgl_code/generate_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../User/Toolkit/scripts/convert_lvgl_code/generate_code.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,11 +64,16 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6.git&quot;,
-    &quot;accountId&quot;: &quot;a679c97f-91ee-40eb-8ce5-af8a944aaf79&quot;
+    &quot;url&quot;: &quot;https://github.com/ichliebedich-DaCapo/STM32F407VET6&quot;,
+    &quot;accountId&quot;: &quot;a9ff9cce-f6cd-41c3-bd49-a806fb1abb79&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../Compose/button.ixx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Compose/gui.ixx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Compose/gui.render.ixx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Compose/image.ixx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Compose/widget.ixx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/main.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../Projects/driversDevelop/ui/gui.ui.ixx" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -98,7 +106,7 @@
     &quot;cf.advertisement.text.has.clang-format&quot;: &quot;true&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ZQ&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;bsp&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -169,11 +177,15 @@
       <workItem from="1745130116510" duration="7240000" />
       <workItem from="1745238472601" duration="597000" />
       <workItem from="1745297339712" duration="710000" />
-      <workItem from="1745390196011" duration="15263000" />
-      <workItem from="1745460247485" duration="4000" />
-      <workItem from="1746077205656" duration="3721000" />
-      <workItem from="1746257343151" duration="75000" />
-      <workItem from="1746258795667" duration="19000" />
+      <workItem from="1745390196011" duration="14322000" />
+      <workItem from="1745419002939" duration="42000" />
+      <workItem from="1745460888974" duration="18000" />
+      <workItem from="1745561990026" duration="595000" />
+      <workItem from="1746072219583" duration="8030000" />
+      <workItem from="1746274443302" duration="6962000" />
+      <workItem from="1746691068846" duration="424000" />
+      <workItem from="1746925464774" duration="1259000" />
+      <workItem from="1746957307232" duration="598000" />
     </task>
     <task id="LOCAL-00001" summary="界面完成">
       <option name="closed" value="true" />
@@ -199,13 +211,13 @@
       <option name="project" value="LOCAL" />
       <updated>1745400683755</updated>
     </task>
-    <task id="LOCAL-00004" summary="【模拟器】重新组织了gui模块组织">
+    <task id="LOCAL-00004" summary="【模拟器】字体改成自定义出bug了">
       <option name="closed" value="true" />
-      <created>1745411321528</created>
+      <created>1746278940487</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1745411321528</updated>
+      <updated>1746278940487</updated>
     </task>
     <option name="localTasksCounter" value="5" />
     <servers />
@@ -233,8 +245,8 @@
     <MESSAGE value="界面完成" />
     <MESSAGE value="【模拟器】MinGW GCC14.2对inline和module特性的支持似乎有问题" />
     <MESSAGE value="【模拟器】成功使用MSVC完成模拟器的开发" />
-    <MESSAGE value="【模拟器】重新组织了gui模块组织" />
-    <option name="LAST_COMMIT_MESSAGE" value="【模拟器】重新组织了gui模块组织" />
+    <MESSAGE value="【模拟器】字体改成自定义出bug了" />
+    <option name="LAST_COMMIT_MESSAGE" value="【模拟器】字体改成自定义出bug了" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

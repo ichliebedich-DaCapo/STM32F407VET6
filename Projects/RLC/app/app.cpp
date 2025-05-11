@@ -36,10 +36,10 @@ namespace FPGA
     constexpr uint32_t FREQ_100K = 4294967;
     constexpr uint32_t FREQ_1M = 42949673;
 }
-
-
 using FREQ_WORD = Register<0x60000000>;
 
+static volatile uint16_t adc_value = 0;
+static volatile float adc_mv = 0;
 namespace app
 {
     void Control::init()
@@ -67,11 +67,17 @@ namespace app
         HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_SET); // 释放复位
     }
 
-    void Control::background_process() {}
+    void Control::background_process() {    // 获取ADC值
+        if(async_delay.is_timeout())
+        {
+            adc_value = bsp::adc::ADS1115::read(bsp::adc::ads1115::MuxConfig::Single_1);
+            adc_mv = adc_value*2.048/65535;
+        }
+    }
 }
 
 
-static volatile uint16_t adc_value = 0;
+
 
 namespace utils
 {
@@ -101,7 +107,7 @@ namespace utils
                 break;
 
             case keyK5:
-                adc_value = bsp::adc::ADS1115::read();
+
                 break;
 
             case keyKD:
@@ -120,5 +126,5 @@ namespace utils
 // 用于采集ADC数据
 void adc1_isr()
 {
-    // 获取ADC值
+
 }

@@ -3,13 +3,28 @@
 //
 module;
 #include <array>
+#include <span>
 #include <project_config.h>
 export module ads1115;
 export import i2c;
 
+export namespace bsp::adc::ads1115
+{
+    // 输入多路配置 bits[12~14] 输入多路复用器配置 前四个为差分输入，后四个为单端输入
+    enum class MuxConfig : uint8_t
+    {
+        Diff_0_1 = 0, // 差分 0-1
+        Diff_0_3 = 1, // 差分 0-3
+        Diff_1_3 = 2, // 差分 1-3
+        Diff_2_3 = 3, // 差分 2-3
+        Single_0 = 4, // 单端 0
+        Single_1 = 5, // 单端 1
+        Single_2 = 6, // 单端 2
+        Single_3 = 7 // 单端 3
+    };
+}
 
-
-namespace ads1115
+namespace bsp::adc::ads1115
 {
     // 设备地址枚举
     enum class Address : uint8_t
@@ -24,18 +39,9 @@ namespace ads1115
         High_thresh = 0x03
     };
 
-    // 输入多路配置 bits[12~14]
-    enum class MuxConfig : uint8_t
-    {
-        Diff_0_1 = 0, // 差分 0-1
-        Diff_0_3 = 1, // 差分 0-3
-        Diff_1_3 = 2, // 差分 1-3
-        Diff_2_3 = 3, // 差分 2-3
-        Single_0 = 4, // 单端 0
-        Single_1 = 5, // 单端 1
-        Single_2 = 6, // 单端 2
-        Single_3 = 7 // 单端 3
-    };
+
+
+
 
     // 可编程增益放大器配置 bits[9~11]
     enum class PGAConfig : uint8_t
@@ -102,14 +108,44 @@ export namespace bsp::adc
         static void init()
         {
             i2c2::init();
+
+            // 初始化配置
+            cmd[0] = static_cast<uint8_t>(ads1115::Address::Config);
+            uint16_t config;
+            config = (1<<15)|(0<<12)|(2<<9)|(1<<8)|(4<<5)|(0<<4)|(0<<3)|(0<<2)|(3<<0);
+            // 转换 小端变大端
+            cmd[1]=config>>8;
+            cmd[2]=config&0xFF;
+            i2c2::write(static_cast<uint16_t>(ads1115::Address::Write), cmd);
         }
 
-        static uint16_t read()
+        //
+        /**
+         * 读取某个引脚ADC的值
+         * @param channel 读取的某个引脚
+         * @details VQ是AIN1,VI是AIN2
+         * @return
+         */
+        static uint16_t read(ads1115::MuxConfig channel)
         {
-            std::array<uint8_t, 2> data;
-            std::array temp = {static_cast<uint8_t>(ads1115::Address::Conversion)};
-            i2c2::write(static_cast<uint16_t>(ads1115::Address::Write), temp);
+            std::array<uint8_t, 2> data{};
+
+//            uint8_t cmd[3]={static_cast<uint8_t>(ads1115::Address::Config)};
+//            // 读取原配置
+//            i2c2::write(static_cast<uint16_t>(ads1115::Address::Write), {&cmd[0],1});
+//            i2c2::read(static_cast<uint16_t>(ads1115::Address::Read), {&cmd[1],&cmd[2]});
+
+            // 修改配置 切换输入通道
+            cmd[0] = static_cast<uint8_t>(ads1115::Address::Config);
+            // 高8位字节和低八位字节顺序颠倒 bits[12:14] → 高位字节bits[4:6];
+            cmd[1] |= (1<<7);// OS置1，开始转换
+            cmd[1] &=~(0x07<<4);// 清零
+            cmd[1] |= (static_cast<uint8_t>(channel)&0x07 << 4);
+            i2c2::write(static_cast<uint16_t>(ads1115::Address::Write), cmd);
+
             // 读取数据
+            cmd[0] = static_cast<uint8_t>(ads1115::Address::Conversion);
+            i2c2::write(static_cast<uint16_t>(ads1115::Address::Write), {&cmd[0],1});
             i2c2::read(static_cast<uint16_t>(ads1115::Address::Read), data);
 
             // 解析数据
@@ -117,11 +153,7 @@ export namespace bsp::adc
             return value;
         }
 
-        static void write(uint8_t channel)
-        {
-            // 修改配置
-            std::array cmd = {static_cast<uint8_t>(ads1115::Address::Config)};
-            i2c2::write(static_cast<uint16_t>(ads1115::Address::Write), cmd);
-        }
+    private:
+        static inline uint8_t cmd[3];
     };
 }

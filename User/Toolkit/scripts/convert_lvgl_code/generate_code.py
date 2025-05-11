@@ -65,6 +65,8 @@ def generate_code(file_path,data, overwrite):
     # 构造新文件内容模板
     new_content = f"""module;
 #include <lvgl.h>
+#include <cstring>
+#include <cstdio>
 export module gui:ui;
 export import :render;
 
