@@ -1,10 +1,7 @@
 
 # -------------------------------Projects层--------------------------------
 # 生成PROJECT配置头文件
-configure_file(
-        ${PROJECTS_DIR}/shared/project_config.h.in
-        ${INC_DIR}/project_config.h
-)
+configure_file( ${PROJECTS_DIR}/shared/project_config.h.in ${PROJECTS_DIR}/shared/project_config.h)
 
 # ---------------------App--------------------
 set(APP_INC_DIRS ${APP_DIR} ${PROJECTS_DIR}/shared ${AI_DIR} ${AI_DIR}/App)

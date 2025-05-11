@@ -97,6 +97,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/Drivers
         ${SDL2_ROOT}/include
         ${PROJECT_ROOT_DIR}/Render
+#        ${PROJECT_DIR}/../shared
 )
 
 # ------------------------ 依赖配置 ------------------------

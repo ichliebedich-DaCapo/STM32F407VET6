@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="BackendCodeEditorMiscSettings">
-    <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="261" type="long" />
+    <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="260" type="long" />
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
     <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
   </component>
@@ -29,12 +29,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="【模拟器】重新组织了gui模块组织">
+      <change afterPath="$PROJECT_DIR$/../../../Temp/temp.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gui.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../gui.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../BSP/lcd.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/lcd.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../BSP/spi.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/spi.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/misc/lv_color.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Middleware/Third_Party/LVGL/lvgl/src/misc/lv_color.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/shared/ISR.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/RLC/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/RLC/app/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/gui.ui.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/driversDevelop/ui/gui.ui.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../User/Toolkit/scripts/convert_lvgl.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../User/Toolkit/scripts/convert_lvgl_code/convert.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../User/Toolkit/scripts/convert_lvgl_code/convert.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../User/Toolkit/scripts/tpiu_itm.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/../../../User/Toolkit/scripts/ITM/tpiu_itm.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../cmake/structure/projects.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cmake/structure/projects.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,11 +66,6 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/../Compose/button.ixx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../Compose/gui.ixx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../Compose/gui.render.ixx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../Compose/image.ixx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../Compose/widget.ixx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/main.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../Projects/driversDevelop/ui/gui.ui.ixx" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -171,6 +171,9 @@
       <workItem from="1745297339712" duration="710000" />
       <workItem from="1745390196011" duration="15263000" />
       <workItem from="1745460247485" duration="4000" />
+      <workItem from="1746077205656" duration="3721000" />
+      <workItem from="1746257343151" duration="75000" />
+      <workItem from="1746258795667" duration="19000" />
     </task>
     <task id="LOCAL-00001" summary="界面完成">
       <option name="closed" value="true" />

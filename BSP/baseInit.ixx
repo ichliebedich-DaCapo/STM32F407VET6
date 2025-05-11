@@ -41,11 +41,6 @@ export namespace bsp::baseInit
     void init();
 }
 
-
-
-
-
-
 TIM_HandleTypeDef htim7;
 extern DMA_HandleTypeDef hdma_memtomem_dma2_stream6;
 
@@ -53,10 +48,6 @@ void bsp::baseInit::init()
 {
     HAL_Init();
     rcc::SystemClock_DefaultConfig(); // 系统时钟初始化
-
-    __HAL_RCC_GPIOC_CLK_ENABLE();
-    __HAL_RCC_GPIOH_CLK_ENABLE();
-    __HAL_RCC_GPIOA_CLK_ENABLE();
 
     // 开启FreeRTOS的运行时统计信息
 #if defined(FREERTOS_DEBUG) && defined(FREERTOS_ENABLE)
@@ -102,9 +93,9 @@ export extern "C"
         __HAL_RCC_PWR_CLK_ENABLE();
 
         // 启用基础GPIO时钟
-        LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC);
-        LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOH);
-        LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
+        __HAL_RCC_GPIOC_CLK_ENABLE();
+        __HAL_RCC_GPIOH_CLK_ENABLE();
+        __HAL_RCC_GPIOA_CLK_ENABLE();
 
         HAL_NVIC_SetPriority(PendSV_IRQn, 15, 0);
     }

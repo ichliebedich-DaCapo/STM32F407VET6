@@ -7,6 +7,7 @@ set_bsp_components(
         spi
         usart
         blue_tooth
+        ads1115
 )
 
 #options_disable_GUI()

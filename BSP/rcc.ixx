@@ -23,10 +23,10 @@ export namespace bsp::rcc
      */
 
     void SystemClock_DefaultConfig() noexcept; ///< 默认时钟配置(168MHz)
-    void SystemClock_Overclock() noexcept; ///< 超频至216MHz
-    void SystemClock_SwitchToHSI() noexcept; ///< 切换至内部时钟源
-    void SystemClock_SwitchToPLL() noexcept; ///< 切换至锁相环时钟
-    void SystemClock_SetFrequency(uint32_t plln) noexcept; ///< 动态设置时钟频率
+    inline void SystemClock_Overclock() noexcept; ///< 超频至216MHz
+    inline void SystemClock_SwitchToHSI() noexcept; ///< 切换至内部时钟源
+    inline void SystemClock_SwitchToPLL() noexcept; ///< 切换至锁相环时钟
+    inline void SystemClock_SetFrequency(uint32_t plln) noexcept; ///< 动态设置时钟频率
 
 }
 
