@@ -22,7 +22,6 @@
   <component name="CMakeRunConfigurationManager">
     <generated>
       <config projectName="Furina" targetName="libdata" />
-      <config projectName="Furina" targetName="liblvgl" />
       <config projectName="Furina" targetName="Furina.elf" />
       <config projectName="Furina" targetName="libbsp" />
     </generated>
@@ -33,11 +32,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【RLC测量仪】ads1115驱动完成">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【RLC测量仪-备份】准备测试i2c接口">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/ads1115.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/ads1115.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/i2c.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/i2c.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/RLC/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/RLC/app/app.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -139,6 +136,11 @@
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.Furina.elf">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-MinGW_ARM" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -170,11 +172,6 @@
       </method>
     </configuration>
     <configuration name="libgui" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="libgui" CONFIG_NAME="Debug-MinGW_ARM">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="liblvgl" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="liblvgl" CONFIG_NAME="Debug-MinGW_ARM">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -224,13 +221,13 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="CMake 应用程序.liblvgl" />
       <item itemvalue="CMake 应用程序.Furina.elf" />
       <item itemvalue="CMake 应用程序.libbsp" />
       <item itemvalue="CMake 应用程序.libdata" />
       <item itemvalue="CMake 应用程序.libgui" />
-      <item itemvalue="CMake 应用程序.liblvgl" />
-      <item itemvalue="Python.convert" />
       <item itemvalue="OpenOCD 下载并运行.Furina.elf" />
+      <item itemvalue="Python.convert" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
@@ -531,14 +528,8 @@
       <workItem from="1746978807187" duration="919000" />
       <workItem from="1747008367068" duration="36000" />
       <workItem from="1747008410336" duration="17000" />
-    </task>
-    <task id="LOCAL-00098" summary="【驱动开发】chart基本功能完善，光标、标号未测试，用随机函数测试发现还是需要脏数组">
-      <option name="closed" value="true" />
-      <created>1739266750758</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1739266750758</updated>
+      <workItem from="1747052348137" duration="7864000" />
+      <workItem from="1747060252878" duration="7293000" />
     </task>
     <task id="LOCAL-00099" summary="【驱动开发】脏数组和双缓冲与lvgl原有的双缓冲和局部渲染机制冲突不起作用">
       <option name="closed" value="true" />
@@ -924,7 +915,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746973090298</updated>
     </task>
-    <option name="localTasksCounter" value="147" />
+    <task id="LOCAL-00147" summary="【RLC测量仪-备份】准备测试i2c接口">
+      <option name="closed" value="true" />
+      <created>1747055600181</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1747055600181</updated>
+    </task>
+    <option name="localTasksCounter" value="148" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -980,7 +979,8 @@
     <MESSAGE value="【THD测量仪】 修复了cmake中模块缺失错误" />
     <MESSAGE value="【THD测量仪】颜色正常" />
     <MESSAGE value="【RLC测量仪】ads1115驱动完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="【RLC测量仪】ads1115驱动完成" />
+    <MESSAGE value="【RLC测量仪-备份】准备测试i2c接口" />
+    <option name="LAST_COMMIT_MESSAGE" value="【RLC测量仪-备份】准备测试i2c接口" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -989,11 +989,6 @@
           <url>file://$PROJECT_DIR$/Projects/StorageOscilloscope/app/app.cpp</url>
           <line>347</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Projects/RLC/app/app.cpp</url>
-          <line>73</line>
-          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
