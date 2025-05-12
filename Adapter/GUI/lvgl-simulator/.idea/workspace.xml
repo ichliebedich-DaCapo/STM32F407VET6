@@ -31,18 +31,9 @@
     <list default="true" id="3cc97a0d-4641-484f-9881-30b6ae29419f" name="更改" comment="【模拟器】字体改成自定义出bug了">
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../BSP/adc.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/adc.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../BSP/ads1115.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/ads1115.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../BSP/lcd.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/lcd.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../BSP/spi.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/spi.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../BSP/i2c.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../BSP/i2c.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Projects/RLC/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/RLC/app/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/RLC/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/RLC/project_config.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/RLC/ui/font.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/RLC/ui/font.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/RLC/ui/gui.ui.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/RLC/ui/gui.ui.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/RLC/ui/lv_customer_font_SourceHanSerifSC_Regular_13.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/RLC/ui/lv_customer_font_SourceHanSerifSC_Regular_13.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Projects/shared/project_config.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Projects/shared/project_config.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../User/Toolkit/scripts/convert_lvgl_code/convert.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../User/Toolkit/scripts/convert_lvgl_code/convert.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../User/Toolkit/scripts/convert_lvgl_code/generate_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../User/Toolkit/scripts/convert_lvgl_code/generate_code.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +176,9 @@
       <workItem from="1746274443302" duration="6962000" />
       <workItem from="1746691068846" duration="424000" />
       <workItem from="1746925464774" duration="1259000" />
-      <workItem from="1746957307232" duration="598000" />
+      <workItem from="1746957307232" duration="1273000" />
+      <workItem from="1746978738247" duration="666000" />
+      <workItem from="1747008373945" duration="28000" />
     </task>
     <task id="LOCAL-00001" summary="界面完成">
       <option name="closed" value="true" />

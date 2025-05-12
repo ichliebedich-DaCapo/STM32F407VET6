@@ -112,7 +112,8 @@ export namespace bsp::adc
             // 初始化配置
             cmd[0] = static_cast<uint8_t>(ads1115::Address::Config);
             uint16_t config;
-            config = (1<<15)|(0<<12)|(2<<9)|(1<<8)|(4<<5)|(0<<4)|(0<<3)|(0<<2)|(3<<0);
+            //0x8583
+            config =0x8583;// (1<<15)|(0<<12)|(2<<9)|(1<<8)|(4<<5)|(0<<4)|(0<<3)|(0<<2)|(3<<0);
             // 转换 小端变大端
             cmd[1]=config>>8;
             cmd[2]=config&0xFF;
@@ -126,7 +127,7 @@ export namespace bsp::adc
          * @details VQ是AIN1,VI是AIN2
          * @return
          */
-        static uint16_t read(ads1115::MuxConfig channel)
+        static int16_t read(ads1115::MuxConfig channel)
         {
             std::array<uint8_t, 2> data{};
 
@@ -137,19 +138,23 @@ export namespace bsp::adc
 
             // 修改配置 切换输入通道
             cmd[0] = static_cast<uint8_t>(ads1115::Address::Config);
-            // 高8位字节和低八位字节顺序颠倒 bits[12:14] → 高位字节bits[4:6];
-            cmd[1] |= (1<<7);// OS置1，开始转换
-            cmd[1] &=~(0x07<<4);// 清零
-            cmd[1] |= (static_cast<uint8_t>(channel)&0x07 << 4);
+//            // 高8位字节和低八位字节顺序颠倒 bits[12:14] → 高位字节bits[4:6];
+//            cmd[1] |= (1<<7);// OS置1，开始转换
+//            cmd[1] &=~(0x07<<4);// 清零
+//            cmd[1] |= (static_cast<uint8_t>(channel)&0x07 << 4);
+            cmd[1]=0xd5;
+            cmd[2]=0xe3;
             i2c2::write(static_cast<uint16_t>(ads1115::Address::Write), cmd);
+
+            HAL_Delay(10);
 
             // 读取数据
             cmd[0] = static_cast<uint8_t>(ads1115::Address::Conversion);
-            i2c2::write(static_cast<uint16_t>(ads1115::Address::Write), {&cmd[0],1});
+            i2c2::write(static_cast<uint16_t>(ads1115::Address::Write), {&cmd[0],&cmd[0]});
             i2c2::read(static_cast<uint16_t>(ads1115::Address::Read), data);
 
             // 解析数据
-            const uint16_t value = (data[0] << 8) | data[1];
+            const auto value =(int16_t)( (data[0] << 8) | data[1]);
             return value;
         }
 

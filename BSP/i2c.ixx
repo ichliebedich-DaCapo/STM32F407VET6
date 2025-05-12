@@ -104,7 +104,7 @@ export namespace bsp::i2c
             // __HAL_LINKDMA(&hi2c, hdmarx, hdma_i2c_rx);
 
             hi2c.Instance = reinterpret_cast<I2C_TypeDef *>(I2C_Base);
-            hi2c.Init.ClockSpeed = 400000;
+            hi2c.Init.ClockSpeed = 300000;
             hi2c.Init.DutyCycle = I2C_DUTYCYCLE_2;
             hi2c.Init.OwnAddress1 = 0;
             hi2c.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;

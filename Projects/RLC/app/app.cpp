@@ -38,8 +38,9 @@ namespace FPGA
 }
 using FREQ_WORD = Register<0x60000000>;
 
-static volatile uint16_t adc_value = 0;
+static volatile int16_t adc_value = 0;
 static volatile float adc_mv = 0;
+
 namespace app
 {
     void Control::init()
@@ -71,7 +72,14 @@ namespace app
         if(async_delay.is_timeout())
         {
             adc_value = bsp::adc::ADS1115::read(bsp::adc::ads1115::MuxConfig::Single_1);
-            adc_mv = adc_value*2.048/65535;
+            adc_mv = adc_value*2.048/32768;
+            adc_mv =( 0xffff-((uint16_t )adc_value) )* 2.048 / 32768;
+
+            adc_value = bsp::adc::ADS1115::read(bsp::adc::ads1115::MuxConfig::Single_2);
+            adc_mv = adc_value*2.048/32768;
+            adc_mv = ((uint16_t )adc_value) * 2.048 / 65535;
+
+
         }
     }
 }
