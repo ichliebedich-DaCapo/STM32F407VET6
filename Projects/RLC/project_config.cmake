@@ -10,9 +10,9 @@ set_bsp_components(
         ads1115
 )
 
-options_disable_GUI()
-#options_enable_DMA_SPI()
-#options_enable_LCD_SPI_PORT()
+#options_disable_GUI()
+options_enable_DMA_SPI()
+options_enable_LCD_SPI_PORT()
 
 #options_enable_FreeRTOS()
 #options_enable_LTO()
