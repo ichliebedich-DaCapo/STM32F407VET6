@@ -32,13 +32,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【RLC测量仪】根据使用体验，由于I2C多次测量，导致UI被阻塞得厉害，需要使用RTOS">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【RLC测量仪】阻抗计算公式实测有问题，可能与单片机计算方式有关">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/RLC/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/RLC/app/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/RLC/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/RLC/project_config.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/RLC/ui/gui.ui.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/RLC/ui/gui.ui.ixx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/ISR.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projects/shared/project_config.h" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/project_config.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -530,15 +526,7 @@
       <workItem from="1747121329958" duration="12759000" />
       <workItem from="1747226874809" duration="5883000" />
       <workItem from="1747298999281" duration="154000" />
-      <workItem from="1747299162240" duration="14370000" />
-    </task>
-    <task id="LOCAL-00101" summary="【驱动开发】Render新增WaveDraw和BasicDraw,WaveDraw实现模版化，准备把脏区域也做到类里">
-      <option name="closed" value="true" />
-      <created>1739433012841</created>
-      <option name="number" value="00101" />
-      <option name="presentableId" value="LOCAL-00101" />
-      <option name="project" value="LOCAL" />
-      <updated>1739433012842</updated>
+      <workItem from="1747299162240" duration="16694000" />
     </task>
     <task id="LOCAL-00102" summary="【驱动开发】WaveDraw模版化,插值算法的特化实现完善（不在依赖.cpp）">
       <option name="closed" value="true" />
@@ -924,7 +912,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747308282840</updated>
     </task>
-    <option name="localTasksCounter" value="150" />
+    <task id="LOCAL-00150" summary="【RLC测量仪】阻抗计算公式实测有问题，可能与单片机计算方式有关">
+      <option name="closed" value="true" />
+      <created>1747314967357</created>
+      <option name="number" value="00150" />
+      <option name="presentableId" value="LOCAL-00150" />
+      <option name="project" value="LOCAL" />
+      <updated>1747314967358</updated>
+    </task>
+    <option name="localTasksCounter" value="151" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -983,7 +979,8 @@
     <MESSAGE value="【RLC测量仪-备份】准备测试i2c接口" />
     <MESSAGE value="【RLC测量仪-开发】准备推导理论公式" />
     <MESSAGE value="【RLC测量仪】根据使用体验，由于I2C多次测量，导致UI被阻塞得厉害，需要使用RTOS" />
-    <option name="LAST_COMMIT_MESSAGE" value="【RLC测量仪】根据使用体验，由于I2C多次测量，导致UI被阻塞得厉害，需要使用RTOS" />
+    <MESSAGE value="【RLC测量仪】阻抗计算公式实测有问题，可能与单片机计算方式有关" />
+    <option name="LAST_COMMIT_MESSAGE" value="【RLC测量仪】阻抗计算公式实测有问题，可能与单片机计算方式有关" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -995,8 +992,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Projects/RLC/app/app.cpp</url>
-          <line>156</line>
-          <option name="timeStamp" value="26" />
+          <line>160</line>
+          <option name="timeStamp" value="33" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1010,11 +1007,15 @@
         <watch expression="adc_offset_VQ" />
         <watch expression="type" />
         <watch expression="R_parameter" />
-        <watch expression="L_parameter" />
+        <watch expression="L_parameter" language="ObjectiveC" />
         <watch expression="C_parameter" />
         <watch expression="temp_tick" />
         <watch expression="data1" />
         <watch expression="data2" />
+        <watch expression="VI" />
+        <watch expression="VQ" />
+        <watch expression="temp_VI" />
+        <watch expression="temp_VQ" />
       </configuration>
     </watches-manager>
   </component>

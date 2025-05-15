@@ -101,38 +101,31 @@ public:
 
     static auto calculate_Z()
     {
-        // 电压单位均为mV
+        // 电压单位均为V,用mV会出现问题
 //        constexpr float A = 910.0f;//1.84-1.86 10~13 ***** 1.88-1.92 -4~-6
 //        constexpr float A2 = A * A;
-        constexpr float A1 = 925.0f;
-        constexpr float A2 = 950.0f;
+        constexpr float A1 = 0.925;
+        constexpr float A2 = 0.950;
         constexpr float A1_2 = A1 * A1;
         constexpr float A2_2 = A2 * A2;
         constexpr float R0 = 200;
         constexpr float R_C = A1_2*A2_2*R0;// R的分子系数
         constexpr float X_C = A1_2*A1*A2*R0;// X的分子系数
-        const float ADC_RANGE = 2048.0f;
+        const float ADC_RANGE = 2.048f;
 
         float VI = adc_data_VI[index]  * ADC_RANGE / 32768;
         float VQ = adc_data_VQ[index]  * ADC_RANGE / 32768;
 
         const float div_C = 2*(A2_2 * VI * VI + A1_2* VQ * VQ);// 分母系数
 
-//        R[index] = A2 * R0 * VI / (2 * VI2_and_VQ2) - R0;
-//        X[index] = A2 * R0 * VQ / (2 * VI2_and_VQ2);
+
         R[index] = R_C*VI/div_C-R0;
         X[index] = -X_C*VQ/div_C;
+        //        R[index] = A2 * R0 * VI / (2 * VI2_and_VQ2) - R0;
+//        X[index] = A2 * R0 * VQ / (2 * VI2_and_VQ2);
 
     }
 
-    static auto get_R()
-    {
-        return R;
-    }
-    static auto get_X()
-    {
-        return X;
-    }
 
     static auto get_VI(){return adc_data_VI;}
     static auto get_VQ(){return adc_data_VQ;}
