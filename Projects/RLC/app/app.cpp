@@ -1,9 +1,12 @@
 //
 // Created by fairy on 2025/1/9 13:31.
 //
+/**
+ * 【简介】：经过粗测，切换频率后稳定时间至少需要20ms(变化≤5)，34ms（变化≤1）
+ */
 #include <array>
-#include <cmath>
 #include <tuple>
+#include <cmath>
 #include <app.hpp>
 
 #ifdef GUI_ENABLE
@@ -48,13 +51,14 @@ using FREQ_WORD = Register<0x60000000>;
  * RLC测量
  * @details 电压单位均为mV
  */
+float temp_VI,temp_VQ;
 class RLC_Measure
 {
 public:
     // 测量出
     static auto init()
     {
-        gui::RLC::set_reset_callback(calibrate);// 设置重置回调
+//        gui::RLC::set_reset_callback(calibrate);// 设置重置回调
         FREQ_WORD::write(FPGA::FREQ_1K);
         HAL_Delay(50);
         calibrate();// 初始校准
@@ -94,6 +98,7 @@ public:
     }
 
     // 计算阻抗
+
     static auto calculate_Z()
     {
         // 电压单位均为mV
@@ -117,6 +122,7 @@ public:
 //        X[index] = A2 * R0 * VQ / (2 * VI2_and_VQ2);
         R[index] = R_C*VI/div_C-R0;
         X[index] = -X_C*VQ/div_C;
+
     }
 
     static auto get_R()
@@ -233,12 +239,6 @@ public:
         adc_offset_VI = static_cast<int16_t>(sum_VI / 5.0f);
     }
 public:
-    struct ParametersType
-    {
-        float R;
-        float L;
-        float C;
-    };
     static constexpr int FREQ_WORD_NUM = 4;// 这里如果要改，请到calculate_element_parameter函数里改取模逻辑
 private:
     static inline ElementType type = ElementType::UNKNOWN;
@@ -299,16 +299,19 @@ namespace app
                 R_data[i]=(int32_t)RLC_Measure::get_VI()[i];
                 X_data[i]=(int32_t)RLC_Measure::get_VQ()[i];
             }
-            // FREQ_WORD_NUM个不同频点下的R和X
-            gui::RLC::generate_data(R_data, X_data,4);
-            // gui显示R、L、C等文本内容
-            auto [VI_VZ, VQ_VZ,R,L,C] = RLC_Measure::get_parameter();
-            gui::RLC::generate_text(VI_VZ, VQ_VZ, R,L,C);
+//            // FREQ_WORD_NUM个不同频点下的R和X
+//            gui::RLC::generate_data(R_data, X_data,4);
+//            // gui显示R、L、C等文本内容
+//            auto [VI_VZ, VQ_VZ,R,L,C] = RLC_Measure::get_parameter();
+//            gui::RLC::generate_text(VI_VZ, VQ_VZ, R,L,C);
+
         }
     }
 }
 
 
+uint32_t temp_tick,temp_tick2;
+int16_t data1,data2;
 namespace utils
 {
     void Key::handler()
@@ -317,7 +320,19 @@ namespace utils
         {
             case keyK0:
                 // 1K
-                FREQ_WORD::write(FPGA::FREQ_1K);
+//                FREQ_WORD::write(FPGA::FREQ_1K);
+//                HAL_Delay(100);
+//                FREQ_WORD::write(FPGA::FREQ_1M);
+//                temp_tick = HAL_GetTick();
+//
+//                 data2= bsp::adc::ADS1115::read(bsp::adc::ads1115::MuxConfig::Single_1);
+//                do{
+//                    data1 = data2;
+//                    data2= bsp::adc::ADS1115::read(bsp::adc::ads1115::MuxConfig::Single_1);
+//                }while(std::abs(data1-data2)>1);
+//                temp_tick2 = HAL_GetTick();
+//                temp_tick = temp_tick2-temp_tick;
+//                __BKPT(0);
                 break;
 
             case keyK1:

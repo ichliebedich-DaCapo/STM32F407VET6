@@ -1,9 +1,12 @@
 module;
 #include <lvgl.h>
+#include <array>
 #include <cstring>
 #include <cstdio>
+
 export module gui:ui;
 export import :render;
+
 
 /*!USER_DECLARE_BEGIN!*/
 
@@ -31,8 +34,8 @@ export namespace gui::widgets::main {
 	inline Chart screen_chart;
 	inline Button screen_btn_reset;
 	inline Label screen_btn_reset_label;
-	inline Label screen_label_VI_VZ;
-	inline Label screen_label_VQ_VZ;
+	inline Label screen_label_ZI;
+	inline Label screen_label_ZQ;
 	inline Label screen_label_C;
 	inline Label screen_label_R;
 	inline Label screen_label_L;
@@ -89,30 +92,28 @@ export namespace gui
             screen_chart.ext_y_array(series_1, pool1);
             screen_chart.ext_y_array(series_2, pool2);
         }
+
+
         static inline auto generate_text(float VI_VZ,float VQ_VZ,float R, float L, float C)
         {
-            char viz[10];
-            char vqz[10];
-            char r[10];
-            char l[10];
-            char c[10];
+            char buffer[10]; // 单个缓冲区复用
 
-            sprintf(viz, "VIz: %.1f", VI_VZ);
-            sprintf(vqz, "VQz: %.1f", VQ_VZ);
-            sprintf(r, "R: %.1f", R);           // 格式化 normal_pool[1]，保留四位小数
-            sprintf(l, "L: %.1f", L);           // 格式化 normal_pool[1]，保留四位小数
-            sprintf(c, "C: %.1f", C);           // 格式化 normal_pool[2]，保留四位小数
+            // 辅助lambda，捕获buffer，自动推导标签类型
+            auto set_label = [&buffer](auto& label, const char* fmt, float value) {
+                sprintf(buffer, fmt, value);
+                label.text(buffer); // 假设text内部复制字符串而非保存指针
+            };
 
-            screen_label_VI_VZ.text(viz);
-            screen_label_VQ_VZ.text(vqz);
-            screen_label_R.text(r);
-            screen_label_L.text(l);
-            screen_label_C.text(c);
+            set_label(screen_label_ZI, "VIz: %.1f", VI_VZ);
+            set_label(screen_label_ZQ, "VQz: %.1f", VQ_VZ);
+            set_label(screen_label_R,    "R: %.1f",   R);
+            set_label(screen_label_L,    "L: %.1f",   L);
+            set_label(screen_label_C,    "C: %.1f",   C);
         }
 
         static inline auto clear_text(){
-            screen_label_VI_VZ.text("-");
-            screen_label_VQ_VZ.text("-");
+            screen_label_ZI.text("-");
+            screen_label_ZQ.text("-");
             screen_label_R.text("-");
             screen_label_L.text("-");
             screen_label_C.text("-");
@@ -207,7 +208,7 @@ export namespace gui {
 		screen_label_C.init(screen)
 			.pos(350,182)
 			.size(120,19)
-			.text_align(LV_TEXT_ALIGN_CENTER)
+			.text_align(LV_TEXT_ALIGN_LEFT)
 			.bg_opa(0);
 		lv_label_set_text(screen_label_C,"C:");
 		lv_obj_set_style_text_font(screen_label_C,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
@@ -215,7 +216,7 @@ export namespace gui {
 		screen_label_R.init(screen)
 			.pos(350,122)
 			.size(120,19)
-			.text_align(LV_TEXT_ALIGN_CENTER)
+			.text_align(LV_TEXT_ALIGN_LEFT)
 			.bg_opa(0);
 		lv_label_set_text(screen_label_R,"R:");
 		lv_obj_set_style_text_font(screen_label_R,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
@@ -223,27 +224,27 @@ export namespace gui {
 		screen_label_L.init(screen)
 			.pos(350,152)
 			.size(120,19)
-			.text_align(LV_TEXT_ALIGN_CENTER)
+			.text_align(LV_TEXT_ALIGN_LEFT)
 			.bg_opa(0);
 		lv_label_set_text(screen_label_L,"L:");
 		lv_obj_set_style_text_font(screen_label_L,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
-        screen_label_VI_VZ.init(screen)
+        screen_label_ZI.init(screen)
                 .pos(350,212)
                 .size(120,19)
-                .text_align(LV_TEXT_ALIGN_CENTER)
+                .text_align(LV_TEXT_ALIGN_LEFT)
                 .bg_opa(0);
-        lv_label_set_text(screen_label_VI_VZ,"0");
-        lv_obj_set_style_text_font(screen_label_VI_VZ,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
+        lv_label_set_text(screen_label_ZI,"0");
+        lv_obj_set_style_text_font(screen_label_ZI,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 
-        screen_label_VQ_VZ.init(screen)
+        screen_label_ZQ.init(screen)
                 .pos(350,242)
                 .size(120,19)
-                .text_align(LV_TEXT_ALIGN_CENTER)
+                .text_align(LV_TEXT_ALIGN_LEFT)
                 .bg_opa(0);
-        lv_label_set_text(screen_label_VQ_VZ,"0");
-        lv_obj_set_style_text_font(screen_label_VQ_VZ,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
+        lv_label_set_text(screen_label_ZQ,"0");
+        lv_obj_set_style_text_font(screen_label_ZQ,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 
         screen_label_x.init(screen)

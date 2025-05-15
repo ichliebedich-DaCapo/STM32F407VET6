@@ -104,7 +104,9 @@ void DMA1_Stream4_IRQHandler()
 
         // 直接执行后续操作（示例：关闭片选+通知渲染完成）
         bsp::spi::cs_high();
+        #ifdef GUI_ENABLE
         gui::Render::display_flush_ready();
+        #endif
     }
 }
 #endif

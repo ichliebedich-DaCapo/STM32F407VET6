@@ -22,7 +22,6 @@
   <component name="CMakeRunConfigurationManager">
     <generated>
       <config projectName="Furina" targetName="libdata" />
-      <config projectName="Furina" targetName="liblvgl" />
       <config projectName="Furina" targetName="Furina.elf" />
       <config projectName="Furina" targetName="libbsp" />
     </generated>
@@ -33,12 +32,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【RLC测量仪-开发】准备推导理论公式">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【RLC测量仪】根据使用体验，由于I2C多次测量，导致UI被阻塞得厉害，需要使用RTOS">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Adapter/GUI/lvgl-simulator/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/RLC/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/RLC/app/app.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/RLC/project_config.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/RLC/project_config.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/RLC/ui/gui.ui.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/RLC/ui/gui.ui.ixx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projects/shared/ISR.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/ISR.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/shared/project_config.h" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/shared/project_config.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,32 +102,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;OpenOCD 下载并运行.Furina.elf.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.convert.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
-    &quot;cf.advertisement.text.has.clang-format&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;bsp&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Program/stm32/STM32F407VET6/Projects/RLC/ui&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;E:/Program/Embedded/MCU/STM32/Furina/main.cpp&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "OpenOCD 下载并运行.Furina.elf.executor": "Debug",
+    "Python.convert.executor": "Run",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.west.config.association.type.startup.service": "true",
+    "cf.advertisement.text.has.clang-format": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "bsp",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/Program/stm32/STM32F407VET6/Projects/RLC/ui",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "E:/Program/Embedded/MCU/STM32/Furina/main.cpp",
+    "settings.editor.selected.configurable": "CPPToolchains",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Program\stm32\STM32F407VET6\Projects\RLC\ui" />
@@ -180,11 +179,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="liblvgl" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="liblvgl" CONFIG_NAME="Debug-MinGW_ARM">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="convert" type="PythonConfigurationType" factoryName="Python">
       <module name="Furina" />
       <option name="ENV_FILES" value="" />
@@ -229,7 +223,6 @@
       <item itemvalue="CMake 应用程序.libbsp" />
       <item itemvalue="CMake 应用程序.libdata" />
       <item itemvalue="CMake 应用程序.libgui" />
-      <item itemvalue="CMake 应用程序.liblvgl" />
       <item itemvalue="OpenOCD 下载并运行.Furina.elf" />
       <item itemvalue="Python.convert" />
     </list>
@@ -537,15 +530,7 @@
       <workItem from="1747121329958" duration="12759000" />
       <workItem from="1747226874809" duration="5883000" />
       <workItem from="1747298999281" duration="154000" />
-      <workItem from="1747299162240" duration="8933000" />
-    </task>
-    <task id="LOCAL-00100" summary="【驱动开发】lvgl图表和WaveDraw的对比">
-      <option name="closed" value="true" />
-      <created>1739350437393</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1739350437393</updated>
+      <workItem from="1747299162240" duration="14370000" />
     </task>
     <task id="LOCAL-00101" summary="【驱动开发】Render新增WaveDraw和BasicDraw,WaveDraw实现模版化，准备把脏区域也做到类里">
       <option name="closed" value="true" />
@@ -931,7 +916,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747067783895</updated>
     </task>
-    <option name="localTasksCounter" value="149" />
+    <task id="LOCAL-00149" summary="【RLC测量仪】根据使用体验，由于I2C多次测量，导致UI被阻塞得厉害，需要使用RTOS">
+      <option name="closed" value="true" />
+      <created>1747308282838</created>
+      <option name="number" value="00149" />
+      <option name="presentableId" value="LOCAL-00149" />
+      <option name="project" value="LOCAL" />
+      <updated>1747308282840</updated>
+    </task>
+    <option name="localTasksCounter" value="150" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -989,7 +982,8 @@
     <MESSAGE value="【RLC测量仪】ads1115驱动完成" />
     <MESSAGE value="【RLC测量仪-备份】准备测试i2c接口" />
     <MESSAGE value="【RLC测量仪-开发】准备推导理论公式" />
-    <option name="LAST_COMMIT_MESSAGE" value="【RLC测量仪-开发】准备推导理论公式" />
+    <MESSAGE value="【RLC测量仪】根据使用体验，由于I2C多次测量，导致UI被阻塞得厉害，需要使用RTOS" />
+    <option name="LAST_COMMIT_MESSAGE" value="【RLC测量仪】根据使用体验，由于I2C多次测量，导致UI被阻塞得厉害，需要使用RTOS" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -998,6 +992,11 @@
           <url>file://$PROJECT_DIR$/Projects/StorageOscilloscope/app/app.cpp</url>
           <line>347</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Projects/RLC/app/app.cpp</url>
+          <line>156</line>
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1013,6 +1012,9 @@
         <watch expression="R_parameter" />
         <watch expression="L_parameter" />
         <watch expression="C_parameter" />
+        <watch expression="temp_tick" />
+        <watch expression="data1" />
+        <watch expression="data2" />
       </configuration>
     </watches-manager>
   </component>
