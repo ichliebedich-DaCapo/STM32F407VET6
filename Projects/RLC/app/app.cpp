@@ -69,7 +69,7 @@ public:
     {
         // 配置参数
         constexpr float alpha = 0.2f;// 滤波参数,越小滤波效果越强
-        constexpr int samples_size = 5;
+        constexpr int samples_size = 10;
         static float filtered_adc_VQ = 0.0f, filtered_adc_VI = 0.0f;
 
         // 首次读取并初始化
@@ -79,22 +79,25 @@ public:
             sum_VQ += bsp::adc::ADS1115::read(bsp::adc::ads1115::MuxConfig::Single_1);
             sum_VI += bsp::adc::ADS1115::read(bsp::adc::ads1115::MuxConfig::Single_2);
         }
-        filtered_adc_VQ = static_cast<float>(sum_VQ) / 5.0f;
-        filtered_adc_VI = static_cast<float>(sum_VI) / 5.0f;
+        filtered_adc_VQ = static_cast<float>(sum_VQ) / 10.0f;
+        filtered_adc_VI = static_cast<float>(sum_VI) / 10.0f;
 
-        // 读5次并实时滤波
-        for (int i = 0; i < 5; i++)
-        {
-            int16_t raw_adc_VQ = bsp::adc::ADS1115::read(bsp::adc::ads1115::MuxConfig::Single_1);
-            filtered_adc_VQ = alpha * raw_adc_VQ + (1.0f - alpha) * filtered_adc_VQ;
-
-            int16_t raw_adc_VI = bsp::adc::ADS1115::read(bsp::adc::ads1115::MuxConfig::Single_2);
-            filtered_adc_VI = alpha * raw_adc_VI + (1.0f - alpha) * filtered_adc_VI;
-        }
-
-        // 使用滤波后的值
-        adc_data_VQ[index] = static_cast<int16_t>(filtered_adc_VQ + 0.5f- adc_offset_VQ);
-        adc_data_VI[index] = static_cast<int16_t>(filtered_adc_VI + 0.5f- adc_offset_VI);
+//        // 读5次并实时滤波
+//        for (int i = 0; i < 5; i++)
+//        {
+//            float raw_adc_VQ = bsp::adc::ADS1115::read(bsp::adc::ads1115::MuxConfig::Single_1);
+//            filtered_adc_VQ = alpha * raw_adc_VQ + (1.0f - alpha) * filtered_adc_VQ;
+//
+//            float raw_adc_VI = bsp::adc::ADS1115::read(bsp::adc::ads1115::MuxConfig::Single_2);
+//            filtered_adc_VI = alpha * raw_adc_VI + (1.0f - alpha) * filtered_adc_VI;
+//        }
+//
+//        // 使用滤波后的值
+//        adc_data_VQ[index] = static_cast<int16_t>(filtered_adc_VQ + 0.5f-(float)adc_offset_VQ);
+//        adc_data_VI[index] = static_cast<int16_t>(filtered_adc_VI + 0.5f-(float)adc_offset_VI);
+       //
+        adc_data_VQ[index] = static_cast<int16_t>(filtered_adc_VQ -(float)adc_offset_VQ);
+        adc_data_VI[index] = static_cast<int16_t>(filtered_adc_VI -(float)adc_offset_VI);
     }
 
     // 计算阻抗
@@ -113,13 +116,14 @@ public:
         constexpr float X_C = A1_2*A1*A2*R0;// X的分子系数
         const float ADC_RANGE = 2.048f;
 
-        float VI = adc_data_VI[index]  * ADC_RANGE / 32768;
-        float VQ = adc_data_VQ[index]  * ADC_RANGE / 32768;
+        float VI =( (float)adc_data_VI[index]  * ADC_RANGE / 32768/1.6f);
+        float VQ =( (float)adc_data_VQ[index]  * ADC_RANGE / 32768/1.6f);
 
         const float div_C = 2*(A2_2 * VI * VI + A1_2* VQ * VQ);// 分母系数
 
 
-        R[index] = R_C*VI/div_C-R0;
+        R[index] = (A1_2/2/VI-1)*R0;//R_C*VI/div_C-R0;
+
         X[index] = -X_C*VQ/div_C;
         //        R[index] = A2 * R0 * VI / (2 * VI2_and_VQ2) - R0;
 //        X[index] = A2 * R0 * VQ / (2 * VI2_and_VQ2);
@@ -155,10 +159,8 @@ public:
             L_parameter  = 0;
             C_parameter  = 0;
 
-            // 计算R的平均值
-            float R_avg = 0.0f;
-            for (float r: R) R_avg += r;
-            R_avg /= R.size();
+            // 线性拟合
+            float R_avg = R[0]*0.936928f-15.81321f;// 只取1KHZ下的阻值
 
             // 检查X是否可视为零（电阻）
             float max_X_abs = 0.0f;
@@ -169,7 +171,7 @@ public:
             }
 
             // 阈值设为R平均值的1%或最小0.1Ω
-            const float threshold = std::max(R_avg * 0.01f, 0.1f);
+            const float threshold = std::max(R_avg * 0.05f, 1.0f);
             if (max_X_abs < threshold)
             {
                 type = ElementType::RESISTOR;
@@ -228,8 +230,8 @@ public:
             sum_VQ += bsp::adc::ADS1115::read(bsp::adc::ads1115::MuxConfig::Single_1);
             sum_VI += bsp::adc::ADS1115::read(bsp::adc::ads1115::MuxConfig::Single_2);
         }
-        adc_offset_VQ = static_cast<int16_t>(sum_VQ / 5.0f);
-        adc_offset_VI = static_cast<int16_t>(sum_VI / 5.0f);
+        adc_offset_VQ = static_cast<int16_t>((float)sum_VQ / 5.0f);
+        adc_offset_VI = static_cast<int16_t>((float)sum_VI / 5.0f);
     }
 public:
     static constexpr int FREQ_WORD_NUM = 4;// 这里如果要改，请到calculate_element_parameter函数里改取模逻辑

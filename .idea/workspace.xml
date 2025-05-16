@@ -32,9 +32,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【RLC测量仪】阻抗计算公式实测有问题，可能与单片机计算方式有关">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【RLC测量仪】电阻的理论计算与实际相差很大">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BSP/ads1115.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/ads1115.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/RLC/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/RLC/app/app.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake/arm-gcc.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/arm-gcc.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,32 +100,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "OpenOCD 下载并运行.Furina.elf.executor": "Debug",
-    "Python.convert.executor": "Run",
-    "RunOnceActivity.RadMigrateCodeStyle": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "RunOnceActivity.west.config.association.type.startup.service": "true",
-    "cf.advertisement.text.has.clang-format": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "bsp",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/Program/stm32/STM32F407VET6/Projects/RLC/ui",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "E:/Program/Embedded/MCU/STM32/Furina/main.cpp",
-    "settings.editor.selected.configurable": "CPPToolchains",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;OpenOCD 下载并运行.Furina.elf.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.convert.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
+    &quot;cf.advertisement.text.has.clang-format&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;bsp&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Program/stm32/STM32F407VET6/Projects/RLC/ui&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;E:/Program/Embedded/MCU/STM32/Furina/main.cpp&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CPPToolchains&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Program\stm32\STM32F407VET6\Projects\RLC\ui" />
@@ -135,11 +137,6 @@
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.Furina.elf">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-MinGW_ARM" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -526,15 +523,9 @@
       <workItem from="1747121329958" duration="12759000" />
       <workItem from="1747226874809" duration="5883000" />
       <workItem from="1747298999281" duration="154000" />
-      <workItem from="1747299162240" duration="16694000" />
-    </task>
-    <task id="LOCAL-00102" summary="【驱动开发】WaveDraw模版化,插值算法的特化实现完善（不在依赖.cpp）">
-      <option name="closed" value="true" />
-      <created>1739439349711</created>
-      <option name="number" value="00102" />
-      <option name="presentableId" value="LOCAL-00102" />
-      <option name="project" value="LOCAL" />
-      <updated>1739439349711</updated>
+      <workItem from="1747299162240" duration="23768000" />
+      <workItem from="1747374710242" duration="12465000" />
+      <workItem from="1747396184559" duration="13021000" />
     </task>
     <task id="LOCAL-00103" summary="【驱动开发】硬件SPI+DMA 存个档">
       <option name="closed" value="true" />
@@ -920,7 +911,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747314967358</updated>
     </task>
-    <option name="localTasksCounter" value="151" />
+    <task id="LOCAL-00151" summary="【RLC测量仪】电阻的理论计算与实际相差很大">
+      <option name="closed" value="true" />
+      <created>1747317047923</created>
+      <option name="number" value="00151" />
+      <option name="presentableId" value="LOCAL-00151" />
+      <option name="project" value="LOCAL" />
+      <updated>1747317047923</updated>
+    </task>
+    <option name="localTasksCounter" value="152" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -955,7 +954,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【开发】准备测试AI代码" />
     <MESSAGE value="【开发】AI无法正确推理，固定输出0" />
     <MESSAGE value="【开发】使用一个终端脚本，成功简化ITM调试的启动" />
     <MESSAGE value="【开发】调试FPGA模块" />
@@ -980,7 +978,8 @@
     <MESSAGE value="【RLC测量仪-开发】准备推导理论公式" />
     <MESSAGE value="【RLC测量仪】根据使用体验，由于I2C多次测量，导致UI被阻塞得厉害，需要使用RTOS" />
     <MESSAGE value="【RLC测量仪】阻抗计算公式实测有问题，可能与单片机计算方式有关" />
-    <option name="LAST_COMMIT_MESSAGE" value="【RLC测量仪】阻抗计算公式实测有问题，可能与单片机计算方式有关" />
+    <MESSAGE value="【RLC测量仪】电阻的理论计算与实际相差很大" />
+    <option name="LAST_COMMIT_MESSAGE" value="【RLC测量仪】电阻的理论计算与实际相差很大" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -990,18 +989,13 @@
           <line>347</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Projects/RLC/app/app.cpp</url>
-          <line>160</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
         <watch expression="R" />
         <watch expression="X" />
-        <watch expression="adc_data_VQ" />
+        <watch expression="adc_data_VQ" language="ObjectiveC" />
         <watch expression="adc_data_VI" />
         <watch expression="adc_offset_VI" />
         <watch expression="adc_offset_VQ" />
@@ -1009,13 +1003,6 @@
         <watch expression="R_parameter" />
         <watch expression="L_parameter" language="ObjectiveC" />
         <watch expression="C_parameter" />
-        <watch expression="temp_tick" />
-        <watch expression="data1" />
-        <watch expression="data2" />
-        <watch expression="VI" />
-        <watch expression="VQ" />
-        <watch expression="temp_VI" />
-        <watch expression="temp_VQ" />
       </configuration>
     </watches-manager>
   </component>
