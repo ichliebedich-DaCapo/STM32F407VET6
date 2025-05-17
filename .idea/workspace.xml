@@ -32,9 +32,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【RLC测量仪】纯电阻100Ω-10kΩ可用线性回归方程拟合">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【RLC测量仪】准备测电容">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BSP/ads1115.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/ads1115.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/RLC/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/RLC/app/app.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -136,6 +135,11 @@
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD 下载并运行.Furina.elf">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Furina.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Furina" TARGET_NAME="Furina.elf" CONFIG_NAME="Debug-MinGW_ARM" RUN_TARGET_PROJECT_NAME="Furina" RUN_TARGET_NAME="Furina.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -525,15 +529,7 @@
       <workItem from="1747299162240" duration="23768000" />
       <workItem from="1747374710242" duration="12465000" />
       <workItem from="1747396184559" duration="15644000" />
-      <workItem from="1747456057478" duration="9168000" />
-    </task>
-    <task id="LOCAL-00104" summary="【驱动开发】硬件SPI+DMA 清屏函数成功 提升很大">
-      <option name="closed" value="true" />
-      <created>1739606015670</created>
-      <option name="number" value="00104" />
-      <option name="presentableId" value="LOCAL-00104" />
-      <option name="project" value="LOCAL" />
-      <updated>1739606015671</updated>
+      <workItem from="1747456057478" duration="11504000" />
     </task>
     <task id="LOCAL-00105" summary="【驱动开发】硬件SPI+DMA 清屏函数成功 修正一点失误 将LCD_CS_LOW();等移到循环外">
       <option name="closed" value="true" />
@@ -919,7 +915,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747410101522</updated>
     </task>
-    <option name="localTasksCounter" value="153" />
+    <task id="LOCAL-00153" summary="【RLC测量仪】准备测电容">
+      <option name="closed" value="true" />
+      <created>1747467045369</created>
+      <option name="number" value="00153" />
+      <option name="presentableId" value="LOCAL-00153" />
+      <option name="project" value="LOCAL" />
+      <updated>1747467045369</updated>
+    </task>
+    <option name="localTasksCounter" value="154" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -954,7 +958,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【开发】使用一个终端脚本，成功简化ITM调试的启动" />
     <MESSAGE value="【开发】调试FPGA模块" />
     <MESSAGE value="【备份】准备查看THD引发的FSMC读取问题" />
     <MESSAGE value="【？？】并未发现FSMC相关问题" />
@@ -979,7 +982,8 @@
     <MESSAGE value="【RLC测量仪】阻抗计算公式实测有问题，可能与单片机计算方式有关" />
     <MESSAGE value="【RLC测量仪】电阻的理论计算与实际相差很大" />
     <MESSAGE value="【RLC测量仪】纯电阻100Ω-10kΩ可用线性回归方程拟合" />
-    <option name="LAST_COMMIT_MESSAGE" value="【RLC测量仪】纯电阻100Ω-10kΩ可用线性回归方程拟合" />
+    <MESSAGE value="【RLC测量仪】准备测电容" />
+    <option name="LAST_COMMIT_MESSAGE" value="【RLC测量仪】准备测电容" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -991,8 +995,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Projects/RLC/app/app.cpp</url>
-          <line>157</line>
-          <option name="timeStamp" value="478" />
+          <line>163</line>
+          <option name="timeStamp" value="481" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

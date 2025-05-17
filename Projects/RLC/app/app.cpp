@@ -35,10 +35,16 @@ using AsyncDelay_HAL = utils::async_delay<HAL_GetTick>;
 AsyncDelay_HAL async_delay(100);
 
 // 经过测试 DA输出频率要达到1K以上偏置稳定，频率越高越稳定
+// 电阻用1kHz
+// 电容用1K到100K，电容越小，频率越高越不准,需要减小 1uF需要小于100k 100uF需要小于10K
+// 电感用
+
+// freq_out/25M = freq_word/2^32  →  freq_word = freq_out*2^32/25M
 namespace FPGA
 {
     constexpr uint32_t FREQ_1K = 171799;//42950;
     constexpr uint32_t FREQ_10K = 1717987;//429497;
+    constexpr uint32_t FREQ_50K = 8589934;
     constexpr uint32_t FREQ_100K = 17179869;//4294967;
     constexpr uint32_t FREQ_500K = 85899346;
     constexpr uint32_t FREQ_1M = 171798692;//42949673;
@@ -83,20 +89,6 @@ public:
         filtered_adc_VQ = static_cast<float>(sum_VQ) /samples;
         filtered_adc_VI = static_cast<float>(sum_VI) /samples;
 
-//        // 读5次并实时滤波
-//        for (int i = 0; i < 5; i++)
-//        {
-//            float raw_adc_VQ = bsp::adc::ADS1115::read(bsp::adc::ads1115::MuxConfig::Single_1);
-//            filtered_adc_VQ = alpha * raw_adc_VQ + (1.0f - alpha) * filtered_adc_VQ;
-//
-//            float raw_adc_VI = bsp::adc::ADS1115::read(bsp::adc::ads1115::MuxConfig::Single_2);
-//            filtered_adc_VI = alpha * raw_adc_VI + (1.0f - alpha) * filtered_adc_VI;
-//        }
-//
-//        // 使用滤波后的值
-//        adc_data_VQ[index] = static_cast<int16_t>(filtered_adc_VQ + 0.5f-(float)adc_offset_VQ);
-//        adc_data_VI[index] = static_cast<int16_t>(filtered_adc_VI + 0.5f-(float)adc_offset_VI);
-       //
         adc_data_VQ[index] = static_cast<int16_t>(filtered_adc_VQ -(float)adc_offset_VQ);
         adc_data_VI[index] = static_cast<int16_t>(filtered_adc_VI -(float)adc_offset_VI);
     }
@@ -125,7 +117,7 @@ public:
 
         R[index] = (A1_2/2/VI-1)*R0;//R_C*VI/div_C-R0;
 
-        X[index] = -X_C*VQ/div_C;
+        X[index] = X_C*VQ/div_C;
         //        R[index] = A2 * R0 * VI / (2 * VI2_and_VQ2) - R0;
 //        X[index] = A2 * R0 * VQ / (2 * VI2_and_VQ2);
 
@@ -147,8 +139,8 @@ public:
 
     static auto calculate_element_parameter()
     {
-        constexpr uint32_t freq_word[FREQ_WORD_NUM] = {FPGA::FREQ_1K, FPGA::FREQ_10K, FPGA::FREQ_100K, FPGA::FREQ_500K};
-        constexpr std::array<float, 4> frequencies = {1000.0f, 10000.0f, 100000.0f, 500000.0f};
+        constexpr uint32_t freq_word[FREQ_WORD_NUM] = {FPGA::FREQ_1K, FPGA::FREQ_10K, FPGA::FREQ_50K, FPGA::FREQ_100K};
+        constexpr std::array<float, 4> frequencies = {1000.0f, 10000.0f, 50000.0f, 100000.0f};
 
         index = (index + 1) & 0x3;// 对4取模
         FREQ_WORD::write(freq_word[index]);
