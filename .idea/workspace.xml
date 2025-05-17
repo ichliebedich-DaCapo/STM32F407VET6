@@ -32,7 +32,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【RLC测量仪】准备测电容">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【RLC测量仪】准备更新算法">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/RLC/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/RLC/app/app.cpp" afterDir="false" />
     </list>
@@ -529,15 +529,7 @@
       <workItem from="1747299162240" duration="23768000" />
       <workItem from="1747374710242" duration="12465000" />
       <workItem from="1747396184559" duration="15644000" />
-      <workItem from="1747456057478" duration="11504000" />
-    </task>
-    <task id="LOCAL-00105" summary="【驱动开发】硬件SPI+DMA 清屏函数成功 修正一点失误 将LCD_CS_LOW();等移到循环外">
-      <option name="closed" value="true" />
-      <created>1739606741244</created>
-      <option name="number" value="00105" />
-      <option name="presentableId" value="LOCAL-00105" />
-      <option name="project" value="LOCAL" />
-      <updated>1739606741244</updated>
+      <workItem from="1747456057478" duration="32133000" />
     </task>
     <task id="LOCAL-00106" summary="【驱动开发】GUI和LCD间的硬件回调注册接口做好了，同时保证了模拟器正常运行（但lvgl还是用不上DMA）">
       <option name="closed" value="true" />
@@ -923,7 +915,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747467045369</updated>
     </task>
-    <option name="localTasksCounter" value="154" />
+    <task id="LOCAL-00154" summary="【RLC测量仪】准备更新算法">
+      <option name="closed" value="true" />
+      <created>1747469850400</created>
+      <option name="number" value="00154" />
+      <option name="presentableId" value="LOCAL-00154" />
+      <option name="project" value="LOCAL" />
+      <updated>1747469850400</updated>
+    </task>
+    <option name="localTasksCounter" value="155" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -958,7 +958,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【开发】调试FPGA模块" />
     <MESSAGE value="【备份】准备查看THD引发的FSMC读取问题" />
     <MESSAGE value="【？？】并未发现FSMC相关问题" />
     <MESSAGE value="【开发】更改了bsp的包含逻辑" />
@@ -983,7 +982,8 @@
     <MESSAGE value="【RLC测量仪】电阻的理论计算与实际相差很大" />
     <MESSAGE value="【RLC测量仪】纯电阻100Ω-10kΩ可用线性回归方程拟合" />
     <MESSAGE value="【RLC测量仪】准备测电容" />
-    <option name="LAST_COMMIT_MESSAGE" value="【RLC测量仪】准备测电容" />
+    <MESSAGE value="【RLC测量仪】准备更新算法" />
+    <option name="LAST_COMMIT_MESSAGE" value="【RLC测量仪】准备更新算法" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -995,8 +995,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Projects/RLC/app/app.cpp</url>
-          <line>163</line>
-          <option name="timeStamp" value="481" />
+          <line>200</line>
+          <option name="timeStamp" value="521" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1012,7 +1012,7 @@
         <watch expression="R_parameter" />
         <watch expression="L_parameter" language="ObjectiveC" />
         <watch expression="C_parameter" />
-        <watch expression="X" />
+        <watch expression="X[2]" />
       </configuration>
     </watches-manager>
   </component>
