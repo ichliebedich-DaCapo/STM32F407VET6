@@ -69,7 +69,8 @@ public:
     {
         // 配置参数
         constexpr float alpha = 0.2f;// 滤波参数,越小滤波效果越强
-        constexpr int samples_size = 10;
+        constexpr int samples_size = 20;
+        constexpr float samples = 20.0f;
         static float filtered_adc_VQ = 0.0f, filtered_adc_VI = 0.0f;
 
         // 首次读取并初始化
@@ -79,8 +80,8 @@ public:
             sum_VQ += bsp::adc::ADS1115::read(bsp::adc::ads1115::MuxConfig::Single_1);
             sum_VI += bsp::adc::ADS1115::read(bsp::adc::ads1115::MuxConfig::Single_2);
         }
-        filtered_adc_VQ = static_cast<float>(sum_VQ) / 10.0f;
-        filtered_adc_VI = static_cast<float>(sum_VI) / 10.0f;
+        filtered_adc_VQ = static_cast<float>(sum_VQ) /samples;
+        filtered_adc_VI = static_cast<float>(sum_VI) /samples;
 
 //        // 读5次并实时滤波
 //        for (int i = 0; i < 5; i++)
@@ -114,7 +115,7 @@ public:
         constexpr float R0 = 200;
         constexpr float R_C = A1_2*A2_2*R0;// R的分子系数
         constexpr float X_C = A1_2*A1*A2*R0;// X的分子系数
-        const float ADC_RANGE = 2.048f;
+        const float ADC_RANGE = 1.024f;
 
         float VI =( (float)adc_data_VI[index]  * ADC_RANGE / 32768/1.6f);
         float VQ =( (float)adc_data_VQ[index]  * ADC_RANGE / 32768/1.6f);
@@ -160,7 +161,17 @@ public:
             C_parameter  = 0;
 
             // 线性拟合
-            float R_avg = R[0]*0.936928f-15.81321f;// 只取1KHZ下的阻值
+//            float R_avg = R[0]*0.936928f-15.81321f;// 只取1KHZ下的阻值
+            float R_avg = 0.0f;
+            if(R[0]>226)
+            {
+//                R_avg = -7.40365166e-7f*R[0]*R[0]+9.35024273e-1f*R[0]-1.93776772e1f;
+                R_avg = 9.27304319e-1f*R[0]-1.12925627e1f;
+            }else
+            {
+//                R_avg = 2.72047542e-5f*R[0]*R[0]*R[0]-7.18297741e-3f*R[0]*R[0]+1.46828988e0f*R[0]-2.64858679e1f;
+                R_avg = 9.21542293e-1f*R[0]-1.46575687e1f;
+            }
 
             // 检查X是否可视为零（电阻）
             float max_X_abs = 0.0f;
@@ -172,7 +183,7 @@ public:
 
             // 阈值设为R平均值的1%或最小0.1Ω
             const float threshold = std::max(R_avg * 0.05f, 1.0f);
-            if (max_X_abs < threshold)
+            if (max_X_abs < threshold||R_avg<100)
             {
                 type = ElementType::RESISTOR;
                 R_parameter = R_avg;

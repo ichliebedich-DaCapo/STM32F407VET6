@@ -32,11 +32,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【RLC测量仪】电阻的理论计算与实际相差很大">
+    <list default="true" id="6de06172-1616-4cb1-8db7-c29cbfc649a3" name="更改" comment="【RLC测量仪】纯电阻100Ω-10kΩ可用线性回归方程拟合">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BSP/ads1115.ixx" beforeDir="false" afterPath="$PROJECT_DIR$/BSP/ads1115.ixx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projects/RLC/app/app.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Projects/RLC/app/app.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake/arm-gcc.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake/arm-gcc.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -525,15 +524,8 @@
       <workItem from="1747298999281" duration="154000" />
       <workItem from="1747299162240" duration="23768000" />
       <workItem from="1747374710242" duration="12465000" />
-      <workItem from="1747396184559" duration="13021000" />
-    </task>
-    <task id="LOCAL-00103" summary="【驱动开发】硬件SPI+DMA 存个档">
-      <option name="closed" value="true" />
-      <created>1739505456973</created>
-      <option name="number" value="00103" />
-      <option name="presentableId" value="LOCAL-00103" />
-      <option name="project" value="LOCAL" />
-      <updated>1739505456973</updated>
+      <workItem from="1747396184559" duration="15644000" />
+      <workItem from="1747456057478" duration="9168000" />
     </task>
     <task id="LOCAL-00104" summary="【驱动开发】硬件SPI+DMA 清屏函数成功 提升很大">
       <option name="closed" value="true" />
@@ -919,7 +911,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747317047923</updated>
     </task>
-    <option name="localTasksCounter" value="152" />
+    <task id="LOCAL-00152" summary="【RLC测量仪】纯电阻100Ω-10kΩ可用线性回归方程拟合">
+      <option name="closed" value="true" />
+      <created>1747410101521</created>
+      <option name="number" value="00152" />
+      <option name="presentableId" value="LOCAL-00152" />
+      <option name="project" value="LOCAL" />
+      <updated>1747410101522</updated>
+    </task>
+    <option name="localTasksCounter" value="153" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -954,7 +954,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="【开发】AI无法正确推理，固定输出0" />
     <MESSAGE value="【开发】使用一个终端脚本，成功简化ITM调试的启动" />
     <MESSAGE value="【开发】调试FPGA模块" />
     <MESSAGE value="【备份】准备查看THD引发的FSMC读取问题" />
@@ -979,7 +978,8 @@
     <MESSAGE value="【RLC测量仪】根据使用体验，由于I2C多次测量，导致UI被阻塞得厉害，需要使用RTOS" />
     <MESSAGE value="【RLC测量仪】阻抗计算公式实测有问题，可能与单片机计算方式有关" />
     <MESSAGE value="【RLC测量仪】电阻的理论计算与实际相差很大" />
-    <option name="LAST_COMMIT_MESSAGE" value="【RLC测量仪】电阻的理论计算与实际相差很大" />
+    <MESSAGE value="【RLC测量仪】纯电阻100Ω-10kΩ可用线性回归方程拟合" />
+    <option name="LAST_COMMIT_MESSAGE" value="【RLC测量仪】纯电阻100Ω-10kΩ可用线性回归方程拟合" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -988,6 +988,11 @@
           <url>file://$PROJECT_DIR$/Projects/StorageOscilloscope/app/app.cpp</url>
           <line>347</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Projects/RLC/app/app.cpp</url>
+          <line>157</line>
+          <option name="timeStamp" value="478" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1003,6 +1008,7 @@
         <watch expression="R_parameter" />
         <watch expression="L_parameter" language="ObjectiveC" />
         <watch expression="C_parameter" />
+        <watch expression="X" />
       </configuration>
     </watches-manager>
   </component>

@@ -112,9 +112,9 @@ export namespace bsp::adc
             // 初始化配置
             cmd[0] = static_cast<uint8_t>(ads1115::Address::Config);
             // [11:9]:010 	调节PGA增益  FSR = ±2.048 V (default)
-            cmd[1]=0x85;
+            //cmd[1]=0x85;
             // [11:9]:011   调节PGA增益  FSR = ±1.024 V
-            //cmd[1]=0x87;
+            cmd[1]=0x87;
             cmd[2]=0x83;
             i2c2::write(static_cast<uint16_t>(ads1115::Address::Write), cmd);
         }
