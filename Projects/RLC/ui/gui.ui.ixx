@@ -94,7 +94,7 @@ export namespace gui
         }
 
 
-        static inline auto generate_text(float VI_VZ,float VQ_VZ,float R, float L, float C)
+        static  auto generate_text(float VI_VZ,float VQ_VZ,float R, float L, float C)
         {
             char buffer[10]; // 单个缓冲区复用
 
@@ -104,11 +104,53 @@ export namespace gui
                 label.text(buffer); // 假设text内部复制字符串而非保存指针
             };
 
-            set_label(screen_label_ZI, "VIz: %.1f", VI_VZ);
-            set_label(screen_label_ZQ, "VQz: %.1f", VQ_VZ);
-            set_label(screen_label_R,    "R: %.1f",   R);
-            set_label(screen_label_L,    "L: %.1f",   L);
-            set_label(screen_label_C,    "C: %.1f",   C);
+            set_label(screen_label_ZI, "VIz: %.3fV", VI_VZ*1.024/32768);
+            set_label(screen_label_ZQ, "VQz: %.3fV", VQ_VZ*1.024/32768);
+            set_label(screen_label_R, "R: %.1fΩ", R);
+
+            //检测电感是什么单位
+            if(L>1e-3&&L<1e-1)
+            {
+                set_label(screen_label_L, "L: %.3fmH", L * 1e3);
+            }
+            else if(L>1e-6&&L<1e-3)
+            {
+                set_label(screen_label_L, "L: %.3fμH", L * 1e6);
+            }
+            else if(L>1e-9&&L<1e-6)
+            {
+                set_label(screen_label_L, "L: %.3fnH", L * 1e9);
+            }
+            else if(L>1e-12&&L<1e-9)
+            {
+                set_label(screen_label_L, "L: %.3fpH", L * 1e12);
+            }
+            else
+            {
+                set_label(screen_label_L, "L: %.3fH", L);
+            }
+
+            //检测电容是什么单位
+            if(C>1e-3&&C<1e-1)
+            {
+                set_label(screen_label_C, "C: %.3fmF", C * 1e3);
+            }
+            else if(C>1e-6&&C<1e-3)
+            {
+                set_label(screen_label_C, "C: %.3fμF", C * 1e6);
+            }
+            else if(C>1e-9&&C<1e-6)
+            {
+                set_label(screen_label_C, "C: %.3fnF", C * 1e9);
+            }
+            else if(C>1e-12&&C<1e-9)
+            {
+                set_label(screen_label_C, "C: %.3fpF", C * 1e12);
+            }
+            else
+            {
+                set_label(screen_label_C, "C: %.3fF", C);
+            }
         }
 
         static inline auto clear_text(){
@@ -202,7 +244,7 @@ export namespace gui {
 
 		screen_btn_reset_label.init(screen_btn_reset)
 			.center(0,0);
-		lv_label_set_text(screen_btn_reset_label,"测量");
+		lv_label_set_text(screen_btn_reset_label,"校准");
 		lv_obj_set_width(screen_btn_reset_label,LV_PCT(100));
 
 		screen_label_C.init(screen)
@@ -234,7 +276,7 @@ export namespace gui {
                 .size(120,19)
                 .text_align(LV_TEXT_ALIGN_LEFT)
                 .bg_opa(0);
-        lv_label_set_text(screen_label_ZI,"0");
+        lv_label_set_text(screen_label_ZI,"ZI:");
         lv_obj_set_style_text_font(screen_label_ZI,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 
@@ -243,7 +285,7 @@ export namespace gui {
                 .size(120,19)
                 .text_align(LV_TEXT_ALIGN_LEFT)
                 .bg_opa(0);
-        lv_label_set_text(screen_label_ZQ,"0");
+        lv_label_set_text(screen_label_ZQ,"ZQ:");
         lv_obj_set_style_text_font(screen_label_ZQ,&lv_customer_font_SourceHanSerifSC_Regular_13,selector_default);
 
 
@@ -306,7 +348,7 @@ export namespace gui {
         screen_btn_reset.OnClicked([](lv_event_t * e){
             RLC::reset_call();
         });
-
+        screen_chart.OnPressed<RLC::set_cursor_on_press>();
         /*!USER_DECLARE_END!*/
     }
 }

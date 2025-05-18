@@ -64,7 +64,7 @@ public:
     // 测量出
     static auto init()
     {
-        //        gui::RLC::set_reset_callback(calibrate);// 设置重置回调
+                gui::RLC::set_reset_callback(calibrate);// 设置重置回调
         FREQ_WORD::write(FPGA::FREQ_1K);
         HAL_Delay(50);
         calibrate();// 初始校准
@@ -185,7 +185,7 @@ public:
             }
 
             // ---------- 判断电感 ----------
-            if(all_positive && r_increase_flag && x_increase_flag)
+            if(all_positive  && x_increase_flag)
             {
                 precise_type = ElementType::INDUCTOR;
                 R_parameter = 0;
@@ -195,10 +195,10 @@ public:
                 float L_avg = 0.0f;
                 for (size_t i = 0; i < 4; ++i)
                 {
-                    L_avg += X[i] /(float)(2 * M_PI * frequencies[i]);
+                    L_avg += 4.933e-6f+0.659937f*X[i] /(float)(2 * M_PI * frequencies[i]);
                 }
                 L_avg /= 4.0f;
-                L_parameter = L_avg;
+                L_parameter = -L_avg*L_avg*6.3e-5f+1.398213f*L_avg-8.876001e-6f;
                 // 检验元件类型是否变化
                 goto FINAL_JUDGE;
             }
@@ -218,7 +218,7 @@ public:
                     C_avg += 1.0f / (float)(2 * M_PI * frequencies[i] * std::abs(X[i]));
                 }
                 C_avg /= 4.0f;
-                C_parameter = C_avg;
+                C_parameter = C_avg*1.078309f+2.001357e-8f;
 
                 // 检验元件类型是否变化
                 goto FINAL_JUDGE;
@@ -269,11 +269,13 @@ public:
                 {
 //                R_parameter = -7.40365166e-7f*R[0]*R[0]+9.35024273e-1f*R[0]-1.93776772e1f;
                     R_parameter = 9.27304319e-1f * R[0] - 1.12925627e1f;
-                } else
+                }
+                else
                 {
 //                R_parameter = 2.72047542e-5f*R[0]*R[0]*R[0]-7.18297741e-3f*R[0]*R[0]+1.46828988e0f*R[0]-2.64858679e1f;
                     R_parameter = 9.21542293e-1f * R[0] - 1.46575687e1f;
                 }
+                R_parameter =  1.6e-5f*R_parameter*R_parameter+0.986144f*R_parameter-13.50644f;
                 return;
             }
 
@@ -322,7 +324,7 @@ public:
                 type = ElementType::CAPACITOR;
                 R_parameter = 0;
                 L_parameter = 0;
-                C_parameter = 1.0f / (float)(2 * M_PI * frequencies[0] * std::abs(X[0]));
+                C_parameter = 1.0f / (float)(2 * M_PI * frequencies[0] * std::abs(X[0])*0.93698f-5462.0f)+1.8972e-8f;
                 return;
             }
 
@@ -335,13 +337,13 @@ public:
     static auto calibrate() -> void
     {
         int32_t sum_VQ = 0, sum_VI = 0;
-        for (int i = 0; i < 5; ++i)
+        for (int i = 0; i < 20; ++i)
         {
             sum_VQ += bsp::adc::ADS1115::read(bsp::adc::ads1115::MuxConfig::Single_1);
             sum_VI += bsp::adc::ADS1115::read(bsp::adc::ads1115::MuxConfig::Single_2);
         }
-        adc_offset_VQ = static_cast<int16_t>((float) sum_VQ / 5.0f);
-        adc_offset_VI = static_cast<int16_t>((float) sum_VI / 5.0f);
+        adc_offset_VQ = static_cast<int16_t>((float) sum_VQ / 20.0f);
+        adc_offset_VI = static_cast<int16_t>((float) sum_VI / 20.0f);
     }
 
 public:
@@ -429,16 +431,16 @@ namespace app
             }
 
 
-//            for(int i=0;i<RLC_Measure::FREQ_WORD_NUM;++i)
-//            {
-//                R_data[i]=(int32_t)RLC_Measure::get_VI()[i];
-//                X_data[i]=(int32_t)RLC_Measure::get_VQ()[i];
-//            }
-//            // FREQ_WORD_NUM个不同频点下的R和X
-//            gui::RLC::generate_data(R_data, X_data,4);
-//            // gui显示R、L、C等文本内容
-//            auto [VI_VZ, VQ_VZ,R,L,C] = RLC_Measure::get_parameter();
-//            gui::RLC::generate_text(VI_VZ, VQ_VZ, R,L,C);
+            for(int i=0;i<RLC_Measure::FREQ_WORD_NUM;++i)
+            {
+                R_data[i]=(int32_t)RLC_Measure::get_VI()[i];
+                X_data[i]=(int32_t)RLC_Measure::get_VQ()[i];
+            }
+            // FREQ_WORD_NUM个不同频点下的R和X
+            gui::RLC::generate_data(R_data, X_data,4);
+            // gui显示R、L、C等文本内容
+            auto [VI_VZ, VQ_VZ,R,L,C] = RLC_Measure::get_parameter();
+            gui::RLC::generate_text(VI_VZ, VQ_VZ, R,L,C);
 
         }
     }
