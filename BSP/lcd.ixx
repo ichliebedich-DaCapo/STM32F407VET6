@@ -13,12 +13,6 @@ import gpio;
 import delay;
 
 // ==================== 属性 ====================
-// 寄存器
-using TFT_CMD = Register<0x60060000>; // TFT命令寄存器片选地址
-using TFT_DATA = Register<0x60060002>; // TFT数据寄存器片选地址
-using TFT_RST = Register<0x60060004>; // TFT复位寄存器地址
-using TFT_LED = Register<0x60060008>; // TFT背光寄存器地址
-constexpr uint32_t TFT_DATA_ADDR = 0x60060002U;
 // 引脚
 using LCD_RST = bsp::gpio<GPIOB_BASE,GPIO_PIN_15>; // 复位引脚
 using LCD_RS = bsp::gpio<GPIOC_BASE,GPIO_PIN_0>; // 命令数据引脚 高电平为数据
@@ -135,28 +129,7 @@ namespace bsp::lcd::detail
         }
     };
 
-    // 8080并口传输数据接口
-    template<>
-    struct InterfacePolicy<InterfaceType::Parallel8080>
-    {
-        static inline void write_cmd(const uint8_t cmd) { TFT_CMD::write(cmd); }
 
-        static inline void write_data(const uint16_t data) { TFT_DATA::write(data); }
-
-        template<void(*delay_ms)(uint32_t),size_t N>
-        static void send_sequence(const std::array<InitCommand, N> &cmds)
-        {
-            for (const auto &cmd: cmds)
-            {
-                write_cmd(cmd.cmd);
-                for (auto d : cmd.data)
-                {
-                    write_data(d);
-                }
-                delay_ms(cmd.delay_ms);
-            }
-        }
-    };
 
     // =========== LCD初始化特化 ===========
         template<DeviceType T>
